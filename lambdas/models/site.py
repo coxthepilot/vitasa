@@ -1,25 +1,39 @@
 import boto3
 import json
+import config.configs
 
 class Site:
     """ A class representing a VITA tax prep location. It is managed by a Site Coordinator. """
 
     # These properties describe the user, and are stored in DynamoDB
-    name = 'VITA tax prep site'
-    address = '123 Fake Street, San Antonio, TX'
-    hours = '9-5'
-    is_open = False
-    availability_status = 'green'
+    name = None
+    xstreet = '123 Fake Street'
+    xcity = 'San Antonio'
+    xzip = '78006'
+    latitude = 175.0
+    longitude = 175.0
+    opentime = '9am'
+    closetime = '5pm'
+    days = 'M-F'
+    sitecoordinator = None
+    sitetype = 'Tax Prep'
 
+    is_open = False
+    
     @staticmethod
     def from_dict(dictionary):
         """ Create a Site object from a data dictionary """
         site = Site()
-        site.name = dictionary['name']
-        site.address = dictionary['address']
-        site.availability_status = dictionary['availability_status']
-        site.hours = dictionary['hours']
-        site.is_open = dictionary['is_open']
+        if 'name' in dictionary: site.name = dictionary['name']
+        if 'xstreet' in dictionary: site.xstreet = dictionary['xstreet']
+        if 'xcity' in dictionary: site.xcity = dictionary['xcity']
+        if 'xzip' in dictionary: site.xzip = dictionary['xzip']
+        if 'latitude' in dictionary: site.latitude = dictionary['latitude']
+        if 'longitude' in dictionary: site.longitude = dictionary['longitude']
+        if 'opentime' in dictionary: site.opentime = dictionary['opentime']
+        if 'closetime' in dictionary: site.closetime = dictionary['closetime']
+        if 'sitecoordinator' in dictionary: site.sitecoordinator = dictionary['sitecoordinator'] # TODO: validate that this is a valid coordinator ID
+        if 'is_open' in dictionary: site.is_open = dictionary['is_open']
 
         # Validate required fields
         if site.name == None:
@@ -31,7 +45,7 @@ class Site:
     def find(name):
         """ Look up the Site in the database """
         dynamodb = boto3.resource('dynamodb')
-        table = dynamodb.Table('vita-sites')
+        table = dynamodb.Table(SITES_TABLE_NAME)
         response = table.get_item(
             Key = {
                 'site-name': name
@@ -40,12 +54,7 @@ class Site:
         
         if 'Item' in response:
             item = response['Item']
-            site = Site()
-            site.name = item['site-name']
-            site.address = item['address']
-            site.hours = item['hours']
-            site.is_open = item['is_open']
-            site.availability_status = item['availability_status']
+            site = Site.from_dict(item)
             return site
         else:
             return None
@@ -55,29 +64,31 @@ class Site:
         """ Look up all Sites in the database """
         sites = []
         dynamodb = boto3.resource('dynamodb')
-        response = dynamodb.Table('vita-sites').scan()
+        response = dynamodb.Table(SITES_TABLE_NAME).scan()
         for item in response['Items']:
-            site = Site()
-            site.name = item['site-name']
-            site.address = item['address']
-            site.hours = item['hours']
-            site.is_open = item['is_open']
-            site.availability_status = item['availability_status']
-            sites.append(site)
+            sites.append(Site.from_dict(item))
         
         return sites
 
     def save(self):
         """ Save all fields to the database """
         dynamodb = boto3.resource('dynamodb')
-        table = dynamodb.Table('vita-sites')
+        table = dynamodb.Table(SITES_TABLE_NAME)
         table.put_item(
             Item = {
-                'site-name': self.name,
-                'address': self.address,
-                'hours': self.hours,
-                'is_open': self.is_open,
-                'availability_status': self.availability_status,
+                'name': self.name,
+                'xstreet': self.xstreet,
+                'xcity': self.xcity,
+                'xzip': self.xzip,
+                'latitude': self.latitude,
+                'longitude': self.longitude,
+                'opentime': self.opentime,
+                'closetime': self.closetime,
+                'days': self.days,
+                'sitecoordinator': self.sitecoordinator,
+                'sitetype': self.sitetype,
+
+                'is_open': self.is_open
             }
         )
 
@@ -85,7 +96,7 @@ class Site:
 
     def delete(self):
         dynamodb = boto3.resource('dynamodb')
-        table = dynamodb.Table('vita-sites')
+        table = dynamodb.Table(SITES_TABLE_NAME)
         table.delete_item(
             Key = {
                 'site-name': self.name
@@ -95,3 +106,14 @@ class Site:
     
     def to_json(self):
         return json.dumps(self.__dict__)
+    
+    def is_valid(self):
+        if self.name == None or len(self.name) == 0
+            return False
+        # TODO: add more validation checks
+        # 1) Is the address valid
+        # 2) Is the lat/long valid range
+        # 3) Is the lat/long in the vicinity of the address
+        # 4) Is the site coordinator a valid identifier from the users table
+        # 5) Does the site coordinator User have the right Role?
+        return True
