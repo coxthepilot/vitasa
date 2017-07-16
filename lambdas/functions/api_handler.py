@@ -3,14 +3,7 @@ import json
 import boto3
 
 from models.site import Site
-def respond(err, res=None):
-    return {
-        'statusCode': '400' if err else '200',
-        'body': err.message if err else json.dumps(res),
-        'headers': {
-            'Content-Type': 'application/json',
-        },
-    }
+import utilities
 
 class LambdaApiHandler:
     @staticmethod
@@ -100,7 +93,7 @@ class LambdaApiHandler:
             response_body = '{"error":"bad request"}'
             response_code = '400'
         
-
+        #utilities.respond(response_code, response_body) # TODO: test this method before implementing
         return {
             'statusCode': response_code,
             'body': response_body,
@@ -113,6 +106,7 @@ class LambdaApiHandler:
     def user_apis(event):
         response_body = '{"error":"/user APIs not implemented yet"}'
         response_code = '404'
+        #utilities.respond(response_code, response_body)
         return {
             'body': response_body,
             'statusCode': response_code,
@@ -125,6 +119,7 @@ class LambdaApiHandler:
     def session_apis(event):
         response_body = '{"error":"/session APIs not implemented yet"}'
         response_code = '404'
+        #utilities.respond(response_code, response_body)
         return {
             'body': response_body,
             'statusCode': response_code,
