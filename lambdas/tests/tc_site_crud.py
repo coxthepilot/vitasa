@@ -51,7 +51,8 @@ class TCSiteCrud(unittest.TestCase):
         starting_sites = Site.all()
 
         site = Site()
-        site.name = 'test_site_2'
+        site.name = 'Chris\' Awesome Test Site #1'
+        site.slug = 'chris-awesome-test-site-1'
         site.xstreet = '1234 Fake Street'
         site.xcity = 'Universal City'
         site.xzip = '78005'
@@ -71,8 +72,9 @@ class TCSiteCrud(unittest.TestCase):
         self.assertEqual(len(starting_sites)+1, len(Site.all()), 'No Site record was actually written')
 
         # Now fetch the site data back out
-        site2 = Site.find('test_site_2')
-        self.assertEqual('test_site_2', site.name)
+        site2 = Site.find('chris-awesome-test-site-1')
+        self.assertEqual('Chris\' Awesome Test Site #1', site.name)
+        self.assertEqual('chris-awesome-test-site-1', site.slug)
         self.assertEqual("1234 Fake Street", site.xstreet)
         self.assertEqual('Universal City', site.xcity)
         self.assertEqual('78005', site.xzip)

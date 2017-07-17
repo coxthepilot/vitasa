@@ -8,6 +8,7 @@ class Site:
 
     # These properties describe the user, and are stored in DynamoDB
     name = None
+    slug = ''
     xstreet = '123 Fake Street'
     xcity = 'San Antonio'
     xzip = '78006'
@@ -26,6 +27,7 @@ class Site:
         """ Create a Site object from a data dictionary """
         site = Site()
         if 'name' in dictionary: site.name = dictionary['name']
+        if 'slug' in dictionary: site.name = dictionary['slug']
         if 'xstreet' in dictionary: site.xstreet = dictionary['xstreet']
         if 'xcity' in dictionary: site.xcity = dictionary['xcity']
         if 'xzip' in dictionary: site.xzip = dictionary['xzip']
@@ -37,29 +39,29 @@ class Site:
         if 'is_open' in dictionary: site.is_open = dictionary['is_open']
 
         # Validate required fields
-        if site.name == None:
+        if site.is_valid():
+            return site
+        else:
             return None
 
-        return site
-
     @staticmethod
-    def find(name):
+    def find(slug):
         """ Look up the Site in the database """
         dynamodb = boto3.resource('dynamodb')
         table = dynamodb.Table(SITES_TABLE_NAME)
         response = table.get_item(
             Key = {
-                'name': name
+                'slug': slug
             }
         )
         
         if 'Item' in response:
             item = response['Item']
             site = Site.from_dict(item)
-            if site.is_valid():
-                return site
-            else:
+            if site is None:
                 return None
+            else:
+                return site
         else:
             return None
     
@@ -71,7 +73,7 @@ class Site:
         response = dynamodb.Table(SITES_TABLE_NAME).scan()
         for item in response['Items']:
             tmp = Site.from_dict(item)
-            if tmp.is_valid():
+            if tmp is not None:
                 sites.append(Site.from_dict(item))
         
         return sites
@@ -86,6 +88,7 @@ class Site:
         table.put_item(
             Item = {
                 'name': self.name,
+                'slug': self.slug,
                 'xstreet': self.xstreet,
                 'xcity': self.xcity,
                 'xzip': self.xzip,
@@ -118,6 +121,8 @@ class Site:
     
     def is_valid(self):
         if self.name == None or len(self.name) == 0:
+            return False
+        if self.slug == None or len(self.slug) == 0:
             return False
         # TODO: add more validation checks
         # 1) Is the address valid
