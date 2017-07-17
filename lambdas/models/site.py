@@ -80,12 +80,15 @@ class Site:
 
     def save(self):
         """ Save all fields to the database """
+        # Attempt to make our own slug if none was given
+
+
         if not self.is_valid():
             return False
         
         dynamodb = boto3.resource('dynamodb')
         table = dynamodb.Table(SITES_TABLE_NAME)
-        table.put_item(
+        response = table.put_item(
             Item = {
                 'name': self.name,
                 'slug': self.slug,
@@ -104,7 +107,7 @@ class Site:
             }
         )
 
-        return True
+        return 'ConsumedCapacity' in response
 
     def delete(self):
         dynamodb = boto3.resource('dynamodb')
