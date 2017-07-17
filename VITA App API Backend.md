@@ -3,12 +3,15 @@
 ## Site Management APIs
 
 ### List All Sites
-GET {endpoint}/site
+
+   GET {endpoint}/site
 
 ### Get Site Details
-GET {endpoint}/site/{site-name}
+
+   GET {endpoint}/site/{site-name}
 
 **Response Sample**
+
     200 OK
     {
         "title": "ValidSite",
@@ -51,12 +54,14 @@ GET {endpoint}/site/{site-name}
     }
 
 ### Create Site
-PUT {endpoint}/site
+
+   PUT {endpoint}/site
 
 Submit a JSON body with the request describing the Site to be created.
 The Response will include the validated Site details for the newly-created site. This will include any pre-save hooks that may have altered some of the requested fields. The schema is identical to that for Get Site Details.
 
 **Request Sample**
+
     PUT /site
     {
         "title": "ValidSite",
@@ -99,12 +104,14 @@ The Response will include the validated Site details for the newly-created site.
     }
 
 ### Update Site
-POST {endpoint}/site/{site-name}
+
+    POST {endpoint}/site/{site-name}
 
 Same request/response schema as Create Site, but using POST rather than PUT. This will return a 400 Bad Request if the site-name is not valid. You must use PUT to create new Site records.
 
 ### Delete Site
-DELETE {endpoint}/site/{site-name}
+
+    DELETE {endpoint}/site/{site-name}
 
 No Request body is required, and no response body is returned. 
 * 200 OK indicates successful deletion
