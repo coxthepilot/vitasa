@@ -3,7 +3,7 @@ import json
 import boto3
 
 from models.site import Site
-import utilities
+from .utilities import *
 
 class LambdaApiHandler:
     @staticmethod
