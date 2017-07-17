@@ -3,10 +3,11 @@
 ## Site Management APIs
 
 ### List All Sites
-
-    GET {endpoint}/site
+This API is used to get an unfiltered list of all sites in the database.
 
 **Request**
+
+    GET {endpoint}/site
 
 Nothing special. A plain GET request against the resource will return a list of all Site records in the database.
 
@@ -14,7 +15,13 @@ Nothing special. A plain GET request against the resource will return a list of 
 
 An array of Site records. Each of which must conform to the provided [site.json schema](schemas/site.json).
 
+**HTTP Codes**
+
+* 200 OK indicates successful query
+
 ### Get Site Details
+
+**Request**
 
     GET {endpoint}/site/{site-slug}
 
@@ -22,14 +29,18 @@ An array of Site records. Each of which must conform to the provided [site.json 
 
 It must conform to the provided [site.json schema](schemas/site.json).
 
+**HTTP Codes**
+
+* 200 OK indicates successful query
+* 404 Not Found indicates an invalid site-slug
+
 ### Create Site
-
-    PUT {endpoint}/site
-
 Submit a JSON body with the request describing the Site to be created.
 The Response will include the validated Site details for the newly-created site. This will include any pre-save hooks that may have altered some of the requested fields. The schema is identical to that for Get Site Details.
 
 **Request**
+
+    PUT {endpoint}/site
 
 The request body shall be a JSON document describing a Site record. 
 
@@ -41,19 +52,53 @@ The response body shall be a JSON document describing the Site record as it was 
 
 It must conform to the provided [site.json schema](schemas/site.json).
 
+**HTTP Codes**
+
+* 200 OK indicates successful creation
+* 401 Bad Request indicates invalid content in one of the fields, or no body attached to the request.
+* 500 Internal Server Error probably indicates an API Gateway config or database connection issue.
+
+
 ### Update Site
+This API is used to change site settings. Specifically, this is used for Opening and Closing a Site, by updating the `is_open` field.
+
+**Request**
 
     POST {endpoint}/site/{site-slug}
 
-Same request/response schema as Create Site, but using POST rather than PUT. This will return a 400 Bad Request if the site-name is not valid. You must use PUT to create new Site records.
+The request body shall be a JSON document describing the desired Site settings.
+
+It must conform to the provided [site.json schema](schemas/site.json).
+
+**Response**
+
+The response body will describe the creates Site record, after any pre-save hooks have updated it.
+
+It must conform to the provided [site.json schema](schemas/site.json).
+
+**HTTP Codes**
+
+* 200 OK indicates successful update
+* 401 Bad Request indicates invalid content in one of the fields, or no body attached to the request.
+* 404 Not Found indicates an invalid site-slug
+* 500 Internal Server Error probably indicates an API Gateway config or database connection issue.
 
 ### Delete Site
+This API is used to destroy an existing Site record.
+
+**Request**
 
     DELETE {endpoint}/site/{site-slug}
 
-No Request body is required, and no response body is returned. 
+No Request body is required
+
+**Response**
+No response body is returned. 
+
+**HTTP Codes**
+
 * 200 OK indicates successful deletion
-* 400 Bad Request indicates invalid Site Slug
+* 404 Not Found indicates an invalid site-slug
 * 500 Internal Server Error probably indicates an API Gateway config or database connection issue.
 
 ## User Management APIs
@@ -64,50 +109,81 @@ Use this API to create a new user. By necessity, this is an open API, with no au
 
 **Request**
 
+    PUT {endpoint}/user
+
 The Request body shall be a JSON document describing a valid User record:
 
 It must conform to the provided [user.json schema](schemas/user.json).
 
 **Response**
-* 200 OK indicates successful User creation
-* 400 Bad Request indicates a duplicate email address
 
 The response body shall be a JSON document describing the user record as it was created. This will include any values that were altered by pre-save hooks, such as case normalization.
 
 It must conform to the provided [user.json schema](schemas/user.json).
 
+**HTTP Codes**
+
+* 200 OK indicates successful User creation
+* 400 Bad Request indicates a duplicate email address
+
 ### Update User Data
-
-    POST {endpoint}/user/{user-id}
-
 This API is used by individual users to update their personal profile (usually for password changes). Use of this API is restricted to users who either
 1. Are updating their own profile, and are not members of the 'New User' Role
 2. Have the Admin Role. They can update anyone's profile.
 
 **Request**
 
+    POST {endpoint}/user/{user-id}
+
 The request body shall conform to the provided [user.json schema](schemas/user.json). The `id` field is required. The `roles` field is ignored.
 
 **Response**
 
 The response payload will be empty. Refer to the HTTP Codes for status.
+
+**HTTP Codes**
+
 * 200 OK indicates successful User creation
-* 400 Bad Request indicates a duplicate email address, invalid `slug`, or other invalid data in the payload.
+* 400 Bad Request indicates a duplicate email address, or other invalid data in the payload.
 * 401 Unauthorized indicates that the user has not logged in successfully
 * 403 Forbidden indicates that the logged-in user does not have permission to update this User record. Either: the logged-in user is different from the user being updated, or the user does not have the Admin Role, and is thus forbidden from altering arbitrary users.
+* 404 Not Found indicates that there was no record found with the specified `user-id`
 
 ### Update User Permissions
 This API is used to grant or revoke Roles to a User. This API is restricted to Users with the Admin Role. As such, this API must not only be signed, but signed by a User with the correct Role.
 
 **Request**
 
-The request body shall conform to the [user.json schema](schemas/user.json), but need only include the `slug` and `roles` fields. Any `roles` specified in this request will overwrite all existing `roles` that were attached to the User previously.
+    POST {endpoint}/user/{user-id}
+
+The request body shall conform to the [user.json schema](schemas/user.json), but need only include the `id` and `roles` fields. Any `roles` specified in this request will overwrite all existing `roles` that were attached to the User previously.
 
 **Response**
 
-No body will be included with the response, just HTTP Codes:
+No body will be included with the response, just HTTP Codes.
+
+**HTTP Codes**
+
 * 200 OK indicates successful update of the user's permissions
-* 400 Bad Request indicates an invalid User `slug`.
+* 400 Bad Request indicates an invalid User `id`.
+* 401 Unauthorized indicates that the user has not logged in successfully
+* 403 Forbidden indicates that the logged-in user does not have the Admin Role, and is thus forbidden from altering user permissions.
+
+### Delete User
+This API is used to destroy a user record. It is only useable by Users with the Admin Role.
+
+**Request**
+    
+    DELETE {endpoint}/user/{user-id}
+
+**Response**
+
+No response body is included. Check the HTTP response Code for status.
+
+**HTTP Codes**
+
+* 200 OK indicates successful update of the user's permissions
+* 400 Bad Request indicates an invalid User `id`.
 * 401 Unauthorized indicates that the user has not logged in successfully
 * 403 Forbidden indicates that the logged-in user does not have the Admin Role, and is thus forbidden from altering user permissions.
 
