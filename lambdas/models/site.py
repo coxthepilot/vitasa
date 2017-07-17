@@ -1,5 +1,7 @@
 import boto3
 import json
+import re
+
 from decimal import Decimal
 from config.configs import *
 
@@ -9,11 +11,15 @@ class Site:
     # These properties describe the user, and are stored in DynamoDB
     name = None
     slug = ''
+    #VALID_SLUG_PATTERN = r"^[a-z0-9]+(?:-[a-z0-9]+)*"
+    VALID_SLUG_PATTERN = r'^[a-z0-9]+'
     xstreet = '123 Fake Street'
     xcity = 'San Antonio'
     xzip = '78006'
-    latitude = Decimal('175.0')
-    longitude = Decimal('175.0')
+    # latitude = Decimal('175.0')
+    # longitude = Decimal('175.0')
+    latitude = '175.0'
+    longitude = '175.0'
     opentime = '9am'
     closetime = '5pm'
     days = 'M-F'
@@ -27,7 +33,7 @@ class Site:
         """ Create a Site object from a data dictionary """
         site = Site()
         if 'name' in dictionary: site.name = dictionary['name']
-        if 'slug' in dictionary: site.name = dictionary['slug']
+        if 'slug' in dictionary: site.slug = dictionary['slug']
         if 'xstreet' in dictionary: site.xstreet = dictionary['xstreet']
         if 'xcity' in dictionary: site.xcity = dictionary['xcity']
         if 'xzip' in dictionary: site.xzip = dictionary['xzip']
@@ -35,6 +41,7 @@ class Site:
         if 'longitude' in dictionary: site.longitude = dictionary['longitude']
         if 'opentime' in dictionary: site.opentime = dictionary['opentime']
         if 'closetime' in dictionary: site.closetime = dictionary['closetime']
+        if 'days' in dictionary: site.days = dictionary['days']
         if 'sitecoordinator' in dictionary: site.sitecoordinator = dictionary['sitecoordinator'] # TODO: validate that this is a valid coordinator ID
         if 'is_open' in dictionary: site.is_open = dictionary['is_open']
 
@@ -81,7 +88,9 @@ class Site:
     def save(self):
         """ Save all fields to the database """
         # Attempt to make our own slug if none was given
-
+        # TODO: unit tests needed for auto-slugify logic
+        if self.slug is None or self.slug == '':
+            self.slug = slugify(self.name)
 
         if not self.is_valid():
             return False
@@ -107,26 +116,36 @@ class Site:
             }
         )
 
-        return 'ConsumedCapacity' in response
+        logging.debug(response)
+
+        return response['ResponseMetadata']['HTTPStatusCode']
+        
 
     def delete(self):
         dynamodb = boto3.resource('dynamodb')
         table = dynamodb.Table(SITES_TABLE_NAME)
-        table.delete_item(
+        response = table.delete_item(
             Key = {
-                'name': self.name
+                'slug': self.slug
             }
         )
-        return True
+
+        return response['ResponseMetadata']['HTTPStatusCode']
     
     def to_json(self):
         return json.dumps(self.__dict__)
     
     def is_valid(self):
         if self.name == None or len(self.name) == 0:
+            logging.debug("Site Validation failed due to missing field {name}")
             return False
         if self.slug == None or len(self.slug) == 0:
+            logging.debug("Site Validation failed due to missing field {slug}")
             return False
+        if not re.search(self.VALID_SLUG_PATTERN, self.slug, re.X):
+            logging.debug("Site Validation failed due to invalid %(slug) =~ %(pattern)" % self.slug % self.VALID_SLUG_PATTERN)
+            return False
+
         # TODO: add more validation checks
         # 1) Is the address valid
         # 2) Is the lat/long valid range
