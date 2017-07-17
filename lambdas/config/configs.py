@@ -1,5 +1,6 @@
 import os
 import boto3
+import logging
 
 ENVIRONMENT = 'dev' # 'test' or 'prod'
 if 'VITA_ENV' in os.environ:
@@ -12,3 +13,9 @@ sites_table_names = {
 }
 
 SITES_TABLE_NAME = sites_table_names[ENVIRONMENT]
+
+log_level = logging.DEBUG
+if ENVIRONMENT == 'prod':
+  log_level = logging.INFO
+
+logging.basicConfig(filename='vita-api-' + ENVIRONMENT + '.log', level=logging.DEBUG)
