@@ -1,5 +1,9 @@
+import os
+import boto3
+
 ENVIRONMENT = 'dev' # 'test' or 'prod'
-ENVIRONMENT = os.environ['vita-env'].lower() if 'vita-env' in os.environ
+if 'VITA_ENV' in os.environ:
+  ENVIRONMENT = os.environ['VITA_ENV'].lower() 
 
 sites_table_names = {
   'dev': 'sites-dev',
@@ -8,4 +12,3 @@ sites_table_names = {
 }
 
 SITES_TABLE_NAME = sites_table_names[ENVIRONMENT]
-

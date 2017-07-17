@@ -1,6 +1,7 @@
 import boto3
 import json
-import config.configs
+from decimal import Decimal
+from config.configs import *
 
 class Site:
     """ A class representing a VITA tax prep location. It is managed by a Site Coordinator. """
@@ -10,8 +11,8 @@ class Site:
     xstreet = '123 Fake Street'
     xcity = 'San Antonio'
     xzip = '78006'
-    latitude = 175.0
-    longitude = 175.0
+    latitude = Decimal('175.0')
+    longitude = Decimal('175.0')
     opentime = '9am'
     closetime = '5pm'
     days = 'M-F'
@@ -48,14 +49,17 @@ class Site:
         table = dynamodb.Table(SITES_TABLE_NAME)
         response = table.get_item(
             Key = {
-                'site-name': name
+                'name': name
             }
         )
         
         if 'Item' in response:
             item = response['Item']
             site = Site.from_dict(item)
-            return site
+            if site.is_valid():
+                return site
+            else:
+                return None
         else:
             return None
     
@@ -66,12 +70,17 @@ class Site:
         dynamodb = boto3.resource('dynamodb')
         response = dynamodb.Table(SITES_TABLE_NAME).scan()
         for item in response['Items']:
-            sites.append(Site.from_dict(item))
+            tmp = Site.from_dict(item)
+            if tmp.is_valid():
+                sites.append(Site.from_dict(item))
         
         return sites
 
     def save(self):
         """ Save all fields to the database """
+        if not self.is_valid():
+            return False
+        
         dynamodb = boto3.resource('dynamodb')
         table = dynamodb.Table(SITES_TABLE_NAME)
         table.put_item(
@@ -99,7 +108,7 @@ class Site:
         table = dynamodb.Table(SITES_TABLE_NAME)
         table.delete_item(
             Key = {
-                'site-name': self.name
+                'name': self.name
             }
         )
         return True
@@ -108,7 +117,7 @@ class Site:
         return json.dumps(self.__dict__)
     
     def is_valid(self):
-        if self.name == None or len(self.name) == 0
+        if self.name == None or len(self.name) == 0:
             return False
         # TODO: add more validation checks
         # 1) Is the address valid
