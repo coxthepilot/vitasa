@@ -1,51 +1,39 @@
 import json
 import boto3
 import logging
-import urllib
-
-class AccountDoesNotExistException(Exception): pass
-
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
+
+class AccountAlreadyExistsException(Exception): pass
+class BadParameters(Exception): pass
+from models.site import Site
+# from .utilities import respond
+def respond(statusCode, body):
+    return {
+        'statusCode': statusCode,
+        'body': body,
+        'headers': {
+            'Content-Type': 'application/json',
+        },
+    }
+
 def lambda_handler(event, context):
     logger.info('got event{}'.format(event))
+#get the site name from the url
+    if 'pathParameters' not in event:
+        return respond('400', '{ "errorCode": "400", "errorMessage":"Bad Request: No Site Slug specified in the path"}')
+    if 'sitename' not in event['pathParameters']:
+        return respond('400', '{ "errorCode": "400", "errorMessage":"Bad Request: No Site Slug found in the path parameters"}')
+    site_name = urllib.parse.unquote(event['pathParameters']['sitename'])
 
-    #get the site name from the url
-    error = False
-    if 'params' not in event: 
-        error = True
-    if 'path' not in event['params']: 
-        error = True
-    if 'sitename' not in event['params']['path']: 
-        error = True
+    if len(site_name) == 0: 
+        return respond('400', '{ "errorCode": "400", "errorMessage":"Bad Request: Empty sitename"}')
         
-    quotedName = event['params']['path']['sitename']
-    sname = urllib.parse.unquote(quotedName)
+    site = Site.find(site_name)
+    if len(site_name) == 0: 
+        return respond('400', '{ "errorCode": "400", "errorMessage":"Bad Request: Invalid site slug"}')
     
-    #sname = event['params']['path']['sitename']
-    
-    #do magic to access the dynamo DB
-    dynamodb = boto3.resource('dynamodb')
-    
-    #see if the site exists; if not, then return an error
-    table = dynamodb.Table('Sites')
-    
-    getresponse = table.get_item(
-        Key={
-            'Name': sname
-        }
-    )
-    if 'Item' not in getresponse:
-        errmsg1 = 'The account does not exist in the DB.'
-        logger.error(errmsg1)
-        raise AccountDoesNotExistException(errmsg1)
-
     #actually delete the site
-    response = table.delete_item(
-        Key={
-            'Name': sname
-        }
-    )
-
-    return json.dumps(response)
+    site.delete()
+    return response('200', '')

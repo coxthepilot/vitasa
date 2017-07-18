@@ -2,23 +2,33 @@ import json
 import boto3
 import logging
 
+from models.site import Site
+# from .utilities import respond
+def respond(statusCode, body):
+    return {
+        'statusCode': statusCode,
+        'body': body,
+        'headers': {
+            'Content-Type': 'application/json',
+        },
+    }
+
 class BadParameters(Exception): pass
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
 def lambda_handler(event, context):
-    logger.info('got event{}'.format(event))
     
-    dynamodb = boto3.resource('dynamodb')
-    table = dynamodb.Table('Sites')
-    response = table.scan()
+    sites = Site.all()
     
-    if 'Items' not in response:
-        errmsg = 'Error in getting the list of sites'
-        logger.error(errmsg)
-        raise BadParameters(errmsg)
+    if sites == None:
+        return respond('500', '{"errorCode":"500","errorMessage":"Unable to fetch a list of sites"}')
     
-    items = response['Items']
-    
-    return json.dumps(items)
+    sites_json = []
+    for site in sites:
+        sites_json.append(site.to_json())
+    j = ','.join(sites_json)
+    response_body = "[ " + j + " ]"
+
+    return respond('200', response_body)

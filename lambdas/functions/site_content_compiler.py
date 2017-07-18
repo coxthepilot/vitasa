@@ -1,6 +1,7 @@
 import json
 import boto3
 from models.site import Site
+from config.configs import *
 
 class SiteContentCompiler:
     @staticmethod
@@ -8,13 +9,12 @@ class SiteContentCompiler:
         if len(sites) == 0:
             return None
 
-        s3_bucket = 'vita-static-content-dev'
-        s3_key = 'sites.json'
         s3 = boto3.resource('s3')
+        bucket = s3.Bucket(S3_STATIC_CONTENT_BUCKET_NAME)
         
         json_str = ",".join([site.to_json() for site in sites])
         json_str = "[" + json_str + "]"
-        response = s3.Bucket(s3_bucket).put_object(Key=s3_key, Body=json_str)
+        response = bucket.put_object(Key=S3_STATIC_SITES_LIST_KEY, Body=json_str)
         response.Acl().put(ACL='public-read')
         print("Upload complete. Response: " + response.key)
         return True
