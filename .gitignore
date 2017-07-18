@@ -1,0 +1,11 @@
+*.pyc
+__pycache__
+.vscode/*
+.cache/*
+*.zip
+
+# MacOS Desktop Services Store file
+.DS_Store
+
+# Logfiles
+*.log
