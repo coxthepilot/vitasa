@@ -44,6 +44,7 @@ class Site:
         if 'days' in dictionary: site.days = dictionary['days']
         if 'sitecoordinator' in dictionary: site.sitecoordinator = dictionary['sitecoordinator'] # TODO: validate that this is a valid coordinator ID
         if 'is_open' in dictionary: site.is_open = dictionary['is_open']
+        if 'sitetype' in dictionary: site.sitetype = dictionary['sitetype']
 
         # Validate required fields
         if site.is_valid():

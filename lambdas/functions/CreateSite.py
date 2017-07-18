@@ -1,77 +1,48 @@
 import json
 import boto3
 import logging
-
-class AccountAlreadyExistsException(Exception): pass
-class BadParameters(Exception): pass
-
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
+
+class AccountAlreadyExistsException(Exception): pass
+class BadParameters(Exception): pass
+from models.site import Site
+# from .utilities import respond
+def respond(statusCode, body):
+    return {
+        'statusCode': statusCode,
+        'body': body,
+        'headers': {
+            'Content-Type': 'application/json',
+        },
+    }
+
+def deserialize_site(event):
+    """ Extract a Site object from the Event body """
+    if event['body'] is None:
+        return None
+
+    json_body = json.loads(event['body'])
+    site = Site.from_dict(json_body)
+    return site
+
+
 def lambda_handler(event, context):
     logger.info('got event{}'.format(event))
-    
-    error = False
-    iname = event['name']
-    if len(iname) == 0: error = True
-    ixstreet = event['xstreet']
-    if len(ixstreet) == 0: error = True
-    ixcity = event['xcity']
-    if len(ixcity) == 0: error = True
-    ixstate = event['xstate']
-    if len(ixstate) == 0: error = True
-    ixzip = event['xzip']
-    if len(ixzip) == 0: error = True
-    ilatitude = event['latitude']
-    if len(ilatitude) == 0: error = True
-    ilongitude = event['longitude']
-    if len(ilongitude) == 0: error = True
-    iopentime = event['opentime']
-    if len(iopentime) == 0: error = True
-    iclosetime = event['closetime']
-    if len(iclosetime) == 0: error = True
-    idays = event['days']
-    if len(idays) == 0: error = True
-    isitecoordinator = event['sitecoordinator']
-    if len(isitecoordinator) == 0: error = True
-    isitetype = event['sitetype']
-    if len(isitetype) == 0: error = True
-    
-    if error:
-        errmsg = 'One or more parameters were bad or missing.'
-        logger.error(errmsg)
-        raise BadParameters(errmsg)
-        
-    #check to see if that name is already in the DB
-    dynamodb = boto3.resource('dynamodb')
-    table = dynamodb.Table('Sites')
-    
-    getresponse = table.get_item(
-        Key={
-            'Name': iname
-        }
-    )
-    if 'Item' in getresponse:
-        errmsg1 = 'The account is already in the DB.'
-        logger.error(errmsg1)
-        raise AccountAlreadyExistsException(errmsg1)
 
-    putresponse = table.put_item(
-        Item={
-            'Name': iname,
-            'xstreet' : ixstreet,
-            'xcity' : ixcity,
-            'xstate' : ixstate,
-            'xzip' : ixzip,
-            'latitude' : ilatitude,
-            'longitude' : ilongitude,
-            'opentime' : iopentime,
-            'closetime' : iclosetime,
-            'days' : idays,
-            'sitecoordinator' : isitecoordinator,
-            'sitetype' : isitetype
-        }
-    )
+    site = deserialize_site(event)
+    if site is None:
+        return respond('400', '{ "errorCode": "400", "errorMessage":"Bad Request: No valid Site data sent in the body."}')
 
-    msg = json.dumps(putresponse)
-    return msg
+    # Check to see if there are any items already existing with that slug
+    existing_site_check = Site.find(site.slug)
+    if existing_site_check is not None:
+        return respond('400', '{ "errorCode": "400", "errorMessage":"Bad Request: Duplicate slug value specified. This must be a unique value for each site."}')
+
+    # Actually create the record now
+    if not site.save():
+        return respond('400', '{ "errorCode": "400", "errorMessage":"Bad Request: Unable to create record due to failed validation checks."}')
+    else:
+        response_body = Site.find(site.slug).to_json() # Reload the object from the database to ensure that any on-save hooks are accounted for
+        return respond('200', response_body)
