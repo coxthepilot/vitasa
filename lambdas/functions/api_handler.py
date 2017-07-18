@@ -3,19 +3,10 @@ import json
 import boto3
 
 from models.site import Site
-from .utilities import *
+import utilities
 
 class LambdaApiHandler:
-    @staticmethod
-    def deserialize_site(event):
-        """ Extract a Site object from the Event body """
-        if event['body'] == None:
-            return None
-
-        json_body = json.loads(event['body'])
-        site = Site.from_dict(json_body['Site'])
-        return site
-
+    
     @staticmethod
     def site_apis(event):
         """ Handle all of the Site Management API endpoints """
