@@ -1,0 +1,14 @@
+{
+	"name": "API Gateway Manual Test",
+	"slug": "api-gateway-manual-test",
+	"xstreet": "300 Alamo Plaza",
+	"xcity": "San Antonio",
+	"xzip": "78205",
+	"latitude": "29.425728",
+	"longitude": "-98.486307",
+	"opentime": "9am",
+	"closetime": "5pm",
+	"days": "M-F",
+	"sitecoordinator": null,
+	"is_open": true
+}

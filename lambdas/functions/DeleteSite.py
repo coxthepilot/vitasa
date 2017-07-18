@@ -1,6 +1,8 @@
 import json
 import boto3
 import logging
+from urllib.parse import unquote
+
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
@@ -25,15 +27,17 @@ def lambda_handler(event, context):
         return respond('400', '{ "errorCode": "400", "errorMessage":"Bad Request: No Site Slug specified in the path"}')
     if 'sitename' not in event['pathParameters']:
         return respond('400', '{ "errorCode": "400", "errorMessage":"Bad Request: No Site Slug found in the path parameters"}')
-    site_name = urllib.parse.unquote(event['pathParameters']['sitename'])
+#    site_name = urllib.parse.unquote(event['pathParameters']['sitename'])
+    # TODO: implement url decoding, or do pattern validation on the sitename
+    site_name = event['pathParameters']['sitename']
 
     if len(site_name) == 0: 
         return respond('400', '{ "errorCode": "400", "errorMessage":"Bad Request: Empty sitename"}')
         
     site = Site.find(site_name)
-    if len(site_name) == 0: 
-        return respond('400', '{ "errorCode": "400", "errorMessage":"Bad Request: Invalid site slug"}')
+    if site is None: 
+        return respond('404', '{ "errorCode": "404", "errorMessage":"Not Found: no Site found with that slug"}')
     
     #actually delete the site
     site.delete()
-    return response('200', '')
+    return respond('200', '')
