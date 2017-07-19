@@ -2,7 +2,6 @@ import unittest
 import sys
 sys.path.insert(0, ".")
 from models.site import Site
-from decimal import Decimal
 
 # TODO: Swtich to pytest from unittest
 #import pytest

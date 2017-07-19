@@ -5,8 +5,6 @@ import re
 from decimal import Decimal
 from config.configs import *
 
-from slugify import slugify
-
 class Site:
     """ A class representing a VITA tax prep location. It is managed by a Site Coordinator. """
 
@@ -48,15 +46,15 @@ class Site:
         if 'is_open' in dictionary: site.is_open = dictionary['is_open']
         if 'sitetype' in dictionary: site.sitetype = dictionary['sitetype']
 
-        # Validate required fields
-        if site.is_valid():
-            return site
-        else:
-            return None
-
+        return site
+        
     @staticmethod
     def find(slug):
         """ Look up the Site in the database """
+
+        if len(slug) == 0:
+            return None
+
         dynamodb = boto3.resource('dynamodb')
         table = dynamodb.Table(SITES_TABLE_NAME)
         response = table.get_item(
@@ -137,6 +135,11 @@ class Site:
     
     def to_json(self):
         return json.dumps(self.__dict__)
+
+    @staticmethod
+    def slugify(sitename):
+        return re.sub(r'[-\s]+', '-',
+            (re.sub(r'[^\w\s-]', '',sitename).strip().lower())).rstrip('-')
 
     def is_valid(self):
         if self.name == None or len(self.name) == 0:
