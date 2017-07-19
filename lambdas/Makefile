@@ -2,27 +2,28 @@
 
 #AWSCLI=aws
 AWSCLI=python3 -m awscli
+ZIP=python3 -m zipfile -c 
 
 test:
 	python3 -m unittest discover --pattern "tc_*.py"
 
 get_site_details.zip: functions/GetSiteDetails.py models/site.py config/configs.py
-	zip $@ $^
+	$(ZIP) $@ $^
 
 get_list_of_sites.zip: functions/GetListOfSites.py models/site.py config/configs.py
-	zip $@ $^
+	$(ZIP) $@ $^
 
 create_site.zip: functions/CreateSite.py models/site.py config/configs.py
-	zip $@ $^
+	$(ZIP) $@ $^
 
 update_site.zip: functions/UpdateSite.py models/site.py config/configs.py
-	zip $@ $^
+	$(ZIP) $@ $^
 
 delete_site.zip: functions/DeleteSite.py models/site.py config/configs.py
-	zip $@ $^
+	$(ZIP) $@ $^
 
 site_json_compiler.zip: functions/site_content_compiler.py models/site.py config/configs.py
-	zip $@ $^
+	$(ZIP) $@ $^
 
 zips: site_json_compiler.zip get_site_details.zip get_list_of_sites.zip create_site.zip update_site.zip delete_site.zip
 
