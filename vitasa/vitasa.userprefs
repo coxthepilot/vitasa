@@ -1,0 +1,18 @@
+﻿<Properties StartupConfiguration="{6B22298C-4080-4B07-9765-083359A6381A}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="vitasa/VC_SitesMap.cs">
+    <Files>
+      <File FileName="vitasa/AppDelegate.cs" Line="1" Column="1" />
+      <File FileName="vitasa/ViewController.cs" Line="19" Column="58" />
+      <File FileName="vitasa/Main.storyboard" />
+      <File FileName="vitasa/VC_SitesList.cs" Line="14" Column="1" />
+      <File FileName="vitasa/VC_SitesMap.cs" Line="41" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|iPhoneSimulator" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.vitasa PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.E707114F-941F-40B9-BB7B-91563EFFEA67" />
+  <MultiItemStartupConfigurations />
+</Properties>
