@@ -5,6 +5,8 @@ import re
 from decimal import Decimal
 from config.configs import *
 
+from slugify import slugify
+
 class Site:
     """ A class representing a VITA tax prep location. It is managed by a Site Coordinator. """
 
@@ -135,7 +137,7 @@ class Site:
     
     def to_json(self):
         return json.dumps(self.__dict__)
-    
+
     def is_valid(self):
         if self.name == None or len(self.name) == 0:
             logging.debug("Site Validation failed due to missing field {name}")
