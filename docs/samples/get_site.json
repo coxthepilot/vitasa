@@ -1,0 +1,14 @@
+{
+  "name": "The Alamo",
+  "slug": "the-alamo",
+  "xstreet": "300 Alamo Plaza",
+  "xcity": "San Antonio",
+  "xzip": "78205",
+  "latitude": "",
+  "longitude": "",
+  "opentime": "9am",
+  "closetime": "5pm",
+  "days": "M-F",
+  "sitecoordinator": null,
+  "is_open": true,
+}

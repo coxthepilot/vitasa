@@ -1,0 +1,6 @@
+{
+    "id": "db265574-f7e6-4a85-8d14-97eb1969f91f",
+    "email": "user1@example.org",
+    "roles": [ "SiteCoordinator" ],
+    "sites": [ "the-alamo" ]
+}
