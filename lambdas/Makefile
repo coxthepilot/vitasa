@@ -5,7 +5,7 @@ AWSCLI=python3 -m awscli
 ZIP=python3 -m zipfile -c 
 
 test:
-	python3 -m unittest discover --pattern "tc_*.py"
+	python3 -m unittest discover
 
 get_site_details.zip: functions/GetSiteDetails.py models/site.py config/configs.py
 	$(ZIP) $@ $^

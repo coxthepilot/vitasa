@@ -11,8 +11,6 @@ class Site:
     # These properties describe the user, and are stored in DynamoDB
     name = None
     slug = ''
-    #VALID_SLUG_PATTERN = r"^[a-z0-9]+(?:-[a-z0-9]+)*"
-    VALID_SLUG_PATTERN = r'^[a-z0-9]+'
     xstreet = '123 Fake Street'
     xcity = 'San Antonio'
     xzip = '78006'
@@ -90,8 +88,8 @@ class Site:
         """ Save all fields to the database """
         # Attempt to make our own slug if none was given
         # TODO: unit tests needed for auto-slugify logic
-        if self.slug is None or self.slug == '':
-            self.slug = slugify(self.name)
+        if self.slug is None or self.slug.strip() == '':
+            self.slug = Site.slugify(self.name)
 
         if not self.is_valid():
             return False
@@ -148,8 +146,9 @@ class Site:
         if self.slug == None or len(self.slug) == 0:
             logging.debug("Site Validation failed due to missing field {slug}")
             return False
-        if not re.search(self.VALID_SLUG_PATTERN, self.slug, re.X):
-            logging.debug("Site Validation failed due to invalid %(slug) =~ %(pattern)" % self.slug % self.VALID_SLUG_PATTERN)
+
+        if Site.slugify(self.slug) != self.slug or len(self.slug.strip()) == 0:
+            logging.debug("Site Validation failed due to invalid {0}".format(self.slug))
             return False
 
         # TODO: add more validation checks
