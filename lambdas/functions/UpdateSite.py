@@ -23,6 +23,8 @@ def lambda_handler(event, context):
     # Extract the ID from the path parameters
     if 'pathParameters' not in event:
         return respond('400', '{ "errorCode": "400", "errorMessage":"Bad Request: No Site Slug specified in the path"}')
+    if event['pathParameters'] is None:
+        return respond('400', '{ "errorCode": "400", "errorMessage":"Bad Request: None Site Slug specified in the path"}')
     if 'sitename' not in event['pathParameters']:
         return respond('400', '{ "errorCode": "400", "errorMessage":"Bad Request: No Site Slug found in the path parameters"}')
     if 'body' not in event:
