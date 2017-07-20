@@ -2,6 +2,12 @@ import os
 import boto3
 import logging
 
+VALID_ENVIRONMENTS = [
+  'dev',
+  'test',
+  'prod',
+]
+
 ENVIRONMENT = 'dev' # 'test' or 'prod'
 if 'VITA_ENV' in os.environ:
   ENVIRONMENT = os.environ['VITA_ENV'].lower() 
@@ -9,6 +15,13 @@ if 'VITA_ENV' in os.environ:
 #
 # DynamoDB Configuration
 # 
+
+dynamo_endpoints = {
+  'dev': 'http://localhost:8000',
+  'test': 'http://localhost:8000',
+  'prod': None,
+}
+DYNAMO_ENDPOINT = dynamo_endpoints[ENVIRONMENT]
 
 sites_table_names = {
   'dev': 'sites-dev',

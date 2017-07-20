@@ -1,4 +1,4 @@
-.PHONY: test publish zips clean publish_lambdas publish_static_dev
+.PHONY: test publish zips clean publish_lambdas publish_static_dev init_db
 
 #AWSCLI=aws
 AWSCLI=python3 -m awscli
@@ -40,6 +40,9 @@ publish_static_dev: static/sites.js static/sites.html
 	$(AWSCLI) s3 cp --acl public-read static/sites.html s3://vitasa-static-content-dev/sites.html
 
 publish: publish_lambdas publish_static_dev
+
+init_db:
+	python3 tools/initialize_aws.py
 
 clean:
 	rm -f *.zip

@@ -2,7 +2,6 @@ import boto3
 import json
 import re
 
-from decimal import Decimal
 from config.configs import *
 
 class Site:
@@ -14,8 +13,6 @@ class Site:
     xstreet = '123 Fake Street'
     xcity = 'San Antonio'
     xzip = '78006'
-    # latitude = Decimal('175.0')
-    # longitude = Decimal('175.0')
     latitude = '175.0'
     longitude = '175.0'
     opentime = '9am'
@@ -87,7 +84,6 @@ class Site:
     def save(self):
         """ Save all fields to the database """
         # Attempt to make our own slug if none was given
-        # TODO: unit tests needed for auto-slugify logic
         if self.slug is None or self.slug.strip() == '':
             self.slug = Site.slugify(self.name)
 
