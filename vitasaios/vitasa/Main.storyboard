@@ -1,0 +1,709 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11134" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11106"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="650" translatesAutoresizingMaskIntoConstraints="NO">
+                                <rect key="frame" x="-19" y="0.0" width="692" height="380"/>
+                                <rect key="contentStretch" x="0.0" y="0.0" width="0" height="0"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="3" translatesAutoresizingMaskIntoConstraints="NO" buttonType="roundedRect">
+                                <rect key="frame" x="96" y="110" width="183" height="36"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20" weight="semibold"/>
+                                <connections>
+                                    <segue id="88" destination="11" kind="show" identifier="MainToSitesList"/>
+                                </connections>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <color key="backgroundColor" colorSpace="calibratedWhite" white="0.333333333333333" alpha="1"/>
+                                </variation>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute keyPath="layer.cornerRadius" type="number">
+                                        <real key="value" value="8"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <rect key="contentStretch" x="0.0" y="0.0" width="1" height="1"/>
+                                <state key="normal" title="  View Sites as List  ">
+                                    <color key="titleColor" colorSpace="calibratedWhite" white="1" alpha="1"/>
+                                </state>
+                                <variation key="heightClass=compact-widthClass=compact">
+                                    <color key="backgroundColor" colorSpace="calibratedWhite" white="0.333333333333333" alpha="1"/>
+                                </variation>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="6" translatesAutoresizingMaskIntoConstraints="NO">
+                                <rect key="frame" x="92" y="183" width="192" height="36"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20" weight="semibold"/>
+                                <state key="normal" title="  View Sites on Map  ">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleColor" colorSpace="calibratedWhite" white="1" alpha="1"/>
+                                </state>
+                                <connections>
+                                    <segue id="140" destination="18" kind="show" identifier="MainToSitesMap"/>
+                                </connections>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <color key="backgroundColor" colorSpace="calibratedWhite" white="0.333333333333333" alpha="1"/>
+                                </variation>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute keyPath="layer.cornerRadius" type="number">
+                                        <real key="value" value="8"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <variation key="heightClass=compact-widthClass=compact">
+                                    <color key="backgroundColor" colorSpace="calibratedWhite" white="0.333333333333333" alpha="1"/>
+                                </variation>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="7" translatesAutoresizingMaskIntoConstraints="NO">
+                                <rect key="frame" x="65" y="615" width="245" height="36"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20" weight="semibold"/>
+                                <state key="normal" title="  Before you go to a site...  ">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleColor" colorSpace="calibratedWhite" white="1" alpha="1"/>
+                                </state>
+                                <connections>
+                                    <segue id="197" destination="151" kind="show" identifier="MainToPrepList"/>
+                                </connections>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <color key="backgroundColor" colorSpace="calibratedWhite" white="0.333333333333333" alpha="1"/>
+                                </variation>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute keyPath="layer.cornerRadius" type="number">
+                                        <real key="value" value="8"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <variation key="heightClass=compact-widthClass=compact">
+                                    <color key="backgroundColor" colorSpace="calibratedWhite" white="0.333333333333333" alpha="1"/>
+                                </variation>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  VITA Sites in San Antonio  " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="425" translatesAutoresizingMaskIntoConstraints="NO">
+                                <rect key="frame" x="36" y="50" width="303" height="29"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="24" weight="semibold"/>
+                                <color key="textColor" colorSpace="calibratedWhite" white="0" alpha="1"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <color key="backgroundColor" colorSpace="calibratedWhite" white="0.666666666666667" alpha="1"/>
+                                </variation>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute keyPath="layer.cornerRadius" type="number">
+                                        <real key="value" value="8"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <rect key="contentStretch" x="1" y="0.0" width="1" height="1"/>
+                                <size key="shadowOffset" width="5" height="5"/>
+                                <variation key="heightClass=compact-widthClass=compact">
+                                    <color key="backgroundColor" colorSpace="calibratedWhite" white="0.666666666666667" alpha="1"/>
+                                </variation>
+                            </label>
+                        </subviews>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="3"/>
+                                <include reference="6"/>
+                                <include reference="7"/>
+                                <include reference="425"/>
+                                <include reference="650"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="543"/>
+                                <include reference="544"/>
+                                <include reference="549"/>
+                                <include reference="552"/>
+                                <include reference="559"/>
+                                <include reference="560"/>
+                                <include reference="1383"/>
+                                <include reference="1384"/>
+                                <include reference="1385"/>
+                                <include reference="1386"/>
+                                <include reference="1395"/>
+                                <include reference="1406"/>
+                                <include reference="1407"/>
+                            </mask>
+                        </variation>
+                        <constraints>
+                            <constraint id="543" firstItem="425" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX"/>
+                            <constraint id="544" firstItem="425" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="30"/>
+                            <constraint id="547" firstItem="425" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="29"/>
+                            <constraint id="548" firstItem="425" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX"/>
+                            <constraint id="549" firstItem="3" firstAttribute="top" secondItem="425" secondAttribute="bottom" constant="31"/>
+                            <constraint id="552" firstItem="3" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX"/>
+                            <constraint id="555" firstItem="3" firstAttribute="top" secondItem="425" secondAttribute="bottom" constant="35"/>
+                            <constraint id="556" firstItem="3" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX"/>
+                            <constraint id="559" firstItem="6" firstAttribute="top" secondItem="3" secondAttribute="bottom" constant="37"/>
+                            <constraint id="560" firstItem="6" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX"/>
+                            <constraint id="563" firstItem="6" firstAttribute="top" secondItem="3" secondAttribute="bottom" constant="28"/>
+                            <constraint id="564" firstItem="6" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX"/>
+                            <constraint id="1383" firstItem="8bC-Xf-vdC" firstAttribute="leadingMargin" secondItem="650" secondAttribute="leading" constant="35"/>
+                            <constraint id="1384" firstItem="650" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" constant="23"/>
+                            <constraint id="1385" firstItem="650" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" constant="18"/>
+                            <constraint id="1386" firstItem="y3c-jy-aDJ" firstAttribute="bottom" secondItem="650" secondAttribute="top" constant="20"/>
+                            <constraint id="1389" firstItem="8bC-Xf-vdC" firstAttribute="leadingMargin" secondItem="650" secondAttribute="leading" constant="35"/>
+                            <constraint id="1390" firstItem="650" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" constant="26"/>
+                            <constraint id="1391" firstItem="650" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" constant="5"/>
+                            <constraint id="1392" firstItem="y3c-jy-aDJ" firstAttribute="bottom" secondItem="650" secondAttribute="top" constant="20"/>
+                            <constraint id="1402" firstItem="7" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="195"/>
+                            <constraint id="1403" firstItem="wfy-db-euE" firstAttribute="top" secondItem="7" secondAttribute="bottom" constant="16"/>
+                            <constraint id="1406" firstItem="7" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="49"/>
+                            <constraint id="1407" firstItem="wfy-db-euE" firstAttribute="top" secondItem="7" secondAttribute="bottom" constant="16"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="543"/>
+                                <exclude reference="544"/>
+                                <exclude reference="547"/>
+                                <exclude reference="548"/>
+                                <exclude reference="549"/>
+                                <exclude reference="552"/>
+                                <exclude reference="555"/>
+                                <exclude reference="556"/>
+                                <exclude reference="559"/>
+                                <exclude reference="560"/>
+                                <exclude reference="563"/>
+                                <exclude reference="564"/>
+                                <exclude reference="1383"/>
+                                <exclude reference="1384"/>
+                                <exclude reference="1385"/>
+                                <exclude reference="1386"/>
+                                <exclude reference="1389"/>
+                                <exclude reference="1390"/>
+                                <exclude reference="1391"/>
+                                <exclude reference="1392"/>
+                                <exclude reference="1395"/>
+                                <exclude reference="1402"/>
+                                <exclude reference="1403"/>
+                                <exclude reference="1406"/>
+                                <exclude reference="1407"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=compact-widthClass=compact">
+                            <mask key="constraints">
+                                <include reference="547"/>
+                                <include reference="548"/>
+                                <include reference="555"/>
+                                <include reference="556"/>
+                                <include reference="563"/>
+                                <include reference="564"/>
+                                <include reference="1389"/>
+                                <include reference="1390"/>
+                                <include reference="1391"/>
+                                <include reference="1392"/>
+                                <include reference="1402"/>
+                                <include reference="1403"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <connections>
+                        <outlet property="B_ViewAsList" destination="3" id="name-outlet-3"/>
+                        <outlet property="B_ViewOnMap" destination="6" id="name-outlet-6"/>
+                        <outlet property="B_GettingReady" destination="7" id="name-outlet-7"/>
+                        <outlet property="I_Background" destination="650" id="name-outlet-650"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-836" y="-324"/>
+        </scene>
+        <scene sceneID="10">
+            <objects>
+                <viewController id="11" sceneMemberID="viewController" customClass="VC_SitesList">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="8"/>
+                        <viewControllerLayoutGuide type="bottom" id="9"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="12">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="142" translatesAutoresizingMaskIntoConstraints="NO">
+                                <rect key="frame" x="9" y="26" width="95" height="30"/>
+                                <state key="normal" title="&lt; Back">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue id="417" destination="BYZ-38-t0r" kind="show" identifier="SitesListToMain"/>
+                                </connections>
+                            </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="143" translatesAutoresizingMaskIntoConstraints="NO">
+                                <rect key="frame" x="16" y="64" width="448" height="240"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="144">
+                                        <rect key="frame" x="0.0" y="28" width="448" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="144" id="145">
+                                            <rect key="frame" x="0.0" y="0.0" width="448" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="142"/>
+                                <include reference="143"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="587"/>
+                                <include reference="588"/>
+                                <include reference="593"/>
+                                <include reference="596"/>
+                                <include reference="597"/>
+                                <include reference="598"/>
+                            </mask>
+                            <color key="backgroundColor" colorSpace="calibratedWhite" white="0.666666666666667" alpha="1"/>
+                        </variation>
+                        <constraints>
+                            <constraint id="587" firstItem="142" firstAttribute="top" secondItem="8" secondAttribute="bottom" constant="6"/>
+                            <constraint id="588" firstItem="12" firstAttribute="leadingMargin" secondItem="142" secondAttribute="leading" constant="7"/>
+                            <constraint id="589" firstItem="142" firstAttribute="top" secondItem="8" secondAttribute="bottom" constant="6"/>
+                            <constraint id="592" firstItem="12" firstAttribute="leadingMargin" secondItem="142" secondAttribute="leading" constant="7"/>
+                            <constraint id="593" firstItem="143" firstAttribute="top" secondItem="8" secondAttribute="bottom" constant="55"/>
+                            <constraint id="596" firstItem="143" firstAttribute="leading" secondItem="12" secondAttribute="leadingMargin"/>
+                            <constraint id="597" firstItem="9" firstAttribute="top" secondItem="143" secondAttribute="bottom" constant="16"/>
+                            <constraint id="598" firstItem="143" firstAttribute="trailing" secondItem="12" secondAttribute="trailingMargin"/>
+                            <constraint id="601" firstItem="143" firstAttribute="top" secondItem="8" secondAttribute="bottom" constant="44"/>
+                            <constraint id="602" firstItem="143" firstAttribute="leading" secondItem="12" secondAttribute="leadingMargin"/>
+                            <constraint id="603" firstItem="9" firstAttribute="top" secondItem="143" secondAttribute="bottom" constant="16"/>
+                            <constraint id="604" firstItem="143" firstAttribute="trailing" secondItem="12" secondAttribute="trailingMargin" constant="4"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="587"/>
+                                <exclude reference="588"/>
+                                <exclude reference="589"/>
+                                <exclude reference="592"/>
+                                <exclude reference="593"/>
+                                <exclude reference="596"/>
+                                <exclude reference="597"/>
+                                <exclude reference="598"/>
+                                <exclude reference="601"/>
+                                <exclude reference="602"/>
+                                <exclude reference="603"/>
+                                <exclude reference="604"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=compact-widthClass=compact">
+                            <mask key="constraints">
+                                <include reference="589"/>
+                                <include reference="592"/>
+                                <include reference="601"/>
+                                <include reference="602"/>
+                                <include reference="603"/>
+                                <include reference="604"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <connections>
+                        <outlet property="B_Back" destination="142" id="name-outlet-142"/>
+                        <outlet property="TV_SitesList" destination="143" id="name-outlet-143"/>
+                        <segue id="995" destination="766" kind="show" identifier="SegueFromListToDetails"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="13" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="49" y="-827"/>
+        </scene>
+        <scene sceneID="17">
+            <objects>
+                <viewController id="18" sceneMemberID="viewController" customClass="VC_SitesMap">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="15"/>
+                        <viewControllerLayoutGuide type="bottom" id="16"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="19">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" id="147" translatesAutoresizingMaskIntoConstraints="NO">
+                                <rect key="frame" x="0.0" y="41" width="375" height="626"/>
+                            </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="146" translatesAutoresizingMaskIntoConstraints="NO">
+                                <rect key="frame" x="16" y="25" width="48" height="30"/>
+                                <state key="normal" title="&lt; Back">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue id="315" destination="BYZ-38-t0r" kind="show" identifier="SitesMapToMain"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="1345"/>
+                                <exclude reference="1346"/>
+                                <exclude reference="1347"/>
+                                <exclude reference="1348"/>
+                                <exclude reference="1351"/>
+                                <exclude reference="1352"/>
+                                <exclude reference="1353"/>
+                                <exclude reference="1354"/>
+                                <exclude reference="1357"/>
+                                <exclude reference="1358"/>
+                                <exclude reference="1359"/>
+                                <exclude reference="1362"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="146"/>
+                                <include reference="147"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="1351"/>
+                                <include reference="1352"/>
+                                <include reference="1353"/>
+                                <include reference="1354"/>
+                                <include reference="1357"/>
+                                <include reference="1358"/>
+                            </mask>
+                            <color key="backgroundColor" colorSpace="calibratedWhite" white="0.666666666666667" alpha="1"/>
+                        </variation>
+                        <constraints>
+                            <constraint id="1345" firstItem="19" firstAttribute="leadingMargin" secondItem="147" secondAttribute="leading" constant="27"/>
+                            <constraint id="1346" firstItem="147" firstAttribute="trailing" secondItem="19" secondAttribute="trailingMargin" constant="21"/>
+                            <constraint id="1347" firstItem="15" firstAttribute="bottom" secondItem="147" secondAttribute="top" constant="20"/>
+                            <constraint id="1348" firstItem="147" firstAttribute="bottom" secondItem="16" secondAttribute="top"/>
+                            <constraint id="1351" firstItem="15" firstAttribute="bottom" secondItem="147" secondAttribute="top" constant="20"/>
+                            <constraint id="1352" firstItem="19" firstAttribute="leadingMargin" secondItem="147" secondAttribute="leading" constant="16"/>
+                            <constraint id="1353" firstItem="147" firstAttribute="bottom" secondItem="16" secondAttribute="top"/>
+                            <constraint id="1354" firstItem="147" firstAttribute="trailing" secondItem="19" secondAttribute="trailingMargin" constant="16"/>
+                            <constraint id="1357" firstItem="146" firstAttribute="top" secondItem="15" secondAttribute="bottom" constant="5"/>
+                            <constraint id="1358" firstItem="146" firstAttribute="leading" secondItem="147" secondAttribute="leading" constant="16"/>
+                            <constraint id="1359" firstItem="146" firstAttribute="leading" secondItem="19" secondAttribute="leadingMargin"/>
+                            <constraint id="1362" firstItem="146" firstAttribute="top" secondItem="15" secondAttribute="bottom" constant="5"/>
+                        </constraints>
+                        <variation key="heightClass=compact-widthClass=compact">
+                            <mask key="constraints">
+                                <include reference="1345"/>
+                                <include reference="1346"/>
+                                <include reference="1347"/>
+                                <include reference="1348"/>
+                                <include reference="1359"/>
+                                <include reference="1362"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <connections>
+                        <outlet property="B_Back" destination="146" id="name-outlet-146"/>
+                        <outlet property="Map_SitesMap" destination="147" id="name-outlet-147"/>
+                        <segue id="1097" destination="766" kind="show" identifier="SiteMapToDetails"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="20" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="44" y="-5"/>
+        </scene>
+        <scene sceneID="150">
+            <objects>
+                <viewController id="151" sceneMemberID="viewController" customClass="VC_GetReady">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="148"/>
+                        <viewControllerLayoutGuide type="bottom" id="149"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="152">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="199" translatesAutoresizingMaskIntoConstraints="NO">
+                                <rect key="frame" x="16" y="23" width="95" height="30"/>
+                                <state key="normal" title="&lt; Back">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue id="273" destination="BYZ-38-t0r" kind="show" identifier="PrepListToMain"/>
+                                </connections>
+                            </button>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" id="200" translatesAutoresizingMaskIntoConstraints="NO" editable="NO">
+                                <rect key="frame" x="16" y="52" width="288" height="500"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <string key="text">What to Bring to Your Local VITA or TCE Site
+
+* Proof of identification (photo ID)
+* Social Security cards for you, your spouse and dependents 
+* An Individual Taxpayer Identification Number (ITIN) assignment letter may be substituted for you, your spouse and your dependents if you do not have a Social Security number
+* Proof of foreign status, if applying for an ITIN
+* Birth dates for you, your spouse and dependents on the tax return
+* Wage and earning statements (Form W-2, W-2G, 1099-R,1099-Misc) from all employers
+* Interest and dividend statements from banks (Forms 1099)
+* Health Insurance Exemption Certificate, if received
+* A copy of last year’s federal and state returns, if available
+* Proof of bank account routing and account numbers for direct deposit such as a blank check
+* To file taxes electronically on a married-filing-joint tax return, both spouses must be present to sign the required forms
+* Total paid for daycare provider and the daycare provider's tax identifying number such as their Social Security number or business Employer Identification Number
+* Forms 1095-A, B and C, Health Coverage Statements
+* Copies of income transcripts from IRS and state, if applicable</string>
+                            </textView>
+                        </subviews>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="199"/>
+                                <include reference="200"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="623"/>
+                                <include reference="624"/>
+                                <include reference="643"/>
+                                <include reference="644"/>
+                                <include reference="645"/>
+                                <include reference="647"/>
+                            </mask>
+                            <color key="backgroundColor" colorSpace="calibratedWhite" white="0.666666666666667" alpha="1"/>
+                        </variation>
+                        <constraints>
+                            <constraint id="623" firstItem="199" firstAttribute="top" secondItem="148" secondAttribute="bottom" constant="3"/>
+                            <constraint id="624" firstItem="199" firstAttribute="leading" secondItem="152" secondAttribute="leadingMargin"/>
+                            <constraint id="631" firstItem="199" firstAttribute="top" secondItem="148" secondAttribute="bottom" constant="3"/>
+                            <constraint id="637" firstItem="200" firstAttribute="top" secondItem="148" secondAttribute="bottom" constant="32"/>
+                            <constraint id="638" firstItem="200" firstAttribute="leading" secondItem="152" secondAttribute="leadingMargin"/>
+                            <constraint id="639" firstItem="149" firstAttribute="top" secondItem="200" secondAttribute="bottom" constant="10"/>
+                            <constraint id="640" firstItem="200" firstAttribute="trailing" secondItem="152" secondAttribute="trailingMargin" constant="4"/>
+                            <constraint id="643" firstItem="200" firstAttribute="top" secondItem="148" secondAttribute="bottom" constant="32"/>
+                            <constraint id="644" firstItem="200" firstAttribute="leading" secondItem="152" secondAttribute="leadingMargin"/>
+                            <constraint id="645" firstItem="149" firstAttribute="top" secondItem="200" secondAttribute="bottom" constant="16"/>
+                            <constraint id="647" firstItem="200" firstAttribute="trailing" secondItem="152" secondAttribute="trailingMargin"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="623"/>
+                                <exclude reference="624"/>
+                                <exclude reference="631"/>
+                                <exclude reference="637"/>
+                                <exclude reference="638"/>
+                                <exclude reference="639"/>
+                                <exclude reference="640"/>
+                                <exclude reference="643"/>
+                                <exclude reference="644"/>
+                                <exclude reference="645"/>
+                                <exclude reference="647"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=compact-widthClass=compact">
+                            <mask key="constraints">
+                                <include reference="631"/>
+                                <include reference="637"/>
+                                <include reference="638"/>
+                                <include reference="639"/>
+                                <include reference="640"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <connections>
+                        <outlet property="B_Back" destination="199" id="name-outlet-199"/>
+                        <outlet property="TB_ReadyMessage" destination="200" id="name-outlet-200"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="153" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-861" y="559"/>
+        </scene>
+        <scene sceneID="765">
+            <objects>
+                <viewController id="766" sceneMemberID="viewController" customClass="VC_SiteDetails" storyboardIdentifier="ViewSiteDetails">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="763"/>
+                        <viewControllerLayoutGuide type="bottom" id="764"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="767">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="1001"/>
+                                <include reference="1006"/>
+                                <include reference="1169"/>
+                                <include reference="1170"/>
+                                <include reference="1171"/>
+                                <include reference="1202"/>
+                                <include reference="1203"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="1180"/>
+                                <include reference="1181"/>
+                                <include reference="1219"/>
+                                <include reference="1220"/>
+                                <include reference="1221"/>
+                                <include reference="1222"/>
+                                <include reference="1223"/>
+                                <include reference="1224"/>
+                                <include reference="1225"/>
+                                <include reference="1226"/>
+                                <include reference="1227"/>
+                                <include reference="1228"/>
+                                <include reference="1231"/>
+                                <include reference="1232"/>
+                            </mask>
+                            <color key="backgroundColor" colorSpace="calibratedRGB" red="0.81176470588235294" green="0.81176470588235294" blue="0.81176470588235294" alpha="1"/>
+                        </variation>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="site name goes here" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1001" translatesAutoresizingMaskIntoConstraints="NO">
+                                <rect key="frame" x="274" y="56" width="189" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20" weight="semibold"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="1006" translatesAutoresizingMaskIntoConstraints="NO">
+                                <rect key="frame" x="16" y="26" width="48" height="30"/>
+                                <state key="normal" title="&lt; Back">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue id="1007" destination="1008" kind="show"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="site address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1169" translatesAutoresizingMaskIntoConstraints="NO">
+                                <rect key="frame" x="72" y="165" width="236" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="site coordinator" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1170" translatesAutoresizingMaskIntoConstraints="NO">
+                                <rect key="frame" x="142" y="89" width="131" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1171" translatesAutoresizingMaskIntoConstraints="NO" text="site status">
+                                <rect key="frame" x="168" y="118" width="79" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1202" translatesAutoresizingMaskIntoConstraints="NO" text="city">
+                                <rect key="frame" x="71" y="201" width="236" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="state plus zip" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1203" translatesAutoresizingMaskIntoConstraints="NO">
+                                <rect key="frame" x="71" y="240" width="194" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="1180"/>
+                                <exclude reference="1181"/>
+                                <exclude reference="1190"/>
+                                <exclude reference="1191"/>
+                                <exclude reference="1207"/>
+                                <exclude reference="1208"/>
+                                <exclude reference="1209"/>
+                                <exclude reference="1210"/>
+                                <exclude reference="1211"/>
+                                <exclude reference="1212"/>
+                                <exclude reference="1213"/>
+                                <exclude reference="1214"/>
+                                <exclude reference="1215"/>
+                                <exclude reference="1216"/>
+                                <exclude reference="1219"/>
+                                <exclude reference="1220"/>
+                                <exclude reference="1221"/>
+                                <exclude reference="1222"/>
+                                <exclude reference="1223"/>
+                                <exclude reference="1224"/>
+                                <exclude reference="1225"/>
+                                <exclude reference="1226"/>
+                                <exclude reference="1227"/>
+                                <exclude reference="1228"/>
+                                <exclude reference="1231"/>
+                                <exclude reference="1232"/>
+                                <exclude reference="1233"/>
+                                <exclude reference="1236"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=compact-widthClass=compact">
+                            <color key="backgroundColor" colorSpace="calibratedRGB" red="0.88627450980392153" green="0.88627450980392153" blue="0.88627450980392153" alpha="1"/>
+                            <mask key="constraints">
+                                <include reference="1190"/>
+                                <include reference="1191"/>
+                                <include reference="1207"/>
+                                <include reference="1208"/>
+                                <include reference="1209"/>
+                                <include reference="1210"/>
+                                <include reference="1211"/>
+                                <include reference="1212"/>
+                                <include reference="1213"/>
+                                <include reference="1214"/>
+                                <include reference="1215"/>
+                                <include reference="1216"/>
+                                <include reference="1233"/>
+                                <include reference="1236"/>
+                            </mask>
+                        </variation>
+                        <constraints>
+                            <constraint id="1180" firstItem="1001" firstAttribute="centerX" secondItem="767" secondAttribute="centerX"/>
+                            <constraint id="1181" firstItem="1001" firstAttribute="top" secondItem="763" secondAttribute="bottom" constant="37"/>
+                            <constraint id="1190" firstItem="1001" firstAttribute="centerX" secondItem="767" secondAttribute="centerX"/>
+                            <constraint id="1191" firstItem="1001" firstAttribute="top" secondItem="763" secondAttribute="bottom" constant="36"/>
+                            <constraint id="1207" firstItem="1170" firstAttribute="centerX" secondItem="767" secondAttribute="centerX"/>
+                            <constraint id="1208" firstItem="1170" firstAttribute="top" secondItem="1001" secondAttribute="bottom" constant="8"/>
+                            <constraint id="1209" firstItem="1171" firstAttribute="centerX" secondItem="767" secondAttribute="centerX"/>
+                            <constraint id="1210" firstItem="1171" firstAttribute="top" secondItem="1170" secondAttribute="bottom" constant="9"/>
+                            <constraint id="1211" firstItem="1169" firstAttribute="top" secondItem="1171" secondAttribute="bottom" constant="26"/>
+                            <constraint id="1212" firstItem="1169" firstAttribute="leading" secondItem="767" secondAttribute="leadingMargin" constant="97"/>
+                            <constraint id="1213" firstItem="1202" firstAttribute="top" secondItem="1169" secondAttribute="bottom" constant="8"/>
+                            <constraint id="1214" firstItem="1202" firstAttribute="leading" secondItem="767" secondAttribute="leadingMargin" constant="97"/>
+                            <constraint id="1215" firstItem="1203" firstAttribute="top" secondItem="1202" secondAttribute="bottom" constant="15"/>
+                            <constraint id="1216" firstItem="1203" firstAttribute="leading" secondItem="767" secondAttribute="leadingMargin" constant="97"/>
+                            <constraint id="1219" firstItem="1170" firstAttribute="top" secondItem="1001" secondAttribute="bottom" constant="8"/>
+                            <constraint id="1220" firstItem="767" firstAttribute="centerX" secondItem="1170" secondAttribute="centerX" constant="5"/>
+                            <constraint id="1221" firstItem="1171" firstAttribute="centerX" secondItem="767" secondAttribute="centerX"/>
+                            <constraint id="1222" firstItem="1171" firstAttribute="top" secondItem="1170" secondAttribute="bottom" constant="8"/>
+                            <constraint id="1223" firstItem="1169" firstAttribute="top" secondItem="1171" secondAttribute="bottom" constant="26"/>
+                            <constraint id="1224" firstItem="1169" firstAttribute="leading" secondItem="767" secondAttribute="leadingMargin" constant="56"/>
+                            <constraint id="1225" firstItem="1202" firstAttribute="top" secondItem="1169" secondAttribute="bottom" constant="15"/>
+                            <constraint id="1226" firstItem="1202" firstAttribute="leading" secondItem="767" secondAttribute="leadingMargin" constant="55"/>
+                            <constraint id="1227" firstItem="1203" firstAttribute="top" secondItem="1202" secondAttribute="bottom" constant="18"/>
+                            <constraint id="1228" firstItem="1203" firstAttribute="leading" secondItem="767" secondAttribute="leadingMargin" constant="55"/>
+                            <constraint id="1231" firstItem="1006" firstAttribute="top" secondItem="763" secondAttribute="bottom" constant="6"/>
+                            <constraint id="1232" firstItem="1006" firstAttribute="leading" secondItem="767" secondAttribute="leadingMargin"/>
+                            <constraint id="1233" firstItem="1006" firstAttribute="top" secondItem="763" secondAttribute="bottom" constant="6"/>
+                            <constraint id="1236" firstItem="1006" firstAttribute="leading" secondItem="767" secondAttribute="leadingMargin"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="L_SiteName" destination="1001" id="name-outlet-1001"/>
+                        <outlet property="B_Back" destination="1006" id="name-outlet-1006"/>
+                        <segue id="1061" destination="11" kind="show" identifier="SiteDetailsToList"/>
+                        <segue id="1159" destination="18" kind="show" identifier="SiteDetailsToMap"/>
+                        <outlet property="L_Address" destination="1169" id="name-outlet-1169"/>
+                        <outlet property="L_SiteCoordinator" destination="1170" id="name-outlet-1170"/>
+                        <outlet property="L_SiteStatus" destination="1171" id="name-outlet-1171"/>
+                        <outlet property="L_City" destination="1202" id="name-outlet-1202"/>
+                        <outlet property="L_StatePlusZip" destination="1203" id="name-outlet-1203"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="768" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1081" y="-367"/>
+        </scene>
+    </scenes>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedScreenMetrics key="destination" type="retina47"/>
+        <simulatedOrientationMetrics key="orientation"/>
+    </simulatedMetricsContainer>
+    <resources>
+        <image name="rwalk" width="2400" height="1601"/>
+    </resources>
+</document>

@@ -1,0 +1,9 @@
+/Users/Billy/Projects/vitasa/vitasa/bin/iPhone/Debug/vitasa.exe
+/Users/Billy/Projects/vitasa/vitasa/bin/iPhone/Debug/vitasa.pdb
+/Users/Billy/Projects/vitasa/vitasa/obj/iPhone/Debug/device-builds/iphone7.2-10.3.2/ibtool/_BundleResourceWithLogicalName.items
+/Users/Billy/Projects/vitasa/vitasa/obj/iPhone/Debug/device-builds/iphone7.2-10.3.2/actool/_PartialAppManifest.items
+/Users/Billy/Projects/vitasa/vitasa/obj/iPhone/Debug/device-builds/iphone7.2-10.3.2/actool/_BundleResourceWithLogicalName.items
+/Users/Billy/Projects/vitasa/vitasa/obj/iPhone/Debug/device-builds/iphone7.2-10.3.2/optimized/
+/Users/Billy/Projects/vitasa/vitasa/obj/iPhone/Debug/vitasa.csproj.CoreCompileInputs.cache
+/Users/Billy/Projects/vitasa/vitasa/obj/iPhone/Debug/vitasa.exe
+/Users/Billy/Projects/vitasa/vitasa/obj/iPhone/Debug/vitasa.pdb
