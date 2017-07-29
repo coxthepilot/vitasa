@@ -1,14 +1,18 @@
 using Foundation;
 using System;
 using UIKit;
+using MapKit;
+using CoreLocation;
 
 namespace vitasa
 {
     public partial class VC_SiteDetails : UIViewController
     {
         public bool CameFromList = false;
+		
+        C_MapDelegate mapDelegate = null;
 
-        public VC_SiteDetails (IntPtr handle) : base (handle)
+		public VC_SiteDetails (IntPtr handle) : base (handle)
         {
             
         }
@@ -23,7 +27,44 @@ namespace vitasa
             if (myAppDelegate.PassAroundContainer.SelectedSite == null)
                 throw new ApplicationException("We must be given the selcted site");
 
-            // connect action code to the Back button
+			Map_SiteMap.MapType = MapKit.MKMapType.Standard;
+			Map_SiteMap.AutoresizingMask = UIViewAutoresizing.FlexibleDimensions;
+			Map_SiteMap.ShowsUserLocation = true;
+			Map_SiteMap.Bounds = View.Bounds;
+
+			CLLocationManager locationManager = new CLLocationManager();
+			locationManager.RequestWhenInUseAuthorization();
+			CLLocation loc = locationManager.Location;
+
+			// assume a starting point of center of san antonio
+			double lat = 29.4208763;
+			double lon = -98.4730651;
+            bool conversionOK = true;
+            try
+            {
+                lat = Convert.ToDouble(myAppDelegate.PassAroundContainer.SelectedSite.SiteLatitude);
+                lon = Convert.ToDouble(myAppDelegate.PassAroundContainer.SelectedSite.SiteLongitude);
+            }
+            catch { conversionOK = false; }
+
+            mapDelegate = new C_MapDelegate(myAppDelegate.PassAroundContainer, this);
+			Map_SiteMap.Delegate = mapDelegate;
+
+			// use a scaling to see about 20km
+			var mapCenter = new CLLocationCoordinate2D(lat, lon);
+			var mapRegion = MKCoordinateRegion.FromDistance(mapCenter, 10000, 10000);
+			Map_SiteMap.CenterCoordinate = mapCenter;
+			Map_SiteMap.Region = mapRegion;
+
+            if (conversionOK)
+            {
+                MKPointAnnotation pa = new MKPointAnnotation();
+                pa.Title = myAppDelegate.PassAroundContainer.SelectedSite.SiteName;
+                pa.Coordinate = new CLLocationCoordinate2D(lat, lon);
+                Map_SiteMap.AddAnnotations(pa);
+            }
+
+			// connect action code to the Back button
 			B_Back.TouchUpInside += (object sender, EventArgs e) =>
 			{
 				if (CameFromList)

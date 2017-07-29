@@ -14,7 +14,7 @@
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <subviews>
@@ -223,7 +223,7 @@
                         <viewControllerLayoutGuide type="bottom" id="9"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="12">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <subviews>
@@ -325,7 +325,7 @@
                         <viewControllerLayoutGuide type="bottom" id="16"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="19">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <subviews>
@@ -416,7 +416,7 @@
                         <viewControllerLayoutGuide type="bottom" id="149"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="152">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <subviews>
@@ -522,7 +522,7 @@
                         <viewControllerLayoutGuide type="bottom" id="764"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="767">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -537,26 +537,34 @@
                                 <include reference="1461"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="1180"/>
-                                <include reference="1181"/>
-                                <include reference="1219"/>
-                                <include reference="1220"/>
-                                <include reference="1221"/>
-                                <include reference="1222"/>
                                 <include reference="1231"/>
                                 <include reference="1232"/>
-                                <include reference="1445"/>
-                                <include reference="1446"/>
-                                <include reference="1447"/>
-                                <include reference="1448"/>
-                                <include reference="1449"/>
-                                <include reference="1450"/>
+                                <include reference="1640"/>
+                                <include reference="1641"/>
+                                <include reference="1642"/>
+                                <include reference="1643"/>
+                                <include reference="1644"/>
+                                <include reference="1645"/>
+                                <include reference="1646"/>
+                                <include reference="1647"/>
+                                <include reference="1648"/>
+                                <include reference="1649"/>
+                                <include reference="1650"/>
+                                <include reference="1651"/>
+                                <include reference="1655"/>
+                                <include reference="1660"/>
+                                <include reference="1661"/>
+                                <include reference="1662"/>
+                                <include reference="1663"/>
+                                <include reference="1691"/>
+                                <include reference="1694"/>
+                                <include reference="1697"/>
                             </mask>
                             <color key="backgroundColor" colorSpace="calibratedRGB" red="0.88235294117647056" green="0.88235294117647056" blue="0.88235294117647056" alpha="1"/>
                         </variation>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="site name goes here" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1001" translatesAutoresizingMaskIntoConstraints="NO">
-                                <rect key="frame" x="274" y="56" width="189" height="24"/>
+                                <rect key="frame" x="16" y="55" width="343" height="24"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20" weight="semibold"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -569,119 +577,162 @@
                                 <connections/>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="site address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1169" translatesAutoresizingMaskIntoConstraints="NO">
-                                <rect key="frame" x="71" y="181" width="93" height="21"/>
+                                <rect key="frame" x="50" y="105" width="93" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="site coordinator" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1170" translatesAutoresizingMaskIntoConstraints="NO">
-                                <rect key="frame" x="142" y="89" width="131" height="21"/>
+                                <rect key="frame" x="74" y="160" width="131" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1171" translatesAutoresizingMaskIntoConstraints="NO" text="site status">
-                                <rect key="frame" x="168" y="118" width="79" height="21"/>
+                                <rect key="frame" x="74" y="190" width="79" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1202" translatesAutoresizingMaskIntoConstraints="NO" text="city, state plus zip">
-                                <rect key="frame" x="71" y="201" width="236" height="21"/>
+                                <rect key="frame" x="50" y="124" width="236" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1439" translatesAutoresizingMaskIntoConstraints="NO">
-                                <rect key="frame" x="43" y="159" width="97" height="21"/>
+                                <rect key="frame" x="16" y="87" width="97" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17" weight="semibold"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="1461" translatesAutoresizingMaskIntoConstraints="NO">
-                                <rect key="frame" x="43" y="89" width="50" height="51"/>
+                                <rect key="frame" x="16" y="160" width="50" height="51"/>
                             </imageView>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" id="1479" translatesAutoresizingMaskIntoConstraints="NO">
+                                <rect key="frame" x="346" y="87" width="305" height="272"/>
+                            </mapView>
                         </subviews>
                         <variation key="default">
                             <mask key="constraints">
-                                <exclude reference="1180"/>
-                                <exclude reference="1181"/>
-                                <exclude reference="1190"/>
-                                <exclude reference="1191"/>
-                                <exclude reference="1207"/>
-                                <exclude reference="1208"/>
-                                <exclude reference="1209"/>
-                                <exclude reference="1210"/>
-                                <exclude reference="1219"/>
-                                <exclude reference="1220"/>
-                                <exclude reference="1221"/>
-                                <exclude reference="1222"/>
                                 <exclude reference="1231"/>
                                 <exclude reference="1232"/>
                                 <exclude reference="1233"/>
                                 <exclude reference="1236"/>
-                                <exclude reference="1445"/>
-                                <exclude reference="1446"/>
-                                <exclude reference="1447"/>
-                                <exclude reference="1448"/>
-                                <exclude reference="1449"/>
-                                <exclude reference="1450"/>
-                                <exclude reference="1451"/>
-                                <exclude reference="1454"/>
-                                <exclude reference="1455"/>
-                                <exclude reference="1456"/>
-                                <exclude reference="1457"/>
-                                <exclude reference="1458"/>
+                                <exclude reference="1640"/>
+                                <exclude reference="1641"/>
+                                <exclude reference="1642"/>
+                                <exclude reference="1643"/>
+                                <exclude reference="1644"/>
+                                <exclude reference="1645"/>
+                                <exclude reference="1646"/>
+                                <exclude reference="1647"/>
+                                <exclude reference="1648"/>
+                                <exclude reference="1649"/>
+                                <exclude reference="1650"/>
+                                <exclude reference="1651"/>
+                                <exclude reference="1655"/>
+                                <exclude reference="1660"/>
+                                <exclude reference="1661"/>
+                                <exclude reference="1662"/>
+                                <exclude reference="1663"/>
+                                <exclude reference="1666"/>
+                                <exclude reference="1667"/>
+                                <exclude reference="1668"/>
+                                <exclude reference="1669"/>
+                                <exclude reference="1670"/>
+                                <exclude reference="1671"/>
+                                <exclude reference="1672"/>
+                                <exclude reference="1673"/>
+                                <exclude reference="1679"/>
+                                <exclude reference="1680"/>
+                                <exclude reference="1681"/>
+                                <exclude reference="1682"/>
+                                <exclude reference="1683"/>
+                                <exclude reference="1684"/>
+                                <exclude reference="1685"/>
+                                <exclude reference="1686"/>
+                                <exclude reference="1687"/>
+                                <exclude reference="1688"/>
+                                <exclude reference="1689"/>
+                                <exclude reference="1690"/>
+                                <exclude reference="1691"/>
+                                <exclude reference="1694"/>
+                                <exclude reference="1697"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=compact-widthClass=compact">
                             <color key="backgroundColor" colorSpace="calibratedRGB" red="0.88627450980392153" green="0.88627450980392153" blue="0.88627450980392153" alpha="1"/>
                             <mask key="constraints">
-                                <include reference="1190"/>
-                                <include reference="1191"/>
-                                <include reference="1207"/>
-                                <include reference="1208"/>
-                                <include reference="1209"/>
-                                <include reference="1210"/>
                                 <include reference="1233"/>
                                 <include reference="1236"/>
-                                <include reference="1451"/>
-                                <include reference="1454"/>
-                                <include reference="1455"/>
-                                <include reference="1456"/>
-                                <include reference="1457"/>
-                                <include reference="1458"/>
+                                <include reference="1666"/>
+                                <include reference="1667"/>
+                                <include reference="1668"/>
+                                <include reference="1669"/>
+                                <include reference="1670"/>
+                                <include reference="1671"/>
+                                <include reference="1672"/>
+                                <include reference="1673"/>
+                                <include reference="1679"/>
+                                <include reference="1680"/>
+                                <include reference="1681"/>
+                                <include reference="1682"/>
+                                <include reference="1683"/>
+                                <include reference="1684"/>
+                                <include reference="1685"/>
+                                <include reference="1686"/>
+                                <include reference="1687"/>
+                                <include reference="1688"/>
+                                <include reference="1689"/>
+                                <include reference="1690"/>
                             </mask>
                         </variation>
                         <constraints>
-                            <constraint id="1180" firstItem="1001" firstAttribute="centerX" secondItem="767" secondAttribute="centerX"/>
-                            <constraint id="1181" firstItem="1001" firstAttribute="top" secondItem="763" secondAttribute="bottom" constant="37"/>
-                            <constraint id="1190" firstItem="1001" firstAttribute="centerX" secondItem="767" secondAttribute="centerX"/>
-                            <constraint id="1191" firstItem="1001" firstAttribute="top" secondItem="763" secondAttribute="bottom" constant="36"/>
-                            <constraint id="1207" firstItem="1170" firstAttribute="centerX" secondItem="767" secondAttribute="centerX"/>
-                            <constraint id="1208" firstItem="1170" firstAttribute="top" secondItem="1001" secondAttribute="bottom" constant="8"/>
-                            <constraint id="1209" firstItem="1171" firstAttribute="centerX" secondItem="767" secondAttribute="centerX"/>
-                            <constraint id="1210" firstItem="1171" firstAttribute="top" secondItem="1170" secondAttribute="bottom" constant="9"/>
-                            <constraint id="1219" firstItem="1170" firstAttribute="top" secondItem="1001" secondAttribute="bottom" constant="8"/>
-                            <constraint id="1220" firstItem="767" firstAttribute="centerX" secondItem="1170" secondAttribute="centerX" constant="5"/>
-                            <constraint id="1221" firstItem="1171" firstAttribute="centerX" secondItem="767" secondAttribute="centerX"/>
-                            <constraint id="1222" firstItem="1171" firstAttribute="top" secondItem="1170" secondAttribute="bottom" constant="8"/>
                             <constraint id="1231" firstItem="1006" firstAttribute="top" secondItem="763" secondAttribute="bottom" constant="6"/>
                             <constraint id="1232" firstItem="1006" firstAttribute="leading" secondItem="767" secondAttribute="leadingMargin"/>
                             <constraint id="1233" firstItem="1006" firstAttribute="top" secondItem="763" secondAttribute="bottom" constant="6"/>
                             <constraint id="1236" firstItem="1006" firstAttribute="leading" secondItem="767" secondAttribute="leadingMargin"/>
-                            <constraint id="1445" firstItem="1169" firstAttribute="leading" secondItem="767" secondAttribute="leadingMargin" constant="55"/>
-                            <constraint id="1446" firstItem="1169" firstAttribute="bottom" secondItem="1202" secondAttribute="top" constant="1"/>
-                            <constraint id="1447" firstItem="1202" firstAttribute="leading" secondItem="767" secondAttribute="leadingMargin" constant="55"/>
-                            <constraint id="1448" firstItem="1439" firstAttribute="top" secondItem="763" secondAttribute="bottom" constant="139"/>
-                            <constraint id="1449" firstItem="1439" firstAttribute="leading" secondItem="767" secondAttribute="leadingMargin" constant="27"/>
-                            <constraint id="1450" firstItem="1169" firstAttribute="top" secondItem="1439" secondAttribute="bottom" constant="1"/>
-                            <constraint id="1451" firstItem="1439" firstAttribute="top" secondItem="763" secondAttribute="bottom" constant="139"/>
-                            <constraint id="1454" firstItem="1439" firstAttribute="leading" secondItem="767" secondAttribute="leadingMargin" constant="27"/>
-                            <constraint id="1455" firstItem="1169" firstAttribute="top" secondItem="1439" secondAttribute="bottom" constant="1"/>
-                            <constraint id="1456" firstItem="1169" firstAttribute="leading" secondItem="767" secondAttribute="leadingMargin" constant="55"/>
-                            <constraint id="1457" firstItem="1169" firstAttribute="bottom" secondItem="1202" secondAttribute="top" constant="1"/>
-                            <constraint id="1458" firstItem="1202" firstAttribute="leading" secondItem="767" secondAttribute="leadingMargin" constant="55"/>
+                            <constraint id="1640" firstItem="1001" firstAttribute="top" secondItem="763" secondAttribute="bottom" constant="35"/>
+                            <constraint id="1641" firstItem="1001" firstAttribute="leading" secondItem="767" secondAttribute="leadingMargin"/>
+                            <constraint id="1642" firstItem="1439" firstAttribute="top" secondItem="1001" secondAttribute="bottom" constant="8"/>
+                            <constraint id="1643" firstItem="1439" firstAttribute="leading" secondItem="767" secondAttribute="leadingMargin"/>
+                            <constraint id="1644" firstItem="1439" firstAttribute="bottom" secondItem="1169" secondAttribute="top" constant="3"/>
+                            <constraint id="1645" firstItem="1169" firstAttribute="leading" secondItem="767" secondAttribute="leadingMargin" constant="34"/>
+                            <constraint id="1646" firstItem="1169" firstAttribute="bottom" secondItem="1202" secondAttribute="top" constant="2"/>
+                            <constraint id="1647" firstItem="1202" firstAttribute="leading" secondItem="767" secondAttribute="leadingMargin" constant="34"/>
+                            <constraint id="1648" firstItem="1461" firstAttribute="top" secondItem="1202" secondAttribute="bottom" constant="15"/>
+                            <constraint id="1649" firstItem="1461" firstAttribute="leading" secondItem="767" secondAttribute="leadingMargin"/>
+                            <constraint id="1650" firstItem="767" firstAttribute="trailingMargin" secondItem="1461" secondAttribute="trailing" constant="293"/>
+                            <constraint id="1651" firstItem="764" firstAttribute="top" secondItem="1461" secondAttribute="bottom" constant="456"/>
+                            <constraint id="1655" firstItem="1171" firstAttribute="leading" secondItem="1461" secondAttribute="trailing" constant="8"/>
+                            <constraint id="1660" firstItem="1479" firstAttribute="top" secondItem="763" secondAttribute="bottom" constant="199"/>
+                            <constraint id="1661" firstItem="1479" firstAttribute="leading" secondItem="767" secondAttribute="leadingMargin"/>
+                            <constraint id="1662" firstItem="764" firstAttribute="top" secondItem="1479" secondAttribute="bottom" constant="16"/>
+                            <constraint id="1663" firstItem="1479" firstAttribute="trailing" secondItem="767" secondAttribute="trailingMargin"/>
+                            <constraint id="1666" firstItem="1001" firstAttribute="top" secondItem="763" secondAttribute="bottom" constant="35"/>
+                            <constraint id="1667" firstItem="1001" firstAttribute="leading" secondItem="767" secondAttribute="leadingMargin"/>
+                            <constraint id="1668" firstItem="1439" firstAttribute="top" secondItem="1001" secondAttribute="bottom" constant="8"/>
+                            <constraint id="1669" firstItem="1439" firstAttribute="leading" secondItem="767" secondAttribute="leadingMargin"/>
+                            <constraint id="1670" firstItem="1439" firstAttribute="bottom" secondItem="1169" secondAttribute="top" constant="3"/>
+                            <constraint id="1671" firstItem="1169" firstAttribute="leading" secondItem="767" secondAttribute="leadingMargin" constant="34"/>
+                            <constraint id="1672" firstItem="1169" firstAttribute="bottom" secondItem="1202" secondAttribute="top" constant="2"/>
+                            <constraint id="1673" firstItem="1202" firstAttribute="leading" secondItem="767" secondAttribute="leadingMargin" constant="34"/>
+                            <constraint id="1679" firstItem="1170" firstAttribute="top" secondItem="763" secondAttribute="bottom" constant="140"/>
+                            <constraint id="1680" firstItem="1170" firstAttribute="leading" secondItem="1461" secondAttribute="trailing" constant="8"/>
+                            <constraint id="1681" firstItem="1461" firstAttribute="leading" secondItem="767" secondAttribute="leadingMargin"/>
+                            <constraint id="1682" firstItem="1461" firstAttribute="top" secondItem="763" secondAttribute="bottom" constant="140"/>
+                            <constraint id="1683" firstItem="764" firstAttribute="top" secondItem="1461" secondAttribute="bottom" constant="164"/>
+                            <constraint id="1684" firstItem="767" firstAttribute="trailingMargin" secondItem="1461" secondAttribute="trailing" constant="581"/>
+                            <constraint id="1685" firstItem="1171" firstAttribute="top" secondItem="763" secondAttribute="bottom" constant="170"/>
+                            <constraint id="1686" firstItem="1171" firstAttribute="leading" secondItem="1461" secondAttribute="trailing" constant="8"/>
+                            <constraint id="1687" firstItem="1479" firstAttribute="top" secondItem="763" secondAttribute="bottom" constant="67"/>
+                            <constraint id="1688" firstItem="1479" firstAttribute="leading" secondItem="767" secondAttribute="leadingMargin" constant="330"/>
+                            <constraint id="1689" firstItem="764" firstAttribute="top" secondItem="1479" secondAttribute="bottom" constant="16"/>
+                            <constraint id="1690" firstItem="1479" firstAttribute="trailing" secondItem="767" secondAttribute="trailingMargin" constant="4"/>
+                            <constraint id="1691" firstItem="1170" firstAttribute="top" secondItem="1202" secondAttribute="bottom" constant="15"/>
+                            <constraint id="1694" firstItem="1170" firstAttribute="leading" secondItem="1461" secondAttribute="trailing" constant="8"/>
+                            <constraint id="1697" firstItem="1171" firstAttribute="top" secondItem="1170" secondAttribute="bottom" constant="9"/>
                         </constraints>
                     </view>
                     <connections>
@@ -694,6 +745,7 @@
                         <outlet property="L_SiteStatus" destination="1171" id="name-outlet-1171"/>
                         <outlet property="L_CityStateZip" destination="1202" id="name-outlet-1202"/>
                         <outlet property="I_SiteStatus" destination="1461" id="name-outlet-1461"/>
+                        <outlet property="Map_SiteMap" destination="1479" id="name-outlet-1479"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="768" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -701,10 +753,6 @@
             <point key="canvasLocation" x="1081" y="-367"/>
         </scene>
     </scenes>
-    <simulatedMetricsContainer key="defaultSimulatedMetrics">
-        <simulatedScreenMetrics key="destination" type="retina47"/>
-        <simulatedOrientationMetrics key="orientation"/>
-    </simulatedMetricsContainer>
     <resources>
         <image name="rwalk" width="2400" height="1601"/>
         <image name="redstatus" width="50" height="50"/>
@@ -712,4 +760,8 @@
         <image name="yellowstatus" width="50" height="50"/>
         <image name="blackstatus" width="50" height="50"/>
     </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedScreenMetrics key="destination" type="retina47"/>
+        <simulatedOrientationMetrics key="orientation"/>
+    </simulatedMetricsContainer>
 </document>

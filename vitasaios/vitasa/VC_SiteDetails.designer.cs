@@ -42,6 +42,10 @@ namespace vitasa
         [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UILabel L_SiteStatus { get; set; }
 
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        MapKit.MKMapView Map_SiteMap { get; set; }
+
         void ReleaseDesignerOutlets ()
         {
             if (B_Back != null) {
@@ -77,6 +81,11 @@ namespace vitasa
             if (L_SiteStatus != null) {
                 L_SiteStatus.Dispose ();
                 L_SiteStatus = null;
+            }
+
+            if (Map_SiteMap != null) {
+                Map_SiteMap.Dispose ();
+                Map_SiteMap = null;
             }
         }
     }

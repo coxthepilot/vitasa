@@ -1,8 +1,9 @@
 ﻿using UIKit;
+using Xamarin.Forms;
 
 namespace vitasa
 {
-    public class Application
+    public class App: Application
     {
         // This is the main entry point of the application.
         static void Main(string[] args)

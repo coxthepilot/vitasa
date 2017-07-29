@@ -1,11 +1,13 @@
 ﻿<Properties StartupConfiguration="{6B22298C-4080-4B07-9765-083359A6381A}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="vitasa/VC_SiteDetails.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="vitasa/Main.storyboard">
     <Files>
       <File FileName="vitasa/Main.storyboard" />
       <File FileName="vitasa/VC_SitesList.cs" Line="111" Column="1" />
-      <File FileName="vitasa/VC_SiteDetails.cs" Line="55" Column="49" />
-      <File FileName="vitasa/VC_SitesMap.cs" Line="27" Column="1" />
-      <File FileName="vitasa/ViewController.cs" Line="24" Column="53" />
+      <File FileName="vitasa/VC_SiteDetails.cs" Line="48" Column="44" />
+      <File FileName="vitasa/VC_SitesMap.cs" Line="15" Column="1" />
+      <File FileName="vitasa/ViewController.cs" Line="27" Column="15" />
+      <File FileName="vitasa/Main.cs" Line="6" Column="20" />
+      <File FileName="vitasa/C_MapDelegate.cs" Line="18" Column="19" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.ItemProperties.app1 AndroidDesignerPreferredDevice="Nexus 4" PreferredExecutionTarget="Android.Android_Accelerated_x86" />

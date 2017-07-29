@@ -11,7 +11,7 @@ namespace vitasa
 {
     public partial class VC_SitesMap : UIViewController
     {
-        MapDelegate mapDelegate = null;
+        C_MapDelegate mapDelegate = null;
 
 		public VC_SitesMap (IntPtr handle) : base (handle)
         {
@@ -89,7 +89,7 @@ namespace vitasa
 
         private void PutPinsOnMap(C_PassAroundContainer passAroundContainer)
         {
-            mapDelegate = new MapDelegate(passAroundContainer, this);
+            mapDelegate = new C_MapDelegate(passAroundContainer, this);
 			Map_SitesMap.Delegate = mapDelegate;
 
             foreach (C_VitaSite vs in passAroundContainer.Sites)
@@ -129,77 +129,5 @@ namespace vitasa
 			}
 		}
 
-		public class MapDelegate : MKMapViewDelegate
-		{
-            C_PassAroundContainer PassAroundContainer;
-
-            UIButton detailButton = null;
-
-            VC_SitesMap ourVC = null;
-
-            public MapDelegate(C_PassAroundContainer pac, VC_SitesMap cv)
-			{
-                PassAroundContainer = pac;
-                ourVC = cv;
-			}
-
-			string pId = "PinAnnotation";
-
-			[Export("mapView:viewForAnnotation:")]
-			public override MKAnnotationView GetViewForAnnotation(MKMapView mapView, IMKAnnotation annotation)
-			{
-				if (annotation is MKUserLocation)
-					return null;
-				string thisWhich = annotation.GetTitle();
-                if (thisWhich == "My Location")
-                    return null;
-
-				// create pin annotation view
-				MKAnnotationView pinView = (MKPinAnnotationView)mapView.DequeueReusableAnnotation(pId);
-
-				if (pinView == null)
-					pinView = new MKPinAnnotationView(annotation, pId);
-
-				C_VitaSite ourSite = null;
-                foreach (C_VitaSite s in PassAroundContainer.Sites)
-				{
-					if (s.SiteName == thisWhich)
-					{
-						ourSite = s;
-						break;
-					}
-				}
-
-                if (ourSite == null)
-                {
-                    Console.WriteLine("Expected site name: " + thisWhich);
-                }
-                else
-                {
-                    if (ourSite.SiteStatus == C_VitaSite.E_SiteStatus.Open)
-                        ((MKPinAnnotationView)pinView).PinTintColor = UIColor.Green;
-                    else if (ourSite.SiteStatus == C_VitaSite.E_SiteStatus.Closed)
-                        ((MKPinAnnotationView)pinView).PinTintColor = UIColor.Black;
-                    else if (ourSite.SiteStatus == C_VitaSite.E_SiteStatus.NearLimit)
-                        ((MKPinAnnotationView)pinView).PinTintColor = UIColor.Yellow;
-                    else if (ourSite.SiteStatus == C_VitaSite.E_SiteStatus.NotAccepting)
-						((MKPinAnnotationView)pinView).PinTintColor = UIColor.Red;
-
-                    pinView.CanShowCallout = true;
-
-                    detailButton = UIButton.FromType(UIButtonType.DetailDisclosure);
-                    detailButton.TouchUpInside += (s, e) =>
-                    {
-						AppDelegate myAppDelegate = (AppDelegate)UIApplication.SharedApplication.Delegate;
-                        myAppDelegate.PassAroundContainer.SelectedSite = ourSite;
-						//ourVC.PassAroundContainer.SelectedSite = ourSite;
-                        ourVC.PerformSegue("SiteMapToDetails", ourVC);
-                    };
-                    pinView.RightCalloutAccessoryView = detailButton;
-                }
-
-				return pinView;
-			}
-		}
 	}
 }
