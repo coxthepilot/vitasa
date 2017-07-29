@@ -10,6 +10,12 @@ namespace vitasa
     {
         // class-level declarations
 
+        /// <summary>
+        /// The application global variables. Generall the sites list, selected site, etc. Is 
+        /// initialized in the view controller.
+        /// </summary>
+        public C_PassAroundContainer PassAroundContainer;
+
         public override UIWindow Window
         {
             get;

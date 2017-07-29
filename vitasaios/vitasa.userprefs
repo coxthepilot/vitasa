@@ -1,21 +1,19 @@
 ﻿<Properties StartupConfiguration="{6B22298C-4080-4B07-9765-083359A6381A}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="vitasa/Main.storyboard">
+  <MonoDevelop.Ide.Workbench ActiveDocument="vitasa/VC_SiteDetails.cs">
     <Files>
-      <File FileName="vitasa/ViewController.cs" Line="51" Column="1" />
       <File FileName="vitasa/Main.storyboard" />
-      <File FileName="vitasa/VC_SitesList.cs" Line="34" Column="32" />
-      <File FileName="vitasa/VC_SitesMap.cs" Line="29" Column="47" />
-      <File FileName="vitasa/C_VitaSite.cs" Line="201" Column="35" />
-      <File FileName="vitasa/VC_SiteDetails.cs" Line="42" Column="74" />
-      <File FileName="vitasa/BeforeYouCome.txt" Line="16" Column="65" />
-      <File FileName="vitasa/VC_GetReady.cs" Line="14" Column="1" />
+      <File FileName="vitasa/VC_SitesList.cs" Line="111" Column="1" />
+      <File FileName="vitasa/VC_SiteDetails.cs" Line="55" Column="49" />
+      <File FileName="vitasa/VC_SitesMap.cs" Line="27" Column="1" />
+      <File FileName="vitasa/ViewController.cs" Line="24" Column="53" />
     </Files>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|iPhone" />
+  <MonoDevelop.Ide.ItemProperties.app1 AndroidDesignerPreferredDevice="Nexus 4" PreferredExecutionTarget="Android.Android_Accelerated_x86" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|iPhoneSimulator" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.ItemProperties.vitasa PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneDeviceTarget.b1ea72bb00e067d0556a4e5a69f9c16becb32492" />
+  <MonoDevelop.Ide.ItemProperties.vitasa PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.FC55E219-01CF-4B69-9619-08CB6DBCD869" />
   <MultiItemStartupConfigurations />
 </Properties>

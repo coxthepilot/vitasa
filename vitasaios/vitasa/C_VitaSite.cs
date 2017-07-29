@@ -22,14 +22,16 @@ namespace vitasa
         public string SiteDays = null;
         public string SiteCoordinator = null;
         public string SiteType = null;
-        public bool SiteIsOpen = false;
+        //public bool SiteIsOpen = false;
+        public enum E_SiteStatus {Open, Closed, Accepting, NearLimit, NotAccepting, Unknown }
+        public E_SiteStatus SiteStatus = E_SiteStatus.Unknown;
 
         public static readonly string N_SiteName = "name";
         public static readonly string N_SiteSlug = "slug";
-        public static readonly string N_SiteStreet = "xstreet";
-        public static readonly string N_SiteCity = "xcity";
-		public static readonly string N_SiteState = "xstate";
-		public static readonly string N_SiteZip = "xzip";
+        public static readonly string N_SiteStreet = "street";
+        public static readonly string N_SiteCity = "city";
+		public static readonly string N_SiteState = "state";
+		public static readonly string N_SiteZip = "zip";
 		public static readonly string N_SiteLatitude = "latitude";
 		public static readonly string N_SiteLongitude = "longitude";
 		public static readonly string N_SiteOpenTime = "opentime";
@@ -37,7 +39,8 @@ namespace vitasa
 		public static readonly string N_SiteDays = "days";
 		public static readonly string N_SiteCoordinator = "sitecoordinator";
 		public static readonly string N_SiteType = "sitetype";
-        public static readonly string N_SiteIsOpen = "is_open";
+        //public static readonly string N_SiteIsOpen = "is_open";
+        public static readonly string N_SiteStatus = "sitestatus";
 
         /// <summary>
         /// Create a new site with null values for all fields
@@ -52,7 +55,7 @@ namespace vitasa
         /// <param name="j">Must be Parsed already</param>
         public C_VitaSite(JsonValue j)
         {
-            // todo: validate the jsonvalue type
+            // todo: validate the SystemJson.Json.Jsonvalue type
 
 			if (j.ContainsKey(N_SiteName))
                 SiteName = j[N_SiteName];
@@ -93,8 +96,21 @@ namespace vitasa
 			if (j.ContainsKey(N_SiteType))
                 SiteType = j[N_SiteType];
 
-            if (j.ContainsKey(N_SiteIsOpen))
-                SiteIsOpen = j[N_SiteIsOpen];
+            //if (j.ContainsKey(N_SiteIsOpen))
+            //    SiteIsOpen = j[N_SiteIsOpen];
+
+            if (j.ContainsKey(N_SiteStatus))
+            {
+                string ssv = j[N_SiteStatus];
+                foreach (E_SiteStatus ss in Enum.GetValues(typeof(E_SiteStatus)))
+                {
+                    if (ssv == ss.ToString())
+                    {
+                        SiteStatus = ss;
+                        break;
+                    }
+                }
+            }
 		}
 
         /// <summary>
@@ -119,12 +135,15 @@ namespace vitasa
 
 		public static async Task<JsonValue> FetchSitesList()
 		{
-            string vitaCoreUrl = "https://s3-us-west-2.amazonaws.com/vitasa-static-content-dev/sites.json";
+            string vitaCoreUrl = "http://vitasa.abandonedfactory.net/sites";
+			//string vitaCoreUrl = "https://s3-us-west-2.amazonaws.com/vitasa-static-content-dev/sites.json";
 			//string vitaCoreUrl = "https://h4ebpp3rvk.execute-api.us-west-2.amazonaws.com/production/sites";
 
 			// Create an HTTP web request using the URL:
 			HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(new Uri(vitaCoreUrl));
-			request.ContentType = "application/json";
+			//request.Headers.Add(HttpRequestHeader.Accept, "application/json");
+            request.Accept = "application/json";
+			//request.ContentType = "application/json";
 			request.Method = "GET";
 
 			// Send the request to the server and wait for the response:
@@ -133,6 +152,9 @@ namespace vitasa
 				// Get a stream representation of the HTTP web response:
 				using (Stream stream = response.GetResponseStream())
 				{
+                    // todo: make sure they responded with an application/json response
+                    // todo: make sure we got response code 200 (ok)
+
 					// Use this stream to build a JSON document object:
 					JsonValue jsonDoc = await Task.Run(() => JsonObject.Load(stream));
 					//Console.Out.WriteLine("Response: {0}", jsonDoc.ToString());
@@ -153,60 +175,60 @@ namespace vitasa
 			}
 		}
 
-        public static void AddDummySites(List<C_VitaSite> SitesList)
-        {
-			// for testing only
-			C_VitaSite s0 = new C_VitaSite();
-			s0.SiteName = "Guadalupe Community Center";
-			s0.SiteSlug = "guadalupe-community-center";
-			s0.SiteStreet = "1801 W Cesar Chavez Blvd";
-			s0.SiteCity = "San Antonio";
-			s0.SiteState = "TX";
-			s0.SiteZip = "78207";
-			s0.SiteLatitude = "29.4230749";
-			s0.SiteLongitude = "-98.5198977";
-			s0.SiteOpenTime = "8:30";
-			s0.SiteCloseTime = "16:30";
-			s0.SiteDays = "mwf";
-			s0.SiteCoordinator = "Rosio";
-			s0.SiteType = "permanent";
-            s0.SiteIsOpen = true;
-			SitesList.Add(s0);
+  //      public static void AddDummySites(List<C_VitaSite> SitesList)
+  //      {
+		//	// for testing only
+		//	C_VitaSite s0 = new C_VitaSite();
+		//	s0.SiteName = "Guadalupe Community Center";
+		//	s0.SiteSlug = "guadalupe-community-center";
+		//	s0.SiteStreet = "1801 W Cesar Chavez Blvd";
+		//	s0.SiteCity = "San Antonio";
+		//	s0.SiteState = "TX";
+		//	s0.SiteZip = "78207";
+		//	s0.SiteLatitude = "29.4230749";
+		//	s0.SiteLongitude = "-98.5198977";
+		//	s0.SiteOpenTime = "8:30";
+		//	s0.SiteCloseTime = "16:30";
+		//	s0.SiteDays = "mwf";
+		//	s0.SiteCoordinator = "Rosio";
+		//	s0.SiteType = "permanent";
+  //          s0.SiteIsOpen = true;
+		//	SitesList.Add(s0);
 
-			C_VitaSite s1 = new C_VitaSite();
-			s1.SiteName = "Presa Community Center";
-			s1.SiteSlug = "presa-community-center";
-			s1.SiteStreet = "3721 S Presa Street";
-			s1.SiteCity = "San Antonio";
-			s1.SiteState = "TX";
-			s1.SiteZip = "78210";
-			s1.SiteLatitude = "29.386249";
-			s1.SiteLongitude = "-98.4815702";
-			s1.SiteOpenTime = "8:30";
-			s1.SiteCloseTime = "16:30";
-			s1.SiteDays = "tw";
-			s1.SiteCoordinator = "Fred";
-			s1.SiteType = "permanent";
-			s1.SiteIsOpen = false;
-			SitesList.Add(s1);
+		//	C_VitaSite s1 = new C_VitaSite();
+		//	s1.SiteName = "Presa Community Center";
+		//	s1.SiteSlug = "presa-community-center";
+		//	s1.SiteStreet = "3721 S Presa Street";
+		//	s1.SiteCity = "San Antonio";
+		//	s1.SiteState = "TX";
+		//	s1.SiteZip = "78210";
+		//	s1.SiteLatitude = "29.386249";
+		//	s1.SiteLongitude = "-98.4815702";
+		//	s1.SiteOpenTime = "8:30";
+		//	s1.SiteCloseTime = "16:30";
+		//	s1.SiteDays = "tw";
+		//	s1.SiteCoordinator = "Fred";
+		//	s1.SiteType = "permanent";
+		//	s1.SiteIsOpen = false;
+		//	SitesList.Add(s1);
 
-			C_VitaSite s2 = new C_VitaSite();
-			s2.SiteName = "Claude Black Community Center";
-			s2.SiteSlug = "claude-black-community-center";
-			s2.SiteStreet = "2915 E Commerce Street";
-			s2.SiteCity = "San Antonio";
-			s2.SiteState = "TX";
-			s2.SiteZip = "78203";
-			s2.SiteLatitude = "29.4200353";
-			s2.SiteLongitude = "-98.44685";
-			s2.SiteOpenTime = "8:30";
-			s2.SiteCloseTime = "16:30";
-			s2.SiteDays = "sasu";
-			s2.SiteCoordinator = "Jaquie";
-			s2.SiteType = "permanent";
-			s2.SiteIsOpen = true;
-			SitesList.Add(s2);
-		}
+		//	C_VitaSite s2 = new C_VitaSite();
+		//	s2.SiteName = "Claude Black Community Center";
+		//	s2.SiteSlug = "claude-black-community-center";
+		//	s2.SiteStreet = "2915 E Commerce Street";
+		//	s2.SiteCity = "San Antonio";
+		//	s2.SiteState = "TX";
+		//	s2.SiteZip = "78203";
+		//	s2.SiteLatitude = "29.4200353";
+		//	s2.SiteLongitude = "-98.44685";
+		//	s2.SiteOpenTime = "8:30";
+		//	s2.SiteCloseTime = "16:30";
+		//	s2.SiteDays = "sasu";
+		//	s2.SiteCoordinator = "Jaquie";
+		//	s2.SiteType = "permanent";
+		//	s2.SiteIsOpen = true;
+		//	SitesList.Add(s2);
+		//}
 
 	}
 }

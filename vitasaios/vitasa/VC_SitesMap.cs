@@ -11,8 +11,6 @@ namespace vitasa
 {
     public partial class VC_SitesMap : UIViewController
     {
-        public C_PassAroundContainer PassAroundContainer;
-
         MapDelegate mapDelegate = null;
 
 		public VC_SitesMap (IntPtr handle) : base (handle)
@@ -22,6 +20,10 @@ namespace vitasa
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
+
+			AppDelegate myAppDelegate = (AppDelegate)UIApplication.SharedApplication.Delegate;
+			if (myAppDelegate.PassAroundContainer == null)
+				throw new ApplicationException("The pass around container may not be null");
 
 			Map_SitesMap.MapType = MapKit.MKMapType.Standard;
             Map_SitesMap.AutoresizingMask = UIViewAutoresizing.FlexibleDimensions;
@@ -37,35 +39,31 @@ namespace vitasa
 			const double lon = -98.4730651;
             var mapCenter = new CLLocationCoordinate2D(lat, lon);
             // use a scaling to see about 20km
-			var mapRegion = MKCoordinateRegion.FromDistance(mapCenter, 20000, 20000);
+			var mapRegion = MKCoordinateRegion.FromDistance(mapCenter, 30000, 30000);
 			Map_SitesMap.CenterCoordinate = mapCenter;
 			Map_SitesMap.Region = mapRegion;
 
 			// todo: get the user's current location and zoom to there on the map
 
-			// make sure we have a container to place results in
-			if (PassAroundContainer == null)
-				PassAroundContainer = new C_PassAroundContainer();
-
 			// check to see if we already have data (possibly passed back to us from another view controller)
-			if (PassAroundContainer.Sites != null)
+            if (myAppDelegate.PassAroundContainer.Sites != null)
 			{
 				// we have already loaded the sites from the back end service; just use it
 				// todo: check the time since loaded; if too long (?), then reload
 				// we have already loaded the sites from the back end service; just use it
 				// check the time since loaded; if too long (more than 60 minutes), then reload
-				TimeSpan ts = DateTime.Now - PassAroundContainer.TimeStampWhenSitesLoaded;
+				TimeSpan ts = DateTime.Now - myAppDelegate.PassAroundContainer.TimeStampWhenSitesLoaded;
                 if (ts.TotalMinutes > 60)
-                    LoadSitesFromWebService();
+                    LoadSitesFromWebService(myAppDelegate.PassAroundContainer);
                 else
                     // tell the control to repaint now that we have data
-                    PutPinsOnMap();
+                    PutPinsOnMap(myAppDelegate.PassAroundContainer);
 			}
 			else
-                LoadSitesFromWebService();
+                LoadSitesFromWebService(myAppDelegate.PassAroundContainer);
 		}
 
-        private void LoadSitesFromWebService()
+        private void LoadSitesFromWebService(C_PassAroundContainer passAroundContainer)
         {
 			// the list of sites has NOT been loaded or has expired, therefore we need to load it
 			// this is done using a thread since it can take a while (seconds)
@@ -75,26 +73,26 @@ namespace vitasa
 					JsonValue jv = await C_VitaSite.FetchSitesList();
 
 					// convert to our class object
-					PassAroundContainer.Sites = C_VitaSite.ImportSites(jv);
-				    PassAroundContainer.Sites.Sort(VC_SitesList.CompareSitesByNameAscending);
-				    PassAroundContainer.TimeStampWhenSitesLoaded = DateTime.Now;
+					passAroundContainer.Sites = C_VitaSite.ImportSites(jv);
+				    passAroundContainer.Sites.Sort(VC_SitesList.CompareSitesByNameAscending);
+				    passAroundContainer.TimeStampWhenSitesLoaded = DateTime.Now;
 
 					// tell the control to repaint; we have to invoke on main thread
 					//   or the control ignores the call
 					UIApplication.SharedApplication.InvokeOnMainThread(
 					new Action(() =>
 					{
-						PutPinsOnMap();
+                        PutPinsOnMap(passAroundContainer);
 					}));
 			});
 		}
 
-        private void PutPinsOnMap()
+        private void PutPinsOnMap(C_PassAroundContainer passAroundContainer)
         {
-            mapDelegate = new MapDelegate(PassAroundContainer, this);
+            mapDelegate = new MapDelegate(passAroundContainer, this);
 			Map_SitesMap.Delegate = mapDelegate;
 
-            foreach (C_VitaSite vs in PassAroundContainer.Sites)
+            foreach (C_VitaSite vs in passAroundContainer.Sites)
 			{
 				double latitude = double.NaN;
 				double longitude = double.NaN;
@@ -126,13 +124,8 @@ namespace vitasa
 			if (segue.Identifier == "SiteMapToDetails")
 			{
 				VC_SiteDetails siteDetails = (VC_SiteDetails)segue.DestinationViewController;
-                siteDetails.PassAroundContainer = PassAroundContainer;
+                //siteDetails.PassAroundContainer = PassAroundContainer;
                 siteDetails.CameFromList = false;
-			}
-			else if (segue.Identifier == "SitesMapToMain")
-			{
-				ViewController vc = (ViewController)segue.DestinationViewController;
-				vc.PassAroundContainer = PassAroundContainer;
 			}
 		}
 
@@ -183,17 +176,23 @@ namespace vitasa
                 }
                 else
                 {
-                    if (ourSite.SiteIsOpen)
-                        ((MKPinAnnotationView)pinView).PinColor = MKPinAnnotationColor.Green;
-                    else
-                        ((MKPinAnnotationView)pinView).PinColor = MKPinAnnotationColor.Red;
+                    if (ourSite.SiteStatus == C_VitaSite.E_SiteStatus.Open)
+                        ((MKPinAnnotationView)pinView).PinTintColor = UIColor.Green;
+                    else if (ourSite.SiteStatus == C_VitaSite.E_SiteStatus.Closed)
+                        ((MKPinAnnotationView)pinView).PinTintColor = UIColor.Black;
+                    else if (ourSite.SiteStatus == C_VitaSite.E_SiteStatus.NearLimit)
+                        ((MKPinAnnotationView)pinView).PinTintColor = UIColor.Yellow;
+                    else if (ourSite.SiteStatus == C_VitaSite.E_SiteStatus.NotAccepting)
+						((MKPinAnnotationView)pinView).PinTintColor = UIColor.Red;
 
                     pinView.CanShowCallout = true;
 
                     detailButton = UIButton.FromType(UIButtonType.DetailDisclosure);
                     detailButton.TouchUpInside += (s, e) =>
                     {
-                        ourVC.PassAroundContainer.SelectedSite = ourSite;
+						AppDelegate myAppDelegate = (AppDelegate)UIApplication.SharedApplication.Delegate;
+                        myAppDelegate.PassAroundContainer.SelectedSite = ourSite;
+						//ourVC.PassAroundContainer.SelectedSite = ourSite;
                         ourVC.PerformSegue("SiteMapToDetails", ourVC);
                     };
                     pinView.RightCalloutAccessoryView = detailButton;

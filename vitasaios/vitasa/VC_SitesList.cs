@@ -9,8 +9,6 @@ namespace vitasa
 {
     public partial class VC_SitesList : UIViewController
     {
-        public C_PassAroundContainer PassAroundContainer;
-
 		public C_SitesTableSource SitesTableDataSource = null;
 
 		public VC_SitesList (IntPtr handle) : base (handle)
@@ -21,33 +19,33 @@ namespace vitasa
         {
             base.ViewDidLoad();
 
-            // make sure we have a container to place results in
-			if (PassAroundContainer == null)
-				PassAroundContainer = new C_PassAroundContainer();
+			AppDelegate myAppDelegate = (AppDelegate)UIApplication.SharedApplication.Delegate;
+            if (myAppDelegate.PassAroundContainer == null)
+                throw new ApplicationException("Pass around container must not be null");
 
             // now that we have the container, create the data source and connect it to our data
-            SitesTableDataSource = new C_SitesTableSource(PassAroundContainer, this);
+            SitesTableDataSource = new C_SitesTableSource(myAppDelegate.PassAroundContainer, this);
 
             // and let the control know where to get data from
 			TV_SitesList.Source = SitesTableDataSource;
 
             // check to see if we already have data (possibly passed back to us from another view controller)
-			if (PassAroundContainer.Sites != null)
+			if (myAppDelegate.PassAroundContainer.Sites != null)
             {
                 // we have already loaded the sites from the back end service; just use it
                 // check the time since loaded; if too long (more than 60 minutes), then reload
-                TimeSpan ts = DateTime.Now - PassAroundContainer.TimeStampWhenSitesLoaded;
+                TimeSpan ts = DateTime.Now - myAppDelegate.PassAroundContainer.TimeStampWhenSitesLoaded;
                 if (ts.TotalMinutes > 60)
-                    LoadSitesFromWebService();
+                    LoadSitesFromWebService(myAppDelegate.PassAroundContainer);
                 else
                     // tell the control to repaint now that we have data
 	    			TV_SitesList.ReloadData();
 			}
             else
-                LoadSitesFromWebService();
+                LoadSitesFromWebService(myAppDelegate.PassAroundContainer);
 		}
 
-        private void LoadSitesFromWebService()
+        private void LoadSitesFromWebService(C_PassAroundContainer passAroundContainer)
         {
 			// the list of sites has NOT been loaded or has expired, therefore we need to reload it
 			// this is done using a thread since it can take a while (seconds)
@@ -56,10 +54,10 @@ namespace vitasa
 					// get the json file of sites and details from the web service
 					JsonValue jv = await C_VitaSite.FetchSitesList();
 
-					// convert to our class object
-					PassAroundContainer.Sites = C_VitaSite.ImportSites(jv);
-				    PassAroundContainer.Sites.Sort(CompareSitesByNameAscending);
-				    PassAroundContainer.TimeStampWhenSitesLoaded = DateTime.Now;
+		    		// convert to our class object
+	    			passAroundContainer.Sites = C_VitaSite.ImportSites(jv);
+				    passAroundContainer.Sites.Sort(CompareSitesByNameAscending);
+				    passAroundContainer.TimeStampWhenSitesLoaded = DateTime.Now;
 
 					// tell the control to repaint; we have to invoke on main thread
 					//   or the control ignores the call
@@ -110,6 +108,15 @@ namespace vitasa
 				cell.TextLabel.Text = site.SiteName;
 				cell.DetailTextLabel.Text = site.SiteStreet + ", " + site.SiteCity + ", " + site.SiteState + " " + site.SiteZip;
 
+                if (site.SiteStatus == C_VitaSite.E_SiteStatus.Open)
+                    cell.ImageView.Image = UIImage.FromBundle("greenstatus.jpg");
+                else if (site.SiteStatus == C_VitaSite.E_SiteStatus.NearLimit)
+					cell.ImageView.Image = UIImage.FromBundle("yellowstatus.jpg");
+                else if (site.SiteStatus == C_VitaSite.E_SiteStatus.NotAccepting)
+					cell.ImageView.Image = UIImage.FromBundle("redstatus.jpg");
+                else if (site.SiteStatus == C_VitaSite.E_SiteStatus.Closed)
+					cell.ImageView.Image = UIImage.FromBundle("blackstatus.jpg");
+
 				return cell;
 			}
 
@@ -130,13 +137,7 @@ namespace vitasa
             if (segue.Identifier == "SegueFromListToDetails")
             {
                 VC_SiteDetails siteDetails = (VC_SiteDetails)segue.DestinationViewController;
-                siteDetails.PassAroundContainer = PassAroundContainer;
                 siteDetails.CameFromList = true;
-            }
-            else if (segue.Identifier == "SitesListToMain")
-            {
-                ViewController vc = (ViewController)segue.DestinationViewController;
-                vc.PassAroundContainer = PassAroundContainer;
             }
         }
 	}

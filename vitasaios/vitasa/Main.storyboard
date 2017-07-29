@@ -26,7 +26,7 @@
                                 <rect key="frame" x="96" y="110" width="183" height="36"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20" weight="semibold"/>
                                 <connections>
-                                    <segue id="88" destination="11" kind="show" identifier="MainToSitesList"/>
+                                    <segue id="88" destination="11" kind="show" identifier="MainToSitesList" animates="NO"/>
                                 </connections>
                                 <variation key="heightClass=regular-widthClass=compact">
                                     <color key="backgroundColor" colorSpace="calibratedWhite" white="0.333333333333333" alpha="1"/>
@@ -52,7 +52,7 @@
                                     <color key="titleColor" colorSpace="calibratedWhite" white="1" alpha="1"/>
                                 </state>
                                 <connections>
-                                    <segue id="140" destination="18" kind="show" identifier="MainToSitesMap"/>
+                                    <segue id="140" destination="18" kind="show" identifier="MainToSitesMap" animates="NO"/>
                                 </connections>
                                 <variation key="heightClass=regular-widthClass=compact">
                                     <color key="backgroundColor" colorSpace="calibratedWhite" white="0.333333333333333" alpha="1"/>
@@ -74,7 +74,7 @@
                                     <color key="titleColor" colorSpace="calibratedWhite" white="1" alpha="1"/>
                                 </state>
                                 <connections>
-                                    <segue id="197" destination="151" kind="show" identifier="MainToPrepList"/>
+                                    <segue id="197" destination="151" kind="show" identifier="MainToPrepList" animates="NO"/>
                                 </connections>
                                 <variation key="heightClass=regular-widthClass=compact">
                                     <color key="backgroundColor" colorSpace="calibratedWhite" white="0.333333333333333" alpha="1"/>
@@ -233,7 +233,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue id="417" destination="BYZ-38-t0r" kind="show" identifier="SitesListToMain"/>
+                                    <segue id="417" destination="BYZ-38-t0r" kind="show" identifier="SitesListToMain" animates="NO"/>
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="143" translatesAutoresizingMaskIntoConstraints="NO">
@@ -310,7 +310,7 @@
                     <connections>
                         <outlet property="B_Back" destination="142" id="name-outlet-142"/>
                         <outlet property="TV_SitesList" destination="143" id="name-outlet-143"/>
-                        <segue id="995" destination="766" kind="show" identifier="SegueFromListToDetails"/>
+                        <segue id="995" destination="766" kind="show" identifier="SegueFromListToDetails" animates="NO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="13" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -338,7 +338,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue id="315" destination="BYZ-38-t0r" kind="show" identifier="SitesMapToMain"/>
+                                    <segue id="315" destination="BYZ-38-t0r" kind="show" identifier="SitesMapToMain" animates="NO"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -401,7 +401,7 @@
                     <connections>
                         <outlet property="B_Back" destination="146" id="name-outlet-146"/>
                         <outlet property="Map_SitesMap" destination="147" id="name-outlet-147"/>
-                        <segue id="1097" destination="766" kind="show" identifier="SiteMapToDetails"/>
+                        <segue id="1097" destination="766" kind="show" identifier="SiteMapToDetails" animates="NO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="20" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -426,7 +426,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue id="273" destination="BYZ-38-t0r" kind="show" identifier="PrepListToMain"/>
+                                    <segue id="273" destination="BYZ-38-t0r" kind="show" identifier="PrepListToMain" animates="NO"/>
                                 </connections>
                             </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" id="200" translatesAutoresizingMaskIntoConstraints="NO" editable="NO">
@@ -533,7 +533,8 @@
                                 <include reference="1170"/>
                                 <include reference="1171"/>
                                 <include reference="1202"/>
-                                <include reference="1203"/>
+                                <include reference="1439"/>
+                                <include reference="1461"/>
                             </mask>
                             <mask key="constraints">
                                 <include reference="1180"/>
@@ -542,16 +543,16 @@
                                 <include reference="1220"/>
                                 <include reference="1221"/>
                                 <include reference="1222"/>
-                                <include reference="1223"/>
-                                <include reference="1224"/>
-                                <include reference="1225"/>
-                                <include reference="1226"/>
-                                <include reference="1227"/>
-                                <include reference="1228"/>
                                 <include reference="1231"/>
                                 <include reference="1232"/>
+                                <include reference="1445"/>
+                                <include reference="1446"/>
+                                <include reference="1447"/>
+                                <include reference="1448"/>
+                                <include reference="1449"/>
+                                <include reference="1450"/>
                             </mask>
-                            <color key="backgroundColor" colorSpace="calibratedRGB" red="0.81176470588235294" green="0.81176470588235294" blue="0.81176470588235294" alpha="1"/>
+                            <color key="backgroundColor" colorSpace="calibratedRGB" red="0.88235294117647056" green="0.88235294117647056" blue="0.88235294117647056" alpha="1"/>
                         </variation>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="site name goes here" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1001" translatesAutoresizingMaskIntoConstraints="NO">
@@ -565,12 +566,10 @@
                                 <state key="normal" title="&lt; Back">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <connections>
-                                    <segue id="1007" destination="1008" kind="show"/>
-                                </connections>
+                                <connections/>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="site address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1169" translatesAutoresizingMaskIntoConstraints="NO">
-                                <rect key="frame" x="72" y="165" width="236" height="21"/>
+                                <rect key="frame" x="71" y="181" width="93" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -587,18 +586,21 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1202" translatesAutoresizingMaskIntoConstraints="NO" text="city">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1202" translatesAutoresizingMaskIntoConstraints="NO" text="city, state plus zip">
                                 <rect key="frame" x="71" y="201" width="236" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="state plus zip" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1203" translatesAutoresizingMaskIntoConstraints="NO">
-                                <rect key="frame" x="71" y="240" width="194" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1439" translatesAutoresizingMaskIntoConstraints="NO">
+                                <rect key="frame" x="43" y="159" width="97" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17" weight="semibold"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="1461" translatesAutoresizingMaskIntoConstraints="NO">
+                                <rect key="frame" x="43" y="89" width="50" height="51"/>
+                            </imageView>
                         </subviews>
                         <variation key="default">
                             <mask key="constraints">
@@ -610,26 +612,26 @@
                                 <exclude reference="1208"/>
                                 <exclude reference="1209"/>
                                 <exclude reference="1210"/>
-                                <exclude reference="1211"/>
-                                <exclude reference="1212"/>
-                                <exclude reference="1213"/>
-                                <exclude reference="1214"/>
-                                <exclude reference="1215"/>
-                                <exclude reference="1216"/>
                                 <exclude reference="1219"/>
                                 <exclude reference="1220"/>
                                 <exclude reference="1221"/>
                                 <exclude reference="1222"/>
-                                <exclude reference="1223"/>
-                                <exclude reference="1224"/>
-                                <exclude reference="1225"/>
-                                <exclude reference="1226"/>
-                                <exclude reference="1227"/>
-                                <exclude reference="1228"/>
                                 <exclude reference="1231"/>
                                 <exclude reference="1232"/>
                                 <exclude reference="1233"/>
                                 <exclude reference="1236"/>
+                                <exclude reference="1445"/>
+                                <exclude reference="1446"/>
+                                <exclude reference="1447"/>
+                                <exclude reference="1448"/>
+                                <exclude reference="1449"/>
+                                <exclude reference="1450"/>
+                                <exclude reference="1451"/>
+                                <exclude reference="1454"/>
+                                <exclude reference="1455"/>
+                                <exclude reference="1456"/>
+                                <exclude reference="1457"/>
+                                <exclude reference="1458"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=compact-widthClass=compact">
@@ -641,14 +643,14 @@
                                 <include reference="1208"/>
                                 <include reference="1209"/>
                                 <include reference="1210"/>
-                                <include reference="1211"/>
-                                <include reference="1212"/>
-                                <include reference="1213"/>
-                                <include reference="1214"/>
-                                <include reference="1215"/>
-                                <include reference="1216"/>
                                 <include reference="1233"/>
                                 <include reference="1236"/>
+                                <include reference="1451"/>
+                                <include reference="1454"/>
+                                <include reference="1455"/>
+                                <include reference="1456"/>
+                                <include reference="1457"/>
+                                <include reference="1458"/>
                             </mask>
                         </variation>
                         <constraints>
@@ -660,38 +662,38 @@
                             <constraint id="1208" firstItem="1170" firstAttribute="top" secondItem="1001" secondAttribute="bottom" constant="8"/>
                             <constraint id="1209" firstItem="1171" firstAttribute="centerX" secondItem="767" secondAttribute="centerX"/>
                             <constraint id="1210" firstItem="1171" firstAttribute="top" secondItem="1170" secondAttribute="bottom" constant="9"/>
-                            <constraint id="1211" firstItem="1169" firstAttribute="top" secondItem="1171" secondAttribute="bottom" constant="26"/>
-                            <constraint id="1212" firstItem="1169" firstAttribute="leading" secondItem="767" secondAttribute="leadingMargin" constant="97"/>
-                            <constraint id="1213" firstItem="1202" firstAttribute="top" secondItem="1169" secondAttribute="bottom" constant="8"/>
-                            <constraint id="1214" firstItem="1202" firstAttribute="leading" secondItem="767" secondAttribute="leadingMargin" constant="97"/>
-                            <constraint id="1215" firstItem="1203" firstAttribute="top" secondItem="1202" secondAttribute="bottom" constant="15"/>
-                            <constraint id="1216" firstItem="1203" firstAttribute="leading" secondItem="767" secondAttribute="leadingMargin" constant="97"/>
                             <constraint id="1219" firstItem="1170" firstAttribute="top" secondItem="1001" secondAttribute="bottom" constant="8"/>
                             <constraint id="1220" firstItem="767" firstAttribute="centerX" secondItem="1170" secondAttribute="centerX" constant="5"/>
                             <constraint id="1221" firstItem="1171" firstAttribute="centerX" secondItem="767" secondAttribute="centerX"/>
                             <constraint id="1222" firstItem="1171" firstAttribute="top" secondItem="1170" secondAttribute="bottom" constant="8"/>
-                            <constraint id="1223" firstItem="1169" firstAttribute="top" secondItem="1171" secondAttribute="bottom" constant="26"/>
-                            <constraint id="1224" firstItem="1169" firstAttribute="leading" secondItem="767" secondAttribute="leadingMargin" constant="56"/>
-                            <constraint id="1225" firstItem="1202" firstAttribute="top" secondItem="1169" secondAttribute="bottom" constant="15"/>
-                            <constraint id="1226" firstItem="1202" firstAttribute="leading" secondItem="767" secondAttribute="leadingMargin" constant="55"/>
-                            <constraint id="1227" firstItem="1203" firstAttribute="top" secondItem="1202" secondAttribute="bottom" constant="18"/>
-                            <constraint id="1228" firstItem="1203" firstAttribute="leading" secondItem="767" secondAttribute="leadingMargin" constant="55"/>
                             <constraint id="1231" firstItem="1006" firstAttribute="top" secondItem="763" secondAttribute="bottom" constant="6"/>
                             <constraint id="1232" firstItem="1006" firstAttribute="leading" secondItem="767" secondAttribute="leadingMargin"/>
                             <constraint id="1233" firstItem="1006" firstAttribute="top" secondItem="763" secondAttribute="bottom" constant="6"/>
                             <constraint id="1236" firstItem="1006" firstAttribute="leading" secondItem="767" secondAttribute="leadingMargin"/>
+                            <constraint id="1445" firstItem="1169" firstAttribute="leading" secondItem="767" secondAttribute="leadingMargin" constant="55"/>
+                            <constraint id="1446" firstItem="1169" firstAttribute="bottom" secondItem="1202" secondAttribute="top" constant="1"/>
+                            <constraint id="1447" firstItem="1202" firstAttribute="leading" secondItem="767" secondAttribute="leadingMargin" constant="55"/>
+                            <constraint id="1448" firstItem="1439" firstAttribute="top" secondItem="763" secondAttribute="bottom" constant="139"/>
+                            <constraint id="1449" firstItem="1439" firstAttribute="leading" secondItem="767" secondAttribute="leadingMargin" constant="27"/>
+                            <constraint id="1450" firstItem="1169" firstAttribute="top" secondItem="1439" secondAttribute="bottom" constant="1"/>
+                            <constraint id="1451" firstItem="1439" firstAttribute="top" secondItem="763" secondAttribute="bottom" constant="139"/>
+                            <constraint id="1454" firstItem="1439" firstAttribute="leading" secondItem="767" secondAttribute="leadingMargin" constant="27"/>
+                            <constraint id="1455" firstItem="1169" firstAttribute="top" secondItem="1439" secondAttribute="bottom" constant="1"/>
+                            <constraint id="1456" firstItem="1169" firstAttribute="leading" secondItem="767" secondAttribute="leadingMargin" constant="55"/>
+                            <constraint id="1457" firstItem="1169" firstAttribute="bottom" secondItem="1202" secondAttribute="top" constant="1"/>
+                            <constraint id="1458" firstItem="1202" firstAttribute="leading" secondItem="767" secondAttribute="leadingMargin" constant="55"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="L_SiteName" destination="1001" id="name-outlet-1001"/>
                         <outlet property="B_Back" destination="1006" id="name-outlet-1006"/>
-                        <segue id="1061" destination="11" kind="show" identifier="SiteDetailsToList"/>
-                        <segue id="1159" destination="18" kind="show" identifier="SiteDetailsToMap"/>
+                        <segue id="1061" destination="11" kind="show" identifier="SiteDetailsToList" animates="NO"/>
+                        <segue id="1159" destination="18" kind="show" identifier="SiteDetailsToMap" animates="NO"/>
                         <outlet property="L_Address" destination="1169" id="name-outlet-1169"/>
                         <outlet property="L_SiteCoordinator" destination="1170" id="name-outlet-1170"/>
                         <outlet property="L_SiteStatus" destination="1171" id="name-outlet-1171"/>
-                        <outlet property="L_City" destination="1202" id="name-outlet-1202"/>
-                        <outlet property="L_StatePlusZip" destination="1203" id="name-outlet-1203"/>
+                        <outlet property="L_CityStateZip" destination="1202" id="name-outlet-1202"/>
+                        <outlet property="I_SiteStatus" destination="1461" id="name-outlet-1461"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="768" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -705,5 +707,9 @@
     </simulatedMetricsContainer>
     <resources>
         <image name="rwalk" width="2400" height="1601"/>
+        <image name="redstatus" width="50" height="50"/>
+        <image name="greenstatus" width="50" height="50"/>
+        <image name="yellowstatus" width="50" height="50"/>
+        <image name="blackstatus" width="50" height="50"/>
     </resources>
 </document>

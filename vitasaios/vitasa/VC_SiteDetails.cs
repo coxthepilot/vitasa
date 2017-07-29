@@ -6,8 +6,6 @@ namespace vitasa
 {
     public partial class VC_SiteDetails : UIViewController
     {
-        public C_PassAroundContainer PassAroundContainer;
-
         public bool CameFromList = false;
 
         public VC_SiteDetails (IntPtr handle) : base (handle)
@@ -19,9 +17,10 @@ namespace vitasa
         {
             base.ViewDidLoad();
 
-            if (PassAroundContainer == null)
+			AppDelegate myAppDelegate = (AppDelegate)UIApplication.SharedApplication.Delegate;
+			if (myAppDelegate.PassAroundContainer == null)
                 throw new ApplicationException("The pass around container may not be null");
-            if (PassAroundContainer.SelectedSite == null)
+            if (myAppDelegate.PassAroundContainer.SelectedSite == null)
                 throw new ApplicationException("We must be given the selcted site");
 
             // connect action code to the Back button
@@ -38,29 +37,22 @@ namespace vitasa
 			};
 
             // populate the controls to explain this site in more detail
-            L_SiteName.Text = PassAroundContainer.SelectedSite.SiteName;
-            L_Address.Text = PassAroundContainer.SelectedSite.SiteStreet;
-            L_City.Text = PassAroundContainer.SelectedSite.SiteCity;
-            L_StatePlusZip.Text = PassAroundContainer.SelectedSite.SiteState + " " + PassAroundContainer.SelectedSite.SiteZip;
-            L_SiteCoordinator.Text = PassAroundContainer.SelectedSite.SiteCoordinator;
-            L_SiteStatus.Text = "Site is " + (PassAroundContainer.SelectedSite.SiteIsOpen ? "Open" : "Closed");
-		}
+            L_SiteName.Text = myAppDelegate.PassAroundContainer.SelectedSite.SiteName;
+            L_Address.Text = myAppDelegate.PassAroundContainer.SelectedSite.SiteStreet;
+            L_CityStateZip.Text = myAppDelegate.PassAroundContainer.SelectedSite.SiteCity
+                + ", " + myAppDelegate.PassAroundContainer.SelectedSite.SiteState 
+                + " " + myAppDelegate.PassAroundContainer.SelectedSite.SiteZip;
+            L_SiteCoordinator.Text = myAppDelegate.PassAroundContainer.SelectedSite.SiteCoordinator;
+            L_SiteStatus.Text = "Site is " + myAppDelegate.PassAroundContainer.SelectedSite.SiteStatus;
 
-        public override void PrepareForSegue(UIStoryboardSegue segue, NSObject sender)
-        {
-            base.PrepareForSegue(segue, sender);
-
-			if (segue.Identifier == "SiteDetailsToMap")
-			{
-				VC_SitesMap siteDetails = (VC_SitesMap)segue.DestinationViewController;
-                siteDetails.PassAroundContainer = PassAroundContainer;
-			}
-            else if (segue.Identifier == "SiteDetailsToList")
-            {
-                VC_SitesList sitesList = (VC_SitesList)segue.DestinationViewController;
-                sitesList.PassAroundContainer = PassAroundContainer;
-            }
-
+            if (myAppDelegate.PassAroundContainer.SelectedSite.SiteStatus == C_VitaSite.E_SiteStatus.Open)
+                I_SiteStatus.Image = UIImage.FromBundle("greenstatus.jpg");
+            else if (myAppDelegate.PassAroundContainer.SelectedSite.SiteStatus == C_VitaSite.E_SiteStatus.Closed)
+				I_SiteStatus.Image = UIImage.FromBundle("blackstatus.jpg");
+			else if (myAppDelegate.PassAroundContainer.SelectedSite.SiteStatus == C_VitaSite.E_SiteStatus.NearLimit)
+				I_SiteStatus.Image = UIImage.FromBundle("yellowstatus.jpg");
+            else if (myAppDelegate.PassAroundContainer.SelectedSite.SiteStatus == C_VitaSite.E_SiteStatus.NotAccepting)
+				I_SiteStatus.Image = UIImage.FromBundle("redstatus.jpg");
 		}
     }
 }

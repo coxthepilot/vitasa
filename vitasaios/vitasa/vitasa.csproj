@@ -99,12 +99,24 @@
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vitasa57.png" />
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vitasa114.png" />
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vitasa180.png" />
+    <ImageAsset Include="Assets.xcassets\redstatus.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\redstatus.imageset\red.jpg" />
+    <ImageAsset Include="Assets.xcassets\greenstatus.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\greenstatus.imageset\green.jpg" />
+    <ImageAsset Include="Assets.xcassets\yellowstatus.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\yellowstatus.imageset\yellow.jpg" />
+    <ImageAsset Include="Assets.xcassets\blackstatus.imageset\black.jpg" />
+    <ImageAsset Include="Assets.xcassets\blackstatus.imageset\Contents.json" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
     <Folder Include="Assets.xcassets\riverwalk.imageset\" />
     <Folder Include="Assets.xcassets\riverimage.imageset\" />
     <Folder Include="Assets.xcassets\rwalk.imageset\" />
+    <Folder Include="Assets.xcassets\redstatus.imageset\" />
+    <Folder Include="Assets.xcassets\greenstatus.imageset\" />
+    <Folder Include="Assets.xcassets\yellowstatus.imageset\" />
+    <Folder Include="Assets.xcassets\blackstatus.imageset\" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="LaunchScreen.storyboard" />

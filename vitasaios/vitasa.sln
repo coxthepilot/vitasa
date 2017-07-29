@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vitasa", "vitasa\vitasa.csproj", "{6B22298C-4080-4B07-9765-083359A6381A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "app1", "app1\app1.csproj", "{FDB37BF5-6E20-4CC5-B40F-107AFC2D63A1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|iPhoneSimulator = Debug|iPhoneSimulator
@@ -19,5 +21,13 @@ Global
 		{6B22298C-4080-4B07-9765-083359A6381A}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
 		{6B22298C-4080-4B07-9765-083359A6381A}.Debug|iPhone.ActiveCfg = Debug|iPhone
 		{6B22298C-4080-4B07-9765-083359A6381A}.Debug|iPhone.Build.0 = Debug|iPhone
+		{FDB37BF5-6E20-4CC5-B40F-107AFC2D63A1}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{FDB37BF5-6E20-4CC5-B40F-107AFC2D63A1}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{FDB37BF5-6E20-4CC5-B40F-107AFC2D63A1}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{FDB37BF5-6E20-4CC5-B40F-107AFC2D63A1}.Release|iPhone.Build.0 = Release|Any CPU
+		{FDB37BF5-6E20-4CC5-B40F-107AFC2D63A1}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{FDB37BF5-6E20-4CC5-B40F-107AFC2D63A1}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{FDB37BF5-6E20-4CC5-B40F-107AFC2D63A1}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{FDB37BF5-6E20-4CC5-B40F-107AFC2D63A1}.Debug|iPhone.Build.0 = Debug|Any CPU
 	EndGlobalSection
 EndGlobal
