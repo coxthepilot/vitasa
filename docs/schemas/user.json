@@ -1,7 +1,7 @@
 {
     "$schema": "http://json-schema.org/schema#",
     "id": {
-        "type": "string",
+        "type": "integer",
         "description": "The ID is created and returned by the Create User API. It is ignored during POST operations."
     },
     "email": {
@@ -22,6 +22,5 @@
     "sites": {
         "type": "string",
         "description": "Indicates which Site or Sites this User is Site Coordinator for. If they have the SiteCoordinator Role, they will have the ability to update the status of their site. Values here must be valid Site identifiers (the slug)"
-        
     }
 }

@@ -6,13 +6,19 @@
         "name": {
             "type": "string"
         },
-        "xstreet": {
+        "slug": {
             "type": "string"
         },
-        "xcity": {
+        "street": {
             "type": "string"
         },
-        "xzip": {
+        "city": {
+            "type": "string"
+        },
+        "state": {
+            "type": "string"
+        },
+        "zip": {
             "type": "string"
         },
         "latitude": {
@@ -31,10 +37,10 @@
             "type": "string"
         },
         "sitecoordinator": {
-            "type": "string"
+            "type": "integer"
         },
-        "is_open": {
-            "type": "boolean"
+        "sitestatus": {
+            "type": "string"
         }
     }
 }

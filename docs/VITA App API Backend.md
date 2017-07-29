@@ -7,7 +7,7 @@ This API is used to get an unfiltered list of all sites in the database.
 
 **Request**
 
-    GET {endpoint}/site
+    GET {endpoint}/sites
 
 Nothing special. A plain GET request against the resource will return a list of all Site records in the database.
 
@@ -23,7 +23,7 @@ An array of Site records. Each of which must conform to the provided [site.json 
 
 **Request**
 
-    GET {endpoint}/site/{site-slug}
+    GET {endpoint}/sites/{site-slug}
 
 **Response**
 
@@ -40,7 +40,7 @@ The Response will include the validated Site details for the newly-created site.
 
 **Request**
 
-    PUT {endpoint}/site
+    PUT {endpoint}/sites
 
 The request body shall be a JSON document describing a Site record. 
 
@@ -64,7 +64,7 @@ This API is used to change site settings. Specifically, this is used for Opening
 
 **Request**
 
-    POST {endpoint}/site/{site-slug}
+    POST {endpoint}/sites/{site-slug}
 
 The request body shall be a JSON document describing the desired Site settings.
 
@@ -88,7 +88,7 @@ This API is used to destroy an existing Site record.
 
 **Request**
 
-    DELETE {endpoint}/site/{site-slug}
+    DELETE {endpoint}/sites/{site-slug}
 
 No Request body is required
 
@@ -109,7 +109,7 @@ Use this API to create a new user. By necessity, this is an open API, with no au
 
 **Request**
 
-    PUT {endpoint}/user
+    PUT {endpoint}/users
 
 The Request body shall be a JSON document describing a valid User record:
 
@@ -133,7 +133,7 @@ This API is used by individual users to update their personal profile (usually f
 
 **Request**
 
-    POST {endpoint}/user/{user-id}
+    POST {endpoint}/users/{user-id}
 
 The request body shall conform to the provided [user.json schema](schemas/user.json). The `id` field is required. The `roles` field is ignored.
 
@@ -154,7 +154,7 @@ This API is used to grant or revoke Roles to a User. This API is restricted to U
 
 **Request**
 
-    POST {endpoint}/user/{user-id}
+    POST {endpoint}/users/{user-id}
 
 The request body shall conform to the [user.json schema](schemas/user.json), but need only include the `id` and `roles` fields. Any `roles` specified in this request will overwrite all existing `roles` that were attached to the User previously.
 
@@ -174,7 +174,7 @@ This API is used to destroy a user record. It is only useable by Users with the 
 
 **Request**
     
-    DELETE {endpoint}/user/{user-id}
+    DELETE {endpoint}/users/{user-id}
 
 **Response**
 
