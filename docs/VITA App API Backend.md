@@ -40,7 +40,7 @@ The Response will include the validated Site details for the newly-created site.
 
 **Request**
 
-    PUT {endpoint}/sites
+    POST {endpoint}/sites
 
 The request body shall be a JSON document describing a Site record. 
 
@@ -64,7 +64,8 @@ This API is used to change site settings. Specifically, this is used for Opening
 
 **Request**
 
-    POST {endpoint}/sites/{site-slug}
+    PUT {endpoint}/sites/{site-slug}
+    PATCH {endpoint}/sites/{site-slug}
 
 The request body shall be a JSON document describing the desired Site settings.
 
@@ -109,7 +110,7 @@ Use this API to create a new user. By necessity, this is an open API, with no au
 
 **Request**
 
-    PUT {endpoint}/users
+    POST {endpoint}/users
 
 The Request body shall be a JSON document describing a valid User record:
 
@@ -133,7 +134,8 @@ This API is used by individual users to update their personal profile (usually f
 
 **Request**
 
-    POST {endpoint}/users/{user-id}
+    PUT {endpoint}/users/{user-id}
+    PATCH {endpoint}/users/{user-id}
 
 The request body shall conform to the provided [user.json schema](schemas/user.json). The `id` field is required. The `roles` field is ignored.
 
