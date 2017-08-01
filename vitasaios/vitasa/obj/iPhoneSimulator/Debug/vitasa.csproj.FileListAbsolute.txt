@@ -72,3 +72,6 @@
 /Users/Billy/Documents/source/vitasa/vitasaios/vitasa/bin/iPhoneSimulator/Debug/zh-Hans/Xamarin.Forms.Platform.iOS.resources.dll
 /Users/Billy/Documents/source/vitasa/vitasaios/vitasa/bin/iPhoneSimulator/Debug/zh-Hant/Xamarin.Forms.Platform.iOS.resources.dll
 /Users/Billy/Documents/source/vitasa/vitasaios/vitasa/obj/iPhoneSimulator/Debug/vitasa.csprojResolveAssemblyReference.cache
+/Users/Billy/Documents/source/vitasa/vitasaios/vitasa/obj/iPhoneSimulator/Debug/device-builds/iphone7.2-10.3.1/optimized/Settings.bundle/Root.plist
+/Users/Billy/Documents/source/vitasa/vitasaios/vitasa/bin/iPhoneSimulator/Debug/ModernHttpClient.dll
+/Users/Billy/Documents/source/vitasa/vitasaios/vitasa/bin/iPhoneSimulator/Debug/ModernHttpClient.dll.mdb

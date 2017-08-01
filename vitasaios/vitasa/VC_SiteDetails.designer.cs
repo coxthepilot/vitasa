@@ -20,6 +20,10 @@ namespace vitasa
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UIButton B_Change { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UIImageView I_SiteStatus { get; set; }
 
         [Outlet]
@@ -51,6 +55,11 @@ namespace vitasa
             if (B_Back != null) {
                 B_Back.Dispose ();
                 B_Back = null;
+            }
+
+            if (B_Change != null) {
+                B_Change.Dispose ();
+                B_Change = null;
             }
 
             if (I_SiteStatus != null) {

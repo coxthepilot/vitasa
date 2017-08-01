@@ -3,12 +3,13 @@ using System;
 using UIKit;
 using MapKit;
 using CoreLocation;
+using Xamarin.Forms;
 
 namespace vitasa
 {
     public partial class VC_SiteDetails : UIViewController
     {
-        public bool CameFromList = false;
+        //public bool CameFromList = false;
 		
         C_MapDelegate mapDelegate = null;
 
@@ -67,15 +68,29 @@ namespace vitasa
 			// connect action code to the Back button
 			B_Back.TouchUpInside += (object sender, EventArgs e) =>
 			{
-				if (CameFromList)
-				{
-					this.PerformSegue("SiteDetailsToList", this);
-				}
-				else
-				{
-					this.PerformSegue("SiteDetailsToMap", this);
-				}
+				string segueToPerform = "";
+				if (myAppDelegate.PassAroundContainer.DetailsCameFrom == E_CameFrom.List)
+                    segueToPerform = "SiteDetailsToList";
+                else if (myAppDelegate.PassAroundContainer.DetailsCameFrom == E_CameFrom.Map)
+					segueToPerform = "SiteDetailsToMap";
+
+                this.PerformSegue(segueToPerform, this);
 			};
+
+            NSUserDefaults userSettings = new NSUserDefaults("group.net.zsquared.vitasa");
+			var userName = userSettings.StringForKey("siteCoordinatorUserName");
+			var userPassword = userSettings.StringForKey("siteCoordinatorPassword");
+            bool weHaveSiteCoordinatorAccountInfo = (userName != null) && (userPassword != null)
+                && (userName.Length != 0) && (userPassword.Length != 0);
+            B_Change.Hidden = !weHaveSiteCoordinatorAccountInfo;
+
+            if (weHaveSiteCoordinatorAccountInfo)
+            {
+                B_Change.TouchUpInside += (sender, e) =>
+                {
+                    this.PerformSegue("Segue_DetailsToUpdate", this);
+                };
+            }
 
             // populate the controls to explain this site in more detail
             L_SiteName.Text = myAppDelegate.PassAroundContainer.SelectedSite.SiteName;

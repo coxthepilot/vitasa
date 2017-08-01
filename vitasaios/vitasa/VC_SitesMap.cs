@@ -124,8 +124,9 @@ namespace vitasa
 			if (segue.Identifier == "SiteMapToDetails")
 			{
 				VC_SiteDetails siteDetails = (VC_SiteDetails)segue.DestinationViewController;
-                //siteDetails.PassAroundContainer = PassAroundContainer;
-                siteDetails.CameFromList = false;
+				//siteDetails.PassAroundContainer = PassAroundContainer;
+				AppDelegate myAppDelegate = (AppDelegate)UIApplication.SharedApplication.Delegate;
+                myAppDelegate.PassAroundContainer.DetailsCameFrom = E_CameFrom.Map;
 			}
 		}
 

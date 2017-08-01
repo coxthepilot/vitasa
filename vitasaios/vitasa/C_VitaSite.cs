@@ -4,9 +4,14 @@ using System.IO;
 using System.Net;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using System.Text;
+using System.Net.Http;
+using ModernHttpClient;
+using Xamarin.Forms;
 
 namespace vitasa
 {
+    // chris: slug being sent? ssl only on /login? login on root url; what to send on cookie?
     public class C_VitaSite
     {
         public string SiteName = null;
@@ -42,9 +47,14 @@ namespace vitasa
         //public static readonly string N_SiteIsOpen = "is_open";
         public static readonly string N_SiteStatus = "sitestatus";
 
-        /// <summary>
-        /// Create a new site with null values for all fields
-        /// </summary>
+		public static string vitaCoreUrl = "http://vitasa.abandonedfactory.net";
+		public static string vitaCoreUrlSSL = "https://vitasa.abandonedfactory.net";
+		//string vitaCoreUrl = "https://s3-us-west-2.amazonaws.com/vitasa-static-content-dev/sites.json";
+		//string vitaCoreUrl = "https://h4ebpp3rvk.execute-api.us-west-2.amazonaws.com/production/sites";
+
+		/// <summary>
+		/// Create a new site with null values for all fields
+		/// </summary>
 		public C_VitaSite()
         {
         }
@@ -120,7 +130,7 @@ namespace vitasa
         /// <param name="json">the value from the backend services that has been Parsed</param>
         public static List<C_VitaSite> ImportSites(JsonValue json)
         {
-            // todo: validate the format of the inpute (somehow); JsonValue seems to be anything
+            // todo: validate the format of the input (somehow); JsonValue seems to be anything
 
             // create the holding place for the results
             List<C_VitaSite> res = new List<C_VitaSite>();
@@ -135,12 +145,9 @@ namespace vitasa
 
 		public static async Task<JsonValue> FetchSitesList()
 		{
-            string vitaCoreUrl = "http://vitasa.abandonedfactory.net/sites";
-			//string vitaCoreUrl = "https://s3-us-west-2.amazonaws.com/vitasa-static-content-dev/sites.json";
-			//string vitaCoreUrl = "https://h4ebpp3rvk.execute-api.us-west-2.amazonaws.com/production/sites";
-
+            string sitesUrl = vitaCoreUrl + "/sites";
 			// Create an HTTP web request using the URL:
-			HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(new Uri(vitaCoreUrl));
+            HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(new Uri(sitesUrl));
 			//request.Headers.Add(HttpRequestHeader.Accept, "application/json");
             request.Accept = "application/json";
 			//request.ContentType = "application/json";
@@ -175,60 +182,159 @@ namespace vitasa
 			}
 		}
 
-  //      public static void AddDummySites(List<C_VitaSite> SitesList)
-  //      {
-		//	// for testing only
-		//	C_VitaSite s0 = new C_VitaSite();
-		//	s0.SiteName = "Guadalupe Community Center";
-		//	s0.SiteSlug = "guadalupe-community-center";
-		//	s0.SiteStreet = "1801 W Cesar Chavez Blvd";
-		//	s0.SiteCity = "San Antonio";
-		//	s0.SiteState = "TX";
-		//	s0.SiteZip = "78207";
-		//	s0.SiteLatitude = "29.4230749";
-		//	s0.SiteLongitude = "-98.5198977";
-		//	s0.SiteOpenTime = "8:30";
-		//	s0.SiteCloseTime = "16:30";
-		//	s0.SiteDays = "mwf";
-		//	s0.SiteCoordinator = "Rosio";
-		//	s0.SiteType = "permanent";
-  //          s0.SiteIsOpen = true;
-		//	SitesList.Add(s0);
+        public async Task<bool> UpdateSiteStatus(E_SiteStatus newSiteStatus, string token)
+        {
+            // post on {url}/sites/{site-slug}
+            // body is json with the setting to update
 
-		//	C_VitaSite s1 = new C_VitaSite();
-		//	s1.SiteName = "Presa Community Center";
-		//	s1.SiteSlug = "presa-community-center";
-		//	s1.SiteStreet = "3721 S Presa Street";
-		//	s1.SiteCity = "San Antonio";
-		//	s1.SiteState = "TX";
-		//	s1.SiteZip = "78210";
-		//	s1.SiteLatitude = "29.386249";
-		//	s1.SiteLongitude = "-98.4815702";
-		//	s1.SiteOpenTime = "8:30";
-		//	s1.SiteCloseTime = "16:30";
-		//	s1.SiteDays = "tw";
-		//	s1.SiteCoordinator = "Fred";
-		//	s1.SiteType = "permanent";
-		//	s1.SiteIsOpen = false;
-		//	SitesList.Add(s1);
+            if ((SiteSlug == null) || (SiteSlug.Length == 0))
+                throw new ApplicationException("slug must not be null or empty");
 
-		//	C_VitaSite s2 = new C_VitaSite();
-		//	s2.SiteName = "Claude Black Community Center";
-		//	s2.SiteSlug = "claude-black-community-center";
-		//	s2.SiteStreet = "2915 E Commerce Street";
-		//	s2.SiteCity = "San Antonio";
-		//	s2.SiteState = "TX";
-		//	s2.SiteZip = "78203";
-		//	s2.SiteLatitude = "29.4200353";
-		//	s2.SiteLongitude = "-98.44685";
-		//	s2.SiteOpenTime = "8:30";
-		//	s2.SiteCloseTime = "16:30";
-		//	s2.SiteDays = "sasu";
-		//	s2.SiteCoordinator = "Jaquie";
-		//	s2.SiteType = "permanent";
-		//	s2.SiteIsOpen = true;
-		//	SitesList.Add(s2);
-		//}
+			// todo: move over to use SSL; hangs if using SSL
+			//SetupCertificateHandling(); // only needed if SSL
+			string updateurl = "/sites/" + SiteSlug;
+            string fullUpdateurl = vitaCoreUrl + updateurl;
 
+            string bodyjson = "{ \"sitestatus\" : \"" + newSiteStatus.ToString() + "\"}";
+
+            bool error = false;
+            try
+            {
+                WebClient wc = new WebClient();
+                wc.BaseAddress = vitaCoreUrl;
+
+                wc.Headers.Add(HttpRequestHeader.Cookie, token);
+                wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
+                wc.Headers.Add(HttpRequestHeader.Accept, "application/json");
+
+                byte[] dataBytes = Encoding.UTF8.GetBytes(bodyjson);
+
+                byte[] responseBytes = await wc.UploadDataTaskAsync(updateurl, "PUT", dataBytes);
+
+                string responseString = Encoding.UTF8.GetString(responseBytes);
+
+                try
+                {
+                    JsonValue responseJson = JsonValue.Parse(responseString);
+
+                    if (responseJson.ContainsKey(N_SiteStatus))
+                    {
+                        string ssv = responseJson[N_SiteStatus];
+                        E_SiteStatus nss = E_SiteStatus.Unknown;
+                        // convert string to enum
+                        foreach (E_SiteStatus ss in Enum.GetValues(typeof(E_SiteStatus)))
+                        {
+                            if (ssv == ss.ToString())
+                            {
+                                nss = ss;
+                                break;
+                            }
+                        }
+
+                        if (nss != E_SiteStatus.Unknown)
+                        {
+                            // if the new site status is not what we asked for, then error
+                            error = nss != newSiteStatus;
+                            if (error)
+                                Console.WriteLine("Site status after update was not what we requested");
+                            else
+                                // since no error, make our site status reflect the new value
+                                SiteStatus = nss;
+                        }
+                        else
+                        {
+                            // the site status returned is not in our enum
+                            error = true;
+                            Console.WriteLine("Site status after update was not in our enum");
+                        }
+                    }
+                    else
+                    {
+                        // response did not contain our site status
+                        error = true;
+						Console.WriteLine("Site status was not present in our response");
+					}
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Attempt to parse response failed: " + e.Message);
+                    error = true;
+                }            
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Attempt to update site status failed: " + e.Message);
+                error = true;
+            }
+
+  			return !error;
+        }
+
+        public static async Task<string> PerformLogin(string userName, string userPassword)
+        {
+			string loginUrl = "/login";
+
+			var client = new HttpClient();
+            client.BaseAddress = new Uri(vitaCoreUrlSSL);
+
+            string jsonData = "{\"email\" : \"" + userName + "\", \"password\" : \"" + userPassword + "\"}";
+
+            SetupCertificateHandling();
+
+            var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
+            HttpResponseMessage response = await client.PostAsync(loginUrl, content);
+
+            var result = await response.Content.ReadAsStringAsync();
+
+            if (response.StatusCode != HttpStatusCode.OK)
+                return null;
+
+            JsonValue jv = JsonValue.Parse(result);
+            if (!jv.ContainsKey("message") || (jv["message"] != "Login successful"))
+                return null;
+
+            var headers = response.Headers;
+            string setCookie = null;
+            foreach (KeyValuePair<string, IEnumerable<string>> kvp in headers)
+            {
+                if (kvp.Key == "Set-Cookie")
+                {
+                    foreach (string sc in kvp.Value)
+                    {
+                        setCookie = sc;
+                        break;
+                    }
+                }
+            }
+
+            string token = null;
+            string[] tokens = setCookie.Split(new char[] { ';' });
+            foreach(string tok in tokens)
+            {
+                if (tok.Contains("_rails-base_session"))
+                {
+                    token = tok;
+                    break;
+                }
+            }
+
+            return token;
+		}
+
+        private static void SetupCertificateHandling()
+        {
+			ServicePointManager.ServerCertificateValidationCallback += (sender, certificate, chain, sslPolicyErrors) =>
+			{
+				System.Security.Cryptography.X509Certificates.X509Certificate cert = (System.Security.Cryptography.X509Certificates.X509Certificate)certificate;
+				string issuer = cert.Issuer;
+				string[] issuers = issuer.Split(new char[] { '=' });
+				bool res = issuers.Length == 2;
+				if (res)
+					res = issuers[1] == "vitasa.abandonedfactory.net";
+
+				return res;
+			};
+
+		}
 	}
 }

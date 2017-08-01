@@ -137,7 +137,8 @@ namespace vitasa
             if (segue.Identifier == "SegueFromListToDetails")
             {
                 VC_SiteDetails siteDetails = (VC_SiteDetails)segue.DestinationViewController;
-                siteDetails.CameFromList = true;
+				AppDelegate myAppDelegate = (AppDelegate)UIApplication.SharedApplication.Delegate;
+                myAppDelegate.PassAroundContainer.DetailsCameFrom = E_CameFrom.List;
             }
         }
 	}

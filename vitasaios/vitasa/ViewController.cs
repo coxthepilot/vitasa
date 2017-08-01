@@ -1,4 +1,5 @@
 ﻿using System;
+using Foundation;
 using Xamarin.Forms;
 
 using UIKit;
@@ -24,7 +25,12 @@ namespace vitasa
 			// use this to put an image in the background
 			I_Background.Image = UIImage.FromBundle("rwalk");
 
-            //Application.Current.Properties[""]
+			//Application.Current.Properties[""]
+
+			//NSUserDefaults shared = new NSUserDefaults("group.net.zsquared.vitasa");
+
+			//var userName = shared.StringForKey("siteCoordinatorUserName");
+			//var userPassword = shared.StringForKey("siteCoordinatorPassword");
 		}
 
         public override void DidReceiveMemoryWarning()
