@@ -10,7 +10,7 @@
 			<key>Title</key>
 			<string>Site Coordinator User Name</string>
 			<key>KeyboardType</key>
-			<string>Alphabet</string>
+			<string>EmailAddress</string>
 			<key>AutocapitalizationType</key>
 			<string>None</string>
 			<key>AutocorrectionType</key>

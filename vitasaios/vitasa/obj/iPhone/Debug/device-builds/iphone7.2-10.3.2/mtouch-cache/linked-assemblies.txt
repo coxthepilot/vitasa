@@ -1,6 +1,0 @@
-/Users/Billy/Projects/vitasa/vitasa/bin/iPhone/Debug/device-builds/iphone7.2-10.3.2/vitasa.app:/Users/Billy/Projects/vitasa/vitasa/obj/iPhone/Debug/device-builds/iphone7.2-10.3.2/mtouch-cache/Link/vitasa.exe
-/Users/Billy/Projects/vitasa/vitasa/bin/iPhone/Debug/device-builds/iphone7.2-10.3.2/vitasa.app:/Users/Billy/Projects/vitasa/vitasa/obj/iPhone/Debug/device-builds/iphone7.2-10.3.2/mtouch-cache/Link/mscorlib.dll
-/Users/Billy/Projects/vitasa/vitasa/bin/iPhone/Debug/device-builds/iphone7.2-10.3.2/vitasa.app:/Users/Billy/Projects/vitasa/vitasa/obj/iPhone/Debug/device-builds/iphone7.2-10.3.2/mtouch-cache/Link/Xamarin.iOS.dll
-/Users/Billy/Projects/vitasa/vitasa/bin/iPhone/Debug/device-builds/iphone7.2-10.3.2/vitasa.app:/Users/Billy/Projects/vitasa/vitasa/obj/iPhone/Debug/device-builds/iphone7.2-10.3.2/mtouch-cache/Link/System.dll
-/Users/Billy/Projects/vitasa/vitasa/bin/iPhone/Debug/device-builds/iphone7.2-10.3.2/vitasa.app:/Users/Billy/Projects/vitasa/vitasa/obj/iPhone/Debug/device-builds/iphone7.2-10.3.2/mtouch-cache/Link/Mono.Security.dll
-/Users/Billy/Projects/vitasa/vitasa/bin/iPhone/Debug/device-builds/iphone7.2-10.3.2/vitasa.app:/Users/Billy/Projects/vitasa/vitasa/obj/iPhone/Debug/device-builds/iphone7.2-10.3.2/mtouch-cache/Link/System.Json.dll

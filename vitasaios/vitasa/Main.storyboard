@@ -782,7 +782,7 @@
                         <viewControllerLayoutGuide type="bottom" id="1714"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="1717">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" colorSpace="calibratedRGB" red="0.94509803921568625" green="0.94509803921568625" blue="0.94509803921568625" alpha="1"/>
                         <variation key="heightClass=regular-widthClass=compact">

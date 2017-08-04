@@ -1,0 +1,14 @@
+/Users/Billy/Documents/source/vitasa/vitasaios/vitasa/bin/iPhone/Release/vitasa.app:/Users/Billy/Documents/source/vitasa/vitasaios/vitasa/obj/iPhone/Release/mtouch-cache/64/Link/vitasa.exe
+/Users/Billy/Documents/source/vitasa/vitasaios/vitasa/bin/iPhone/Release/vitasa.app:/Users/Billy/Documents/source/vitasa/vitasaios/vitasa/obj/iPhone/Release/mtouch-cache/64/Link/mscorlib.dll
+/Users/Billy/Documents/source/vitasa/vitasaios/vitasa/bin/iPhone/Release/vitasa.app:/Users/Billy/Documents/source/vitasa/vitasaios/vitasa/obj/iPhone/Release/mtouch-cache/64/Link/Xamarin.Forms.Core.dll
+/Users/Billy/Documents/source/vitasa/vitasaios/vitasa/bin/iPhone/Release/vitasa.app:/Users/Billy/Documents/source/vitasa/vitasaios/vitasa/obj/iPhone/Release/mtouch-cache/64/Link/System.Core.dll
+/Users/Billy/Documents/source/vitasa/vitasaios/vitasa/bin/iPhone/Release/vitasa.app:/Users/Billy/Documents/source/vitasa/vitasaios/vitasa/obj/iPhone/Release/mtouch-cache/64/Link/System.dll
+/Users/Billy/Documents/source/vitasa/vitasaios/vitasa/bin/iPhone/Release/vitasa.app:/Users/Billy/Documents/source/vitasa/vitasaios/vitasa/obj/iPhone/Release/mtouch-cache/64/Link/Mono.Security.dll
+/Users/Billy/Documents/source/vitasa/vitasaios/vitasa/bin/iPhone/Release/vitasa.app:/Users/Billy/Documents/source/vitasa/vitasaios/vitasa/obj/iPhone/Release/mtouch-cache/64/Link/System.Xml.dll
+/Users/Billy/Documents/source/vitasa/vitasaios/vitasa/bin/iPhone/Release/vitasa.app:/Users/Billy/Documents/source/vitasa/vitasaios/vitasa/obj/iPhone/Release/mtouch-cache/64/Link/Xamarin.Forms.Platform.dll
+/Users/Billy/Documents/source/vitasa/vitasaios/vitasa/bin/iPhone/Release/vitasa.app:/Users/Billy/Documents/source/vitasa/vitasaios/vitasa/obj/iPhone/Release/mtouch-cache/64/Link/Xamarin.Forms.Platform.iOS.dll
+/Users/Billy/Documents/source/vitasa/vitasaios/vitasa/bin/iPhone/Release/vitasa.app:/Users/Billy/Documents/source/vitasa/vitasaios/vitasa/obj/iPhone/Release/mtouch-cache/64/Link/Xamarin.iOS.dll
+/Users/Billy/Documents/source/vitasa/vitasaios/vitasa/bin/iPhone/Release/vitasa.app:/Users/Billy/Documents/source/vitasa/vitasaios/vitasa/obj/iPhone/Release/mtouch-cache/64/Link/System.Net.Http.dll
+/Users/Billy/Documents/source/vitasa/vitasaios/vitasa/bin/iPhone/Release/vitasa.app:/Users/Billy/Documents/source/vitasa/vitasaios/vitasa/obj/iPhone/Release/mtouch-cache/64/Link/System.Runtime.Serialization.dll
+/Users/Billy/Documents/source/vitasa/vitasaios/vitasa/bin/iPhone/Release/vitasa.app:/Users/Billy/Documents/source/vitasa/vitasaios/vitasa/obj/iPhone/Release/mtouch-cache/64/Link/System.ServiceModel.Internals.dll
+/Users/Billy/Documents/source/vitasa/vitasaios/vitasa/bin/iPhone/Release/vitasa.app:/Users/Billy/Documents/source/vitasa/vitasaios/vitasa/obj/iPhone/Release/mtouch-cache/64/Link/System.Json.dll

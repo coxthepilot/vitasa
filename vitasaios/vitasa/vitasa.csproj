@@ -77,7 +77,7 @@
     <MtouchArch>ARMv7, ARM64</MtouchArch>
     <MtouchHttpClientHandler>HttpClientHandler</MtouchHttpClientHandler>
     <PlatformTarget>x86</PlatformTarget>
-    <CodesignProvision>Automatic:AdHoc</CodesignProvision>
+    <CodesignProvision>vitasa prov prof</CodesignProvision>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -123,6 +123,7 @@
     <ImageAsset Include="Assets.xcassets\yellowstatus.imageset\yellow.jpg" />
     <ImageAsset Include="Assets.xcassets\blackstatus.imageset\black.jpg" />
     <ImageAsset Include="Assets.xcassets\blackstatus.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\LaunchImage.launchimage\Contents.json" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />

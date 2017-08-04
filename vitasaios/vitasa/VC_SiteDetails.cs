@@ -9,9 +9,11 @@ namespace vitasa
 {
     public partial class VC_SiteDetails : UIViewController
     {
-        //public bool CameFromList = false;
-		
-        C_MapDelegate mapDelegate = null;
+        public const string Name_SiteCoordinatorUserName = "siteCoordinatorUserName";
+		public const string Name_SiteCoordinatorPassword = "siteCoordinatorPassword";
+		public const string Name_VitasaGroup = "group.net.zsquared.vitasa";
+
+		C_MapDelegate mapDelegate = null;
 
 		public VC_SiteDetails (IntPtr handle) : base (handle)
         {
@@ -77,9 +79,16 @@ namespace vitasa
                 this.PerformSegue(segueToPerform, this);
 			};
 
-            NSUserDefaults userSettings = new NSUserDefaults("group.net.zsquared.vitasa");
-			var userName = userSettings.StringForKey("siteCoordinatorUserName");
-			var userPassword = userSettings.StringForKey("siteCoordinatorPassword");
+			// the following is required when working on a physical device
+			NSUserDefaults userSettings = new NSUserDefaults(Name_VitasaGroup, NSUserDefaultsType.SuiteName);
+			var whatWeAreRunningOn = ObjCRuntime.Runtime.Arch;
+            // SIMULATOR or DEVICE
+            if (whatWeAreRunningOn == ObjCRuntime.Arch.SIMULATOR)
+                // accessing via the suite name doesn't work in the simulator
+			    userSettings = new NSUserDefaults(Name_VitasaGroup);
+
+			var userName = userSettings.StringForKey(Name_SiteCoordinatorUserName);
+            var userPassword = userSettings.StringForKey(Name_SiteCoordinatorPassword);
             bool weHaveSiteCoordinatorAccountInfo = (userName != null) && (userPassword != null)
                 && (userName.Length != 0) && (userPassword.Length != 0);
             B_Change.Hidden = !weHaveSiteCoordinatorAccountInfo;

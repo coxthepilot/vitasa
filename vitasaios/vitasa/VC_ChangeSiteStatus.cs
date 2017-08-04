@@ -59,7 +59,16 @@ namespace vitasa
             {
                 // do the initial login to get the token which is also the means to verify authorization
                 // failure to get the token means they are not authorized
-				NSUserDefaults userSettings = new NSUserDefaults("group.net.zsquared.vitasa");
+				//NSUserDefaults userSettings = new NSUserDefaults("group.net.zsquared.vitasa");
+
+				// the following is required when working on a physical device
+                NSUserDefaults userSettings = new NSUserDefaults(VC_SiteDetails.Name_VitasaGroup, NSUserDefaultsType.SuiteName);
+				var whatWeAreRunningOn = ObjCRuntime.Runtime.Arch;
+				// SIMULATOR or DEVICE
+				if (whatWeAreRunningOn == ObjCRuntime.Arch.SIMULATOR)
+					// accessing via the suite name doesn't work in the simulator
+					userSettings = new NSUserDefaults(VC_SiteDetails.Name_VitasaGroup);
+
 				var userName = userSettings.StringForKey("siteCoordinatorUserName");
 				var userPassword = userSettings.StringForKey("siteCoordinatorPassword");
                 string token = await C_VitaSite.PerformLogin(userName, userPassword);
