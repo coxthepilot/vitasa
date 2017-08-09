@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using System.Json;
 using Xamarin.Forms;
 
+using zsquared;
+
 namespace vitasa
 {
     public partial class VC_ChangeSiteStatus : UIViewController
@@ -27,8 +29,8 @@ namespace vitasa
 
             C_VitaSite OurSite = myAppDelegate.PassAroundContainer.SelectedSite;
 
-            L_CurrentSite.Text = OurSite.SiteName;
-            L_SiteCurrentStatus.Text = "Site is currently: " + OurSite.SiteStatus.ToString();
+            L_CurrentSite.Text = OurSite.Name;
+            L_SiteCurrentStatus.Text = "Site is currently: " + OurSite.Status.ToString();
 
             B_Back.TouchUpInside += (sender, e) => 
             {
@@ -37,22 +39,22 @@ namespace vitasa
 
             B_MakeSiteOpen.TouchUpInside += (sender, e) => 
             {
-                UpdateSiteStatus(C_VitaSite.E_SiteStatus.Open, OurSite);
+                UpdateSiteStatus(E_SiteStatus.Accepting, OurSite);
             };
 
             B_MakeSiteClosed.TouchUpInside += (sender, e) => 
             {
-				UpdateSiteStatus(C_VitaSite.E_SiteStatus.Closed, OurSite);
+				UpdateSiteStatus(E_SiteStatus.Closed, OurSite);
 			};
 
             B_MakeSiteNearingLimit.TouchUpInside += (sender, e) => 
             {
-				UpdateSiteStatus(C_VitaSite.E_SiteStatus.NearLimit, OurSite);
+				UpdateSiteStatus(E_SiteStatus.NearLimit, OurSite);
 			};
 
             B_MakeSiteNotAccepting.TouchUpInside += (sender, e) => 
             {
-				UpdateSiteStatus(C_VitaSite.E_SiteStatus.NotAccepting, OurSite);
+				UpdateSiteStatus(E_SiteStatus.NotAccepting, OurSite);
 			};
 
 			Task.Run(async () =>
@@ -71,7 +73,7 @@ namespace vitasa
 
 				var userName = userSettings.StringForKey("siteCoordinatorUserName");
 				var userPassword = userSettings.StringForKey("siteCoordinatorPassword");
-                string token = await C_VitaSite.PerformLogin(userName, userPassword);
+                string token = await C_Vita.PerformLogin(userName, userPassword);
 
                 if (token != null)
                 {
@@ -79,7 +81,7 @@ namespace vitasa
 					UIApplication.SharedApplication.InvokeOnMainThread(
 					new Action(() =>
 					{
-						C_VitaSite.E_SiteStatus siteStatus = myAppDelegate.PassAroundContainer.SelectedSite.SiteStatus;
+						E_SiteStatus siteStatus = myAppDelegate.PassAroundContainer.SelectedSite.Status;
 						SetButtonsBasedOnStatus(siteStatus);
 						L_VerifyingAuthorization.Text = "Verification Successful.";
 					}));
@@ -99,20 +101,20 @@ namespace vitasa
         /// <summary>
         /// Set the buttons based on the SiteStatus; must be run on the UIThread
         /// </summary>
-        private void SetButtonsBasedOnStatus(C_VitaSite.E_SiteStatus siteStatus)
+        private void SetButtonsBasedOnStatus(E_SiteStatus siteStatus)
         {
 			B_MakeSiteOpen.Hidden = false;
 			B_MakeSiteClosed.Hidden = false;
 			B_MakeSiteNotAccepting.Hidden = false;
 			B_MakeSiteNearingLimit.Hidden = false;
 
-            B_MakeSiteOpen.Enabled = siteStatus != C_VitaSite.E_SiteStatus.Open;
-            B_MakeSiteClosed.Enabled = siteStatus != C_VitaSite.E_SiteStatus.Closed;
-            B_MakeSiteNotAccepting.Enabled = siteStatus != C_VitaSite.E_SiteStatus.NotAccepting;
-            B_MakeSiteNearingLimit.Enabled = siteStatus != C_VitaSite.E_SiteStatus.NearLimit;
+            B_MakeSiteOpen.Enabled = siteStatus != E_SiteStatus.Accepting;
+            B_MakeSiteClosed.Enabled = siteStatus != E_SiteStatus.Closed;
+            B_MakeSiteNotAccepting.Enabled = siteStatus != E_SiteStatus.NotAccepting;
+            B_MakeSiteNearingLimit.Enabled = siteStatus != E_SiteStatus.NearLimit;
 		}         
 
-        private void UpdateSiteStatus(C_VitaSite.E_SiteStatus desiredSiteStatus, C_VitaSite ourSite)
+        private void UpdateSiteStatus(E_SiteStatus desiredSiteStatus, C_VitaSite ourSite)
         {
 			Task.Run(async () =>
 			{
@@ -123,8 +125,8 @@ namespace vitasa
 					UIApplication.SharedApplication.InvokeOnMainThread(
 					new Action(() =>
 					{
-                        SetButtonsBasedOnStatus(ourSite.SiteStatus);
-						L_SiteCurrentStatus.Text = "Site is currently: " + ourSite.SiteStatus.ToString();
+                        SetButtonsBasedOnStatus(ourSite.Status);
+						L_SiteCurrentStatus.Text = "Site is currently: " + ourSite.Status.ToString();
 					}));
 				}
 				else

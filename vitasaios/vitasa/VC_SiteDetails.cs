@@ -5,6 +5,8 @@ using MapKit;
 using CoreLocation;
 using Xamarin.Forms;
 
+using zsquared;
+
 namespace vitasa
 {
     public partial class VC_SiteDetails : UIViewController
@@ -45,12 +47,12 @@ namespace vitasa
             bool conversionOK = true;
             try
             {
-                lat = Convert.ToDouble(myAppDelegate.PassAroundContainer.SelectedSite.SiteLatitude);
-                lon = Convert.ToDouble(myAppDelegate.PassAroundContainer.SelectedSite.SiteLongitude);
+                lat = Convert.ToDouble(myAppDelegate.PassAroundContainer.SelectedSite.Latitude);
+                lon = Convert.ToDouble(myAppDelegate.PassAroundContainer.SelectedSite.Longitude);
             }
             catch { conversionOK = false; }
 
-            mapDelegate = new C_MapDelegate(myAppDelegate.PassAroundContainer, this);
+            mapDelegate = new C_MapDelegate(myAppDelegate.PassAroundContainer, this, null);
 			Map_SiteMap.Delegate = mapDelegate;
 
 			// use a scaling to see about 20km
@@ -62,7 +64,7 @@ namespace vitasa
             if (conversionOK)
             {
                 MKPointAnnotation pa = new MKPointAnnotation();
-                pa.Title = myAppDelegate.PassAroundContainer.SelectedSite.SiteName;
+                pa.Title = myAppDelegate.PassAroundContainer.SelectedSite.Name;
                 pa.Coordinate = new CLLocationCoordinate2D(lat, lon);
                 Map_SiteMap.AddAnnotations(pa);
             }
@@ -102,21 +104,21 @@ namespace vitasa
             }
 
             // populate the controls to explain this site in more detail
-            L_SiteName.Text = myAppDelegate.PassAroundContainer.SelectedSite.SiteName;
-            L_Address.Text = myAppDelegate.PassAroundContainer.SelectedSite.SiteStreet;
-            L_CityStateZip.Text = myAppDelegate.PassAroundContainer.SelectedSite.SiteCity
-                + ", " + myAppDelegate.PassAroundContainer.SelectedSite.SiteState 
-                + " " + myAppDelegate.PassAroundContainer.SelectedSite.SiteZip;
-            L_SiteCoordinator.Text = myAppDelegate.PassAroundContainer.SelectedSite.SiteCoordinator;
-            L_SiteStatus.Text = "Site is " + myAppDelegate.PassAroundContainer.SelectedSite.SiteStatus;
+            L_SiteName.Text = myAppDelegate.PassAroundContainer.SelectedSite.Name;
+            L_Address.Text = myAppDelegate.PassAroundContainer.SelectedSite.Street;
+            L_CityStateZip.Text = myAppDelegate.PassAroundContainer.SelectedSite.City
+                + ", " + myAppDelegate.PassAroundContainer.SelectedSite.State 
+                + " " + myAppDelegate.PassAroundContainer.SelectedSite.Zip;
+            L_SiteCoordinator.Text = myAppDelegate.PassAroundContainer.SelectedSite.PrimaryCoordinator;
+            L_SiteStatus.Text = "Site is " + myAppDelegate.PassAroundContainer.SelectedSite.Status;
 
-            if (myAppDelegate.PassAroundContainer.SelectedSite.SiteStatus == C_VitaSite.E_SiteStatus.Open)
+            if (myAppDelegate.PassAroundContainer.SelectedSite.Status == E_SiteStatus.Accepting)
                 I_SiteStatus.Image = UIImage.FromBundle("greenstatus.jpg");
-            else if (myAppDelegate.PassAroundContainer.SelectedSite.SiteStatus == C_VitaSite.E_SiteStatus.Closed)
+            else if (myAppDelegate.PassAroundContainer.SelectedSite.Status == E_SiteStatus.Closed)
 				I_SiteStatus.Image = UIImage.FromBundle("blackstatus.jpg");
-			else if (myAppDelegate.PassAroundContainer.SelectedSite.SiteStatus == C_VitaSite.E_SiteStatus.NearLimit)
+			else if (myAppDelegate.PassAroundContainer.SelectedSite.Status == E_SiteStatus.NearLimit)
 				I_SiteStatus.Image = UIImage.FromBundle("yellowstatus.jpg");
-            else if (myAppDelegate.PassAroundContainer.SelectedSite.SiteStatus == C_VitaSite.E_SiteStatus.NotAccepting)
+            else if (myAppDelegate.PassAroundContainer.SelectedSite.Status == E_SiteStatus.NotAccepting)
 				I_SiteStatus.Image = UIImage.FromBundle("redstatus.jpg");
 		}
     }

@@ -808,14 +808,14 @@
                                 <include reference="2208"/>
                                 <include reference="2209"/>
                                 <include reference="2210"/>
-                                <include reference="2211"/>
-                                <include reference="2212"/>
-                                <include reference="2213"/>
-                                <include reference="2214"/>
-                                <include reference="2231"/>
-                                <include reference="2232"/>
-                                <include reference="2233"/>
-                                <include reference="2234"/>
+                                <include reference="2275"/>
+                                <include reference="2276"/>
+                                <include reference="2289"/>
+                                <include reference="2290"/>
+                                <include reference="2291"/>
+                                <include reference="2292"/>
+                                <include reference="2293"/>
+                                <include reference="2294"/>
                             </mask>
                         </variation>
                         <subviews>
@@ -839,21 +839,21 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="1888" translatesAutoresizingMaskIntoConstraints="NO" hidden="YES">
-                                <rect key="frame" x="43" y="198" width="54" height="36"/>
+                                <rect key="frame" x="43" y="140" width="215" height="36"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20" weight="heavy"/>
-                                <state key="normal" title="Open">
+                                <state key="normal" title="Open and Accepting">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="1889" translatesAutoresizingMaskIntoConstraints="NO" hidden="YES">
-                                <rect key="frame" x="43" y="272" width="70" height="36"/>
+                                <rect key="frame" x="43" y="471" width="70" height="36"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20" weight="heavy"/>
                                 <state key="normal" title="Closed">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="1891" translatesAutoresizingMaskIntoConstraints="NO" hidden="YES">
-                                <rect key="frame" x="43" y="350" width="143" height="36"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="1891" translatesAutoresizingMaskIntoConstraints="NO" hidden="YES" fixedFrame="YES">
+                                <rect key="frame" x="43" y="382" width="143" height="36"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20" weight="heavy"/>
                                 <state key="normal" title="Not Accepting">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -866,7 +866,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="2159" translatesAutoresizingMaskIntoConstraints="NO" hidden="YES">
-                                <rect key="frame" x="43" y="430" width="160" height="30"/>
+                                <rect key="frame" x="43" y="290" width="102" height="36"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20" weight="heavy"/>
                                 <state key="normal" title="Near Limit">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -891,10 +891,6 @@
                                 <exclude reference="1941"/>
                                 <exclude reference="2189"/>
                                 <exclude reference="2190"/>
-                                <exclude reference="2191"/>
-                                <exclude reference="2192"/>
-                                <exclude reference="2193"/>
-                                <exclude reference="2194"/>
                                 <exclude reference="2199"/>
                                 <exclude reference="2200"/>
                                 <exclude reference="2201"/>
@@ -905,18 +901,22 @@
                                 <exclude reference="2208"/>
                                 <exclude reference="2209"/>
                                 <exclude reference="2210"/>
-                                <exclude reference="2211"/>
-                                <exclude reference="2212"/>
-                                <exclude reference="2213"/>
-                                <exclude reference="2214"/>
-                                <exclude reference="2225"/>
-                                <exclude reference="2226"/>
-                                <exclude reference="2227"/>
-                                <exclude reference="2228"/>
-                                <exclude reference="2231"/>
-                                <exclude reference="2232"/>
-                                <exclude reference="2233"/>
-                                <exclude reference="2234"/>
+                                <exclude reference="2275"/>
+                                <exclude reference="2276"/>
+                                <exclude reference="2279"/>
+                                <exclude reference="2280"/>
+                                <exclude reference="2281"/>
+                                <exclude reference="2282"/>
+                                <exclude reference="2283"/>
+                                <exclude reference="2284"/>
+                                <exclude reference="2285"/>
+                                <exclude reference="2286"/>
+                                <exclude reference="2289"/>
+                                <exclude reference="2290"/>
+                                <exclude reference="2291"/>
+                                <exclude reference="2292"/>
+                                <exclude reference="2293"/>
+                                <exclude reference="2294"/>
                             </mask>
                         </variation>
                         <constraints>
@@ -930,10 +930,6 @@
                             <constraint id="1941" firstItem="1857" firstAttribute="leading" secondItem="1717" secondAttribute="leadingMargin" constant="23"/>
                             <constraint id="2189" firstItem="1879" firstAttribute="top" secondItem="1857" secondAttribute="bottom" constant="8"/>
                             <constraint id="2190" firstItem="1879" firstAttribute="leading" secondItem="1717" secondAttribute="leadingMargin" constant="27"/>
-                            <constraint id="2191" firstItem="1888" firstAttribute="top" secondItem="1879" secondAttribute="bottom" constant="24"/>
-                            <constraint id="2192" firstItem="1888" firstAttribute="leading" secondItem="1717" secondAttribute="leadingMargin" constant="31"/>
-                            <constraint id="2193" firstItem="1889" firstAttribute="top" secondItem="1888" secondAttribute="bottom" constant="38"/>
-                            <constraint id="2194" firstItem="1889" firstAttribute="leading" secondItem="1717" secondAttribute="leadingMargin" constant="31"/>
                             <constraint id="2199" firstItem="2184" firstAttribute="top" secondItem="1713" secondAttribute="bottom" constant="30"/>
                             <constraint id="2200" firstItem="2184" firstAttribute="leading" secondItem="1857" secondAttribute="trailing" constant="73"/>
                             <constraint id="2201" firstItem="2007" firstAttribute="top" secondItem="2184" secondAttribute="bottom" constant="10"/>
@@ -944,18 +940,22 @@
                             <constraint id="2208" firstItem="2184" firstAttribute="leading" secondItem="1717" secondAttribute="leadingMargin" constant="27"/>
                             <constraint id="2209" firstItem="2007" firstAttribute="top" secondItem="2184" secondAttribute="bottom" constant="10"/>
                             <constraint id="2210" firstItem="2007" firstAttribute="leading" secondItem="1717" secondAttribute="leadingMargin" constant="27"/>
-                            <constraint id="2211" firstItem="1888" firstAttribute="top" secondItem="2007" secondAttribute="bottom" constant="36"/>
-                            <constraint id="2212" firstItem="1888" firstAttribute="leading" secondItem="1717" secondAttribute="leadingMargin" constant="27"/>
-                            <constraint id="2213" firstItem="1889" firstAttribute="top" secondItem="1888" secondAttribute="bottom" constant="38"/>
-                            <constraint id="2214" firstItem="1889" firstAttribute="leading" secondItem="1717" secondAttribute="leadingMargin" constant="27"/>
-                            <constraint id="2225" firstItem="1891" firstAttribute="top" secondItem="1879" secondAttribute="bottom" constant="24"/>
-                            <constraint id="2226" firstItem="1891" firstAttribute="leading" secondItem="1717" secondAttribute="leadingMargin" constant="288"/>
-                            <constraint id="2227" firstItem="2159" firstAttribute="top" secondItem="1891" secondAttribute="bottom" constant="41"/>
-                            <constraint id="2228" firstItem="2159" firstAttribute="leading" secondItem="1717" secondAttribute="leadingMargin" constant="288"/>
-                            <constraint id="2231" firstItem="1891" firstAttribute="top" secondItem="1889" secondAttribute="bottom" constant="42"/>
-                            <constraint id="2232" firstItem="1891" firstAttribute="leading" secondItem="1717" secondAttribute="leadingMargin" constant="27"/>
-                            <constraint id="2233" firstItem="2159" firstAttribute="top" secondItem="1891" secondAttribute="bottom" constant="44"/>
-                            <constraint id="2234" firstItem="2159" firstAttribute="leading" secondItem="1717" secondAttribute="leadingMargin" constant="27"/>
+                            <constraint id="2275" firstItem="1888" firstAttribute="top" secondItem="2007" secondAttribute="bottom" constant="32"/>
+                            <constraint id="2276" firstItem="1888" firstAttribute="leading" secondItem="1717" secondAttribute="leadingMargin" constant="27"/>
+                            <constraint id="2279" firstItem="1888" firstAttribute="top" secondItem="1879" secondAttribute="bottom" constant="38"/>
+                            <constraint id="2280" firstItem="1888" firstAttribute="leading" secondItem="1717" secondAttribute="leadingMargin" constant="27"/>
+                            <constraint id="2281" firstItem="2159" firstAttribute="top" secondItem="1888" secondAttribute="bottom" constant="54"/>
+                            <constraint id="2282" firstItem="2159" firstAttribute="leading" secondItem="1717" secondAttribute="leadingMargin" constant="31"/>
+                            <constraint id="2283" firstItem="1891" firstAttribute="top" secondItem="1879" secondAttribute="bottom" constant="38"/>
+                            <constraint id="2284" firstItem="1891" firstAttribute="leading" secondItem="1717" secondAttribute="leadingMargin" constant="280"/>
+                            <constraint id="2285" firstItem="1889" firstAttribute="top" secondItem="1891" secondAttribute="bottom" constant="54"/>
+                            <constraint id="2286" firstItem="1889" firstAttribute="leading" secondItem="1717" secondAttribute="leadingMargin" constant="282"/>
+                            <constraint id="2289" firstItem="2159" firstAttribute="top" secondItem="1888" secondAttribute="bottom" constant="60"/>
+                            <constraint id="2290" firstItem="2159" firstAttribute="leading" secondItem="1717" secondAttribute="leadingMargin" constant="27"/>
+                            <constraint id="2291" firstItem="1891" firstAttribute="top" secondItem="2159" secondAttribute="bottom" constant="56"/>
+                            <constraint id="2292" firstItem="1891" firstAttribute="leading" secondItem="1717" secondAttribute="leadingMargin" constant="27"/>
+                            <constraint id="2293" firstItem="1889" firstAttribute="top" secondItem="1891" secondAttribute="bottom" constant="53"/>
+                            <constraint id="2294" firstItem="1889" firstAttribute="leading" secondItem="1717" secondAttribute="leadingMargin" constant="27"/>
                         </constraints>
                         <variation key="heightClass=compact-widthClass=compact">
                             <mask key="constraints">
@@ -965,18 +965,18 @@
                                 <include reference="1941"/>
                                 <include reference="2189"/>
                                 <include reference="2190"/>
-                                <include reference="2191"/>
-                                <include reference="2192"/>
-                                <include reference="2193"/>
-                                <include reference="2194"/>
                                 <include reference="2199"/>
                                 <include reference="2200"/>
                                 <include reference="2201"/>
                                 <include reference="2202"/>
-                                <include reference="2225"/>
-                                <include reference="2226"/>
-                                <include reference="2227"/>
-                                <include reference="2228"/>
+                                <include reference="2279"/>
+                                <include reference="2280"/>
+                                <include reference="2281"/>
+                                <include reference="2282"/>
+                                <include reference="2283"/>
+                                <include reference="2284"/>
+                                <include reference="2285"/>
+                                <include reference="2286"/>
                             </mask>
                             <color key="backgroundColor" colorSpace="calibratedRGB" red="0.88235294117647056" green="0.88235294117647056" blue="0.88235294117647056" alpha="1"/>
                         </variation>

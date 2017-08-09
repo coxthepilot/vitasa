@@ -1,0 +1,11 @@
+/Users/Billy/Documents/source/vitasa/vitasaios/vitavol/bin/iPhoneSimulator/Debug/vitavol.exe
+/Users/Billy/Documents/source/vitasa/vitasaios/vitavol/bin/iPhoneSimulator/Debug/vitavol.pdb
+/Users/Billy/Documents/source/vitasa/vitasaios/vitavol/obj/iPhoneSimulator/Debug/vitavol.csprojResolveAssemblyReference.cache
+/Users/Billy/Documents/source/vitasa/vitasaios/vitavol/obj/iPhoneSimulator/Debug/vitavol.csproj.CoreCompileInputs.cache
+/Users/Billy/Documents/source/vitasa/vitasaios/vitavol/obj/iPhoneSimulator/Debug/vitavol.exe
+/Users/Billy/Documents/source/vitasa/vitasaios/vitavol/obj/iPhoneSimulator/Debug/vitavol.pdb
+/Users/Billy/Documents/source/vitasa/vitasaios/vitavol/bin/iPhoneSimulator/Debug/Xamarin.Forms.Core.dll
+/Users/Billy/Documents/source/vitasa/vitasaios/vitavol/obj/iPhoneSimulator/Debug/device-builds/iphone9.1-10.3.1/ibtool/_BundleResourceWithLogicalName.items
+/Users/Billy/Documents/source/vitasa/vitasaios/vitavol/obj/iPhoneSimulator/Debug/device-builds/iphone9.1-10.3.1/actool/_PartialAppManifest.items
+/Users/Billy/Documents/source/vitasa/vitasaios/vitavol/obj/iPhoneSimulator/Debug/device-builds/iphone9.1-10.3.1/actool/_BundleResourceWithLogicalName.items
+/Users/Billy/Documents/source/vitasa/vitasaios/vitavol/obj/iPhoneSimulator/Debug/device-builds/iphone9.1-10.3.1/optimized/

@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Json;
 
+using zsquared;
+
 namespace vitasa
 {
     public partial class VC_SitesMap : UIViewController
@@ -63,18 +65,15 @@ namespace vitasa
                 LoadSitesFromWebService(myAppDelegate.PassAroundContainer);
 		}
 
-        private void LoadSitesFromWebService(C_PassAroundContainer passAroundContainer)
+        private void LoadSitesFromWebService(C_Global passAroundContainer)
         {
 			// the list of sites has NOT been loaded or has expired, therefore we need to load it
 			// this is done using a thread since it can take a while (seconds)
 			Task.Run(async () =>
 			{
 					// get the json file of sites and details from the web service
-					JsonValue jv = await C_VitaSite.FetchSitesList();
-
-					// convert to our class object
-					passAroundContainer.Sites = C_VitaSite.ImportSites(jv);
-				    passAroundContainer.Sites.Sort(VC_SitesList.CompareSitesByNameAscending);
+					passAroundContainer.Sites = await C_VitaSite.FetchSitesList();
+				    passAroundContainer.Sites.Sort(C_VitaSite.CompareSitesByNameAscending);
 				    passAroundContainer.TimeStampWhenSitesLoaded = DateTime.Now;
 
 					// tell the control to repaint; we have to invoke on main thread
@@ -87,9 +86,9 @@ namespace vitasa
 			});
 		}
 
-        private void PutPinsOnMap(C_PassAroundContainer passAroundContainer)
+        private void PutPinsOnMap(C_Global passAroundContainer)
         {
-            mapDelegate = new C_MapDelegate(passAroundContainer, this);
+            mapDelegate = new C_MapDelegate(passAroundContainer, this, "SiteMapToDetails");
 			Map_SitesMap.Delegate = mapDelegate;
 
             foreach (C_VitaSite vs in passAroundContainer.Sites)
@@ -99,8 +98,8 @@ namespace vitasa
 				bool conversionOK = true;
 				try
 				{
-					latitude = Convert.ToDouble(vs.SiteLatitude);
-					longitude = Convert.ToDouble(vs.SiteLongitude);
+					latitude = Convert.ToDouble(vs.Latitude);
+					longitude = Convert.ToDouble(vs.Longitude);
 				}
 				catch
 				{
@@ -110,7 +109,7 @@ namespace vitasa
 				if (conversionOK)
 				{
 					MKPointAnnotation pa = new MKPointAnnotation();
-					pa.Title = vs.SiteName;
+					pa.Title = vs.Name;
 					pa.Coordinate = new CLLocationCoordinate2D(latitude, longitude);
 					Map_SitesMap.AddAnnotations(pa);
 				}

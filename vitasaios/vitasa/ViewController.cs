@@ -2,6 +2,8 @@
 using Foundation;
 using Xamarin.Forms;
 
+using zsquared;
+
 using UIKit;
 
 namespace vitasa
@@ -20,7 +22,7 @@ namespace vitasa
 
 			AppDelegate myAppDelegate = (AppDelegate)UIApplication.SharedApplication.Delegate;
 			if (myAppDelegate.PassAroundContainer == null)
-				myAppDelegate.PassAroundContainer = new C_PassAroundContainer();
+				myAppDelegate.PassAroundContainer = new C_Global();
 
 			// use this to put an image in the background
 			I_Background.Image = UIImage.FromBundle("rwalk");

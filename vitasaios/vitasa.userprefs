@@ -1,20 +1,27 @@
-﻿<Properties StartupConfiguration="{6B22298C-4080-4B07-9765-083359A6381A}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="vitasa/C_VitaSite.cs">
+﻿<Properties StartupConfiguration="{6A54BBFE-FE39-4316-BA0B-E74DA172F56E}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="vitavol/VC_CalendarDetails.cs">
     <Files>
-      <File FileName="vitasa/Main.storyboard" />
-      <File FileName="vitasa/C_VitaSite.cs" Line="321" Column="1" />
-      <File FileName="vitasa/VC_SiteDetails.cs" Line="14" Column="10" />
-      <File FileName="vitasa/VC_SitesMap.cs" Line="130" Column="1" />
-      <File FileName="vitasa/VC_SitesList.cs" Line="1" Column="1" />
-      <File FileName="vitasa/VC_ChangeSiteStatus.cs" Line="68" Column="58" />
+      <File FileName="vitavol/Main.storyboard" />
+      <File FileName="vitavol/VC_CalendarDetails.cs" Line="53" Column="97" />
+      <File FileName="SharedModels/C_CalendarTableSource.cs" Line="48" Column="17" />
+      <File FileName="SharedModels/C_YMD.cs" Line="395" Column="61" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.ItemProperties.app1 AndroidDesignerPreferredDevice="Nexus 4" PreferredExecutionTarget="Android.Android_Accelerated_x86" />
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|iPhone" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|iPhoneSimulator" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="/Users/Billy/Documents/source/vitasa/vitasaios/vitasa/C_VitaUser.cs" relfile="vitasa/C_VitaUser.cs" line="42" column="1" />
+      <Breakpoint file="/Users/Billy/Documents/source/vitasa/vitasaios/vitasa/C_VitaUser.cs" relfile="vitasa/C_VitaUser.cs" line="38" column="1" />
+      <Breakpoint file="/Users/Billy/Documents/source/vitasa/vitasaios/vitavol/VC_Map.cs" relfile="vitavol/VC_Map.cs" line="127" column="1" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.ItemProperties.vitasa PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneDeviceTarget.b1ea72bb00e067d0556a4e5a69f9c16becb32492" />
+  <MonoDevelop.Ide.ItemProperties.vitasa PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.380DF332-2DDD-47D7-B6D2-E5E2A64DCD30" />
   <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.vitasaadmin PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.9E1407D0-3EDF-4710-9D48-3397478EA0FD" />
+  <MonoDevelop.Ide.ItemProperties.vitavol PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.380DF332-2DDD-47D7-B6D2-E5E2A64DCD30" />
+  <DisabledProjects>
+    <String>../SharedModels/SharedModels.shproj</String>
+  </DisabledProjects>
 </Properties>

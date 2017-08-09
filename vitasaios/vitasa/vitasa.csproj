@@ -107,14 +107,6 @@
     <ImageAsset Include="Assets.xcassets\Contents.json" />
     <ImageAsset Include="Assets.xcassets\rwalk.imageset\Contents.json" />
     <ImageAsset Include="Assets.xcassets\rwalk.imageset\riverwalk.jpg" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vitasa29.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vitasa58.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vitasa87.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vitasa80.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vitasa120.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vitasa57.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vitasa114.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vitasa180.png" />
     <ImageAsset Include="Assets.xcassets\redstatus.imageset\Contents.json" />
     <ImageAsset Include="Assets.xcassets\redstatus.imageset\red.jpg" />
     <ImageAsset Include="Assets.xcassets\greenstatus.imageset\Contents.json" />
@@ -124,6 +116,14 @@
     <ImageAsset Include="Assets.xcassets\blackstatus.imageset\black.jpg" />
     <ImageAsset Include="Assets.xcassets\blackstatus.imageset\Contents.json" />
     <ImageAsset Include="Assets.xcassets\LaunchImage.launchimage\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vitasa29.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vitasa58.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vitasa87.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vitasa80.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vitasa120.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vitasa57.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vitasa114.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vitasa180.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
@@ -163,13 +163,10 @@
     <Compile Include="VC_GetReady.designer.cs">
       <DependentUpon>VC_GetReady.cs</DependentUpon>
     </Compile>
-    <Compile Include="C_VitaSite.cs" />
     <Compile Include="VC_SiteDetails.cs" />
     <Compile Include="VC_SiteDetails.designer.cs">
       <DependentUpon>VC_SiteDetails.cs</DependentUpon>
     </Compile>
-    <Compile Include="C_PassAroundContainer.cs" />
-    <Compile Include="C_MapDelegate.cs" />
     <Compile Include="VC_ChangeSiteStatus.cs" />
     <Compile Include="VC_ChangeSiteStatus.designer.cs">
       <DependentUpon>VC_ChangeSiteStatus.cs</DependentUpon>
@@ -181,6 +178,7 @@
     </BundleResource>
     <BundleResource Include="Settings.bundle\Root.plist" />
   </ItemGroup>
+  <Import Project="..\SharedModels\SharedModels.projitems" Label="Shared" Condition="Exists('..\SharedModels\SharedModels.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.2.3.4.247\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.2.3.4.247\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />
 </Project>

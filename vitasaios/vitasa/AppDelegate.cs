@@ -1,6 +1,8 @@
 ﻿using Foundation;
 using UIKit;
 
+using zsquared;
+
 namespace vitasa
 {
     // The UIApplicationDelegate for the application. This class is responsible for launching the
@@ -14,7 +16,7 @@ namespace vitasa
         /// The application global variables. Generall the sites list, selected site, etc. Is 
         /// initialized in the view controller.
         /// </summary>
-        public C_PassAroundContainer PassAroundContainer;
+        public C_Global PassAroundContainer;
 
         public override UIWindow Window
         {

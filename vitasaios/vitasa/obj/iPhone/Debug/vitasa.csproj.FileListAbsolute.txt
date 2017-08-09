@@ -65,3 +65,4 @@
 /Users/Billy/Documents/source/vitasa/vitasaios/vitasa/obj/iPhone/Debug/vitasa.csproj.CoreCompileInputs.cache
 /Users/Billy/Documents/source/vitasa/vitasaios/vitasa/obj/iPhone/Debug/vitasa.exe
 /Users/Billy/Documents/source/vitasa/vitasaios/vitasa/obj/iPhone/Debug/vitasa.pdb
+/Users/Billy/Documents/source/vitasa/vitasaios/vitasa/obj/iPhone/Debug/vitasa.csprojResolveAssemblyReference.cache

@@ -1,0 +1,10 @@
+/Users/Billy/Documents/source/vitasa/vitasaios/vitasaadmin/obj/iPhoneSimulator/Debug/vitasaadmin.csprojResolveAssemblyReference.cache
+/Users/Billy/Documents/source/vitasa/vitasaios/vitasaadmin/obj/iPhoneSimulator/Debug/vitasaadmin.csproj.CoreCompileInputs.cache
+/Users/Billy/Documents/source/vitasa/vitasaios/vitasaadmin/bin/iPhoneSimulator/Debug/vitasaadmin.exe
+/Users/Billy/Documents/source/vitasa/vitasaios/vitasaadmin/bin/iPhoneSimulator/Debug/vitasaadmin.pdb
+/Users/Billy/Documents/source/vitasa/vitasaios/vitasaadmin/obj/iPhoneSimulator/Debug/vitasaadmin.exe
+/Users/Billy/Documents/source/vitasa/vitasaios/vitasaadmin/obj/iPhoneSimulator/Debug/vitasaadmin.pdb
+/Users/Billy/Documents/source/vitasa/vitasaios/vitasaadmin/obj/iPhoneSimulator/Debug/device-builds/iphone7.2-10.3.1/ibtool/_BundleResourceWithLogicalName.items
+/Users/Billy/Documents/source/vitasa/vitasaios/vitasaadmin/obj/iPhoneSimulator/Debug/device-builds/iphone7.2-10.3.1/actool/_PartialAppManifest.items
+/Users/Billy/Documents/source/vitasa/vitasaios/vitasaadmin/obj/iPhoneSimulator/Debug/device-builds/iphone7.2-10.3.1/actool/_BundleResourceWithLogicalName.items
+/Users/Billy/Documents/source/vitasa/vitasaios/vitasaadmin/obj/iPhoneSimulator/Debug/device-builds/iphone7.2-10.3.1/optimized/
