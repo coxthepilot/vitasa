@@ -5,7 +5,10 @@ AWSCLI=python3 -m awscli
 ZIP=python3 -m zipfile -c 
 
 test:
-	python3 -m unittest discover
+	ps -ef | grep DynamoDBLocal | grep java | ruby -e "while(s=gets); puts s.split(/ +/)[1]; end" | xargs kill 
+	java -jar /home/chris/bin/DynamoDBLocal/DynamoDBLocal.jar -inMemory &
+	VITA_ENV=test python3 -m unittest discover
+	ps -ef | grep DynamoDBLocal | grep java | ruby -e "while(s=gets); puts s.split(/ +/)[1]; end" | xargs kill
 
 get_site_details.zip: functions/GetSiteDetails.py models/site.py config/configs.py
 	$(ZIP) $@ $^

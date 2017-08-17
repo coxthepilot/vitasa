@@ -12,14 +12,28 @@ class Site:
     slug = ''
     xstreet = '123 Fake Street'
     xcity = 'San Antonio'
+    xstate = 'TX'
     xzip = '78006'
     latitude = '175.0'
     longitude = '175.0'
-    opentime = '9am'
-    closetime = '5pm'
-    days = 'M-F'
+    google_place_id = None
     sitecoordinator = None
-    sitetype = 'Tax Prep'
+    backup_sitecoordinator = None
+
+    VALID_SITE_STATUSES = [ 'Accepting', 'NearLimit', 'NotAccepting', 'Closed' ]
+    sitestatus = 'Closed'
+    default_schedule = {
+        'Monday': {
+            'is_open': True,
+            'open': '09:00',
+            'close': '15:00'
+        },
+        'Tuesday': {
+            'is_open': False,
+            'open': None,
+            'close': None
+        }
+    }
 
     is_open = False
     
@@ -29,18 +43,17 @@ class Site:
         site = Site()
         if 'name' in dictionary: site.name = dictionary['name']
         if 'slug' in dictionary: site.slug = dictionary['slug']
-        if 'xstreet' in dictionary: site.xstreet = dictionary['xstreet']
-        if 'xcity' in dictionary: site.xcity = dictionary['xcity']
-        if 'xzip' in dictionary: site.xzip = dictionary['xzip']
+        if 'street' in dictionary: site.xstreet = dictionary['street']
+        if 'city' in dictionary: site.xcity = dictionary['city']
+        if 'state' in dictionary: site.xstate = dictionary['state']
+        if 'zip' in dictionary: site.xzip = dictionary['zip']
         if 'latitude' in dictionary: site.latitude = dictionary['latitude']
         if 'longitude' in dictionary: site.longitude = dictionary['longitude']
-        if 'opentime' in dictionary: site.opentime = dictionary['opentime']
-        if 'closetime' in dictionary: site.closetime = dictionary['closetime']
-        if 'days' in dictionary: site.days = dictionary['days']
+        if 'google_place_id' in dictionary: site.google_place_id = dictionary['google_place_id']
         if 'sitecoordinator' in dictionary: site.sitecoordinator = dictionary['sitecoordinator'] # TODO: validate that this is a valid coordinator ID
-        if 'is_open' in dictionary: site.is_open = dictionary['is_open']
-        if 'sitetype' in dictionary: site.sitetype = dictionary['sitetype']
-
+        if 'backup_sitecoordinator' in dictionary: site.backup_sitecoordinator = dictionary['backup_sitecoordinator'] # TODO: validate that this is a valid coordinator ID
+        if 'sitestatus' in dictionary: site.is_open = dictionary['sitestatus']
+        
         return site
         
     @staticmethod
@@ -77,7 +90,7 @@ class Site:
         for item in response['Items']:
             tmp = Site.from_dict(item)
             if tmp is not None:
-                sites.append(Site.from_dict(item))
+                sites.append(tmp)
         
         return sites
 
@@ -96,16 +109,15 @@ class Site:
             Item = {
                 'name': self.name,
                 'slug': self.slug,
-                'xstreet': self.xstreet,
-                'xcity': self.xcity,
-                'xzip': self.xzip,
+                'street': self.xstreet,
+                'city': self.xcity,
+                'state': self.xstate,
+                'zip': self.xzip,
                 'latitude': self.latitude,
                 'longitude': self.longitude,
-                'opentime': self.opentime,
-                'closetime': self.closetime,
-                'days': self.days,
                 'sitecoordinator': self.sitecoordinator,
-                'sitetype': self.sitetype,
+                'backup_sitecoordinator': self.backup_sitecoordinator,
+                'sitestatus': self.sitestatus,
 
                 'is_open': self.is_open
             }
@@ -147,10 +159,13 @@ class Site:
             logging.debug("Site Validation failed due to invalid {0}".format(self.slug))
             return False
 
+        if self.sitestatus not in Site.VALID_SITE_STATUSES:
+            return False
+
         # TODO: add more validation checks
         # 1) Is the address valid
         # 2) Is the lat/long valid range
         # 3) Is the lat/long in the vicinity of the address
-        # 4) Is the site coordinator a valid identifier from the users table
+        # 4) Is the site coordinator (and backup) a valid identifier from the users table
         # 5) Does the site coordinator User have the right Role?
         return True

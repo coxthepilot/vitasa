@@ -25,17 +25,17 @@ class AwsConfig:
         },
         "users_table": {
             "table_name": "users-dev",
-            "index_name": "email",
+            "index_name": "id",
             "attribute_definitions": [{
-                "AttributeName": 'email',
+                "AttributeName": 'id',
                 "AttributeType": 'S',
             }],
             "key_schema": [{
-                'AttributeName': 'email',
+                'AttributeName': 'id',
                 'KeyType': 'HASH'
             }],
             'global_secondary_indexes': {
-                "IndexName": "guid",
+                "IndexName": "email",
                 "Projection": {
                     'ProjectionType': 'ALL',
                 },
@@ -82,5 +82,5 @@ class AwsConfig:
 
 if __name__ == '__main__':
     configurator = AwsConfig()
-    configurator.dynamodb['endpoint'] = 'http://localhost:3000'
+    configurator.dynamodb['endpoint'] = 'http://localhost:8000'
     configurator.init_dynamo()

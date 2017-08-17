@@ -17,7 +17,8 @@ if 'VITA_ENV' in os.environ:
 # 
 
 dynamo_endpoints = {
-  'dev': 'http://localhost:8000',
+  # 'dev': 'http://localhost:8000',
+  'dev': None,
   'test': 'http://localhost:8000',
   'prod': None,
 }
@@ -61,3 +62,5 @@ if ENVIRONMENT == 'test':
   # In test mode, log to a file. dev and prod are assumed to be logging to a CloudWatch stream
   # TODO: once Dynamo Local is configured, then dev should also get a local logfile
   logging.basicConfig(filename='vita-api-' + ENVIRONMENT + '.log', level=logging.DEBUG)
+
+DYNAMO_CLIENT = boto3.resource('dynamodb', endpoint_url=DYNAMO_ENDPOINT)
