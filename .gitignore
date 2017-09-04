@@ -14,3 +14,8 @@ __pycache__
 # Logfiles
 *.log
 >>>>>>> origin/master
+# object and binary files
+*vitasaios/vitasa/bin/*
+*vitasaios/vitasa/obj/*
+*vitasaios/vitavol/bin/*
+*vitasaios/vitavol/obj/*
