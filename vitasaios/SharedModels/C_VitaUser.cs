@@ -189,9 +189,10 @@ namespace zsquared
         /// <param name="wi">work item to add</param>
         public async Task<bool> AddIntent(C_WorkItem wi)
         {
-            string submiturl = C_Vita.VitaCoreUrlSSL + "/users/" + id.ToString() + "/signups/";
+            //string submiturl = C_Vita.VitaCoreUrlSSL + "/users/" + id.ToString() + "/signups/";
+			string submiturl = C_Vita.VitaCoreUrlSSL + "/signups/";
 
-            C_Vita.SetupCertificateHandling();
+			C_Vita.SetupCertificateHandling();
 
 			string bodyjson = "{ "
                 + "\"site\" : \"" + wi.SiteSlug + "\""

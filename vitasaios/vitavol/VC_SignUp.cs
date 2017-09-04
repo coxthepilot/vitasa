@@ -114,7 +114,24 @@ namespace vitavol
 
             B_GetDirections.TouchUpInside += (sender, e) => 
             {
-                // todo: connect to the apple maps for directions
+                // the destination is the site the user selected
+                // the source address is unspecified which makes it the user's current location
+                string destinationAddress = Global.SelectedSite.Street + ", "
+                                                  + Global.SelectedSite.City + " "
+                                                  + Global.SelectedSite.State;
+                string url = "http://maps.apple.com/?daddr=" + destinationAddress;  // + "&saddr=<destination>";
+                url = url.Replace(" ", "%20");
+				if (UIApplication.SharedApplication.CanOpenUrl(new NSUrl(url)))
+				{
+					UIApplication.SharedApplication.OpenUrl(new NSUrl(url));
+				}
+				else
+				{
+                    Tools.MessageBox(this,
+                                    "No maps app",
+                                     "Maps app not supported on this device",
+                                     Tools.E_MessageBoxButtons.Ok);
+				}           
             };
 
 			Task.Run(async () =>

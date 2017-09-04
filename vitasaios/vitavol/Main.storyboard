@@ -1401,7 +1401,7 @@
                                     <color key="backgroundColor" colorSpace="calibratedWhite" white="1" alpha="1"/>
                                 </variation>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="26133" translatesAutoresizingMaskIntoConstraints="NO" fixedFrame="YES">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="...date..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="26133" translatesAutoresizingMaskIntoConstraints="NO" fixedFrame="YES">
                                 <rect key="frame" x="16" y="82" width="341" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -3152,6 +3152,10 @@
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Background" width="2400" height="1601"/>
+        <image name="greenstatus.jpg" width="50" height="50"/>
+        <image name="redstatus.jpg" width="50" height="50"/>
+        <image name="yellowstatus.jpg" width="50" height="50"/>
+        <image name="blackstatus.jpg" width="50" height="50"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedScreenMetrics key="destination" type="retina47"/>

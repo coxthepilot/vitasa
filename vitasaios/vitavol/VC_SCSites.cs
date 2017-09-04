@@ -9,6 +9,11 @@ namespace vitavol
 {
     public partial class VC_SCSites : UIViewController
     {
+        // Input
+        //   SCSites
+        //   DetailsCameFrom
+        //   SelectedSite
+
         C_Global Global;
 
         public VC_SCSites (IntPtr handle) : base (handle)
@@ -21,6 +26,10 @@ namespace vitavol
 
 			AppDelegate myAppDelegate = (AppDelegate)UIApplication.SharedApplication.Delegate;
 			Global = myAppDelegate.Global;
+
+            if ((Global.SCSites == null)
+                || (Global.SelectedSite == null))
+                throw new ApplicationException("required parameters not present");
 
 			B_Back.TouchUpInside += (sender, e) => 
             {
@@ -35,7 +44,7 @@ namespace vitavol
 		{
 			readonly C_Global Global;
             public List<C_VitaSite> Sites; // this is public so a remove operations doesn't require a re-fetch of the list
-			const string CellIdentifier = "TableCell_SignUpsTableSourceSCSites";
+			const string CellIdentifier = "TableCell_SitesTableSourceSCSites";
             readonly VC_SCSites OurVC;
 
             public C_SitesTableSourceSCSites(C_Global pac, List<C_VitaSite> sites, VC_SCSites vc)

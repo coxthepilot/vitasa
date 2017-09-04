@@ -10,6 +10,11 @@ namespace vitavol
 {
     public partial class VC_SCSiteOnDate : UIViewController
     {
+        // Input:
+        //    SelectedSite
+        //    SelectedDate
+        //    LoggedInUser
+
 		C_Global Global;
         C_CalendarEntry OurCalendarEntry;
         C_SiteCalendarEntry OurDefaultCalendarEntry;
@@ -27,9 +32,13 @@ namespace vitavol
 			AppDelegate myAppDelegate = (AppDelegate)UIApplication.SharedApplication.Delegate;
 			Global = myAppDelegate.Global;
 
+            if ((Global.SelectedSite == null)
+                || (Global.SelectedDate == null)
+                || (Global.LoggedInUser == null))
+                throw new ApplicationException("required parameters not present");
+
             NewEntry = false;
             // see if an exception already exists
-            // todo: the static method called here should move to a class method!
             OurCalendarEntry = Global.SelectedSite.GetCalendarExceptionForDateForSite(Global.SelectedDate);
 			int dayOfWeek = (int)Global.SelectedDate.DayOfWeek;
 			OurDefaultCalendarEntry = Global.SelectedSite.SiteCalendar[dayOfWeek];

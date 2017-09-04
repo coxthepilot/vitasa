@@ -94,7 +94,8 @@ namespace vitavol
 
 				cell.TextLabel.Text = site.Name;
                 int dayOfWeek = (int)Global.SelectedDate.DayOfWeek;
-				cell.DetailTextLabel.Text = site.SiteCalendar[dayOfWeek].OverrideNumEFilers.ToString() + " needed.";
+                int numEF = site.GetNumEFilersRequiredOnDate(Global.SelectedDate);
+				cell.DetailTextLabel.Text = numEF.ToString() + " needed.";
 
                 switch (site.Status)
                 {
@@ -127,8 +128,5 @@ namespace vitavol
 				ourVC.PerformSegue("Segue_SitesOnDateListToSignUp", ourVC);
 			}
 		}
-
-
-
     }
 }

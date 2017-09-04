@@ -10,6 +10,10 @@ namespace vitavol
 {
     public partial class VC_SCSiteDefaults : UIViewController
 	{
+        // Input
+        //   SelectedSite
+        //   SelectedDayOfWeek
+
 		C_Global Global;
 
         // a flag to tell if the user made changes
@@ -25,6 +29,10 @@ namespace vitavol
 
 			AppDelegate myAppDelegate = (AppDelegate)UIApplication.SharedApplication.Delegate;
 			Global = myAppDelegate.Global;
+
+            if ((Global.SelectedSite == null)
+                || (Global.SelectedDayOfWeek == -1))
+                throw new ApplicationException("required parameters not found");
 
 			B_Back.TouchUpInside += async (sender, e) => 
             {

@@ -12,6 +12,10 @@ namespace vitavol
     {
         // Input:
         //   LoggedInUser
+        //   SelectedDate
+        //   SelectedSite
+        //   CalendarDate ???
+        //   AllSites
         
         C_Global Global;
 

@@ -25,7 +25,10 @@ namespace vitavol
         {
             base.ViewDidLoad();
 
-            if ((Global.SelectedDate == null)
+			AppDelegate myAppDelegate = (AppDelegate)UIApplication.SharedApplication.Delegate;
+			Global = myAppDelegate.Global;
+
+			if ((Global.SelectedDate == null)
                 || (Global.SelectedSite == null)
                 || (Global.VolunteerName == null)
                 || (Global.VolunteerWorkItem == null))
@@ -38,9 +41,6 @@ namespace vitavol
 
 				PerformSegue("Segue_SCVolunteerHoursToSCVolunteers", this);
 			};
-
-			AppDelegate myAppDelegate = (AppDelegate)UIApplication.SharedApplication.Delegate;
-			Global = myAppDelegate.Global;
 
 			B_Back.TouchUpInside += (sender, e) => 
             {

@@ -8,6 +8,11 @@ namespace vitavol
 {
     public partial class VC_SCSite : UIViewController
     {
+        // Input
+        //   DetailsCameFrom
+        //   SelectedSite
+        //   LoggedInUser
+
         C_Global Global;
 
         public VC_SCSite (IntPtr handle) : base (handle)

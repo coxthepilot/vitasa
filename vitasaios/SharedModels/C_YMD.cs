@@ -393,6 +393,7 @@ namespace zsquared
         /// "yyyy" is replaced with 4 digit year, "yy" is replaced with last two digits of year
         /// "mm" is replaced with month number (1..12); "mmm" is replaced with month short name
         /// "dd" is replaced with day number (1..31)
+        /// "dow" is replaced with name for the day of the week
         /// all other characters in the string are unchanged
         /// </summary>
         /// <param name="fmt"></param>
@@ -421,6 +422,13 @@ namespace zsquared
             
             if (res.Contains("dd"))
                 res = res.Replace("dd", Day.ToString("D2"));
+
+            if (res.Contains("dow"))
+            {
+                int dow = (int)DayOfWeek;
+                string down = DayOfWeekNames[dow];
+                res = res.Replace("dow", down);
+            }
 
             return res;
         }

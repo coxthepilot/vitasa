@@ -509,6 +509,7 @@ namespace zsquared
 
 		public async Task<bool> RemoveCalendarException(string token, C_CalendarEntry calEntry)
 		{
+            // todo: not working...
 			bool success = false;
 
             string updateurl = "/sites/" + Slug + "/calendars/" + calEntry.id.ToString();
@@ -523,16 +524,11 @@ namespace zsquared
 				wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
 				wc.Headers.Add(HttpRequestHeader.Accept, "application/json");
 
-                byte[] dataBytes = Encoding.UTF8.GetBytes("{[]}");
+                byte[] dataBytes = Encoding.UTF8.GetBytes("");
 
 				byte[] responseBytes = await wc.UploadDataTaskAsync(updateurl, "DELETE", dataBytes);
 
-				string responseString = Encoding.UTF8.GetString(responseBytes);
-
-				JsonValue res = JsonValue.Parse(responseString);
-				// verify that we got what we wanted
-
-				Console.WriteLine("yipee");
+				//string responseString = Encoding.UTF8.GetString(responseBytes);
 
                 // remove the calendar entry from this instance
                 CalendarOverrides.Remove(calEntry);

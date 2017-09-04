@@ -10,6 +10,12 @@ namespace vitavol
 {
     public partial class VC_SCSiteCalendar : UIViewController
     {
+        // Input
+        //   LoggedInUser
+        //   SelectedDate
+        //   SelectedSite
+        //   SelectedDayOfWeek
+
 		C_YMD CalDate;
 		C_CalGrid calgrid;
 		C_Global Global;
@@ -24,6 +30,12 @@ namespace vitavol
 
 			AppDelegate myAppDelegate = (AppDelegate)UIApplication.SharedApplication.Delegate;
 			Global = myAppDelegate.Global;
+
+            if ((Global.LoggedInUser == null)
+                || (Global.SelectedDate == null)
+                || (Global.SelectedSite == null)
+                || (Global.SelectedDayOfWeek == -1))
+                throw new ApplicationException("required parameters not found");
 
 			B_Back.TouchUpInside += (sender, e) => 
             {

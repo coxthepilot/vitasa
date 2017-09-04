@@ -13,7 +13,7 @@ namespace vitavol
     {
         // --- used as input to the controller -----
         // SelectedDate
-        // OpenSitesThatNeedHelp
+        // OpenSitesThatNeedHelp (from the list view)
 
 		C_Global Global;
 
@@ -25,12 +25,12 @@ namespace vitavol
         {
             base.ViewDidLoad();
 
-            if ((Global.SelectedDate == null)
-                || (Global.OpenSitesThatNeedHelp == null))
-                throw new ApplicationException("expected input is incomplete");
-
 			AppDelegate myAppDelegate = (AppDelegate)UIApplication.SharedApplication.Delegate;
 			Global = myAppDelegate.Global;
+
+			if ((Global.SelectedDate == null)
+                || (Global.OpenSitesThatNeedHelp == null))
+                throw new ApplicationException("expected input is incomplete");
 
 			L_Date.Text = "Date: " + Global.SelectedDate.ToString("mmm dd, yyyy");
 

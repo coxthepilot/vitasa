@@ -25,6 +25,9 @@ namespace vitavol
             AppDelegate myAppDelegate = (AppDelegate)UIApplication.SharedApplication.Delegate;
             C_Global Global = myAppDelegate.Global;
 
+            if (Global.SelectedSite == null)
+                throw new ApplicationException("required parameters not present");
+
             // ----- init variables -----
 
             Global.SelectedDate = C_YMD.Now;
@@ -74,43 +77,33 @@ namespace vitavol
 
             // ----- initialize the view -----
 
-            //Task.Run(async () => 
-            //{
-				// find out how many Volunteers signed up to work on this date
-				WorkItemsOnSiteOnDate = Global.SelectedSite.GetWorkItemsOnDate(Global.SelectedDate);
+			// find out how many Volunteers signed up to work on this date
+			WorkItemsOnSiteOnDate = Global.SelectedSite.GetWorkItemsOnDate(Global.SelectedDate);
 
-				// todo: need a way to get user names with only SiteCoordinator role
-				// for now, just pass an empty Dictionary...
-				Dictionary<int, string> UserIdToUser = new Dictionary<int, string>();
+			// todo: need a way to get user names with only SiteCoordinator role
+			// for now, just pass an empty Dictionary...
+			Dictionary<int, string> UserIdToUser = new Dictionary<int, string>();
 
-				// find out how many are required
-				int dayOfWeek = (int)Global.SelectedDate.DayOfWeek;
-				int requiredVolunteers = Global.SelectedSite.SiteCalendar[dayOfWeek].NumEFilers;
-				C_CalendarEntry SiteCalendarEntry = Global.SelectedSite.GetCalendarExceptionForDateForSite(Global.SelectedDate);
-				if (SiteCalendarEntry != null)
-					requiredVolunteers = SiteCalendarEntry.NumEFilers;
+			// find out how many are required
+			int dayOfWeek = (int)Global.SelectedDate.DayOfWeek;
+			int requiredVolunteers = Global.SelectedSite.SiteCalendar[dayOfWeek].NumEFilers;
+			C_CalendarEntry SiteCalendarEntry = Global.SelectedSite.GetCalendarExceptionForDateForSite(Global.SelectedDate);
+			if (SiteCalendarEntry != null)
+				requiredVolunteers = SiteCalendarEntry.NumEFilers;
 
-				//UIApplication.SharedApplication.InvokeOnMainThread(
-				//new Action(() =>
-				//{
-					// set up the view elements
-					L_SiteName.Text = Global.SelectedSite.Name;
-					L_Volunteers.Text = WorkItemsOnSiteOnDate.Count.ToString() + " of " + requiredVolunteers.ToString();
+			// set up the view elements
+			L_SiteName.Text = Global.SelectedSite.Name;
+			L_Volunteers.Text = WorkItemsOnSiteOnDate.Count.ToString() + " of " + requiredVolunteers.ToString();
 
-					TV_Volunteers.Source = new C_WorkItemsTableSourceSCVolunteers(Global, WorkItemsOnSiteOnDate, this, UserIdToUser);
-					TV_Volunteers.ReloadData();
-				//}));
-			//});
+			TV_Volunteers.Source = new C_WorkItemsTableSourceSCVolunteers(Global, WorkItemsOnSiteOnDate, this, UserIdToUser);
+			TV_Volunteers.ReloadData();
         }
 
         private string FriendlyDate(NSDate nsd)
         {
 			DateTime dt = Tools.NSDateToDateTime(nsd);
 			C_YMD ymd = new C_YMD(dt);
-            int dayOfWeek = (int)ymd.DayOfWeek;
-            string dayOfWeekName = C_YMD.DayOfWeekNames[dayOfWeek];
-            string res = dayOfWeekName + " " + ymd.ToString("mmm dd, yyyy");
-            return res;
+            return ymd.ToString("dow mmm dd, yyyy");
 		}
 
 		public class C_WorkItemsTableSourceSCVolunteers : UITableViewSource

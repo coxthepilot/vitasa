@@ -103,10 +103,22 @@
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vitavol57.png" />
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vitavol114.png" />
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vitavol180.png" />
+    <ImageAsset Include="Assets.xcassets\greenstatus.jpg.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\greenstatus.jpg.imageset\green.jpg" />
+    <ImageAsset Include="Assets.xcassets\redstatus.jpg.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\redstatus.jpg.imageset\red.jpg" />
+    <ImageAsset Include="Assets.xcassets\yellowstatus.jpg.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\yellowstatus.jpg.imageset\yellow.jpg" />
+    <ImageAsset Include="Assets.xcassets\blackstatus.jpg.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\blackstatus.jpg.imageset\black.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
     <Folder Include="Assets.xcassets\Background.imageset\" />
+    <Folder Include="Assets.xcassets\greenstatus.jpg.imageset\" />
+    <Folder Include="Assets.xcassets\redstatus.jpg.imageset\" />
+    <Folder Include="Assets.xcassets\yellowstatus.jpg.imageset\" />
+    <Folder Include="Assets.xcassets\blackstatus.jpg.imageset\" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="LaunchScreen.storyboard" />
