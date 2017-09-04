@@ -15,7 +15,15 @@ namespace vitavol
     {
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UIButton B_About { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UIButton B_Login { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UIButton B_Register { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
@@ -31,9 +39,19 @@ namespace vitavol
 
         void ReleaseDesignerOutlets ()
         {
+            if (B_About != null) {
+                B_About.Dispose ();
+                B_About = null;
+            }
+
             if (B_Login != null) {
                 B_Login.Dispose ();
                 B_Login = null;
+            }
+
+            if (B_Register != null) {
+                B_Register.Dispose ();
+                B_Register = null;
             }
 
             if (I_BackgroundImage != null) {

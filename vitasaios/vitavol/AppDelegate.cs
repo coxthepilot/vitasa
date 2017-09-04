@@ -10,7 +10,15 @@ namespace vitavol
     [Register("AppDelegate")]
     public class AppDelegate : UIApplicationDelegate
     {
-		public C_Global PassAroundContainer;
+        /// <summary>
+        /// These are values that get pass from ViewController to ViewController.
+        /// </summary>
+		public C_Global Global;
+
+        ///// <summary>
+        ///// A DB for use in testing. Only active in Debug.
+        ///// </summary>
+        //public C_TestingDB TestingDB;
 
         public override UIWindow Window
         {

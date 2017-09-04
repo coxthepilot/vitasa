@@ -12,13 +12,14 @@ namespace zsquared
         C_Global Global;
         UIViewController ourVC = null;
         string TouchSegueForSelection;
+        List<C_Suggestion> Suggestions;
 
 		const string CellIdentifier = "TableCell";
 
-        public C_SuggestionsTableSource(C_Global pac, UIViewController vc, string touchSegueForSelection)
+        public C_SuggestionsTableSource(C_Global pac, UIViewController vc, string touchSegueForSelection, List<C_Suggestion> suggestions)
 		{
             Global = pac;
-
+            Suggestions = suggestions;
 			ourVC = vc;
 
             TouchSegueForSelection = touchSegueForSelection;
@@ -27,8 +28,8 @@ namespace zsquared
 		public override nint RowsInSection(UITableView tableview, nint section)
 		{
 			int count = 0;
-            if (Global.Suggestions != null)
-                count = Global.Suggestions.Count;
+            if (Suggestions != null)
+                count = Suggestions.Count;
 			return count;
 		}
 
@@ -39,17 +40,17 @@ namespace zsquared
 			if (cell == null)
 				cell = new UITableViewCell(UITableViewCellStyle.Subtitle, CellIdentifier);
 
-            C_Suggestion suggestion = Global.Suggestions[indexPath.Row];
+            C_Suggestion suggestion = Suggestions[indexPath.Row];
 
-            cell.TextLabel.Text = suggestion.Title;
-            cell.DetailTextLabel.Text = suggestion.Date.ToString() + ":" + suggestion.Text;
+            cell.TextLabel.Text = suggestion.Subject;
+            cell.DetailTextLabel.Text = suggestion.Date.ToString() + ":" + suggestion.Body;
 
 			return cell;
 		}
 
 		public override void RowSelected(UITableView tableView, NSIndexPath indexPath)
 		{
-            Global.SelectedSuggestion = Global.Suggestions[indexPath.Row];
+            Global.SelectedSuggestion = Suggestions[indexPath.Row];
 
             ourVC.PerformSegue(TouchSegueForSelection, ourVC);
 		}

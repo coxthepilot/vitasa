@@ -11,7 +11,7 @@ using zsquared;
 
 namespace zsquared
 {
-	public class C_MapDelegate : MKMapViewDelegate
+	public class C_MapDelegateNotUsed : MKMapViewDelegate
 	{
 		C_Global PassAroundContainer;
 
@@ -19,13 +19,15 @@ namespace zsquared
 
 		UIViewController ourVC = null;
 
+        List<C_VitaSite> Sites;
+
         string segueOnMapTouch;
 
-        public C_MapDelegate(C_Global pac, UIViewController cv, string segue)
+        public C_MapDelegateNotUsed(C_Global pac, UIViewController cv, string segue, List<C_VitaSite> sites)
 		{
 			PassAroundContainer = pac;
 			ourVC = cv;
-
+            Sites = sites;
             segueOnMapTouch = segue;
 		}
 
@@ -47,7 +49,7 @@ namespace zsquared
 				pinView = new MKPinAnnotationView(annotation, pId);
 
 			C_VitaSite ourSite = null;
-			foreach (C_VitaSite s in PassAroundContainer.Sites)
+			foreach (C_VitaSite s in Sites)
 			{
 				if (s.Name == thisWhich)
 				{

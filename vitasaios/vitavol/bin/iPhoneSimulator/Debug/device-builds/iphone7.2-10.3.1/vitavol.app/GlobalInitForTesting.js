@@ -11,14 +11,42 @@
             "zip" : "78230",
             "latitude" : "29.5324397",
             "longitude" : "-98.590141",
-            "hours" : "mwf",
-            "sitecoordinator" : "CB coordinator",
-            "hours" : "MWF, 9:00 to 3:00",
-            "sitebackupcoordinator" : "CB Backup coordinator",
-            "sitetype" : "permanent",
-            "sitestatus" : "closed",
+            "sitecoordinator" : 5,
+            "sitebackupcoordinator" : 3,
             "google_place_id" : "ChIJETMeHs5gXIYRRDPQxNwy4FU",
-            "managingregion" : "San Antonio"
+            "sitestatus" : "closed",
+            "managingregion" : "San Antonio",
+            "sitecalendar" :
+            [
+                {
+                    "opentime" : "08:30", "closetime" : "17:00",
+                    "isclosed" : "true",  "numefilers" : "0"
+                },
+                {
+                    "opentime" : "08:30", "closetime" : "17:00",
+                    "isclosed" : "false", "numefilers" : "4"
+                },
+                {
+                    "opentime" : "08:30", "closetime" : "17:00",
+                    "isclosed" : "true",  "numefilers" : "0"
+                },
+                {
+                    "opentime" : "08:30", "closetime" : "17:00",
+                    "isclosed" : "false", "numefilers" : "4"
+                },
+                {
+                    "opentime" : "08:30", "closetime" : "17:00",
+                    "isclosed" : "true",  "numefilers" : "0"
+                },
+                {
+                    "opentime" : "08:30", "closetime" : "17:00",
+                    "isclosed" : "false", "numefilers" : "4"
+                },
+                {
+                    "opentime" : "08:30", "closetime" : "17:00",
+                    "isclosed" : "true",  "numefilers" : "0"
+                }
+            ]
         },
         {
             "id" : "1",
@@ -30,64 +58,109 @@
             "zip" : "78233",
             "latitude" : "29.545058",
             "longitude" : "-98.4036457",
-            "hours" : "mwf",
-            "sitecoordinator" : "TOL coordinator",
-            "hours" : "MTuTh 12:00 to 3:00",
-            "sitebackupcoordinator" : "TOL backup coordinator",
-            "sitetype" : "permanent",
+            "sitecoordinator" : 5,
+            "sitebackupcoordinator" : 2,
             "sitestatus" : "accepting",
             "google_place_id" : "ChIJh8mGDl6LXIYRj-mzXGDC-So",
-            "managingregion" : "San Antonio"
+            "managingregion" : "San Antonio",
+            "sitecalendar" :
+            [
+                {
+                    "opentime" : "08:30", "closetime" : "17:00",
+                    "isclosed" : "true",  "numefilers" : "0"
+                },
+                {
+                    "opentime" : "08:30", "closetime" : "17:00",
+                    "isclosed" : "false", "numefilers" : "4"
+                },
+                {
+                    "opentime" : "08:30", "closetime" : "17:00",
+                    "isclosed" : "true",  "numefilers" : "0"
+                },
+                {
+                    "opentime" : "08:30", "closetime" : "17:00",
+                    "isclosed" : "false", "numefilers" : "4"
+                },
+                {
+                    "opentime" : "08:30", "closetime" : "17:00",
+                    "isclosed" : "true",  "numefilers" : "0"
+                },
+                {
+                    "opentime" : "08:30", "closetime" : "17:00",
+                    "isclosed" : "false", "numefilers" : "4"
+                },
+                {
+                    "opentime" : "08:30", "closetime" : "17:00",
+                    "isclosed" : "true",  "numefilers" : "0"
+                }
+            ]
         }
     ],
     "Users" :
     [
         {
             "id" : "0",
+            "name" : "Fred Thompson",
             "email" : "fred@gmail.com",
             "managingregion" : "San Antonio",
             "permissions" :
             [
                 "SiteCoordinator",
-                "User"
+                "Volunteer"
             ]
         },
         {
             "id" : "1",
+            "name" : "Judy Mills",
             "email" : "judy@gmail.com",
             "managingregion" : "San Antonio",
             "permissions" :
             [
-                "User"
+                "Volunteer"
             ]
         },
         {
             "id" : "2",
+            "name" : "Tom Landry",
             "email" : "tom@gmail.com",
             "managingregion" : "San Antonio",
             "permissions" :
             [
                 "SiteCoordinator",
-                "User",
+                "Volunteer",
                 "Admin"
             ]
         },
         {
             "id" : "3",
+            "name" : "Bob Fordonuts",
             "email" : "bob@gmail.com",
             "managingregion" : "San Antonio",
             "permissions" :
             [
-                "User"
+                "Volunteer"
             ]
         },
         {
             "id" : "4",
+            "name" : "Billy Cox",
             "email" : "billy@gmail.com",
+            "password" : "password",
             "managingregion" : "San Antonio",
             "permissions" :
             [
-                "User"
+                "Volunteer"
+            ]
+        },
+        {
+            "id" : "5",
+            "name" : "Billy Cox",
+            "email" : "billy.cox@zsquared.net",
+            "password" : "565794A",
+            "managingregion" : "San Antonio",
+            "permissions" :
+            [
+                "SiteCoordinator"
             ]
         }
     ],
@@ -99,11 +172,8 @@
             "date" : "2017-8-10",
             "opentime" : "10:00",
             "closetime" : "17:00",
-            "efilerstatus" : "AdditionalHelpNeeded",
-            "efilersneeded" : "4",
-            "efilerintents" :
-            [
-            ]
+            "isclosed" : "false",
+            "numefilers" : "5"
         },
         {
             "id" : "1",
@@ -111,12 +181,8 @@
             "date" : "2017-8-11",
             "opentime" : "10:00",
             "closetime" : "17:00",
-            "efilerstatus" : "AdditionalHelpNeeded",
-            "efilersneeded" : "4",
-            "efilerintents" :
-            [
-                "tom@gmail.com"
-            ]
+            "isclosed" : "false",
+            "numefilers" : "6"
         },
         {
             "id" : "2",
@@ -124,13 +190,8 @@
             "date" : "2017-8-12",
             "opentime" : "10:00",
             "closetime" : "17:00",
-            "efilerstatus" : "AdditionalHelpNeeded",
-            "efilersneeded" : "4",
-            "efilerintents" :
-            [
-                "bob@gmail.com",
-                "tom@gmail.com"
-            ]
+            "isclosed" : "false",
+            "numefilers" : "6"
         },
         {
             "id" : "10",
@@ -138,13 +199,8 @@
             "date" : "2017-8-10",
             "opentime" : "11:00",
             "closetime" : "15:00",
-            "efilerstatus" : "AdditionalHelpNeeded",
-            "efilersneeded" : "4",
-            "efilerintents" :
-            [
-                "bob@gmail.com",
-                "fred@gmail.com"
-            ]
+            "isclosed" : "false",
+            "numefilers" : "6"
         },
         {
             "id" : "11",
@@ -152,12 +208,8 @@
             "date" : "2017-8-11",
             "opentime" : "11:00",
             "closetime" : "15:00",
-            "efilerstatus" : "AdditionalHelpNeeded",
-            "efilersneeded" : "3",
-            "efilerintents" :
-            [
-                "fred@gmail.com"
-            ]
+            "isclosed" : "false",
+            "numefilers" : "6"
         },
         {
             "id" : "12",
@@ -165,33 +217,79 @@
             "date" : "2017-8-12",
             "opentime" : "11:00",
             "closetime" : "15:00",
-            "efilerstatus" : "AdditionalHelpNeeded",
-            "efilersneeded" : "3",
-            "efilerintents" :
-            [
-                "fred@gmail.com"
-            ]
+            "isclosed" : "false",
+            "numefilers" : "6"
         }
     ],
     "Suggestions" :
     [
         {
             "id" : "0",
-            "submitter" : "fred@gmail.com",
-            "title" : "more fruit",
-            "date" : "2017-08-10",
+            "from" : "billy@gmail.com",
+            "subject" : "more fruit",
             "managingregion" : "San Antonio",
-            "text" : "we need more fresh fruit in the afternoon",
+            "body" : "we need more fresh fruit in the afternoon",
+            "date" : "2017-08-10",
             "status" : "Submitted"
         },
         {
             "id" : "1",
-            "submitter" : "fred@gmail.com",
-            "title" : "water fountains",
-            "date" : "2017-08-11",
+            "from" : "billy@gmail.com",
+            "subject" : "water fountains",
             "managingregion" : "San Antonio",
-            "text" : "Where are the water fountains?",
+            "body" : "Where are the water fountains?",
+            "date" : "2017-08-11",
             "status" : "Closed"
+        }
+    ],
+    "SignUps" :
+    [
+        {
+            "id" : "0",
+            "userid" : "2",
+            "siteslug" : "thousand-oaks-library",
+            "date" : "2017-09-04",
+            "hours" : "6.0",
+            "approved" : "false"
+        },
+        {
+            "id" : "1",
+            "userid" : "3",
+            "siteslug" : "thousand-oaks-library",
+            "date" : "2017-09-06",
+            "hours" : "6.0",
+            "approved" : "false"
+        },
+        {
+            "id" : "2",
+            "userid" : "4",
+            "siteslug" : "cody-black",
+            "date" : "2017-09-04",
+            "hours" : "6.0",
+            "approved" : "false"
+        },
+        {
+            "id" : "3",
+            "userid" : "4",
+            "siteslug" : "cody-black",
+            "date" : "2017-09-06",
+            "hours" : "6.0",
+            "approved" : "false"
+        }
+    ],
+    "Notifications" :
+    [
+        {
+            "id" : "0",
+            "from" : "Alej",
+            "datetime" : "2017-09-04 08:30:00",
+            "body" : "notice: beer at my place tonight"
+        },
+        {
+            "id" : "1",
+            "from" : "Jess",
+            "datetime" : "2017-09-05 10:00:00",
+            "body" : "notice: really short staff everywhere"
         }
     ]
 }

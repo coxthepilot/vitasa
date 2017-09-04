@@ -19,7 +19,7 @@ namespace vitavol
             base.ViewDidLoad();
 
 			AppDelegate myAppDelegate = (AppDelegate)UIApplication.SharedApplication.Delegate;
-			C_Global passAroundContainer = myAppDelegate.PassAroundContainer;
+			C_Global passAroundContainer = myAppDelegate.Global;
 
             // ----------- setup button responders -----
 
@@ -30,7 +30,6 @@ namespace vitavol
 
             B_MakeSuggestion.TouchUpInside += (sender, e) => 
             {
-                passAroundContainer.DetailsCameFrom = E_CameFrom.List;
                 PerformSegue("Segue_ListToSuggestions", this);
             };
 

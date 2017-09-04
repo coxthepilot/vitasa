@@ -16,8 +16,6 @@
 /Users/Billy/Projects/vitasaios/vitasa/obj/iPhoneSimulator/Debug/device-builds/iphone7.2-10.3.1/actool/_PartialAppManifest.items
 /Users/Billy/Projects/vitasaios/vitasa/obj/iPhoneSimulator/Debug/device-builds/iphone7.2-10.3.1/actool/_BundleResourceWithLogicalName.items
 /Users/Billy/Projects/vitasaios/vitasa/obj/iPhoneSimulator/Debug/device-builds/iphone7.2-10.3.1/optimized/
-/Users/Billy/Documents/source/vitasa/vitasaios/vitasa/obj/iPhoneSimulator/Debug/vitasa.csprojResolveAssemblyReference.cache
-/Users/Billy/Documents/source/vitasa/vitasaios/vitasa/obj/iPhoneSimulator/Debug/vitasa.csproj.CoreCompileInputs.cache
 /Users/Billy/Documents/source/vitasa/vitasaios/vitasa/bin/iPhoneSimulator/Debug/vitasa.exe
 /Users/Billy/Documents/source/vitasa/vitasaios/vitasa/bin/iPhoneSimulator/Debug/vitasa.pdb
 /Users/Billy/Documents/source/vitasa/vitasaios/vitasa/bin/iPhoneSimulator/Debug/ModernHttpClient.dll
@@ -68,10 +66,12 @@
 /Users/Billy/Documents/source/vitasa/vitasaios/vitasa/bin/iPhoneSimulator/Debug/zh-HK/Xamarin.Forms.Platform.iOS.resources.dll
 /Users/Billy/Documents/source/vitasa/vitasaios/vitasa/bin/iPhoneSimulator/Debug/zh-Hans/Xamarin.Forms.Platform.iOS.resources.dll
 /Users/Billy/Documents/source/vitasa/vitasaios/vitasa/bin/iPhoneSimulator/Debug/zh-Hant/Xamarin.Forms.Platform.iOS.resources.dll
-/Users/Billy/Documents/source/vitasa/vitasaios/vitasa/obj/iPhoneSimulator/Debug/vitasa.exe
-/Users/Billy/Documents/source/vitasa/vitasaios/vitasa/obj/iPhoneSimulator/Debug/vitasa.pdb
 /Users/Billy/Documents/source/vitasa/vitasaios/vitasa/obj/iPhoneSimulator/Debug/device-builds/iphone7.2-10.3.1/ibtool/_BundleResourceWithLogicalName.items
 /Users/Billy/Documents/source/vitasa/vitasaios/vitasa/obj/iPhoneSimulator/Debug/device-builds/iphone7.2-10.3.1/actool/_PartialAppManifest.items
 /Users/Billy/Documents/source/vitasa/vitasaios/vitasa/obj/iPhoneSimulator/Debug/device-builds/iphone7.2-10.3.1/actool/_BundleResourceWithLogicalName.items
 /Users/Billy/Documents/source/vitasa/vitasaios/vitasa/obj/iPhoneSimulator/Debug/device-builds/iphone7.2-10.3.1/optimized/Settings.bundle/Root.plist
 /Users/Billy/Documents/source/vitasa/vitasaios/vitasa/obj/iPhoneSimulator/Debug/device-builds/iphone7.2-10.3.1/optimized/
+/Users/Billy/Documents/source/vitasa/vitasaios/vitasa/obj/iPhoneSimulator/Debug/vitasa.csprojResolveAssemblyReference.cache
+/Users/Billy/Documents/source/vitasa/vitasaios/vitasa/obj/iPhoneSimulator/Debug/vitasa.csproj.CoreCompileInputs.cache
+/Users/Billy/Documents/source/vitasa/vitasaios/vitasa/obj/iPhoneSimulator/Debug/vitasa.exe
+/Users/Billy/Documents/source/vitasa/vitasaios/vitasa/obj/iPhoneSimulator/Debug/vitasa.pdb

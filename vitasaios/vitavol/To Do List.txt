@@ -1,0 +1,29 @@
+﻿All
+    Notifications (poll or APN)
+    Reminders on SignUp (local Notifcations)
+    Entitlements
+    SignUp - Get Directions
+    Put size handles on all UI elements (!!! sigh !!!)
+    Use device authentication
+    Default hours for a user signup should be the open hours for a site
+    Refresh LoggedInUser data after some time interval?
+    If CRUD WorkIntent: change in LoggedInUser AND Site
+    Protocol version
+
+    How to hande lost password???
+
+VC_Suggestion
+    Add new suggestion, gets 422; unprocessable; probably schema issue
+    Use a Multiline text box for the suggestion body
+    Save Changes on Back
+    On Delete, confirm the delete with User
+
+For Sheila/Alejandra
+    If SC, but no sites, treat a volunteer? Or SC with no sites?
+
+For Chris
+    DELETE on /sites/slug/calendars/{id} gets error 400, bad request; don't send with a payload
+    POST on /suggestions (create new suggestion) gets 422; stuck in VC_Suggestion on Save; fields null
+       on return; >>> upload the code to github
+    Need UserId on WorkIntent; userid is there, look at response
+    Need get user name (minimum) without Admin (or, eash SC gets admin?)

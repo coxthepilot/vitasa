@@ -7,28 +7,33 @@ using UIKit;
 
 namespace zsquared
 {
+    public enum E_SitesCellType { NameAndDate, NameAndNeeded }
 	public class C_SitesTableSource : UITableViewSource
 	{
-        C_Global PassAroundContainer;
+        C_Global Global;
         UIViewController ourVC = null;
         string TouchSegue;
+        List<C_VitaSite> Sites;
+        E_SitesCellType CellType;
+        C_YMD Date;
 
 		const string CellIdentifier = "TableCell";
 
-        public C_SitesTableSource(C_Global pac, UIViewController vc, string touchSegue)
+        public C_SitesTableSource(C_Global pac, UIViewController vc, string touchSegue, List<C_VitaSite> sites, E_SitesCellType cellType, C_YMD date)
 		{
-            PassAroundContainer = pac;
-
+            Global = pac;
 			ourVC = vc;
-
+            Sites = sites;
             TouchSegue = touchSegue;
+            CellType = cellType;
+            Date = date;
 		}
 
 		public override nint RowsInSection(UITableView tableview, nint section)
 		{
 			int count = 0;
-			if (PassAroundContainer.Sites != null)
-				count = PassAroundContainer.Sites.Count;
+			if (Sites != null)
+				count = Sites.Count;
 			return count;
 		}
 
@@ -39,10 +44,19 @@ namespace zsquared
 			if (cell == null)
 				cell = new UITableViewCell(UITableViewCellStyle.Subtitle, CellIdentifier);
 
-			C_VitaSite site = PassAroundContainer.Sites[indexPath.Row];
+			C_VitaSite site = Sites[indexPath.Row];
 
-			cell.TextLabel.Text = site.Name;
-			cell.DetailTextLabel.Text = site.Street + ", " + site.City + ", " + site.State + " " + site.Zip;
+            if (CellType == E_SitesCellType.NameAndDate)
+            {
+                cell.TextLabel.Text = site.Name;
+                cell.DetailTextLabel.Text = site.Street + ", " + site.City + ", " + site.State + " " + site.Zip;
+            }
+            else if (CellType == E_SitesCellType.NameAndNeeded)
+            {
+				cell.TextLabel.Text = site.Name;
+                int dayOfWeek = (int)Date.DayOfWeek;
+                cell.DetailTextLabel.Text = site.SiteCalendar[dayOfWeek].OverrideNumEFilers.ToString() + " needed.";
+			}
 
             if (site.Status == E_SiteStatus.Accepting)
 				cell.ImageView.Image = UIImage.FromBundle("greenstatus.jpg");
@@ -58,10 +72,8 @@ namespace zsquared
 
 		public override void RowSelected(UITableView tableView, NSIndexPath indexPath)
 		{
-            //base.RowSelected(tableView, indexPath);
-
-            PassAroundContainer.DetailsCameFrom = E_CameFrom.List;
-			PassAroundContainer.SelectedSite = PassAroundContainer.Sites[indexPath.Row];
+            Global.DetailsCameFrom = E_CameFrom.List;
+			Global.SelectedSite = Sites[indexPath.Row];
 
             ourVC.PerformSegue(TouchSegue, ourVC);
 		}

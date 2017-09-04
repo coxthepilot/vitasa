@@ -1,34 +1,105 @@
 ﻿using System;
 using System.Json;
+using System.IO;
+using System.Net;
+using System.Threading.Tasks;
 using System.Collections.Generic;
+using System.Text;
+using System.Net.Http;
+using UIKit;
+using System.Linq;
 
 namespace zsquared
 {
-    public enum E_SuggestionStatus { Submitted, ActionPending, Closed, Enhancement, Unknown }
-    
+    public enum E_SuggestionStatus { Open, Closed, WontFix, InProgress, Unknown }
+
     public class C_Suggestion
     {
         public int id;
-        public string Submitter;
-        public string ManagingRegion;
-        public string Title;
+        public int UserId;
+        public string Subject;
         public string Text;
         public C_YMD Date;
         public E_SuggestionStatus Status;
+        public bool FromPublic;
+        public bool dirty; // not save or restored
 
         public static readonly string N_ID = "id";
-        public static readonly string N_Submitter = "submitter";
-        public static readonly string N_Title = "title";
-        public static readonly string N_ManagingRegion = "managingregion";
-        public static readonly string N_Text = "text";
-        public static readonly string N_Date = "date";
+        public static readonly string N_UserId = "user_id";
+        public static readonly string N_Subject = "subject";
+        public static readonly string N_Text = "details";
+        public static readonly string N_Date = "created_at";
         public static readonly string N_Status = "status";
+        public static readonly string N_FromPublic = "from_public";
 
         public C_Suggestion()
         {
+            id = -1; // make sure we know that this a new item, never from the DB (yet)
+            Status = E_SuggestionStatus.Open;
         }
 
-        public static List<C_Suggestion> ImportSuggestion(JsonValue json)
+        public C_Suggestion(JsonValue j)
+        {
+            if (!(j is JsonObject))
+                throw new ApplicationException("we can only work with an object");
+
+            if (j.ContainsKey(N_ID))
+                id = j[N_ID];
+
+            if (j.ContainsKey(N_UserId))
+                UserId = j[N_UserId];
+
+            if (j.ContainsKey(N_Subject))
+                Subject = j[N_Subject];
+
+            if (j.ContainsKey(N_Text))
+                Text = j[N_Text];
+
+            if (j.ContainsKey(N_Date))
+            {
+                string sd = j[N_Date];
+                DateTime dt = Convert.ToDateTime(sd);
+                DateTime dtctx = new DateTime(dt.Ticks, DateTimeKind.Local);
+                Date = new C_YMD(dtctx);
+            }
+
+            try
+            {
+                if (j.ContainsKey(N_FromPublic))
+                {
+                    var jv = j[N_FromPublic];
+                    if (jv != null)
+                    {
+                        if (jv.JsonType == JsonType.Boolean)
+                            FromPublic = jv;
+                        else
+                        {
+                            try
+                            {
+								string bs = j[N_FromPublic];
+								if (bs != null)
+									FromPublic = bs == "true";
+							}
+                            catch {}
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+
+			if (j.ContainsKey(N_Status))
+            {
+                string ssv = j[N_Status];
+                Status = Tools.StringToEnum<E_SuggestionStatus>(ssv);
+            }
+
+            dirty = false;
+        }
+
+		public static List<C_Suggestion> ImportSuggestion(JsonValue json)
 		{
 			if (!(json is JsonArray))
 				throw new ApplicationException("the sites list must be an array");
@@ -43,45 +114,5 @@ namespace zsquared
 
 			return res;
 		}
-
-
-		public C_Suggestion(JsonValue j)
-		{
-			if (!(j is JsonObject))
-				throw new ApplicationException("we can only work with an object");
-
-			if (j.ContainsKey(N_ID))
-				id = j[N_ID];
-
-			if (j.ContainsKey(N_Submitter))
-                Submitter = j[N_Submitter];
-
-            if (j.ContainsKey(N_Title))
-                Title = j[N_Title];
-
-			if (j.ContainsKey(N_ManagingRegion))
-                ManagingRegion = j[N_ManagingRegion];
-
-			if (j.ContainsKey(N_Text))
-                Text = j[N_Text];
-
-            if (j.ContainsKey(N_Date))
-                Date = new C_YMD((string)j[N_Date]);
-
-			if (j.ContainsKey(N_Status))
-			{
-				string ssv = j[N_Status];
-
-				foreach (E_SuggestionStatus ss in Enum.GetValues(typeof(E_SuggestionStatus)))
-				{
-					if (ssv == ss.ToString())
-					{
-						Status = ss;
-						break;
-					}
-				}
-			}
-		}
-
 	}
 }

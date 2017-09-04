@@ -11,7 +11,7 @@ namespace zsquared
     /// </summary>
     public class C_HMS
     {
-        int _hour = 0;
+        int _hour;
         public int Hour
         {
             get { return _hour; }
@@ -23,7 +23,7 @@ namespace zsquared
             }
         }
 
-        int _minutes = 0;
+        int _minutes;
         public int Minutes
         {
             get { return _minutes; }
@@ -35,7 +35,7 @@ namespace zsquared
             }
         }
 
-        public int _seconds = 0;
+        public int _seconds;
         public int Seconds
         {
             get { return _seconds; }
@@ -63,8 +63,22 @@ namespace zsquared
 
         public C_HMS(string s)
         {
-            // HH:MM:SS or HH:MM
-            string[] ss = s.Split(new char[] { ':' });
+            bool isPM = s.Contains("pm");
+            if (s.Contains("am"))
+            {
+                int ix = s.IndexOf("am", StringComparison.Ordinal);
+                s = s.Remove(ix, 2);
+            }
+            if (s.Contains("pm"))
+            {
+                int ix = s.IndexOf("pm", StringComparison.Ordinal);
+				s = s.Remove(ix, 2);
+			}
+            // just in case there are any left over blanks...
+            s = s.Trim();
+
+			// HH:MM:SS or HH:MM
+			string[] ss = s.Split(new char[] { ':' });
             if ((ss.Length < 2) || (ss.Length > 3))
                 throw new ApplicationException("Unexpected format (HH:MM[:SS])");
 
@@ -87,6 +101,11 @@ namespace zsquared
             {
                 throw new ApplicationException("Conversion error (" + e.Message + ")");
             }
+
+            if (isPM)
+                _hour += 12;
+            if (_hour == 24)
+                _hour = 0;
         }
 
         public C_HMS(C_HMS hms)
@@ -154,27 +173,21 @@ namespace zsquared
 
         public static bool operator >(C_HMS v1, C_HMS v2)
         {
-            bool res = false;
-
-            if ((v1._hour > v2._hour)
+            bool res = ((v1._hour > v2._hour)
                 || ((v1._hour == v2._hour) && (v1._minutes > v2._minutes))
                 || ((v1._hour == v2._hour) && (v1._minutes == v2._minutes) && (v1._seconds > v2._seconds))
-                )
-                res = true;
+                );
 
             return res;
         }
 
         public static bool operator >=(C_HMS v1, C_HMS v2)
         {
-            bool res = false;
-
-            if (((v1._hour == v2._hour) && (v1._minutes == v2._minutes) && (v1._seconds == v2._seconds))
+            bool res = (((v1._hour == v2._hour) && (v1._minutes == v2._minutes) && (v1._seconds == v2._seconds))
                 || (v1._hour > v2._hour)
                 || ((v1._hour == v2._hour) && (v1._minutes > v2._minutes))
                 || ((v1._hour == v2._hour) && (v1._minutes == v2._minutes) && (v1._seconds > v2._seconds))
-                )
-                res = true;
+                );
 
             return res;
         }
@@ -194,14 +207,11 @@ namespace zsquared
 
         public static bool operator <=(C_HMS v1, C_HMS v2)
         {
-            bool res = false;
-
-            if (((v1._hour == v2._hour) && (v1._minutes == v2._minutes) && (v1._seconds == v2._seconds))
+            bool res = (((v1._hour == v2._hour) && (v1._minutes == v2._minutes) && (v1._seconds == v2._seconds))
                 || (v1._hour < v2._hour)
                 || ((v1._hour == v2._hour) && (v1._minutes < v2._minutes))
                 || ((v1._hour == v2._hour) && (v1._minutes == v2._minutes) && (v1._seconds < v2._seconds))
-                )
-                res = true;
+                );
 
             return res;
         }
@@ -238,20 +248,40 @@ namespace zsquared
 
         /// <summary>
         /// returns a formated time using the provided format
-        /// "hhmmss"
+        /// "hhmmssp" hh = hours, mm = minutes, ss = seconds, p = use 12-hour format
         /// </summary>
-        /// <param name="s"></param>
+        /// <param name="fmt"></param>
         /// <returns></returns>
         public string ToString(string fmt)
         {
             string res = fmt.ToLower();
 
+            string ampm = "";
+            int ampmHour = _hour;
+            if (res.Contains("p"))
+            {
+                if (ampmHour > 12)
+                {
+                    ampmHour = ampmHour - 12;
+                    ampm = "pm";
+                    if (ampmHour == 0)
+                    {
+                        ampmHour = 12;
+                        ampm = "am";
+                    }
+                }
+                else
+                    ampm = "am";
+            }
+
             if (res.Contains("hh"))
-                res = res.Replace("hh", _hour.ToString("D2"));
+                res = res.Replace("hh", ampmHour.ToString("D2"));
             if (res.Contains("mm"))
                 res = res.Replace("mm", _minutes.ToString("D2"));
             if (res.Contains("ss"))
                 res = res.Replace("ss", _seconds.ToString("D2"));
+            if (res.Contains("p"))
+                res = res.Replace("p", ampm);
 
             return res;
         }

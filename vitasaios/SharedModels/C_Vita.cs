@@ -6,25 +6,24 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Text;
 using System.Net.Http;
+using System.Net.Http.Headers;
+using UIKit;
+using System.Linq;
 
 namespace zsquared
 {
-    public class C_Vita
+    public static class C_Vita
     {
-		public static string VitaCoreUrl = "http://vitasa.abandonedfactory.net";
+		//public static string VitaCoreUrl = "http://vitasa.abandonedfactory.net";
 		public static string VitaCoreUrlSSL = "https://vitasa.abandonedfactory.net";
-		//string vitaCoreUrl = "https://s3-us-west-2.amazonaws.com/vitasa-static-content-dev/sites.json";
-		//string vitaCoreUrl = "https://h4ebpp3rvk.execute-api.us-west-2.amazonaws.com/production/sites";
-		
-        public C_Vita()
-        {
-        }
+        //string vitaCoreUrl = "https://s3-us-west-2.amazonaws.com/vitasa-static-content-dev/sites.json";
+        //string vitaCoreUrl = "https://h4ebpp3rvk.execute-api.us-west-2.amazonaws.com/production/sites";
 
-		public static void SetupCertificateHandling()
+        public static void SetupCertificateHandling()
 		{
 			ServicePointManager.ServerCertificateValidationCallback += (sender, certificate, chain, sslPolicyErrors) =>
 			{
-				System.Security.Cryptography.X509Certificates.X509Certificate cert = (System.Security.Cryptography.X509Certificates.X509Certificate)certificate;
+				System.Security.Cryptography.X509Certificates.X509Certificate cert = certificate;
 				string issuer = cert.Issuer;
 				string[] issuers = issuer.Split(new char[] { '=' });
 				bool res = issuers.Length == 2;
@@ -36,14 +35,21 @@ namespace zsquared
 
 		}
 
-		public static async Task<string> PerformLogin(string userName, string userPassword)
+        public static async Task<C_VitaUser> PerformLogin(string email, string userPassword)
 		{
+            // do the login with the api's
 			string loginUrl = "/login";
 
-			var client = new HttpClient();
-			client.BaseAddress = new Uri(C_Vita.VitaCoreUrlSSL);
+            var client = new HttpClient()
+            {
+                BaseAddress = new Uri(C_Vita.VitaCoreUrlSSL)
+            };
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-			string jsonData = "{\"email\" : \"" + userName + "\", \"password\" : \"" + userPassword + "\"}";
+            string jsonData = "{" 
+                + "\"email\" : \"" + email + "\"" 
+                + ",\"password\" : \"" + userPassword + "\"" 
+                + "}";
 
 			C_Vita.SetupCertificateHandling();
 
@@ -55,11 +61,13 @@ namespace zsquared
 			if (response.StatusCode != HttpStatusCode.OK)
 				return null;
 
+            // success should include the user details
 			JsonValue jv = JsonValue.Parse(result);
-			if (!jv.ContainsKey("message") || (jv["message"] != "Login successful"))
-				return null;
+            C_VitaUser user = new C_VitaUser(jv);
 
+            // the headers should contain our token in the 'Set-Cookie' header
 			var headers = response.Headers;
+
 			string setCookie = null;
 			foreach (KeyValuePair<string, IEnumerable<string>> kvp in headers)
 			{
@@ -84,7 +92,9 @@ namespace zsquared
 				}
 			}
 
-			return token;
+            user.Token = token;
+
+			return user;
 		}
 
 

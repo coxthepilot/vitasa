@@ -115,6 +115,7 @@
   <ItemGroup>
     <None Include="Info.plist" />
     <None Include="Entitlements.plist" />
+    <None Include="To Do List.txt" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Main.cs" />
@@ -123,33 +124,74 @@
     <Compile Include="ViewController.designer.cs">
       <DependentUpon>ViewController.cs</DependentUpon>
     </Compile>
-    <Compile Include="VC_Map.cs" />
-    <Compile Include="VC_Map.designer.cs">
-      <DependentUpon>VC_Map.cs</DependentUpon>
-    </Compile>
-    <Compile Include="VC_SiteDetails.cs" />
-    <Compile Include="VC_SiteDetails.designer.cs">
-      <DependentUpon>VC_SiteDetails.cs</DependentUpon>
-    </Compile>
-    <Compile Include="VC_List.cs" />
-    <Compile Include="VC_List.designer.cs">
-      <DependentUpon>VC_List.cs</DependentUpon>
-    </Compile>
     <Compile Include="VC_Suggestions.cs" />
     <Compile Include="VC_Suggestions.designer.cs">
       <DependentUpon>VC_Suggestions.cs</DependentUpon>
     </Compile>
-    <Compile Include="VC_SuggestionEdit.cs" />
-    <Compile Include="VC_SuggestionEdit.designer.cs">
-      <DependentUpon>VC_SuggestionEdit.cs</DependentUpon>
+    <Compile Include="VC_About.cs" />
+    <Compile Include="VC_About.designer.cs">
+      <DependentUpon>VC_About.cs</DependentUpon>
     </Compile>
-    <Compile Include="VC_CalendarDetails.cs" />
-    <Compile Include="VC_CalendarDetails.designer.cs">
-      <DependentUpon>VC_CalendarDetails.cs</DependentUpon>
+    <Compile Include="VC_Register.cs" />
+    <Compile Include="VC_Register.designer.cs">
+      <DependentUpon>VC_Register.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VC_MySignUps.cs" />
+    <Compile Include="VC_MySignUps.designer.cs">
+      <DependentUpon>VC_MySignUps.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VC_Suggestion.cs" />
+    <Compile Include="VC_Suggestion.designer.cs">
+      <DependentUpon>VC_Suggestion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VC_Calendar.cs" />
+    <Compile Include="VC_Calendar.designer.cs">
+      <DependentUpon>VC_Calendar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VC_SitesOnDateList.cs" />
+    <Compile Include="VC_SitesOnDateList.designer.cs">
+      <DependentUpon>VC_SitesOnDateList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VC_SitesOnDateMap.cs" />
+    <Compile Include="VC_SitesOnDateMap.designer.cs">
+      <DependentUpon>VC_SitesOnDateMap.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VC_SignUp.cs" />
+    <Compile Include="VC_SignUp.designer.cs">
+      <DependentUpon>VC_SignUp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VC_SCSites.cs" />
+    <Compile Include="VC_SCSites.designer.cs">
+      <DependentUpon>VC_SCSites.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VC_SCSite.cs" />
+    <Compile Include="VC_SCSite.designer.cs">
+      <DependentUpon>VC_SCSite.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VC_SCVolunteers.cs" />
+    <Compile Include="VC_SCVolunteers.designer.cs">
+      <DependentUpon>VC_SCVolunteers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VC_SCVolunteerHours.cs" />
+    <Compile Include="VC_SCVolunteerHours.designer.cs">
+      <DependentUpon>VC_SCVolunteerHours.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VC_SCSiteCalendar.cs" />
+    <Compile Include="VC_SCSiteCalendar.designer.cs">
+      <DependentUpon>VC_SCSiteCalendar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VC_SCSiteOnDate.cs" />
+    <Compile Include="VC_SCSiteOnDate.designer.cs">
+      <DependentUpon>VC_SCSiteOnDate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VC_SCSiteDefaults.cs" />
+    <Compile Include="VC_SCSiteDefaults.designer.cs">
+      <DependentUpon>VC_SCSiteDefaults.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="GlobalInitForTesting.js" />
+    <BundleResource Include="about.htm" />
   </ItemGroup>
   <Import Project="..\SharedModels\SharedModels.projitems" Label="Shared" Condition="Exists('..\SharedModels\SharedModels.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />

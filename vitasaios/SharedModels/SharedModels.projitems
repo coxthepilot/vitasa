@@ -11,19 +11,22 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)C_Global.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)C_SitesTableSource.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)C_UsersTableSource.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)C_Vita.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)C_VitaSite.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)C_VitaUser.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)C_MapDelegate.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)C_Tools.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)C_CalendarEntry.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)C_YMD.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)C_HMS.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)C_Suggestion.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)C_PickerModel.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)C_SuggestionsTableSource.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)C_CalendarTableSource.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)C_IntentsTableSource.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)C_Registration.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)C_SiteCalendarEntry.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)C_TestingDB.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)C_Notification.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)C_WorkItem.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)EmptyTextFile.txt" />
   </ItemGroup>
 </Project>

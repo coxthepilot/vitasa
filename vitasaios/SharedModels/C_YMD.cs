@@ -12,6 +12,7 @@ namespace zsquared
     /// </summary>
     public class C_YMD : IComparable
     {
+        public static string[] DayOfWeekNames = new string[7] { "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" };
         int _year = 2013;
         public int Year
         {
@@ -386,7 +387,7 @@ namespace zsquared
             return Year.ToString("D4") + "-" + Month.ToString("D2") + "-" + Day.ToString("D2");
         }
 
-        static readonly List<string> MonthNames = new List<string>() { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
+        static readonly List<string> MonthNames = new List<string>() { "xxx", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
         /// <summary>
         /// returns a formated time using the provided format
         /// "yyyy" is replaced with 4 digit year, "yy" is replaced with last two digits of year

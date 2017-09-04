@@ -1,12 +1,11 @@
-# Version: 10.10.0.36 (d15-2: d2270eec)
+# Version: 10.12.0.20 (d15-3: 80b8487d)
 # [first argument, ignore] # --cache
-/Library/Frameworks/Xamarin.iOS.framework/Versions/10.10.0.36/lib/mtouch/mtouch.exe \
+/Library/Frameworks/Xamarin.iOS.framework/Versions/10.12.0.20/lib/mtouch/mtouch.exe \
 	/Users/Billy/Documents/source/vitasa/vitasaios/vitasa/obj/iPhoneSimulator/Debug/device-builds/iphone7.2-10.3.1/mtouch-cache \
 	--sim \
 	/Users/Billy/Documents/source/vitasa/vitasaios/vitasa/bin/iPhoneSimulator/Debug/device-builds/iphone7.2-10.3.1/vitasa.app \
 	--executable \
 	vitasa \
-	--fastdev \
 	--debug \
 	--nolink \
 	--sdkroot \
@@ -15,6 +14,7 @@
 	10.3 \
 	--targetver \
 	10.3 \
+	--aot-options=-O=-float32 \
 	--http-message-handler=HttpClientHandler \
 	--abi=x86_64 \
 	--symbollist \
@@ -173,6 +173,8 @@
 	-r \
 	/Library/Frameworks/Xamarin.iOS.framework/Versions/Current/lib/mono/Xamarin.iOS/Facades/System.ObjectModel.dll \
 	-r \
+	/Library/Frameworks/Xamarin.iOS.framework/Versions/Current/lib/mono/Xamarin.iOS/Facades/System.Reflection.DispatchProxy.dll \
+	-r \
 	/Library/Frameworks/Xamarin.iOS.framework/Versions/Current/lib/mono/Xamarin.iOS/Facades/System.Reflection.dll \
 	-r \
 	/Library/Frameworks/Xamarin.iOS.framework/Versions/Current/lib/mono/Xamarin.iOS/Facades/System.Reflection.Emit.dll \
@@ -201,7 +203,11 @@
 	-r \
 	/Library/Frameworks/Xamarin.iOS.framework/Versions/Current/lib/mono/Xamarin.iOS/Facades/System.Runtime.InteropServices.dll \
 	-r \
+	/Library/Frameworks/Xamarin.iOS.framework/Versions/Current/lib/mono/Xamarin.iOS/Facades/System.Runtime.InteropServices.RuntimeInformation.dll \
+	-r \
 	/Library/Frameworks/Xamarin.iOS.framework/Versions/Current/lib/mono/Xamarin.iOS/Facades/System.Runtime.InteropServices.WindowsRuntime.dll \
+	-r \
+	/Library/Frameworks/Xamarin.iOS.framework/Versions/Current/lib/mono/Xamarin.iOS/Facades/System.Runtime.Loader.dll \
 	-r \
 	/Library/Frameworks/Xamarin.iOS.framework/Versions/Current/lib/mono/Xamarin.iOS/Facades/System.Runtime.Numerics.dll \
 	-r \
@@ -308,6 +314,8 @@
 	/Library/Frameworks/Xamarin.iOS.framework/Versions/Current/lib/mono/Xamarin.iOS/Facades/System.Xml.XPath.dll \
 	-r \
 	/Library/Frameworks/Xamarin.iOS.framework/Versions/Current/lib/mono/Xamarin.iOS/Facades/System.Xml.XPath.XDocument.dll \
+	-r \
+	/Library/Frameworks/Xamarin.iOS.framework/Versions/Current/lib/mono/Xamarin.iOS/Facades/System.Xml.XPath.XmlDocument.dll \
 	-r \
 	/Library/Frameworks/Xamarin.iOS.framework/Versions/Current/lib/mono/Xamarin.iOS/Facades/System.Xml.Xsl.Primitives.dll \
 	-r \

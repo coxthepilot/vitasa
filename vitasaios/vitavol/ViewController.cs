@@ -12,52 +12,45 @@ namespace vitavol
 {
     public partial class ViewController : UIViewController
     {
-        string LoginToken;
-        C_Global passAroundContainer;
-
         protected ViewController(IntPtr handle) : base(handle)
         {
-            // Note: this .ctor should not contain any initialization logic.
+            // place no init logic here
         }
 
 		public override void DidReceiveMemoryWarning()
 		{
 			base.DidReceiveMemoryWarning();
-			// Release any cached data, images, etc that aren't in use.
 		}
 
 		public override void ViewDidLoad()
         {
             base.ViewDidLoad();
-            // Perform any additional setup after loading the view, typically from a nib.
 
-            // -------- for testing, we pre-load the globals from a json file ----------
-            string initjs = File.ReadAllText("GlobalInitForTesting.js");
-            passAroundContainer = new C_Global(initjs);
-            passAroundContainer.TimeStampWhenSitesLoaded = DateTime.Now;
-            // ------- end of testing init -------------
-
-			//passAroundContainer = new C_Global(); // <---- this is the normal method
 			AppDelegate myAppDelegate = (AppDelegate)UIApplication.SharedApplication.Delegate;
-			myAppDelegate.PassAroundContainer = passAroundContainer;
+			myAppDelegate.Global = new C_Global();
+            C_Global Global = myAppDelegate.Global;
 
-			TB_Email.Text = NSUserDefaults.StandardUserDefaults.StringForKey("email");
-			TB_Password.Text = NSUserDefaults.StandardUserDefaults.StringForKey("password");
-			B_Login.Enabled = (TB_Email.Text.Length > 7) && (TB_Password.Text.Length > 6);
-
-			I_BackgroundImage.Image = UIImage.FromBundle("Background.jpg");
+            B_About.TouchUpInside += (sender, e) => 
+            {
+                PerformSegue("Segue_LoginToAbout", this);
+            };
 
 			TB_Email.AddTarget((sender, e) =>
 			{
-				B_Login.Enabled = (TB_Email.Text.Length > 7) && (TB_Password.Text.Length > 6);
+				B_Login.Enabled = (TB_Email.Text.Length > 6) && (TB_Password.Text.Length > 6);
 
 			}, UIControlEvent.EditingChanged);
 
 			TB_Password.AddTarget((sender, e) =>
 			{
-				B_Login.Enabled = (TB_Email.Text.Length > 7) && (TB_Password.Text.Length > 6);
+				B_Login.Enabled = (TB_Email.Text.Length > 6) && (TB_Password.Text.Length > 6);
 
 			}, UIControlEvent.EditingChanged);
+
+            B_Register.TouchUpInside += (sender, e) => 
+            {
+                PerformSegue("Segue_LoginToRegister", this);
+            };
 
             B_Login.TouchUpInside += (sender, e) => 
             {
@@ -69,87 +62,111 @@ namespace vitavol
 
 				B_Login.Enabled = false;
 
-                // testing only --------------------
-                var ou = passAroundContainer.Users.Where(u => u.email == TB_Email.Text);
-                if (ou.Count() != 0)
-                {
-					// our name was found in the list
-                    NSUserDefaults.StandardUserDefaults.SetString(TB_Email.Text, "email");
-	                NSUserDefaults.StandardUserDefaults.SetString(TB_Password.Text, "password");
+				Task.Run(async () =>
+				{
+                    try
+                    {
+                        C_VitaUser user = await C_Vita.PerformLogin(email, pw);
 
-                    passAroundContainer.LoggedInUser = (C_VitaUser)(ou.First());
+						if (user != null)
+						{
+                            // get the all sites details
+                            Global.AllSites = C_VitaSite.FetchSitesList();
+                            
+							UIApplication.SharedApplication.InvokeOnMainThread(
+							new Action(() =>
+							{
+                                Global.LoggedInUser = user;
 
-	                PerformSegue("Segue_LoginToMap", this);
-				}
-                else
-                {
-                    Tools.MessageBoxOK("error", "email not valid");
-                }
-                // end of testing --------------------
+								NSUserDefaults.StandardUserDefaults.SetString(TB_Email.Text, "email");
+								NSUserDefaults.StandardUserDefaults.SetString(TB_Password.Text, "password");
 
-				//Task.Run(async () =>
-				//{
-				//	try
-				//	{
-				//		string token = await C_Vita.PerformLogin(email, pw);
+                                if (user.HasSiteCoordinator)
+                                {
+                                    // get the sites for which this site coordinator is responsible
+                                    // if only one, then SCSite; if more than one then SCSites
+                                    List<C_VitaSite> SCSites = new List<C_VitaSite>();
+                                    foreach(C_VitaSite s in Global.AllSites)
+                                    {
+                                        if (Global.LoggedInUser.id == s.PrimaryCoordinator)
+                                            SCSites.Add(s);
+                                    }
+                                    if (SCSites.Count == 0)
+                                    {
+										// a site coordinator with no sites; treat them as a normal volunteer (?)
+                                		PerformSegue("Segue_LoginToSignUps", this);
+									}
+                                    else if (SCSites.Count == 1)
+                                    {
+                                        Global.SelectedSite = SCSites[0];
+                                        Global.SCSites = SCSites;
+                                        Global.DetailsCameFrom = E_CameFrom.Login;
+										PerformSegue("Segue_LoginToSCSite", this);
+									}
+                                    else
+                                    {
+                                        Global.SelectedSite = null;
+										Global.SCSites = SCSites;
+										Global.DetailsCameFrom = E_CameFrom.Login;
+										PerformSegue("Segue_LoginToSCSites", this);
+									}
+                                }
+                                else if (user.HasVolunteer)
+                                {
+									PerformSegue("Segue_LoginToSignUps", this);
+                                }
+                                else if (user.HasNewUser)
+								{
+									Tools.MessageBox(this, 
+                                                       "Not Authorized", 
+                                                       "Staff has not yet acted on your registration.",
+                                                     Tools.E_MessageBoxButtons.Ok);
+									B_Login.Enabled = true;
+								}
+								else
+                                {
+									Tools.MessageBox(this, 
+                                                     "Error", 
+                                                     "Authorization failure. Expecting Volunteer or Site Coordinator",
+                                                     Tools.E_MessageBoxButtons.Ok);
+									B_Login.Enabled = true;
+								}
+							}));
+						}
+						else
+						{
+							UIApplication.SharedApplication.InvokeOnMainThread(
+							new Action(() =>
+							{
+								Tools.MessageBox(this,
+                                                 "Error", 
+                                                 "Authorization failure. Bad email or password.",
+                                                 Tools.E_MessageBoxButtons.Ok);
+								B_Login.Enabled = true;
+							}));
+						}
+					}
+                    catch (Exception e4)
+					{
+						UIApplication.SharedApplication.InvokeOnMainThread(
+						new Action(() =>
+						{
+                            Tools.MessageBox(this, 
+                                             "Error", 
+                                             "Error attempting login",
+                                             Tools.E_MessageBoxButtons.Ok);
+                            Console.WriteLine(e4.Message);
+							B_Login.Enabled = true;
+						}));
+					}
+				}); // end of Task.Run
+			}; // end of B_Login lambda
 
-				//		if (token != null)
-				//		{
-				//			LoginToken = token;
+            TB_Email.Text = NSUserDefaults.StandardUserDefaults.StringForKey("email");
+			TB_Password.Text = NSUserDefaults.StandardUserDefaults.StringForKey("password");
+			B_Login.Enabled = (TB_Email.Text.Length > 6) && (TB_Password.Text.Length > 6);
 
-				//			// get user record for this user
-				//			List<C_VitaUser> usersList = await C_VitaUser.FetchUsersList(LoginToken);
-				//			passAroundContainer.Users = usersList;
-
-				//			if (usersList != null)
-				//			{
-				//				C_VitaUser ourUser = null;
-				//				var ou = usersList.Where(user => user.email == email);
-				//				if (ou.Count() != 0)
-				//					ourUser = ou.First();
-
-    //                            if ((ourUser != null) && ((ourUser.HasSiteCoordinator) || (ourUser.HasAdmin)))
-				//				{
-				//					UIApplication.SharedApplication.InvokeOnMainThread(
-				//					new Action(() =>
-				//					{
-				//						passAroundContainer.LoginToken = LoginToken;
-
-				//						NSUserDefaults.StandardUserDefaults.SetString(TB_Email.Text, "email");
-				//						NSUserDefaults.StandardUserDefaults.SetString(TB_Password.Text, "password");
-
-				//						PerformSegue("Segue_LoginToMap", this);
-				//					}));
-				//				}
-				//				else
-				//				{
-				//					Tools.MessageBox("Error", "Not a User or does not have Admin priviledge");
-    //                                B_Login.Enabled = true;
-				//				}
-				//			}
-				//			else
-				//			{
-				//				Tools.MessageBox("Error", "Unable to get users. Probably do not have Admin priviledges.");
-				//				B_Login.Enabled = true;
-				//			}
-				//		}
-				//		else
-				//		{
-				//			UIApplication.SharedApplication.InvokeOnMainThread(
-				//			new Action(() =>
-				//			{
-				//				Tools.MessageBox("Error", "Authorization failure.");
-				//				B_Login.Enabled = true;
-				//			}));
-				//		}
-				//	}
-				//	catch (Exception e1)
-				//	{
-				//		Console.WriteLine(e1.Message);
-				//		B_Login.Enabled = true;
-				//	}
-				//});
-			};
-        }
+			I_BackgroundImage.Image = UIImage.FromBundle("Background.jpg");
+		}
     }
 }

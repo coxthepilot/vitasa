@@ -5,8 +5,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vitasa", "vitasa\vitasa.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "app1", "app1\app1.csproj", "{FDB37BF5-6E20-4CC5-B40F-107AFC2D63A1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vitasaadmin", "vitasaadmin\vitasaadmin.csproj", "{2D681BBD-6C07-4DAF-B6F8-17AFAD2CBE91}"
-EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "SharedModels", "SharedModels\SharedModels.shproj", "{A00E7063-860B-4124-9C8E-0FCFCE560ED6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vitavol", "vitavol\vitavol.csproj", "{6A54BBFE-FE39-4316-BA0B-E74DA172F56E}"
@@ -35,14 +33,6 @@ Global
 		{FDB37BF5-6E20-4CC5-B40F-107AFC2D63A1}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 		{FDB37BF5-6E20-4CC5-B40F-107AFC2D63A1}.Debug|iPhone.ActiveCfg = Debug|Any CPU
 		{FDB37BF5-6E20-4CC5-B40F-107AFC2D63A1}.Debug|iPhone.Build.0 = Debug|Any CPU
-		{2D681BBD-6C07-4DAF-B6F8-17AFAD2CBE91}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
-		{2D681BBD-6C07-4DAF-B6F8-17AFAD2CBE91}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
-		{2D681BBD-6C07-4DAF-B6F8-17AFAD2CBE91}.Release|iPhone.ActiveCfg = Release|iPhone
-		{2D681BBD-6C07-4DAF-B6F8-17AFAD2CBE91}.Release|iPhone.Build.0 = Release|iPhone
-		{2D681BBD-6C07-4DAF-B6F8-17AFAD2CBE91}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
-		{2D681BBD-6C07-4DAF-B6F8-17AFAD2CBE91}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
-		{2D681BBD-6C07-4DAF-B6F8-17AFAD2CBE91}.Debug|iPhone.ActiveCfg = Debug|iPhone
-		{2D681BBD-6C07-4DAF-B6F8-17AFAD2CBE91}.Debug|iPhone.Build.0 = Debug|iPhone
 		{6A54BBFE-FE39-4316-BA0B-E74DA172F56E}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
 		{6A54BBFE-FE39-4316-BA0B-E74DA172F56E}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
 		{6A54BBFE-FE39-4316-BA0B-E74DA172F56E}.Release|iPhone.ActiveCfg = Release|iPhone
