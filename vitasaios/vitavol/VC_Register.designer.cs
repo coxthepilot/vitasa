@@ -16,6 +16,10 @@ namespace vitavol
     {
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UIActivityIndicatorView AI_Submitting { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UIButton B_Back { get; set; }
 
         [Outlet]
@@ -24,7 +28,7 @@ namespace vitavol
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UISwitch SW_Advanced { get; set; }
+        UIKit.UILabel L_Certification { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
@@ -52,6 +56,11 @@ namespace vitavol
 
         void ReleaseDesignerOutlets ()
         {
+            if (AI_Submitting != null) {
+                AI_Submitting.Dispose ();
+                AI_Submitting = null;
+            }
+
             if (B_Back != null) {
                 B_Back.Dispose ();
                 B_Back = null;
@@ -62,9 +71,9 @@ namespace vitavol
                 B_Submit = null;
             }
 
-            if (SW_Advanced != null) {
-                SW_Advanced.Dispose ();
-                SW_Advanced = null;
+            if (L_Certification != null) {
+                L_Certification.Dispose ();
+                L_Certification = null;
             }
 
             if (SW_Basic != null) {

@@ -21,10 +21,7 @@ namespace vitavol
                 PerformSegue("Segue_RegisterToLogin", this);
 
 			SW_Basic.ValueChanged += (sender, e) => 
-                SW_Advanced.On = !SW_Basic.On;
-
-            SW_Advanced.ValueChanged += (sender, e) =>
-				SW_Basic.On = !SW_Advanced.On;
+                L_Certification.Text = SW_Basic.On ? "Basic" : "Advanced";
 
             TB_Name.AddTarget((sender, e) =>
 			{
@@ -56,11 +53,11 @@ namespace vitavol
 
 			}, UIControlEvent.EditingChanged);
 
-            B_Submit.TouchUpInside += (sender, e) => 
+            B_Submit.TouchUpInside += async (sender, e) => 
             {
                 // send the registration to the backend
                 E_Certification loc = E_Certification.Basic;
-                if (SW_Advanced.On)
+                if (!SW_Basic.On)
                     loc = E_Certification.Advanced;
 
                 // need to get these values before we leave the UI thread
@@ -69,32 +66,69 @@ namespace vitavol
                 string upassword = TB_Password.Text;
                 string uphone = TB_Phone.Text;
 
-                Task.Run(async () => 
-                {
-                    try
-                    {
-                        bool success = await C_Registration.SubmitRegistration(uname, uemail, upassword, uphone, loc);
+                AI_Submitting.StartAnimating();
+                EnableUI(false);
 
+                try
+                {
+                    bool success = await C_Registration.SubmitRegistration(uname, uemail, upassword, uphone, loc);
+
+                    if (success)
+                    {
                         UIApplication.SharedApplication.InvokeOnMainThread(
-                        new Action(() =>
+                        new Action(async () =>
                         {
-                            // tell the user that the staff will approve, check back later
-                            Tools.MessageBox(this, 
-                                             "Registration Submitted", 
-                                             "Your registration has been submitted. Staff will respond shortly.", 
+							AI_Submitting.StopAnimating();
+							EnableUI(true);
+
+							// tell the user that the staff will approve, check back later
+							Tools.E_MessageBoxResults mbres = await Tools.MessageBox(this,
+                                             "Registration Submitted",
+                                             "Your registration has been submitted. Staff will respond shortly.",
                                              Tools.E_MessageBoxButtons.Ok);
-                            PerformSegue("Segue_RegistrationToLogin", this);
+                            PerformSegue("Segue_RegisterToLogin", this);
                         }));
                     }
-                    catch (Exception e1)
+                    else
                     {
-                        Console.WriteLine(e1.Message);
+						UIApplication.SharedApplication.InvokeOnMainThread(
+						new Action(async () =>
+						{
+							AI_Submitting.StopAnimating();
+							EnableUI(true);
+
+							// tell the user that the staff will approve, check back later
+							Tools.E_MessageBoxResults mbres = await Tools.MessageBox(this,
+											"Error",
+											"Unable to submit registration. System error.",
+											 Tools.E_MessageBoxButtons.Ok);
+						}));
+                        return;
                     }
-
-				});
-
+                }
+                catch (Exception e1)
+                {
+                    Console.WriteLine(e1.Message);
+                }
+                finally
+                {
+					AI_Submitting.StopAnimating();
+					EnableUI(true);
+				}
             };
 		}
+
+        private void EnableUI(bool en)
+        {
+            TB_Name.Enabled = en;
+            TB_Email.Enabled = en;
+            TB_Password.Enabled = en;
+            TB_VerifyPassword.Enabled = en;
+            TB_Phone.Enabled = en;
+            SW_Basic.Enabled = en;
+            B_Back.Enabled = en;
+            B_Submit.Enabled = en;
+        }
 
         private bool CheckReadyToSubmit()
         {

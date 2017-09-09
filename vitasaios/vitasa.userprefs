@@ -1,9 +1,11 @@
 ﻿<Properties StartupConfiguration="{6A54BBFE-FE39-4316-BA0B-E74DA172F56E}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="vitavol/To Do List.txt">
+  <MonoDevelop.Ide.Workbench ActiveDocument="vitavol/VC_GridTest.cs">
     <Files>
-      <File FileName="vitavol/To Do List.txt" Line="17" Column="1" />
       <File FileName="vitavol/Main.storyboard" />
-      <File FileName="vitavol/ViewController.cs" Line="169" Column="67" />
+      <File FileName="vitavol/VC_GridTest.cs" Line="144" Column="1" />
+      <File FileName="vitavol/ViewController.cs" Line="47" Column="1" />
+      <File FileName="vitavol/VC_Calendar.cs" Line="190" Column="11" />
+      <File FileName="SharedModels/C_Global.cs" Line="178" Column="33" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.ItemProperties.app1 AndroidDesignerPreferredDevice="Nexus 4" PreferredExecutionTarget="Android.Android_Accelerated_x86" />
@@ -15,40 +17,38 @@
       <Breakpoint file="/Users/Billy/Documents/source/vitasa/vitasaios/vitavol/VC_Map.cs" relfile="vitavol/VC_Map.cs" line="127" column="1" />
       <Breakpoint file="/Users/Billy/Documents/source/vitasa/vitasaios/vitavol/VC_List.cs" relfile="vitavol/VC_List.cs" line="32" column="14" />
       <Breakpoint file="/Users/Billy/Documents/source/vitasa/vitasaios/SharedModels/C_TestingDB.cs" relfile="SharedModels/C_TestingDB.cs" line="57" column="1" />
-      <Breakpoint file="/Users/Billy/Documents/source/vitasa/vitasaios/SharedModels/C_Registration.cs" relfile="SharedModels/C_Registration.cs" line="57" column="6" />
-      <Breakpoint file="/Users/Billy/Documents/source/vitasa/vitasaios/SharedModels/C_VitaUser.cs" relfile="SharedModels/C_VitaUser.cs" line="565" column="1" />
-      <Breakpoint file="/Users/Billy/Documents/source/vitasa/vitasaios/SharedModels/C_VitaUser.cs" relfile="SharedModels/C_VitaUser.cs" line="321" column="1" />
-      <Breakpoint file="/Users/Billy/Documents/source/vitasa/vitasaios/SharedModels/C_VitaSite.cs" relfile="SharedModels/C_VitaSite.cs" line="171" column="1" />
-      <Breakpoint file="/Users/Billy/Documents/source/vitasa/vitasaios/SharedModels/C_VitaUser.cs" relfile="SharedModels/C_VitaUser.cs" line="328" column="1" />
-      <Breakpoint file="/Users/Billy/Documents/source/vitasa/vitasaios/SharedModels/C_Suggestion.cs" relfile="SharedModels/C_Suggestion.cs" line="90" column="46" />
-      <Breakpoint file="/Users/Billy/Documents/source/vitasa/vitasaios/SharedModels/C_VitaSite.cs" relfile="SharedModels/C_VitaSite.cs" line="192" column="1" />
-      <Breakpoint file="/Users/Billy/Documents/source/vitasa/vitasaios/SharedModels/C_VitaSite.cs" relfile="SharedModels/C_VitaSite.cs" line="213" column="1" />
-      <Breakpoint file="/Users/Billy/Documents/source/vitasa/vitasaios/SharedModels/C_VitaSite.cs" relfile="SharedModels/C_VitaSite.cs" line="280" column="1" />
-      <Breakpoint file="/Users/Billy/Documents/source/vitasa/vitasaios/SharedModels/C_VitaSite.cs" relfile="SharedModels/C_VitaSite.cs" line="130" column="1" />
-      <Breakpoint file="/Users/Billy/Documents/source/vitasa/vitasaios/SharedModels/C_VitaSite.cs" relfile="SharedModels/C_VitaSite.cs" line="154" column="18" />
-      <Breakpoint file="/Users/Billy/Documents/source/vitasa/vitasaios/SharedModels/C_VitaSite.cs" relfile="SharedModels/C_VitaSite.cs" line="269" column="20" />
-      <Breakpoint file="/Users/Billy/Documents/source/vitasa/vitasaios/SharedModels/C_VitaSite.cs" relfile="SharedModels/C_VitaSite.cs" line="450" column="9" />
-      <Breakpoint file="/Users/Billy/Documents/source/vitasa/vitasaios/SharedModels/C_VitaSite.cs" relfile="SharedModels/C_VitaSite.cs" line="540" column="10" />
-      <Breakpoint file="/Users/Billy/Documents/source/vitasa/vitasaios/SharedModels/C_VitaSite.cs" relfile="SharedModels/C_VitaSite.cs" line="503" column="1" />
-      <Breakpoint file="/Users/Billy/Documents/source/vitasa/vitasaios/SharedModels/C_VitaSite.cs" relfile="SharedModels/C_VitaSite.cs" line="234" column="1" />
-      <Breakpoint file="/Users/Billy/Documents/source/vitasa/vitasaios/SharedModels/C_CalendarEntry.cs" relfile="SharedModels/C_CalendarEntry.cs" line="146" column="54" />
-      <Breakpoint file="/Users/Billy/Documents/source/vitasa/vitasaios/SharedModels/C_CalendarEntry.cs" relfile="SharedModels/C_CalendarEntry.cs" line="125" column="54" />
-      <Breakpoint file="/Users/Billy/Documents/source/vitasa/vitasaios/SharedModels/C_VitaUser.cs" relfile="SharedModels/C_VitaUser.cs" line="507" column="13" />
-      <Breakpoint file="/Users/Billy/Documents/source/vitasa/vitasaios/vitavol/VC_SCVolunteerHours.cs" relfile="vitavol/VC_SCVolunteerHours.cs" line="35" column="95" />
+      <Breakpoint file="/Users/Billy/Documents/source/vitasa/vitasaios/SharedModels/C_Registration.cs" relfile="SharedModels/C_Registration.cs" line="49" column="6" />
+      <Breakpoint file="/Users/Billy/Documents/source/vitasa/vitasaios/SharedModels/C_VitaUser.cs" relfile="SharedModels/C_VitaUser.cs" line="430" column="1" />
+      <Breakpoint file="/Users/Billy/Documents/source/vitasa/vitasaios/SharedModels/C_VitaUser.cs" relfile="SharedModels/C_VitaUser.cs" line="233" column="1" />
+      <Breakpoint file="/Users/Billy/Documents/source/vitasa/vitasaios/SharedModels/C_VitaSite.cs" relfile="SharedModels/C_VitaSite.cs" line="196" column="1" />
+      <Breakpoint file="/Users/Billy/Documents/source/vitasa/vitasaios/SharedModels/C_VitaSite.cs" relfile="SharedModels/C_VitaSite.cs" line="374" column="9" />
+      <Breakpoint file="/Users/Billy/Documents/source/vitasa/vitasaios/SharedModels/C_VitaSite.cs" relfile="SharedModels/C_VitaSite.cs" line="447" column="10" />
+      <Breakpoint file="/Users/Billy/Documents/source/vitasa/vitasaios/SharedModels/C_VitaSite.cs" relfile="SharedModels/C_VitaSite.cs" line="414" column="1" />
+      <Breakpoint file="/Users/Billy/Documents/source/vitasa/vitasaios/SharedModels/C_VitaUser.cs" relfile="SharedModels/C_VitaUser.cs" line="387" column="13" />
       <Breakpoint file="/Users/Billy/Documents/source/vitasa/vitasaios/vitavol/VC_SitesOnDateMap.cs" relfile="vitavol/VC_SitesOnDateMap.cs" line="33" column="80" />
-      <Breakpoint file="/Users/Billy/Documents/source/vitasa/vitasaios/vitavol/VC_SignUp.cs" relfile="vitavol/VC_SignUp.cs" line="40" column="24" />
-      <Breakpoint file="/Users/Billy/Documents/source/vitasa/vitasaios/vitavol/VC_Suggestion.cs" relfile="vitavol/VC_Suggestion.cs" line="127" column="1" />
-      <Breakpoint file="/Users/Billy/Documents/source/vitasa/vitasaios/vitavol/VC_Suggestion.cs" relfile="vitavol/VC_Suggestion.cs" line="133" column="1" />
-      <Breakpoint file="/Users/Billy/Documents/source/vitasa/vitasaios/SharedModels/C_VitaUser.cs" relfile="SharedModels/C_VitaUser.cs" line="150" column="1" />
-      <Breakpoint file="/Users/Billy/Documents/source/vitasa/vitasaios/SharedModels/C_WorkItem.cs" relfile="SharedModels/C_WorkItem.cs" line="33" column="1" />
-      <Breakpoint file="/Users/Billy/Documents/source/vitasa/vitasaios/SharedModels/C_VitaUser.cs" relfile="SharedModels/C_VitaUser.cs" line="228" column="1" />
-      <Breakpoint file="/Users/Billy/Documents/source/vitasa/vitasaios/SharedModels/C_VitaUser.cs" relfile="SharedModels/C_VitaUser.cs" line="217" column="1" />
+      <Breakpoint file="/Users/Billy/Documents/source/vitasa/vitasaios/SharedModels/C_VitaUser.cs" relfile="SharedModels/C_VitaUser.cs" line="280" column="1" />
+      <Breakpoint file="/Users/Billy/Documents/source/vitasa/vitasaios/SharedModels/C_YMD.cs" relfile="SharedModels/C_YMD.cs" line="93" column="38" />
+      <Breakpoint file="/Users/Billy/Documents/source/vitasa/vitasaios/SharedModels/C_WorkItem.cs" relfile="SharedModels/C_WorkItem.cs" line="149" column="44" />
+      <Breakpoint file="/Users/Billy/Documents/source/vitasa/vitasaios/SharedModels/C_WorkItem.cs" relfile="SharedModels/C_WorkItem.cs" line="206" column="1" />
+      <Breakpoint file="/Users/Billy/Documents/source/vitasa/vitasaios/SharedModels/C_WorkItem.cs" relfile="SharedModels/C_WorkItem.cs" line="261" column="1" />
+      <Breakpoint file="/Users/Billy/Documents/source/vitasa/vitasaios/vitavol/VC_SCSiteCalendar.cs" relfile="vitavol/VC_SCSiteCalendar.cs" line="36" column="25" />
+      <Breakpoint file="/Users/Billy/Documents/source/vitasa/vitasaios/SharedModels/C_VitaSite.cs" relfile="SharedModels/C_VitaSite.cs" line="326" column="42" />
+      <Breakpoint file="/Users/Billy/Documents/source/vitasa/vitasaios/vitavol/VC_SCSiteDefaults.cs" relfile="vitavol/VC_SCSiteDefaults.cs" line="251" column="23" />
+      <Breakpoint file="/Users/Billy/Documents/source/vitasa/vitasaios/SharedModels/C_VitaUser.cs" relfile="SharedModels/C_VitaUser.cs" line="325" column="38" />
+      <Breakpoint file="/Users/Billy/Documents/source/vitasa/vitasaios/SharedModels/C_VitaUser.cs" relfile="SharedModels/C_VitaUser.cs" line="222" column="71" />
+      <Breakpoint file="/Users/Billy/Documents/source/vitasa/vitasaios/SharedModels/C_VitaSite.cs" relfile="SharedModels/C_VitaSite.cs" line="509" column="33" />
+      <Breakpoint file="/Users/Billy/Documents/source/vitasa/vitasaios/SharedModels/C_VitaSite.cs" relfile="SharedModels/C_VitaSite.cs" line="265" column="42" />
+      <Breakpoint file="/Users/Billy/Documents/source/vitasa/vitasaios/SharedModels/C_VitaSite.cs" relfile="SharedModels/C_VitaSite.cs" line="474" column="1" />
+      <Breakpoint file="/Users/Billy/Documents/source/vitasa/vitasaios/SharedModels/C_WorkItem.cs" relfile="SharedModels/C_WorkItem.cs" line="104" column="22" />
+      <Breakpoint file="/Users/Billy/Documents/source/vitasa/vitasaios/vitavol/C_NotificationEvent.cs" relfile="vitavol/C_NotificationEvent.cs" line="25" column="23" />
+      <Breakpoint file="/Users/Billy/Documents/source/vitasa/vitasaios/vitavol/AppDelegate.cs" relfile="vitavol/AppDelegate.cs" line="95" column="9" />
+      <Breakpoint file="/Users/Billy/Documents/source/vitasa/vitasaios/vitavol/VC_GridTest.cs" relfile="vitavol/VC_GridTest.cs" line="44" column="37" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.ItemProperties.vitasa PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.380DF332-2DDD-47D7-B6D2-E5E2A64DCD30" />
   <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.ItemProperties.vitavol PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.FC55E219-01CF-4B69-9619-08CB6DBCD869" />
+  <MonoDevelop.Ide.ItemProperties.vitavol PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.8869554C-20BF-4437-8E64-939662EA6459" />
   <DisabledProjects>
     <String>../SharedModels/SharedModels.shproj</String>
     <String>vitasaadmin/vitasaadmin.csproj</String>

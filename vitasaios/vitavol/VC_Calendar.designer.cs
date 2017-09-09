@@ -16,6 +16,10 @@ namespace vitavol
     {
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UIActivityIndicatorView AI_Loading { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UIButton B_00 { get; set; }
 
         [Outlet]
@@ -200,6 +204,11 @@ namespace vitavol
 
         void ReleaseDesignerOutlets ()
         {
+            if (AI_Loading != null) {
+                AI_Loading.Dispose ();
+                AI_Loading = null;
+            }
+
             if (B_00 != null) {
                 B_00.Dispose ();
                 B_00 = null;

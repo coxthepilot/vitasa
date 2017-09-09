@@ -39,26 +39,35 @@ namespace vitavol
 			// from the all sites list, select the ones that are open on this date
 			List<C_VitaSite> openSites = C_VitaSite.SitesOpenOnDay(Global.SelectedDate, Global.AllSites);
 			// and get the workitems for those sites; shouldn't be any work items on closed dates...
-            WorkItemsOnDateAllSites = C_VitaSite.GetWorksItemsOnDateFromSites(Global.SelectedDate, openSites);
+            WorkItemsOnDateAllSites = Global.GetWorkItemsForSiteOnDateForUser(
+                null,
+                Global.SelectedDate,
+                -1,
+                C_Global.E_SiteCondition.Open);
 
 			// build a list of sites that need help on this date
 			List<C_VitaSite> openSitesThatNeedHelp = new List<C_VitaSite>();
             foreach(C_VitaSite site in Global.AllSites)
             {
                 int numRequired = site.GetNumEFilersRequiredOnDate(Global.SelectedDate);
-                List<C_WorkItem> workItemsForSiteOnDate = site.GetWorkItemsOnDate(Global.SelectedDate);
+                List<C_WorkItem> workItemsForSiteOnDate = Global.GetWorkItemsForSiteOnDateForUser(
+                    site.Slug,
+                    Global.SelectedDate,
+                    -1,
+                    C_Global.E_SiteCondition.Any);
 
-                if (numRequired > workItemsForSiteOnDate.Count)
+
+				if (numRequired > workItemsForSiteOnDate.Count)
                     openSitesThatNeedHelp.Add(site);
 			}
 
 			Global.OpenSitesThatNeedHelp = openSitesThatNeedHelp; // we save this so Maps doesn't have to recompute
 
-            TV_Sites.Source = new C_SitesTableSourceX(Global, this, openSitesThatNeedHelp, WorkItemsOnDateAllSites);
+            TV_Sites.Source = new C_TableSourceSitesOnDateList(Global, this, openSitesThatNeedHelp, WorkItemsOnDateAllSites);
             TV_Sites.ReloadData();
 		}
 
-		public class C_SitesTableSourceX : UITableViewSource
+		public class C_TableSourceSitesOnDateList : UITableViewSource
 		{
             readonly C_Global Global;
             readonly UIViewController ourVC;
@@ -67,7 +76,7 @@ namespace vitavol
 
             const string CellIdentifier = "TableCell";
 
-            public C_SitesTableSourceX(C_Global pac, UIViewController vc, List<C_VitaSite> sites, List<C_WorkItem> signUpsOnDate)
+            public C_TableSourceSitesOnDateList(C_Global pac, UIViewController vc, List<C_VitaSite> sites, List<C_WorkItem> signUpsOnDate)
 			{
 				Global = pac;
 				ourVC = vc;
@@ -77,9 +86,7 @@ namespace vitavol
 
 			public override nint RowsInSection(UITableView tableview, nint section)
 			{
-				int count = 0;
-				if (Sites != null)
-					count = Sites.Count;
+				int count = Sites.Count;
 				return count;
 			}
 
@@ -97,22 +104,6 @@ namespace vitavol
                 int numEF = site.GetNumEFilersRequiredOnDate(Global.SelectedDate);
 				cell.DetailTextLabel.Text = numEF.ToString() + " needed.";
 
-                switch (site.Status)
-                {
-                    case E_SiteStatus.Accepting:
-                        cell.ImageView.Image = UIImage.FromBundle("greenstatus.jpg");
-                        break;
-                    case E_SiteStatus.NearLimit:
-                        cell.ImageView.Image = UIImage.FromBundle("yellowstatus.jpg");
-                        break;
-                    case E_SiteStatus.NotAccepting:
-                        cell.ImageView.Image = UIImage.FromBundle("redstatus.jpg");
-                        break;
-                    case E_SiteStatus.Closed:
-                        cell.ImageView.Image = UIImage.FromBundle("blackstatus.jpg");
-                        break;
-                }
-
                 return cell;
 			}
 
@@ -121,7 +112,11 @@ namespace vitavol
                 // Required for VC_SignUp
                 // SelectedDate - came from Calendar
 				Global.SelectedSite = Sites[indexPath.Row];
-                Global.WorkItemsOnSiteOnDate = Global.SelectedSite.GetWorkItemsOnDate(Global.SelectedDate);
+                Global.WorkItemsOnSiteOnDate = Global.GetWorkItemsForSiteOnDateForUser(
+                    Global.SelectedSite.Slug,
+                    Global.SelectedDate,
+                    -1,
+                    C_Global.E_SiteCondition.Any);
 
 				Global.DetailsCameFrom = E_CameFrom.List;
 

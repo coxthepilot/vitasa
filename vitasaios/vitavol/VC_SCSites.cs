@@ -72,7 +72,7 @@ namespace vitavol
                 C_VitaSite oursite = Sites[indexPath.Row];
 
 				cell.TextLabel.Text = oursite.Name;
-                cell.DetailTextLabel.Text = oursite.Street; // todo: show volunteers status?
+                cell.DetailTextLabel.Text = oursite.Street;
 
 				return cell;
 			}

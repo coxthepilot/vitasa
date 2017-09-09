@@ -16,11 +16,11 @@ namespace vitavol
     {
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UIButton B_Back { get; set; }
+        UIKit.UIActivityIndicatorView AI_Busy { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UIButton B_Cancel { get; set; }
+        UIKit.UIButton B_Back { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
@@ -44,22 +44,22 @@ namespace vitavol
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UITextField TB_Suggestion { get; set; }
+        UIKit.UITextField TB_Title { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UITextField TB_Title { get; set; }
+        UIKit.UITextView TxV_Body { get; set; }
 
         void ReleaseDesignerOutlets ()
         {
+            if (AI_Busy != null) {
+                AI_Busy.Dispose ();
+                AI_Busy = null;
+            }
+
             if (B_Back != null) {
                 B_Back.Dispose ();
                 B_Back = null;
-            }
-
-            if (B_Cancel != null) {
-                B_Cancel.Dispose ();
-                B_Cancel = null;
             }
 
             if (B_DeleteThisSuggestion != null) {
@@ -87,14 +87,14 @@ namespace vitavol
                 L_Submitter = null;
             }
 
-            if (TB_Suggestion != null) {
-                TB_Suggestion.Dispose ();
-                TB_Suggestion = null;
-            }
-
             if (TB_Title != null) {
                 TB_Title.Dispose ();
                 TB_Title = null;
+            }
+
+            if (TxV_Body != null) {
+                TxV_Body.Dispose ();
+                TxV_Body = null;
             }
         }
     }

@@ -65,53 +65,64 @@ namespace vitavol
 
 			B_Back.TouchUpInside += async (sender, e) =>
 			{
-                if (Dirty)
+                if (!Dirty)
                 {
-                    Tools.E_MessageBoxResults mbres = await Tools.MessageBox(
-                        this,
-                        "Save Changes?",
-                        "Changes have been made. Save them?",
-                        Tools.E_MessageBoxButtons.YesNo);
-                    if (mbres == Tools.E_MessageBoxResults.Yes)
-                    {
-                        if (NewEntry)
-                        {
-							// create new entry
-							OurCalendarEntry.OpenTime = new C_HMS(TB_OpenTime.Text);
-							OurCalendarEntry.CloseTime = new C_HMS(TB_CloseTime.Text);
-							OurCalendarEntry.NumEFilers = Convert.ToInt32(TB_NumEFilers.Text);
-							bool success = await Global.SelectedSite.CreateCalendarException(Global.LoggedInUser.Token, OurCalendarEntry);
-                            if (!success)
-                            {
-                                await Tools.MessageBox(this, "Error", "Unable to create the calendar entry.", Tools.E_MessageBoxButtons.Ok);
-                                return;
-                            }
-                        }
-                        else
-                        {
-							// update the entry
-							OurCalendarEntry.OpenTime = new C_HMS(TB_OpenTime.Text);
-							OurCalendarEntry.CloseTime = new C_HMS(TB_CloseTime.Text);
-							OurCalendarEntry.NumEFilers = Convert.ToInt32(TB_NumEFilers.Text);
-							bool success = await Global.SelectedSite.UpdateCalendarException(Global.LoggedInUser.Token, OurCalendarEntry);
-							if (!success)
-							{
-								await Tools.MessageBox(this, "Error", "Unable to update the calendar entry.", Tools.E_MessageBoxButtons.Ok);
-								return;
-							}
-						}
-                    }
-                }
+					PerformSegue("Segue_SCSiteOnDateToSCSiteCalendar", this);
+                    return;
+				}
 
-				PerformSegue("Segue_SCSiteOnDateToSCSiteCalendar", this);
+                Tools.E_MessageBoxResults mbres = await Tools.MessageBox(
+                    this,
+                    "Save Changes?",
+                    "Changes have been made. Save them?",
+                    Tools.E_MessageBoxButtons.YesNo);
+
+                if (mbres != Tools.E_MessageBoxResults.Yes)
+                {
+					PerformSegue("Segue_SCSiteOnDateToSCSiteCalendar", this);
+                    return;
+				}
+
+				OurCalendarEntry.OpenTime = new C_HMS(TB_OpenTime.Text);
+				OurCalendarEntry.CloseTime = new C_HMS(TB_CloseTime.Text);
+				OurCalendarEntry.NumEFilers = Convert.ToInt32(TB_NumEFilers.Text);
+                bool success = false;
+
+                EnableUI(false);
+                AI_Busy.StartAnimating();
+
+				if (NewEntry)
+					// create new entry
+					success = await Global.SelectedSite.CreateCalendarException(Global.LoggedInUser.Token, OurCalendarEntry);
+                else
+					// update the entry
+					success = await Global.SelectedSite.UpdateCalendarException(Global.LoggedInUser.Token, OurCalendarEntry);
+
+                AI_Busy.StopAnimating();
+                EnableUI(true);
+
+                if (success)
+					PerformSegue("Segue_SCSiteOnDateToSCSiteCalendar", this);
+                
+                Tools.E_MessageBoxResults mbres1 = await Tools.MessageBox(this, 
+                                                                         "Error", 
+                                                                         "Unable to create the calendar entry.", 
+                                                                         Tools.E_MessageBoxButtons.Ok);
 			};
 
 			B_RestoreDefaults.TouchUpInside += async (sender, e) =>
 			{
                 if (!NewEntry)
                 {
-					// delete this calendar exception
+                    // delete this calendar exception
+                    AI_Busy.StartAnimating();
+                    EnableUI(false);
+
 					bool success = await Global.SelectedSite.RemoveCalendarException(Global.LoggedInUser.Token, OurCalendarEntry);
+
+                    AI_Busy.StopAnimating();
+                    EnableUI(true);
+
 					if (!success)
 					{
 						await Tools.MessageBox(this, "Error", "Unable to update the calendar entry.", Tools.E_MessageBoxButtons.Ok);
@@ -124,36 +135,34 @@ namespace vitavol
 
 			B_SaveCalendarException.TouchUpInside += async (sender, e) =>
 			{
-                if (NewEntry)
-                {
+				OurCalendarEntry.OpenTime = new C_HMS(TB_OpenTime.Text);
+				OurCalendarEntry.CloseTime = new C_HMS(TB_CloseTime.Text);
+				OurCalendarEntry.NumEFilers = Convert.ToInt32(TB_NumEFilers.Text);
+                bool success = false;
+
+				AI_Busy.StartAnimating();
+				EnableUI(false);
+
+				if (NewEntry)
                     // create new calendar entry
-                    OurCalendarEntry.OpenTime = new C_HMS(TB_OpenTime.Text);
-                    OurCalendarEntry.CloseTime = new C_HMS(TB_CloseTime.Text);
-                    OurCalendarEntry.NumEFilers = Convert.ToInt32(TB_NumEFilers.Text);
-					bool success = await Global.SelectedSite.CreateCalendarException(Global.LoggedInUser.Token, OurCalendarEntry);
-					if (!success)
-					{
-						await Tools.MessageBox(this, "Error", "Unable to create the calendar entry.", Tools.E_MessageBoxButtons.Ok);
-						return;
-					}
-
-					Dirty = false;
-                }
+					success = await Global.SelectedSite.CreateCalendarException(Global.LoggedInUser.Token, OurCalendarEntry);
                 else
-                {
 					// update the entry
-					OurCalendarEntry.OpenTime = new C_HMS(TB_OpenTime.Text);
-					OurCalendarEntry.CloseTime = new C_HMS(TB_CloseTime.Text);
-					OurCalendarEntry.NumEFilers = Convert.ToInt32(TB_NumEFilers.Text);
-					bool success = await Global.SelectedSite.UpdateCalendarException(Global.LoggedInUser.Token, OurCalendarEntry);
-					if (!success)
-					{
-						await Tools.MessageBox(this, "Error", "Unable to update the calendar entry.", Tools.E_MessageBoxButtons.Ok);
-						return;
-					}
+					success = await Global.SelectedSite.UpdateCalendarException(Global.LoggedInUser.Token, OurCalendarEntry);
 
-					Dirty = false;
-                }
+				AI_Busy.StopAnimating();
+				EnableUI(true);
+
+				if (!success)
+				{
+                    Tools.E_MessageBoxResults mbres = await Tools.MessageBox(this, 
+                                                                             "Error", 
+                                                                             "Unable to update the calendar entry.", 
+                                                                             Tools.E_MessageBoxButtons.Ok);
+					return;
+				}
+
+				Dirty = false;
 
 				PerformSegue("Segue_SCSiteOnDateToSCSiteCalendar", this);
 			};
@@ -192,9 +201,7 @@ namespace vitavol
 
 			TB_OpenTime.InputView = DP_OpenTime;
 			TB_OpenTime.InputAccessoryView = ToolBar_OpenTime;
-            DateTime dty1 = Tools.NSDateToDateTime(Tools.BuildNSDateFromTime(OurCalendarEntry.OpenTime.ToString("hh:mm")));
-			C_HMS openTime = new C_HMS(dty1);
-			TB_OpenTime.Text = openTime.ToString("hh:mm p");
+			TB_OpenTime.Text = OurCalendarEntry.OpenTime.ToString("hh:mm p");
 
             // close time
             UIDatePicker DP_CloseTime = new UIDatePicker()
@@ -230,9 +237,7 @@ namespace vitavol
 			TB_CloseTime.InputView = DP_CloseTime;
 			TB_CloseTime.InputAccessoryView = ToolBar_CloseTime;
 
-            DateTime dtx2 = Tools.NSDateToDateTime(Tools.BuildNSDateFromTime(OurCalendarEntry.CloseTime.ToString("hh:mm")));
-			C_HMS closeTime = new C_HMS(dtx2);
-			TB_CloseTime.Text = closeTime.ToString("hh:mm p");
+			TB_CloseTime.Text = OurCalendarEntry.CloseTime.ToString("hh:mm p");
 
 			// number of efilers
 			UIPickerView PV_EFilers = new UIPickerView()
@@ -262,10 +267,22 @@ namespace vitavol
 			};
 			doneButtonEFiler.SetTitleTextAttributes(uitaef, UIControlState.Normal);
 
+            PV_EFilers.Select(OurCalendarEntry.NumEFilers, 0, true);
 			TB_NumEFilers.InputView = PV_EFilers;
 			TB_NumEFilers.InputAccessoryView = ToolBar_EFiler;
             TB_NumEFilers.Text = OurCalendarEntry.NumEFilers.ToString();
 		}
+
+        private void EnableUI(bool en)
+        {
+            B_Back.Enabled = en;
+            B_RestoreDefaults.Enabled = en && Dirty;
+            B_SaveCalendarException.Enabled = en && Dirty;
+            TB_OpenTime.Enabled = en;
+            TB_CloseTime.Enabled = en;
+            TB_NumEFilers.Enabled = en;
+            SW_IsOpen.Enabled = en;
+        }
 
         private void SetDisplayValues()
         {

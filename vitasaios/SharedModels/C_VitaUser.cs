@@ -23,8 +23,8 @@ namespace zsquared
         public string Password; // only used on create new user; never sent from the backend
         public string Phone;
         public E_Certification Certification;
-        public List<C_WorkItem> WorkHistory;
-        public List<C_WorkItem> WorkIntents;
+        public List<C_WorkItem> WorkHistoryX;
+        public List<C_WorkItem> WorkIntentsX;
 		public List<E_VitaUserRoles> Roles;
         public List<C_Suggestion> Suggestions;
 
@@ -79,8 +79,8 @@ namespace zsquared
 
 		public C_VitaUser()
         {
-            WorkHistory = new List<C_WorkItem>();
-            WorkIntents = new List<C_WorkItem>();
+            WorkHistoryX = new List<C_WorkItem>();
+            WorkIntentsX = new List<C_WorkItem>();
             Roles = new List<E_VitaUserRoles>();
             Suggestions = new List<C_Suggestion>();
         }
@@ -91,8 +91,8 @@ namespace zsquared
             Email = _email;
             Password = _pw;
 
-			WorkHistory = new List<C_WorkItem>();
-			WorkIntents = new List<C_WorkItem>();
+			WorkHistoryX = new List<C_WorkItem>();
+			WorkIntentsX = new List<C_WorkItem>();
 			Roles = new List<E_VitaUserRoles>();
 			Suggestions = new List<C_Suggestion>();
 		}
@@ -104,25 +104,29 @@ namespace zsquared
             if (!(jv is JsonObject))
                 throw new ApplicationException("expecting JsonObject");
 
-			WorkHistory = new List<C_WorkItem>();
-			WorkIntents = new List<C_WorkItem>();
+			WorkHistoryX = new List<C_WorkItem>();
+			WorkIntentsX = new List<C_WorkItem>();
 			Roles = new List<E_VitaUserRoles>();
 			Suggestions = new List<C_Suggestion>();
 
-			if (jv.ContainsKey(N_ID))
-				id = jv[N_ID];
+            if (jv.ContainsKey(N_ID))
+                id = Tools.JsonProcessInt(jv[N_ID], id);
 
-			if (jv.ContainsKey(N_Name))
-				Name = jv[N_Name];
+            if (jv.ContainsKey(N_Name))
+                Name = Tools.JsonProcessString(jv[N_Name], Name);
 
-			if (jv.ContainsKey(N_Email))
-                Email = jv[N_Email];
+            if (jv.ContainsKey(N_Email))
+                Email = Tools.JsonProcessString(jv[N_Email], Email);
 
             if (jv.ContainsKey(N_Phone))
-				Phone = jv[N_Phone];
+                Phone = Tools.JsonProcessString(jv[N_Phone], Phone);
 
             if (jv.ContainsKey(N_Certification))
-                Certification = Tools.StringToEnum<E_Certification>((string)jv[N_Certification]);
+            {
+                string cs = Tools.JsonProcessString(jv[N_Certification], "Unknown");
+
+				Certification = Tools.StringToEnum<E_Certification>(cs);
+            }
 
             if (jv.ContainsKey(N_WorkHistory))
             {
@@ -134,7 +138,7 @@ namespace zsquared
 				foreach (JsonValue jvav in jva)
 				{
                     C_WorkItem wh = new C_WorkItem(jvav);
-                    WorkHistory.Add(wh);
+                    WorkHistoryX.Add(wh);
 				}
 			}
 
@@ -148,7 +152,7 @@ namespace zsquared
 				foreach (JsonValue jvav in jva)
 				{
 					C_WorkItem wh = new C_WorkItem(jvav);
-                    WorkIntents.Add(wh);
+                    WorkIntentsX.Add(wh);
 				}
 			}
 
@@ -182,103 +186,6 @@ namespace zsquared
             }
 		}
 
-        /// <summary>
-        /// Makes the API call to add an Intent. If successful, also adds to the User WorkIntents list.
-        /// </summary>
-        /// <returns>true on success</returns>
-        /// <param name="wi">work item to add</param>
-        public async Task<bool> AddIntent(C_WorkItem wi)
-        {
-            //string submiturl = C_Vita.VitaCoreUrlSSL + "/users/" + id.ToString() + "/signups/";
-			string submiturl = C_Vita.VitaCoreUrlSSL + "/signups/";
-
-			C_Vita.SetupCertificateHandling();
-
-			string bodyjson = "{ "
-                + "\"site\" : \"" + wi.SiteSlug + "\""
-                + ",\"date\" : \"" + wi.Date.ToString("yyyy-mm-dd") + "\""
-				+ "}";
-
-            bool success = false;
-			try
-			{
-				WebClient wc = new WebClient()
-				{
-					BaseAddress = C_Vita.VitaCoreUrlSSL
-				};
-                wc.Headers.Add(HttpRequestHeader.Cookie, Token);
-				wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
-				wc.Headers.Add(HttpRequestHeader.Accept, "application/json");
-
-				byte[] dataBytes = Encoding.UTF8.GetBytes(bodyjson);
-				// do the actual web request
-				byte[] responseBytes = await wc.UploadDataTaskAsync(submiturl, "POST", dataBytes);
-                // get and parse the response
-				string responseString = Encoding.UTF8.GetString(responseBytes);
-				JsonValue responseJson = JsonValue.Parse(responseString);
-                // if it parses then it is our success result
-
-                // add the intent to this users WorkIntent list
-                WorkIntents.Add(wi);
-
-				success = true;
-			}
-			catch (Exception e)
-			{
-				Console.WriteLine("Attempt to add intent or response parsing failed: " + e.Message);
-                success = false;
-			}
-
-			return success;
-        }
-
-        /// <summary>
-        /// Makes the API call to remove the intent; on success, removes the this users WorkIntents list.
-        /// </summary>
-        /// <returns>true on success</returns>
-        /// <param name="wi">work item to remove</param>
-        public async Task<bool> RemoveIntent(C_WorkItem wi)
-        {
-            if (wi.id == -1)
-                throw new ApplicationException("must be an existing id; can't delete one that hasn't been added");
-            
-            string submiturl = C_Vita.VitaCoreUrlSSL + "/users/" + id.ToString() + "/signups/" + wi.id.ToString();
-
-            C_Vita.SetupCertificateHandling();
-
-            bool success = false;
-			try
-			{
-				WebClient wc = new WebClient()
-				{
-                    BaseAddress = C_Vita.VitaCoreUrlSSL
-				};
-				wc.Headers.Add(HttpRequestHeader.Cookie, Token);
-				wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
-				wc.Headers.Add(HttpRequestHeader.Accept, "application/json");
-
-				byte[] dataBytes = Encoding.UTF8.GetBytes("");
-				// do the actual web request
-				byte[] responseBytes = await wc.UploadDataTaskAsync(submiturl, "DELETE", dataBytes);
-
-				string responseString = Encoding.UTF8.GetString(responseBytes);
-				JsonValue responseJson = JsonValue.Parse(responseString);
-                // if it parses then it is our success result
-
-                // remove this intent from the list
-                WorkIntents.Remove(wi);
-
-				success = true;
-			}
-			catch (Exception e)
-			{
-				Console.WriteLine("Attempt to remove intent or response parsing failed: " + e.Message);
-                success = false;
-			}
-
-			return success;
-        }
-
 		/// <summary>
 		/// Makes the API call to add a Suggestion. If successful, also adds to the User Suggestions list.
 		/// </summary>
@@ -286,38 +193,36 @@ namespace zsquared
 		/// <param name="sug">suggestion to add</param>
         public async Task<bool> AddSuggestion(C_Suggestion sug)
 		{
-            string submiturl = C_Vita.VitaCoreUrlSSL + "/suggestions";
-
-            C_Vita.SetupCertificateHandling();
-
-            // todo; needs the subject, date, status, and maybe more
 			string bodyjson = "{ "
                 + "\"subject\" : \"" + sug.Subject + "\""
                 + ",\"details\" : \"" + sug.Text + "\""
 				//+ ",\"from_public\" : \"" + "false" + "\""
 				+ "}";
-			byte[] dataBytes = Encoding.UTF8.GetBytes(bodyjson);
-
-			WebClient wc = new WebClient()
-			{
-				BaseAddress = C_Vita.VitaCoreUrlSSL
-			};
-			wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
-			wc.Headers.Add(HttpRequestHeader.Accept, "application/json");
-            wc.Headers.Add(HttpRequestHeader.Cookie, Token);
 
 			bool success = false;
 			try
 			{
-				// do the actual web request
-				byte[] responseBytes = await wc.UploadDataTaskAsync(submiturl, "POST", dataBytes);
+				string submiturl = "/suggestions";
+				WebClient wc = new WebClient()
+				{
+					BaseAddress = C_Vita.VitaCoreUrlSSL
+				};
+				wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
+				wc.Headers.Add(HttpRequestHeader.Accept, "application/json");
+				wc.Headers.Add(HttpRequestHeader.Cookie, Token);
+
+                // do the actual web request
+                string responseString = await wc.UploadStringTaskAsync(submiturl, "POST", bodyjson);
+
 				// get and parse the response
-				string responseString = Encoding.UTF8.GetString(responseBytes);
 				JsonValue responseJson = JsonValue.Parse(responseString);
-                // if it parses then it is our success result
+
                 C_Suggestion nsug = new C_Suggestion(responseJson);
+                if ((nsug.Subject == null) || (nsug.Text == null))
+                    Console.WriteLine("Suggestion subject or text is null");
 
                 // add the intent to this users WorkIntent list
+                sug.id = nsug.id;
                 Suggestions.Add(sug);
 
 				success = true;
@@ -340,20 +245,18 @@ namespace zsquared
 		{
             if (sug.id == -1)
                 throw new ApplicationException("can't update a Suggestion that hasn't been submitted yet");
-            
-            string submiturl = C_Vita.VitaCoreUrlSSL + "/suggestions/" + sug.id.ToString();
 
-            C_Vita.SetupCertificateHandling();
-
-			// todo; needs the subject, date, status, and maybe more
+            string escapedText = sug.Text.Replace("\n", "\\n");
 			string bodyjson = "{ "
 				+ "\"user\" : \"" + id.ToString() + "\""
-                                      + ",\"text\" : \"" + sug.Text + "\""
+                + ",\"details\" : \"" + escapedText + "\""
+                + ",\"subject\" : \"" + sug.Subject + "\""
 				+ "}";
 
 			bool success = false;
 			try
 			{
+				string submiturl = "/suggestions/" + sug.id.ToString();
 				WebClient wc = new WebClient()
 				{
 					BaseAddress = C_Vita.VitaCoreUrlSSL
@@ -362,16 +265,13 @@ namespace zsquared
 				wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
 				wc.Headers.Add(HttpRequestHeader.Accept, "application/json");
 
-				byte[] dataBytes = Encoding.UTF8.GetBytes(bodyjson);
-				// do the actual web request
-				byte[] responseBytes = await wc.UploadDataTaskAsync(submiturl, "PUT", dataBytes);
-				// get and parse the response
-				string responseString = Encoding.UTF8.GetString(responseBytes);
-				JsonValue responseJson = JsonValue.Parse(responseString);
-				// if it parses then it is our success result
+                string responseString = await wc.UploadStringTaskAsync(submiturl, "PUT", bodyjson);
 
-				// add the intent to this users WorkIntent list
-				Suggestions.Add(sug);
+				// get and parse the response
+				JsonValue responseJson = JsonValue.Parse(responseString);
+
+                C_Suggestion nsug = new C_Suggestion(responseJson);
+				// if it parses then it is our success result
 
 				success = true;
 			}
@@ -394,13 +294,10 @@ namespace zsquared
 			if (wi.id == -1)
 				throw new ApplicationException("must be an existing id; can't delete one that hasn't been added");
 
-            string submiturl = C_Vita.VitaCoreUrlSSL + "/suggestions/" + wi.id.ToString();
-
-            C_Vita.SetupCertificateHandling();
-
 			bool success = false;
 			try
 			{
+				string submiturl = "/suggestions/" + wi.id.ToString();
 				WebClient wc = new WebClient()
 				{
                     BaseAddress = C_Vita.VitaCoreUrlSSL
@@ -414,8 +311,8 @@ namespace zsquared
 				// do the actual web request
 				byte[] responseBytes = await wc.UploadDataTaskAsync(submiturl, "DELETE", dataBytes);
 
-				string responseString = Encoding.UTF8.GetString(responseBytes);
-				JsonValue responseJson = JsonValue.Parse(responseString);
+				//string responseString = Encoding.UTF8.GetString(responseBytes);
+				//JsonValue responseJson = JsonValue.Parse(responseString);
                 // if it parses then it is our success result
 
                 // remove this intent from the list
@@ -462,16 +359,13 @@ namespace zsquared
             return res;
 		}
 
-        public static async Task<C_VitaUser> FetchUser(string token, int id)
+        public static async Task<C_VitaUser> FetchUserX(string token, int id)
         {
-            string usersUrl = C_Vita.VitaCoreUrlSSL + "/users/" + id.ToString();
-			C_Vita.SetupCertificateHandling();
-
 			C_VitaUser res = null;
-
 			try
 			{
-                WebClient wc = new WebClient()
+				string usersUrl = "/users/" + id.ToString();
+				WebClient wc = new WebClient()
                 {
                     BaseAddress = C_Vita.VitaCoreUrlSSL
 				};
@@ -479,28 +373,14 @@ namespace zsquared
 				wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
 				wc.Headers.Add(HttpRequestHeader.Accept, "application/json");
 
-				var data = await wc.DownloadDataTaskAsync(new Uri(usersUrl));
+                string ss = await wc.DownloadStringTaskAsync(usersUrl);
 
-				using (Stream outstream = new MemoryStream())
-				{
-					await outstream.WriteAsync(data, 0, data.Length);
+				JsonValue jv = JsonValue.Parse(ss);
 
-					outstream.Seek(0, SeekOrigin.Begin);
+				if (!(jv is JsonObject))
+					throw new ApplicationException("must be an object");
 
-					// todo: need to handle abritrarily large read responses
-					byte[] ba = new byte[10000]; // arbitrary number
-					int bytesRead = outstream.Read(ba, 0, 10000);
-
-					string resp = Encoding.UTF8.GetString(ba, 0, bytesRead);
-
-					JsonValue jv = JsonValue.Parse(resp);
-
-					// we are expecting an array
-                    if (!(jv is JsonObject))
-						throw new ApplicationException("must be an object");
-                    
-					res = new C_VitaUser(jv);
-				}
+				res = new C_VitaUser(jv);
 			}
 			catch (Exception e)
 			{
@@ -518,14 +398,11 @@ namespace zsquared
         /// <param name="token">Token.</param>
 		public static async Task<List<C_VitaUser>> FetchUsersList(string token)
 		{
-            string usersUrl = C_Vita.VitaCoreUrlSSL + "/users";
-            C_Vita.SetupCertificateHandling();
-
             List<C_VitaUser> res = null;
-
 			try
 			{
-                WebClient wc = new WebClient()
+				string usersUrl = "/users";
+				WebClient wc = new WebClient()
                 {
                     BaseAddress = C_Vita.VitaCoreUrlSSL
                 };
@@ -533,32 +410,20 @@ namespace zsquared
 				wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
 				wc.Headers.Add(HttpRequestHeader.Accept, "application/json");
 
-                var data = await wc.DownloadDataTaskAsync(new Uri(usersUrl));
+                string resp = await wc.DownloadStringTaskAsync(usersUrl);
 
-                using (Stream outstream = new MemoryStream())
-                {
-                    await outstream.WriteAsync(data, 0, data.Length);
+				JsonValue jv = JsonValue.Parse(resp);
 
-                    outstream.Seek(0, SeekOrigin.Begin);
-
-                    // todo: need to handle abritrarily large read responses
-                    byte[] ba = new byte[10000]; // arbitrary number
-                    int bytesRead = outstream.Read(ba, 0, 10000);
-
-                    string resp = Encoding.UTF8.GetString(ba, 0, bytesRead);
-
-                    JsonValue jv = JsonValue.Parse(resp);
-
-					// we are expecting an array
-					if (!(jv is JsonArray))
-						throw new ApplicationException("must be an array");
-					res = new List<C_VitaUser>();
-                    foreach(JsonValue jv1 in jv)
-                    {
-                        C_VitaUser vu = new C_VitaUser(jv1);
-                        res.Add(vu);
-                    }
-                }
+				// we are expecting an array
+				if (!(jv is JsonArray))
+					throw new ApplicationException("must be an array");
+                
+				res = new List<C_VitaUser>();
+				foreach (JsonValue jv1 in jv)
+				{
+					C_VitaUser vu = new C_VitaUser(jv1);
+					res.Add(vu);
+				}
 			}
 			catch (Exception e)
 			{

@@ -1,2 +1,3 @@
-﻿                    var x = j[N_Coordinator];
-"  at zsquared.C_VitaSite..ctor (System.Json.JsonValue j) [0x001fc] in /Users/Billy/Documents/source/vitasa/vitasaios/SharedModels/C_VitaSite.cs:115 "
+﻿{
+[
+    {"workitemid" + : "35","notificationissued" + : "true","eventdate" + : "2017-09-13","siteslug" + : "cody-library","sitename" + : "Cody Library"}]}

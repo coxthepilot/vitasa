@@ -44,55 +44,30 @@ namespace zsquared
                 throw new ApplicationException("we can only work with an object");
 
             if (j.ContainsKey(N_ID))
-                id = j[N_ID];
+                id = Tools.JsonProcessInt(j[N_ID], id);
 
             if (j.ContainsKey(N_UserId))
-                UserId = j[N_UserId];
+                UserId = Tools.JsonProcessInt(j[N_UserId], UserId);
 
             if (j.ContainsKey(N_Subject))
-                Subject = j[N_Subject];
+                Subject = Tools.JsonProcessString(j[N_Subject], Subject);
 
             if (j.ContainsKey(N_Text))
-                Text = j[N_Text];
+            {
+                string unescapedText = Tools.JsonProcessString(j[N_Text], Text);
+                if (unescapedText != null)
+                    Text = unescapedText.Replace("\\n", "\n");
+            }
 
             if (j.ContainsKey(N_Date))
-            {
-                string sd = j[N_Date];
-                DateTime dt = Convert.ToDateTime(sd);
-                DateTime dtctx = new DateTime(dt.Ticks, DateTimeKind.Local);
-                Date = new C_YMD(dtctx);
-            }
+                Date = Tools.JsonProcessDate(j[N_Date], Date);
 
-            try
-            {
-                if (j.ContainsKey(N_FromPublic))
-                {
-                    var jv = j[N_FromPublic];
-                    if (jv != null)
-                    {
-                        if (jv.JsonType == JsonType.Boolean)
-                            FromPublic = jv;
-                        else
-                        {
-                            try
-                            {
-								string bs = j[N_FromPublic];
-								if (bs != null)
-									FromPublic = bs == "true";
-							}
-                            catch {}
-                        }
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
+            if (j.ContainsKey(N_FromPublic))
+                FromPublic = Tools.JsonProcessBool(j[N_FromPublic], FromPublic);
 
 			if (j.ContainsKey(N_Status))
             {
-                string ssv = j[N_Status];
+                string ssv = Tools.JsonProcessString(j[N_Status], E_SuggestionStatus.Unknown.ToString());
                 Status = Tools.StringToEnum<E_SuggestionStatus>(ssv);
             }
 

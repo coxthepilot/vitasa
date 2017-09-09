@@ -1,31 +1,27 @@
-﻿All
-    Notifications (poll or APN)
-    Reminders on SignUp (local Notifcations)
+﻿To Do:
+    System Notifications (poll or APN)
     Entitlements
     Put size handles on all UI elements (!!! sigh !!!)
-    Use device authentication
-    Default hours for a user signup should be the open hours for a site
-    Refresh LoggedInUser data after some time interval?
-    If CRUD WorkIntent: change in LoggedInUser AND Site
     Protocol version
+    Hande lost password
 
-    How to hande lost password???
-
-VC_Suggestion
-    Add new suggestion, gets 422; unprocessable; probably schema issue
-    Use a Multiline text box for the suggestion body
+Future
+* Means to edit/change the Site season (from Back Office web UI)
 
 For Sheila/Alejandra
     If SC, but no sites, treat as a volunteer? Or SC with no sites?
+    Can backup SC's do everything the primary can? Yes...
 
 For Chris
-    *** Fixed: DELETE on /sites/slug/calendars/{id} gets error 400, bad request; don't send with a payload; the delete is being successful
+* Some very slow responses; probably network related; any way to view his response times?
+* Occasionally getting a 422 on Registration; do logs show anything?
+* 422 seems to be a DB error (like duplicate key)
+* Some calls just return {true} as a bool; expected? Example: update site calendar
+* Protocol version; do I need to signal the API version I'm using?
 
-    POST on /suggestions (create new suggestion) gets 422; stuck in VC_Suggestion on Save; fields null
-       on return; >>> upload the code to github; done
+Bugs
+* Register: occasional 422; when it starts, have to exit and come back in; after 2 registrations; could be db errors...
+* Some login, other api responses VERY slow (could be my home wifi and internet)
 
-    Getting 422 on POST intent; /signups not /users/6/signups
-
-    Need UserId on WorkIntent; userid is there, look at response
-
-    Need get user name (minimum) without Admin (or, eash SC gets admin?)
+Verify
+* Local notifications are working

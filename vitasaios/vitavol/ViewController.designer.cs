@@ -15,7 +15,15 @@ namespace vitavol
     {
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UIActivityIndicatorView AI_Spinner { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UIButton B_About { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UIButton B_CellView { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
@@ -31,6 +39,10 @@ namespace vitavol
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UILabel L_Fetch { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UITextField TB_Email { get; set; }
 
         [Outlet]
@@ -39,9 +51,19 @@ namespace vitavol
 
         void ReleaseDesignerOutlets ()
         {
+            if (AI_Spinner != null) {
+                AI_Spinner.Dispose ();
+                AI_Spinner = null;
+            }
+
             if (B_About != null) {
                 B_About.Dispose ();
                 B_About = null;
+            }
+
+            if (B_CellView != null) {
+                B_CellView.Dispose ();
+                B_CellView = null;
             }
 
             if (B_Login != null) {
@@ -57,6 +79,11 @@ namespace vitavol
             if (I_BackgroundImage != null) {
                 I_BackgroundImage.Dispose ();
                 I_BackgroundImage = null;
+            }
+
+            if (L_Fetch != null) {
+                L_Fetch.Dispose ();
+                L_Fetch = null;
             }
 
             if (TB_Email != null) {

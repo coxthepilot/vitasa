@@ -8,6 +8,7 @@ using UIKit;
 namespace zsquared
 {
     public enum E_SitesCellType { NameAndDate, NameAndNeeded }
+
 	public class C_SitesTableSource : UITableViewSource
 	{
         C_Global Global;

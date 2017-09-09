@@ -2,6 +2,7 @@ using Foundation;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Linq;
 using UIKit;
 
 using zsquared;
@@ -30,21 +31,12 @@ namespace vitavol
 			AppDelegate myAppDelegate = (AppDelegate)UIApplication.SharedApplication.Delegate;
             Global = myAppDelegate.Global;
 
+			// use the date from our previous visit if it exists
+			if (Global.CalendarDate == null)
+				Global.CalendarDate = C_YMD.Now;
+
 			B_Back.TouchUpInside += (sender, e) => 
                 PerformSegue("Segue_CalendarToSignUps", this);
-
-            // use the date from our previous visit if it exists
-            if (Global.CalendarDate == null)
-                Global.CalendarDate = C_YMD.Now;
-            
-            CalDate = Global.CalendarDate;
-            calgrid = new C_CalGrid(GetButtonsArray(), L_MonthYear, Global.LoggedInUser);
-            calgrid.ButtonTouchUpInside += (ymd) =>
-            {
-                Global.SelectedDate = ymd;
-
-                PerformSegue("Segue_CalendarToSitesOnDateList", this);
-            };
 
             B_NextMonth.TouchUpInside += (sender, e) =>
             {
@@ -64,10 +56,57 @@ namespace vitavol
 				calgrid.SetDisplay();
 			};
 
-            calgrid.BuildDateStateArray(CalDate, Global.AllSites);
+            AI_Loading.StartAnimating();
+            EnableUI(false);
+            Task.Run(async () => 
+            {
+				int daysInMonth = DateTime.DaysInMonth(Global.CalendarDate.Year, Global.CalendarDate.Month);
+				C_YMD start = new C_YMD(Global.CalendarDate.Year, Global.CalendarDate.Month, 1);
+				C_YMD end = new C_YMD(Global.CalendarDate.Year, Global.CalendarDate.Month, daysInMonth);
 
-            calgrid.SetDisplay();
+                if (Global.SitesSchedule == null)
+                {
+                    Global.SitesSchedule = await C_SiteSchedule.FetchSitesSchedules(start, end);
+                    Global.SiteScheduleSampleTime = DateTime.Now;
+                }
+
+                TimeSpan ts = DateTime.Now - Global.SiteScheduleSampleTime;
+                if (ts.TotalMinutes > 10)
+				{
+					Global.SitesSchedule = await C_SiteSchedule.FetchSitesSchedules(start, end);
+					Global.SiteScheduleSampleTime = DateTime.Now;
+				}
+
+				UIApplication.SharedApplication.InvokeOnMainThread(
+                new Action(() =>
+                {
+                    AI_Loading.StopAnimating();
+                    EnableUI(true);
+
+					CalDate = Global.CalendarDate;
+                    calgrid = new C_CalGrid(GetButtonsArray(), L_MonthYear, Global);
+					calgrid.ButtonTouchUpInside += (ymd) =>
+					{
+						Global.SelectedDate = ymd;
+
+						PerformSegue("Segue_CalendarToSitesOnDateList", this);
+					};
+
+					calgrid.BuildDateStateArray(CalDate, Global.AllSites);
+
+					calgrid.SetDisplay();
+				}));
+			});
 		}
+
+        private void EnableUI(bool en)
+        {
+            B_Back.Enabled = en;
+
+            List<UIButton> buttons = GetButtonsArray();
+            foreach (UIButton b in buttons)
+                b.Hidden = !en;
+        }
 
         public List<UIButton> GetButtonsArray()
         {
@@ -98,6 +137,8 @@ namespace vitavol
             int DateOffset;         // offset for first day of the month
             readonly UILabel YearMonthLabel; // the label for month/year display
             C_VitaUser OurUser;
+            List<C_SiteSchedule> SitesSchedule;
+            C_Global Global;
 
             public delegate void ButtonTouchUpEventHandler(C_YMD ymd);
 
@@ -106,11 +147,13 @@ namespace vitavol
 			/// </summary>
 			public event ButtonTouchUpEventHandler ButtonTouchUpInside;
 
-            public C_CalGrid(List<UIButton> buttons, UILabel yearMonthLabel, C_VitaUser ou)
+            public C_CalGrid(List<UIButton> buttons, UILabel yearMonthLabel, C_Global global)
             {
                 Buttons = buttons;
                 YearMonthLabel = yearMonthLabel;
-                OurUser = ou;
+                Global = global;
+                OurUser = Global.LoggedInUser;
+                SitesSchedule = Global.SitesSchedule;
 
                 foreach(UIButton button in Buttons)
                     button.TouchUpInside += Button_TouchUpInside;
@@ -131,7 +174,9 @@ namespace vitavol
                     return;
 
                 E_DayState thisDayState = DayState[day - 1];
-                if (thisDayState == E_DayState.OnePlusHasNeeds)
+                // we let the user sign up is any site has needs or he's already signed up (for mobile doing >1 per day)
+                if ((thisDayState == E_DayState.OnePlusHasNeeds)
+                    || (thisDayState == E_DayState.SignedUp))
                     ButtonTouchUpInside?.Invoke(new C_YMD(Date.Year, Date.Month, day));
             }
 
@@ -148,30 +193,31 @@ namespace vitavol
                     E_DayState dayState = E_DayState.Unknown;
 
                     C_YMD ourDate = new C_YMD(Date.Year, Date.Month, day);
-                    int ourDayOfWeek = (int)ourDate.DayOfWeek;
 
-                    // see if any site is open
-                    List<C_VitaSite> openSitesList = C_VitaSite.SitesOpenOnDay(ourDate, sites);
-                    if (openSitesList.Count == 0)
-                        dayState = E_DayState.AllClosed;
+                    // see if the user is already signed up somewhere that day
+                    List<C_WorkItem> LoggedInUserWorkItemsOnDate = Global.GetWorkItemsForSiteOnDateForUser(
+                        null,
+                        ourDate,
+                        OurUser.id,
+                        C_Global.E_SiteCondition.Any);
+                    if (LoggedInUserWorkItemsOnDate.Count != 0)
+                        dayState = E_DayState.SignedUp;
                     else
                     {
-                        // todo: can't figure out sign ups for a user at this point
+                        List<C_SiteSchedule> sitesOnDateSchedule = C_SiteSchedule.GetSiteScheduleForSiteOnDate(null, ourDate, SitesSchedule);
 
-                        // see if any site has needs
-                        dayState = E_DayState.NoNeeds;
-                        foreach(C_VitaSite site in openSitesList)
+                        bool allClosed = C_SiteSchedule.AllSitesClosed(sitesOnDateSchedule);
+                        if (allClosed)
+                            dayState = E_DayState.AllClosed;
+                        else
                         {
-                            List<C_WorkItem> workItemsOnDate = site.GetWorkItemsOnDate(Date);
-                            int numEFilersRequired = site.GetNumEFilersRequiredOnDate(Date);
+                            var ou = sitesOnDateSchedule.Where(ss => ss.EFilersNeeded > ss.EFilersSignedUp);
 
-                            if (workItemsOnDate.Count < numEFilersRequired)
-                            {
-                                dayState = E_DayState.OnePlusHasNeeds;
-                                break;
-                            }
+                            int xc = ou.Count();
+                            dayState = ou.Any() ? E_DayState.OnePlusHasNeeds : E_DayState.NoNeeds;
                         }
                     }
+
                     DayState[day - 1] = dayState;
 				}
 

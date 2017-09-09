@@ -15,7 +15,7 @@ __pycache__
 *.log
 >>>>>>> origin/master
 # object and binary files
-*vitasaios/vitasa/bin/*
-*vitasaios/vitasa/obj/*
-*vitasaios/vitavol/bin/*
-*vitasaios/vitavol/obj/*
+#*.exe
+#*.dll
+#*.pdb
+#*.app

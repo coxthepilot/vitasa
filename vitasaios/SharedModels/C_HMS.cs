@@ -274,8 +274,12 @@ namespace zsquared
                     ampm = "am";
             }
 
+            string s_ampmHour = ampmHour.ToString("D2");
+            if (ampmHour < 10)
+                s_ampmHour = " " + ampmHour.ToString("D1");
+
             if (res.Contains("hh"))
-                res = res.Replace("hh", ampmHour.ToString("D2"));
+                res = res.Replace("hh", s_ampmHour);
             if (res.Contains("mm"))
                 res = res.Replace("mm", _minutes.ToString("D2"));
             if (res.Contains("ss"))

@@ -28,23 +28,41 @@ namespace vitavol
 
 			B_Back.TouchUpInside += async (sender, e) =>
 			{
-                if (Dirty)
+                if (!Dirty)
                 {
-                    E_MessageBoxResults mbres = await MessageBox(this,
-                                                                  "Changes have been made",
-                                                                  "Changes were made to the suggestion and not saved. Save them?",
-                                                                   E_MessageBoxButtons.YesNo);
-                    if (mbres == E_MessageBoxResults.Yes)
-                    {
-                        bool success = await SaveSuggestion();
+                    PerformSegue("Segue_SuggestionToSuggestions", this);
+                    return;
+                }
 
-                        if (!success)
-                        {
-                            await MessageBox(this, "Error", "Unable to add or update the suggestion", E_MessageBoxButtons.Ok);
+                E_MessageBoxResults mbres = await MessageBox(this,
+                                                              "Changes have been made",
+                                                              "Changes were made to the suggestion and not saved. Save them?",
+                                                               E_MessageBoxButtons.YesNo);
+                if (mbres != E_MessageBoxResults.Yes)
+				{
+                    // the user doesn't want us to save any changes
+					PerformSegue("Segue_SuggestionToSuggestions", this);
+					return;
+				}
 
-                            return;
-                        }
-                    }
+				Global.SelectedSuggestion.Subject = TB_Title.Text;
+                Global.SelectedSuggestion.Text = TxV_Body.Text;
+
+                AI_Busy.StartAnimating();
+                EnableUI(false);
+
+                bool success = await SaveSuggestion();
+
+                AI_Busy.StopAnimating();
+                EnableUI(true);
+
+                if (!success)
+                {
+                    E_MessageBoxResults mbres1 = await MessageBox(this,
+                                                                  "Error",
+                                                                  "Unable to add or update the suggestion",
+                                                                  E_MessageBoxButtons.Ok);
+                    return;
                 }
 
 				PerformSegue("Segue_SuggestionToSuggestions", this);
@@ -64,41 +82,48 @@ namespace vitavol
                     return;
 				}
 
+                AI_Busy.StartAnimating();
+                EnableUI(false);
+
                 bool success = await Global.LoggedInUser.RemoveSuggestion(Global.SelectedSuggestion);
                 Global.LoggedInUser.Suggestions.Remove(Global.SelectedSuggestion);
 
-                await MessageBox(this,
-                                  "Error",
-                                  "Unable to delete the suggestion.",
-                                   E_MessageBoxButtons.Ok);
+                AI_Busy.StopAnimating();
+                EnableUI(true);
+
+                if (!success)
+                {
+                    E_MessageBoxResults mbres = await MessageBox(this,
+                                                                  "Error",
+                                                                  "Unable to delete the suggestion.",
+                                                                   E_MessageBoxButtons.Ok);
+                }
 
 				PerformSegue("Segue_SuggestionToSuggestions", this);
 			};
 
-            B_Save.TouchUpInside += (sender, e) => 
+            B_Save.TouchUpInside += async (sender, e) => 
             {
-                Task.Run(async () =>
+				Global.SelectedSuggestion.Subject = TB_Title.Text;
+				Global.SelectedSuggestion.Text = TxV_Body.Text;
+
+                AI_Busy.StartAnimating();
+                EnableUI(false);
+
+				bool success = await SaveSuggestion();
+
+				AI_Busy.StopAnimating();
+				EnableUI(true);
+
+				if (!success)
                 {
-                    bool success = await SaveSuggestion();
+                    E_MessageBoxResults mbres = await MessageBox(this, 
+                                                                 "Error", 
+                                                                 "Unable to add or update the suggestion", 
+                                                                 E_MessageBoxButtons.Ok);
+					return;
+                }
 
-                    if (!success)
-                    {
-                        await MessageBox(this, "Error", "Unable to add or update the suggestion", E_MessageBoxButtons.Ok);
-
-                        return;
-                    }
-
-					UIApplication.SharedApplication.InvokeOnMainThread(
-                    new Action(() =>
-                    {
-						PerformSegue("Segue_SuggestionToSuggestions", this);
-					}));
-				});
-			};
-
-            B_Cancel.TouchUpInside += (sender, e) => 
-            {
-                // don't save this suggestion; if new, then all is lost, otherwise just the changes are lost
 				PerformSegue("Segue_SuggestionToSuggestions", this);
 			};
 
@@ -107,31 +132,36 @@ namespace vitavol
                 Dirty = true;
 			}, UIControlEvent.EditingChanged);
 
-			TB_Suggestion.AddTarget((sender, e) =>
-			{
+            TxV_Body.Changed += (sender, e) => 
+            {
                 Dirty = true;
-			}, UIControlEvent.EditingChanged);
+            };
 
 			// ---------- init the fields --------
 			L_Submitter.Text = Global.LoggedInUser.Name;
 			L_Date.Text = Global.SelectedSuggestion.Date.ToString();
 			L_Status.Text = Global.SelectedSuggestion.Status.ToString();
 			TB_Title.Text = Global.SelectedSuggestion.Subject;
-			TB_Suggestion.Text = Global.SelectedSuggestion.Text;
+			TxV_Body.Text = Global.SelectedSuggestion.Text;
 
             Dirty = Global.SelectedSuggestion.id == -1;
 		}
 
+        private void EnableUI(bool en)
+        {
+            TB_Title.Enabled = en;
+            TxV_Body.UserInteractionEnabled = en;
+            B_Back.Enabled = en;
+            B_Save.Enabled = en;
+            B_DeleteThisSuggestion.Enabled = en;
+        }
+
         private async Task<bool> SaveSuggestion()
         {
-			Global.SelectedSuggestion.Subject = TB_Title.Text;
-			Global.SelectedSuggestion.Text = TB_Suggestion.Text;
-
 			bool success = false;
 			if (Global.SelectedSuggestion.id == -1)
 			{
 				success = await Global.LoggedInUser.AddSuggestion(Global.SelectedSuggestion);
-				Global.LoggedInUser.Suggestions.Add(Global.SelectedSuggestion);
 			}
 			else
 				success = await Global.LoggedInUser.UpdateSuggestion(Global.SelectedSuggestion);

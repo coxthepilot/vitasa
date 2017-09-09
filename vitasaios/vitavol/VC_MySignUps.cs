@@ -41,13 +41,25 @@ namespace vitavol
 
 			// since the login process includes the user work history and intents, we don't need to fetch again
 			// todo: after some amount of time, these values are stale? Since this user is the only one that can change
-            //   them then perhaps they are ok; can backoffice change their intents? when approved and moves to history?
+			//   them then perhaps they are ok; can backoffice change their intents? when approved and moves to history?
 
+            List<C_WorkItem> OurWorkItems = Global.GetWorkItemsForSiteOnDateForUser(
+				null,
+				null,
+				Global.LoggedInUser.id,
+				C_Global.E_SiteCondition.Any);
+            OurWorkItems.Sort(C_WorkItem.CompareByDateAscending);
+            
 			Global.DetailsCameFrom = E_CameFrom.MySignUps;
-            C_MySignUpsTableSourceWorkIntents ts = new C_MySignUpsTableSourceWorkIntents(Global, Global.LoggedInUser.WorkIntents);
+            C_MySignUpsTableSourceWorkIntents ts = new C_MySignUpsTableSourceWorkIntents(Global.AllSites, OurWorkItems);
 			TV_SignUps.Source = ts;
-			TV_SignUps.Delegate = new C_MySignUpsTableDelegateWorkIntents(Global, this, Global.LoggedInUser.WorkIntents, ts);
+			TV_SignUps.Delegate = new C_MySignUpsTableDelegateWorkIntents(Global, this, ts);
 			TV_SignUps.ReloadData();
+        }
+
+        private void EnableUI(bool en)
+        {
+            
         }
 
         /// <summary>
@@ -57,14 +69,12 @@ namespace vitavol
         {
 			readonly C_Global Global;
 			readonly VC_MySignUps OurVC;
-            readonly List<C_WorkItem> Intents;
             C_MySignUpsTableSourceWorkIntents TableSource;
 
-            public C_MySignUpsTableDelegateWorkIntents(C_Global global, VC_MySignUps vc, List<C_WorkItem> intents, C_MySignUpsTableSourceWorkIntents tsource)
+            public C_MySignUpsTableDelegateWorkIntents(C_Global global, VC_MySignUps vc, C_MySignUpsTableSourceWorkIntents tsource)
             {
 				Global = global;
 				OurVC = vc;
-                Intents = intents;
                 TableSource = tsource;
             }
 
@@ -73,11 +83,17 @@ namespace vitavol
                 UITableViewRowAction hiButton = UITableViewRowAction.Create(UITableViewRowActionStyle.Default, "Remove",
                 async delegate
                 {
-                    C_WorkItem intentToRemove = Intents[indexPath.Row];
+                    C_WorkItem intentToRemove = TableSource.OurWorkItems[indexPath.Row];
 
-                    await Global.LoggedInUser.RemoveIntent(intentToRemove);
+                    OurVC.AI_Busy.StartAnimating();
+                    OurVC.EnableUI(false);
 
-                    UIApplication.SharedApplication.InvokeOnMainThread(new Action(OurVC.TV_SignUps.ReloadData));
+                    bool success = await intentToRemove.RemoveIntent(Global);
+
+                    OurVC.EnableUI(true);
+                    OurVC.AI_Busy.StopAnimating();
+
+                    OurVC.TV_SignUps.ReloadData();
                 });
 
                 return new UITableViewRowAction[] { hiButton };
@@ -86,7 +102,7 @@ namespace vitavol
             public override void RowSelected(UITableView tableView, NSIndexPath indexPath)
             {
                 // identify the specific signup
-                C_WorkItem SelectedSignUp = Intents[indexPath.Row];
+                C_WorkItem SelectedSignUp = TableSource.OurWorkItems[indexPath.Row];
 
 				// make sure the calendar starts on today if we get there
 				Global.CalendarDate = null;
@@ -102,21 +118,21 @@ namespace vitavol
 
 		public class C_MySignUpsTableSourceWorkIntents : UITableViewSource
 		{
-            readonly C_Global Global;
-            public List<C_WorkItem> Intents; // this is public so a remove operations doesn't require a re-fetch of the list
 			const string CellIdentifier = "TableCell_SignUpsTableSourceMySignUps";
+            public List<C_WorkItem> OurWorkItems;
+            List<C_VitaSite> AllSites;
 
-            public C_MySignUpsTableSourceWorkIntents(C_Global pac, List<C_WorkItem> intents)
+            public C_MySignUpsTableSourceWorkIntents(List<C_VitaSite> allSites, List<C_WorkItem> ourWorkItems)
 			{
-				Global = pac;
-                Intents = intents;
+                AllSites = allSites;
+                OurWorkItems = ourWorkItems;
 			}
 
 			public override nint RowsInSection(UITableView tableview, nint section)
 			{
 				int count = 0;
-				if (Intents != null)
-					count = Intents.Count;
+				if (OurWorkItems != null)
+					count = OurWorkItems.Count;
 				return count;
 			}
 
@@ -127,11 +143,13 @@ namespace vitavol
 				if (cell == null)
 					cell = new UITableViewCell(UITableViewCellStyle.Subtitle, CellIdentifier);
 
-				C_WorkItem wi = Intents[indexPath.Row];
-                C_VitaSite oursite = C_VitaSite.GetSiteBySlug(wi.SiteSlug, Global.AllSites);
+				C_WorkItem wi = OurWorkItems[indexPath.Row];
+                C_VitaSite oursite = C_VitaSite.GetSiteBySlug(wi.SiteSlug, AllSites);
+                C_HMS[] openclose = oursite.GetOpenCloseTimeOnDate(wi.Date);
 
                 cell.TextLabel.Text = oursite.Name;
-				cell.DetailTextLabel.Text = wi.Date.ToString();
+                cell.DetailTextLabel.Text = wi.Date.ToString() 
+                    + " [" + openclose[0].ToString("hh:mm p").Trim() + " - " + openclose[1].ToString("hh:mm p") + "]";
 
 				return cell;
 			}

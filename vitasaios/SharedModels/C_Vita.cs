@@ -16,8 +16,6 @@ namespace zsquared
     {
 		//public static string VitaCoreUrl = "http://vitasa.abandonedfactory.net";
 		public static string VitaCoreUrlSSL = "https://vitasa.abandonedfactory.net";
-        //string vitaCoreUrl = "https://s3-us-west-2.amazonaws.com/vitasa-static-content-dev/sites.json";
-        //string vitaCoreUrl = "https://h4ebpp3rvk.execute-api.us-west-2.amazonaws.com/production/sites";
 
         public static void SetupCertificateHandling()
 		{
@@ -39,7 +37,6 @@ namespace zsquared
 		{
             // do the login with the api's
 			string loginUrl = "/login";
-
             var client = new HttpClient()
             {
                 BaseAddress = new Uri(C_Vita.VitaCoreUrlSSL)
@@ -50,8 +47,6 @@ namespace zsquared
                 + "\"email\" : \"" + email + "\"" 
                 + ",\"password\" : \"" + userPassword + "\"" 
                 + "}";
-
-			C_Vita.SetupCertificateHandling();
 
 			var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
 			HttpResponseMessage response = await client.PostAsync(loginUrl, content);
@@ -96,9 +91,5 @@ namespace zsquared
 
 			return user;
 		}
-
-
-
-
 	}
 }

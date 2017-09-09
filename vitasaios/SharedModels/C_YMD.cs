@@ -78,8 +78,8 @@ namespace zsquared
 
         public C_YMD(string s)
         {
-            string[] ss = s.Split(new char[] { '-' });
-            if (ss.Length != 3)
+            string[] ss = s.Split(new char[] { '-', 'T' });
+            if (ss.Length < 3)
                 throw new ApplicationException("Unexpected format");
 
             try

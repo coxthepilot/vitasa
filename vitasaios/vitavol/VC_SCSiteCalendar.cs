@@ -32,9 +32,7 @@ namespace vitavol
 			Global = myAppDelegate.Global;
 
             if ((Global.LoggedInUser == null)
-                || (Global.SelectedDate == null)
-                || (Global.SelectedSite == null)
-                || (Global.SelectedDayOfWeek == -1))
+                || (Global.SelectedSite == null))
                 throw new ApplicationException("required parameters not found");
 
 			B_Back.TouchUpInside += (sender, e) => 

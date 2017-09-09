@@ -42,10 +42,22 @@ namespace vitavol
                              "Save Changes?", 
                              "Changes were made. Save before leaving?", 
                              Tools.E_MessageBoxButtons.YesNo);
-                    if (mbres == Tools.E_MessageBoxResults.Yes)
+
+                    if (mbres != Tools.E_MessageBoxResults.Yes)
                     {
-                        await SaveChanges();
-                    }
+						PerformSegue("Segue_SCSiteDefaultsToSCSiteCalendar", this);
+                        return;
+					}
+                        
+                    bool success = await SaveChanges();
+                    if (!success)
+                    {
+						Tools.E_MessageBoxResults mbres1 = await Tools.MessageBox(this,
+								                                                  "Error",
+								                                                  "Unable to save the changes?",
+                                                                                  Tools.E_MessageBoxButtons.Ok);
+                        return;
+					}
                 }
 
                 PerformSegue("Segue_SCSiteDefaultsToSCSiteCalendar", this);
@@ -63,12 +75,24 @@ namespace vitavol
 			SW_IsOpen.ValueChanged += (sender, e) => 
             {
 				SetEnableOnControls(SW_IsOpen.On);
+                Dirty = true;
+                B_SaveDefaults.Enabled = true;
 			};
 
             B_SaveDefaults.TouchUpInside += async (sender, e) => 
             {
-                await SaveChanges();
-            };
+				bool success = await SaveChanges();
+				if (!success)
+				{
+					Tools.E_MessageBoxResults mbres1 = await Tools.MessageBox(this,
+																			  "Error",
+																			  "Unable to save the changes?",
+																			  Tools.E_MessageBoxButtons.Ok);
+					return;
+				}
+
+				PerformSegue("Segue_SCSiteDefaultsToSCSiteCalendar", this);
+			};
 
 			// open time
 			// Setup the textfield for the date to use a date picker in an action sheet/toolbar
@@ -103,8 +127,7 @@ namespace vitavol
 
 			TB_OpenTime.InputView = DP_OpenTime;
 			TB_OpenTime.InputAccessoryView = ToolBar_OpenTime;
-			DateTime dty1 = Tools.NSDateToDateTime(Tools.BuildNSDateFromTime(calDefaults.OpenTime));
-			C_HMS openTime = new C_HMS(dty1);
+			C_HMS openTime = new C_HMS(calDefaults.OpenTime);
 			TB_OpenTime.Text = openTime.ToString("hh:mm p");
 
 			// close time
@@ -139,15 +162,13 @@ namespace vitavol
 
 			TB_CloseTime.InputView = DP_CloseTime;
 			TB_CloseTime.InputAccessoryView = ToolBar_CloseTime;
-
-			DateTime dtx2 = Tools.NSDateToDateTime(Tools.BuildNSDateFromTime(calDefaults.CloseTime));
-			C_HMS closeTime = new C_HMS(dtx2);
+			C_HMS closeTime = new C_HMS(calDefaults.CloseTime);
 			TB_CloseTime.Text = closeTime.ToString("hh:mm p");
 
             // number of efilers
             UIPickerView PV_EFilers = new UIPickerView()
             {
-                Model = new EFilerPickerViewModel()
+                Model = new EFilerPickerViewModel(),
             };
             UIToolbar ToolBar_EFiler = new UIToolbar()
 			{
@@ -171,10 +192,22 @@ namespace vitavol
 			};
 			doneButtonEFiler.SetTitleTextAttributes(uitaef, UIControlState.Normal);
 
+            PV_EFilers.Select(calDefaults.NumEFilers, 0, true);
+            PV_EFilers.ShowSelectionIndicator = true;
             TB_EFilers.InputView = PV_EFilers;
 			TB_EFilers.InputAccessoryView = ToolBar_EFiler;
             TB_EFilers.Text = calDefaults.NumEFilers.ToString();
 		}
+
+        private void EnableUI(bool en)
+        {
+            B_Back.Enabled = en;
+            B_SaveDefaults.Enabled = en && Dirty;
+            TB_EFilers.Enabled = en;
+            TB_OpenTime.Enabled = en;
+            TB_CloseTime.Enabled = en;
+            SW_IsOpen.Enabled = en;
+        }
 
         private async Task<bool> SaveChanges()
         {
@@ -187,9 +220,26 @@ namespace vitavol
 				if (!SW_IsOpen.On)
 					closeTimex = openTimex;
 
+                EnableUI(false);
+                AI_Busy.StartAnimating();
+
 				bool success = await Global.SelectedSite.UpdateDefaultCalendar(Global.SelectedDayOfWeek, openTimex, closeTimex, numEFilers, Global.LoggedInUser.Token);
+
+                EnableUI(true);
+                AI_Busy.StopAnimating();
+
+                C_SiteCalendarEntry ce = Global.SelectedSite.SiteCalendar[Global.SelectedDayOfWeek];
+                ce.OpenTime = openTimex.ToString("hh:mm");
+                ce.CloseTime = closeTimex.ToString("hh:mm");
+                ce.NumEFilers = numEFilers;
+
                 if (!success)
-                    await Tools.MessageBox(this, "Error", "Failed to update the Site calendar", Tools.E_MessageBoxButtons.Ok);
+                {
+                    Tools.E_MessageBoxResults mbres = await Tools.MessageBox(this, 
+                                                                             "Error", 
+                                                                             "Failed to update the Site calendar", 
+                                                                             Tools.E_MessageBoxButtons.Ok);
+                }
                 else
                 {
                     Dirty = false;

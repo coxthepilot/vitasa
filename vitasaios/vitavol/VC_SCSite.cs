@@ -41,30 +41,69 @@ namespace vitavol
 
             L_SiteName.Text = Global.SelectedSite.Name;
 
-            SetButtonEnabled();
+            EnableUI(true);
 
-            B_Closed.TouchUpInside += (sender, e) => 
+            B_Closed.TouchUpInside += async (sender, e) => 
             {
-                SetNewSiteStatus(E_SiteStatus.Closed);
-            };
+                E_SiteStatus newStatus = E_SiteStatus.Closed;
+				EnableUI(false);
+				AI_Busy.StartAnimating();
 
-            B_Accepting.TouchUpInside += (sender, e) => 
-            {
-                SetNewSiteStatus(E_SiteStatus.Accepting);
+				bool success = await Global.SelectedSite.UpdateSiteStatus(newStatus, Global.LoggedInUser.Token);
+				if (success)
+					Global.SelectedSite.Status = newStatus;
+
+				AI_Busy.StopAnimating();
+				EnableUI(true);
 			};
 
-            B_NearLimit.TouchUpInside += (sender, e) => 
+            B_Accepting.TouchUpInside += async (sender, e) => 
             {
-                SetNewSiteStatus(E_SiteStatus.NearLimit);
+				E_SiteStatus newStatus = E_SiteStatus.Accepting;
+				EnableUI(false);
+				AI_Busy.StartAnimating();
+
+				bool success = await Global.SelectedSite.UpdateSiteStatus(newStatus, Global.LoggedInUser.Token);
+				if (success)
+					Global.SelectedSite.Status = newStatus;
+
+				AI_Busy.StopAnimating();
+				EnableUI(true);
 			};
 
-            B_AtLimit.TouchUpInside += (sender, e) => 
+            B_NearLimit.TouchUpInside += async (sender, e) => 
             {
-                SetNewSiteStatus(E_SiteStatus.NotAccepting);
+                E_SiteStatus newStatus = E_SiteStatus.NearLimit;
+				EnableUI(false);
+				AI_Busy.StartAnimating();
+
+				bool success = await Global.SelectedSite.UpdateSiteStatus(newStatus, Global.LoggedInUser.Token);
+				if (success)
+					Global.SelectedSite.Status = newStatus;
+
+				AI_Busy.StopAnimating();
+				EnableUI(true);
+			};
+
+            B_AtLimit.TouchUpInside += async (sender, e) => 
+            {
+                E_SiteStatus newStatus = E_SiteStatus.NotAccepting;
+				EnableUI(false);
+				AI_Busy.StartAnimating();
+
+				bool success = await Global.SelectedSite.UpdateSiteStatus(newStatus, Global.LoggedInUser.Token);
+				if (success)
+					Global.SelectedSite.Status = newStatus;
+
+				AI_Busy.StopAnimating();
+				EnableUI(true);
 			};
 
             B_Volunteers.TouchUpInside += (sender, e) => 
             {
+                // clear all the dirty flags in the WorkItems to avoid saving stuff we shouldn't
+                Global.ClearDirtyFlagOnIntents();
+
                 PerformSegue("Segue_SCSiteToSCVolunteers", this);
             };
 
@@ -74,29 +113,21 @@ namespace vitavol
             };
 		}
 
-        private void SetNewSiteStatus(E_SiteStatus newStatus)
-        {
-			Task.Run(async () =>
-			{
-                bool success = await Global.SelectedSite.UpdateSiteStatus(newStatus, Global.LoggedInUser.Token);
-                if (success)
-                {
-                    Global.SelectedSite.Status = newStatus;
-                    UIApplication.SharedApplication.InvokeOnMainThread(new Action(SetButtonEnabled));
-                }
-			});
-		}
-
-        private void SetButtonEnabled()
+        private void EnableUI(bool enable)
         {
 			int isiteStatus = (int)Global.SelectedSite.Status;
 			string ssitestatus = C_VitaSite.N_SiteStatus[isiteStatus];
 			L_ClientStatus.Text = ssitestatus;
 
-			B_Closed.Enabled = Global.SelectedSite.Status != E_SiteStatus.Closed;
-			B_Accepting.Enabled = Global.SelectedSite.Status != E_SiteStatus.Accepting;
-			B_NearLimit.Enabled = Global.SelectedSite.Status != E_SiteStatus.NearLimit;
-			B_AtLimit.Enabled = Global.SelectedSite.Status != E_SiteStatus.NotAccepting;
+			B_Closed.Enabled = enable && Global.SelectedSite.Status != E_SiteStatus.Closed;
+			B_Accepting.Enabled = enable && Global.SelectedSite.Status != E_SiteStatus.Accepting;
+			B_NearLimit.Enabled = enable && Global.SelectedSite.Status != E_SiteStatus.NearLimit;
+			B_AtLimit.Enabled = enable && Global.SelectedSite.Status != E_SiteStatus.NotAccepting;
+
+            B_Volunteers.Enabled = enable;
+            B_SiteCalendar.Enabled = enable;
+
+            B_Back.Enabled = enable;
 		}
     }
 }

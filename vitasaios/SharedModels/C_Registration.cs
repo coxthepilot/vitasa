@@ -13,17 +13,8 @@ namespace zsquared
     public enum E_Certification { Basic, Advanced, Unknown };
     public class C_Registration
     {
-        public C_Registration()
-        {
-        }
-
         public static async Task<bool> SubmitRegistration(string username, string email, string password, string phone, E_Certification cert)
         {
-            // todo: move over to use SSL; hangs if using SSL
-            //SetupCertificateHandling(); // only needed if SSL
-
-            string submiturl = C_Vita.VitaCoreUrlSSL + "/users";
-
 			string bodyjson = "{ "
 				+ "\"name\" : \"" + username + "\""
 				+ ",\"email\" : \"" + email + "\""
@@ -33,9 +24,10 @@ namespace zsquared
                 + ",\"certification\" : \"" + cert.ToString() + "\""
 				+ "}";
 
-			bool error = false;
+            bool success = false;
 			try
 			{
+				string submiturl = "/users";
 				WebClient wc = new WebClient()
 				{
                     BaseAddress = C_Vita.VitaCoreUrlSSL
@@ -49,16 +41,16 @@ namespace zsquared
 
 				string responseString = Encoding.UTF8.GetString(responseBytes);
 				JsonValue responseJson = JsonValue.Parse(responseString);
-                // if it parses then it is our success result
-                error = false;
+
+                success = true;
 			}
 			catch (Exception e)
 			{
 				Console.WriteLine("Attempt to update site status or response parsing failed: " + e.Message);
-				error = true;
+                success = false;
 			}
 
-			return !error;        
+			return success;        
         }
     }
 }

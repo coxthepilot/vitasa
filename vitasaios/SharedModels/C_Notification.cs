@@ -7,7 +7,7 @@ namespace zsquared
 {
     public class C_Notification
     {
-        public string id;
+        public int id;
         public string From;
         public DateTime DateAndTime;
         public string Body;
@@ -26,27 +26,34 @@ namespace zsquared
 			if (!(j is JsonObject))
 				throw new ApplicationException("we can only work with an object");
 
-			if (j.ContainsKey(N_ID))
-				id = j[N_ID];
+            if (j.ContainsKey(N_ID))
+                id = Tools.JsonProcessInt(j[N_ID], id);
 
-			if (j.ContainsKey(N_From))
-				From = j[N_From];
+            if (j.ContainsKey(N_From))
+                From = Tools.JsonProcessString(j[N_From], From);
 
             if (j.ContainsKey(N_DateAndTime))
             {
-                string dts = j[N_DateAndTime];
+                var jv = j[N_DateAndTime];
+                if (jv != null)
+                {
+                    if (jv.JsonType == JsonType.String)
+                    {
+                        string dts = j[N_DateAndTime];
 
-				string[] formats = { "yyyy-MM-dd hh:mm:ss" };
+                        string[] formats = { "yyyy-MM-dd hh:mm:ss" };
 
-                try { DateAndTime = DateTime.ParseExact(dts, formats, new CultureInfo("en-US"), DateTimeStyles.AssumeLocal); }
-                catch (Exception e)
-                { 
-                    Console.WriteLine(e.Message);
+                        try { DateAndTime = DateTime.ParseExact(dts, formats, new CultureInfo("en-US"), DateTimeStyles.AssumeLocal); }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e.Message);
+                        }
+                    }
                 }
             }
 
             if (j.ContainsKey(N_Body))
-                Body = j[N_Body];
+                Body = Tools.JsonProcessString(j[N_Body], Body);
 		}
 
         public static List<C_Notification> ImportNotifications(JsonValue json)

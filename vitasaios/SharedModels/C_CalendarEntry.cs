@@ -71,83 +71,26 @@ namespace zsquared
 			if (!(j is JsonObject))
 				throw new ApplicationException("we can only work with an object");
 
-			if (j.ContainsKey(N_ID))
-                id = j[N_ID];
+            if (j.ContainsKey(N_ID))
+                id = Tools.JsonProcessInt(j[N_ID], id);
 
-			if (j.ContainsKey(N_SiteID))
-                SiteID = j[N_SiteID];
+            if (j.ContainsKey(N_SiteID))
+                SiteID = Tools.JsonProcessInt(j[N_SiteID], SiteID);
 
             if (j.ContainsKey(N_Date))
-                Date = new C_YMD((string)j[N_Date]);
+                Date = Tools.JsonProcessDate(j[N_Date], Date);
 
             if (j.ContainsKey(N_OpenTime))
-            {
-                var jv = j[N_OpenTime];
-                if (jv == null)
-                {
-                    OpenTime = new C_HMS(0, 0, 0);
-                }
-                else if (jv.JsonType == JsonType.String)
-                {
-                    OpenTime = new C_HMS((string)jv);
-                }
-			}
+                OpenTime = Tools.JsonProcessTime(j[N_OpenTime], OpenTime);
 
             if (j.ContainsKey(N_CloseTime))
-            {
-				var jv = j[N_CloseTime];
-				if (jv == null)
-				{
-                    CloseTime = new C_HMS(0, 0, 0);
-				}
-				else if (jv.JsonType == JsonType.String)
-				{
-					CloseTime = new C_HMS((string)jv);
-				}
-			}
+				CloseTime = Tools.JsonProcessTime(j[N_OpenTime], CloseTime);
 
             if (j.ContainsKey(N_IsClosed))
-            {
-                var jv = j[N_IsClosed];
-                if (jv == null)
-                    IsClosed = true;
-                else if (jv.JsonType == JsonType.Boolean)
-                    IsClosed = jv;
-                else
-                {
-                    try
-                    {
-                        string bs = j[N_IsClosed];
-                        IsClosed = bs.ToLower() == "true";
-                    }
-                    catch (Exception e)
-                    {
-                        Console.WriteLine(e.Message);
-                    }
-                }
-            }
+                IsClosed = Tools.JsonProcessBool(j[N_IsClosed], IsClosed);
 
             if (j.ContainsKey(N_NumEFilers))
-            {
-                var jv = j[N_NumEFilers];
-                if (jv == null)
-                    NumEFilers = 0;
-                else if (jv.JsonType == JsonType.Number)
-                    NumEFilers = jv;
-                else
-                {
-					try 
-                    {
-						string ns = j[N_NumEFilers];
-						NumEFilers = Convert.ToInt32(ns); 
-                    }
-                    catch (Exception e)
-                    { 
-                        Console.WriteLine(e.Message);
-                    }
-				}
-
-            }
+                NumEFilers = Tools.JsonProcessInt(j[N_NumEFilers], NumEFilers);
 		}
 
         public string GetJson()

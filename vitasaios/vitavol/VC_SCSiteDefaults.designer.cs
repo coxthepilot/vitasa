@@ -16,6 +16,10 @@ namespace vitavol
     {
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UIActivityIndicatorView AI_Busy { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UIButton B_Back { get; set; }
 
         [Outlet]
@@ -48,6 +52,11 @@ namespace vitavol
 
         void ReleaseDesignerOutlets ()
         {
+            if (AI_Busy != null) {
+                AI_Busy.Dispose ();
+                AI_Busy = null;
+            }
+
             if (B_Back != null) {
                 B_Back.Dispose ();
                 B_Back = null;

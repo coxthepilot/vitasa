@@ -22,9 +22,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)C_PickerModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)C_Registration.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)C_SiteCalendarEntry.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)C_TestingDB.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)C_Notification.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)C_WorkItem.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)C_SiteSchedule.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)EmptyTextFile.txt" />

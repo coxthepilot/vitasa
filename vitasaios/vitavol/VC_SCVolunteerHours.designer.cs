@@ -20,7 +20,7 @@ namespace vitavol
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UIButton B_Save { get; set; }
+        UIKit.UILabel L_ApprovedState { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
@@ -45,9 +45,9 @@ namespace vitavol
                 B_Back = null;
             }
 
-            if (B_Save != null) {
-                B_Save.Dispose ();
-                B_Save = null;
+            if (L_ApprovedState != null) {
+                L_ApprovedState.Dispose ();
+                L_ApprovedState = null;
             }
 
             if (L_Date != null) {

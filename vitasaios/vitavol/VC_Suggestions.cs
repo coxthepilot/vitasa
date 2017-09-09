@@ -56,6 +56,13 @@ namespace vitavol
 			PerformSegue("Segue_SuggestionsToSuggestion", this);
 		}
 
+        public void EnableUI(bool en)
+        {
+            B_Back.Enabled = en;
+            TV_ListOfSuggestions.UserInteractionEnabled = en;
+            B_NewSuggestion.Enabled = en;
+        }
+
 		public class C_SuggestionsTableDelegate : UITableViewDelegate
 		{
 			readonly C_Global Global;
@@ -74,13 +81,31 @@ namespace vitavol
 			public override UITableViewRowAction[] EditActionsForRow(UITableView tableView, NSIndexPath indexPath)
 			{
 				UITableViewRowAction hiButton = UITableViewRowAction.Create(UITableViewRowActionStyle.Default, "Remove",
-				async delegate
-				{
+                async delegate
+                {
+                    OurVC.AI_Busy.StartAnimating();
+                    OurVC.EnableUI(false);
+
                     C_Suggestion suggestionToRemove = Suggestions[indexPath.Row];
 
-                    await Global.LoggedInUser.RemoveSuggestion(suggestionToRemove);
+                    bool success = await Global.LoggedInUser.RemoveSuggestion(suggestionToRemove);
 
-                    UIApplication.SharedApplication.InvokeOnMainThread(new Action(OurVC.TV_ListOfSuggestions.ReloadData));
+					UIApplication.SharedApplication.InvokeOnMainThread(
+                    new Action(() =>
+                    {
+                        if (!success)
+                        {
+                            Tools.MessageBox(OurVC, 
+                                            "Error",
+                                            "Unable to remove the suggestion",
+                                             Tools.E_MessageBoxButtons.Ok);
+                        }
+
+                        OurVC.TV_ListOfSuggestions.ReloadData();
+                        OurVC.AI_Busy.StopAnimating();
+                        OurVC.EnableUI(true);
+                    }));
+
 				});
 
 				return new UITableViewRowAction[] { hiButton };
@@ -127,8 +152,11 @@ namespace vitavol
 
 				C_Suggestion suggestion = Suggestions[indexPath.Row];
 
-				cell.TextLabel.Text = suggestion.Subject;
-                cell.DetailTextLabel.Text = suggestion.Date.ToString("mmm dd,yyyy") + ":" + suggestion.Text;
+                string subject = suggestion.Subject == null ? "<null>" : suggestion.Subject;
+                string text = suggestion.Text == null ? "<null>" : suggestion.Text;
+
+				cell.TextLabel.Text = subject;
+                cell.DetailTextLabel.Text = suggestion.Date.ToString("mmm dd,yyyy") + ":" + text;
 
 				return cell;
 			}

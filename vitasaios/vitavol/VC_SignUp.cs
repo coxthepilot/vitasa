@@ -35,9 +35,14 @@ namespace vitavol
 
 			if ((Global.SelectedDate == null)
 				|| (Global.SelectedSite == null)
-				|| (Global.WorkItemsOnSiteOnDate == null)
 				|| (Global.LoggedInUser == null))
 				throw new ApplicationException("required elements not present");
+
+            Global.WorkItemsOnSiteOnDate = Global.GetWorkItemsForSiteOnDateForUser(
+                Global.SelectedSite.Slug,
+                Global.SelectedDate,
+                -1,
+                C_Global.E_SiteCondition.Any);
 
 			B_Back.TouchUpInside += (sender, e) => 
             {
@@ -55,64 +60,61 @@ namespace vitavol
                 }
             };
 
-            B_SignMeUp.TouchUpInside += (sender, e) => 
+            B_SignMeUp.TouchUpInside += async (sender, e) => 
             {
                 // if sign me up, the add to the list, and go back to MySignUps
                 // if remove me, then remove from list, and go back to MySignUps
                 if (SignUpListHasOurUser)
                 {
-					// remove
-					Task.Run(async () =>
+					// remove the signup for this user
+                    var ourUserSignup = Global.WorkItemsOnSiteOnDate.Where(wix => wix.UserId == Global.LoggedInUser.id);
+
+                    // if we didn't find the signup to remove, then just return
+                    if (!ourUserSignup.Any())
+                        return;
+
+                    AI_Loading.StartAnimating();
+
+					C_WorkItem wi = ourUserSignup.First();
+
+                    bool success = await wi.RemoveIntent(Global);
+
+                    AI_Busy.StopAnimating();
+
+                    if (!success)
                     {
-                        // find the signup for this user
-                        var ourUserSignup = Global.WorkItemsOnSiteOnDate.Where(wi => wi.UserId == Global.LoggedInUser.id);
-
-                        if (ourUserSignup.Any())
-                        {
-                            //bool s = await Global.SelectedSite.wor
-                            C_WorkItem wi = (C_WorkItem)ourUserSignup.FirstOrDefault();
-                            bool success = await Global.LoggedInUser.RemoveIntent(wi);
-                            Global.SelectedSite.WorkIntents.Remove(wi);
-
-                            UIApplication.SharedApplication.InvokeOnMainThread(
-                            new Action(() =>
-                            {
-                                if (!success)
-                                    Tools.MessageBox(this, 
-                                                     "Error", 
-                                                     "Remove SignUp failed",
-                                                     Tools.E_MessageBoxButtons.Ok);
-                                else
-                                    PerformSegue("Segue_SignUpToMySignUps", this);
-                            }));
-                        }
-					});
+                        Tools.E_MessageBoxResults mbres = await Tools.MessageBox(this,
+                                         "Error",
+                                         "Remove SignUp failed",
+                                         Tools.E_MessageBoxButtons.Ok);
+                    }
+                    else
+                        PerformSegue("Segue_SignUpToMySignUps", this);
                 }
                 else
                 {
 					// add
-					Task.Run(async () => 
+					AI_Busy.StartAnimating();
+
+					C_WorkItem wi = new C_WorkItem(Global.SelectedSite.Slug, Global.SelectedDate, Global.LoggedInUser.id, 0);
+
+                    bool success = await wi.AddIntent(Global, Global.LoggedInUser.id);
+
+					AI_Busy.StopAnimating();
+
+                    if (!success)
                     {
-                        C_WorkItem wi = new C_WorkItem(Global.SelectedSite.Slug, Global.SelectedDate, Global.LoggedInUser.id, 0);
-
-                        bool success = await Global.LoggedInUser.AddIntent(wi);
-
-						UIApplication.SharedApplication.InvokeOnMainThread(
-						new Action(() =>
-						{
-							if (!success)
-								Tools.MessageBox(this, 
-                                                 "Error", 
-                                                 "Add SignUp failed",
-                                                 Tools.E_MessageBoxButtons.Ok);
-							else
-								PerformSegue("Segue_SignUpToMySignUps", this);
-						}));
-					});
+                        Tools.E_MessageBoxResults mbres = await Tools.MessageBox(this,
+                                         "Error",
+                                         "Add SignUp failed",
+                                         Tools.E_MessageBoxButtons.Ok);
+                    }
+					else
+						PerformSegue("Segue_SignUpToMySignUps", this);
                 }
             };
 
-            B_GetDirections.TouchUpInside += (sender, e) => 
+            B_GetDirections.TouchUpInside += async (sender, e) => 
             {
                 // the destination is the site the user selected
                 // the source address is unspecified which makes it the user's current location
@@ -122,17 +124,19 @@ namespace vitavol
                 string url = "http://maps.apple.com/?daddr=" + destinationAddress;  // + "&saddr=<destination>";
                 url = url.Replace(" ", "%20");
 				if (UIApplication.SharedApplication.CanOpenUrl(new NSUrl(url)))
-				{
 					UIApplication.SharedApplication.OpenUrl(new NSUrl(url));
-				}
+                
 				else
 				{
-                    Tools.MessageBox(this,
+                    Tools.E_MessageBoxResults mbres = await Tools.MessageBox(this,
                                     "No maps app",
                                      "Maps app not supported on this device",
                                      Tools.E_MessageBoxButtons.Ok);
 				}           
             };
+
+            AI_Loading.StartAnimating();
+            EnableUI(false);
 
 			Task.Run(async () =>
             {
@@ -142,7 +146,7 @@ namespace vitavol
 
                 foreach(C_WorkItem wi in Global.WorkItemsOnSiteOnDate)
                 {
-                    C_VitaUser user = await C_VitaUser.FetchUser(Global.LoggedInUser.Token, wi.UserId);
+                    C_VitaUser user = await Global.GetUserDetails(wi.UserId);
                     UserNames.Add(user.Name);
 
                     SignUpListHasOurUser |= wi.UserId == Global.LoggedInUser.id;
@@ -152,6 +156,9 @@ namespace vitavol
 				UIApplication.SharedApplication.InvokeOnMainThread(
 				new Action(() =>
 				{
+                    AI_Loading.StopAnimating();
+                    EnableUI(true);
+
                     // setup the table view with the list of names
 					C_SignUpTableSourceSignUp signUpTableSource = new C_SignUpTableSourceSignUp(UserNames);
 					TV_Users.Source = signUpTableSource;
@@ -160,10 +167,13 @@ namespace vitavol
 					string t = SignUpListHasOurUser ? "Remove My Sign Up" : "Sign Me Up";
 					B_SignMeUp.SetTitle(t, UIControlState.Normal);
 
-                    L_Site.Text = Global.SelectedSite.Name;
-                    int dayOfWeek = (int)Global.SelectedDate.DayOfWeek;
+					int dayOfWeek = (int)Global.SelectedDate.DayOfWeek;
+					C_HMS openTime = new C_HMS(Global.SelectedSite.SiteCalendar[dayOfWeek].OpenTime);
+					C_HMS closeTime = new C_HMS(Global.SelectedSite.SiteCalendar[dayOfWeek].CloseTime);
+
+					L_Site.Text = Global.SelectedSite.Name;
 					L_DateAndTime.Text = Global.SelectedDate.ToString("mmm dd, yyyy") 
-                        + " from " + Global.SelectedSite.SiteCalendar[dayOfWeek].OpenTime + " to " + Global.SelectedSite.SiteCalendar[dayOfWeek].CloseTime;
+                        + " [" + openTime.ToString("hh:mm") + " - " + closeTime.ToString("hh:mm") + "]";
 
                     L_Address.Text = Global.SelectedSite.Street;
                     L_CityStateZip.Text = Global.SelectedSite.City + ", " + Global.SelectedSite.State + " " + Global.SelectedSite.Zip;
@@ -173,6 +183,14 @@ namespace vitavol
 				}));
 			});
 		}
+
+        private void EnableUI(bool en)
+        {
+            B_Back.Enabled = en;
+            B_SignMeUp.Enabled = en;
+            B_GetDirections.Enabled = en;
+            TV_Users.UserInteractionEnabled = en;
+        }
 
 		public class C_SignUpTableSourceSignUp : UITableViewSource
 		{

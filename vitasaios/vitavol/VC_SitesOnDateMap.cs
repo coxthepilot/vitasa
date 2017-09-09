@@ -177,6 +177,5 @@ namespace vitavol
 				return pinView;
 			}
 		}
-
 	}
 }

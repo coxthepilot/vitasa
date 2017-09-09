@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Net.Http;
 using UIKit;
+using System.Linq;
 
 namespace zsquared
 {
@@ -31,8 +32,10 @@ namespace zsquared
 		public C_SiteCalendarEntry[] SiteCalendar;
 		public int BackupCoordinator;
         public List<C_CalendarEntry> CalendarOverrides;
-        public List<C_WorkItem> WorkHistory;
-        public List<C_WorkItem> WorkIntents;
+        public List<C_WorkItem> WorkHistoryX;
+        public List<C_WorkItem> WorkIntentsX;
+        public C_YMD SeasonFirstDate;
+        public C_YMD SeasonLastDate;
 
 		public static readonly string N_ID = "id";
         public static readonly string N_Name = "name";
@@ -50,6 +53,8 @@ namespace zsquared
         public static readonly string N_CalendarOverrides = "calendar_overrides";
         public static readonly string N_WorkHistory = "work_history";
         public static readonly string N_WorkIntents = "work_intents";
+        public static readonly string N_SeasonFirstDate = "season_first_date";
+        public static readonly string N_SeasonLastDate = "season_last_date";
 
 		/// <summary>
 		/// Create a new site with null values for all fields
@@ -60,8 +65,11 @@ namespace zsquared
             for (int ix = 0; ix != 7; ix++)
                 SiteCalendar[ix] = new C_SiteCalendarEntry();
             CalendarOverrides = new List<C_CalendarEntry>();
-            WorkHistory = new List<C_WorkItem>();
-            WorkIntents = new List<C_WorkItem>();
+            WorkHistoryX = new List<C_WorkItem>();
+            WorkIntentsX = new List<C_WorkItem>();
+
+            SeasonFirstDate = new C_YMD(2017, 09, 01);
+            SeasonLastDate = new C_YMD(2018, 04, 15);
         }
 
         /// <summary>
@@ -74,8 +82,11 @@ namespace zsquared
 			for (int ix = 0; ix != 7; ix++)
 				SiteCalendar[ix] = new C_SiteCalendarEntry();
 			CalendarOverrides = new List<C_CalendarEntry>();
-			WorkHistory = new List<C_WorkItem>();
-			WorkIntents = new List<C_WorkItem>();
+			WorkHistoryX = new List<C_WorkItem>();
+			WorkIntentsX = new List<C_WorkItem>();
+
+			SeasonFirstDate = new C_YMD(2017, 09, 01);
+			SeasonLastDate = new C_YMD(2018, 04, 15);
 
 			if (!(j is JsonObject))
                 throw new ApplicationException("we can only work with an object");
@@ -83,138 +94,75 @@ namespace zsquared
             try
             {
                 if (j.ContainsKey(N_ID))
-                    id = j[N_ID];
+                    id = Tools.JsonProcessInt(j[N_ID], id);
 
                 if (j.ContainsKey(N_Name))
-                    Name = j[N_Name];
+                    Name = Tools.JsonProcessString(j[N_Name], Name);
 
                 if (j.ContainsKey(N_Slug))
-                    Slug = j[N_Slug];
+					Slug = Tools.JsonProcessString(j[N_Slug], Slug);
 
                 if (j.ContainsKey(N_Street))
-                    Street = j[N_Street];
+					Street = Tools.JsonProcessString(j[N_Street], Street);
 
                 if (j.ContainsKey(N_City))
-                    City = j[N_City];
+					City = Tools.JsonProcessString(j[N_City], City);
 
                 if (j.ContainsKey(N_State))
-                    State = j[N_State];
+					State = Tools.JsonProcessString(j[N_State], State);
 
                 if (j.ContainsKey(N_Zip))
-                    Zip = j[N_Zip];
+                    Zip = Tools.JsonProcessString(j[N_Zip], Zip);
 
                 if (j.ContainsKey(N_Latitude))
-                    Latitude = j[N_Latitude];
+                    Latitude = Tools.JsonProcessString(j[N_Latitude], Latitude);
 
                 if (j.ContainsKey(N_Longitude))
-                    Longitude = j[N_Longitude];
+                    Longitude = Tools.JsonProcessString(j[N_Longitude], Longitude);
 
                 if (j.ContainsKey(N_Coordinator))
-                {
-                    var cv = j[N_Coordinator];
-                    if (cv == null)
-                        PrimaryCoordinator = 0;
-                    else
-                    {
-                        if (cv.JsonType == JsonType.Number)
-                            PrimaryCoordinator = cv;
-                        else
-                        {
-                            try
-                            {
-                                string s = cv;
-                                PrimaryCoordinator = s == null ? 0 : Convert.ToInt32(s);
-                            }
-                            catch (Exception e)
-                            {
-                                Console.WriteLine(e.Message);
-                            }
-                        }
-                    }
-                }
+                    PrimaryCoordinator = Tools.JsonProcessInt(j[N_Coordinator], PrimaryCoordinator);
 
                 if (j.ContainsKey(N_BackupCoordinator))
-				{
-					var cv = j[N_BackupCoordinator];
-					if (cv == null)
-                        BackupCoordinator = 0;
-					else
-					{
-						if (cv.JsonType == JsonType.Number)
-							BackupCoordinator = cv;
-						else
-						{
-							try
-							{
-								string s = cv;
-								BackupCoordinator = s == null ? 0 : Convert.ToInt32(s);
-							}
-							catch (Exception e)
-							{
-								Console.WriteLine(e.Message);
-							}
-						}
-					}
-				}
+                    BackupCoordinator = Tools.JsonProcessInt(j[N_BackupCoordinator], BackupCoordinator);
 
 				if (j.ContainsKey(N_PlaceID))
                     PlaceID = j[N_PlaceID];
 
                 if (j.ContainsKey(N_Status))
                 {
-                    string ssv = j[N_Status];
+                    string ssv = Tools.JsonProcessString(j[N_Status], "Unknown");
                     Status = Tools.StringToEnum<E_SiteStatus>(ssv);
                 }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
 
-            try
-            {
                 if (j.ContainsKey(N_WorkHistory))
                 {
                     if (j[N_WorkHistory] is JsonArray)
                     {
-                        WorkHistory = new List<C_WorkItem>();
+                        WorkHistoryX = new List<C_WorkItem>();
                         JsonArray ja = (JsonArray)j[N_WorkHistory];
                         foreach (JsonValue jav in ja)
                         {
                             C_WorkItem wi = new C_WorkItem(jav);
-                            WorkHistory.Add(wi);
+                            WorkHistoryX.Add(wi);
                         }
                     }
                 }
-            }
-            catch (Exception e)
-            {
-				Console.WriteLine(e.Message);
-			}
 
-            try
-            {
                 if (j.ContainsKey(N_WorkIntents))
                 {
                     if (j[N_WorkIntents] is JsonArray)
                     {
-                        WorkIntents = new List<C_WorkItem>();
+                        WorkIntentsX = new List<C_WorkItem>();
                         JsonArray ja = (JsonArray)j[N_WorkIntents];
                         foreach (JsonValue jav in ja)
                         {
                             C_WorkItem wi = new C_WorkItem(jav);
-                            WorkIntents.Add(wi);
+                            WorkIntentsX.Add(wi);
                         }
                     }
                 }
-            }
-			catch (Exception e)
-			{
-				Console.WriteLine(e.Message);
-			}
 
-			try
-			{
                 if (j.ContainsKey(N_CalendarOverrides))
 				{
                     var jv = j[N_CalendarOverrides];
@@ -224,54 +172,22 @@ namespace zsquared
                         {
                             C_CalendarEntry ce = new C_CalendarEntry(jav);
                             CalendarOverrides.Add(ce);
-							Console.WriteLine("found calendar overrides");
 						}
 					}
 				}
-			}
-			catch (Exception e)
-			{
-				Console.WriteLine(e.Message);
-			}
 
-			try
-            {
                 // parse through the <day of week>_<open | close | efiler> values
                 foreach (string k in ((JsonObject)j).Keys)
                 {
-                    if ((k.Contains("_open")) || (k.Contains("_close")) || (k.Contains("_efilers")))
+					int dow = FindDayOfWeekInKey(k);
+                    if (((k.Contains("_open")) || (k.Contains("_close")) || (k.Contains("_efilers"))) && (dow != -1))
                     {
-                        int dow = FindDayOfWeekInKey(k);
-                        if (dow != -1)
-                        {
-                            if (k.Contains("_open"))
-                                SiteCalendar[dow].OpenTime = j[k];
-                            else if (k.Contains("_close"))
-                                SiteCalendar[dow].CloseTime = j[k];
-                            else if (k.Contains("_efilers"))
-                            {
-								var cv = j[k];
-								if (cv == null)
-									SiteCalendar[dow].NumEFilers = 0;
-								else
-								{
-									if (cv.JsonType == JsonType.Number)
-										SiteCalendar[dow].NumEFilers = cv;
-									else
-									{
-										try
-										{
-											string s = cv;
-											SiteCalendar[dow].NumEFilers = s == null ? 0 : Convert.ToInt32(s);
-										}
-										catch (Exception e)
-										{
-											Console.WriteLine(e.Message);
-										}
-									}
-								}
-                            }
-                        }
+                        if (k.Contains("_open"))
+                            SiteCalendar[dow].OpenTime = Tools.JsonProcessString(j[k], SiteCalendar[dow].OpenTime);
+                        else if (k.Contains("_close"))
+                            SiteCalendar[dow].CloseTime = Tools.JsonProcessString(j[k], SiteCalendar[dow].CloseTime);
+                        else if (k.Contains("_efilers"))
+                            SiteCalendar[dow].NumEFilers = Tools.JsonProcessInt(j[k], SiteCalendar[dow].NumEFilers);
                     }
                 }
             }
@@ -308,7 +224,7 @@ namespace zsquared
         /// </summary>
         /// <returns>A list of sites found in the json</returns>
         /// <param name="json">the value from the backend services that has been Parsed</param>
-        public static List<C_VitaSite> ImportSites(JsonValue json)
+        private static List<C_VitaSite> ImportSites(JsonValue json)
         {
             if (!(json is JsonArray))
                 throw new ApplicationException("the sites list must be an array");
@@ -324,13 +240,11 @@ namespace zsquared
             return res;
         }
 
-        public static List<C_VitaSite> FetchSitesList()
+        public async static Task<List<C_VitaSite>> FetchSitesListX()
         {
             List<C_VitaSite> siteslist = null;
 
-            string sitesUrl = C_Vita.VitaCoreUrlSSL + "/sites";
-            C_Vita.SetupCertificateHandling();
-
+            string sitesUrl = "/sites";
 			WebClient wc = new WebClient()
             {
                 BaseAddress = C_Vita.VitaCoreUrlSSL
@@ -340,8 +254,10 @@ namespace zsquared
 
             try
             {
-                string ds = wc.DownloadString(new Uri(sitesUrl));
-                JsonValue jdoc = JsonValue.Parse(ds);
+                //string ds = await wc.DownloadStringTaskAsync(new Uri(sitesUrl));
+				string ds = await wc.DownloadStringTaskAsync(sitesUrl);
+
+				JsonValue jdoc = JsonValue.Parse(ds);
 				siteslist = ImportSites(jdoc);
 			}
             catch (Exception e2)
@@ -353,7 +269,34 @@ namespace zsquared
 			return siteslist;
 		}
 
-        public async Task<bool> UpdateDefaultCalendar(int dayOfWeek, C_HMS openTime, C_HMS closeTime, int numefilers, string token)
+		public async static Task<C_VitaSite> FetchSitesDetails(string slug)
+		{
+			C_VitaSite site = null;
+
+			string siteUrl = "/sites/" + slug;
+			WebClient wc = new WebClient()
+			{
+				BaseAddress = C_Vita.VitaCoreUrlSSL
+			};
+			wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
+			wc.Headers.Add(HttpRequestHeader.Accept, "application/json");
+
+			try
+			{
+				string ds = await wc.DownloadStringTaskAsync(siteUrl);
+
+				JsonValue jdoc = JsonValue.Parse(ds);
+                site = new C_VitaSite(jdoc);
+			}
+			catch (Exception e2)
+			{
+				Console.WriteLine(e2.Message);
+			}
+
+			return site;
+		}
+
+		public async Task<bool> UpdateDefaultCalendar(int dayOfWeek, C_HMS openTime, C_HMS closeTime, int numefilers, string token)
         {
             if ((dayOfWeek < 0) || (dayOfWeek > 6))
                 throw new ApplicationException("day of week value must be 0..6");
@@ -374,22 +317,9 @@ namespace zsquared
             bool success = false;
             try
             {
-                JsonValue responseJson = await UpdateSite(bodyjson, token);
+                JsonValue responseString = await UpdateSite(bodyjson, token);
 
-                bool bad = !responseJson.ContainsKey(n_opentime);
-                bad |= !responseJson.ContainsKey(n_closetime);
-                bad |= !responseJson.ContainsKey(n_numefilers);
-
-                // todo: should check the values also...
-
-                success = !bad;
-
-                if (success)
-                {
-                    SiteCalendar[dayOfWeek].OpenTime = openTime.ToString("hh:mm");
-                    SiteCalendar[dayOfWeek].CloseTime = closeTime.ToString("hh:mm");
-                    SiteCalendar[dayOfWeek].NumEFilers = numefilers;
-				}
+                success = true;
             }
             catch (Exception e)
             {
@@ -399,6 +329,12 @@ namespace zsquared
             return success;
         }
 
+        /// <summary>
+        /// Calendar exceptions over all other information regarding open, close, and number of eFilers
+        /// </summary>
+        /// <returns>true if successful</returns>
+        /// <param name="token">Token.</param>
+        /// <param name="calEntry">Cal entry.</param>
         public async Task<bool> CreateCalendarException(string token, C_CalendarEntry calEntry)
         {
             string isClosed = calEntry.OpenTime == calEntry.CloseTime ? "true" : "false";
@@ -412,15 +348,9 @@ namespace zsquared
 				+ "}";
 
 			bool success = false;
-
-			// todo: move over to use SSL; hangs if using SSL
-			//SetupCertificateHandling(); // only needed if SSL
-
-			string updateurl = "/sites/" + Slug + "/calendars/";
-			//string fullUpdateurl = C_Vita.VitaCoreUrl + updateurl;
-            C_Vita.SetupCertificateHandling();
 			try
 			{
+				string updateurl = "/sites/" + Slug + "/calendars/";
 				WebClient wc = new WebClient()
 				{
                     BaseAddress = C_Vita.VitaCoreUrlSSL
@@ -429,16 +359,10 @@ namespace zsquared
 				wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
 				wc.Headers.Add(HttpRequestHeader.Accept, "application/json");
 
-				byte[] dataBytes = Encoding.UTF8.GetBytes(bodyjson);
+                string responseString = await wc.UploadStringTaskAsync(updateurl, "POST", bodyjson);
 
-				byte[] responseBytes = await wc.UploadDataTaskAsync(updateurl, "POST", dataBytes);
-
-				string responseString = Encoding.UTF8.GetString(responseBytes);
-
-				JsonValue res = JsonValue.Parse(responseString);
-                // verify that we got what we wanted
-
-                Console.WriteLine("yipee");
+				//string responseString = Encoding.UTF8.GetString(responseBytes);
+				//JsonValue res = JsonValue.Parse(responseString);
 
                 // add it to the current Site instance
                 CalendarOverrides.Add(calEntry);
@@ -467,14 +391,9 @@ namespace zsquared
 				+ "}";
 
 			bool success = false;
-
-			// todo: move over to use SSL; hangs if using SSL
-			//SetupCertificateHandling(); // only needed if SSL
-
-            string updateurl = "/sites/" + Slug + "/calendars/" + calEntry.id.ToString();
-            C_Vita.SetupCertificateHandling();
 			try
 			{
+				string updateurl = "/sites/" + Slug + "/calendars/" + calEntry.id.ToString();
 				WebClient wc = new WebClient()
 				{
                     BaseAddress = C_Vita.VitaCoreUrlSSL
@@ -483,18 +402,10 @@ namespace zsquared
 				wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
 				wc.Headers.Add(HttpRequestHeader.Accept, "application/json");
 
-				byte[] dataBytes = Encoding.UTF8.GetBytes(bodyjson);
+                string responseString = await wc.UploadStringTaskAsync(updateurl, "PUT", bodyjson);
 
-				byte[] responseBytes = await wc.UploadDataTaskAsync(updateurl, "PUT", dataBytes);
-
-				string responseString = Encoding.UTF8.GetString(responseBytes);
-
-				JsonValue res = JsonValue.Parse(responseString);
-				// verify that we got what we wanted
-
-				Console.WriteLine("yipee");
-
-                // should already be updated
+				//string responseString = Encoding.UTF8.GetString(responseBytes);
+				//JsonValue res = JsonValue.Parse(responseString);
 
 				success = true;
 			}
@@ -509,13 +420,10 @@ namespace zsquared
 
 		public async Task<bool> RemoveCalendarException(string token, C_CalendarEntry calEntry)
 		{
-            // todo: not working...
 			bool success = false;
-
-            string updateurl = "/sites/" + Slug + "/calendars/" + calEntry.id.ToString();
-            C_Vita.SetupCertificateHandling();
 			try
 			{
+				string updateurl = "/sites/" + Slug + "/calendars/" + calEntry.id.ToString();
 				WebClient wc = new WebClient()
 				{
                     BaseAddress = C_Vita.VitaCoreUrlSSL
@@ -524,14 +432,13 @@ namespace zsquared
 				wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
 				wc.Headers.Add(HttpRequestHeader.Accept, "application/json");
 
-                byte[] dataBytes = Encoding.UTF8.GetBytes("");
-
-				byte[] responseBytes = await wc.UploadDataTaskAsync(updateurl, "DELETE", dataBytes);
+                string responseString = await wc.UploadStringTaskAsync(updateurl, "DELETE", "");
 
 				//string responseString = Encoding.UTF8.GetString(responseBytes);
+				//JsonValue res = JsonValue.Parse(responseString);
 
-                // remove the calendar entry from this instance
-                CalendarOverrides.Remove(calEntry);
+				// remove the calendar entry from this instance
+				CalendarOverrides.Remove(calEntry);
 
 				success = true;
 			}
@@ -546,9 +453,6 @@ namespace zsquared
 
 		public async Task<bool> UpdateSiteStatus(E_SiteStatus newSiteStatus, string token)
         {
-			// post on {url}/sites/{site-slug}
-			// body is json with the setting to update
-
 			if (string.IsNullOrEmpty(Slug))
                 throw new ApplicationException("slug must not be null or empty");
 
@@ -561,26 +465,9 @@ namespace zsquared
 			try
 			{
                 JsonValue responseJson = await UpdateSite(bodyjson, token);
+                // we could check the boolean that is returned...
 
-                // make sure we got what we expected
-				if (responseJson.ContainsKey(N_Status))
-				{
-					string ssv = responseJson[N_Status];
-                    E_SiteStatus nss = Tools.StringToEnum<E_SiteStatus>(ssv);
-
-					// if the new site status is not what we asked for, then error
-                    success = nss == newSiteStatus;
-                    if (!success)
-                        Console.WriteLine("Site status after update was not what we requested");
-                    else
-                        // since no error, make our site status reflect the new value
-                        Status = nss;
-				}
-				else
-				{
-					// response did not contain our site status
-					Console.WriteLine("Site status was not present in our response");
-				}
+                success = true;
 			}
 			catch (Exception e)
 			{
@@ -594,19 +481,15 @@ namespace zsquared
         /// Update a field or set of fields on this site
         /// </summary>
         /// <returns>true on success</returns>
-        /// <param name="jsonString">Json string.</param>
+        /// <param name="jsonString">Json string of items to update.</param>
         /// <param name="token">Token.</param>
-        private async Task<JsonValue> UpdateSite(string jsonString, string token)
+        private async Task<bool> UpdateSite(string jsonString, string token)
         {
-			// todo: move over to use SSL; hangs if using SSL
-			//SetupCertificateHandling(); // only needed if SSL
-			string updateurl = "/sites/" + Slug;
-            string fullUpdateurl = C_Vita.VitaCoreUrlSSL + updateurl;
-
-            JsonValue res = null;
-            C_Vita.SetupCertificateHandling();
+            bool res = false;
+            //JsonValue res = null;
 			try
 			{
+				string updateurl = "/sites/" + Slug;
 				WebClient wc = new WebClient()
 				{
                     BaseAddress = C_Vita.VitaCoreUrlSSL
@@ -615,90 +498,23 @@ namespace zsquared
 				wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
 				wc.Headers.Add(HttpRequestHeader.Accept, "application/json");
 
-				byte[] dataBytes = Encoding.UTF8.GetBytes(jsonString);
+                string responseString = await wc.UploadStringTaskAsync(updateurl, "PUT", jsonString);
 
-				byte[] responseBytes = await wc.UploadDataTaskAsync(updateurl, "PUT", dataBytes);
+                //JsonValue jvResponse = JsonValue.Parse(responseString);
 
-				string responseString = Encoding.UTF8.GetString(responseBytes);
-
-				res = JsonValue.Parse(responseString);
+                res = true;
 			}
 			catch (Exception e)
 			{
 				Console.WriteLine("Attempt to update site status failed: " + e.Message);
-                res = null;
+                res = false;
 			}
 
             return res;
         }
 
-        public static C_VitaSite GetSiteBySlug(string slug, List<C_VitaSite> sites)
-        {
-            C_VitaSite res = null;
-
-            foreach(C_VitaSite s in sites)
-            {
-                if (s.Slug == slug)
-                {
-                    res = s;
-                    break;
-                }
-            }
-
-            return res;
-        }
-
-		public static List<C_VitaSite> SitesOpenOnDay(C_YMD onDate, List<C_VitaSite> sitesList)
+		public int GetNumEFilersRequiredOnDate(C_YMD onDate)
 		{
-			List<C_VitaSite> res = new List<C_VitaSite>();
-
-			int dayOfWeek = (int)onDate.DayOfWeek;
-			foreach (C_VitaSite site in sitesList)
-			{
-                if (site.SiteIsOpenOnDay(onDate))
-                    res.Add(site);
-			}
-
-			return res;
-		}
-
-        public static List<C_WorkItem> GetWorksItemsOnDateFromSites(C_YMD onDate, List<C_VitaSite> sitesList)
-        {
-            List<C_WorkItem> res = new List<C_WorkItem>();
-
-            foreach(C_VitaSite site in sitesList)
-            {
-                foreach(C_WorkItem wi in site.WorkIntents)
-                {
-                    if (wi.Date == onDate)
-                        res.Add(wi);
-                }
-            }
-
-            return res;
-        }
-
-        public bool SiteIsOpenOnDay(C_YMD onDate)
-        {
-			int dayOfWeek = (int)onDate.DayOfWeek;
-
-			bool siteIsOpenOnDate = SiteCalendar[dayOfWeek].OpenTime != SiteCalendar[dayOfWeek].CloseTime;
-
-			// scan for an override
-			foreach (C_CalendarEntry ce in CalendarOverrides)
-			{
-				if (ce.Date == onDate)
-				{
-					siteIsOpenOnDate = !ce.IsClosed;
-					break;
-				}
-			}
-
-            return siteIsOpenOnDate;
-		}
-
-        public int GetNumEFilersRequiredOnDate(C_YMD onDate)
-        {
 			int dayOfWeek = (int)onDate.DayOfWeek;
 
 			int OverrideNumEFilers = SiteCalendar[dayOfWeek].NumEFilers; // set the default value
@@ -714,27 +530,46 @@ namespace zsquared
 					break;
 				}
 			}
-            return OverrideNumEFilers;
+			return OverrideNumEFilers;
 		}
 
-        public List<C_WorkItem> GetWorkItemsOnDate(C_YMD onDate)
-        {
-            List<C_WorkItem> res = new List<C_WorkItem>();
+		/// <summary>
+		/// Gets the open and close times for the Site on the given date accounting for 
+		/// possible overrides. [0] is the open time, [1] is the close time.
+		/// </summary>
+		/// <returns>The open close time on date.</returns>
+		/// <param name="onDate">On date.</param>
+		public C_HMS[] GetOpenCloseTimeOnDate(C_YMD onDate)
+		{
+			int dayOfWeek = (int)onDate.DayOfWeek;
 
-            foreach(C_WorkItem wi in WorkIntents)
-            {
-                if (wi.Date == onDate)
-                    res.Add(wi);
-            }
+			C_HMS openTime = new C_HMS(SiteCalendar[dayOfWeek].OpenTime);
+			C_HMS closeTime = new C_HMS(SiteCalendar[dayOfWeek].CloseTime);
 
-            return res;
-        }
+			// scan for an override
+			foreach (C_CalendarEntry ce in CalendarOverrides)
+			{
+				if (ce.Date == onDate)
+				{
+					openTime = ce.OpenTime;
+					closeTime = ce.CloseTime;
+
+					break;
+				}
+			}
+
+			C_HMS[] res = new C_HMS[2];
+			res[0] = openTime;
+			res[1] = closeTime;
+
+			return res;
+		}
 
 		public C_CalendarEntry GetCalendarExceptionForDateForSite(C_YMD ymd)
 		{
 			C_CalendarEntry res = null;
 
-            foreach (C_CalendarEntry ce in CalendarOverrides)
+			foreach (C_CalendarEntry ce in CalendarOverrides)
 			{
 				if (ce.Date == ymd)
 				{
@@ -744,6 +579,62 @@ namespace zsquared
 			}
 
 			return res;
+		}
+
+		// ------------ static methods -----------
+
+		/// <summary>
+		/// Find the Site in the list based on the Slug.
+		/// </summary>
+		/// <returns>The Site.</returns>
+		/// <param name="slug">Slug.</param>
+		/// <param name="sites">Sites.</param>
+		public static C_VitaSite GetSiteBySlug(string slug, List<C_VitaSite> sites)
+        {
+            var ou = sites.Where(s => s.Slug == slug);
+            C_VitaSite res = null;
+            if (ou.Any())
+                res = ou.First();
+
+            return res;
+        }
+
+        /// <summary>
+        /// Returns a list of Sites that open on the indicated date, from the supplied list. Open 
+        /// is determined based on weekly calendar, seasonal dates, and lastly any calendar exception.
+        /// </summary>
+        /// <returns>List of sites open on the date</returns>
+        /// <param name="onDate">On date.</param>
+        /// <param name="sitesList">Sites list.</param>
+		public static List<C_VitaSite> SitesOpenOnDay(C_YMD onDate, List<C_VitaSite> sitesList)
+		{
+            var ou = sitesList.Where(s => s.SiteIsOpenOnDay(onDate));
+            List<C_VitaSite> res = new List<C_VitaSite>();
+            if (ou.Any())
+                res = ou.ToList();
+            return res;
+		}
+
+        public bool SiteIsOpenOnDay(C_YMD onDate)
+        {
+			int dayOfWeek = (int)onDate.DayOfWeek;
+
+            bool siteIsOpenOnDate =
+                (SiteCalendar[dayOfWeek].OpenTime != SiteCalendar[dayOfWeek].CloseTime)
+                && (onDate >= SeasonFirstDate)
+                && (onDate <= SeasonLastDate);
+
+			// scan for an override
+			foreach (C_CalendarEntry ce in CalendarOverrides)
+			{
+                if (ce.Date == onDate)
+				{
+					siteIsOpenOnDate = !ce.IsClosed;
+					break;
+				}
+			}
+
+            return siteIsOpenOnDate;
 		}
 
 		public static int CompareSitesByNameAscending(C_VitaSite s1, C_VitaSite s2)
