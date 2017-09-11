@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using zsquared;
 using MapKit;
 using CoreLocation;
+using System.Linq;
 
 namespace vitavol
 {
@@ -28,16 +29,20 @@ namespace vitavol
 			AppDelegate myAppDelegate = (AppDelegate)UIApplication.SharedApplication.Delegate;
 			Global = myAppDelegate.Global;
 
-			if ((Global.SelectedDate == null)
-                || (Global.OpenSitesThatNeedHelp == null))
-                throw new ApplicationException("expected input is incomplete");
+			// set the standard background color
+			View.BackgroundColor = UIColor.FromRGB(240, 240, 240);
 
-			L_Date.Text = "Date: " + Global.SelectedDate.ToString("mmm dd, yyyy");
+			L_Date.Text = Global.SelectedDate.ToString("mmm dd, yyyy");
 
 			B_Back.TouchUpInside += (sender, e) => 
             {
                 PerformSegue("Segue_SitesOnDateMapToSitesOnDateList", this);
             };
+
+			B_ShowAsList.TouchUpInside += (sender, e) =>
+			{
+				PerformSegue("Segue_SitesOnDateMapToSitesOnDateList", this);
+			};
 
 			Map_Sites.MapType = MapKit.MKMapType.Standard;
 			Map_Sites.AutoresizingMask = UIViewAutoresizing.FlexibleDimensions;
@@ -70,11 +75,12 @@ namespace vitavol
 			{
 				double latitude = double.NaN;
 				double longitude = double.NaN;
-				bool conversionOK = true;
+                bool conversionOK = false;
 				try
 				{
 					latitude = Convert.ToDouble(vs.Latitude);
 					longitude = Convert.ToDouble(vs.Longitude);
+                    conversionOK = true;
 				}
 				catch
 				{
@@ -127,22 +133,10 @@ namespace vitavol
 				if (pinView == null)
 					pinView = new MKPinAnnotationView(annotation, pId);
 
-				C_VitaSite ourSite = null;
-				foreach (C_VitaSite s in Sites)
+                var sou = Sites.Where(s => s.Name == thisWhich);
+                if (sou.Any())
 				{
-					if (s.Name == thisWhich)
-					{
-						ourSite = s;
-						break;
-					}
-				}
-
-				if (ourSite == null)
-				{
-					Console.WriteLine("Expected site name: " + thisWhich);
-				}
-				else
-				{
+                    C_VitaSite ourSite = sou.First();
                     switch (ourSite.Status)
                     {
                         case E_SiteStatus.Accepting:

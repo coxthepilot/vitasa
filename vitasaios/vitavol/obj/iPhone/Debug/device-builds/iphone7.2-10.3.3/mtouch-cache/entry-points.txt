@@ -1,12 +1,27 @@
-UIApplicationMain
-xamarin_get_block_descriptor
-xamarin_timezone_get_data
-xamarin_GetFolderPath
-xamarin_log
-xamarin_start_wwan
-CreateZStream
-CloseZStream
-Flush
-ReadZStream
-WriteZStream
-mono_pmip
+Function=xamarin_IntPtr_objc_msgSend_IntPtr
+	/Users/Billy/Documents/source/vitasa/vitasaios/vitavol/obj/iPhone/Debug/device-builds/iphone7.2-10.3.3/mtouch-cache/Link/Xamarin.iOS.dll
+Function=xamarin_IntPtr_objc_msgSendSuper_IntPtr
+	/Users/Billy/Documents/source/vitasa/vitasaios/vitavol/obj/iPhone/Debug/device-builds/iphone7.2-10.3.3/mtouch-cache/Link/Xamarin.iOS.dll
+Function=UIApplicationMain
+	/Users/Billy/Documents/source/vitasa/vitasaios/vitavol/obj/iPhone/Debug/device-builds/iphone7.2-10.3.3/mtouch-cache/Link/Xamarin.iOS.dll
+Function=xamarin_get_block_descriptor
+	/Users/Billy/Documents/source/vitasa/vitasaios/vitavol/obj/iPhone/Debug/device-builds/iphone7.2-10.3.3/mtouch-cache/Link/Xamarin.iOS.dll
+Function=CreateZStream
+	/Users/Billy/Documents/source/vitasa/vitasaios/vitavol/obj/iPhone/Debug/device-builds/iphone7.2-10.3.3/mtouch-cache/Link/System.dll
+Function=CloseZStream
+	/Users/Billy/Documents/source/vitasa/vitasaios/vitavol/obj/iPhone/Debug/device-builds/iphone7.2-10.3.3/mtouch-cache/Link/System.dll
+Function=Flush
+	/Users/Billy/Documents/source/vitasa/vitasaios/vitavol/obj/iPhone/Debug/device-builds/iphone7.2-10.3.3/mtouch-cache/Link/System.dll
+Function=ReadZStream
+	/Users/Billy/Documents/source/vitasa/vitasaios/vitavol/obj/iPhone/Debug/device-builds/iphone7.2-10.3.3/mtouch-cache/Link/System.dll
+Function=WriteZStream
+	/Users/Billy/Documents/source/vitasa/vitasaios/vitavol/obj/iPhone/Debug/device-builds/iphone7.2-10.3.3/mtouch-cache/Link/System.dll
+Function=xamarin_start_wwan
+	/Users/Billy/Documents/source/vitasa/vitasaios/vitavol/obj/iPhone/Debug/device-builds/iphone7.2-10.3.3/mtouch-cache/Link/System.dll
+Function=xamarin_timezone_get_data
+	/Users/Billy/Documents/source/vitasa/vitasaios/vitavol/obj/iPhone/Debug/device-builds/iphone7.2-10.3.3/mtouch-cache/Link/mscorlib.dll
+Function=xamarin_GetFolderPath
+	/Users/Billy/Documents/source/vitasa/vitasaios/vitavol/obj/iPhone/Debug/device-builds/iphone7.2-10.3.3/mtouch-cache/Link/mscorlib.dll
+Function=xamarin_log
+	/Users/Billy/Documents/source/vitasa/vitasaios/vitavol/obj/iPhone/Debug/device-builds/iphone7.2-10.3.3/mtouch-cache/Link/mscorlib.dll
+Function=mono_pmip

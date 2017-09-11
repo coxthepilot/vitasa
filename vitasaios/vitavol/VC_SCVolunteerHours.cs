@@ -28,9 +28,8 @@ namespace vitavol
 			AppDelegate myAppDelegate = (AppDelegate)UIApplication.SharedApplication.Delegate;
 			Global = myAppDelegate.Global;
 
-            if ((Global.WorkItemsDate == null)
-                || (Global.VolunteerWorkItem == null))
-                throw new ApplicationException("required input elements are not all present");
+			// set the standard background color
+			View.BackgroundColor = UIColor.FromRGB(240, 240, 240);
 
 			B_Back.TouchUpInside += (sender, e) => 
             {

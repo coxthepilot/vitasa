@@ -1,27 +1,39 @@
 ﻿To Do:
     System Notifications (poll or APN)
-    Entitlements
-    Put size handles on all UI elements (!!! sigh !!!)
+    Entitlements/Certificates
     Protocol version
     Hande lost password
+
+Testing
+* validate layout on iPhone 5s, 6, 6+, 7, 7+
+* validate background fetch (every ~ 4 hours)
 
 Future
 * Means to edit/change the Site season (from Back Office web UI)
 
 For Sheila/Alejandra
     If SC, but no sites, treat as a volunteer? Or SC with no sites?
-    Can backup SC's do everything the primary can? Yes...
+    Role for backup site coordinators? same powers as primary?
+    iPhone only ok for volunteers and site coordinators? not planning Android...
 
 For Chris
 * Some very slow responses; probably network related; any way to view his response times?
 * Occasionally getting a 422 on Registration; do logs show anything?
-* 422 seems to be a DB error (like duplicate key)
 * Some calls just return {true} as a bool; expected? Example: update site calendar
 * Protocol version; do I need to signal the API version I'm using?
+* >> Need api to register a push API token (string) along with user type (vol/sc vs client); for APNS
+* >> Need GET/users/{id} to include the sites for which the user is a site coordinator?
+* >> Need a fast(er) way to get slug to site name table 
+* >> Need a fast(er) to get user id to name table
+* FYI: must have a slash before ? Unpredictable results
 
 Bugs
-* Register: occasional 422; when it starts, have to exit and come back in; after 2 registrations; could be db errors...
-* Some login, other api responses VERY slow (could be my home wifi and internet)
+* Save Volunteer hours didn't start the spinner and left them dirty (<Back say them dirty)
+* Looks like hours are all showing up approved
+* Allow SC to change approved hours
+* Color status images have white around them; make transparent or same as our background color 240/240/240
+* Find signup for current user, don't do if site coordinator
 
-Verify
-* Local notifications are working
+Todo:
+* get binary files off of github
+* Need final words for the about page

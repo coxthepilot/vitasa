@@ -23,7 +23,10 @@ namespace vitavol
 			AppDelegate myAppDelegate = (AppDelegate)UIApplication.SharedApplication.Delegate;
 			Global = myAppDelegate.Global;
 
-            L_Date.Text = "Date: " + Global.SelectedDate.ToString("mmm dd, yyyy");
+			// set the standard background color
+			View.BackgroundColor = UIColor.FromRGB(240, 240, 240);
+
+			L_Date.Text = "Date: " + Global.SelectedDate.ToString("mmm dd, yyyy");
 
 			B_Back.TouchUpInside += (sender, e) => 
             {
@@ -99,28 +102,51 @@ namespace vitavol
 
 				C_VitaSite site = Sites[indexPath.Row];
 
+				// figure out if the user is already signed up for this date
+				List<C_WorkItem> wiUser = Global.GetWorkItemsForSiteOnDateForUser(
+					site.Slug,
+					Global.SelectedDate,
+                    Global.LoggedInUser.id,
+					C_Global.E_SiteCondition.Any);
+
 				cell.TextLabel.Text = site.Name;
-                int dayOfWeek = (int)Global.SelectedDate.DayOfWeek;
+                //int dayOfWeek = (int)Global.SelectedDate.DayOfWeek;
                 int numEF = site.GetNumEFilersRequiredOnDate(Global.SelectedDate);
-				cell.DetailTextLabel.Text = numEF.ToString() + " needed.";
+
+                if (wiUser.Count == 0)
+					cell.DetailTextLabel.Text = numEF.ToString() + " needed.";
+                else
+					cell.DetailTextLabel.Text = "Already signed up at this site.";
+
 
                 return cell;
 			}
 
 			public override void RowSelected(UITableView tableView, NSIndexPath indexPath)
 			{
-                // Required for VC_SignUp
-                // SelectedDate - came from Calendar
-				Global.SelectedSite = Sites[indexPath.Row];
-                Global.WorkItemsOnSiteOnDate = Global.GetWorkItemsForSiteOnDateForUser(
-                    Global.SelectedSite.Slug,
-                    Global.SelectedDate,
-                    -1,
-                    C_Global.E_SiteCondition.Any);
+				// see if the user is already signed up at this site
+				// figure out if the user is already signed up for this date
+				List<C_WorkItem> wiUser = Global.GetWorkItemsForSiteOnDateForUser(
+					Sites[indexPath.Row].Slug,
+					Global.SelectedDate,
+					Global.LoggedInUser.id,
+					C_Global.E_SiteCondition.Any);
 
-				Global.DetailsCameFrom = E_CameFrom.List;
+                if (wiUser.Count == 0)
+                {
+                    // Required for VC_SignUp
+                    // SelectedDate - came from Calendar
+                    Global.SelectedSite = Sites[indexPath.Row];
+                    Global.WorkItemsOnSiteOnDate = Global.GetWorkItemsForSiteOnDateForUser(
+                        Global.SelectedSite.Slug,
+                        Global.SelectedDate,
+                        -1,
+                        C_Global.E_SiteCondition.Any);
 
-				ourVC.PerformSegue("Segue_SitesOnDateListToSignUp", ourVC);
+                    Global.DetailsCameFrom = E_CameFrom.List;
+
+                    ourVC.PerformSegue("Segue_SitesOnDateListToSignUp", ourVC);
+                }
 			}
 		}
     }

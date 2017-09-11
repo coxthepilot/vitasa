@@ -205,7 +205,7 @@ namespace zsquared
 				string submiturl = "/suggestions";
 				WebClient wc = new WebClient()
 				{
-					BaseAddress = C_Vita.VitaCoreUrlSSL
+					BaseAddress = C_Vita.VitaCoreUrl
 				};
 				wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
 				wc.Headers.Add(HttpRequestHeader.Accept, "application/json");
@@ -218,8 +218,6 @@ namespace zsquared
 				JsonValue responseJson = JsonValue.Parse(responseString);
 
                 C_Suggestion nsug = new C_Suggestion(responseJson);
-                if ((nsug.Subject == null) || (nsug.Text == null))
-                    Console.WriteLine("Suggestion subject or text is null");
 
                 // add the intent to this users WorkIntent list
                 sug.id = nsug.id;
@@ -229,7 +227,7 @@ namespace zsquared
 			}
 			catch (Exception e)
 			{
-                Console.WriteLine("Attempt to add intent or response parsing failed: " + e.Message);
+                Console.WriteLine(e.Message);
 				success = false;
 			}
 
@@ -259,7 +257,7 @@ namespace zsquared
 				string submiturl = "/suggestions/" + sug.id.ToString();
 				WebClient wc = new WebClient()
 				{
-					BaseAddress = C_Vita.VitaCoreUrlSSL
+					BaseAddress = C_Vita.VitaCoreUrl
 				};
 				wc.Headers.Add(HttpRequestHeader.Cookie, Token);
 				wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
@@ -275,9 +273,8 @@ namespace zsquared
 
 				success = true;
 			}
-			catch (Exception e)
+			catch
 			{
-				Console.WriteLine("Attempt to add intent or response parsing failed: " + e.Message);
 				success = false;
 			}
 
@@ -300,7 +297,7 @@ namespace zsquared
 				string submiturl = "/suggestions/" + wi.id.ToString();
 				WebClient wc = new WebClient()
 				{
-                    BaseAddress = C_Vita.VitaCoreUrlSSL
+                    BaseAddress = C_Vita.VitaCoreUrl
 				};
 				wc.Headers.Add(HttpRequestHeader.Cookie, Token);
 				wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
@@ -320,9 +317,8 @@ namespace zsquared
 
 				success = true;
 			}
-			catch (Exception e)
+			catch
 			{
-				Console.WriteLine("Attempt to remove intent or response parsing failed: " + e.Message);
 				success = false;
 			}
 
@@ -367,7 +363,7 @@ namespace zsquared
 				string usersUrl = "/users/" + id.ToString();
 				WebClient wc = new WebClient()
                 {
-                    BaseAddress = C_Vita.VitaCoreUrlSSL
+                    BaseAddress = C_Vita.VitaCoreUrl
 				};
 				wc.Headers.Add(HttpRequestHeader.Cookie, token);
 				wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
@@ -382,9 +378,8 @@ namespace zsquared
 
 				res = new C_VitaUser(jv);
 			}
-			catch (Exception e)
+			catch
 			{
-				Console.WriteLine("error in download: " + e.Message);
 				res = null;
 			}
 
@@ -404,7 +399,7 @@ namespace zsquared
 				string usersUrl = "/users";
 				WebClient wc = new WebClient()
                 {
-                    BaseAddress = C_Vita.VitaCoreUrlSSL
+                    BaseAddress = C_Vita.VitaCoreUrl
                 };
                 wc.Headers.Add(HttpRequestHeader.Cookie, token);
 				wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
@@ -425,9 +420,8 @@ namespace zsquared
 					res.Add(vu);
 				}
 			}
-			catch (Exception e)
+			catch
 			{
-				Console.WriteLine("error in download: " + e.Message);
                 res = null;
 			}
 

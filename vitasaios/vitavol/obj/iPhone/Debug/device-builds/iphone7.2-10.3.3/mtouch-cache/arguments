@@ -1,6 +1,6 @@
-# Version: 10.10.0.36 (d15-2: d2270eec)
+# Version: 10.12.0.20 (d15-3: 80b8487d)
 # [first argument, ignore] # --cache
-/Library/Frameworks/Xamarin.iOS.framework/Versions/10.10.0.36/lib/mtouch/mtouch.exe \
+/Library/Frameworks/Xamarin.iOS.framework/Versions/10.12.0.20/lib/mtouch/mtouch.exe \
 	/Users/Billy/Documents/source/vitasa/vitasaios/vitavol/obj/iPhone/Debug/device-builds/iphone7.2-10.3.3/mtouch-cache \
 	--dev \
 	/Users/Billy/Documents/source/vitasa/vitasaios/vitavol/bin/iPhone/Debug/device-builds/iphone7.2-10.3.3/vitavol.app \
@@ -34,7 +34,13 @@
 	-r \
 	/Library/Frameworks/Xamarin.iOS.framework/Versions/Current/lib/mono/Xamarin.iOS/System.Xml.dll \
 	-r \
-	/Users/Billy/Documents/source/vitasa/vitasaios/packages/Xamarin.Forms.2.3.4.247/build/portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20/Xamarin.Forms.Core.dll \
+	/Users/Billy/Documents/source/vitasa/vitasaios/packages/Xamarin.Forms.2.3.4.270/lib/Xamarin.iOS10/Xamarin.Forms.Core.dll \
+	-r \
+	/Users/Billy/Documents/source/vitasa/vitasaios/packages/Xamarin.Forms.2.3.4.270/lib/Xamarin.iOS10/Xamarin.Forms.Platform.dll \
+	-r \
+	/Users/Billy/Documents/source/vitasa/vitasaios/packages/Xamarin.Forms.2.3.4.270/lib/Xamarin.iOS10/Xamarin.Forms.Platform.iOS.dll \
+	-r \
+	/Users/Billy/Documents/source/vitasa/vitasaios/packages/Xamarin.Forms.2.3.4.270/lib/Xamarin.iOS10/Xamarin.Forms.Xaml.dll \
 	-r \
 	/Library/Frameworks/Xamarin.iOS.framework/Versions/Current/lib/mono/Xamarin.iOS/Xamarin.iOS.dll \
 	-r \
@@ -166,6 +172,8 @@
 	-r \
 	/Library/Frameworks/Xamarin.iOS.framework/Versions/Current/lib/mono/Xamarin.iOS/Facades/System.ObjectModel.dll \
 	-r \
+	/Library/Frameworks/Xamarin.iOS.framework/Versions/Current/lib/mono/Xamarin.iOS/Facades/System.Reflection.DispatchProxy.dll \
+	-r \
 	/Library/Frameworks/Xamarin.iOS.framework/Versions/Current/lib/mono/Xamarin.iOS/Facades/System.Reflection.dll \
 	-r \
 	/Library/Frameworks/Xamarin.iOS.framework/Versions/Current/lib/mono/Xamarin.iOS/Facades/System.Reflection.Emit.dll \
@@ -194,7 +202,11 @@
 	-r \
 	/Library/Frameworks/Xamarin.iOS.framework/Versions/Current/lib/mono/Xamarin.iOS/Facades/System.Runtime.InteropServices.dll \
 	-r \
+	/Library/Frameworks/Xamarin.iOS.framework/Versions/Current/lib/mono/Xamarin.iOS/Facades/System.Runtime.InteropServices.RuntimeInformation.dll \
+	-r \
 	/Library/Frameworks/Xamarin.iOS.framework/Versions/Current/lib/mono/Xamarin.iOS/Facades/System.Runtime.InteropServices.WindowsRuntime.dll \
+	-r \
+	/Library/Frameworks/Xamarin.iOS.framework/Versions/Current/lib/mono/Xamarin.iOS/Facades/System.Runtime.Loader.dll \
 	-r \
 	/Library/Frameworks/Xamarin.iOS.framework/Versions/Current/lib/mono/Xamarin.iOS/Facades/System.Runtime.Numerics.dll \
 	-r \
@@ -302,9 +314,85 @@
 	-r \
 	/Library/Frameworks/Xamarin.iOS.framework/Versions/Current/lib/mono/Xamarin.iOS/Facades/System.Xml.XPath.XDocument.dll \
 	-r \
+	/Library/Frameworks/Xamarin.iOS.framework/Versions/Current/lib/mono/Xamarin.iOS/Facades/System.Xml.XPath.XmlDocument.dll \
+	-r \
 	/Library/Frameworks/Xamarin.iOS.framework/Versions/Current/lib/mono/Xamarin.iOS/Facades/System.Xml.Xsl.Primitives.dll \
 	-r \
-	/Users/Billy/Documents/source/vitasa/vitasaios/packages/Xamarin.Forms.2.3.4.247/build/portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20/Xamarin.Forms.Core.dll \
+	/Users/Billy/Documents/source/vitasa/vitasaios/packages/Xamarin.Forms.2.3.4.270/lib/Xamarin.iOS10/Xamarin.Forms.Core.dll \
+	-r \
+	/Users/Billy/Documents/source/vitasa/vitasaios/packages/Xamarin.Forms.2.3.4.270/lib/Xamarin.iOS10/Xamarin.Forms.Platform.dll \
+	-r \
+	/Users/Billy/Documents/source/vitasa/vitasaios/packages/Xamarin.Forms.2.3.4.270/lib/Xamarin.iOS10/Xamarin.Forms.Platform.iOS.dll \
+	-r \
+	/Users/Billy/Documents/source/vitasa/vitasaios/packages/Xamarin.Forms.2.3.4.270/lib/Xamarin.iOS10/Xamarin.Forms.Xaml.dll \
+	-r \
+	/Users/Billy/Documents/source/vitasa/vitasaios/packages/Xamarin.Forms.2.3.4.270/lib/Xamarin.iOS10/ar/Xamarin.Forms.Platform.iOS.resources.dll \
+	-r \
+	/Users/Billy/Documents/source/vitasa/vitasaios/packages/Xamarin.Forms.2.3.4.270/lib/Xamarin.iOS10/ca/Xamarin.Forms.Platform.iOS.resources.dll \
+	-r \
+	/Users/Billy/Documents/source/vitasa/vitasaios/packages/Xamarin.Forms.2.3.4.270/lib/Xamarin.iOS10/cs/Xamarin.Forms.Platform.iOS.resources.dll \
+	-r \
+	/Users/Billy/Documents/source/vitasa/vitasaios/packages/Xamarin.Forms.2.3.4.270/lib/Xamarin.iOS10/da/Xamarin.Forms.Platform.iOS.resources.dll \
+	-r \
+	/Users/Billy/Documents/source/vitasa/vitasaios/packages/Xamarin.Forms.2.3.4.270/lib/Xamarin.iOS10/de/Xamarin.Forms.Platform.iOS.resources.dll \
+	-r \
+	/Users/Billy/Documents/source/vitasa/vitasaios/packages/Xamarin.Forms.2.3.4.270/lib/Xamarin.iOS10/el/Xamarin.Forms.Platform.iOS.resources.dll \
+	-r \
+	/Users/Billy/Documents/source/vitasa/vitasaios/packages/Xamarin.Forms.2.3.4.270/lib/Xamarin.iOS10/es/Xamarin.Forms.Platform.iOS.resources.dll \
+	-r \
+	/Users/Billy/Documents/source/vitasa/vitasaios/packages/Xamarin.Forms.2.3.4.270/lib/Xamarin.iOS10/fi/Xamarin.Forms.Platform.iOS.resources.dll \
+	-r \
+	/Users/Billy/Documents/source/vitasa/vitasaios/packages/Xamarin.Forms.2.3.4.270/lib/Xamarin.iOS10/fr/Xamarin.Forms.Platform.iOS.resources.dll \
+	-r \
+	/Users/Billy/Documents/source/vitasa/vitasaios/packages/Xamarin.Forms.2.3.4.270/lib/Xamarin.iOS10/he/Xamarin.Forms.Platform.iOS.resources.dll \
+	-r \
+	/Users/Billy/Documents/source/vitasa/vitasaios/packages/Xamarin.Forms.2.3.4.270/lib/Xamarin.iOS10/hi/Xamarin.Forms.Platform.iOS.resources.dll \
+	-r \
+	/Users/Billy/Documents/source/vitasa/vitasaios/packages/Xamarin.Forms.2.3.4.270/lib/Xamarin.iOS10/hr/Xamarin.Forms.Platform.iOS.resources.dll \
+	-r \
+	/Users/Billy/Documents/source/vitasa/vitasaios/packages/Xamarin.Forms.2.3.4.270/lib/Xamarin.iOS10/hu/Xamarin.Forms.Platform.iOS.resources.dll \
+	-r \
+	/Users/Billy/Documents/source/vitasa/vitasaios/packages/Xamarin.Forms.2.3.4.270/lib/Xamarin.iOS10/id/Xamarin.Forms.Platform.iOS.resources.dll \
+	-r \
+	/Users/Billy/Documents/source/vitasa/vitasaios/packages/Xamarin.Forms.2.3.4.270/lib/Xamarin.iOS10/it/Xamarin.Forms.Platform.iOS.resources.dll \
+	-r \
+	/Users/Billy/Documents/source/vitasa/vitasaios/packages/Xamarin.Forms.2.3.4.270/lib/Xamarin.iOS10/ja/Xamarin.Forms.Platform.iOS.resources.dll \
+	-r \
+	/Users/Billy/Documents/source/vitasa/vitasaios/packages/Xamarin.Forms.2.3.4.270/lib/Xamarin.iOS10/ko/Xamarin.Forms.Platform.iOS.resources.dll \
+	-r \
+	/Users/Billy/Documents/source/vitasa/vitasaios/packages/Xamarin.Forms.2.3.4.270/lib/Xamarin.iOS10/ms/Xamarin.Forms.Platform.iOS.resources.dll \
+	-r \
+	/Users/Billy/Documents/source/vitasa/vitasaios/packages/Xamarin.Forms.2.3.4.270/lib/Xamarin.iOS10/nb/Xamarin.Forms.Platform.iOS.resources.dll \
+	-r \
+	/Users/Billy/Documents/source/vitasa/vitasaios/packages/Xamarin.Forms.2.3.4.270/lib/Xamarin.iOS10/nl/Xamarin.Forms.Platform.iOS.resources.dll \
+	-r \
+	/Users/Billy/Documents/source/vitasa/vitasaios/packages/Xamarin.Forms.2.3.4.270/lib/Xamarin.iOS10/pl/Xamarin.Forms.Platform.iOS.resources.dll \
+	-r \
+	/Users/Billy/Documents/source/vitasa/vitasaios/packages/Xamarin.Forms.2.3.4.270/lib/Xamarin.iOS10/pt/Xamarin.Forms.Platform.iOS.resources.dll \
+	-r \
+	/Users/Billy/Documents/source/vitasa/vitasaios/packages/Xamarin.Forms.2.3.4.270/lib/Xamarin.iOS10/pt-BR/Xamarin.Forms.Platform.iOS.resources.dll \
+	-r \
+	/Users/Billy/Documents/source/vitasa/vitasaios/packages/Xamarin.Forms.2.3.4.270/lib/Xamarin.iOS10/ro/Xamarin.Forms.Platform.iOS.resources.dll \
+	-r \
+	/Users/Billy/Documents/source/vitasa/vitasaios/packages/Xamarin.Forms.2.3.4.270/lib/Xamarin.iOS10/ru/Xamarin.Forms.Platform.iOS.resources.dll \
+	-r \
+	/Users/Billy/Documents/source/vitasa/vitasaios/packages/Xamarin.Forms.2.3.4.270/lib/Xamarin.iOS10/sk/Xamarin.Forms.Platform.iOS.resources.dll \
+	-r \
+	/Users/Billy/Documents/source/vitasa/vitasaios/packages/Xamarin.Forms.2.3.4.270/lib/Xamarin.iOS10/sv/Xamarin.Forms.Platform.iOS.resources.dll \
+	-r \
+	/Users/Billy/Documents/source/vitasa/vitasaios/packages/Xamarin.Forms.2.3.4.270/lib/Xamarin.iOS10/th/Xamarin.Forms.Platform.iOS.resources.dll \
+	-r \
+	/Users/Billy/Documents/source/vitasa/vitasaios/packages/Xamarin.Forms.2.3.4.270/lib/Xamarin.iOS10/tr/Xamarin.Forms.Platform.iOS.resources.dll \
+	-r \
+	/Users/Billy/Documents/source/vitasa/vitasaios/packages/Xamarin.Forms.2.3.4.270/lib/Xamarin.iOS10/uk/Xamarin.Forms.Platform.iOS.resources.dll \
+	-r \
+	/Users/Billy/Documents/source/vitasa/vitasaios/packages/Xamarin.Forms.2.3.4.270/lib/Xamarin.iOS10/vi/Xamarin.Forms.Platform.iOS.resources.dll \
+	-r \
+	/Users/Billy/Documents/source/vitasa/vitasaios/packages/Xamarin.Forms.2.3.4.270/lib/Xamarin.iOS10/zh-HK/Xamarin.Forms.Platform.iOS.resources.dll \
+	-r \
+	/Users/Billy/Documents/source/vitasa/vitasaios/packages/Xamarin.Forms.2.3.4.270/lib/Xamarin.iOS10/zh-Hans/Xamarin.Forms.Platform.iOS.resources.dll \
+	-r \
+	/Users/Billy/Documents/source/vitasa/vitasaios/packages/Xamarin.Forms.2.3.4.270/lib/Xamarin.iOS10/zh-Hant/Xamarin.Forms.Platform.iOS.resources.dll \
 	--target-framework \
 	"Xamarin.iOS,v1.0" \
 	/Users/Billy/Documents/source/vitasa/vitasaios/vitavol/bin/iPhone/Debug/vitavol.exe \

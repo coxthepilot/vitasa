@@ -32,82 +32,79 @@ namespace vitavol
             base.ViewDidLoad();
 
 			AppDelegate myAppDelegate = (AppDelegate)UIApplication.SharedApplication.Delegate;
-			//myAppDelegate.Global = new C_Global(); // only do this when the app starts up the first time
             C_Global Global = myAppDelegate.Global;
 
-            if (Global == null)
-                throw new ApplicationException("hoping it would get set in app delegate");
+            // ----- debug only -----
 
-			// only needed once when the app starts
-			C_Vita.SetupCertificateHandling();
-
-            B_CellView.TouchUpInside += (sender, e) => 
+            B_TriggerFetch.TouchUpInside += (sender, e) => 
             {
-                PerformSegue("Segue_LoginToCellView", this);
+                myAppDelegate.FetchHandler(null);
             };
+
+            B_ClearFetch.TouchUpInside += (sender, e) => 
+            {
+                NSUserDefaults.StandardUserDefaults.SetString("{}", AppDelegate.N_KnownEventsJson);
+			};
+
+            // ----- debug only -----
 
 			B_About.TouchUpInside += (sender, e) => 
             {
                 PerformSegue("Segue_LoginToAbout", this);
             };
 
+            // keep track of the length of text in the email box, allow login when email and password are long enought
 			TB_Email.AddTarget((sender, e) =>
 			{
 				B_Login.Enabled = (TB_Email.Text.Length > 6) && (TB_Password.Text.Length > 6);
 
 			}, UIControlEvent.EditingChanged);
 
+			// keep track of the length of text in the passwrd box, allow login when email and password are long enought
 			TB_Password.AddTarget((sender, e) =>
 			{
 				B_Login.Enabled = (TB_Email.Text.Length > 6) && (TB_Password.Text.Length > 6);
 
 			}, UIControlEvent.EditingChanged);
 
+            // if the user asks to register, take then to the registration page
             B_Register.TouchUpInside += (sender, e) => 
             {
                 PerformSegue("Segue_LoginToRegister", this);
             };
 
+            // Login is requested; we can only get this when the email and password are long enough
             B_Login.TouchUpInside += async (sender, e) => 
             {
 				string email = TB_Email.Text;
 				string pw = TB_Password.Text;
 
-				if ((TB_Email.Text.Length == 0) || (TB_Password.Text.Length == 0))
-					return;
+				// Disable the UI since this is a long running process
+				EnableUI(false);
+				AI_Spinner.StartAnimating();
 
-                EnableUI(false);
-                AI_Spinner.StartAnimating();
+				try
+				{
+					// do the actual login API call
+					C_VitaUser user = await C_Vita.PerformLogin(email, pw);
+					// if bad name or pass, we get null; otherwise we get a C_VitaUser
+					if (user == null)
+					{
+						E_MessageBoxResults mbres = await MessageBox(this,
+																	 "Error",
+																	 "Login failed. Bad email or password",
+																	 E_MessageBoxButtons.Ok);
+						AI_Spinner.StopAnimating();
+						EnableUI(true);
+						return;
+					}
 
-                try
-                {
-                    C_VitaUser user = await C_Vita.PerformLogin(email, pw);
-
-                    if (user == null)
-                    {
-                        E_MessageBoxResults mbres = await MessageBox(this, 
-                                                                     "Error", 
-                                                                     "Login failed. Bad email or password", 
-                                                                     E_MessageBoxButtons.Ok);
-                        AI_Spinner.StopAnimating();
-					    EnableUI(true);
-                        return;
-                    }
-
-                    // testing
-                    List<C_WorkItem> wlist = await C_WorkItem.GetWorkItemsForUser(user.Token, user.id);
-                    //wlist.Sort(C_WorkItem.CompareByDateAscending);
-                    C_YMD dateToLookFor = C_YMD.Now;
-                    dateToLookFor = dateToLookFor.AddDays(1); // tomorrow
-                    List<C_WorkItem> workItemsForDate = C_WorkItem.GetWorkItemsForDate(dateToLookFor, wlist);
-
-                    Console.WriteLine(workItemsForDate.Count.ToString());
-                    // end of testing
-
-                    bool getSitesSuccess = await Global.GetAllSites();
-
-                    if (!getSitesSuccess)
-                    {
+					// get the list of all sites. We need this list to find out which sites the user might be a site coordinator in.
+					// todo: can Chris include this with User
+					// todo: lots of places downstream use this for slug to site name translation
+					bool getSitesSuccess = await Global.GetAllSites();
+					if (!getSitesSuccess)
+					{
 						E_MessageBoxResults mbres = await MessageBox(this,
 																	 "Error",
 																	 "Unable to access Sites list",
@@ -117,76 +114,82 @@ namespace vitavol
 						return;
 					}
 
-                    AI_Spinner.StopAnimating();
-                    EnableUI(true);
-                    Global.LoggedInUser = user;
+					AI_Spinner.StopAnimating();
+					EnableUI(true);
+					Global.LoggedInUser = user;
 
 					NSUserDefaults.StandardUserDefaults.SetString(TB_Email.Text, "email");
 					NSUserDefaults.StandardUserDefaults.SetString(TB_Password.Text, "password");
 
-                    if (user.HasSiteCoordinator)
-                    {
+					if (user.HasSiteCoordinator)
+					{
                         // get the sites for which this site coordinator is responsible
                         // if only one, then SCSite; if more than one then SCSites
-                        List<C_VitaSite> SCSites = new List<C_VitaSite>();
-                        foreach(C_VitaSite s in Global.AllSites)
-                        {
-                            if (Global.LoggedInUser.id == s.PrimaryCoordinator)
-                                SCSites.Add(s);
-                        }
-                        if (SCSites.Count == 0)
-                        {
-							// a site coordinator with no sites; treat them as a normal volunteer (?)
-                    		PerformSegue("Segue_LoginToSignUps", this);
-						}
-                        else if (SCSites.Count == 1)
-                        {
-                            Global.SelectedSite = SCSites[0];
-                            Global.SCSites = SCSites;
-                            Global.DetailsCameFrom = E_CameFrom.Login;
-							PerformSegue("Segue_LoginToSCSite", this);
-						}
-                        else
-                        {
-                            Global.SelectedSite = null;
+                        var sou = Global.AllSites.Where(s => s.PrimaryCoordinator == Global.LoggedInUser.id);
+                        List<C_VitaSite> SCSites = sou.ToList();
+
+						if (SCSites.Count == 0)
+						{
+							// a site coordinator with no sites; treat them as a site coordinator with no sites
+							E_MessageBoxResults mbres = await MessageBox(this,
+								"No Sites",
+								"Site Coordinator but no Sites assigned.",
+								E_MessageBoxButtons.Ok);
+
+							Global.SelectedSite = null;
 							Global.SCSites = SCSites;
 							Global.DetailsCameFrom = E_CameFrom.Login;
 							PerformSegue("Segue_LoginToSCSites", this);
 						}
-                    }
-                    else if (user.HasVolunteer)
-                    {
-						PerformSegue("Segue_LoginToSignUps", this);
-                    }
-                    else if (user.HasNewUser)
+						else if (SCSites.Count == 1)
+						{
+							Global.SelectedSite = SCSites[0];
+							Global.SCSites = SCSites;
+							Global.DetailsCameFrom = E_CameFrom.Login;
+							PerformSegue("Segue_LoginToSCSite", this);
+						}
+						else
+						{
+							Global.SelectedSite = null;
+							Global.SCSites = SCSites;
+							Global.DetailsCameFrom = E_CameFrom.Login;
+							PerformSegue("Segue_LoginToSCSites", this);
+						}
+					}
+					else if (user.HasVolunteer)
 					{
-                        E_MessageBoxResults mbres = await MessageBox(this, 
-                                           "Not Authorized", 
-                                           "Staff has not yet acted on your registration.",
-                                         Tools.E_MessageBoxButtons.Ok);
+						PerformSegue("Segue_LoginToSignUps", this);
+					}
+					else if (user.HasNewUser)
+					{
+						E_MessageBoxResults mbres = await MessageBox(this,
+										   "Not Authorized",
+										   "Staff has not yet acted on your registration.",
+										   E_MessageBoxButtons.Ok);
 					}
 					else
-                    {
-                        E_MessageBoxResults mbres = await MessageBox(this, 
-                                         "Error", 
-                                         "Authorization failure. Expecting Volunteer or Site Coordinator",
-                                         Tools.E_MessageBoxButtons.Ok);
+					{
+						E_MessageBoxResults mbres = await MessageBox(this,
+										 "Error",
+										 "Authorization failure. Expecting Volunteer or Site Coordinator",
+										 E_MessageBoxButtons.Ok);
 					}
 				}
-                catch (Exception e4)
+				catch
 				{
-                    ShowMessageOnUIThreadAndEnableUI("Error", "Error attempting login.", true);
-                    Console.WriteLine(e4.Message);
+					ShowMessageOnUIThreadAndEnableUI("Error", "Error attempting login.", true);
 				}
+
 			}; // end of B_Login lambda
 
+            // set the defaults from the settings
             TB_Email.Text = NSUserDefaults.StandardUserDefaults.StringForKey("email");
 			TB_Password.Text = NSUserDefaults.StandardUserDefaults.StringForKey("password");
 			B_Login.Enabled = (TB_Email.Text.Length > 6) && (TB_Password.Text.Length > 6);
 
 			I_BackgroundImage.Image = UIImage.FromBundle("Background.jpg");
 
-            L_Fetch.Text = Global.LastFecthRunTime.ToString("O");
+            L_Fetch.Text = Global.LastFetchRunTime.ToString("O");
 		}
 
         private void ShowMessageOnUIThreadAndEnableUI(string title, string message, bool en)

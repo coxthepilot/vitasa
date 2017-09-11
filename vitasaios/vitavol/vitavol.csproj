@@ -18,7 +18,7 @@
     <DefineConstants>DEBUG;ENABLE_TEST_CLOUD;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <CodesignKey>iPhone Distribution: William Cox (E6N8D4T3TQ)</CodesignKey>
+    <CodesignKey>iPhone Developer: William Cox (Z3E4GL342J)</CodesignKey>
     <DeviceSpecificBuild>true</DeviceSpecificBuild>
     <MtouchDebug>true</MtouchDebug>
     <MtouchNoSymbolStrip>true</MtouchNoSymbolStrip>
@@ -27,7 +27,7 @@
     <MtouchLink>None</MtouchLink>
     <MtouchArch>i386, x86_64</MtouchArch>
     <MtouchHttpClientHandler>HttpClientHandler</MtouchHttpClientHandler>
-    <CodesignProvision>vita vol disty profile</CodesignProvision>
+    <CodesignProvision>vita vol dev</CodesignProvision>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
     <DebugType>pdbonly</DebugType>
@@ -66,7 +66,7 @@
     <DefineConstants>DEBUG;ENABLE_TEST_CLOUD;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <CodesignKey>iPhone Distribution: William Cox (E6N8D4T3TQ)</CodesignKey>
+    <CodesignKey>iPhone Developer: William Cox (Z3E4GL342J)</CodesignKey>
     <DeviceSpecificBuild>true</DeviceSpecificBuild>
     <MtouchDebug>true</MtouchDebug>
     <MtouchNoSymbolStrip>true</MtouchNoSymbolStrip>
@@ -77,7 +77,7 @@
     <MtouchLink>SdkOnly</MtouchLink>
     <MtouchArch>ARMv7, ARM64</MtouchArch>
     <MtouchHttpClientHandler>HttpClientHandler</MtouchHttpClientHandler>
-    <CodesignProvision>vita vol disty profile</CodesignProvision>
+    <CodesignProvision>vita vol dev</CodesignProvision>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -214,10 +214,7 @@
     <Compile Include="C_UserNotificationCenterDelegate.cs" />
     <Compile Include="I_LocalNotification.cs" />
     <Compile Include="C_NotificationEvent.cs" />
-    <Compile Include="VC_GridTest.cs" />
-    <Compile Include="VC_GridTest.designer.cs">
-      <DependentUpon>VC_GridTest.cs</DependentUpon>
-    </Compile>
+    <Compile Include="C_CVHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="GlobalInitForTesting.js" />

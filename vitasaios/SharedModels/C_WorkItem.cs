@@ -68,11 +68,18 @@ namespace zsquared
         {
             bool res = await AddIntent(Global.LoggedInUser.Token, userId);
 
-            Global.WorkItems.Add(this);
+            if (res)
+                Global.WorkItems.Add(this);
 
             return res;
         }
 
+        /// <summary>
+        /// Get the signups for a given user. Returns either a list or null; No throws.
+        /// </summary>
+        /// <returns>The work items for user.</returns>
+        /// <param name="token">Token.</param>
+        /// <param name="userid">Userid.</param>
 		public static async Task<List<C_WorkItem>> GetWorkItemsForUser(string token, int userid)
 		{
             List<C_WorkItem> res = null;
@@ -82,7 +89,7 @@ namespace zsquared
 
 				WebClient wc = new WebClient()
 				{
-					BaseAddress = C_Vita.VitaCoreUrlSSL
+					BaseAddress = C_Vita.VitaCoreUrl
 				};
 				wc.Headers.Add(HttpRequestHeader.Cookie, token);
 				wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
@@ -99,9 +106,9 @@ namespace zsquared
                     res.Add(wi);
                 }
 			}
-            catch (Exception e)
+            catch
             {
-                Console.WriteLine(e.Message);
+                res = null;
             }
 
             return res;
@@ -126,7 +133,7 @@ namespace zsquared
 				string submiturl = "/signups/";
 				WebClient wc = new WebClient()
 				{
-					BaseAddress = C_Vita.VitaCoreUrlSSL
+					BaseAddress = C_Vita.VitaCoreUrl
 				};
 				wc.Headers.Add(HttpRequestHeader.Cookie, token);
 				wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
@@ -146,7 +153,6 @@ namespace zsquared
 			}
 			catch (Exception e)
 			{
-				Console.WriteLine("Attempt to add intent or response parsing failed: " + e.Message);
 				success = false;
 			}
 
@@ -159,8 +165,6 @@ namespace zsquared
 
             // no need to change the intent since it came from the WorkItems list start with
             // if it didn't, then should be an add
-            if (!Global.WorkItems.Contains(this))
-                throw new ApplicationException("can't update that which doesn't exist");
 
             return res;
         }
@@ -184,7 +188,7 @@ namespace zsquared
 				string submiturl = "/signups/" + id.ToString();
 				WebClient wc = new WebClient()
 				{
-					BaseAddress = C_Vita.VitaCoreUrlSSL
+					BaseAddress = C_Vita.VitaCoreUrl
 				};
 				wc.Headers.Add(HttpRequestHeader.Cookie, token);
 				wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
@@ -203,7 +207,6 @@ namespace zsquared
 			}
 			catch (Exception e)
 			{
-				Console.WriteLine("Attempt to add intent or response parsing failed: " + e.Message);
 				success = false;
 			}
 
@@ -219,7 +222,8 @@ namespace zsquared
         {
             bool res = await RemoveIntent(global.LoggedInUser.Token);
 
-            global.WorkItems.Remove(this);
+            if (res && global.WorkItems.Contains(this))
+                global.WorkItems.Remove(this);
 
             return res;
         }
@@ -240,7 +244,7 @@ namespace zsquared
 				string submiturl = "/signups/" + id.ToString();
 				WebClient wc = new WebClient()
 				{
-					BaseAddress = C_Vita.VitaCoreUrlSSL
+					BaseAddress = C_Vita.VitaCoreUrl
 				};
 				wc.Headers.Add(HttpRequestHeader.Cookie, token);
 				wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
@@ -258,19 +262,37 @@ namespace zsquared
 			}
 			catch (Exception e)
 			{
-				Console.WriteLine("Attempt to remove intent or response parsing failed: " + e.Message);
 				success = false;
 			}
 
 			return success;
 		}
 
+        /// <summary>
+        /// Returns a subset of the workItems list based on items for the date. List
+        /// may be empty; will never return null. No throws.
+        /// </summary>
+        /// <returns>The work items for date.</returns>
+        /// <param name="onDate">On date.</param>
+        /// <param name="workItems">Work items.</param>
         public static List<C_WorkItem> GetWorkItemsForDate(C_YMD onDate, List<C_WorkItem> workItems)
         {
             List<C_WorkItem> res = new List<C_WorkItem>();
-            var ou = workItems.Where(wi => wi.Date == onDate);
-            if (ou.Any())
-                res = ou.ToList();
+            try
+            {
+                var ou = workItems.Where(wi => wi.Date == onDate);
+
+                if (ou.Any())
+                    res = ou.ToList();
+
+                // don't know why ToList would ever return null, but just in case
+                if (res == null)
+                    res = new List<C_WorkItem>();
+            }
+            catch 
+            {
+                res = new List<C_WorkItem>();
+            }
 
             return res;
         }

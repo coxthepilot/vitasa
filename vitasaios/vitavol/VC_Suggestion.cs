@@ -24,6 +24,9 @@ namespace vitavol
 			AppDelegate myAppDelegate = (AppDelegate)UIApplication.SharedApplication.Delegate;
             Global = myAppDelegate.Global;
 
+			// set the standard background color
+			View.BackgroundColor = UIColor.FromRGB(240, 240, 240);
+
 			// ----------- init the button handlers --------
 
 			B_Back.TouchUpInside += async (sender, e) =>
@@ -35,9 +38,9 @@ namespace vitavol
                 }
 
                 E_MessageBoxResults mbres = await MessageBox(this,
-                                                              "Changes have been made",
-                                                              "Changes were made to the suggestion and not saved. Save them?",
-                                                               E_MessageBoxButtons.YesNo);
+                      "Changes have been made",
+                      "Changes were made to the suggestion and not saved. Save them?",
+                       E_MessageBoxButtons.YesNo);
                 if (mbres != E_MessageBoxResults.Yes)
 				{
                     // the user doesn't want us to save any changes
@@ -59,9 +62,9 @@ namespace vitavol
                 if (!success)
                 {
                     E_MessageBoxResults mbres1 = await MessageBox(this,
-                                                                  "Error",
-                                                                  "Unable to add or update the suggestion",
-                                                                  E_MessageBoxButtons.Ok);
+                          "Error",
+                          "Unable to add or update the suggestion",
+                          E_MessageBoxButtons.Ok);
                     return;
                 }
 
@@ -118,9 +121,9 @@ namespace vitavol
 				if (!success)
                 {
                     E_MessageBoxResults mbres = await MessageBox(this, 
-                                                                 "Error", 
-                                                                 "Unable to add or update the suggestion", 
-                                                                 E_MessageBoxButtons.Ok);
+                         "Error", 
+                         "Unable to add or update the suggestion", 
+                         E_MessageBoxButtons.Ok);
 					return;
                 }
 
@@ -159,13 +162,20 @@ namespace vitavol
         private async Task<bool> SaveSuggestion()
         {
 			bool success = false;
-			if (Global.SelectedSuggestion.id == -1)
-			{
-				success = await Global.LoggedInUser.AddSuggestion(Global.SelectedSuggestion);
-			}
-			else
-				success = await Global.LoggedInUser.UpdateSuggestion(Global.SelectedSuggestion);
-            Dirty = false;
+            try
+            {
+                if (Global.SelectedSuggestion.id == -1)
+                {
+                    success = await Global.LoggedInUser.AddSuggestion(Global.SelectedSuggestion);
+                }
+                else
+                    success = await Global.LoggedInUser.UpdateSuggestion(Global.SelectedSuggestion);
+                Dirty = false;
+            }
+            catch 
+            {
+                success = false;
+            }
 
             return success;
 		}

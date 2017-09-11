@@ -16,6 +16,9 @@ namespace vitavol
         {
             base.ViewDidLoad();
 
+			// set the standard background color
+			View.BackgroundColor = UIColor.FromRGB(240, 240, 240);
+
 			string fileName = "about.htm"; // remember case-sensitive
 			string localHtmlUrl = Path.Combine(NSBundle.MainBundle.BundlePath, fileName);
             WV_About.LoadRequest(new NSUrlRequest(new NSUrl(localHtmlUrl, false)));

@@ -17,7 +17,10 @@ namespace vitavol
         {
             base.ViewDidLoad();
 
-            B_Back.TouchUpInside += (sender, e) => 
+			// set the standard background color
+			View.BackgroundColor = UIColor.FromRGB(240, 240, 240);
+
+			B_Back.TouchUpInside += (sender, e) => 
                 PerformSegue("Segue_RegisterToLogin", this);
 
 			SW_Basic.ValueChanged += (sender, e) => 

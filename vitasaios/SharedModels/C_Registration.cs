@@ -15,22 +15,22 @@ namespace zsquared
     {
         public static async Task<bool> SubmitRegistration(string username, string email, string password, string phone, E_Certification cert)
         {
-			string bodyjson = "{ "
-				+ "\"name\" : \"" + username + "\""
-				+ ",\"email\" : \"" + email + "\""
-				+ ",\"password\" : \"" + password + "\""
-				+ ",\"password_confirmation\" : \"" + password + "\""
-				+ ",\"phone\" : \"" + phone + "\""
-                + ",\"certification\" : \"" + cert.ToString() + "\""
-				+ "}";
-
             bool success = false;
 			try
 			{
+				string bodyjson = "{ "
+					+ "\"name\" : \"" + username + "\""
+					+ ",\"email\" : \"" + email + "\""
+					+ ",\"password\" : \"" + password + "\""
+					+ ",\"password_confirmation\" : \"" + password + "\""
+					+ ",\"phone\" : \"" + phone + "\""
+					+ ",\"certification\" : \"" + cert.ToString() + "\""
+					+ "}";
+
 				string submiturl = "/users";
 				WebClient wc = new WebClient()
 				{
-                    BaseAddress = C_Vita.VitaCoreUrlSSL
+                    BaseAddress = C_Vita.VitaCoreUrl
 				};
 				wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
 				wc.Headers.Add(HttpRequestHeader.Accept, "application/json");
@@ -46,7 +46,6 @@ namespace zsquared
 			}
 			catch (Exception e)
 			{
-				Console.WriteLine("Attempt to update site status or response parsing failed: " + e.Message);
                 success = false;
 			}
 

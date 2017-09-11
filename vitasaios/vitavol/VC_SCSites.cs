@@ -27,9 +27,8 @@ namespace vitavol
 			AppDelegate myAppDelegate = (AppDelegate)UIApplication.SharedApplication.Delegate;
 			Global = myAppDelegate.Global;
 
-            if ((Global.SCSites == null)
-                || (Global.SelectedSite == null))
-                throw new ApplicationException("required parameters not present");
+			// set the standard background color
+			View.BackgroundColor = UIColor.FromRGB(240, 240, 240);
 
 			B_Back.TouchUpInside += (sender, e) => 
             {

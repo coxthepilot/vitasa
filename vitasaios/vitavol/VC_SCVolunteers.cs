@@ -2,6 +2,7 @@ using Foundation;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Linq;
 using zsquared;
 using UIKit;
 
@@ -27,8 +28,8 @@ namespace vitavol
             AppDelegate myAppDelegate = (AppDelegate)UIApplication.SharedApplication.Delegate;
             Global = myAppDelegate.Global;
 
-            if (Global.SelectedSite == null)
-                throw new ApplicationException("required parameters not present");
+			// set the standard background color
+			View.BackgroundColor = UIColor.FromRGB(240, 240, 240);
 
             // ----- init variables -----
 
@@ -40,17 +41,9 @@ namespace vitavol
             B_Back.TouchUpInside += async (sender, e) =>
             {
                 // see if any of the items were changed and not saved
-                bool itemsChanged = false;
-                foreach(C_WorkItem wi in Global.WorkItemsOnSiteOnDate)
-                {
-                    if (wi.Dirty)
-                    {
-                        itemsChanged = true;
-                        break;
-                    }
-                }
+                var ou = Global.WorkItemsOnSiteOnDate.Where(wi => wi.Dirty);
 
-                if (!itemsChanged)
+                if (!ou.Any())
                 {
 					PerformSegue("Segue_SCVolunteersToSCSite", this);
                     return;
@@ -215,15 +208,19 @@ namespace vitavol
 
         private async Task<bool> SaveChangedItems()
         {
-            foreach(C_WorkItem wi in Global.WorkItemsOnSiteOnDate)
+            try
             {
-                if (!wi.Approved)
+                foreach (C_WorkItem wi in Global.WorkItemsOnSiteOnDate)
                 {
-                    wi.Approved = true;
-                    await wi.UpdateIntent(Global);
-                    wi.Dirty = false;
+                    if (!wi.Approved)
+                    {
+                        wi.Approved = true;
+                        await wi.UpdateIntent(Global);
+                        wi.Dirty = false;
+                    }
                 }
             }
+            catch {}
 
             return true;
         }

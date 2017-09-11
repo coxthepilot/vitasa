@@ -80,12 +80,14 @@ namespace zsquared
         public List<C_SiteSchedule> SitesSchedule;
         public DateTime SiteScheduleSampleTime;
 
-        public DateTime LastFecthRunTime;
+        public DateTime LastFetchRunTime;
 
         public async Task<bool> GetAllSites()
         {
 			// get the all sites details
 			AllSites = await C_VitaSite.FetchSitesListX();
+            if (AllSites == null)
+                AllSites = new List<C_VitaSite>();
 
 			if (WorkItems == null)
 				WorkItems = new List<C_WorkItem>();

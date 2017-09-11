@@ -33,10 +33,8 @@ namespace vitavol
 			AppDelegate myAppDelegate = (AppDelegate)UIApplication.SharedApplication.Delegate;
 			Global = myAppDelegate.Global;
 
-			if ((Global.SelectedDate == null)
-				|| (Global.SelectedSite == null)
-				|| (Global.LoggedInUser == null))
-				throw new ApplicationException("required elements not present");
+			// set the standard background color
+			View.BackgroundColor = UIColor.FromRGB(240, 240, 240);
 
             Global.WorkItemsOnSiteOnDate = Global.GetWorkItemsForSiteOnDateForUser(
                 Global.SelectedSite.Slug,
@@ -73,7 +71,7 @@ namespace vitavol
                     if (!ourUserSignup.Any())
                         return;
 
-                    AI_Loading.StartAnimating();
+                    AI_Busy.StartAnimating();
 
 					C_WorkItem wi = ourUserSignup.First();
 
@@ -135,7 +133,7 @@ namespace vitavol
 				}           
             };
 
-            AI_Loading.StartAnimating();
+            AI_Busy.StartAnimating();
             EnableUI(false);
 
 			Task.Run(async () =>
@@ -156,7 +154,7 @@ namespace vitavol
 				UIApplication.SharedApplication.InvokeOnMainThread(
 				new Action(() =>
 				{
-                    AI_Loading.StopAnimating();
+                    AI_Busy.StopAnimating();
                     EnableUI(true);
 
                     // setup the table view with the list of names
