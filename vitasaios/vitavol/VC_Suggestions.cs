@@ -22,6 +22,9 @@ namespace vitavol
 			AppDelegate myAppDelegate = (AppDelegate)UIApplication.SharedApplication.Delegate;
             Global = myAppDelegate.Global;
 
+            // set the standard background color
+            View.BackgroundColor = C_Global.StandardBackground;
+
 			// --------- button handlers -----------
 
 			B_Back.TouchUpInside += (sender, e) => 
@@ -30,7 +33,6 @@ namespace vitavol
             B_NewSuggestion.TouchUpInside += OnNewSuggestion;
 
 			// since the login process provides us this users suggestions, we don't need to pull anything additional
-			// todo: does this list get stale?
 
             C_SuggestionsTableSource ts = new C_SuggestionsTableSource(Global, this, Global.LoggedInUser.Suggestions);
 			TV_ListOfSuggestions.Source = ts;
@@ -88,7 +90,9 @@ namespace vitavol
 
                     C_Suggestion suggestionToRemove = Suggestions[indexPath.Row];
 
-                    bool success = await Global.LoggedInUser.RemoveSuggestion(suggestionToRemove);
+                    bool success = await suggestionToRemove.RemoveSuggestion(Global.LoggedInUser.Token);
+                    Global.LoggedInUser.Suggestions.Remove(suggestionToRemove);
+                    //bool success = await Global.LoggedInUser.RemoveSuggestion(suggestionToRemove);
 
 					UIApplication.SharedApplication.InvokeOnMainThread(
                     new Action(() =>
@@ -152,8 +156,8 @@ namespace vitavol
 
 				C_Suggestion suggestion = Suggestions[indexPath.Row];
 
-                string subject = suggestion.Subject == null ? "<null>" : suggestion.Subject;
-                string text = suggestion.Text == null ? "<null>" : suggestion.Text;
+                string subject = suggestion.Subject ?? "<null>";
+                string text = suggestion.Text ?? "<null>";
 
 				cell.TextLabel.Text = subject;
                 cell.DetailTextLabel.Text = suggestion.Date.ToString("mmm dd,yyyy") + ":" + text;

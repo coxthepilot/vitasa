@@ -84,7 +84,7 @@ namespace zsquared
                 OpenTime = Tools.JsonProcessTime(j[N_OpenTime], OpenTime);
 
             if (j.ContainsKey(N_CloseTime))
-				CloseTime = Tools.JsonProcessTime(j[N_OpenTime], CloseTime);
+                CloseTime = Tools.JsonProcessTime(j[N_CloseTime], CloseTime);
 
             if (j.ContainsKey(N_IsClosed))
                 IsClosed = Tools.JsonProcessBool(j[N_IsClosed], IsClosed);
@@ -127,136 +127,6 @@ namespace zsquared
 
 			return res;
 		}
-
-		//public static async Task<List<C_CalendarEntry>> FetchCalendarEntries(
-  //      	string token,       // token
-  //      	int siteid,         // site to get calendar entries for, -1 is all
-  //          C_YMD from,         // from date
-  //          C_YMD to            // to date
-  //      )
-		//{
-		//	//vitavol.AppDelegate myAppDelegate = (vitavol.AppDelegate)UIApplication.SharedApplication.Delegate;
-		//	//C_TestingDB testingDB = myAppDelegate.TestingDB;
-		//	//if (testingDB != null)
-		//	//{
-		//	//	List<C_CalendarEntry> res = new List<C_CalendarEntry>();
-
-		//	//	foreach (C_CalendarEntry ce in testingDB.CalendarEntries)
-		//	//	{
-		//	//		if (
-		//	//			   ((from == null) || (from >= ce.Date))
-  // //                     && ((to == null) || (to <= ce.Date))
-		//	//			&& ((siteid == -1) || (siteid == ce.SiteID)))
-		//	//			res.Add(ce);
-		//	//	}
-
-		//	//	return res;
-		//	//}
-
-		//	string sitesUrl = C_Vita.VitaCoreUrl + "/sites";
-		//	// Create an HTTP web request using the URL:
-		//	HttpWebRequest request = (HttpWebRequest)WebRequest.Create(new Uri(sitesUrl));
-		//	//request.Headers.Add(HttpRequestHeader.Accept, "application/json");
-		//	request.Accept = "application/json";
-		//	//request.ContentType = "application/json";
-		//	request.Method = "GET";
-
-		//	// Send the request to the server and wait for the response:
-		//	using (WebResponse response = await request.GetResponseAsync())
-		//	{
-		//		// Get a stream representation of the HTTP web response:
-		//		using (Stream stream = response.GetResponseStream())
-		//		{
-		//			// todo: make sure they responded with an application/json response
-		//			// todo: make sure we got response code 200 (ok)
-
-		//			// Use this stream to build a JSON document object:
-		//			JsonValue jsonDoc = await Task.Run(() => JsonValue.Load(stream));
-		//			//Console.Out.WriteLine("Response: {0}", jsonDoc.ToString());
-
-		//			JsonValue jv = jsonDoc;
-		//			if (jsonDoc is JsonObject)
-		//			{
-		//				try { jv = JsonValue.Parse(jsonDoc); }
-		//				catch (Exception e)
-		//				{
-		//					Console.WriteLine(e.Message);
-		//				}
-		//			}
-
-		//			// Return the JSON document:
-
-		//			//List<C_VitaSite> siteslist = ImportSites(jv);
-
-		//			return null;
-		//		}
-		//	}
-		//}
-
-
-		//public static async Task<List<C_CalendarEntry>> FetchCalendarAllSitesInDateRange(C_YMD from, C_YMD to)
-  //      {
-		//	//vitavol.AppDelegate myAppDelegate = (vitavol.AppDelegate)UIApplication.SharedApplication.Delegate;
-		//	//C_TestingDB testingDB = myAppDelegate.TestingDB;
-		//	//if (testingDB != null)
-		//	//{
-		//	//	List<C_CalendarEntry> res = new List<C_CalendarEntry>();
-
-  // //             foreach (C_CalendarEntry su in testingDB.CalendarEntries)
-		//	//	{
-		//	//		if (
-		//	//			   ((from == null) || (su.Date >= from))
-		//	//			&& ((to == null) || (su.Date <= to))
-		//	//		)
-		//	//			res.Add(su);
-		//	//	}
-
-		//	//	return res;
-		//	//}
-
-		//	throw new ApplicationException("not implemented");
-
-
-		//	//string sitesUrl = C_Vita.VitaCoreUrl + "/calendar/";
-  // //         // todo: include the date range
-
-		//	//// Create an HTTP web request using the URL:
-		//	//HttpWebRequest request = (HttpWebRequest)WebRequest.Create(new Uri(sitesUrl));
-		//	//request.Accept = "application/json";
-		//	////request.ContentType = "application/json";
-		//	//request.Method = "GET";
-
-		//	//// Send the request to the server and wait for the response:
-		//	//using (WebResponse response = await request.GetResponseAsync())
-		//	//{
-		//	//	// Get a stream representation of the HTTP web response:
-		//	//	using (Stream stream = response.GetResponseStream())
-		//	//	{
-		//	//		// todo: make sure they responded with an application/json response
-		//	//		// todo: make sure we got response code 200 (ok)
-
-		//	//		// Use this stream to build a JSON document object:
-		//	//		JsonValue jsonDoc = await Task.Run(() => JsonValue.Load(stream));
-		//	//		//Console.Out.WriteLine("Response: {0}", jsonDoc.ToString());
-
-		//	//		JsonValue jv = jsonDoc;
-		//	//		if (jsonDoc is JsonObject)
-		//	//		{
-		//	//			try { jv = JsonValue.Parse(jsonDoc); }
-		//	//			catch (Exception e)
-		//	//			{
-		//	//				Console.WriteLine(e.Message);
-		//	//			}
-		//	//		}
-
-		//	//		// Return the JSON document:
-
-		//	//		List<C_CalendarEntry> siteslist = ImportCalendar(jv);
-
-		//	//		return siteslist;
-		//	//	}
-		//	//}
-		//}
 
 		public static List<C_YMD> GetListOfDates(List<C_CalendarEntry> cel)
         {

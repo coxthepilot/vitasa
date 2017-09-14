@@ -4,6 +4,8 @@ using System;
 using UIKit;
 using System.IO;
 
+using zsquared;
+
 namespace vitavol
 {
     public partial class VC_About : UIViewController
@@ -16,6 +18,9 @@ namespace vitavol
         {
             base.ViewDidLoad();
 
+			// set the standard background color
+			View.BackgroundColor = C_Global.StandardBackground;
+
 			string fileName = "about.htm"; // remember case-sensitive
 			string localHtmlUrl = Path.Combine(NSBundle.MainBundle.BundlePath, fileName);
             WV_About.LoadRequest(new NSUrlRequest(new NSUrl(localHtmlUrl, false)));
@@ -24,8 +29,6 @@ namespace vitavol
 			{
 				PerformSegue("Segue_AboutToLogin", this);
 			};
-
-
 		}
     }
 

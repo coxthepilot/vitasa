@@ -10,13 +10,11 @@ namespace vitasa
     [Register("AppDelegate")]
     public class AppDelegate : UIApplicationDelegate
     {
-        // class-level declarations
-
         /// <summary>
         /// The application global variables. Generall the sites list, selected site, etc. Is 
         /// initialized in the view controller.
         /// </summary>
-        public C_Global PassAroundContainer;
+        public C_Global Global;
 
         public override UIWindow Window
         {
@@ -26,8 +24,13 @@ namespace vitasa
 
         public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
         {
-            // Override point for customization after application launch.
-            // If not required for your application you can safely delete this method
+			// Override point for customization after application launch.
+			// If not required for your application you can safely delete this method
+
+			// only needed once when the app starts; this lets us handle the certificate from abandonedfactory.net
+			C_Vita.SetupCertificateHandling();
+
+			Global = new C_Global();
 
             return true;
         }

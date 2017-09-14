@@ -82,10 +82,10 @@ namespace zsquared
 
 			try
 			{
-				string sitesUrl = "/schedule?start=" + from.ToString("yyyy-mm-dd") + ";end=" + to.ToString("yyyy-mm-dd");
+				string sitesUrl = "/schedule/?start=" + from.ToString("yyyy-mm-dd") + ";end=" + to.ToString("yyyy-mm-dd");
 				WebClient wc = new WebClient()
 				{
-					BaseAddress = C_Vita.VitaCoreUrlSSL
+					BaseAddress = C_Vita.VitaCoreUrl
 				};
 				wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
 				wc.Headers.Add(HttpRequestHeader.Accept, "application/json");
@@ -111,8 +111,8 @@ namespace zsquared
 			}
 			catch (Exception e2)
 			{
-				Console.WriteLine(e2.Message);
-				res = null;
+                Console.WriteLine(e2.Message);
+				res = new List<C_SiteSchedule>(); ;
 			}
 
 			return res;

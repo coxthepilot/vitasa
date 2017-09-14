@@ -2,6 +2,7 @@ using Foundation;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Linq;
 using zsquared;
 using UIKit;
 
@@ -27,8 +28,8 @@ namespace vitavol
             AppDelegate myAppDelegate = (AppDelegate)UIApplication.SharedApplication.Delegate;
             Global = myAppDelegate.Global;
 
-            if (Global.SelectedSite == null)
-                throw new ApplicationException("required parameters not present");
+			// set the standard background color
+			View.BackgroundColor = C_Global.StandardBackground;
 
             // ----- init variables -----
 
@@ -40,17 +41,9 @@ namespace vitavol
             B_Back.TouchUpInside += async (sender, e) =>
             {
                 // see if any of the items were changed and not saved
-                bool itemsChanged = false;
-                foreach(C_WorkItem wi in Global.WorkItemsOnSiteOnDate)
-                {
-                    if (wi.Dirty)
-                    {
-                        itemsChanged = true;
-                        break;
-                    }
-                }
+                var ou = Global.WorkItemsOnSiteOnDate.Where(wi => wi.Dirty);
 
-                if (!itemsChanged)
+                if (!ou.Any())
                 {
 					PerformSegue("Segue_SCVolunteersToSCSite", this);
                     return;
@@ -96,7 +89,7 @@ namespace vitavol
 					 "Approve signups on this date?",
 					 Tools.E_MessageBoxButtons.YesNo);
 
-                if (mbres != Tools.E_MessageBoxResults.No)
+                if (mbres != Tools.E_MessageBoxResults.Yes)
                     return;
 
 				AI_Busy.StartAnimating();
@@ -136,6 +129,7 @@ namespace vitavol
                 TB_Date.Text = FriendlyDate(DP_Date.Date);
 	            TB_Date.ResignFirstResponder();
                 Global.WorkItemsDate = new C_YMD(Tools.NSDateToDateTime(DP_Date.Date));
+                //B_ApproveHours.Enabled = Global.WorkItemsDate <= C_YMD.Now;
                 EnableUI(false);
                 TableSource.DoNotDisplayValues = true;
                 TV_Volunteers.ReloadData();
@@ -149,7 +143,7 @@ namespace vitavol
                 TableSource.DoNotDisplayValues = false;
                 TV_Volunteers.ReloadData();
             	EnableUI(true);
-                B_ApproveHours.Enabled = Global.WorkItemsOnSiteOnDate.Count != 0;
+                B_ApproveHours.Enabled = (Global.WorkItemsOnSiteOnDate.Count != 0) && (Global.WorkItemsDate <= C_YMD.Now);
 			});
 
 			ToolBar_Date.SetItems(new UIBarButtonItem[] { doneButton }, true);
@@ -215,17 +209,23 @@ namespace vitavol
 
         private async Task<bool> SaveChangedItems()
         {
-            foreach(C_WorkItem wi in Global.WorkItemsOnSiteOnDate)
+            bool res = true;
+            try
             {
-                if (!wi.Approved)
+                foreach (C_WorkItem wi in Global.WorkItemsOnSiteOnDate)
                 {
-                    wi.Approved = true;
-                    await wi.UpdateIntent(Global);
-                    wi.Dirty = false;
+                    if (!wi.Approved)
+                    {
+                        wi.Approved = true;
+                        bool success = await wi.UpdateIntent(Global);
+                        res &= success;
+                        wi.Dirty = false;
+                    }
                 }
             }
+            catch {}
 
-            return true;
+            return res;
         }
 
         private async Task<bool> RebuildWorkItemsOnDateChange()

@@ -22,12 +22,12 @@ namespace vitasa
             base.ViewDidLoad();
 
 			AppDelegate myAppDelegate = (AppDelegate)UIApplication.SharedApplication.Delegate;
-			if (myAppDelegate.PassAroundContainer == null)
+			if (myAppDelegate.Global == null)
 				throw new ApplicationException("Pass around container must not be null");
-            if (myAppDelegate.PassAroundContainer.SelectedSite == null)
+            if (myAppDelegate.Global.SelectedSite == null)
                 throw new ApplicationException("we must have a selected site");
 
-            C_VitaSite OurSite = myAppDelegate.PassAroundContainer.SelectedSite;
+            C_VitaSite OurSite = myAppDelegate.Global.SelectedSite;
 
             L_CurrentSite.Text = OurSite.Name;
             L_SiteCurrentStatus.Text = "Site is currently: " + OurSite.Status.ToString();
@@ -81,7 +81,7 @@ namespace vitasa
 					UIApplication.SharedApplication.InvokeOnMainThread(
 					new Action(() =>
 					{
-						E_SiteStatus siteStatus = myAppDelegate.PassAroundContainer.SelectedSite.Status;
+						E_SiteStatus siteStatus = myAppDelegate.Global.SelectedSite.Status;
 						SetButtonsBasedOnStatus(siteStatus);
 						L_VerifyingAuthorization.Text = "Verification Successful.";
 					}));

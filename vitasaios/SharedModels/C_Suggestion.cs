@@ -22,7 +22,7 @@ namespace zsquared
         public C_YMD Date;
         public E_SuggestionStatus Status;
         public bool FromPublic;
-        public bool dirty; // not save or restored
+        public bool dirty; // not saved or restored
 
         public static readonly string N_ID = "id";
         public static readonly string N_UserId = "user_id";
@@ -88,6 +88,141 @@ namespace zsquared
 			}
 
 			return res;
+		}
+
+        public async Task<bool> AddSuggestion(string token)
+        {
+			string escapedText = Text.Replace("\n", "\\n");
+			string bodyjson = "{ "
+				+ "\"subject\" : \"" + Subject + "\""
+				+ ",\"details\" : \"" + escapedText + "\""
+                + ",\"from_public\" : \"" + (FromPublic ? "true" : "false") + "\""
+				+ "}";
+
+			bool success = false;
+			try
+			{
+				string submiturl = "/suggestions";
+				WebClient wc = new WebClient()
+				{
+					BaseAddress = C_Vita.VitaCoreUrl
+				};
+				if (token != null)
+					wc.Headers.Add(HttpRequestHeader.Cookie, token);
+				wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
+				wc.Headers.Add(HttpRequestHeader.Accept, "application/json");
+
+				// do the actual web request
+				string responseString = await wc.UploadStringTaskAsync(submiturl, "POST", bodyjson);
+
+				// get and parse the response
+				JsonValue responseJson = JsonValue.Parse(responseString);
+
+				//C_Suggestion nsug = new C_Suggestion(responseJson);
+				//id = nsug.id;
+				//Suggestions.Add(this);
+
+				success = true;
+			}
+			catch (Exception e)
+			{
+				Console.WriteLine(e.Message);
+				success = false;
+			}
+
+            return success;
+		}
+
+		/// <summary>
+		/// Makes the API call to add a Suggestion. If successful, also adds to the User Suggestions list.
+		/// </summary>
+		/// <returns>true on success</returns>
+		public async Task<bool> UpdateSuggestion(string token)
+		{
+			if (id == -1)
+				throw new ApplicationException("can't update a Suggestion that hasn't been submitted yet");
+
+			string escapedText = Text.Replace("\n", "\\n");
+			string bodyjson = "{ "
+				+ "\"user\" : \"" + id.ToString() + "\""
+				+ ",\"details\" : \"" + escapedText + "\""
+				+ ",\"subject\" : \"" + Subject + "\""
+				+ "}";
+
+			bool success = false;
+			try
+			{
+				string submiturl = "/suggestions/" + id.ToString();
+				WebClient wc = new WebClient()
+				{
+					BaseAddress = C_Vita.VitaCoreUrl
+				};
+                if (token != null)
+    				wc.Headers.Add(HttpRequestHeader.Cookie, token);
+				wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
+				wc.Headers.Add(HttpRequestHeader.Accept, "application/json");
+
+				string responseString = await wc.UploadStringTaskAsync(submiturl, "PUT", bodyjson);
+
+				// get and parse the response
+				JsonValue responseJson = JsonValue.Parse(responseString);
+
+				C_Suggestion nsug = new C_Suggestion(responseJson);
+				// if it parses then it is our success result
+
+				success = true;
+			}
+			catch
+			{
+				success = false;
+			}
+
+			return success;
+		}
+
+		/// <summary>
+		/// Makes the API call to remove the Suggestion; on success, removes from this users Suggestions list
+		/// </summary>
+		/// <returns>True on success</returns>
+		/// <param name="wi">Suggestion to remove</param>
+		public async Task<bool> RemoveSuggestion(string token)
+		{
+			if (id == -1)
+				throw new ApplicationException("must be an existing id; can't delete one that hasn't been added");
+
+			bool success = false;
+			try
+			{
+				string submiturl = "/suggestions/" + id.ToString();
+				WebClient wc = new WebClient()
+				{
+					BaseAddress = C_Vita.VitaCoreUrl
+				};
+                if (token != null)
+    				wc.Headers.Add(HttpRequestHeader.Cookie, token);
+				wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
+				wc.Headers.Add(HttpRequestHeader.Accept, "application/json");
+
+
+				byte[] dataBytes = Encoding.UTF8.GetBytes("");
+				// do the actual web request
+				byte[] responseBytes = await wc.UploadDataTaskAsync(submiturl, "DELETE", dataBytes);
+
+				//string responseString = Encoding.UTF8.GetString(responseBytes);
+				//JsonValue responseJson = JsonValue.Parse(responseString);
+				// if it parses then it is our success result
+
+				// remove this intent from the list
+				//Suggestions.Remove(wi);
+
+				success = true;
+			}
+			catch
+			{
+				success = false;
+			}
+
+			return success;
 		}
 	}
 }

@@ -186,148 +186,146 @@ namespace zsquared
             }
 		}
 
-		/// <summary>
-		/// Makes the API call to add a Suggestion. If successful, also adds to the User Suggestions list.
-		/// </summary>
-		/// <returns>true on success</returns>
-		/// <param name="sug">suggestion to add</param>
-        public async Task<bool> AddSuggestion(C_Suggestion sug)
-		{
-			string bodyjson = "{ "
-                + "\"subject\" : \"" + sug.Subject + "\""
-                + ",\"details\" : \"" + sug.Text + "\""
-				//+ ",\"from_public\" : \"" + "false" + "\""
-				+ "}";
+		///// <summary>
+		///// Makes the API call to add a Suggestion. If successful, also adds to the User Suggestions list.
+		///// </summary>
+		///// <returns>true on success</returns>
+		///// <param name="sug">suggestion to add</param>
+  //      public async Task<bool> AddSuggestion(C_Suggestion sug)
+		//{
+  //          // todo: move this stuff into C_Suggestion
+		//	string bodyjson = "{ "
+  //              + "\"subject\" : \"" + sug.Subject + "\""
+  //              + ",\"details\" : \"" + sug.Text + "\""
+		//		//+ ",\"from_public\" : \"" + "false" + "\""
+		//		+ "}";
 
-			bool success = false;
-			try
-			{
-				string submiturl = "/suggestions";
-				WebClient wc = new WebClient()
-				{
-					BaseAddress = C_Vita.VitaCoreUrlSSL
-				};
-				wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
-				wc.Headers.Add(HttpRequestHeader.Accept, "application/json");
-				wc.Headers.Add(HttpRequestHeader.Cookie, Token);
+		//	bool success = false;
+		//	try
+		//	{
+		//		string submiturl = "/suggestions";
+		//		WebClient wc = new WebClient()
+		//		{
+		//			BaseAddress = C_Vita.VitaCoreUrl
+		//		};
+		//		wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
+		//		wc.Headers.Add(HttpRequestHeader.Accept, "application/json");
+  //              if (Token != null)
+  //  				wc.Headers.Add(HttpRequestHeader.Cookie, Token);
 
-                // do the actual web request
-                string responseString = await wc.UploadStringTaskAsync(submiturl, "POST", bodyjson);
+  //              // do the actual web request
+  //              string responseString = await wc.UploadStringTaskAsync(submiturl, "POST", bodyjson);
 
-				// get and parse the response
-				JsonValue responseJson = JsonValue.Parse(responseString);
+		//		// get and parse the response
+		//		JsonValue responseJson = JsonValue.Parse(responseString);
 
-                C_Suggestion nsug = new C_Suggestion(responseJson);
-                if ((nsug.Subject == null) || (nsug.Text == null))
-                    Console.WriteLine("Suggestion subject or text is null");
+  //              C_Suggestion nsug = new C_Suggestion(responseJson);
 
-                // add the intent to this users WorkIntent list
-                sug.id = nsug.id;
-                Suggestions.Add(sug);
+  //              // add the intent to this users WorkIntent list
+  //              sug.id = nsug.id;
+  //              Suggestions.Add(sug);
 
-				success = true;
-			}
-			catch (Exception e)
-			{
-                Console.WriteLine("Attempt to add intent or response parsing failed: " + e.Message);
-				success = false;
-			}
+		//		success = true;
+		//	}
+		//	catch (Exception e)
+		//	{
+  //              Console.WriteLine(e.Message);
+		//		success = false;
+		//	}
 
-			return success;
-		}
+		//	return success;
+		//}
 
-		/// <summary>
-		/// Makes the API call to add a Suggestion. If successful, also adds to the User Suggestions list.
-		/// </summary>
-		/// <returns>true on success</returns>
-		/// <param name="sug">suggestion to add</param>
-		public async Task<bool> UpdateSuggestion(C_Suggestion sug)
-		{
-            if (sug.id == -1)
-                throw new ApplicationException("can't update a Suggestion that hasn't been submitted yet");
+		///// <summary>
+		///// Makes the API call to add a Suggestion. If successful, also adds to the User Suggestions list.
+		///// </summary>
+		///// <returns>true on success</returns>
+		///// <param name="sug">suggestion to add</param>
+		//public async Task<bool> UpdateSuggestion(C_Suggestion sug)
+		//{
+  //          if (sug.id == -1)
+  //              throw new ApplicationException("can't update a Suggestion that hasn't been submitted yet");
 
-            string escapedText = sug.Text.Replace("\n", "\\n");
-			string bodyjson = "{ "
-				+ "\"user\" : \"" + id.ToString() + "\""
-                + ",\"details\" : \"" + escapedText + "\""
-                + ",\"subject\" : \"" + sug.Subject + "\""
-				+ "}";
+  //          string escapedText = sug.Text.Replace("\n", "\\n");
+		//	string bodyjson = "{ "
+		//		+ "\"user\" : \"" + id.ToString() + "\""
+  //              + ",\"details\" : \"" + escapedText + "\""
+  //              + ",\"subject\" : \"" + sug.Subject + "\""
+		//		+ "}";
 
-			bool success = false;
-			try
-			{
-				string submiturl = "/suggestions/" + sug.id.ToString();
-				WebClient wc = new WebClient()
-				{
-					BaseAddress = C_Vita.VitaCoreUrlSSL
-				};
-				wc.Headers.Add(HttpRequestHeader.Cookie, Token);
-				wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
-				wc.Headers.Add(HttpRequestHeader.Accept, "application/json");
+		//	bool success = false;
+		//	try
+		//	{
+		//		string submiturl = "/suggestions/" + sug.id.ToString();
+		//		WebClient wc = new WebClient()
+		//		{
+		//			BaseAddress = C_Vita.VitaCoreUrl
+		//		};
+		//		wc.Headers.Add(HttpRequestHeader.Cookie, Token);
+		//		wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
+		//		wc.Headers.Add(HttpRequestHeader.Accept, "application/json");
 
-                string responseString = await wc.UploadStringTaskAsync(submiturl, "PUT", bodyjson);
+  //              string responseString = await wc.UploadStringTaskAsync(submiturl, "PUT", bodyjson);
 
-				// get and parse the response
-				JsonValue responseJson = JsonValue.Parse(responseString);
+		//		// get and parse the response
+		//		JsonValue responseJson = JsonValue.Parse(responseString);
 
-                C_Suggestion nsug = new C_Suggestion(responseJson);
-				// if it parses then it is our success result
+  //              C_Suggestion nsug = new C_Suggestion(responseJson);
+		//		// if it parses then it is our success result
 
-				success = true;
-			}
-			catch (Exception e)
-			{
-				Console.WriteLine("Attempt to add intent or response parsing failed: " + e.Message);
-				success = false;
-			}
+		//		success = true;
+		//	}
+		//	catch
+		//	{
+		//		success = false;
+		//	}
 
-			return success;
-		}
+		//	return success;
+		//}
 
-		/// <summary>
-		/// Makes the API call to remove the Suggestion; on success, removes from this users Suggestions list
-		/// </summary>
-		/// <returns>True on success</returns>
-		/// <param name="wi">Suggestion to remove</param>
-        public async Task<bool> RemoveSuggestion(C_Suggestion wi)
-		{
-			if (wi.id == -1)
-				throw new ApplicationException("must be an existing id; can't delete one that hasn't been added");
+		///// <summary>
+		///// Makes the API call to remove the Suggestion; on success, removes from this users Suggestions list
+		///// </summary>
+		///// <returns>True on success</returns>
+		///// <param name="wi">Suggestion to remove</param>
+  //      public async Task<bool> RemoveSuggestion(C_Suggestion wi)
+		//{
+		//	if (wi.id == -1)
+		//		throw new ApplicationException("must be an existing id; can't delete one that hasn't been added");
 
-			bool success = false;
-			try
-			{
-				string submiturl = "/suggestions/" + wi.id.ToString();
-				WebClient wc = new WebClient()
-				{
-                    BaseAddress = C_Vita.VitaCoreUrlSSL
-				};
-				wc.Headers.Add(HttpRequestHeader.Cookie, Token);
-				wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
-				wc.Headers.Add(HttpRequestHeader.Accept, "application/json");
+		//	bool success = false;
+		//	try
+		//	{
+		//		string submiturl = "/suggestions/" + wi.id.ToString();
+		//		WebClient wc = new WebClient()
+		//		{
+  //                  BaseAddress = C_Vita.VitaCoreUrl
+		//		};
+		//		wc.Headers.Add(HttpRequestHeader.Cookie, Token);
+		//		wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
+		//		wc.Headers.Add(HttpRequestHeader.Accept, "application/json");
 
 
-				byte[] dataBytes = Encoding.UTF8.GetBytes("");
-				// do the actual web request
-				byte[] responseBytes = await wc.UploadDataTaskAsync(submiturl, "DELETE", dataBytes);
+		//		byte[] dataBytes = Encoding.UTF8.GetBytes("");
+		//		// do the actual web request
+		//		byte[] responseBytes = await wc.UploadDataTaskAsync(submiturl, "DELETE", dataBytes);
 
-				//string responseString = Encoding.UTF8.GetString(responseBytes);
-				//JsonValue responseJson = JsonValue.Parse(responseString);
-                // if it parses then it is our success result
+		//		//string responseString = Encoding.UTF8.GetString(responseBytes);
+		//		//JsonValue responseJson = JsonValue.Parse(responseString);
+  //              // if it parses then it is our success result
 
-                // remove this intent from the list
-                Suggestions.Remove(wi);
+  //              // remove this intent from the list
+  //              Suggestions.Remove(wi);
 
-				success = true;
-			}
-			catch (Exception e)
-			{
-				Console.WriteLine("Attempt to remove intent or response parsing failed: " + e.Message);
-				success = false;
-			}
+		//		success = true;
+		//	}
+		//	catch
+		//	{
+		//		success = false;
+		//	}
 
-			return success;
-		}
+		//	return success;
+		//}
 
 		public string RolesSummary()
 		{
@@ -367,7 +365,7 @@ namespace zsquared
 				string usersUrl = "/users/" + id.ToString();
 				WebClient wc = new WebClient()
                 {
-                    BaseAddress = C_Vita.VitaCoreUrlSSL
+                    BaseAddress = C_Vita.VitaCoreUrl
 				};
 				wc.Headers.Add(HttpRequestHeader.Cookie, token);
 				wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
@@ -382,9 +380,8 @@ namespace zsquared
 
 				res = new C_VitaUser(jv);
 			}
-			catch (Exception e)
+			catch
 			{
-				Console.WriteLine("error in download: " + e.Message);
 				res = null;
 			}
 
@@ -404,7 +401,7 @@ namespace zsquared
 				string usersUrl = "/users";
 				WebClient wc = new WebClient()
                 {
-                    BaseAddress = C_Vita.VitaCoreUrlSSL
+                    BaseAddress = C_Vita.VitaCoreUrl
                 };
                 wc.Headers.Add(HttpRequestHeader.Cookie, token);
 				wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
@@ -425,9 +422,8 @@ namespace zsquared
 					res.Add(vu);
 				}
 			}
-			catch (Exception e)
+			catch
 			{
-				Console.WriteLine("error in download: " + e.Message);
                 res = null;
 			}
 

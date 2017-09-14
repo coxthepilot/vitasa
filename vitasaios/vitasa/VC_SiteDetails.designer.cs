@@ -20,7 +20,7 @@ namespace vitasa
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UIButton B_Change { get; set; }
+        UIKit.UIButton B_GetDirections { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
@@ -33,10 +33,6 @@ namespace vitasa
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UILabel L_CityStateZip { get; set; }
-
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UILabel L_SiteCoordinator { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
@@ -57,9 +53,9 @@ namespace vitasa
                 B_Back = null;
             }
 
-            if (B_Change != null) {
-                B_Change.Dispose ();
-                B_Change = null;
+            if (B_GetDirections != null) {
+                B_GetDirections.Dispose ();
+                B_GetDirections = null;
             }
 
             if (I_SiteStatus != null) {
@@ -75,11 +71,6 @@ namespace vitasa
             if (L_CityStateZip != null) {
                 L_CityStateZip.Dispose ();
                 L_CityStateZip = null;
-            }
-
-            if (L_SiteCoordinator != null) {
-                L_SiteCoordinator.Dispose ();
-                L_SiteCoordinator = null;
             }
 
             if (L_SiteName != null) {

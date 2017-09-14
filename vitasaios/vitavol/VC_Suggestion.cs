@@ -24,6 +24,9 @@ namespace vitavol
 			AppDelegate myAppDelegate = (AppDelegate)UIApplication.SharedApplication.Delegate;
             Global = myAppDelegate.Global;
 
+            // set the standard background color
+            View.BackgroundColor = C_Global.StandardBackground;
+
 			// ----------- init the button handlers --------
 
 			B_Back.TouchUpInside += async (sender, e) =>
@@ -35,9 +38,9 @@ namespace vitavol
                 }
 
                 E_MessageBoxResults mbres = await MessageBox(this,
-                                                              "Changes have been made",
-                                                              "Changes were made to the suggestion and not saved. Save them?",
-                                                               E_MessageBoxButtons.YesNo);
+                      "Changes have been made",
+                      "Changes were made to the suggestion and not saved. Save them?",
+                       E_MessageBoxButtons.YesNo);
                 if (mbres != E_MessageBoxResults.Yes)
 				{
                     // the user doesn't want us to save any changes
@@ -59,9 +62,9 @@ namespace vitavol
                 if (!success)
                 {
                     E_MessageBoxResults mbres1 = await MessageBox(this,
-                                                                  "Error",
-                                                                  "Unable to add or update the suggestion",
-                                                                  E_MessageBoxButtons.Ok);
+                          "Error",
+                          "Unable to add or update the suggestion",
+                          E_MessageBoxButtons.Ok);
                     return;
                 }
 
@@ -85,7 +88,7 @@ namespace vitavol
                 AI_Busy.StartAnimating();
                 EnableUI(false);
 
-                bool success = await Global.LoggedInUser.RemoveSuggestion(Global.SelectedSuggestion);
+                bool success = await Global.SelectedSuggestion.RemoveSuggestion(Global.LoggedInUser.Token);
                 Global.LoggedInUser.Suggestions.Remove(Global.SelectedSuggestion);
 
                 AI_Busy.StopAnimating();
@@ -118,9 +121,9 @@ namespace vitavol
 				if (!success)
                 {
                     E_MessageBoxResults mbres = await MessageBox(this, 
-                                                                 "Error", 
-                                                                 "Unable to add or update the suggestion", 
-                                                                 E_MessageBoxButtons.Ok);
+                         "Error", 
+                         "Unable to add or update the suggestion", 
+                         E_MessageBoxButtons.Ok);
 					return;
                 }
 
@@ -138,6 +141,8 @@ namespace vitavol
             };
 
 			// ---------- init the fields --------
+            // we only allow changing and editing if the suggestion is still in the Open state
+
 			L_Submitter.Text = Global.LoggedInUser.Name;
 			L_Date.Text = Global.SelectedSuggestion.Date.ToString();
 			L_Status.Text = Global.SelectedSuggestion.Status.ToString();
@@ -145,6 +150,15 @@ namespace vitavol
 			TxV_Body.Text = Global.SelectedSuggestion.Text;
 
             Dirty = Global.SelectedSuggestion.id == -1;
+
+            if (Global.SelectedSuggestion.Status != E_SuggestionStatus.Open)
+            {
+                Dirty = false;
+                TB_Title.Enabled = false;
+                TxV_Body.UserInteractionEnabled = false;
+                B_Save.Enabled = false;
+                B_DeleteThisSuggestion.Enabled = false;
+            }
 		}
 
         private void EnableUI(bool en)
@@ -159,13 +173,23 @@ namespace vitavol
         private async Task<bool> SaveSuggestion()
         {
 			bool success = false;
-			if (Global.SelectedSuggestion.id == -1)
-			{
-				success = await Global.LoggedInUser.AddSuggestion(Global.SelectedSuggestion);
-			}
-			else
-				success = await Global.LoggedInUser.UpdateSuggestion(Global.SelectedSuggestion);
-            Dirty = false;
+            try
+            {
+                if (Global.SelectedSuggestion.id == -1)
+                {
+                    success = await Global.SelectedSuggestion.AddSuggestion(Global.LoggedInUser.Token);
+                    //success = await Global.LoggedInUser.AddSuggestion(Global.SelectedSuggestion);
+                    Global.LoggedInUser.Suggestions.Add(Global.SelectedSuggestion);
+                }
+                else
+                    success = await Global.SelectedSuggestion.UpdateSuggestion(Global.LoggedInUser.Token);
+                    //success = await Global.LoggedInUser.UpdateSuggestion(Global.SelectedSuggestion);
+                Dirty = false;
+            }
+            catch 
+            {
+                success = false;
+            }
 
             return success;
 		}

@@ -68,6 +68,7 @@ namespace zsquared
             WorkHistoryX = new List<C_WorkItem>();
             WorkIntentsX = new List<C_WorkItem>();
 
+            // todo; get these from the json when supported by the api
             SeasonFirstDate = new C_YMD(2017, 09, 01);
             SeasonLastDate = new C_YMD(2018, 04, 15);
         }
@@ -87,9 +88,6 @@ namespace zsquared
 
 			SeasonFirstDate = new C_YMD(2017, 09, 01);
 			SeasonLastDate = new C_YMD(2018, 04, 15);
-
-			if (!(j is JsonObject))
-                throw new ApplicationException("we can only work with an object");
 
             try
             {
@@ -191,10 +189,7 @@ namespace zsquared
                     }
                 }
             }
-			catch (Exception e)
-			{
-				Console.WriteLine(e.Message);
-			}
+            catch { }
 		}
 
         private int FindDayOfWeekInKey(string k)
@@ -231,11 +226,15 @@ namespace zsquared
 
             // create the holding place for the results
             List<C_VitaSite> res = new List<C_VitaSite>();
-            foreach(JsonValue j in json)
+            try
             {
-                C_VitaSite vs = new C_VitaSite(j);
-                res.Add(vs);
-			}
+                foreach (JsonValue j in json)
+                {
+                    C_VitaSite vs = new C_VitaSite(j);
+                    res.Add(vs);
+                }
+            }
+            catch {}
             
             return res;
         }
@@ -244,25 +243,25 @@ namespace zsquared
         {
             List<C_VitaSite> siteslist = null;
 
-            string sitesUrl = "/sites";
-			WebClient wc = new WebClient()
-            {
-                BaseAddress = C_Vita.VitaCoreUrlSSL
-            };
-            wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
-            wc.Headers.Add(HttpRequestHeader.Accept, "application/json");
+			try
+			{
+				string sitesUrl = "/sites";
+    			WebClient wc = new WebClient()
+                {
+                    BaseAddress = C_Vita.VitaCoreUrl
+                };
+                wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
+                wc.Headers.Add(HttpRequestHeader.Accept, "application/json");
+                //wc.Headers.Add(HttpRequestHeader.AcceptLanguage, "en");
 
-            try
-            {
-                //string ds = await wc.DownloadStringTaskAsync(new Uri(sitesUrl));
 				string ds = await wc.DownloadStringTaskAsync(sitesUrl);
 
 				JsonValue jdoc = JsonValue.Parse(ds);
 				siteslist = ImportSites(jdoc);
 			}
-            catch (Exception e2)
+            catch (Exception e)
             {
-                Console.WriteLine(e2.Message);
+                Console.WriteLine(e.Message);
                 siteslist = null;
             }
 
@@ -273,24 +272,24 @@ namespace zsquared
 		{
 			C_VitaSite site = null;
 
-			string siteUrl = "/sites/" + slug;
-			WebClient wc = new WebClient()
-			{
-				BaseAddress = C_Vita.VitaCoreUrlSSL
-			};
-			wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
-			wc.Headers.Add(HttpRequestHeader.Accept, "application/json");
-
 			try
 			{
+				string siteUrl = "/sites/" + slug;
+    			WebClient wc = new WebClient()
+    			{
+    				BaseAddress = C_Vita.VitaCoreUrl
+    			};
+    			wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
+    			wc.Headers.Add(HttpRequestHeader.Accept, "application/json");
+
 				string ds = await wc.DownloadStringTaskAsync(siteUrl);
 
 				JsonValue jdoc = JsonValue.Parse(ds);
                 site = new C_VitaSite(jdoc);
 			}
-			catch (Exception e2)
+			catch
 			{
-				Console.WriteLine(e2.Message);
+                site = null;
 			}
 
 			return site;
@@ -303,27 +302,27 @@ namespace zsquared
             if (numefilers < 0)
                 throw new ApplicationException("number of efilers must be greater than 0");
 
-            string dows = C_YMD.DayOfWeekNames[dayOfWeek].ToLower();
-            string n_opentime = dows + "_open";
-            string n_closetime = dows + "_close";
-            string n_numefilers = dows + "_efilers";
+			bool success = false;
+			try
+			{
+				string dows = C_YMD.DayOfWeekNames[dayOfWeek].ToLower();
+                string n_opentime = dows + "_open";
+                string n_closetime = dows + "_close";
+                string n_numefilers = dows + "_efilers";
 
-            string bodyjson = "{"
-                  + "\"" + n_opentime + "\" : \"" + openTime.ToString("hh:mm") + "\""
-                  + ",\"" + n_closetime + "\" : \"" + closeTime.ToString("hh:mm") + "\""
-                  + ",\"" + n_numefilers + "\" : \"" + numefilers.ToString() + "\""
-                    + "}";
+                string bodyjson = "{"
+                      + "\"" + n_opentime + "\" : \"" + openTime.ToString("hh:mm") + "\""
+                      + ",\"" + n_closetime + "\" : \"" + closeTime.ToString("hh:mm") + "\""
+                      + ",\"" + n_numefilers + "\" : \"" + numefilers.ToString() + "\""
+                      + "}";
 
-            bool success = false;
-            try
-            {
                 JsonValue responseString = await UpdateSite(bodyjson, token);
 
                 success = true;
             }
-            catch (Exception e)
+            catch
             {
-                Console.WriteLine(e.Message);
+                success = false;
             }
 
             return success;
@@ -337,23 +336,24 @@ namespace zsquared
         /// <param name="calEntry">Cal entry.</param>
         public async Task<bool> CreateCalendarException(string token, C_CalendarEntry calEntry)
         {
-            string isClosed = calEntry.OpenTime == calEntry.CloseTime ? "true" : "false";
-			string bodyjson = "{ " 
-                + "\"date\" : \"" + calEntry.Date.ToString("yyyy-mm-dd") + "\""
-                + ",\"open\" : \"" + calEntry.OpenTime.ToString("hh:mm") + "\""
-				+ ",\"close\" : \"" + calEntry.CloseTime.ToString("hh:mm") + "\""
-                + ",\"is_closed\" : \"" + isClosed + "\""
-                + ",\"efilers_needed\" : \"" + calEntry.NumEFilers.ToString() + "\""
-				+ ",\"backup_coordinator_today\" : \"" + "false" + "\""
-				+ "}";
-
 			bool success = false;
 			try
 			{
+
+				string isClosed = calEntry.OpenTime == calEntry.CloseTime ? "true" : "false";
+    			string bodyjson = "{ " 
+                    + "\"date\" : \"" + calEntry.Date.ToString("yyyy-mm-dd") + "\""
+                    + ",\"open\" : \"" + calEntry.OpenTime.ToString("hh:mm") + "\""
+    				+ ",\"close\" : \"" + calEntry.CloseTime.ToString("hh:mm") + "\""
+                    + ",\"is_closed\" : \"" + isClosed + "\""
+                    + ",\"efilers_needed\" : \"" + calEntry.NumEFilers.ToString() + "\""
+    				+ ",\"backup_coordinator_today\" : \"" + "false" + "\""
+    				+ "}";
+
 				string updateurl = "/sites/" + Slug + "/calendars/";
 				WebClient wc = new WebClient()
 				{
-                    BaseAddress = C_Vita.VitaCoreUrlSSL
+                    BaseAddress = C_Vita.VitaCoreUrl
 				};
 				wc.Headers.Add(HttpRequestHeader.Cookie, token);
 				wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
@@ -369,9 +369,8 @@ namespace zsquared
 
                 success = true;
 			}
-			catch (Exception e)
+			catch
 			{
-				Console.WriteLine("Attempt to update site status failed: " + e.Message);
                 success = false;
 			}
 
@@ -380,23 +379,23 @@ namespace zsquared
 
 		public async Task<bool> UpdateCalendarException(string token, C_CalendarEntry calEntry)
 		{
-			string isClosed = calEntry.OpenTime == calEntry.CloseTime ? "true" : "false";
-			string bodyjson = "{ "
-				+ "\"date\" : \"" + calEntry.Date.ToString("yyyy-mm-dd") + "\""
-				+ ",\"open\" : \"" + calEntry.OpenTime.ToString("hh:mm") + "\""
-				+ ",\"close\" : \"" + calEntry.CloseTime.ToString("hh:mm") + "\""
-				+ ",\"efilers_needed\" : \"" + calEntry.NumEFilers.ToString() + "\""
-				+ ",\"is_closed\" : \"" + isClosed + "\""
-				+ ",\"backup_coordinator_today\" : \"" + "false" + "\""
-				+ "}";
-
 			bool success = false;
 			try
 			{
+				string isClosed = calEntry.OpenTime == calEntry.CloseTime ? "true" : "false";
+    			string bodyjson = "{ "
+    				+ "\"date\" : \"" + calEntry.Date.ToString("yyyy-mm-dd") + "\""
+    				+ ",\"open\" : \"" + calEntry.OpenTime.ToString("hh:mm") + "\""
+    				+ ",\"close\" : \"" + calEntry.CloseTime.ToString("hh:mm") + "\""
+    				+ ",\"efilers_needed\" : \"" + calEntry.NumEFilers.ToString() + "\""
+    				+ ",\"is_closed\" : \"" + isClosed + "\""
+    				+ ",\"backup_coordinator_today\" : \"" + "false" + "\""
+    				+ "}";
+
 				string updateurl = "/sites/" + Slug + "/calendars/" + calEntry.id.ToString();
 				WebClient wc = new WebClient()
 				{
-                    BaseAddress = C_Vita.VitaCoreUrlSSL
+                    BaseAddress = C_Vita.VitaCoreUrl
 				};
 				wc.Headers.Add(HttpRequestHeader.Cookie, token);
 				wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
@@ -404,14 +403,12 @@ namespace zsquared
 
                 string responseString = await wc.UploadStringTaskAsync(updateurl, "PUT", bodyjson);
 
-				//string responseString = Encoding.UTF8.GetString(responseBytes);
 				//JsonValue res = JsonValue.Parse(responseString);
 
 				success = true;
 			}
-			catch (Exception e)
+			catch
 			{
-				Console.WriteLine("Attempt to update site status failed: " + e.Message);
 				success = false;
 			}
 
@@ -426,7 +423,7 @@ namespace zsquared
 				string updateurl = "/sites/" + Slug + "/calendars/" + calEntry.id.ToString();
 				WebClient wc = new WebClient()
 				{
-                    BaseAddress = C_Vita.VitaCoreUrlSSL
+                    BaseAddress = C_Vita.VitaCoreUrl
 				};
 				wc.Headers.Add(HttpRequestHeader.Cookie, token);
 				wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
@@ -434,7 +431,6 @@ namespace zsquared
 
                 string responseString = await wc.UploadStringTaskAsync(updateurl, "DELETE", "");
 
-				//string responseString = Encoding.UTF8.GetString(responseBytes);
 				//JsonValue res = JsonValue.Parse(responseString);
 
 				// remove the calendar entry from this instance
@@ -442,9 +438,8 @@ namespace zsquared
 
 				success = true;
 			}
-			catch (Exception e)
+			catch
 			{
-				Console.WriteLine("Attempt to update site status failed: " + e.Message);
 				success = false;
 			}
 
@@ -459,20 +454,20 @@ namespace zsquared
             if (Status == newSiteStatus)
                 return true;
 
-            string bodyjson = "{ \"sitestatus\" : \"" + newSiteStatus.ToString() + "\"}";
-
-            bool success = false;
+			bool success = false;
 			try
 			{
+				string bodyjson = "{ \"sitestatus\" : \"" + newSiteStatus.ToString() + "\"}";
+
                 JsonValue responseJson = await UpdateSite(bodyjson, token);
                 // we could check the boolean that is returned...
 
                 success = true;
 			}
-			catch (Exception e)
-			{
-				Console.WriteLine("Attempt to parse response failed: " + e.Message);
-			}
+			catch
+            {
+                success = false;
+            }
 
             return success;
         }
@@ -486,13 +481,12 @@ namespace zsquared
         private async Task<bool> UpdateSite(string jsonString, string token)
         {
             bool res = false;
-            //JsonValue res = null;
 			try
 			{
 				string updateurl = "/sites/" + Slug;
 				WebClient wc = new WebClient()
 				{
-                    BaseAddress = C_Vita.VitaCoreUrlSSL
+                    BaseAddress = C_Vita.VitaCoreUrl
 				};
 				wc.Headers.Add(HttpRequestHeader.Cookie, token);
 				wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
@@ -504,9 +498,9 @@ namespace zsquared
 
                 res = true;
 			}
-			catch (Exception e)
+            catch (Exception e)
 			{
-				Console.WriteLine("Attempt to update site status failed: " + e.Message);
+                Console.WriteLine(e.Message);
                 res = false;
 			}
 
@@ -592,11 +586,7 @@ namespace zsquared
 		public static C_VitaSite GetSiteBySlug(string slug, List<C_VitaSite> sites)
         {
             var ou = sites.Where(s => s.Slug == slug);
-            C_VitaSite res = null;
-            if (ou.Any())
-                res = ou.First();
-
-            return res;
+            return ou.First();
         }
 
         /// <summary>
@@ -609,10 +599,7 @@ namespace zsquared
 		public static List<C_VitaSite> SitesOpenOnDay(C_YMD onDate, List<C_VitaSite> sitesList)
 		{
             var ou = sitesList.Where(s => s.SiteIsOpenOnDay(onDate));
-            List<C_VitaSite> res = new List<C_VitaSite>();
-            if (ou.Any())
-                res = ou.ToList();
-            return res;
+            return ou.ToList();
 		}
 
         public bool SiteIsOpenOnDay(C_YMD onDate)
@@ -641,6 +628,5 @@ namespace zsquared
 		{
 			return string.Compare(s1.Name, s2.Name, StringComparison.Ordinal);
 		}
-
 	}
 }

@@ -42,8 +42,8 @@ namespace zsquared
 
         public C_WorkItem(JsonValue jv)
         {
-			if (!(jv is JsonObject))
-				throw new ApplicationException("expecting JsonObject");
+            if (!(jv is JsonObject))
+                throw new ApplicationException("expecting JsonObject");
 
             if (jv.ContainsKey(N_ID))
                 id = Tools.JsonProcessInt(jv[N_ID], id);
@@ -62,96 +62,100 @@ namespace zsquared
 
             if (jv.ContainsKey(N_Approved))
                 Approved = Tools.JsonProcessBool(jv[N_Approved], Approved);
-		}
+        }
 
         public async Task<bool> AddIntent(C_Global Global, int userId)
         {
             bool res = await AddIntent(Global.LoggedInUser.Token, userId);
 
-            Global.WorkItems.Add(this);
+            if (res)
+                Global.WorkItems.Add(this);
 
             return res;
         }
 
+        /// <summary>
+        /// Get the signups for a given user. Returns either a list or null; No throws.
+        /// </summary>
+        /// <returns>The work items for user.</returns>
+        /// <param name="token">Token.</param>
+        /// <param name="userid">Userid.</param>
 		public static async Task<List<C_WorkItem>> GetWorkItemsForUser(string token, int userid)
-		{
+        {
             List<C_WorkItem> res = null;
             try
             {
                 string submiturl = "/signups/?user_id=" + userid.ToString();
 
-				WebClient wc = new WebClient()
-				{
-					BaseAddress = C_Vita.VitaCoreUrlSSL
-				};
-				wc.Headers.Add(HttpRequestHeader.Cookie, token);
-				wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
-				wc.Headers.Add(HttpRequestHeader.Accept, "application/json");
+                WebClient wc = new WebClient()
+                {
+                    BaseAddress = C_Vita.VitaCoreUrl
+                };
+                wc.Headers.Add(HttpRequestHeader.Cookie, token);
+                wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
+                wc.Headers.Add(HttpRequestHeader.Accept, "application/json");
 
                 string responseString = await wc.DownloadStringTaskAsync(submiturl);
 
                 JsonValue responseJson = JsonValue.Parse(responseString);
 
                 res = new List<C_WorkItem>();
-                foreach(JsonValue jv in responseJson)
+                foreach (JsonValue jv in responseJson)
                 {
                     C_WorkItem wi = new C_WorkItem(jv);
                     res.Add(wi);
                 }
-			}
-            catch (Exception e)
+            }
+            catch
             {
-                Console.WriteLine(e.Message);
+                res = null;
             }
 
             return res;
-		}
+        }
 
-		/// <summary>
-		/// Adds an intent for the specified user
-		/// </summary>
-		/// <returns>The intent.</returns>
-		/// <param name="token">Token.</param>
-		public async Task<bool> AddIntent(string token, int userId)
-		{
-			string bodyjson = "{ "
-				+ "\"site\" : \"" + SiteSlug + "\""
-				+ ",\"date\" : \"" + Date.ToString("yyyy-mm-dd") + "\""
-				+ ",\"user_id\" : \"" + userId + "\""
-				+ "}";
+        /// <summary>
+        /// Adds an intent for the specified user
+        /// </summary>
+        /// <returns>The intent.</returns>
+        /// <param name="token">Token.</param>
+        public async Task<bool> AddIntent(string token, int userId)
+        {
+            string bodyjson = "{ "
+                + "\"site\" : \"" + SiteSlug + "\""
+                + ",\"date\" : \"" + Date.ToString("yyyy-mm-dd") + "\""
+                + ",\"user_id\" : \"" + userId + "\""
+                + "}";
 
-			bool success = false;
-			try
-			{
-				string submiturl = "/signups/";
-				WebClient wc = new WebClient()
-				{
-					BaseAddress = C_Vita.VitaCoreUrlSSL
-				};
-				wc.Headers.Add(HttpRequestHeader.Cookie, token);
-				wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
-				wc.Headers.Add(HttpRequestHeader.Accept, "application/json");
+            bool success = false;
+            try
+            {
+                string submiturl = "/signups/";
+                WebClient wc = new WebClient()
+                {
+                    BaseAddress = C_Vita.VitaCoreUrl
+                };
+                wc.Headers.Add(HttpRequestHeader.Cookie, token);
+                wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
+                wc.Headers.Add(HttpRequestHeader.Accept, "application/json");
 
-				byte[] dataBytes = Encoding.UTF8.GetBytes(bodyjson);
-				// do the actual web request
-				byte[] responseBytes = await wc.UploadDataTaskAsync(submiturl, "POST", dataBytes);
-				// get and parse the response
-				string responseString = Encoding.UTF8.GetString(responseBytes);
-				JsonValue responseJson = JsonValue.Parse(responseString);
+                string responseString = await wc.UploadStringTaskAsync(submiturl, "POST", bodyjson);
+
+                JsonValue responseJson = JsonValue.Parse(responseString);
                 C_WorkItem wix = new C_WorkItem(responseJson);
                 id = wix.id;
-				// if it parses then it is our success result
+                // if it parses then it is our success result
 
-				success = true;
-			}
-			catch (Exception e)
-			{
-				Console.WriteLine("Attempt to add intent or response parsing failed: " + e.Message);
-				success = false;
-			}
+                success = true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                success = false;
+            }
 
-			return success;
-		}
+            return success;
+        }
 
         public async Task<bool> UpdateIntent(C_Global Global)
         {
@@ -159,8 +163,6 @@ namespace zsquared
 
             // no need to change the intent since it came from the WorkItems list start with
             // if it didn't, then should be an add
-            if (!Global.WorkItems.Contains(this))
-                throw new ApplicationException("can't update that which doesn't exist");
 
             return res;
         }
@@ -171,39 +173,36 @@ namespace zsquared
         /// <returns>The intent.</returns>
         /// <param name="token">Token.</param>
 		public async Task<bool> UpdateIntent(string token)
-		{
-			string bodyjson = "{ "
-				+ "\"approved\" : \"" + (Approved ? "true" : "false") + "\""
-				+ ",\"hours\" : \"" + Hours.ToString() + "\""
+        {
+            string bodyjson = "{ "
+                + "\"approved\" : \"" + (Approved ? "true" : "false") + "\""
+                + ",\"hours\" : \"" + Hours.ToString() + "\""
                 + ",\"user_id\" : \"" + UserId + "\""
-				+ "}";
+                + "}";
 
-			bool success = false;
-			try
-			{
-				string submiturl = "/signups/" + id.ToString();
-				WebClient wc = new WebClient()
-				{
-					BaseAddress = C_Vita.VitaCoreUrlSSL
-				};
-				wc.Headers.Add(HttpRequestHeader.Cookie, token);
-				wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
-				wc.Headers.Add(HttpRequestHeader.Accept, "application/json");
+            bool success = false;
+            try
+            {
+                string submiturl = "/signups/" + id.ToString();
+                WebClient wc = new WebClient()
+                {
+                    BaseAddress = C_Vita.VitaCoreUrl
+                };
+                wc.Headers.Add(HttpRequestHeader.Cookie, token);
+                wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
+                wc.Headers.Add(HttpRequestHeader.Accept, "application/json");
 
-				byte[] dataBytes = Encoding.UTF8.GetBytes(bodyjson);
-				// do the actual web request
-				byte[] responseBytes = await wc.UploadDataTaskAsync(submiturl, "PUT", dataBytes);
-				// get and parse the response
-				string responseString = Encoding.UTF8.GetString(responseBytes);
-				JsonValue responseJson = JsonValue.Parse(responseString);
+                string responseString = await wc.UploadStringTaskAsync(submiturl, "PUT", bodyjson);
+
+                JsonValue responseJson = JsonValue.Parse(responseString);
                 C_WorkItem wix = new C_WorkItem(responseJson);
-				// if it parses then it is our success result
+                // if it parses then it is our success result
 
-				success = true;
-			}
-			catch (Exception e)
-			{
-				Console.WriteLine("Attempt to add intent or response parsing failed: " + e.Message);
+                success = true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
 				success = false;
 			}
 
@@ -219,7 +218,8 @@ namespace zsquared
         {
             bool res = await RemoveIntent(global.LoggedInUser.Token);
 
-            global.WorkItems.Remove(this);
+            if (res && global.WorkItems.Contains(this))
+                global.WorkItems.Remove(this);
 
             return res;
         }
@@ -240,17 +240,14 @@ namespace zsquared
 				string submiturl = "/signups/" + id.ToString();
 				WebClient wc = new WebClient()
 				{
-					BaseAddress = C_Vita.VitaCoreUrlSSL
+					BaseAddress = C_Vita.VitaCoreUrl
 				};
 				wc.Headers.Add(HttpRequestHeader.Cookie, token);
 				wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
 				wc.Headers.Add(HttpRequestHeader.Accept, "application/json");
 
-				byte[] dataBytes = Encoding.UTF8.GetBytes("");
-				// do the actual web request
-				byte[] responseBytes = await wc.UploadDataTaskAsync(submiturl, "DELETE", dataBytes);
+                string responseString = await wc.UploadStringTaskAsync(submiturl, "DELETE", "");
 
-				//string responseString = Encoding.UTF8.GetString(responseBytes);
 				//JsonValue responseJson = JsonValue.Parse(responseString);
 				// if it parses then it is our success result
 
@@ -258,19 +255,38 @@ namespace zsquared
 			}
 			catch (Exception e)
 			{
-				Console.WriteLine("Attempt to remove intent or response parsing failed: " + e.Message);
+                Console.WriteLine(e.Message);
 				success = false;
 			}
 
 			return success;
 		}
 
+        /// <summary>
+        /// Returns a subset of the workItems list based on items for the date. List
+        /// may be empty; will never return null. No throws.
+        /// </summary>
+        /// <returns>The work items for date.</returns>
+        /// <param name="onDate">On date.</param>
+        /// <param name="workItems">Work items.</param>
         public static List<C_WorkItem> GetWorkItemsForDate(C_YMD onDate, List<C_WorkItem> workItems)
         {
             List<C_WorkItem> res = new List<C_WorkItem>();
-            var ou = workItems.Where(wi => wi.Date == onDate);
-            if (ou.Any())
-                res = ou.ToList();
+            try
+            {
+                var ou = workItems.Where(wi => wi.Date == onDate);
+
+                if (ou.Any())
+                    res = ou.ToList();
+
+                // don't know why ToList would ever return null, but just in case
+                if (res == null)
+                    res = new List<C_WorkItem>();
+            }
+            catch 
+            {
+                res = new List<C_WorkItem>();
+            }
 
             return res;
         }

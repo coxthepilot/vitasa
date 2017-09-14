@@ -33,10 +33,8 @@ namespace vitavol
 			AppDelegate myAppDelegate = (AppDelegate)UIApplication.SharedApplication.Delegate;
 			Global = myAppDelegate.Global;
 
-			if ((Global.SelectedDate == null)
-				|| (Global.SelectedSite == null)
-				|| (Global.LoggedInUser == null))
-				throw new ApplicationException("required elements not present");
+			// set the standard background color
+			View.BackgroundColor = C_Global.StandardBackground;
 
             Global.WorkItemsOnSiteOnDate = Global.GetWorkItemsForSiteOnDateForUser(
                 Global.SelectedSite.Slug,
@@ -73,7 +71,7 @@ namespace vitavol
                     if (!ourUserSignup.Any())
                         return;
 
-                    AI_Loading.StartAnimating();
+                    AI_Busy.StartAnimating();
 
 					C_WorkItem wi = ourUserSignup.First();
 
@@ -95,14 +93,16 @@ namespace vitavol
                 {
 					// add
 					AI_Busy.StartAnimating();
+                    EnableUI(false);
 
 					C_WorkItem wi = new C_WorkItem(Global.SelectedSite.Slug, Global.SelectedDate, Global.LoggedInUser.id, 0);
 
                     bool success = await wi.AddIntent(Global, Global.LoggedInUser.id);
 
 					AI_Busy.StopAnimating();
+                    EnableUI(true);
 
-                    if (!success)
+					if (!success)
                     {
                         Tools.E_MessageBoxResults mbres = await Tools.MessageBox(this,
                                          "Error",
@@ -135,7 +135,46 @@ namespace vitavol
 				}           
             };
 
-            AI_Loading.StartAnimating();
+            B_SaveHours.TouchUpInside += async (sender, e) => 
+            {
+
+				// remove the signup for this user
+				var ourUserSignup = Global.WorkItemsOnSiteOnDate.Where(wix => wix.UserId == Global.LoggedInUser.id);
+
+                // if we didn't find the signup to save, then just return
+                if (!ourUserSignup.Any())
+                {
+					Tools.E_MessageBoxResults mbres = await Tools.MessageBox(this,
+									 "Error",
+									 "Updating hours failed.",
+									 Tools.E_MessageBoxButtons.Ok);
+					return;
+                }
+
+				C_WorkItem wi = ourUserSignup.First();
+
+                try { wi.Hours = Convert.ToSingle(TB_Hours.Text); }
+                catch {}
+
+				AI_Busy.StartAnimating();
+                EnableUI(false);
+
+				bool success = await wi.UpdateIntent(Global);
+
+				AI_Busy.StopAnimating();
+                EnableUI(true);
+                TB_Hours.ResignFirstResponder();
+
+				if (!success)
+				{
+					Tools.E_MessageBoxResults mbres = await Tools.MessageBox(this,
+									 "Error",
+									 "Updating hours failed.",
+									 Tools.E_MessageBoxButtons.Ok);
+				}
+			};
+
+            AI_Busy.StartAnimating();
             EnableUI(false);
 
 			Task.Run(async () =>
@@ -143,21 +182,32 @@ namespace vitavol
                 // Build a list of user names to display. Keep watch for our user in the list
                 List<string> UserNames = new List<string>();
 				SignUpListHasOurUser = false;
+                C_WorkItem ourUserWorkItem = null;
 
                 foreach(C_WorkItem wi in Global.WorkItemsOnSiteOnDate)
                 {
                     C_VitaUser user = await Global.GetUserDetails(wi.UserId);
                     UserNames.Add(user.Name);
 
-                    SignUpListHasOurUser |= wi.UserId == Global.LoggedInUser.id;
+                    if (wi.UserId == Global.LoggedInUser.id)
+                    {
+                        SignUpListHasOurUser = true;
+                        ourUserWorkItem = wi;
+                    }
                 }
 
                 // now we can do all the UI updating (and on the UI thread)
 				UIApplication.SharedApplication.InvokeOnMainThread(
 				new Action(() =>
 				{
-                    AI_Loading.StopAnimating();
+                    AI_Busy.StopAnimating();
                     EnableUI(true);
+
+                    bool en = (ourUserWorkItem != null) && (!ourUserWorkItem.Approved);
+                    TB_Hours.Enabled = en;
+                    B_SaveHours.Enabled = en;
+                    if (ourUserWorkItem != null)
+                        TB_Hours.Text = ourUserWorkItem.Hours.ToString();
 
                     // setup the table view with the list of names
 					C_SignUpTableSourceSignUp signUpTableSource = new C_SignUpTableSourceSignUp(UserNames);

@@ -12,7 +12,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Xamarin.Forms;
 
-
 namespace vitavol
 {
     // The UIApplicationDelegate for the application. This class is responsible for launching the
@@ -20,15 +19,15 @@ namespace vitavol
     [Register("AppDelegate")]
     public class AppDelegate : UIApplicationDelegate
     {
-        /// <summary>
-        /// These are values that get pass from ViewController to ViewController.
-        /// </summary>
-		public C_Global Global;
+		public static readonly string N_KnownEventsJson = "knowneventsjson";
+        public static readonly string N_Email = "email";
+        public static readonly string N_Password = "password";
+        public static readonly string N_PushDeviceToken = "PushDeviceToken";
 
-        ///// <summary>
-        ///// A DB for use in testing. Only active in Debug.
-        ///// </summary>
-        //public C_TestingDB TestingDB;
+		/// <summary>
+		/// These are values that get pass from ViewController to ViewController.
+		/// </summary>
+		public C_Global Global;
 
         public override UIWindow Window
         {
@@ -38,45 +37,53 @@ namespace vitavol
 
         public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
         {
-            // Override point for customization after application launch.
-            // If not required for your application you can safely delete this method
-
+            // initialize the variables that are shared across pages
             Global = new C_Global();
 
-            try
+            // only needed once when the app starts; this lets us handle the certificate from abandonedfactory.net
+			C_Vita.SetupCertificateHandling();
+
+			try
             {
+                // required so we can request permission to do authorizations
                 global::Xamarin.Forms.Forms.Init();
 
                 // tell the user we are going to issue notifications; the OS will ask for permission
                 if (UIDevice.CurrentDevice.CheckSystemVersion(10, 0))
                 {
                     // Request Permissions
-                    UNUserNotificationCenter.Current.RequestAuthorization(UNAuthorizationOptions.Alert, (granted, error) =>
-                    {
-                        // todo: start the background task to check for need to notify the user
+                    UNUserNotificationCenter.Current.RequestAuthorization(UNAuthorizationOptions.Alert, (granted, error) => { });
 
-                    });
+                    //UIRemoteNotificationType notificationTypes = UIRemoteNotificationType.Alert | UIRemoteNotificationType.Sound;
+                    //UIApplication.SharedApplication.RegisterForRemoteNotificationTypes(notificationTypes);
+                    UIApplication.SharedApplication.RegisterForRemoteNotifications();
                 }
                 else if (UIDevice.CurrentDevice.CheckSystemVersion(8, 0))
                 {
-                    var notificationSettings = UIUserNotificationSettings.GetSettingsForTypes(
-                    UIUserNotificationType.Alert | UIUserNotificationType.Badge | UIUserNotificationType.Sound, null);
+                    var notificationSettings = UIUserNotificationSettings.GetSettingsForTypes(UIUserNotificationType.Alert, null);
 
                     application.RegisterUserNotificationSettings(notificationSettings);
+
+					var pushSettings = UIUserNotificationSettings.GetSettingsForTypes(
+					   UIUserNotificationType.Alert | UIUserNotificationType.Sound,
+					   new NSSet());
+
+					UIApplication.SharedApplication.RegisterUserNotificationSettings(pushSettings);
+					UIApplication.SharedApplication.RegisterForRemoteNotifications();
                 }
 
                 //Get current notification settings (why????)
-                UNUserNotificationCenter.Current.GetNotificationSettings((settings) =>
-                {
-                    var alertsAllowed = (settings.AlertSetting == UNNotificationSetting.Enabled);
-                });
+                //UNUserNotificationCenter.Current.GetNotificationSettings((settings) =>
+                //{
+                //    var alertsAllowed = (settings.AlertSetting == UNNotificationSetting.Enabled);
+                //});
 
                 // set our delegate in place to let us know when notifications are about to happen
                 UNUserNotificationCenter.Current.Delegate = new UserNotificationCenterDelegate();
 
                 // set the minium amount of time between fetches (in seconds)
                 // we target 4 hours to make sure we get at least one late at night
-                UIApplication.SharedApplication.SetMinimumBackgroundFetchInterval(5 * 60); // should be 4 * 60 * 60
+                UIApplication.SharedApplication.SetMinimumBackgroundFetchInterval(4 * 60 * 60);
             }
             catch (Exception e)
             {
@@ -86,11 +93,43 @@ namespace vitavol
             return true;
         }
 
-        public static readonly string N_KnownEventsJson = "knowneventsjson";
+		public override void RegisteredForRemoteNotifications(UIApplication application, NSData deviceToken)
+		{
+			// Get current device token
+			var DeviceToken = deviceToken.Description;
+			if (!string.IsNullOrWhiteSpace(DeviceToken))
+			{
+				DeviceToken = DeviceToken.Trim('<').Trim('>');
+			}
+
+			// Get previous device token
+			var oldDeviceToken = NSUserDefaults.StandardUserDefaults.StringForKey(N_PushDeviceToken);
+
+			// Has the token changed?
+			if (string.IsNullOrEmpty(oldDeviceToken) || !oldDeviceToken.Equals(DeviceToken))
+			{
+                // todo: call the back end api to register this APNS token
+                Console.WriteLine(DeviceToken);
+			}
+
+			// Save new device token
+			NSUserDefaults.StandardUserDefaults.SetString(DeviceToken, N_PushDeviceToken);
+		}
+
+		public override void FailedToRegisterForRemoteNotifications(UIApplication application, NSError error)
+		{
+            Console.WriteLine("Failed to register token");
+		}
 
         public override void PerformFetch(UIApplication application, Action<UIBackgroundFetchResult> completionHandler)
         {
-			// get our settings
+			Console.WriteLine("OS initiated Fetch...");
+			FetchHandler(completionHandler);
+        }
+
+        public void FetchHandler(Action<UIBackgroundFetchResult> completionHandler)
+        {
+            // get our settings; if this is a new app, then create the empty json set
 			// KnownEventsJson is a list of events for which we will eventually issue notifications
 			string KnownEventsJsonString = NSUserDefaults.StandardUserDefaults.StringForKey(N_KnownEventsJson);
 			if (string.IsNullOrEmpty(KnownEventsJsonString))
@@ -100,40 +139,39 @@ namespace vitavol
 			}
 
 			// see if we have a user; if we do not have a user, then we have nothing to do
-			string email = NSUserDefaults.StandardUserDefaults.StringForKey("email");
-			string password = NSUserDefaults.StandardUserDefaults.StringForKey("password");
+            string email = NSUserDefaults.StandardUserDefaults.StringForKey(N_Email);
+            string password = NSUserDefaults.StandardUserDefaults.StringForKey(N_Password);
 			if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
 			{
-				completionHandler(UIBackgroundFetchResult.NoData);
-				return;
+                completionHandler?.Invoke(UIBackgroundFetchResult.NoData);
+                return;
 			}
 
 			Task.Run(async () =>
 			{
 				C_VitaUser ourUser = await C_Vita.PerformLogin(email, password);
-
-				if (ourUser == null)
+                if ((ourUser == null) || (ourUser.HasSiteCoordinator))
 				{
-					completionHandler(UIBackgroundFetchResult.NoData);
+					completionHandler?.Invoke(UIBackgroundFetchResult.NoData);
 					return;
 				}
 
 				// now that we have a user, go ahead and parse the KnownEvents
-				JsonValue KnownEventsJson = JsonValue.Parse(KnownEventsJsonString);
 				List<C_NotificationEvent> KnownEvents = new List<C_NotificationEvent>();
-				if (KnownEventsJson.ContainsKey("knownevents"))
-				{
-					JsonValue kej = KnownEventsJson["knownevents"];
-					try
-					{
-						foreach (JsonValue jv in kej)
-						{
-							C_NotificationEvent ne = new C_NotificationEvent(jv);
-							KnownEvents.Add(ne);
-						}
-					}
-					catch { }
-				}
+                try
+                {
+                    JsonValue KnownEventsJson = JsonValue.Parse(KnownEventsJsonString);
+                    if (KnownEventsJson.ContainsKey("knownevents"))
+                    {
+                        JsonValue kej = KnownEventsJson["knownevents"];
+                        foreach (JsonValue jv in kej)
+                        {
+                            C_NotificationEvent ne = new C_NotificationEvent(jv);
+                            KnownEvents.Add(ne);
+                        }
+                    }
+                }
+                catch {}
 
 				C_YMD firstDay = C_YMD.Now;
 				// remove items that happened from yesterday back
@@ -211,30 +249,37 @@ namespace vitavol
 					// if we haven't already issue the notification, the create and post it
 					if (!ne.NotificationIssued)
 					{
-						// figure out when we want the alert to go out
-						C_YMD notificationDate = ne.EventDate.SubtractDays(1);
-						if (notificationDate < C_YMD.Now)
-							notificationDate = C_YMD.Now;
-						DateTime notificationDateTime = new DateTime(
-							notificationDate.Year,
-							notificationDate.Month,
-							notificationDate.Day,
-							15, 0, 0); // at 3pm in the afternoon (totally arbitrary)
+                        try
+                        {
+                            // figure out when we want the alert to go out
+                            C_YMD notificationDate = ne.EventDate.SubtractDays(1);
+                            if (notificationDate < C_YMD.Now)
+                                notificationDate = C_YMD.Now;
+                            DateTime notificationDateTime = new DateTime(
+                                notificationDate.Year,
+                                notificationDate.Month,
+                                notificationDate.Day,
+                                15, 00, 0); // at 3pm in the afternoon (totally arbitrary)
 
-						ILocalNotification adiln = DependencyService.Get<ILocalNotification>();
-						if (adiln != null)
-						{
-							adiln.ShowNotification(
-								"VITA Event Sign Up",                   // title
-								"You have signed up to volunteer",      // subtitle
-								ne.SiteName + " on " + ne.EventDate.ToString("mmm dd, yyyy"),  // description
-								ne.WorkItemId.ToString(),               // id
-								notificationDateTime.ToString("O"),     // date or interval
-								1,                                      // type = set to date
-								"");                                    // extra parameters - we have none
-						}
+                            ILocalNotification adiln = DependencyService.Get<ILocalNotification>();
+                            if (adiln != null)
+                            {
+                                adiln.ShowNotification(
+                                    "VITA Event Sign Up",                   // title
+                                    "You have signed up to volunteer",      // subtitle
+                                    ne.SiteName + " on " + ne.EventDate.ToString("mmm dd, yyyy"),  // description
+                                    ne.WorkItemId.ToString(),               // id
+                                    notificationDateTime.ToString("O"),     // date or interval
+                                    1,                                      // type = set to date
+                                    "");                                    // extra parameters - we have none
+                            }
 
-						ne.NotificationIssued = true;
+                            ne.NotificationIssued = true;
+                        }
+                        catch
+                        {
+                            ne.NotificationIssued = false;
+                        }
 					}
 				}
 
@@ -242,10 +287,10 @@ namespace vitavol
 				string newKnownEventJsonString = C_NotificationEvent.GetJsonFromList(NewKnownEvents);
 				NSUserDefaults.StandardUserDefaults.SetString(newKnownEventJsonString, N_KnownEventsJson);
 
-                Global.LastFecthRunTime = DateTime.Now;
+				Global.LastFetchRunTime = DateTime.Now;
 
-				completionHandler(UIBackgroundFetchResult.NewData);
-			});
+                completionHandler?.Invoke(UIBackgroundFetchResult.NewData);
+			});        
         }
 
         public override void OnResignActivation(UIApplication application)

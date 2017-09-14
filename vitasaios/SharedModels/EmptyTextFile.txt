@@ -1,3 +1,1 @@
-﻿{
-[
-    {"workitemid" + : "35","notificationissued" + : "true","eventdate" + : "2017-09-13","siteslug" + : "cody-library","sitename" + : "Cody Library"}]}
+﻿Error getting response stream (ReadDone2): ReceiveFailure

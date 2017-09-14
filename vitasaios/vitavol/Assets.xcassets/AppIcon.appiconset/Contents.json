@@ -1,55 +1,55 @@
 {
   "images": [
     {
-      "filename": "vitavol29.png",
+      "filename": "vv29.png",
       "size": "29x29",
       "scale": "1x",
       "idiom": "iphone"
     },
     {
-      "filename": "vitavol58.png",
+      "filename": "vv58.png",
       "size": "29x29",
       "scale": "2x",
       "idiom": "iphone"
     },
     {
-      "filename": "vitavol87.png",
+      "filename": "vv87.png",
       "size": "29x29",
       "scale": "3x",
       "idiom": "iphone"
     },
     {
-      "filename": "vitavol80.png",
+      "filename": "vv80.png",
       "size": "40x40",
       "scale": "2x",
       "idiom": "iphone"
     },
     {
-      "filename": "vitavol120.png",
+      "filename": "vv120.png",
       "size": "40x40",
       "scale": "3x",
       "idiom": "iphone"
     },
     {
-      "filename": "vitavol57.png",
+      "filename": "vv57.png",
       "size": "57x57",
       "scale": "1x",
       "idiom": "iphone"
     },
     {
-      "filename": "vitavol114.png",
+      "filename": "vv114.png",
       "size": "57x57",
       "scale": "2x",
       "idiom": "iphone"
     },
     {
-      "filename": "vitavol120.png",
+      "filename": "vv120.png",
       "size": "60x60",
       "scale": "2x",
       "idiom": "iphone"
     },
     {
-      "filename": "vitavol180.png",
+      "filename": "vv180.png",
       "size": "60x60",
       "scale": "3x",
       "idiom": "iphone"

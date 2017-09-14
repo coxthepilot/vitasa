@@ -30,9 +30,8 @@ namespace vitavol
 			AppDelegate myAppDelegate = (AppDelegate)UIApplication.SharedApplication.Delegate;
 			Global = myAppDelegate.Global;
 
-            if ((Global.SelectedSite == null)
-                || (Global.SelectedDayOfWeek == -1))
-                throw new ApplicationException("required parameters not found");
+			// set the standard background color
+			View.BackgroundColor = C_Global.StandardBackground;
 
 			B_Back.TouchUpInside += async (sender, e) => 
             {
@@ -127,7 +126,9 @@ namespace vitavol
 
 			TB_OpenTime.InputView = DP_OpenTime;
 			TB_OpenTime.InputAccessoryView = ToolBar_OpenTime;
-			C_HMS openTime = new C_HMS(calDefaults.OpenTime);
+			C_HMS openTime = null;
+            try { openTime = new C_HMS(calDefaults.OpenTime); }
+			catch { }
 			TB_OpenTime.Text = openTime.ToString("hh:mm p");
 
 			// close time
@@ -162,7 +163,9 @@ namespace vitavol
 
 			TB_CloseTime.InputView = DP_CloseTime;
 			TB_CloseTime.InputAccessoryView = ToolBar_CloseTime;
-			C_HMS closeTime = new C_HMS(calDefaults.CloseTime);
+            C_HMS closeTime = null;
+			try { closeTime = new C_HMS(calDefaults.CloseTime); }
+            catch {}
 			TB_CloseTime.Text = closeTime.ToString("hh:mm p");
 
             // number of efilers
@@ -214,7 +217,7 @@ namespace vitavol
 			try
 			{
 				C_HMS openTimex = new C_HMS(TB_OpenTime.Text);
-                C_HMS closeTimex = new C_HMS(TB_CloseTime.Text);
+				C_HMS closeTimex = new C_HMS(TB_CloseTime.Text);
 
 				int numEFilers = Convert.ToInt32(TB_EFilers.Text);
 				if (!SW_IsOpen.On)
@@ -246,10 +249,7 @@ namespace vitavol
                     B_SaveDefaults.Enabled = false;
 				}
 			}
-			catch (Exception e1)
-			{
-				Console.WriteLine(e1.Message);
-			}
+            catch { }
 
             // we only have a return value since an async MUST return a value...sigh
             return true;

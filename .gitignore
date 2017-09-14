@@ -14,8 +14,8 @@ __pycache__
 # Logfiles
 *.log
 >>>>>>> origin/master
-# object and binary files
-#*.exe
-#*.dll
-#*.pdb
-#*.app
+# object and binary file
+# *.exe
+# *.dll
+# *.pdb
+# *.app

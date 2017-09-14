@@ -2,6 +2,7 @@ using Foundation;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Linq;
 using UIKit;
 
 using zsquared;
@@ -30,7 +31,10 @@ namespace vitavol
             AppDelegate myAppDelegate = (AppDelegate)UIApplication.SharedApplication.Delegate;
             Global = myAppDelegate.Global;
 
-            B_Back.TouchUpInside += (sender, e) =>
+			// set the standard background color
+			View.BackgroundColor = C_Global.StandardBackground;
+
+			B_Back.TouchUpInside += (sender, e) =>
                 PerformSegue("Segue_SignUpsToLogin", this);
 
             B_Suggestion.TouchUpInside += (sender, e) =>
@@ -39,19 +43,26 @@ namespace vitavol
             B_SignUp.TouchUpInside += (sender, e) =>
                 PerformSegue("Segue_SignUpsToCalendar", this);
 
-			// since the login process includes the user work history and intents, we don't need to fetch again
-			// todo: after some amount of time, these values are stale? Since this user is the only one that can change
-			//   them then perhaps they are ok; can backoffice change their intents? when approved and moves to history?
+            // since the login process includes the user work history and intents, we don't need to fetch again
+            // todo: after some amount of time, these values are stale? Since this user is the only one that can change
+            //   them then perhaps they are ok; can backoffice change their intents? when approved and moves to history?
 
-            List<C_WorkItem> OurWorkItems = Global.GetWorkItemsForSiteOnDateForUser(
+            // get all workintents for this user
+			List<C_WorkItem> OurWorkItems = Global.GetWorkItemsForSiteOnDateForUser(
 				null,
 				null,
 				Global.LoggedInUser.id,
 				C_Global.E_SiteCondition.Any);
-            OurWorkItems.Sort(C_WorkItem.CompareByDateAscending);
-            
+
+            // make sure we only look at the current items (today and beyond)
+            C_YMD today = C_YMD.Now;
+            var ou = OurWorkItems.Where(wi => wi.Date >= today);
+            List<C_WorkItem> OurWorkItems2 = ou.ToList();
+            // sort to make the list nicer
+            OurWorkItems2.Sort(C_WorkItem.CompareByDateAscending);
+
 			Global.DetailsCameFrom = E_CameFrom.MySignUps;
-            C_MySignUpsTableSourceWorkIntents ts = new C_MySignUpsTableSourceWorkIntents(Global.AllSites, OurWorkItems);
+            C_MySignUpsTableSourceWorkIntents ts = new C_MySignUpsTableSourceWorkIntents(Global.AllSites, OurWorkItems2);
 			TV_SignUps.Source = ts;
 			TV_SignUps.Delegate = new C_MySignUpsTableDelegateWorkIntents(Global, this, ts);
 			TV_SignUps.ReloadData();

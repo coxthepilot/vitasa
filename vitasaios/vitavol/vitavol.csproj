@@ -18,7 +18,7 @@
     <DefineConstants>DEBUG;ENABLE_TEST_CLOUD;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <CodesignKey>iPhone Distribution: William Cox (E6N8D4T3TQ)</CodesignKey>
+    <CodesignKey>iPhone Developer: William Cox (Z3E4GL342J)</CodesignKey>
     <DeviceSpecificBuild>true</DeviceSpecificBuild>
     <MtouchDebug>true</MtouchDebug>
     <MtouchNoSymbolStrip>true</MtouchNoSymbolStrip>
@@ -27,7 +27,7 @@
     <MtouchLink>None</MtouchLink>
     <MtouchArch>i386, x86_64</MtouchArch>
     <MtouchHttpClientHandler>HttpClientHandler</MtouchHttpClientHandler>
-    <CodesignProvision>vita vol disty profile</CodesignProvision>
+    <CodesignProvision>vita vol dev</CodesignProvision>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
     <DebugType>pdbonly</DebugType>
@@ -66,7 +66,7 @@
     <DefineConstants>DEBUG;ENABLE_TEST_CLOUD;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <CodesignKey>iPhone Distribution: William Cox (E6N8D4T3TQ)</CodesignKey>
+    <CodesignKey>iPhone Developer: William Cox (Z3E4GL342J)</CodesignKey>
     <DeviceSpecificBuild>true</DeviceSpecificBuild>
     <MtouchDebug>true</MtouchDebug>
     <MtouchNoSymbolStrip>true</MtouchNoSymbolStrip>
@@ -77,7 +77,7 @@
     <MtouchLink>SdkOnly</MtouchLink>
     <MtouchArch>ARMv7, ARM64</MtouchArch>
     <MtouchHttpClientHandler>HttpClientHandler</MtouchHttpClientHandler>
-    <CodesignProvision>vita vol disty profile</CodesignProvision>
+    <CodesignProvision>vita vol dev</CodesignProvision>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -104,14 +104,6 @@
     <ImageAsset Include="Assets.xcassets\Contents.json" />
     <ImageAsset Include="Assets.xcassets\Background.imageset\Contents.json" />
     <ImageAsset Include="Assets.xcassets\Background.imageset\tourists-2346545-v2.jpg" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vitavol29.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vitavol58.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vitavol87.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vitavol80.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vitavol120.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vitavol57.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vitavol114.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vitavol180.png" />
     <ImageAsset Include="Assets.xcassets\greenstatus.jpg.imageset\Contents.json" />
     <ImageAsset Include="Assets.xcassets\greenstatus.jpg.imageset\green.jpg" />
     <ImageAsset Include="Assets.xcassets\redstatus.jpg.imageset\Contents.json" />
@@ -120,6 +112,14 @@
     <ImageAsset Include="Assets.xcassets\yellowstatus.jpg.imageset\yellow.jpg" />
     <ImageAsset Include="Assets.xcassets\blackstatus.jpg.imageset\Contents.json" />
     <ImageAsset Include="Assets.xcassets\blackstatus.jpg.imageset\black.jpg" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vv29.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vv58.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vv87.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vv80.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vv120.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vv57.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vv114.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vv180.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
@@ -214,10 +214,7 @@
     <Compile Include="C_UserNotificationCenterDelegate.cs" />
     <Compile Include="I_LocalNotification.cs" />
     <Compile Include="C_NotificationEvent.cs" />
-    <Compile Include="VC_GridTest.cs" />
-    <Compile Include="VC_GridTest.designer.cs">
-      <DependentUpon>VC_GridTest.cs</DependentUpon>
-    </Compile>
+    <Compile Include="C_CVHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="GlobalInitForTesting.js" />
