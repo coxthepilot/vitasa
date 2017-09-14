@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<resheader name="resmimetype">
+		<value>text/microsoft-resx</value>
+	</resheader>
+	<resheader name="version">
+		<value>2.0</value>
+	</resheader>
+	<resheader name="reader">
+		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<resheader name="writer">
+		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+    <data name="Main_L_Title" xml:space="preserve">
+        <value>VITA Sites in San Antonio</value>
+        <comment>Main page, main title</comment>
+    </data>
+    <data name="Main_L_SubTitle" xml:space="preserve">
+        <value>Show VITA Sites on a...</value>
+        <comment>Main page, subtitle</comment>
+    </data>
+    <data name="Main_B_List" xml:space="preserve">
+        <value>List</value>
+        <comment>Main page, button to view sites on a list</comment>
+    </data>
+    <data name="Main_B_Map" xml:space="preserve">
+        <value>Map</value>
+        <comment>Main page, button to view sites on a map</comment>
+    </data>
+    <data name="Main_B_BeforeYouGo" xml:space="preserve">
+        <value>Before You Go</value>
+        <comment>Main page, button to message re Before You Go</comment>
+    </data>
+    <data name="Main_B_Feedback" xml:space="preserve">
+        <value>Feedback</value>
+        <comment>Main page, button to provide feedback</comment>
+    </data>
+    <data name="Main_B_Resources" xml:space="preserve">
+        <value>Resources</value>
+        <comment>Main page, button to message re community resources</comment>
+    </data>
+    <data name="Main_B_MyFreeTaxes" xml:space="preserve">
+        <value>My Free Taxes</value>
+        <comment>Main page, button to message re my free taxes</comment>
+    </data>
+    <data name="Main_B_211" xml:space="preserve">
+        <value>Using 211</value>
+        <comment>Main page, button to message re using 211</comment>
+    </data>
+    <data name="Main_B_BecomingAVolunteer" xml:space="preserve">
+        <value>Becoming a volunteer</value>
+        <comment>Main page, button to message re becoming a volunteer</comment>
+    </data>
+    <data name="Main_B_About" xml:space="preserve">
+        <value>About</value>
+        <comment>Main page, button to message re about this app</comment>
+    </data>
+    <data name="Main_N_Accepting" xml:space="preserve">
+        <value>Accepting</value>
+        <comment>Site details, label on open and accepting clients</comment>
+    </data>
+    <data name="Main_N_NearLimit" xml:space="preserve">
+        <value>Near Limit</value>
+        <comment>Site details, label on nearing limit</comment>
+    </data>
+    <data name="Main_N_At Limit" xml:space="preserve">
+        <value>At Limit</value>
+        <comment>Site details, label on at limit status (aka full)</comment>
+    </data>
+    <data name="Main_N_Closed" xml:space="preserve">
+        <value>Closed</value>
+        <comment>Site details, label on closed status</comment>
+    </data>
+    <data name="Main_B_Directions" xml:space="preserve">
+        <value>Directions</value>
+        <comment>Site details, button, get directions</comment>
+    </data>
+    <data name="Suggestion_L_Suggestion" xml:space="preserve">
+        <value>Feedback</value>
+        <comment>Suggestion, title for page</comment>
+    </data>
+    <data name="Suggestion_L_Subject" xml:space="preserve">
+        <value>Subject</value>
+        <comment>Suggestion, header for textfield asking for feedback subject</comment>
+    </data>
+    <data name="Suggestion_L_Text" xml:space="preserve">
+        <value>Subject</value>
+        <comment>Suggestion, header for textfield asking for the body of the feedback</comment>
+    </data>
+    <data name="Suggestion_B_Submit" xml:space="preserve">
+        <value>Submit</value>
+        <comment>Suggestion, button to submit the feedback</comment>
+    </data>
+</root>

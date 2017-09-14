@@ -28,6 +28,10 @@ namespace vitavol
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UIButton B_SaveHours { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UIButton B_SignMeUp { get; set; }
 
         [Outlet]
@@ -48,6 +52,10 @@ namespace vitavol
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UITextField TB_Hours { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UITableView TV_Users { get; set; }
 
         void ReleaseDesignerOutlets ()
@@ -65,6 +73,11 @@ namespace vitavol
             if (B_GetDirections != null) {
                 B_GetDirections.Dispose ();
                 B_GetDirections = null;
+            }
+
+            if (B_SaveHours != null) {
+                B_SaveHours.Dispose ();
+                B_SaveHours = null;
             }
 
             if (B_SignMeUp != null) {
@@ -90,6 +103,11 @@ namespace vitavol
             if (L_Site != null) {
                 L_Site.Dispose ();
                 L_Site = null;
+            }
+
+            if (TB_Hours != null) {
+                TB_Hours.Dispose ();
+                TB_Hours = null;
             }
 
             if (TV_Users != null) {

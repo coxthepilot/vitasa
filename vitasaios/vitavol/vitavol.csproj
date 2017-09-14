@@ -104,14 +104,6 @@
     <ImageAsset Include="Assets.xcassets\Contents.json" />
     <ImageAsset Include="Assets.xcassets\Background.imageset\Contents.json" />
     <ImageAsset Include="Assets.xcassets\Background.imageset\tourists-2346545-v2.jpg" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vitavol29.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vitavol58.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vitavol87.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vitavol80.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vitavol120.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vitavol57.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vitavol114.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vitavol180.png" />
     <ImageAsset Include="Assets.xcassets\greenstatus.jpg.imageset\Contents.json" />
     <ImageAsset Include="Assets.xcassets\greenstatus.jpg.imageset\green.jpg" />
     <ImageAsset Include="Assets.xcassets\redstatus.jpg.imageset\Contents.json" />
@@ -120,6 +112,14 @@
     <ImageAsset Include="Assets.xcassets\yellowstatus.jpg.imageset\yellow.jpg" />
     <ImageAsset Include="Assets.xcassets\blackstatus.jpg.imageset\Contents.json" />
     <ImageAsset Include="Assets.xcassets\blackstatus.jpg.imageset\black.jpg" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vv29.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vv58.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vv87.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vv80.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vv120.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vv57.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vv114.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vv180.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />

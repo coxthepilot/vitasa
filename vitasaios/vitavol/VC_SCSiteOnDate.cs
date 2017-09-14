@@ -33,7 +33,7 @@ namespace vitavol
 			Global = myAppDelegate.Global;
 
 			// set the standard background color
-			View.BackgroundColor = UIColor.FromRGB(240, 240, 240);
+			View.BackgroundColor = C_Global.StandardBackground;
 
             NewEntry = false;
             // see if an exception already exists
@@ -47,11 +47,14 @@ namespace vitavol
                 {
                     SiteID = Global.SelectedSite.id,
                     Date = Global.SelectedDate,
-                    OpenTime = new C_HMS(OurDefaultCalendarEntry.OpenTime),
-                    CloseTime = new C_HMS(OurDefaultCalendarEntry.CloseTime),
                     IsClosed = OurDefaultCalendarEntry.OpenTime == OurDefaultCalendarEntry.CloseTime,
                     NumEFilers = OurDefaultCalendarEntry.NumEFilers
                 };
+                try { OurCalendarEntry.OpenTime = new C_HMS(OurDefaultCalendarEntry.OpenTime); }
+                catch { OurCalendarEntry.OpenTime = new C_HMS(0, 0, 0); }
+                try { OurCalendarEntry.CloseTime = new C_HMS(OurDefaultCalendarEntry.CloseTime); }
+                catch { OurCalendarEntry.CloseTime = new C_HMS(0, 0, 0); }
+
                 B_SaveCalendarException.SetTitle("Save New Calendar Exception", UIControlState.Normal);
                 NewEntry = true;
             }

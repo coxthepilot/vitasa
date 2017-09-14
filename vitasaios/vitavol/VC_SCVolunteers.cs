@@ -29,7 +29,7 @@ namespace vitavol
             Global = myAppDelegate.Global;
 
 			// set the standard background color
-			View.BackgroundColor = UIColor.FromRGB(240, 240, 240);
+			View.BackgroundColor = C_Global.StandardBackground;
 
             // ----- init variables -----
 
@@ -89,7 +89,7 @@ namespace vitavol
 					 "Approve signups on this date?",
 					 Tools.E_MessageBoxButtons.YesNo);
 
-                if (mbres != Tools.E_MessageBoxResults.No)
+                if (mbres != Tools.E_MessageBoxResults.Yes)
                     return;
 
 				AI_Busy.StartAnimating();
@@ -129,6 +129,7 @@ namespace vitavol
                 TB_Date.Text = FriendlyDate(DP_Date.Date);
 	            TB_Date.ResignFirstResponder();
                 Global.WorkItemsDate = new C_YMD(Tools.NSDateToDateTime(DP_Date.Date));
+                //B_ApproveHours.Enabled = Global.WorkItemsDate <= C_YMD.Now;
                 EnableUI(false);
                 TableSource.DoNotDisplayValues = true;
                 TV_Volunteers.ReloadData();
@@ -142,7 +143,7 @@ namespace vitavol
                 TableSource.DoNotDisplayValues = false;
                 TV_Volunteers.ReloadData();
             	EnableUI(true);
-                B_ApproveHours.Enabled = Global.WorkItemsOnSiteOnDate.Count != 0;
+                B_ApproveHours.Enabled = (Global.WorkItemsOnSiteOnDate.Count != 0) && (Global.WorkItemsDate <= C_YMD.Now);
 			});
 
 			ToolBar_Date.SetItems(new UIBarButtonItem[] { doneButton }, true);
@@ -208,6 +209,7 @@ namespace vitavol
 
         private async Task<bool> SaveChangedItems()
         {
+            bool res = true;
             try
             {
                 foreach (C_WorkItem wi in Global.WorkItemsOnSiteOnDate)
@@ -215,14 +217,15 @@ namespace vitavol
                     if (!wi.Approved)
                     {
                         wi.Approved = true;
-                        await wi.UpdateIntent(Global);
+                        bool success = await wi.UpdateIntent(Global);
+                        res &= success;
                         wi.Dirty = false;
                     }
                 }
             }
             catch {}
 
-            return true;
+            return res;
         }
 
         private async Task<bool> RebuildWorkItemsOnDateChange()

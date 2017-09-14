@@ -3,13 +3,58 @@ using System.Collections.Generic;
 using System.Json;
 using System.Linq;
 using System.Threading.Tasks;
+using UIKit;
 
 namespace zsquared
 {
-    public enum E_CameFrom { List, Map, MySignUps, SCSites, SCSite, Login, Unknown }
+    public enum E_CameFrom { Unknown = 0, List, Map, MySignUps, SCSites, SCSite, Login }
+    public enum E_Message { Unknown = 0, BeforeYoGo, Resources, About, BecomeAVolunteer, Using211, MyFreeTaxes }
 
     public class C_Global
     {
+        public static readonly string N_BeforeYouGo = "before-you-go";
+        public static readonly string N_Resources = "community-resources";
+        public static readonly string N_About = "about";
+        public static readonly string N_BecomeAVolunteer = "become-a-volunteer";
+        public static readonly string N_Using211 = "using-211";
+        public static readonly string N_MyFreeTaxes = "my-free-taxes";
+        
+        public static UIColor StandardBackground
+        {
+            get { return UIColor.FromRGB(240, 240, 240); }
+        }
+
+        public static string SlugForMessage(E_Message msg)
+        {
+            string res = null;
+            switch (msg)
+            {
+                case E_Message.BeforeYoGo:
+                    res = N_BeforeYouGo;
+                    break;
+                case E_Message.Resources:
+                    res = N_Resources;
+                    break;
+                case E_Message.About:
+                    res = N_About;
+                    break;
+                case E_Message.BecomeAVolunteer:
+                    res = N_BecomeAVolunteer;
+                    break;
+                case E_Message.Using211:
+                    res = N_Using211;
+                    break;
+                case E_Message.MyFreeTaxes:
+                    res = N_MyFreeTaxes;
+                    break;
+            }
+
+            return res;
+        }
+
+        //for the client
+        public E_Message MessageToShow;
+
 		/// <summary>
 		/// This is the user that we logged into the system with. Includes a valid token.
 		/// </summary>
@@ -18,6 +63,7 @@ namespace zsquared
         /// A list of all Sites with their details obtained when the user logged in.
         /// </summary>
         public List<C_VitaSite> AllSites;
+        public DateTime AllSitesSampleDateTime; // used in client app
         /// <summary>
         /// A list of C_WorkItems found in pulling Site and User data
         /// </summary>
@@ -31,10 +77,6 @@ namespace zsquared
 		/// The current selected site for displaying details
 		/// </summary>
 		public C_VitaSite SelectedSite;
-		/// <summary>
-		/// The selected calendar entry.
-		/// </summary>
-		public C_CalendarEntry SelectedCalendarEntry;
 		/// <summary>
 		/// The selected suggestion.
 		/// </summary>

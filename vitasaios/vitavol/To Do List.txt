@@ -8,32 +8,33 @@ Testing
 * validate layout on iPhone 5s, 6, 6+, 7, 7+
 * validate background fetch (every ~ 4 hours)
 
-Future
+Future (near)
 * Means to edit/change the Site season (from Back Office web UI)
+* Need UI to CRUD all details about a user
+* Need UI to CRUD all details on a site
+* Need UI to CRUD all WorkItems (all users, all sites, all days - and select accordingly)
+* Need admin and committee UI to CRUD all suggestions
 
 For Sheila/Alejandra
-    If SC, but no sites, treat as a volunteer? Or SC with no sites?
-    Role for backup site coordinators? same powers as primary?
-    iPhone only ok for volunteers and site coordinators? not planning Android...
+    Role for backup site coordinators? same powers as primary? Yes, backup operates just as primary
+    iPhone only ok for volunteers and site coordinators? not planning Android for the vol/SC app...; no, need andriod
+    Approval for vol hours and reporting; vol need way to set hours work, cant change after approved by SC; SC can always change
+    Time to review the app? Fri 10am GCC
+    Web design and DNS access
 
 For Chris
-* Some very slow responses; probably network related; any way to view his response times?
-* Occasionally getting a 422 on Registration; do logs show anything?
-* Some calls just return {true} as a bool; expected? Example: update site calendar
-* Protocol version; do I need to signal the API version I'm using?
+* Some calls just return {true} as a bool; expected? Example: update site calendar [tell him what we need]
+* Protocol version; do I need to signal the API version I'm using? [post a github issue]
 * >> Need api to register a push API token (string) along with user type (vol/sc vs client); for APNS
 * >> Need GET/users/{id} to include the sites for which the user is a site coordinator?
 * >> Need a fast(er) way to get slug to site name table 
 * >> Need a fast(er) to get user id to name table
-* FYI: must have a slash before ? Unpredictable results
+* Registrations of an email address already in the system generates a 'system error' [change error message]; error 422 [model validation failed]; expected? Post as an issue
+* URL for production and staging
+* client notification, would need a certificate on both ends
 
 Bugs
-* Save Volunteer hours didn't start the spinner and left them dirty (<Back say them dirty)
-* Looks like hours are all showing up approved
-* Allow SC to change approved hours
-* Color status images have white around them; make transparent or same as our background color 240/240/240
-* Find signup for current user, don't do if site coordinator
+* Make another pass at the icon(s)
+* Streamlined github contents
+* Need DNS redirect
 
-Todo:
-* get binary files off of github
-* Need final words for the about page

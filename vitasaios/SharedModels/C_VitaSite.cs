@@ -252,14 +252,16 @@ namespace zsquared
                 };
                 wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
                 wc.Headers.Add(HttpRequestHeader.Accept, "application/json");
+                //wc.Headers.Add(HttpRequestHeader.AcceptLanguage, "en");
 
 				string ds = await wc.DownloadStringTaskAsync(sitesUrl);
 
 				JsonValue jdoc = JsonValue.Parse(ds);
 				siteslist = ImportSites(jdoc);
 			}
-            catch
+            catch (Exception e)
             {
+                Console.WriteLine(e.Message);
                 siteslist = null;
             }
 

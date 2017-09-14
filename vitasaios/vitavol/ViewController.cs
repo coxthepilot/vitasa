@@ -34,6 +34,8 @@ namespace vitavol
 			AppDelegate myAppDelegate = (AppDelegate)UIApplication.SharedApplication.Delegate;
             C_Global Global = myAppDelegate.Global;
 
+            View.BackgroundColor = C_Global.StandardBackground;
+
             // ----- debug only -----
 
             B_TriggerFetch.TouchUpInside += (sender, e) => 
@@ -123,9 +125,10 @@ namespace vitavol
 
 					if (user.HasSiteCoordinator)
 					{
-                        // get the sites for which this site coordinator is responsible
+                        // get the sites for which this site coordinator is responsible (as primary or backup)
                         // if only one, then SCSite; if more than one then SCSites
-                        var sou = Global.AllSites.Where(s => s.PrimaryCoordinator == Global.LoggedInUser.id);
+                        var sou = Global.AllSites.Where(s => (s.PrimaryCoordinator == Global.LoggedInUser.id) 
+                                                          || (s.BackupCoordinator == Global.LoggedInUser.id));
                         List<C_VitaSite> SCSites = sou.ToList();
 
 						if (SCSites.Count == 0)

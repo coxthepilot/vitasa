@@ -18,7 +18,7 @@ namespace vitavol
             base.ViewDidLoad();
 
 			// set the standard background color
-			View.BackgroundColor = UIColor.FromRGB(240, 240, 240);
+			View.BackgroundColor = C_Global.StandardBackground;
 
 			B_Back.TouchUpInside += (sender, e) => 
                 PerformSegue("Segue_RegisterToLogin", this);
@@ -103,7 +103,7 @@ namespace vitavol
 							// tell the user that the staff will approve, check back later
 							Tools.E_MessageBoxResults mbres = await Tools.MessageBox(this,
 											"Error",
-											"Unable to submit registration. System error.",
+											"Unable to submit registration, possibly due to a duplicate registration.",
 											 Tools.E_MessageBoxButtons.Ok);
 						}));
                         return;

@@ -150,7 +150,7 @@ namespace vitavol
 			Task.Run(async () =>
 			{
 				C_VitaUser ourUser = await C_Vita.PerformLogin(email, password);
-				if (ourUser == null)
+                if ((ourUser == null) || (ourUser.HasSiteCoordinator))
 				{
 					completionHandler?.Invoke(UIBackgroundFetchResult.NoData);
 					return;

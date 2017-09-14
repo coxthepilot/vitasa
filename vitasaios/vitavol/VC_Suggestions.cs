@@ -22,8 +22,8 @@ namespace vitavol
 			AppDelegate myAppDelegate = (AppDelegate)UIApplication.SharedApplication.Delegate;
             Global = myAppDelegate.Global;
 
-			// set the standard background color
-			View.BackgroundColor = UIColor.FromRGB(240, 240, 240);
+            // set the standard background color
+            View.BackgroundColor = C_Global.StandardBackground;
 
 			// --------- button handlers -----------
 
@@ -90,7 +90,9 @@ namespace vitavol
 
                     C_Suggestion suggestionToRemove = Suggestions[indexPath.Row];
 
-                    bool success = await Global.LoggedInUser.RemoveSuggestion(suggestionToRemove);
+                    bool success = await suggestionToRemove.RemoveSuggestion(Global.LoggedInUser.Token);
+                    Global.LoggedInUser.Suggestions.Remove(suggestionToRemove);
+                    //bool success = await Global.LoggedInUser.RemoveSuggestion(suggestionToRemove);
 
 					UIApplication.SharedApplication.InvokeOnMainThread(
                     new Action(() =>

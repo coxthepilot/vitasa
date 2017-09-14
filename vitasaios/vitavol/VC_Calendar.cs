@@ -36,11 +36,11 @@ namespace vitavol
         {
             base.ViewDidLoad();
 
-			// set the standard background color
-			View.BackgroundColor = UIColor.FromRGB(240, 240, 240);
-
 			AppDelegate myAppDelegate = (AppDelegate)UIApplication.SharedApplication.Delegate;
             Global = myAppDelegate.Global;
+
+			// set the standard background color
+			View.BackgroundColor = C_Global.StandardBackground;
 
 			// use the date from our previous visit if it exists
 			if (Global.CalendarDate == null)
@@ -126,6 +126,9 @@ namespace vitavol
 			IMG_AllSitesClosed.BackgroundColor = Color_AllSitesClosed;
 			IMG_UserSignedUpBase.BackgroundColor = UIColor.Black;
 			IMG_UserSignedUpTop.BackgroundColor = UIColor.White;
+			
+            B_NextMonth.BackgroundColor = C_Global.StandardBackground;
+            B_PreviousMonth.BackgroundColor = C_Global.StandardBackground;
 
 			AI_Loading.StartAnimating();
             EnableUI(false);

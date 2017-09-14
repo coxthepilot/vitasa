@@ -27,7 +27,7 @@ namespace vitavol
 			Global = myAppDelegate.Global;
 
 			// set the standard background color
-			View.BackgroundColor = UIColor.FromRGB(240, 240, 240);
+			View.BackgroundColor = C_Global.StandardBackground;
 
 			if (Global.DetailsCameFrom == E_CameFrom.Login)
                 B_Back.SetTitle("< Login", UIControlState.Normal);

@@ -11,7 +11,9 @@ namespace vitasa
 {
     public partial class VC_SitesList : UIViewController
     {
-		public C_SitesTableSource SitesTableDataSource = null;
+        C_Global Global;
+
+        public C_SitesTableSourceX SitesTableDataSource;
 
 		public VC_SitesList (IntPtr handle) : base (handle)
         {
@@ -22,65 +24,125 @@ namespace vitasa
             base.ViewDidLoad();
 
 			AppDelegate myAppDelegate = (AppDelegate)UIApplication.SharedApplication.Delegate;
-            if (myAppDelegate.PassAroundContainer == null)
-                throw new ApplicationException("Pass around container must not be null");
+            Global = myAppDelegate.Global;
 
-            // now that we have the container, create the data source and connect it to our data
-            SitesTableDataSource = new C_SitesTableSource(myAppDelegate.PassAroundContainer, this, "SegueFromListToDetails");
+			AI_Busy.StartAnimating();
 
-            // and let the control know where to get data from
-			TV_SitesList.Source = SitesTableDataSource;
-
-            // check to see if we already have data (possibly passed back to us from another view controller)
-			if (myAppDelegate.PassAroundContainer.Sites != null)
-            {
-                // we have already loaded the sites from the back end service; just use it
-                // check the time since loaded; if too long (more than 60 minutes), then reload
-                TimeSpan ts = DateTime.Now - myAppDelegate.PassAroundContainer.TimeStampWhenSitesLoaded;
-                if (ts.TotalMinutes > 60)
-                    LoadSitesFromWebService(myAppDelegate.PassAroundContainer);
-                else
-                    // tell the control to repaint now that we have data
-	    			TV_SitesList.ReloadData();
+			bool reload = Global.AllSites == null;
+			if (!reload)
+			{
+				TimeSpan ts = DateTime.Now - Global.AllSitesSampleDateTime;
+				reload = ts.TotalMinutes > 30;
 			}
-            else
-                LoadSitesFromWebService(myAppDelegate.PassAroundContainer);
-		}
 
-        private void LoadSitesFromWebService(C_Global passAroundContainer)
-        {
-			// the list of sites has NOT been loaded or has expired, therefore we need to reload it
-			// this is done using a thread since it can take a while (seconds)
+			List<C_VitaSite> openSites = new List<C_VitaSite>();
+
 			Task.Run(async () =>
 			{
-					// get the json file of sites and details from the web service
-					passAroundContainer.Sites = await C_VitaSite.FetchSitesList();
+				if (reload)
+                {
+                    // get the json file of sites and details from the web service
+                    Global.AllSites = await C_VitaSite.FetchSitesListX();
+                    Global.AllSitesSampleDateTime = DateTime.Now;
+				}
 
-		    		// convert to our class object
-				    passAroundContainer.Sites.Sort(C_VitaSite.CompareSitesByNameAscending);
-				    passAroundContainer.TimeStampWhenSitesLoaded = DateTime.Now;
+				C_YMD date = C_YMD.Now;
+                for (int ix = 0; ix != 7; ix++)
+                {
+                    List<C_VitaSite> sitesOnDay = C_VitaSite.SitesOpenOnDay(date, Global.AllSites);
 
-					// tell the control to repaint; we have to invoke on main thread
-					//   or the control ignores the call
-					UIApplication.SharedApplication.InvokeOnMainThread(
-					new Action(() =>
-					{
-						TV_SitesList.ReloadData();
-					}));
+                    foreach(C_VitaSite s in sitesOnDay)
+                    {
+                        if (!openSites.Contains(s))
+                            openSites.Add(s);
+                    }
+
+                    date = date.AddDays(1);
+                }                                      
+                openSites.Sort(C_VitaSite.CompareSitesByNameAscending);
+
+                UIApplication.SharedApplication.InvokeOnMainThread(
+				new Action(() =>
+				{
+					// now that we have the container, create the data source and connect it to our data
+					SitesTableDataSource = new C_SitesTableSourceX(this, Global, openSites);
+
+					// and let the control know where to get data from
+					TV_SitesList.Source = SitesTableDataSource;
+
+					TV_SitesList.ReloadData();
+
+                    AI_Busy.StopAnimating();
+				}));
 			});
 		}
 
-
-        public override void PrepareForSegue(UIStoryboardSegue segue, NSObject sender)
+        public override void ViewDidAppear(bool animated)
         {
-            base.PrepareForSegue(segue, sender);
+            View.BackgroundColor = C_Global.StandardBackground;
+			TV_SitesList.BackgroundColor = C_Global.StandardBackground;
+		}
 
-            if (segue.Identifier == "SegueFromListToDetails")
-            {
-                VC_SiteDetails siteDetails = (VC_SiteDetails)segue.DestinationViewController;
-				AppDelegate myAppDelegate = (AppDelegate)UIApplication.SharedApplication.Delegate;
-                myAppDelegate.PassAroundContainer.DetailsCameFrom = E_CameFrom.List;
-            }
-        }
+		public class C_SitesTableSourceX : UITableViewSource
+		{
+            readonly C_Global Global;
+            List<C_VitaSite> Sites;
+            readonly UIViewController ourVC;
+
+            const string CellIdentifier = "VITAClientSitesList";
+
+            public C_SitesTableSourceX(UIViewController vc, C_Global global, List<C_VitaSite> sites)
+			{
+				ourVC = vc;
+                Global = global;
+                Sites = sites;
+			}
+
+			public override nint RowsInSection(UITableView tableview, nint section)
+			{
+                return Sites.Count;
+			}
+
+			public override UITableViewCell GetCell(UITableView tableView, NSIndexPath indexPath)
+			{
+				UITableViewCell cell = tableView.DequeueReusableCell(CellIdentifier);
+				//---- if there are no cells to reuse, create a new one ---
+				if (cell == null)
+					cell = new UITableViewCell(UITableViewCellStyle.Subtitle, CellIdentifier);
+
+                cell.BackgroundColor = C_Global.StandardBackground;
+
+                C_VitaSite site = Sites[indexPath.Row];
+
+				cell.TextLabel.Text = site.Name;
+				cell.DetailTextLabel.Text = site.Street + ", " + site.City + ", " + site.State + " " + site.Zip;
+
+                switch (site.Status)
+                {
+                    case E_SiteStatus.Accepting:
+                        cell.ImageView.Image = UIImage.FromBundle("greenstatus.jpg");
+                        break;
+                    case E_SiteStatus.NearLimit:
+                        cell.ImageView.Image = UIImage.FromBundle("yellowstatus.jpg");
+                        break;
+                    case E_SiteStatus.NotAccepting:
+                        cell.ImageView.Image = UIImage.FromBundle("redstatus.jpg");
+                        break;
+                    case E_SiteStatus.Closed:
+                        cell.ImageView.Image = UIImage.FromBundle("blackstatus.jpg");
+                        break;
+                }
+
+                return cell;
+			}
+
+			public override void RowSelected(UITableView tableView, NSIndexPath indexPath)
+			{
+				Global.DetailsCameFrom = E_CameFrom.List;
+                Global.SelectedSite = Sites[indexPath.Row];
+
+				ourVC.PerformSegue("Segue_ListToDetails", ourVC);
+			}
+		}
 	}
 }

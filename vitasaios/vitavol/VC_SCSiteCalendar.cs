@@ -36,9 +36,6 @@ namespace vitavol
 			AppDelegate myAppDelegate = (AppDelegate)UIApplication.SharedApplication.Delegate;
 			Global = myAppDelegate.Global;
 
-            // set the standard background color
-            View.BackgroundColor = UIColor.FromRGB(240, 240, 240);
-
 			if (Global.CalendarDate == null)
 				Global.CalendarDate = C_YMD.Now;
 
@@ -91,6 +88,9 @@ namespace vitavol
 
 			L_MonthYear.Text = Global.CalendarDate.ToString("mmm-yyyy");
 
+            B_MonthNext.BackgroundColor = C_Global.StandardBackground;
+            B_MonthPrevious.BackgroundColor = C_Global.StandardBackground;
+
             CollectionViewHelper = new C_CVHelper(UIColor.FromRGB(240, 240, 240), CV_Grid, DateState, DayState);
 			CollectionViewHelper.DateTouched += (sender, e) =>
 			{
@@ -104,6 +104,12 @@ namespace vitavol
                 Global.SelectedDayOfWeek = ea.DayOfWeek;
 				PerformSegue("Segue_SCSiteCalendarToSCSiteDefaults", this);
 			};
+		}
+
+        public override void ViewDidAppear(bool animated)
+        {
+			// set the standard background color
+			View.BackgroundColor = C_Global.StandardBackground;
 		}
 
         public C_DateState[] BuildDateStateArray(C_YMD Date, C_VitaSite site)
@@ -142,7 +148,22 @@ namespace vitavol
 				// see if this date has an exception
 				C_CalendarEntry siteExceptionOnDate = site.GetCalendarExceptionForDateForSite(ourDate);
                 if (siteExceptionOnDate != null)
-                    dayState.ShowBox = siteExceptionOnDate.OpenTime != siteExceptionOnDate.CloseTime;
+                {
+                    if (siteExceptionOnDate.OpenTime != siteExceptionOnDate.CloseTime)
+                    {
+                        dayState.ShowBox = true;
+						dayState.NormalColor = Color_OpenDefault;
+						dayState.HighlightedColor = Color_OpenDefault;
+						dayState.TextColor = UIColor.Black;
+					}
+                    else
+                    {
+                        dayState.ShowBox = false;
+						dayState.NormalColor = Color_ClosedDefault;
+						dayState.HighlightedColor = Color_ClosedDefault;
+						dayState.TextColor = UIColor.Black;
+					}
+                }
 
 				// todo: add a check for out of season
 

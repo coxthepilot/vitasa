@@ -24,8 +24,8 @@ namespace vitavol
 			AppDelegate myAppDelegate = (AppDelegate)UIApplication.SharedApplication.Delegate;
             Global = myAppDelegate.Global;
 
-			// set the standard background color
-			View.BackgroundColor = UIColor.FromRGB(240, 240, 240);
+            // set the standard background color
+            View.BackgroundColor = C_Global.StandardBackground;
 
 			// ----------- init the button handlers --------
 
@@ -88,7 +88,7 @@ namespace vitavol
                 AI_Busy.StartAnimating();
                 EnableUI(false);
 
-                bool success = await Global.LoggedInUser.RemoveSuggestion(Global.SelectedSuggestion);
+                bool success = await Global.SelectedSuggestion.RemoveSuggestion(Global.LoggedInUser.Token);
                 Global.LoggedInUser.Suggestions.Remove(Global.SelectedSuggestion);
 
                 AI_Busy.StopAnimating();
@@ -141,6 +141,8 @@ namespace vitavol
             };
 
 			// ---------- init the fields --------
+            // we only allow changing and editing if the suggestion is still in the Open state
+
 			L_Submitter.Text = Global.LoggedInUser.Name;
 			L_Date.Text = Global.SelectedSuggestion.Date.ToString();
 			L_Status.Text = Global.SelectedSuggestion.Status.ToString();
@@ -148,6 +150,15 @@ namespace vitavol
 			TxV_Body.Text = Global.SelectedSuggestion.Text;
 
             Dirty = Global.SelectedSuggestion.id == -1;
+
+            if (Global.SelectedSuggestion.Status != E_SuggestionStatus.Open)
+            {
+                Dirty = false;
+                TB_Title.Enabled = false;
+                TxV_Body.UserInteractionEnabled = false;
+                B_Save.Enabled = false;
+                B_DeleteThisSuggestion.Enabled = false;
+            }
 		}
 
         private void EnableUI(bool en)
@@ -166,10 +177,13 @@ namespace vitavol
             {
                 if (Global.SelectedSuggestion.id == -1)
                 {
-                    success = await Global.LoggedInUser.AddSuggestion(Global.SelectedSuggestion);
+                    success = await Global.SelectedSuggestion.AddSuggestion(Global.LoggedInUser.Token);
+                    //success = await Global.LoggedInUser.AddSuggestion(Global.SelectedSuggestion);
+                    Global.LoggedInUser.Suggestions.Add(Global.SelectedSuggestion);
                 }
                 else
-                    success = await Global.LoggedInUser.UpdateSuggestion(Global.SelectedSuggestion);
+                    success = await Global.SelectedSuggestion.UpdateSuggestion(Global.LoggedInUser.Token);
+                    //success = await Global.LoggedInUser.UpdateSuggestion(Global.SelectedSuggestion);
                 Dirty = false;
             }
             catch 

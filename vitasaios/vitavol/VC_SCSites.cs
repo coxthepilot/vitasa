@@ -28,7 +28,7 @@ namespace vitavol
 			Global = myAppDelegate.Global;
 
 			// set the standard background color
-			View.BackgroundColor = UIColor.FromRGB(240, 240, 240);
+			View.BackgroundColor = C_Global.StandardBackground;
 
 			B_Back.TouchUpInside += (sender, e) => 
             {
