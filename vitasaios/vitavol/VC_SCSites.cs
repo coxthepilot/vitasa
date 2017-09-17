@@ -27,9 +27,6 @@ namespace vitavol
 			AppDelegate myAppDelegate = (AppDelegate)UIApplication.SharedApplication.Delegate;
 			Global = myAppDelegate.Global;
 
-			// set the standard background color
-			View.BackgroundColor = C_Global.StandardBackground;
-
 			B_Back.TouchUpInside += (sender, e) => 
             {
                 PerformSegue("Segue_SCSitesToLogin", this);
@@ -38,6 +35,12 @@ namespace vitavol
             TV_Sites.Source = new C_SitesTableSourceSCSites(Global, Global.SCSites, this);
             TV_Sites.ReloadData();
         }
+
+        public override void ViewDidAppear(bool animated)
+        {
+			// set the standard background color
+            View.BackgroundColor = C_Common.StandardBackground;
+		}
 
 		public class C_SitesTableSourceSCSites : UITableViewSource
 		{

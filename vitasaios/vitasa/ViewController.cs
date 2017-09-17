@@ -48,18 +48,6 @@ namespace vitasa
 				PerformSegue("Segue_MainToMessage", this);
 			};
 
-            B_211.TouchUpInside += (sender, e) =>
-			{
-                Global.MessageToShow = E_Message.Using211;
-				PerformSegue("Segue_MainToMessage", this);
-			};
-
-            B_MyFreeTaxes.TouchUpInside += (sender, e) =>
-			{
-                Global.MessageToShow = E_Message.MyFreeTaxes;
-				PerformSegue("Segue_MainToMessage", this);
-			};
-
             B_Feedback.TouchUpInside += (sender, e) => 
             {
                 PerformSegue("Segue_MainToSuggestion", this);
@@ -81,9 +69,7 @@ namespace vitasa
             B_ViewOnMap.SetTitle(AppResources.Main_B_Map, UIControlState.Normal);
             B_GettingReady.SetTitle(AppResources.Main_B_BeforeYouGo, UIControlState.Normal);
             B_Feedback.SetTitle(AppResources.Main_B_Feedback, UIControlState.Normal);
-            B_MyFreeTaxes.SetTitle(AppResources.Main_B_MyFreeTaxes, UIControlState.Normal);
             B_Resources.SetTitle(AppResources.Main_B_Resources, UIControlState.Normal);
-            B_211.SetTitle(AppResources.Main_B_211, UIControlState.Normal);
             B_BecomingAVolunteer.SetTitle(AppResources.Main_B_BecomingAVolunteer, UIControlState.Normal);
             B_About.SetTitle(AppResources.Main_B_About, UIControlState.Normal);
 

@@ -19,7 +19,7 @@ namespace vitavol
             base.ViewDidLoad();
 
 			// set the standard background color
-			View.BackgroundColor = C_Global.StandardBackground;
+            View.BackgroundColor = C_Common.StandardBackground;
 
 			string fileName = "about.htm"; // remember case-sensitive
 			string localHtmlUrl = Path.Combine(NSBundle.MainBundle.BundlePath, fileName);

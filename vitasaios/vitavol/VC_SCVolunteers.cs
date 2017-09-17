@@ -29,7 +29,7 @@ namespace vitavol
             Global = myAppDelegate.Global;
 
 			// set the standard background color
-			View.BackgroundColor = C_Global.StandardBackground;
+            View.BackgroundColor = C_Common.StandardBackground;
 
             // ----- init variables -----
 
@@ -49,14 +49,14 @@ namespace vitavol
                     return;
 				}
                 
-                Tools.E_MessageBoxResults mbres = await Tools.MessageBox(this,
+                C_MessageBox.E_MessageBoxResults mbres = await C_MessageBox.MessageBox(this,
                      "Items Changed",
                      "One or more items changed. Approved them?",
-                     Tools.E_MessageBoxButtons.YesNoCancel);
+                     C_MessageBox.E_MessageBoxButtons.YesNoCancel);
 
-                if (mbres == Tools.E_MessageBoxResults.Cancel)
+                if (mbres == C_MessageBox.E_MessageBoxResults.Cancel)
                     return;
-                else if (mbres == Tools.E_MessageBoxResults.No)
+                else if (mbres == C_MessageBox.E_MessageBoxResults.No)
                 {
 					PerformSegue("Segue_SCVolunteersToSCSite", this);
 					return;
@@ -72,10 +72,10 @@ namespace vitavol
 
                 if (!success)
                 {
-                    Tools.E_MessageBoxResults mbres1 = await Tools.MessageBox(this,
+                    C_MessageBox.E_MessageBoxResults mbres1 = await C_MessageBox.MessageBox(this,
                                                                             "Error",
                                                                             "Unble to save the work item",
-                                                                             Tools.E_MessageBoxButtons.Ok);
+                                                                             C_MessageBox.E_MessageBoxButtons.Ok);
                     return;
                 }
 
@@ -84,12 +84,12 @@ namespace vitavol
 
             B_ApproveHours.TouchUpInside += async (sender, e) =>
             {
-				Tools.E_MessageBoxResults mbres = await Tools.MessageBox(this,
+				C_MessageBox.E_MessageBoxResults mbres = await C_MessageBox.MessageBox(this,
 					 "Approve Items?",
 					 "Approve signups on this date?",
-					 Tools.E_MessageBoxButtons.YesNo);
+					 C_MessageBox.E_MessageBoxButtons.YesNo);
 
-                if (mbres != Tools.E_MessageBoxResults.Yes)
+                if (mbres != C_MessageBox.E_MessageBoxResults.Yes)
                     return;
 
 				AI_Busy.StartAnimating();
@@ -102,10 +102,10 @@ namespace vitavol
 
 				if (!success)
 				{
-					Tools.E_MessageBoxResults mbres1 = await Tools.MessageBox(this,
+					C_MessageBox.E_MessageBoxResults mbres1 = await C_MessageBox.MessageBox(this,
 																			"Error",
 																			"Unble to save the work item",
-																			 Tools.E_MessageBoxButtons.Ok);
+																			 C_MessageBox.E_MessageBoxButtons.Ok);
 					return;
 				}
 			};
@@ -114,7 +114,7 @@ namespace vitavol
             UIDatePicker DP_Date = new UIDatePicker()
             {
                 Mode = UIDatePickerMode.Date,
-                Date = Tools.YMDToNSDate(Global.WorkItemsDate)
+                Date = C_NSDateConversions.YMDToNSDate(Global.WorkItemsDate)
             };
 
             UIToolbar ToolBar_Date = new UIToolbar()
@@ -128,7 +128,7 @@ namespace vitavol
 			{
                 TB_Date.Text = FriendlyDate(DP_Date.Date);
 	            TB_Date.ResignFirstResponder();
-                Global.WorkItemsDate = new C_YMD(Tools.NSDateToDateTime(DP_Date.Date));
+                Global.WorkItemsDate = new C_YMD(C_NSDateConversions.NSDateToDateTime(DP_Date.Date));
                 //B_ApproveHours.Enabled = Global.WorkItemsDate <= C_YMD.Now;
                 EnableUI(false);
                 TableSource.DoNotDisplayValues = true;
@@ -214,13 +214,10 @@ namespace vitavol
             {
                 foreach (C_WorkItem wi in Global.WorkItemsOnSiteOnDate)
                 {
-                    if (!wi.Approved)
-                    {
-                        wi.Approved = true;
-                        bool success = await wi.UpdateIntent(Global);
-                        res &= success;
-                        wi.Dirty = false;
-                    }
+                    wi.Approved = true;
+                    bool success = await wi.UpdateIntent(Global);
+                    res &= success;
+                    wi.Dirty = false;
                 }
             }
             catch {}
@@ -260,7 +257,7 @@ namespace vitavol
 
         private string FriendlyDate(NSDate nsd)
         {
-			DateTime dt = Tools.NSDateToDateTime(nsd);
+            DateTime dt = C_NSDateConversions.NSDateToDateTime(nsd);
 			C_YMD ymd = new C_YMD(dt);
             return ymd.ToString("dow mmm dd, yyyy");
 		}
@@ -304,8 +301,10 @@ namespace vitavol
 
                 C_WorkItem signup = WorkItems[indexPath.Row];
 
+                string s_cert = signup.User.Certification.ToString();
+
                 cell.TextLabel.Text = signup.User.Name;
-                cell.DetailTextLabel.Text = signup.Hours.ToString() + " hours";
+                cell.DetailTextLabel.Text = s_cert + " - " + signup.Hours.ToString() + " hours";
 
 				return cell;
 			}

@@ -24,7 +24,7 @@ namespace vitavol
 			Global = myAppDelegate.Global;
 
 			// set the standard background color
-			View.BackgroundColor = C_Global.StandardBackground;
+            View.BackgroundColor = C_Common.StandardBackground;
 
 			L_Date.Text = "Date: " + Global.SelectedDate.ToString("mmm dd, yyyy");
 

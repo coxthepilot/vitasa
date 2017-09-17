@@ -23,7 +23,7 @@ namespace vitavol
             Global = myAppDelegate.Global;
 
             // set the standard background color
-            View.BackgroundColor = C_Global.StandardBackground;
+            View.BackgroundColor = C_Common.StandardBackground;
 
 			// --------- button handlers -----------
 
@@ -43,11 +43,9 @@ namespace vitavol
 		public void OnNewSuggestion(object s, EventArgs e)
 		{
 			// create the new suggestion
-			C_Suggestion sug = new C_Suggestion()
+            C_Suggestion sug = new C_Suggestion(Global.LoggedInUser.id, C_YMD.Now, false)
 			{
-				Date = C_YMD.Now,
 				Status = E_SuggestionStatus.Open,
-				UserId = Global.LoggedInUser.id,
 				Subject = "",
 				Text = "",
 				dirty = true
@@ -99,10 +97,10 @@ namespace vitavol
                     {
                         if (!success)
                         {
-                            Tools.MessageBox(OurVC, 
+                            C_MessageBox.MessageBox(OurVC, 
                                             "Error",
                                             "Unable to remove the suggestion",
-                                             Tools.E_MessageBoxButtons.Ok);
+                                             C_MessageBox.E_MessageBoxButtons.Ok);
                         }
 
                         OurVC.TV_ListOfSuggestions.ReloadData();

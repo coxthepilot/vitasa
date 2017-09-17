@@ -166,5 +166,11 @@ namespace vitasa {
                 return ResourceManager.GetString("Suggestion_B_Submit", resourceCulture);
             }
         }
+        
+        internal static string SitesList_L_ServicesKey {
+            get {
+                return ResourceManager.GetString("SitesList_L_ServicesKey", resourceCulture);
+            }
+        }
     }
 }

@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Json;
 using UIKit;
+using CoreLocation;
+using Xamarin.Forms;
+//using System.Device;
 
 using zsquared;
 
@@ -14,6 +17,10 @@ namespace vitasa
         C_Global Global;
 
         public C_SitesTableSourceX SitesTableDataSource;
+
+        C_GetMyLocation GetLocation;
+
+        List<C_VitaSite> OpenSites;
 
 		public VC_SitesList (IntPtr handle) : base (handle)
         {
@@ -26,16 +33,16 @@ namespace vitasa
 			AppDelegate myAppDelegate = (AppDelegate)UIApplication.SharedApplication.Delegate;
             Global = myAppDelegate.Global;
 
-			AI_Busy.StartAnimating();
-
 			bool reload = Global.AllSites == null;
 			if (!reload)
 			{
 				TimeSpan ts = DateTime.Now - Global.AllSitesSampleDateTime;
 				reload = ts.TotalMinutes > 30;
 			}
+            if (reload)
+				AI_Busy.StartAnimating();
 
-			List<C_VitaSite> openSites = new List<C_VitaSite>();
+			OpenSites = new List<C_VitaSite>();
 
 			Task.Run(async () =>
 			{
@@ -53,19 +60,19 @@ namespace vitasa
 
                     foreach(C_VitaSite s in sitesOnDay)
                     {
-                        if (!openSites.Contains(s))
-                            openSites.Add(s);
+                        if (!OpenSites.Contains(s))
+                            OpenSites.Add(s);
                     }
 
                     date = date.AddDays(1);
                 }                                      
-                openSites.Sort(C_VitaSite.CompareSitesByNameAscending);
+                OpenSites.Sort(C_VitaSite.CompareSitesByNameAscending);
 
                 UIApplication.SharedApplication.InvokeOnMainThread(
 				new Action(() =>
 				{
 					// now that we have the container, create the data source and connect it to our data
-					SitesTableDataSource = new C_SitesTableSourceX(this, Global, openSites);
+					SitesTableDataSource = new C_SitesTableSourceX(this, Global, OpenSites);
 
 					// and let the control know where to get data from
 					TV_SitesList.Source = SitesTableDataSource;
@@ -75,18 +82,72 @@ namespace vitasa
                     AI_Busy.StopAnimating();
 				}));
 			});
+
+            L_ServicesKey.Text = AppResources.SitesList_L_ServicesKey;
+
+            GetLocation = new C_GetMyLocation();
+            GetLocation.LocationObtained += (sender, e) => 
+            {
+                GetLocation.StopLocationUpdates();
+
+                C_LocationEventArgs lea = (C_LocationEventArgs)e;
+                // re-sort the table view based on this location
+
+                foreach(C_VitaSite s in OpenSites)
+                {
+                    try
+                    {
+                        double siteLat = Convert.ToDouble(s.Latitude);
+                        double siteLong = Convert.ToDouble(s.Longitude);
+
+                        double distance = DistanceTo(lea.Lat, lea.Lng, siteLat, siteLong); // in miles, doesn't matter, could be in furlongs
+                        s.DistanceFromUserLocation = distance;
+                    }
+                    catch
+                    {
+                        s.DistanceFromUserLocation = double.NaN;
+                    }
+                }
+                OpenSites.Sort(C_VitaSite.CompareSitesByDistance);
+                TV_SitesList.ReloadData();
+            };
+            GetLocation.ObtainMyLocation();
 		}
 
         public override void ViewDidAppear(bool animated)
         {
-            View.BackgroundColor = C_Global.StandardBackground;
-			TV_SitesList.BackgroundColor = C_Global.StandardBackground;
+            View.BackgroundColor = C_Common.StandardBackground;
+            TV_SitesList.BackgroundColor = C_Common.StandardBackground;
+		}
+
+        /// <summary>
+        /// Calculate the distance between to points on the earth surface
+        /// </summary>
+        /// <returns>distance in miles</returns>
+        /// <param name="lat1">Lat1.</param>
+        /// <param name="lon1">Lon1.</param>
+        /// <param name="lat2">Lat2.</param>
+        /// <param name="lon2">Lon2.</param>
+		public static double DistanceTo(double lat1, double lon1, double lat2, double lon2)
+		{
+			double rlat1 = Math.PI * lat1 / 180;
+			double rlat2 = Math.PI * lat2 / 180;
+			double theta = lon1 - lon2;
+			double rtheta = Math.PI * theta / 180;
+			double dist =
+				Math.Sin(rlat1) * Math.Sin(rlat2) + Math.Cos(rlat1) *
+				Math.Cos(rlat2) * Math.Cos(rtheta);
+			dist = Math.Acos(dist);
+			dist = dist * 180 / Math.PI;
+			dist = dist * 60 * 1.1515;
+
+			return dist;
 		}
 
 		public class C_SitesTableSourceX : UITableViewSource
 		{
             readonly C_Global Global;
-            List<C_VitaSite> Sites;
+            readonly List<C_VitaSite> Sites;
             readonly UIViewController ourVC;
 
             const string CellIdentifier = "VITAClientSitesList";
@@ -110,12 +171,12 @@ namespace vitasa
 				if (cell == null)
 					cell = new UITableViewCell(UITableViewCellStyle.Subtitle, CellIdentifier);
 
-                cell.BackgroundColor = C_Global.StandardBackground;
+                cell.BackgroundColor = C_Common.StandardBackground;
 
                 C_VitaSite site = Sites[indexPath.Row];
 
-				cell.TextLabel.Text = site.Name;
-				cell.DetailTextLabel.Text = site.Street + ", " + site.City + ", " + site.State + " " + site.Zip;
+                cell.TextLabel.Text = site.Name;
+				cell.DetailTextLabel.Text = "(DO, Ex, MFT) " + site.Street + ", " + site.City + ", " + site.State + " " + site.Zip;
 
                 switch (site.Status)
                 {
@@ -144,5 +205,78 @@ namespace vitasa
 				ourVC.PerformSegue("Segue_ListToDetails", ourVC);
 			}
 		}
+
+		public class C_LocationEventArgs : EventArgs, I_LocationEventArgs
+		{
+			public double Lat { get; set; }
+			public double Lng { get; set; }
+		}
+
+		public class C_GetMyLocation : I_Location
+		{
+			public event EventHandler<I_LocationEventArgs> LocationObtained;
+            bool LocationFound;
+
+            CLLocationManager locationManager;
+
+            public C_GetMyLocation()
+            {
+                LocationFound = false;
+            }
+
+			public void ObtainMyLocation()
+			{
+                locationManager = new CLLocationManager()
+                {
+                    DesiredAccuracy = CLLocation.AccuracyBest,
+                    DistanceFilter = CLLocationDistance.FilterNone
+                };
+
+                locationManager.LocationsUpdated += (object sender, CLLocationsUpdatedEventArgs e) =>
+				{
+					CLLocation[] locations = e.Locations;
+
+                    C_LocationEventArgs args = new C_LocationEventArgs()
+                    {
+                        Lat = locations[locations.Length - 1].Coordinate.Latitude,
+                        Lng = locations[locations.Length - 1].Coordinate.Longitude
+                    };
+                    if (!LocationFound)
+                    {
+                        LocationObtained?.Invoke(this, args);
+                        LocationFound = true;
+                    }
+				};
+
+				locationManager.AuthorizationChanged += (object sender, CLAuthorizationChangedEventArgs e) =>
+				{
+					if (e.Status == CLAuthorizationStatus.AuthorizedWhenInUse)
+					{
+						locationManager.StartUpdatingLocation();
+					}
+				};
+
+
+				locationManager.RequestWhenInUseAuthorization();
+			}
+
+            public void StopLocationUpdates()
+            {
+                locationManager.StopUpdatingLocation();
+            }
+		}
+
+		public interface I_Location
+		{
+			void ObtainMyLocation();
+			event EventHandler<I_LocationEventArgs> LocationObtained;
+		}
+
+		public interface I_LocationEventArgs
+		{
+			double Lat { get; set; }
+			double Lng { get; set; }
+		}
+
 	}
 }

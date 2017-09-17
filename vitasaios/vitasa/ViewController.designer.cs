@@ -15,10 +15,6 @@ namespace vitasa
     {
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UIButton B_211 { get; set; }
-
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UIButton B_About { get; set; }
 
         [Outlet]
@@ -32,10 +28,6 @@ namespace vitasa
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UIButton B_GettingReady { get; set; }
-
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UIButton B_MyFreeTaxes { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
@@ -63,11 +55,6 @@ namespace vitasa
 
         void ReleaseDesignerOutlets ()
         {
-            if (B_211 != null) {
-                B_211.Dispose ();
-                B_211 = null;
-            }
-
             if (B_About != null) {
                 B_About.Dispose ();
                 B_About = null;
@@ -86,11 +73,6 @@ namespace vitasa
             if (B_GettingReady != null) {
                 B_GettingReady.Dispose ();
                 B_GettingReady = null;
-            }
-
-            if (B_MyFreeTaxes != null) {
-                B_MyFreeTaxes.Dispose ();
-                B_MyFreeTaxes = null;
             }
 
             if (B_Resources != null) {

@@ -29,20 +29,12 @@ namespace vitavol
 			AppDelegate myAppDelegate = (AppDelegate)UIApplication.SharedApplication.Delegate;
 			Global = myAppDelegate.Global;
 
-			// set the standard background color
-			View.BackgroundColor = C_Global.StandardBackground;
-
 			L_Date.Text = Global.SelectedDate.ToString("mmm dd, yyyy");
 
 			B_Back.TouchUpInside += (sender, e) => 
             {
                 PerformSegue("Segue_SitesOnDateMapToSitesOnDateList", this);
             };
-
-			B_ShowAsList.TouchUpInside += (sender, e) =>
-			{
-				PerformSegue("Segue_SitesOnDateMapToSitesOnDateList", this);
-			};
 
 			Map_Sites.MapType = MapKit.MKMapType.Standard;
 			Map_Sites.AutoresizingMask = UIViewAutoresizing.FlexibleDimensions;
@@ -68,6 +60,12 @@ namespace vitavol
 
             PutPinsOnMap();
         }
+
+        public override void ViewDidAppear(bool animated)
+        {
+			// set the standard background color
+            View.BackgroundColor = C_Common.StandardBackground;
+		}
 
 		private void PutPinsOnMap()
 		{

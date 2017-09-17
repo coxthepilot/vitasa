@@ -30,8 +30,6 @@ namespace vitasa
 			AppDelegate myAppDelegate = (AppDelegate)UIApplication.SharedApplication.Delegate;
             Global = myAppDelegate.Global;
 
-			View.BackgroundColor = C_Global.StandardBackground;
-
 			// connect action code to the Back button
 			B_Back.TouchUpInside += (object sender, EventArgs e) =>
 			{
@@ -58,14 +56,12 @@ namespace vitasa
 
 				else
 				{
-					Tools.E_MessageBoxResults mbres = await Tools.MessageBox(this,
+                    C_MessageBox.E_MessageBoxResults mbres = await C_MessageBox.MessageBox(this,
 									"No maps app",
 									 "Maps app not supported on this device",
-									 Tools.E_MessageBoxButtons.Ok);
+									 C_MessageBox.E_MessageBoxButtons.Ok);
 				}
 			};
-
-
 
 			Map_SiteMap.MapType = MapKit.MKMapType.Standard;
 			Map_SiteMap.AutoresizingMask = UIViewAutoresizing.FlexibleDimensions;
@@ -136,7 +132,7 @@ namespace vitasa
 
 		public override void ViewDidAppear(bool animated)
 		{
-			View.BackgroundColor = C_Global.StandardBackground;
+            View.BackgroundColor = C_Common.StandardBackground;
 		}
 
 		class C_MapDelegate : MKMapViewDelegate

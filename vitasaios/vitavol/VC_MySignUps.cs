@@ -31,9 +31,6 @@ namespace vitavol
             AppDelegate myAppDelegate = (AppDelegate)UIApplication.SharedApplication.Delegate;
             Global = myAppDelegate.Global;
 
-			// set the standard background color
-			View.BackgroundColor = C_Global.StandardBackground;
-
 			B_Back.TouchUpInside += (sender, e) =>
                 PerformSegue("Segue_SignUpsToLogin", this);
 
@@ -68,6 +65,13 @@ namespace vitavol
 			TV_SignUps.ReloadData();
         }
 
+        public override void ViewDidAppear(bool animated)
+        {
+			// set the standard background color
+            View.BackgroundColor = C_Common.StandardBackground;
+            TV_SignUps.BackgroundColor = C_Common.StandardBackground;
+		}
+
         private void EnableUI(bool en)
         {
             
@@ -100,6 +104,7 @@ namespace vitavol
                     OurVC.EnableUI(false);
 
                     bool success = await intentToRemove.RemoveIntent(Global);
+                    TableSource.OurWorkItems.Remove(intentToRemove);
 
                     OurVC.EnableUI(true);
                     OurVC.AI_Busy.StopAnimating();

@@ -23,10 +23,6 @@ namespace vitavol
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UIButton B_ClearFetch { get; set; }
-
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UIButton B_Login { get; set; }
 
         [Outlet]
@@ -35,15 +31,7 @@ namespace vitavol
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UIButton B_TriggerFetch { get; set; }
-
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UIImageView I_BackgroundImage { get; set; }
-
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UILabel L_Fetch { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
@@ -65,11 +53,6 @@ namespace vitavol
                 B_About = null;
             }
 
-            if (B_ClearFetch != null) {
-                B_ClearFetch.Dispose ();
-                B_ClearFetch = null;
-            }
-
             if (B_Login != null) {
                 B_Login.Dispose ();
                 B_Login = null;
@@ -80,19 +63,9 @@ namespace vitavol
                 B_Register = null;
             }
 
-            if (B_TriggerFetch != null) {
-                B_TriggerFetch.Dispose ();
-                B_TriggerFetch = null;
-            }
-
             if (I_BackgroundImage != null) {
                 I_BackgroundImage.Dispose ();
                 I_BackgroundImage = null;
-            }
-
-            if (L_Fetch != null) {
-                L_Fetch.Dispose ();
-                L_Fetch = null;
             }
 
             if (TB_Email != null) {

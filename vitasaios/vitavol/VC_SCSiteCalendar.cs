@@ -88,9 +88,6 @@ namespace vitavol
 
 			L_MonthYear.Text = Global.CalendarDate.ToString("mmm-yyyy");
 
-            B_MonthNext.BackgroundColor = C_Global.StandardBackground;
-            B_MonthPrevious.BackgroundColor = C_Global.StandardBackground;
-
             CollectionViewHelper = new C_CVHelper(UIColor.FromRGB(240, 240, 240), CV_Grid, DateState, DayState);
 			CollectionViewHelper.DateTouched += (sender, e) =>
 			{
@@ -109,7 +106,9 @@ namespace vitavol
         public override void ViewDidAppear(bool animated)
         {
 			// set the standard background color
-			View.BackgroundColor = C_Global.StandardBackground;
+            View.BackgroundColor = C_Common.StandardBackground;
+            B_MonthNext.BackgroundColor = C_Common.StandardBackground;
+            B_MonthPrevious.BackgroundColor = C_Common.StandardBackground;
 		}
 
         public C_DateState[] BuildDateStateArray(C_YMD Date, C_VitaSite site)
@@ -149,7 +148,7 @@ namespace vitavol
 				C_CalendarEntry siteExceptionOnDate = site.GetCalendarExceptionForDateForSite(ourDate);
                 if (siteExceptionOnDate != null)
                 {
-                    if (siteExceptionOnDate.OpenTime != siteExceptionOnDate.CloseTime)
+                    if (!siteExceptionOnDate.IsClosed)
                     {
                         dayState.ShowBox = true;
 						dayState.NormalColor = Color_OpenDefault;
@@ -158,7 +157,7 @@ namespace vitavol
 					}
                     else
                     {
-                        dayState.ShowBox = false;
+                        dayState.ShowBox = true;
 						dayState.NormalColor = Color_ClosedDefault;
 						dayState.HighlightedColor = Color_ClosedDefault;
 						dayState.TextColor = UIColor.Black;

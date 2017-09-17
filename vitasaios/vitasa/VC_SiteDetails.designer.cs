@@ -36,6 +36,18 @@ namespace vitasa
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UILabel L_DropOff { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UILabel L_Express { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UILabel L_MyFreeTaxes { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UILabel L_SiteName { get; set; }
 
         [Outlet]
@@ -71,6 +83,21 @@ namespace vitasa
             if (L_CityStateZip != null) {
                 L_CityStateZip.Dispose ();
                 L_CityStateZip = null;
+            }
+
+            if (L_DropOff != null) {
+                L_DropOff.Dispose ();
+                L_DropOff = null;
+            }
+
+            if (L_Express != null) {
+                L_Express.Dispose ();
+                L_Express = null;
+            }
+
+            if (L_MyFreeTaxes != null) {
+                L_MyFreeTaxes.Dispose ();
+                L_MyFreeTaxes = null;
             }
 
             if (L_SiteName != null) {

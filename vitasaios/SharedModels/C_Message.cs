@@ -3,13 +3,13 @@ using System.Json;
 using System.IO;
 using System.Net;
 using System.Threading.Tasks;
-using System.Collections.Generic;
-using System.Text;
-using System.Net.Http;
+//using System.Collections.Generic;
+//using System.Text;
+//using System.Net.Http;
 
-using UIKit;
-using System.Linq;
-using Foundation;
+//using UIKit;
+//using System.Linq;
+//using Foundation;
 
 namespace zsquared
 {
@@ -29,6 +29,7 @@ namespace zsquared
 
         public C_Message(string slug, string text, E_Language language)
         {
+            id = -1;
             Slug = slug;
             Text = text;
             Language = language;
@@ -55,10 +56,45 @@ namespace zsquared
             }
 		}
 
-        public static async Task<C_Message> GetMessage(E_Language language, string slug)
+		public static readonly string Slug_BeforeYouGo = "before-you-go";
+		public static readonly string Slug_Resources = "community-resources";
+		public static readonly string Slug_About = "about";
+		public static readonly string Slug_BecomeAVolunteer = "become-a-volunteer";
+		public static readonly string Slug_Using211 = "using-211";
+		public static readonly string Slug_MyFreeTaxes = "my-free-taxes";
+
+		public static string SlugForMessage(E_Message msg)
+		{
+			string res = null;
+			switch (msg)
+			{
+				case E_Message.BeforeYoGo:
+					res = Slug_BeforeYouGo;
+					break;
+				case E_Message.Resources:
+					res = Slug_Resources;
+					break;
+				case E_Message.About:
+					res = Slug_About;
+					break;
+				case E_Message.BecomeAVolunteer:
+					res = Slug_BecomeAVolunteer;
+					break;
+				case E_Message.Using211:
+					res = Slug_Using211;
+					break;
+				case E_Message.MyFreeTaxes:
+					res = Slug_MyFreeTaxes;
+					break;
+			}
+
+			return res;
+		}
+
+		public static async Task<C_Message> GetMessage(E_Language language, string slug)
         {
             C_Message msg = null;
-            string acceptLanguage = language == E_Language.Spanish ? "es" : "en-US";
+            string acceptLanguage = language == E_Language.Spanish ? "es" : "en";
 
 			try
 			{
@@ -91,17 +127,19 @@ namespace zsquared
 			return msg;
         }
 
-		public async Task<bool> AddMessage(string token)
-		{
-            string messageLanguage = Language == E_Language.Spanish ? "text_es" : "text_en";
-			string bodyjson = "{ "
-                + "\"" + messageLanguage + "\" : \"" + Text + "\""
-				+ "}";
+        public static async Task<bool> AddMessage(string token, C_Message english, C_Message spanish)
+        {
+            bool success = false;
 
-			bool success = false;
+			string bodyjson = "{ "
+				+ "\"" + "slug" + "\" : \"" + english.Slug + "\""
+				+ ",\"" + "text_en" + "\" : \"" + EscapeText(english.Text) + "\""
+                + ",\"" + "text_es" + "\" : \"" + EscapeText(spanish.Text) + "\""
+				+ "}";
+            
 			try
 			{
-                string submiturl = "/resources/" + Slug + "/";
+                string submiturl = "/resources";
 
 				WebClient wc = new WebClient()
 				{
@@ -111,7 +149,7 @@ namespace zsquared
 				wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
 				wc.Headers.Add(HttpRequestHeader.Accept, "application/json");
 
-                string responseString = await wc.UploadStringTaskAsync(submiturl, "POST", bodyjson);
+				string responseString = await wc.UploadStringTaskAsync(submiturl, "POST", bodyjson);
 
 				JsonValue responseJson = JsonValue.Parse(responseString);
 				// if it parses then it is our success result
@@ -120,12 +158,54 @@ namespace zsquared
 			}
 			catch (Exception e)
 			{
-                Console.WriteLine(e.Message);
+				Console.WriteLine(e.Message);
 				success = false;
 			}
 
 			return success;
-		}
+        }
+
+        private static string EscapeText(string s)
+        {
+            return s.Replace("\n", "\\n");
+        }
+
+		//public async Task<bool> AddMessage(string token)
+		//{
+  //          string messageLanguage = Language == E_Language.Spanish ? "text_es" : "text_en";
+		//	string escapedText = Text.Replace("\n", "\\n");
+		//	string bodyjson = "{ "
+  //              + "\"" + messageLanguage + "\" : \"" + escapedText + "\""
+		//		+ "}";
+
+		//	bool success = false;
+		//	try
+		//	{
+  //              string submiturl = "/resources/" + Slug + "/";
+
+		//		WebClient wc = new WebClient()
+		//		{
+		//			BaseAddress = C_Vita.VitaCoreUrl
+		//		};
+		//		wc.Headers.Add(HttpRequestHeader.Cookie, token);
+		//		wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
+		//		wc.Headers.Add(HttpRequestHeader.Accept, "application/json");
+
+  //              string responseString = await wc.UploadStringTaskAsync(submiturl, "POST", bodyjson);
+
+		//		JsonValue responseJson = JsonValue.Parse(responseString);
+		//		// if it parses then it is our success result
+
+		//		success = true;
+		//	}
+		//	catch (Exception e)
+		//	{
+  //              Console.WriteLine(e.Message);
+		//		success = false;
+		//	}
+
+		//	return success;
+		//}
 
 		public async Task<bool> UpdateMessage(string token)
 		{

@@ -20,10 +20,6 @@ namespace vitavol
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UIButton B_ShowAsList { get; set; }
-
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UILabel L_Date { get; set; }
 
         [Outlet]
@@ -35,11 +31,6 @@ namespace vitavol
             if (B_Back != null) {
                 B_Back.Dispose ();
                 B_Back = null;
-            }
-
-            if (B_ShowAsList != null) {
-                B_ShowAsList.Dispose ();
-                B_ShowAsList = null;
             }
 
             if (L_Date != null) {

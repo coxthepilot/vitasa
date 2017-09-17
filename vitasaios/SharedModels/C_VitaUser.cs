@@ -7,9 +7,9 @@ using System.Collections.Generic;
 using System.Text;
 using System.Net.Http;
 
-using UIKit;
+//using UIKit;
 using System.Linq;
-using Foundation;
+//using Foundation;
 
 namespace zsquared
 {
@@ -17,18 +17,18 @@ namespace zsquared
 
     public class C_VitaUser
     {
-        public int id;
-        public string Name;
-		public string Email;
+        public readonly int id;
+        public readonly string Name;
+		public readonly string Email;
         public string Password; // only used on create new user; never sent from the backend
-        public string Phone;
-        public E_Certification Certification;
+        public readonly string Phone;
+        public readonly E_Certification Certification;
         public List<C_WorkItem> WorkHistoryX;
         public List<C_WorkItem> WorkIntentsX;
 		public List<E_VitaUserRoles> Roles;
         public List<C_Suggestion> Suggestions;
 
-        public string Token; // not saved or restored; from the login headers
+        public string Token; // saved across UI transitions
 
         public static readonly string N_ID = "id";
         public static readonly string N_Name = "name";
@@ -40,6 +40,7 @@ namespace zsquared
 		public static readonly string N_WorkIntents = "work_intents";
         public static readonly string N_Roles = "roles";
         public static readonly string N_Suggestions = "suggestions";
+        public static readonly string N_Token = "token";
 
         public bool HasAdmin
         {
@@ -121,7 +122,10 @@ namespace zsquared
             if (jv.ContainsKey(N_Phone))
                 Phone = Tools.JsonProcessString(jv[N_Phone], Phone);
 
-            if (jv.ContainsKey(N_Certification))
+            if (jv.ContainsKey(N_Token))
+                Token = Tools.JsonProcessString(jv[N_Token], Token);
+
+			if (jv.ContainsKey(N_Certification))
             {
                 string cs = Tools.JsonProcessString(jv[N_Certification], "Unknown");
 
@@ -186,146 +190,117 @@ namespace zsquared
             }
 		}
 
-		///// <summary>
-		///// Makes the API call to add a Suggestion. If successful, also adds to the User Suggestions list.
-		///// </summary>
-		///// <returns>true on success</returns>
-		///// <param name="sug">suggestion to add</param>
-  //      public async Task<bool> AddSuggestion(C_Suggestion sug)
-		//{
-  //          // todo: move this stuff into C_Suggestion
-		//	string bodyjson = "{ "
-  //              + "\"subject\" : \"" + sug.Subject + "\""
-  //              + ",\"details\" : \"" + sug.Text + "\""
-		//		//+ ",\"from_public\" : \"" + "false" + "\""
-		//		+ "}";
+        public string GetJson()
+        {
+            StringBuilder sb = new StringBuilder();
 
-		//	bool success = false;
-		//	try
-		//	{
-		//		string submiturl = "/suggestions";
-		//		WebClient wc = new WebClient()
-		//		{
-		//			BaseAddress = C_Vita.VitaCoreUrl
-		//		};
-		//		wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
-		//		wc.Headers.Add(HttpRequestHeader.Accept, "application/json");
-  //              if (Token != null)
-  //  				wc.Headers.Add(HttpRequestHeader.Cookie, Token);
+            sb.Append("{");
 
-  //              // do the actual web request
-  //              string responseString = await wc.UploadStringTaskAsync(submiturl, "POST", bodyjson);
+            sb.Append("\"" + N_ID + "\" : \"" + id.ToString() + "\"");
+			sb.Append(",");
+			sb.Append("\"" + N_Name + "\" : \"" + Name + "\"");
+			sb.Append(",");
+			sb.Append("\"" + N_Email + "\" : \"" + Email + "\"");
+			sb.Append(",");
+			sb.Append("\"" + N_Password + "\" : \"" + Password + "\"");
+			sb.Append(",");
+			sb.Append("\"" + N_Phone + "\" : \"" + Phone + "\"");
+			sb.Append(",");
+            sb.Append("\"" + N_Certification + "\" : \"" + Certification.ToString() + "\"");
 
-		//		// get and parse the response
-		//		JsonValue responseJson = JsonValue.Parse(responseString);
+			sb.Append(",");
+            sb.Append("\"" + N_Roles + "\" : [");
+            for (int ix = 0; ix != Roles.Count; ix++)
+            {
+                if (ix != 0) sb.Append(",");
+                sb.Append("\"" + Roles[ix].ToString() + "\"");
+            }
+            sb.Append("]");
 
-  //              C_Suggestion nsug = new C_Suggestion(responseJson);
+			sb.Append(",");
+            sb.Append("\"" + N_Suggestions + "\" : [");
+            for (int ix = 0; ix != Suggestions.Count; ix++)
+			{
+				if (ix != 0) sb.Append(",");
+                sb.Append("\"" + Suggestions[ix].GetJson() + "\"");
+			}
+			sb.Append("]");
 
-  //              // add the intent to this users WorkIntent list
-  //              sug.id = nsug.id;
-  //              Suggestions.Add(sug);
+			sb.Append(",");
+            sb.Append("\"" + N_Token + "\" : \"" + Token + "\"");
 
-		//		success = true;
-		//	}
-		//	catch (Exception e)
-		//	{
-  //              Console.WriteLine(e.Message);
-		//		success = false;
-		//	}
+			sb.Append("}");
 
-		//	return success;
-		//}
+			return sb.ToString();
+        }
 
-		///// <summary>
-		///// Makes the API call to add a Suggestion. If successful, also adds to the User Suggestions list.
-		///// </summary>
-		///// <returns>true on success</returns>
-		///// <param name="sug">suggestion to add</param>
-		//public async Task<bool> UpdateSuggestion(C_Suggestion sug)
-		//{
-  //          if (sug.id == -1)
-  //              throw new ApplicationException("can't update a Suggestion that hasn't been submitted yet");
+        public override bool Equals(System.Object obj)
+        {
+			if (obj == null)
+				return false;
 
-  //          string escapedText = sug.Text.Replace("\n", "\\n");
-		//	string bodyjson = "{ "
-		//		+ "\"user\" : \"" + id.ToString() + "\""
-  //              + ",\"details\" : \"" + escapedText + "\""
-  //              + ",\"subject\" : \"" + sug.Subject + "\""
-		//		+ "}";
+            C_VitaUser g = obj as C_VitaUser;
+			if ((System.Object)g == null)
+				return false;
 
-		//	bool success = false;
-		//	try
-		//	{
-		//		string submiturl = "/suggestions/" + sug.id.ToString();
-		//		WebClient wc = new WebClient()
-		//		{
-		//			BaseAddress = C_Vita.VitaCoreUrl
-		//		};
-		//		wc.Headers.Add(HttpRequestHeader.Cookie, Token);
-		//		wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
-		//		wc.Headers.Add(HttpRequestHeader.Accept, "application/json");
+			bool res = true;
 
-  //              string responseString = await wc.UploadStringTaskAsync(submiturl, "PUT", bodyjson);
+            res &= id == g.id;
+            if (Name != null)
+                res &= Name == g.Name;
+            if (Email != null)
+                res &= Email == g.Email;
+            if (Password != null)
+                res &= Password == g.Password;
+            if (Phone != null)
+                res &= Phone == g.Phone;
+            res &= Certification == g.Certification;
+            res &= Roles.Count == g.Roles.Count;
+            foreach (E_VitaUserRoles r in Roles)
+                res &= g.Roles.Contains(r);
+            res &= Suggestions.Count == g.Suggestions.Count;
+            for (int ix = 0; ix != Suggestions.Count; ix ++)
+                res &= Suggestions[ix] == g.Suggestions[ix];
+            if (Token != null)
+                res &= Token == g.Token;
 
-		//		// get and parse the response
-		//		JsonValue responseJson = JsonValue.Parse(responseString);
+			return res;
+		}
 
-  //              C_Suggestion nsug = new C_Suggestion(responseJson);
-		//		// if it parses then it is our success result
+        public static bool operator ==(C_VitaUser a, C_VitaUser b)
+		{
+			// If both are null, or both are same instance, return true.
+			if (System.Object.ReferenceEquals(a, b))
+			{
+				return true;
+			}
 
-		//		success = true;
-		//	}
-		//	catch
-		//	{
-		//		success = false;
-		//	}
+			// If one is null, but not both, return false.
+			if (((object)a == null) || ((object)b == null))
+			{
+				return false;
+			}
 
-		//	return success;
-		//}
+            // Return true if the fields match:
+            return a.Equals(b);
+		}
 
-		///// <summary>
-		///// Makes the API call to remove the Suggestion; on success, removes from this users Suggestions list
-		///// </summary>
-		///// <returns>True on success</returns>
-		///// <param name="wi">Suggestion to remove</param>
-  //      public async Task<bool> RemoveSuggestion(C_Suggestion wi)
-		//{
-		//	if (wi.id == -1)
-		//		throw new ApplicationException("must be an existing id; can't delete one that hasn't been added");
+		public static bool operator !=(C_VitaUser a, C_VitaUser b)
+		{
+			return !(a == b);
+		}        
 
-		//	bool success = false;
-		//	try
-		//	{
-		//		string submiturl = "/suggestions/" + wi.id.ToString();
-		//		WebClient wc = new WebClient()
-		//		{
-  //                  BaseAddress = C_Vita.VitaCoreUrl
-		//		};
-		//		wc.Headers.Add(HttpRequestHeader.Cookie, Token);
-		//		wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
-		//		wc.Headers.Add(HttpRequestHeader.Accept, "application/json");
+        public override int GetHashCode()
+        {
+			int hash = 269;
+			hash = (hash * 47) * id.GetHashCode();
+			hash = (hash * 47) * Name.GetHashCode();
+            hash = (hash * 47) * Email.GetHashCode();
+            hash = (hash * 47) * Phone.GetHashCode();
+            hash = (hash * 47) * Certification.GetHashCode();
 
-
-		//		byte[] dataBytes = Encoding.UTF8.GetBytes("");
-		//		// do the actual web request
-		//		byte[] responseBytes = await wc.UploadDataTaskAsync(submiturl, "DELETE", dataBytes);
-
-		//		//string responseString = Encoding.UTF8.GetString(responseBytes);
-		//		//JsonValue responseJson = JsonValue.Parse(responseString);
-  //              // if it parses then it is our success result
-
-  //              // remove this intent from the list
-  //              Suggestions.Remove(wi);
-
-		//		success = true;
-		//	}
-		//	catch
-		//	{
-		//		success = false;
-		//	}
-
-		//	return success;
-		//}
+			return hash;
+		}
 
 		public string RolesSummary()
 		{

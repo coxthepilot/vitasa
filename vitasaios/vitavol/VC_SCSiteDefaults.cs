@@ -31,18 +31,18 @@ namespace vitavol
 			Global = myAppDelegate.Global;
 
 			// set the standard background color
-			View.BackgroundColor = C_Global.StandardBackground;
+            View.BackgroundColor = C_Common.StandardBackground;
 
 			B_Back.TouchUpInside += async (sender, e) => 
             {
                 if (Dirty)
                 {
-                    Tools.E_MessageBoxResults mbres = await Tools.MessageBox(this, 
+                    C_MessageBox.E_MessageBoxResults mbres = await C_MessageBox.MessageBox(this, 
                              "Save Changes?", 
                              "Changes were made. Save before leaving?", 
-                             Tools.E_MessageBoxButtons.YesNo);
+                             C_MessageBox.E_MessageBoxButtons.YesNo);
 
-                    if (mbres != Tools.E_MessageBoxResults.Yes)
+                    if (mbres != C_MessageBox.E_MessageBoxResults.Yes)
                     {
 						PerformSegue("Segue_SCSiteDefaultsToSCSiteCalendar", this);
                         return;
@@ -51,10 +51,10 @@ namespace vitavol
                     bool success = await SaveChanges();
                     if (!success)
                     {
-						Tools.E_MessageBoxResults mbres1 = await Tools.MessageBox(this,
+						C_MessageBox.E_MessageBoxResults mbres1 = await C_MessageBox.MessageBox(this,
 								                                                  "Error",
 								                                                  "Unable to save the changes?",
-                                                                                  Tools.E_MessageBoxButtons.Ok);
+                                                                                  C_MessageBox.E_MessageBoxButtons.Ok);
                         return;
 					}
                 }
@@ -83,10 +83,10 @@ namespace vitavol
 				bool success = await SaveChanges();
 				if (!success)
 				{
-					Tools.E_MessageBoxResults mbres1 = await Tools.MessageBox(this,
+					C_MessageBox.E_MessageBoxResults mbres1 = await C_MessageBox.MessageBox(this,
 																			  "Error",
 																			  "Unable to save the changes?",
-																			  Tools.E_MessageBoxButtons.Ok);
+																			  C_MessageBox.E_MessageBoxButtons.Ok);
 					return;
 				}
 
@@ -98,7 +98,7 @@ namespace vitavol
 			UIDatePicker DP_OpenTime = new UIDatePicker()
             {
                 Mode = UIDatePickerMode.Time,
-                Date = Tools.BuildNSDateFromTime(calDefaults.OpenTime)
+                Date = C_NSDateConversions.BuildNSDateFromTime(calDefaults.OpenTime)
 			};
 
             UIToolbar ToolBar_OpenTime = new UIToolbar()
@@ -110,7 +110,7 @@ namespace vitavol
 
             UIBarButtonItem doneButtonOpen = new UIBarButtonItem("Done", UIBarButtonItemStyle.Done, (s, e) =>
 			{
-                DateTime dt = Tools.NSDateToDateTime(DP_OpenTime.Date);
+                DateTime dt = C_NSDateConversions.NSDateToDateTime(DP_OpenTime.Date);
                 C_HMS hms = new C_HMS(dt);
                 TB_OpenTime.Text = hms.ToString("hh:mm p");
 				TB_OpenTime.ResignFirstResponder();
@@ -135,7 +135,7 @@ namespace vitavol
 			UIDatePicker DP_CloseTime = new UIDatePicker()
 			{
 				Mode = UIDatePickerMode.Time,
-                Date = Tools.BuildNSDateFromTime(calDefaults.CloseTime)
+                Date = C_NSDateConversions.BuildNSDateFromTime(calDefaults.CloseTime)
 			};
 
 			UIToolbar ToolBar_CloseTime = new UIToolbar()
@@ -147,7 +147,7 @@ namespace vitavol
 
 			UIBarButtonItem doneButtonClose = new UIBarButtonItem("Done", UIBarButtonItemStyle.Done, (s, e) =>
 			{
-				DateTime dt = Tools.NSDateToDateTime(DP_CloseTime.Date);
+                DateTime dt = C_NSDateConversions.NSDateToDateTime(DP_CloseTime.Date);
 				C_HMS hms = new C_HMS(dt);
                 TB_CloseTime.Text = hms.ToString("hh:mm p");
 				TB_CloseTime.ResignFirstResponder();
@@ -238,10 +238,10 @@ namespace vitavol
 
                 if (!success)
                 {
-                    Tools.E_MessageBoxResults mbres = await Tools.MessageBox(this, 
+                    C_MessageBox.E_MessageBoxResults mbres = await C_MessageBox.MessageBox(this, 
                                                                              "Error", 
                                                                              "Failed to update the Site calendar", 
-                                                                             Tools.E_MessageBoxButtons.Ok);
+                                                                             C_MessageBox.E_MessageBoxButtons.Ok);
                 }
                 else
                 {

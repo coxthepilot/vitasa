@@ -24,6 +24,10 @@ namespace vitasa
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UILabel L_ServicesKey { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UITableView TV_SitesList { get; set; }
 
         void ReleaseDesignerOutlets ()
@@ -36,6 +40,11 @@ namespace vitasa
             if (B_Back != null) {
                 B_Back.Dispose ();
                 B_Back = null;
+            }
+
+            if (L_ServicesKey != null) {
+                L_ServicesKey.Dispose ();
+                L_ServicesKey = null;
             }
 
             if (TV_SitesList != null) {

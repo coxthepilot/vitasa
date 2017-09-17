@@ -28,11 +28,7 @@ namespace vitavol
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UILabel L_Certification { get; set; }
-
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UISwitch SW_Basic { get; set; }
+        UIKit.UISegmentedControl SC_Certification { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
@@ -71,14 +67,9 @@ namespace vitavol
                 B_Submit = null;
             }
 
-            if (L_Certification != null) {
-                L_Certification.Dispose ();
-                L_Certification = null;
-            }
-
-            if (SW_Basic != null) {
-                SW_Basic.Dispose ();
-                SW_Basic = null;
+            if (SC_Certification != null) {
+                SC_Certification.Dispose ();
+                SC_Certification = null;
             }
 
             if (TB_Email != null) {

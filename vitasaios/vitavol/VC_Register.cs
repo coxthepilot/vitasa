@@ -18,13 +18,10 @@ namespace vitavol
             base.ViewDidLoad();
 
 			// set the standard background color
-			View.BackgroundColor = C_Global.StandardBackground;
+            View.BackgroundColor = C_Common.StandardBackground;
 
 			B_Back.TouchUpInside += (sender, e) => 
                 PerformSegue("Segue_RegisterToLogin", this);
-
-			SW_Basic.ValueChanged += (sender, e) => 
-                L_Certification.Text = SW_Basic.On ? "Basic" : "Advanced";
 
             TB_Name.AddTarget((sender, e) =>
 			{
@@ -59,9 +56,8 @@ namespace vitavol
             B_Submit.TouchUpInside += async (sender, e) => 
             {
                 // send the registration to the backend
-                E_Certification loc = E_Certification.Basic;
-                if (!SW_Basic.On)
-                    loc = E_Certification.Advanced;
+                nint cl = SC_Certification.SelectedSegment;
+                E_Certification loc = cl == 0 ? E_Certification.Basic : E_Certification.Advanced;
 
                 // need to get these values before we leave the UI thread
                 string uname = TB_Name.Text;
@@ -85,10 +81,10 @@ namespace vitavol
 							EnableUI(true);
 
 							// tell the user that the staff will approve, check back later
-							Tools.E_MessageBoxResults mbres = await Tools.MessageBox(this,
+                            C_MessageBox.E_MessageBoxResults mbres = await C_MessageBox.MessageBox(this,
                                              "Registration Submitted",
                                              "Your registration has been submitted. Staff will respond shortly.",
-                                             Tools.E_MessageBoxButtons.Ok);
+                                             C_MessageBox.E_MessageBoxButtons.Ok);
                             PerformSegue("Segue_RegisterToLogin", this);
                         }));
                     }
@@ -101,10 +97,10 @@ namespace vitavol
 							EnableUI(true);
 
 							// tell the user that the staff will approve, check back later
-							Tools.E_MessageBoxResults mbres = await Tools.MessageBox(this,
+							C_MessageBox.E_MessageBoxResults mbres = await C_MessageBox.MessageBox(this,
 											"Error",
 											"Unable to submit registration, possibly due to a duplicate registration.",
-											 Tools.E_MessageBoxButtons.Ok);
+											 C_MessageBox.E_MessageBoxButtons.Ok);
 						}));
                         return;
                     }
@@ -128,7 +124,7 @@ namespace vitavol
             TB_Password.Enabled = en;
             TB_VerifyPassword.Enabled = en;
             TB_Phone.Enabled = en;
-            SW_Basic.Enabled = en;
+            SC_Certification.Enabled = en;
             B_Back.Enabled = en;
             B_Submit.Enabled = en;
         }

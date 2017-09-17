@@ -4,7 +4,7 @@ using UIKit;
 using Xamarin.Forms;
 using System.Threading.Tasks;
 using zsquared;
-using static zsquared.Tools;
+using static zsquared.C_MessageBox;
 
 namespace vitavol
 {
@@ -25,7 +25,7 @@ namespace vitavol
             Global = myAppDelegate.Global;
 
             // set the standard background color
-            View.BackgroundColor = C_Global.StandardBackground;
+            View.BackgroundColor = C_Common.StandardBackground;
 
 			// ----------- init the button handlers --------
 

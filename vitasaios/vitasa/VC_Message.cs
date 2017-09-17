@@ -2,7 +2,7 @@ using Foundation;
 using System;
 using UIKit;
 using System.Threading.Tasks;
-using static zsquared.Tools;
+using static zsquared.C_MessageBox;
 
 using zsquared;
 
@@ -56,7 +56,7 @@ namespace vitasa
 
 			Task.Run(async () => 
             {
-                string messageSlug = C_Global.SlugForMessage(Global.MessageToShow);
+                string messageSlug = C_Message.SlugForMessage(Global.MessageToShow);
 
                 string userLang = NSLocale.CurrentLocale.LocaleIdentifier;
                 C_Message.E_Language lang = C_Message.E_Language.English;
@@ -83,7 +83,7 @@ namespace vitasa
 
 		public override void ViewDidAppear(bool animated)
 		{
-			View.BackgroundColor = C_Global.StandardBackground;
+            View.BackgroundColor = C_Common.StandardBackground;
 		}
 	}
 }
