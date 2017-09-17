@@ -33,11 +33,10 @@ namespace vitasa
 
                 AI_Busy.StartAnimating();
 
-				C_Suggestion sug = new C_Suggestion()
+				C_Suggestion sug = new C_Suggestion(true)
 				{
 					Subject = TB_Subject.Text,
-                    Text = TxV_Text.Text,
-                    FromPublic = true
+                    Text = TxV_Text.Text
 				};
 
 				Task.Run(async () => 
@@ -51,12 +50,12 @@ namespace vitasa
 
                         if (!success)
                         {
-                            Tools.E_MessageBoxResults mbres = await Tools.MessageBox(this, "Error", "Unable to post the suggestion.", Tools.E_MessageBoxButtons.Ok);
+                            C_MessageBox.E_MessageBoxResults mbres = await C_MessageBox.MessageBox(this, "Error", "Unable to post the suggestion.", C_MessageBox.E_MessageBoxButtons.Ok);
                             return;
                         }
                         else
                         {
-                            Tools.E_MessageBoxResults mbres = await Tools.MessageBox(this, "Thanks!", "Thanks for taking the time to provide feedback", Tools.E_MessageBoxButtons.Ok);
+                            C_MessageBox.E_MessageBoxResults mbres = await C_MessageBox.MessageBox(this, "Thanks!", "Thanks for taking the time to provide feedback", C_MessageBox.E_MessageBoxButtons.Ok);
                             PerformSegue("Segue_SuggestionToMain", this);
                             return;
                         }
@@ -82,7 +81,7 @@ namespace vitasa
 
 		public override void ViewDidAppear(bool animated)
 		{
-			View.BackgroundColor = C_Global.StandardBackground;
+            View.BackgroundColor = C_Common.StandardBackground;
 		}
 	}
 }

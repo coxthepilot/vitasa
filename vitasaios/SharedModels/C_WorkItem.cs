@@ -7,9 +7,9 @@ using System.Collections.Generic;
 using System.Text;
 using System.Net.Http;
 
-using UIKit;
+//using UIKit;
 using System.Linq;
-using Foundation;
+//using Foundation;
 
 namespace zsquared
 {
@@ -234,30 +234,51 @@ namespace zsquared
 			if (id == -1)
 				throw new ApplicationException("must be an existing id; can't delete one that hasn't been added");
 
+            int retryCount = 0;
 			bool success = false;
-			try
-			{
-				string submiturl = "/signups/" + id.ToString();
-				WebClient wc = new WebClient()
-				{
-					BaseAddress = C_Vita.VitaCoreUrl
-				};
-				wc.Headers.Add(HttpRequestHeader.Cookie, token);
-				wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
-				wc.Headers.Add(HttpRequestHeader.Accept, "application/json");
+            bool retry = false;
+            do
+            {
+                try
+                {
+                    retry = false;
+                    string submiturl = "/signups/" + id.ToString();
+                    WebClient wc = new WebClient()
+                    {
+                        BaseAddress = C_Vita.VitaCoreUrl
+                    };
+                    wc.Headers.Add(HttpRequestHeader.Cookie, token);
+                    wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
+                    wc.Headers.Add(HttpRequestHeader.Accept, "application/json");
 
-                string responseString = await wc.UploadStringTaskAsync(submiturl, "DELETE", "");
+                    string responseString = await wc.UploadStringTaskAsync(submiturl, "DELETE", "");
 
-				//JsonValue responseJson = JsonValue.Parse(responseString);
-				// if it parses then it is our success result
+                    //JsonValue responseJson = JsonValue.Parse(responseString);
+                    // if it parses then it is our success result
 
-				success = true;
-			}
-			catch (Exception e)
-			{
-                Console.WriteLine(e.Message);
-				success = false;
-			}
+                    success = true;
+                }
+                catch (WebException we)
+                {
+                    success = false;
+                    if (we.Status == WebExceptionStatus.ReceiveFailure)
+                    {
+                        if (retryCount < 3)
+                        {
+                            retry = true;
+                            retryCount++;
+                        }
+                        else
+                            Console.WriteLine("exceeded retry");
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    success = false;
+                }
+            }
+            while (!success && retry);
 
 			return success;
 		}

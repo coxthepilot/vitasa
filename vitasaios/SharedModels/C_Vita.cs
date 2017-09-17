@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Json;
-using System.IO;
+//using System.IO;
 using System.Net;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Text;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using UIKit;
-using System.Linq;
+//using UIKit;
+//using System.Linq;
 
 namespace zsquared
 {
@@ -99,8 +99,9 @@ namespace zsquared
 
                 user.Token = token;
             }
-            catch 
+            catch (Exception e)
             {
+                Console.WriteLine(e.Message);
                 user = null;
             }
 

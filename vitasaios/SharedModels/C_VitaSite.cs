@@ -4,9 +4,9 @@ using System.IO;
 using System.Net;
 using System.Threading.Tasks;
 using System.Collections.Generic;
-using System.Text;
-using System.Net.Http;
-using UIKit;
+//using System.Text;
+//using System.Net.Http;
+//using UIKit;
 using System.Linq;
 
 namespace zsquared
@@ -34,8 +34,12 @@ namespace zsquared
         public List<C_CalendarEntry> CalendarOverrides;
         public List<C_WorkItem> WorkHistoryX;
         public List<C_WorkItem> WorkIntentsX;
+        // not yet being returned by the api call
         public C_YMD SeasonFirstDate;
         public C_YMD SeasonLastDate;
+
+        // not saved in the db; updated after the sites list is loaded and user location is determined
+        public double DistanceFromUserLocation;
 
 		public static readonly string N_ID = "id";
         public static readonly string N_Name = "name";
@@ -320,8 +324,9 @@ namespace zsquared
 
                 success = true;
             }
-            catch
+            catch (Exception e)
             {
+                Console.WriteLine(e.Message);
                 success = false;
             }
 
@@ -340,12 +345,12 @@ namespace zsquared
 			try
 			{
 
-				string isClosed = calEntry.OpenTime == calEntry.CloseTime ? "true" : "false";
+				//string isClosed = calEntry.OpenTime == calEntry.CloseTime ? "true" : "false";
     			string bodyjson = "{ " 
                     + "\"date\" : \"" + calEntry.Date.ToString("yyyy-mm-dd") + "\""
                     + ",\"open\" : \"" + calEntry.OpenTime.ToString("hh:mm") + "\""
     				+ ",\"close\" : \"" + calEntry.CloseTime.ToString("hh:mm") + "\""
-                    + ",\"is_closed\" : \"" + isClosed + "\""
+                    + ",\"is_closed\" : \"" + (calEntry.IsClosed ? "true" : "false") + "\""
                     + ",\"efilers_needed\" : \"" + calEntry.NumEFilers.ToString() + "\""
     				+ ",\"backup_coordinator_today\" : \"" + "false" + "\""
     				+ "}";
@@ -369,8 +374,9 @@ namespace zsquared
 
                 success = true;
 			}
-			catch
+            catch (Exception e)
 			{
+                Console.WriteLine(e.Message);
                 success = false;
 			}
 
@@ -382,13 +388,13 @@ namespace zsquared
 			bool success = false;
 			try
 			{
-				string isClosed = calEntry.OpenTime == calEntry.CloseTime ? "true" : "false";
+				//string isClosed = calEntry.OpenTime == calEntry.CloseTime ? "true" : "false";
     			string bodyjson = "{ "
     				+ "\"date\" : \"" + calEntry.Date.ToString("yyyy-mm-dd") + "\""
     				+ ",\"open\" : \"" + calEntry.OpenTime.ToString("hh:mm") + "\""
     				+ ",\"close\" : \"" + calEntry.CloseTime.ToString("hh:mm") + "\""
     				+ ",\"efilers_needed\" : \"" + calEntry.NumEFilers.ToString() + "\""
-    				+ ",\"is_closed\" : \"" + isClosed + "\""
+                    + ",\"is_closed\" : \"" + (calEntry.IsClosed ? "true" : "false") + "\""
     				+ ",\"backup_coordinator_today\" : \"" + "false" + "\""
     				+ "}";
 
@@ -407,8 +413,9 @@ namespace zsquared
 
 				success = true;
 			}
-			catch
+            catch (Exception e)
 			{
+                Console.WriteLine(e.Message);
 				success = false;
 			}
 
@@ -438,8 +445,9 @@ namespace zsquared
 
 				success = true;
 			}
-			catch
+			catch (Exception e)
 			{
+				Console.WriteLine(e.Message);
 				success = false;
 			}
 
@@ -464,12 +472,13 @@ namespace zsquared
 
                 success = true;
 			}
-			catch
-            {
-                success = false;
-            }
+			catch (Exception e)
+			{
+				Console.WriteLine(e.Message);
+				success = false;
+			}
 
-            return success;
+			return success;
         }
 
         /// <summary>
@@ -628,5 +637,13 @@ namespace zsquared
 		{
 			return string.Compare(s1.Name, s2.Name, StringComparison.Ordinal);
 		}
+
+        public static int CompareSitesByDistance(C_VitaSite s1, C_VitaSite s2)
+        {
+            if (double.IsNaN(s1.DistanceFromUserLocation) || double.IsNaN(s2.DistanceFromUserLocation))
+                return 0;
+
+            return s1.DistanceFromUserLocation.CompareTo(s2.DistanceFromUserLocation);
+        }
 	}
 }

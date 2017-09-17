@@ -36,6 +36,10 @@ namespace vitavol
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UIButton B_EditSiteDetails { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UIButton B_NearLimit { get; set; }
 
         [Outlet]
@@ -99,6 +103,11 @@ namespace vitavol
             if (B_Closed != null) {
                 B_Closed.Dispose ();
                 B_Closed = null;
+            }
+
+            if (B_EditSiteDetails != null) {
+                B_EditSiteDetails.Dispose ();
+                B_EditSiteDetails = null;
             }
 
             if (B_NearLimit != null) {

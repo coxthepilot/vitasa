@@ -29,20 +29,17 @@ namespace vitavol
 			Global = myAppDelegate.Global;
 
 			// set the standard background color
-			View.BackgroundColor = C_Global.StandardBackground;
+            View.BackgroundColor = C_Common.StandardBackground;
 
 			B_Back.TouchUpInside += (sender, e) => 
             {
 				try 
                 {
-                    if (!Global.VolunteerWorkItem.Approved)
+                    float h = Convert.ToSingle(TB_Hours.Text);
+                    if (Math.Abs(h - Global.VolunteerWorkItem.Hours) > EPSILON)
                     {
-                        float h = Convert.ToSingle(TB_Hours.Text);
-                        if (Math.Abs(h - Global.VolunteerWorkItem.Hours) > EPSILON)
-                        {
-                            Global.VolunteerWorkItem.Dirty = true;
-                            Global.VolunteerWorkItem.Hours = h;
-                        }
+                        Global.VolunteerWorkItem.Dirty = true;
+                        Global.VolunteerWorkItem.Hours = h;
                     }
 				}
 				catch { }
@@ -57,7 +54,6 @@ namespace vitavol
             L_ApprovedState.Text = Global.VolunteerWorkItem.Approved ? "Approved" : "not approved";
 
             TB_Hours.Text = Global.VolunteerWorkItem.Hours.ToString();
-            //TB_Hours.Enabled = !Global.VolunteerWorkItem.Approved;
         }
     }
 }

@@ -27,7 +27,7 @@ namespace vitavol
 			Global = myAppDelegate.Global;
 
 			// set the standard background color
-			View.BackgroundColor = C_Global.StandardBackground;
+            View.BackgroundColor = C_Common.StandardBackground;
 
 			if (Global.DetailsCameFrom == E_CameFrom.Login)
                 B_Back.SetTitle("< Login", UIControlState.Normal);
@@ -113,6 +113,11 @@ namespace vitavol
             B_SiteCalendar.TouchUpInside += (sender, e) => 
             {
                 PerformSegue("Segue_SCSiteToSCSiteCalendar", this);
+            };
+
+            B_EditSiteDetails.TouchUpInside += (sender, e) => 
+            {
+                PerformSegue("Segue_SCSiteToEditSiteDetails", this);
             };
 
             IMG_Closed.Image = UIImage.FromBundle("blackstatus.jpg");

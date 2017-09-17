@@ -28,7 +28,7 @@ namespace vitasa
 			AppDelegate myAppDelegate = (AppDelegate)UIApplication.SharedApplication.Delegate;
             Global = myAppDelegate.Global;
 
-            View.BackgroundColor = C_Global.StandardBackground;
+            View.BackgroundColor = C_Common.StandardBackground;
 
             B_Back.TouchUpInside += (sender, e) => 
             {
@@ -55,14 +55,15 @@ namespace vitasa
 
 			// todo: get the user's current location and zoom to there on the map
 
-			AI_Busy.StartAnimating();
-
 			bool reload = Global.AllSites == null;
 			if (!reload)
 			{
 				TimeSpan ts = DateTime.Now - Global.AllSitesSampleDateTime;
 				reload = ts.TotalMinutes > 30;
 			}
+
+            if (reload)
+    			AI_Busy.StartAnimating();
 
 			OpenSites = new List<C_VitaSite>();
 
@@ -102,7 +103,7 @@ namespace vitasa
 
 		public override void ViewDidAppear(bool animated)
 		{
-			View.BackgroundColor = C_Global.StandardBackground;
+            View.BackgroundColor = C_Common.StandardBackground;
 		}
 
         private void PutPinsOnMap(List<C_VitaSite> Sites)
@@ -214,6 +215,15 @@ namespace vitasa
 
 				return pinView;
 			}
+
+    //        public override void DidUpdateUserLocation(MKMapView mapView, MKUserLocation userLocation)
+    //        {
+    //            if (mapView.UserLocation != null)
+				//{
+				//	CLLocationCoordinate2D coords = mapView.UserLocation.Coordinate;
+    //                // todo; do something with this location?
+				//}            
+            //}
 		}
 	}
 }

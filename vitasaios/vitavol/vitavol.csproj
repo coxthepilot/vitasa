@@ -215,11 +215,16 @@
     <Compile Include="I_LocalNotification.cs" />
     <Compile Include="C_NotificationEvent.cs" />
     <Compile Include="C_CVHelper.cs" />
+    <Compile Include="VC_EditSiteDetails.cs" />
+    <Compile Include="VC_EditSiteDetails.designer.cs">
+      <DependentUpon>VC_EditSiteDetails.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="GlobalInitForTesting.js" />
     <BundleResource Include="about.htm" />
   </ItemGroup>
+  <Import Project="..\iOSSharedModel\iOSSharedModels.projitems" Label="Shared" Condition="Exists('..\iOSSharedModel\iOSSharedModels.projitems')" />
   <Import Project="..\SharedModels\SharedModels.projitems" Label="Shared" Condition="Exists('..\SharedModels\SharedModels.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.2.3.4.270\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.2.3.4.270\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />

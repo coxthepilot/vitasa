@@ -13,11 +13,11 @@
 		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
 	</resheader>
     <data name="Main_L_Title" xml:space="preserve">
-        <value>es:VITA Sites in San Antonio</value>
+        <value>es:San Antonio</value>
         <comment>Main page, main title</comment>
     </data>
     <data name="Main_L_SubTitle" xml:space="preserve">
-        <value>es:Show VITA Sites on a...</value>
+        <value>es:VITA Sites</value>
         <comment>Main page, subtitle</comment>
     </data>
     <data name="Main_B_List" xml:space="preserve">
@@ -91,5 +91,9 @@
     <data name="Suggestion_B_Submit" xml:space="preserve">
         <value>es:Submit</value>
         <comment>Suggestion, button to submit the feedback</comment>
+    </data>
+    <data name="SitesList_L_ServicesKey" xml:space="preserve">
+        <value>es:Services: DO: drop off, Ex: express, MFT: My Free Taxes</value>
+        <comment>label to explain the codes for each site</comment>
     </data>
 </root>

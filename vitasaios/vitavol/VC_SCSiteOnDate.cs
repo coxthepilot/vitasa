@@ -33,7 +33,7 @@ namespace vitavol
 			Global = myAppDelegate.Global;
 
 			// set the standard background color
-			View.BackgroundColor = C_Global.StandardBackground;
+            View.BackgroundColor = C_Common.StandardBackground;
 
             NewEntry = false;
             // see if an exception already exists
@@ -62,7 +62,13 @@ namespace vitavol
             L_SiteName.Text = Global.SelectedSite.Name;
             L_Date.Text = Global.SelectedDate.ToString("mmm dd, yyyy");
 
-            SetDisplayValues();
+			SW_IsOpen.ValueChanged += (sender, e) =>
+			{
+				Dirty = true;
+                B_SaveCalendarException.Enabled = true;
+			};
+
+			SetDisplayValues();
 
 			B_Back.TouchUpInside += async (sender, e) =>
 			{
@@ -72,13 +78,13 @@ namespace vitavol
                     return;
 				}
 
-                Tools.E_MessageBoxResults mbres = await Tools.MessageBox(
+                C_MessageBox.E_MessageBoxResults mbres = await C_MessageBox.MessageBox(
                     this,
                     "Save Changes?",
                     "Changes have been made. Save them?",
-                    Tools.E_MessageBoxButtons.YesNo);
+                    C_MessageBox.E_MessageBoxButtons.YesNo);
 
-                if (mbres != Tools.E_MessageBoxResults.Yes)
+                if (mbres != C_MessageBox.E_MessageBoxResults.Yes)
                 {
 					PerformSegue("Segue_SCSiteOnDateToSCSiteCalendar", this);
                     return;
@@ -115,10 +121,10 @@ namespace vitavol
                 if (success)
 					PerformSegue("Segue_SCSiteOnDateToSCSiteCalendar", this);
                 
-                Tools.E_MessageBoxResults mbres1 = await Tools.MessageBox(this, 
+                C_MessageBox.E_MessageBoxResults mbres1 = await C_MessageBox.MessageBox(this, 
                                                                          "Error", 
                                                                          "Unable to create the calendar entry.", 
-                                                                         Tools.E_MessageBoxButtons.Ok);
+                                                                         C_MessageBox.E_MessageBoxButtons.Ok);
 			};
 
 			B_RestoreDefaults.TouchUpInside += async (sender, e) =>
@@ -144,7 +150,7 @@ namespace vitavol
 
 					if (!success)
 					{
-						await Tools.MessageBox(this, "Error", "Unable to update the calendar entry.", Tools.E_MessageBoxButtons.Ok);
+						await C_MessageBox.MessageBox(this, "Error", "Unable to update the calendar entry.", C_MessageBox.E_MessageBoxButtons.Ok);
 						return;
 					}
 				}
@@ -157,6 +163,7 @@ namespace vitavol
 				OurCalendarEntry.OpenTime = new C_HMS(TB_OpenTime.Text);
 				OurCalendarEntry.CloseTime = new C_HMS(TB_CloseTime.Text);
 				OurCalendarEntry.NumEFilers = Convert.ToInt32(TB_NumEFilers.Text);
+                OurCalendarEntry.IsClosed = !SW_IsOpen.On;
 
 				AI_Busy.StartAnimating();
 				EnableUI(false);
@@ -181,10 +188,10 @@ namespace vitavol
 
 				if (!success)
 				{
-                    Tools.E_MessageBoxResults mbres = await Tools.MessageBox(this, 
+                    C_MessageBox.E_MessageBoxResults mbres = await C_MessageBox.MessageBox(this, 
                                                                              "Error", 
                                                                              "Unable to update the calendar entry.", 
-                                                                             Tools.E_MessageBoxButtons.Ok);
+                                                                             C_MessageBox.E_MessageBoxButtons.Ok);
 					return;
 				}
 
@@ -198,7 +205,7 @@ namespace vitavol
             UIDatePicker DP_OpenTime = new UIDatePicker()
             {
                 Mode = UIDatePickerMode.Time,
-                Date = Tools.BuildNSDateFromTime(OurCalendarEntry.OpenTime.ToString("hh:mm"))
+                Date = C_NSDateConversions.BuildNSDateFromTime(OurCalendarEntry.OpenTime.ToString("hh:mm"))
 			};
 
 			UIToolbar ToolBar_OpenTime = new UIToolbar()
@@ -210,7 +217,7 @@ namespace vitavol
 
 			UIBarButtonItem doneButtonOpen = new UIBarButtonItem("Done", UIBarButtonItemStyle.Done, (s, e) =>
 			{
-				DateTime dt = Tools.NSDateToDateTime(DP_OpenTime.Date);
+                DateTime dt = C_NSDateConversions.NSDateToDateTime(DP_OpenTime.Date);
 				C_HMS hms = new C_HMS(dt);
 				TB_OpenTime.Text = hms.ToString("hh:mm p");
 				TB_OpenTime.ResignFirstResponder();
@@ -233,7 +240,7 @@ namespace vitavol
             UIDatePicker DP_CloseTime = new UIDatePicker()
             {
                 Mode = UIDatePickerMode.Time,
-                Date = Tools.BuildNSDateFromTime(OurCalendarEntry.CloseTime.ToString("hh:mm"))
+                Date = C_NSDateConversions.BuildNSDateFromTime(OurCalendarEntry.CloseTime.ToString("hh:mm"))
 			};
 
 			UIToolbar ToolBar_CloseTime = new UIToolbar()
@@ -245,7 +252,7 @@ namespace vitavol
 
 			UIBarButtonItem doneButtonClose = new UIBarButtonItem("Done", UIBarButtonItemStyle.Done, (s, e) =>
 			{
-				DateTime dt = Tools.NSDateToDateTime(DP_CloseTime.Date);
+                DateTime dt = C_NSDateConversions.NSDateToDateTime(DP_CloseTime.Date);
 				C_HMS hms = new C_HMS(dt);
 				TB_CloseTime.Text = hms.ToString("hh:mm p");
 				TB_CloseTime.ResignFirstResponder();
@@ -297,6 +304,7 @@ namespace vitavol
 			TB_NumEFilers.InputView = PV_EFilers;
 			TB_NumEFilers.InputAccessoryView = ToolBar_EFiler;
             TB_NumEFilers.Text = OurCalendarEntry.NumEFilers.ToString();
+            SW_IsOpen.On = !OurCalendarEntry.IsClosed;
 		}
 
         private void EnableUI(bool en)
@@ -304,8 +312,8 @@ namespace vitavol
             B_Back.Enabled = en;
             B_RestoreDefaults.Enabled = en && Dirty;
             B_SaveCalendarException.Enabled = en && Dirty;
-            TB_OpenTime.Enabled = en;
-            TB_CloseTime.Enabled = en;
+            TB_OpenTime.Enabled = en && !SW_IsOpen.On;
+            TB_CloseTime.Enabled = en && !SW_IsOpen.On;
             TB_NumEFilers.Enabled = en;
             SW_IsOpen.Enabled = en;
         }

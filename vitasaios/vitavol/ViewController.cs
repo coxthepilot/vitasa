@@ -5,9 +5,11 @@ using System.Collections.Generic;
 using System.Linq;
 using Foundation;
 using System.IO;
-using static zsquared.Tools;
+using static zsquared.C_MessageBox;
 using Xamarin.Forms;
 using System.Json;
+using EventKit;
+using EventKitUI;
 
 using zsquared;
 
@@ -15,7 +17,9 @@ namespace vitavol
 {
     public partial class ViewController : UIViewController
     {
-        protected ViewController(IntPtr handle) : base(handle)
+		public EKEventStore EventStore;
+
+		protected ViewController(IntPtr handle) : base(handle)
         {
             // place no init logic here
         }
@@ -27,175 +31,160 @@ namespace vitavol
 
 		public static readonly string N_KnownEventsJson = "knowneventsjson";
 
-		public override void ViewDidLoad()
+        public override void ViewDidLoad()
         {
             base.ViewDidLoad();
 
-			AppDelegate myAppDelegate = (AppDelegate)UIApplication.SharedApplication.Delegate;
+            AppDelegate myAppDelegate = (AppDelegate)UIApplication.SharedApplication.Delegate;
             C_Global Global = myAppDelegate.Global;
+            EventStore = myAppDelegate.EventStore;
 
-            View.BackgroundColor = C_Global.StandardBackground;
+            View.BackgroundColor = C_Common.StandardBackground;
 
-            // ----- debug only -----
-
-            B_TriggerFetch.TouchUpInside += (sender, e) => 
-            {
-                myAppDelegate.FetchHandler(null);
-            };
-
-            B_ClearFetch.TouchUpInside += (sender, e) => 
-            {
-                NSUserDefaults.StandardUserDefaults.SetString("{}", AppDelegate.N_KnownEventsJson);
-			};
-
-            // ----- debug only -----
-
-			B_About.TouchUpInside += (sender, e) => 
+            B_About.TouchUpInside += (sender, e) =>
             {
                 PerformSegue("Segue_LoginToAbout", this);
             };
 
             // keep track of the length of text in the email box, allow login when email and password are long enought
-			TB_Email.AddTarget((sender, e) =>
-			{
-				B_Login.Enabled = (TB_Email.Text.Length > 6) && (TB_Password.Text.Length > 6);
+            TB_Email.AddTarget((sender, e) =>
+            {
+                B_Login.Enabled = (TB_Email.Text.Length > 6) && (TB_Password.Text.Length > 6);
 
-			}, UIControlEvent.EditingChanged);
+            }, UIControlEvent.EditingChanged);
 
-			// keep track of the length of text in the passwrd box, allow login when email and password are long enought
-			TB_Password.AddTarget((sender, e) =>
-			{
-				B_Login.Enabled = (TB_Email.Text.Length > 6) && (TB_Password.Text.Length > 6);
+            // keep track of the length of text in the passwrd box, allow login when email and password are long enought
+            TB_Password.AddTarget((sender, e) =>
+            {
+                B_Login.Enabled = (TB_Email.Text.Length > 6) && (TB_Password.Text.Length > 6);
 
-			}, UIControlEvent.EditingChanged);
+            }, UIControlEvent.EditingChanged);
 
             // if the user asks to register, take then to the registration page
-            B_Register.TouchUpInside += (sender, e) => 
+            B_Register.TouchUpInside += (sender, e) =>
             {
                 PerformSegue("Segue_LoginToRegister", this);
             };
 
             // Login is requested; we can only get this when the email and password are long enough
-            B_Login.TouchUpInside += async (sender, e) => 
+            B_Login.TouchUpInside += async (sender, e) =>
             {
 				string email = TB_Email.Text;
-				string pw = TB_Password.Text;
+                string pw = TB_Password.Text;
 
-				// Disable the UI since this is a long running process
-				EnableUI(false);
-				AI_Spinner.StartAnimating();
+                // Disable the UI since this is a long running process
+                EnableUI(false);
+                AI_Spinner.StartAnimating();
 
-				try
-				{
-					// do the actual login API call
-					C_VitaUser user = await C_Vita.PerformLogin(email, pw);
-					// if bad name or pass, we get null; otherwise we get a C_VitaUser
-					if (user == null)
-					{
-						E_MessageBoxResults mbres = await MessageBox(this,
-																	 "Error",
-																	 "Login failed. Bad email or password",
-																	 E_MessageBoxButtons.Ok);
-						AI_Spinner.StopAnimating();
-						EnableUI(true);
-						return;
-					}
+                try
+                {
+                    // do the actual login API call
+                    C_VitaUser user = await C_Vita.PerformLogin(email, pw);
+                    // if bad name or pass, we get null; otherwise we get a C_VitaUser
+                    if (user == null)
+                    {
+                        E_MessageBoxResults mbres = await MessageBox(this,
+                                                                     "Error",
+                                                                     "Login failed. Bad email or password",
+                                                                     E_MessageBoxButtons.Ok);
+                        AI_Spinner.StopAnimating();
+                        EnableUI(true);
+                        return;
+                    }
 
-					// get the list of all sites. We need this list to find out which sites the user might be a site coordinator in.
-					// todo: can Chris include this with User
-					// todo: lots of places downstream use this for slug to site name translation
-					bool getSitesSuccess = await Global.GetAllSites();
-					if (!getSitesSuccess)
-					{
-						E_MessageBoxResults mbres = await MessageBox(this,
-																	 "Error",
-																	 "Unable to access Sites list",
-																	 E_MessageBoxButtons.Ok);
-						AI_Spinner.StopAnimating();
-						EnableUI(true);
-						return;
-					}
+                    // get the list of all sites. We need this list to find out which sites the user might be a site coordinator in.
+                    // todo: can Chris include this with User
+                    // todo: lots of places downstream use this for slug to site name translation
+                    bool getSitesSuccess = await Global.GetAllSites();
+                    if (!getSitesSuccess)
+                    {
+                        E_MessageBoxResults mbres = await MessageBox(this,
+                                                                     "Error",
+                                                                     "Unable to access Sites list",
+                                                                     E_MessageBoxButtons.Ok);
+                        AI_Spinner.StopAnimating();
+                        EnableUI(true);
+                        return;
+                    }
 
-					AI_Spinner.StopAnimating();
-					EnableUI(true);
-					Global.LoggedInUser = user;
+                    AI_Spinner.StopAnimating();
+                    EnableUI(true);
+                    Global.LoggedInUser = user;
 
-					NSUserDefaults.StandardUserDefaults.SetString(TB_Email.Text, "email");
-					NSUserDefaults.StandardUserDefaults.SetString(TB_Password.Text, "password");
+                    NSUserDefaults.StandardUserDefaults.SetString(TB_Email.Text, "email");
+                    NSUserDefaults.StandardUserDefaults.SetString(TB_Password.Text, "password");
 
-					if (user.HasSiteCoordinator)
-					{
+                    if (user.HasSiteCoordinator)
+                    {
                         // get the sites for which this site coordinator is responsible (as primary or backup)
                         // if only one, then SCSite; if more than one then SCSites
-                        var sou = Global.AllSites.Where(s => (s.PrimaryCoordinator == Global.LoggedInUser.id) 
+                        var sou = Global.AllSites.Where(s => (s.PrimaryCoordinator == Global.LoggedInUser.id)
                                                           || (s.BackupCoordinator == Global.LoggedInUser.id));
                         List<C_VitaSite> SCSites = sou.ToList();
 
-						if (SCSites.Count == 0)
-						{
-							// a site coordinator with no sites; treat them as a site coordinator with no sites
-							E_MessageBoxResults mbres = await MessageBox(this,
-								"No Sites",
-								"Site Coordinator but no Sites assigned.",
-								E_MessageBoxButtons.Ok);
+                        if (SCSites.Count == 0)
+                        {
+                            // a site coordinator with no sites; treat them as a site coordinator with no sites
+                            E_MessageBoxResults mbres = await MessageBox(this,
+                                "No Sites",
+                                "Site Coordinator but no Sites assigned.",
+                                E_MessageBoxButtons.Ok);
 
-							Global.SelectedSite = null;
-							Global.SCSites = SCSites;
-							Global.DetailsCameFrom = E_CameFrom.Login;
-							PerformSegue("Segue_LoginToSCSites", this);
-						}
-						else if (SCSites.Count == 1)
-						{
-							Global.SelectedSite = SCSites[0];
-							Global.SCSites = SCSites;
-							Global.DetailsCameFrom = E_CameFrom.Login;
-							PerformSegue("Segue_LoginToSCSite", this);
-						}
-						else
-						{
-							Global.SelectedSite = null;
-							Global.SCSites = SCSites;
-							Global.DetailsCameFrom = E_CameFrom.Login;
-							PerformSegue("Segue_LoginToSCSites", this);
-						}
-					}
-					else if (user.HasVolunteer)
-					{
-						PerformSegue("Segue_LoginToSignUps", this);
-					}
-					else if (user.HasNewUser)
-					{
-						E_MessageBoxResults mbres = await MessageBox(this,
-										   "Not Authorized",
-										   "Staff has not yet acted on your registration.",
-										   E_MessageBoxButtons.Ok);
-					}
-					else
-					{
-						E_MessageBoxResults mbres = await MessageBox(this,
-										 "Error",
-										 "Authorization failure. Expecting Volunteer or Site Coordinator",
-										 E_MessageBoxButtons.Ok);
-					}
-				}
-				catch
-				{
-					ShowMessageOnUIThreadAndEnableUI("Error", "Error attempting login.", true);
-				}
+                            Global.SelectedSite = null;
+                            Global.SCSites = SCSites;
+                            Global.DetailsCameFrom = E_CameFrom.Login;
+                            PerformSegue("Segue_LoginToSCSites", this);
+                        }
+                        else if (SCSites.Count == 1)
+                        {
+                            Global.SelectedSite = SCSites[0];
+                            Global.SCSites = SCSites;
+                            Global.DetailsCameFrom = E_CameFrom.Login;
+                            PerformSegue("Segue_LoginToSCSite", this);
+                        }
+                        else
+                        {
+                            Global.SelectedSite = null;
+                            Global.SCSites = SCSites;
+                            Global.DetailsCameFrom = E_CameFrom.Login;
+                            PerformSegue("Segue_LoginToSCSites", this);
+                        }
+                    }
+                    else if (user.HasVolunteer)
+                    {
+                        PerformSegue("Segue_LoginToSignUps", this);
+                    }
+                    else if (user.HasNewUser)
+                    {
+                        E_MessageBoxResults mbres = await MessageBox(this,
+                                           "Not Authorized",
+                                           "Staff has not yet acted on your registration.",
+                                           E_MessageBoxButtons.Ok);
+                    }
+                    else
+                    {
+                        E_MessageBoxResults mbres = await MessageBox(this,
+                                         "Error",
+                                         "Authorization failure. Expecting Volunteer or Site Coordinator",
+                                         E_MessageBoxButtons.Ok);
+                    }
+                }
+                catch
+                {
+                    ShowMessageOnUIThreadAndEnableUI("Error", "Error attempting login.", true);
+                }
 
-			}; // end of B_Login lambda
+            }; // end of B_Login lambda
 
             // set the defaults from the settings
             TB_Email.Text = NSUserDefaults.StandardUserDefaults.StringForKey("email");
-			TB_Password.Text = NSUserDefaults.StandardUserDefaults.StringForKey("password");
-			B_Login.Enabled = (TB_Email.Text.Length > 6) && (TB_Password.Text.Length > 6);
+            TB_Password.Text = NSUserDefaults.StandardUserDefaults.StringForKey("password");
+            B_Login.Enabled = (TB_Email.Text.Length > 6) && (TB_Password.Text.Length > 6);
 
-			I_BackgroundImage.Image = UIImage.FromBundle("Background.jpg");
+            I_BackgroundImage.Image = UIImage.FromBundle("Background.jpg");
+        }
 
-            L_Fetch.Text = Global.LastFetchRunTime.ToString("O");
-		}
-
-        private void ShowMessageOnUIThreadAndEnableUI(string title, string message, bool en)
+		private void ShowMessageOnUIThreadAndEnableUI(string title, string message, bool en)
         {
 			UIApplication.SharedApplication.InvokeOnMainThread(
 			new Action(() =>

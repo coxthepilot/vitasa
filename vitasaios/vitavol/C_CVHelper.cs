@@ -188,12 +188,16 @@ namespace vitavol
                             cell.Label.Text = dateState.Date.Day.ToString();
 
                             UIColor normColor = dateState.NormalColor;
+                            UIColor textColor = dateState.TextColor;
                             if (dateState.Date < now)
+                            {
                                 normColor = BackgroundColor;
+                                textColor = UIColor.Black;
+                            }
 
 							cell.ContentView.BackgroundColor = normColor;
                             cell.ContentView.Layer.BorderColor = normColor.CGColor;
-                            cell.Label.TextColor = dateState.TextColor;
+                            cell.Label.TextColor = textColor;
 
                             if ((dateState.ShowBox) && (dateState.Date >= now))
                                 cell.ContentView.Layer.BorderColor = dateState.BoxColor.CGColor;

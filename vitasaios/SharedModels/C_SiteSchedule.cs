@@ -4,9 +4,9 @@ using System.IO;
 using System.Net;
 using System.Threading.Tasks;
 using System.Collections.Generic;
-using System.Text;
-using System.Net.Http;
-using UIKit;
+//using System.Text;
+//using System.Net.Http;
+//using UIKit;
 using System.Linq;
 
 namespace zsquared
@@ -80,40 +80,59 @@ namespace zsquared
         {
             List<C_SiteSchedule> res = new List<C_SiteSchedule>();
 
-			try
-			{
-				string sitesUrl = "/schedule/?start=" + from.ToString("yyyy-mm-dd") + ";end=" + to.ToString("yyyy-mm-dd");
-				WebClient wc = new WebClient()
-				{
-					BaseAddress = C_Vita.VitaCoreUrl
-				};
-				wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
-				wc.Headers.Add(HttpRequestHeader.Accept, "application/json");
-
-				C_YMD date = null;
-				string ds = await wc.DownloadStringTaskAsync(sitesUrl);
-
-				JsonValue jdoc = JsonValue.Parse(ds);
-
-                // scan through the dates
-                foreach (JsonValue jv in jdoc)
+            int retryCount = 0;
+            bool retry = false;
+            do
+            {
+                try
                 {
-                    if (jv.ContainsKey("date"))
-                        date = Tools.JsonProcessDate(jv["date"], date);
-
-                    if (jv.ContainsKey("sites"))
+                    retry = false;
+                    string sitesUrl = "/schedule/?start=" + from.ToString("yyyy-mm-dd") + ";end=" + to.ToString("yyyy-mm-dd");
+                    WebClient wc = new WebClient()
                     {
-                        JsonValue jvx = jv["sites"];
-                        List<C_SiteSchedule> resx = ImportSitesSchedules(jvx, date);
-                        res.AddRange(resx);
+                        BaseAddress = C_Vita.VitaCoreUrl
+                    };
+                    wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
+                    wc.Headers.Add(HttpRequestHeader.Accept, "application/json");
+
+                    C_YMD date = null;
+                    string ds = await wc.DownloadStringTaskAsync(sitesUrl);
+
+                    JsonValue jdoc = JsonValue.Parse(ds);
+
+                    // scan through the dates
+                    foreach (JsonValue jv in jdoc)
+                    {
+                        if (jv.ContainsKey("date"))
+                            date = Tools.JsonProcessDate(jv["date"], date);
+
+                        if (jv.ContainsKey("sites"))
+                        {
+                            JsonValue jvx = jv["sites"];
+                            List<C_SiteSchedule> resx = ImportSitesSchedules(jvx, date);
+                            res.AddRange(resx);
+                        }
                     }
                 }
-			}
-			catch (Exception e2)
-			{
-                Console.WriteLine(e2.Message);
-				res = new List<C_SiteSchedule>(); ;
-			}
+                catch (WebException we)
+                {
+                    if (we.Status == WebExceptionStatus.ReceiveFailure)
+                    {
+                        res = new List<C_SiteSchedule>();
+                        if (retryCount < 3)
+                        {
+                            retry = true;
+                            retryCount++;
+                        }
+                    }
+                }
+                catch (Exception e2)
+                {
+                    Console.WriteLine(e2.Message);
+                    res = new List<C_SiteSchedule>(); ;
+                }
+            }
+            while (retry);
 
 			return res;
         }

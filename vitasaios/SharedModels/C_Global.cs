@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Json;
 using System.Linq;
 using System.Threading.Tasks;
-using UIKit;
+using System.Text;
 
 namespace zsquared
 {
@@ -12,66 +12,38 @@ namespace zsquared
 
     public class C_Global
     {
-        public static readonly string N_BeforeYouGo = "before-you-go";
-        public static readonly string N_Resources = "community-resources";
-        public static readonly string N_About = "about";
-        public static readonly string N_BecomeAVolunteer = "become-a-volunteer";
-        public static readonly string N_Using211 = "using-211";
-        public static readonly string N_MyFreeTaxes = "my-free-taxes";
-        
-        public static UIColor StandardBackground
-        {
-            get { return UIColor.FromRGB(240, 240, 240); }
-        }
+        public static readonly string Name_Global = "global";
 
-        public static string SlugForMessage(E_Message msg)
-        {
-            string res = null;
-            switch (msg)
-            {
-                case E_Message.BeforeYoGo:
-                    res = N_BeforeYouGo;
-                    break;
-                case E_Message.Resources:
-                    res = N_Resources;
-                    break;
-                case E_Message.About:
-                    res = N_About;
-                    break;
-                case E_Message.BecomeAVolunteer:
-                    res = N_BecomeAVolunteer;
-                    break;
-                case E_Message.Using211:
-                    res = N_Using211;
-                    break;
-                case E_Message.MyFreeTaxes:
-                    res = N_MyFreeTaxes;
-                    break;
-            }
-
-            return res;
-        }
-
-        //for the client
+        /// <summary>
+        /// Used in client; the message to show
+        /// </summary>
         public E_Message MessageToShow;
-
+        public static readonly string N_MessageToShow = "messagetoshow";
 		/// <summary>
 		/// This is the user that we logged into the system with. Includes a valid token.
 		/// </summary>
 		public C_VitaUser LoggedInUser;
+        public static readonly string N_LoggedInUser = "loggedinuser";
         /// <summary>
         /// A list of all Sites with their details obtained when the user logged in.
         /// </summary>
         public List<C_VitaSite> AllSites;
+        public static readonly string N_AllSites = "allsites";
+        /// <summary>
+        /// Used to keep track of how long since our last sample
+        /// </summary>
         public DateTime AllSitesSampleDateTime; // used in client app
+        public static readonly string N_AllSitesSampleDateTime = "allsitessampledatetime";
         /// <summary>
         /// A list of C_WorkItems found in pulling Site and User data
         /// </summary>
         public List<C_WorkItem> WorkItems;
+        public static readonly string N_WorkItems = "workitems";
         /// <summary>
         /// List of known users; this is not a list of ALL users, just ones we have seen
         /// </summary>
         public List<C_VitaUser> Users;
+        public static readonly string N_Users = "users";
 
 		/// <summary>
 		/// The current selected site for displaying details
@@ -103,6 +75,9 @@ namespace zsquared
         ///// Generated in VC_SitesOnDateList, used in ...Map and SignUp
         ///// </summary>
         public List<C_WorkItem> WorkItemsOnSiteOnDate;
+        /// <summary>
+        /// A record of when we took the sample
+        /// </summary>
         public C_YMD WorkItemsDate;
         /// <summary>
         /// The Month and Year last used in the Calendar view.
@@ -120,9 +95,128 @@ namespace zsquared
 
         // --- used in VC_Calendar ---
         public List<C_SiteSchedule> SitesSchedule;
+        /// <summary>
+        /// A record of when we took the SiteSchedule sample.
+        /// </summary>
         public DateTime SiteScheduleSampleTime;
-
+        /// <summary>
+        /// A record of when the fetch last ran (mostly for debug)
+        /// </summary>
         public DateTime LastFetchRunTime;
+
+        public C_Global()
+        {
+            
+        }
+
+        public C_Global(JsonValue jv)
+        {
+            if (jv.ContainsKey(N_MessageToShow))
+                MessageToShow = Tools.StringToEnum <E_Message> (Tools.JsonProcessString(jv, MessageToShow.ToString()));
+
+            if (jv.ContainsKey(N_LoggedInUser))
+                LoggedInUser = new C_VitaUser(jv[N_LoggedInUser]);
+        }
+
+        public string GetJson()
+        {
+            // todo: serialize this entire object as a string
+            string s_global = "";
+			try
+            {
+                StringBuilder sb = new StringBuilder();
+
+                sb.Append("{");
+
+                sb.Append("\"" + N_MessageToShow + "\" : \"" + MessageToShow.ToString() + "\"");
+
+                string s_user = LoggedInUser.GetJson();
+                JsonValue jv_user = JsonValue.Parse(s_user);
+                C_VitaUser test_user = new C_VitaUser(jv_user);
+                if (LoggedInUser != test_user)
+                    throw new ApplicationException("C_VitaUser: to json and back failed");
+                sb.Append(",");
+                sb.Append("\"" + N_LoggedInUser + "\" : " + LoggedInUser.GetJson());
+
+                // many more to do here...
+                sb.Append(",");
+
+
+
+
+
+
+                sb.Append("}");
+
+                s_global = sb.ToString();
+                JsonValue jv_global = JsonValue.Parse(s_global);
+                C_Global test_global = new C_Global(jv_global);
+                if (this != test_global)
+                    throw new ApplicationException("C_Global: to json and back failed");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+
+			return s_global;
+        }
+
+        public override bool Equals(System.Object obj)
+        {
+            if (obj == null)
+                return false;
+
+            C_Global g = obj as C_Global;
+            if ((System.Object)g == null)
+                return false;
+
+            bool res = true;
+
+            res &= MessageToShow == g.MessageToShow;
+            res &= LoggedInUser == g.LoggedInUser;
+
+            // and many more to do
+
+
+
+
+
+
+            return res;
+        }
+
+        public static bool operator ==(C_Global a, C_Global b)
+		{
+			// If both are null, or both are same instance, return true.
+			if (System.Object.ReferenceEquals(a, b))
+			{
+				return true;
+			}
+
+			// If one is null, but not both, return false.
+			if (((object)a == null) || ((object)b == null))
+			{
+				return false;
+			}
+
+			// Return true if the fields match:
+			return a.Equals(b);
+		}
+
+		public static bool operator !=(C_Global a, C_Global b)
+		{
+			return !(a == b);
+		}
+
+		public override int GetHashCode()
+        {
+			int hash = 269;
+
+            // no good way to has since all of the variables are changing all the time....
+
+			return hash;
+		}
 
         public async Task<bool> GetAllSites()
         {
