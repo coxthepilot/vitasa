@@ -2,6 +2,7 @@ using Foundation;
 using System;
 using UIKit;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using zsquared;
 
@@ -10,7 +11,6 @@ namespace vitavol
     public partial class VC_SitesOnDateList : UIViewController
     {
         C_Global Global;
-        List<C_WorkItem> WorkItemsOnDateAllSites;
 
         public VC_SitesOnDateList (IntPtr handle) : base (handle)
         {
@@ -39,35 +39,38 @@ namespace vitavol
                 PerformSegue("Segue_SitesOnDateListToSitesOnDateMap", this);
             };
 
-			// from the all sites list, select the ones that are open on this date
-			List<C_VitaSite> openSites = C_VitaSite.SitesOpenOnDay(Global.SelectedDate, Global.AllSites);
-			// and get the workitems for those sites; shouldn't be any work items on closed dates...
-            WorkItemsOnDateAllSites = Global.GetWorkItemsForSiteOnDateForUser(
-                null,
-                Global.SelectedDate,
-                -1,
-                C_Global.E_SiteCondition.Open);
 
-			// build a list of sites that need help on this date
-			List<C_VitaSite> openSitesThatNeedHelp = new List<C_VitaSite>();
-            foreach(C_VitaSite site in Global.AllSites)
+            Task.Run(async () => 
             {
-                int numRequired = site.GetNumEFilersRequiredOnDate(Global.SelectedDate);
-                List<C_WorkItem> workItemsForSiteOnDate = Global.GetWorkItemsForSiteOnDateForUser(
-                    site.Slug,
-                    Global.SelectedDate,
-                    -1,
-                    C_Global.E_SiteCondition.Any);
+				// build a list of all open sites on this date
+				List<C_VitaSite> openSitesOnDate = await Global.GetOpenSitesOnDate(Global.SelectedDate);
+
+				// then filter to those sites that need help on this date
+				List<C_VitaSite> openSitesThatNeedHelp = new List<C_VitaSite>();
+    	        foreach(C_VitaSite site in openSitesOnDate)
+    	        {
+	                int numRequired = site.GetNumEFilersRequiredOnDate(Global.SelectedDate);
 
 
-				if (numRequired > workItemsForSiteOnDate.Count)
-                    openSitesThatNeedHelp.Add(site);
-			}
+                    List<C_WorkItem> workItemsForSiteOnDate = Global.GetWorkItemsForSiteOnDate(Global.SelectedDate, site.Slug);
 
-			Global.OpenSitesThatNeedHelp = openSitesThatNeedHelp; // we save this so Maps doesn't have to recompute
+    				if (numRequired > workItemsForSiteOnDate.Count)
+	                    openSitesThatNeedHelp.Add(site);
+				}
 
-            TV_Sites.Source = new C_TableSourceSitesOnDateList(Global, this, openSitesThatNeedHelp, WorkItemsOnDateAllSites);
-            TV_Sites.ReloadData();
+                List<string> openSitesThatNeedHelpSlugs = new List<string>();
+                foreach (C_VitaSite site in openSitesThatNeedHelp)
+                    openSitesThatNeedHelpSlugs.Add(site.Slug);
+
+				Global.OpenSitesThatNeedHelp = openSitesThatNeedHelpSlugs; // we save this so Maps doesn't have to recompute
+
+				UIApplication.SharedApplication.InvokeOnMainThread(
+				new Action(() =>
+				{
+					TV_Sites.Source = new C_TableSourceSitesOnDateList(Global, this, openSitesThatNeedHelp);
+					TV_Sites.ReloadData();
+				}));
+			});
 		}
 
 		public class C_TableSourceSitesOnDateList : UITableViewSource
@@ -75,16 +78,14 @@ namespace vitavol
             readonly C_Global Global;
             readonly UIViewController ourVC;
 			readonly List<C_VitaSite> Sites;
-            readonly List<C_WorkItem> SignUpsOnDate;
 
             const string CellIdentifier = "TableCell";
 
-            public C_TableSourceSitesOnDateList(C_Global pac, UIViewController vc, List<C_VitaSite> sites, List<C_WorkItem> signUpsOnDate)
+            public C_TableSourceSitesOnDateList(C_Global pac, UIViewController vc, List<C_VitaSite> sites)
 			{
 				Global = pac;
 				ourVC = vc;
 				Sites = sites;
-                SignUpsOnDate = signUpsOnDate;
 			}
 
 			public override nint RowsInSection(UITableView tableview, nint section)
@@ -102,51 +103,45 @@ namespace vitavol
 
 				C_VitaSite site = Sites[indexPath.Row];
 
-				// figure out if the user is already signed up for this date
-				List<C_WorkItem> wiUser = Global.GetWorkItemsForSiteOnDateForUser(
-					site.Slug,
-					Global.SelectedDate,
-                    Global.LoggedInUser.id,
-					C_Global.E_SiteCondition.Any);
+                // figure out if the user is already signed up for this date at this site
+                // get all of this users work items
+                List<C_WorkItem> LoggedInUserWorkItems = Global.GetWorkItemsForUser(Global.LoggedInUserId);
+                // filter for this date
+                var ou = LoggedInUserWorkItems.Where(wi => wi.Date == Global.SelectedDate);
+                List<C_WorkItem> LoggedInUserWorksItemsOnSelectedDate = ou.ToList();
+                // filter for this site
+                var ou1 = LoggedInUserWorksItemsOnSelectedDate.Where(wi => wi.SiteSlug == site.Slug);
+                // if any remain, then the user is signed up for this site on this date
+                bool LoggedInUserWorkingThisDateThisSite = ou1.Any();
 
 				cell.TextLabel.Text = site.Name;
-                //int dayOfWeek = (int)Global.SelectedDate.DayOfWeek;
+
                 int numEF = site.GetNumEFilersRequiredOnDate(Global.SelectedDate);
 
-                if (wiUser.Count == 0)
-					cell.DetailTextLabel.Text = numEF.ToString() + " needed.";
-                else
+                if (LoggedInUserWorkingThisDateThisSite)
 					cell.DetailTextLabel.Text = "Already signed up at this site.";
+				else
+				    cell.DetailTextLabel.Text = numEF.ToString() + " needed.";
 
 
-                return cell;
+				return cell;
 			}
 
 			public override void RowSelected(UITableView tableView, NSIndexPath indexPath)
 			{
-				// see if the user is already signed up at this site
-				// figure out if the user is already signed up for this date
-				List<C_WorkItem> wiUser = Global.GetWorkItemsForSiteOnDateForUser(
-					Sites[indexPath.Row].Slug,
-					Global.SelectedDate,
-					Global.LoggedInUser.id,
-					C_Global.E_SiteCondition.Any);
+				//// figure out if the user is already signed up for this date
+				//List<C_WorkItem> LoggedInUserWorkItems = Global.GetWorkItemsForUser(Global.LoggedInUserId);
+				//var ou = LoggedInUserWorkItems.Where(wi => wi.Date == Global.SelectedDate);
 
-                if (wiUser.Count == 0)
-                {
-                    // Required for VC_SignUp
-                    // SelectedDate - came from Calendar
-                    Global.SelectedSite = Sites[indexPath.Row];
-                    Global.WorkItemsOnSiteOnDate = Global.GetWorkItemsForSiteOnDateForUser(
-                        Global.SelectedSite.Slug,
-                        Global.SelectedDate,
-                        -1,
-                        C_Global.E_SiteCondition.Any);
+                //if (!ou.Any())
+                //{
+                    Global.SelectedSiteSlug = Sites[indexPath.Row].Slug;
+                    Global.WorkItemsOnSiteOnDate = Global.GetWorkItemsForSiteOnDate(Global.SelectedDate, Global.SelectedSiteSlug);
 
-                    Global.DetailsCameFrom = E_CameFrom.List;
+                    Global.ViewCameFrom = E_ViewCameFrom.List;
 
                     ourVC.PerformSegue("Segue_SitesOnDateListToSignUp", ourVC);
-                }
+                //}
 			}
 		}
     }

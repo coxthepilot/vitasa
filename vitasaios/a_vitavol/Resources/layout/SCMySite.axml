@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:backgroundTint="#bdffffff">
+        <TextView
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/L_SCMySite_SiteName"
+            android:text="...site name..."
+            android:gravity="center_horizontal" />
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:id="@+id/space1" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/B_SCMySite_ManageVolunteers"
+            android:text="Manage Volunteers" />
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:id="@+id/space1" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/B_SCMySite_EditSiteCalendar"
+            android:text="Edit Site Calendar" />
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:id="@+id/space1" />
+        <TextView
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView1"
+            android:text="Site Capabilities" />
+        <CheckBox
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/CB_SCMySite_DropOff"
+            android:text="Drop-Off" />
+        <CheckBox
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/CB_SCMySite_Express"
+            android:text="Express" />
+        <CheckBox
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/CB_SCMySite_MFT"
+            android:text="My Free Taxes" />
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:id="@+id/space1" />
+        <TextView
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/L_SCMySite_ClientStatus"
+            android:text="Client Status: &lt;closed&gt;" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <Space
+                android:layout_width="10dp"
+                android:layout_height="match_parent"
+                android:id="@+id/space1" />
+            <Button
+                android:id="@+id/B_SCMySite_Closed"
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:layout_height="wrap_content"
+                android:text="Closed" />
+            <Space
+                android:layout_width="10dp"
+                android:layout_height="match_parent"
+                android:id="@+id/space1" />
+            <Button
+                android:id="@+id/B_SCMySite_Accepting"
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:layout_height="wrap_content"
+                android:text="Accepting" />
+            <Space
+                android:layout_width="10dp"
+                android:layout_height="match_parent"
+                android:id="@+id/space1" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <Space
+                android:layout_width="10dp"
+                android:layout_height="match_parent"
+                android:id="@+id/space1" />
+            <Button
+                android:id="@+id/B_SCMySite_NearLimit"
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:layout_height="wrap_content"
+                android:text="Near Limit" />
+            <Space
+                android:layout_width="10dp"
+                android:layout_height="match_parent"
+                android:id="@+id/space1" />
+            <Button
+                android:id="@+id/B_SCMySite_AtLimit"
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:layout_height="wrap_content"
+                android:text="At Limit" />
+            <Space
+                android:layout_width="10dp"
+                android:layout_height="match_parent"
+                android:id="@+id/space1" />
+        </LinearLayout>
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:id="@+id/space1" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/B_SCMySite_EditProfile"
+            android:text="Edit My Profile" />
+    </LinearLayout>
+</ScrollView>

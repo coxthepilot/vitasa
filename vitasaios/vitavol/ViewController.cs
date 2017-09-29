@@ -79,7 +79,7 @@ namespace vitavol
                 try
                 {
                     // do the actual login API call
-                    C_VitaUser user = await C_Vita.PerformLogin(email, pw);
+                    C_VitaUser user = await Global.PerformLogin(email, pw);
                     // if bad name or pass, we get null; otherwise we get a C_VitaUser
                     if (user == null)
                     {
@@ -92,61 +92,63 @@ namespace vitavol
                         return;
                     }
 
-                    // get the list of all sites. We need this list to find out which sites the user might be a site coordinator in.
-                    // todo: can Chris include this with User
-                    // todo: lots of places downstream use this for slug to site name translation
-                    bool getSitesSuccess = await Global.GetAllSites();
-                    if (!getSitesSuccess)
-                    {
-                        E_MessageBoxResults mbres = await MessageBox(this,
-                                                                     "Error",
-                                                                     "Unable to access Sites list",
-                                                                     E_MessageBoxButtons.Ok);
-                        AI_Spinner.StopAnimating();
-                        EnableUI(true);
-                        return;
-                    }
+                    //// get the list of all sites. We need this list to find out which sites the user might be a site coordinator in.
+                    //// todo: can Chris include this with User
+                    //// todo: lots of places downstream use this for slug to site name translation
+                    //bool getSitesSuccess = await Global.GetAllSites();
+                    //if (!getSitesSuccess)
+                    //{
+                    //    E_MessageBoxResults mbres = await MessageBox(this,
+                    //                                                 "Error",
+                    //                                                 "Unable to access Sites list",
+                    //                                                 E_MessageBoxButtons.Ok);
+                    //    AI_Spinner.StopAnimating();
+                    //    EnableUI(true);
+                    //    return;
+                    //}
 
                     AI_Spinner.StopAnimating();
                     EnableUI(true);
-                    Global.LoggedInUser = user;
+                    Global.LoggedInUserId = user.id;
 
                     NSUserDefaults.StandardUserDefaults.SetString(TB_Email.Text, "email");
                     NSUserDefaults.StandardUserDefaults.SetString(TB_Password.Text, "password");
 
                     if (user.HasSiteCoordinator)
                     {
-                        // get the sites for which this site coordinator is responsible (as primary or backup)
-                        // if only one, then SCSite; if more than one then SCSites
-                        var sou = Global.AllSites.Where(s => (s.PrimaryCoordinator == Global.LoggedInUser.id)
-                                                          || (s.BackupCoordinator == Global.LoggedInUser.id));
-                        List<C_VitaSite> SCSites = sou.ToList();
+                        //// get the sites for which this site coordinator is responsible (as primary or backup)
+                        //// if only one, then SCSite; if more than one then SCSites
+                        //var sou = Global.AllSites.Where(s => (s.PrimaryCoordinator == Global.LoggedInUser.id)
+                        //                                  || (s.BackupCoordinator == Global.LoggedInUser.id));
+                        //List<C_VitaSite> SCSites = sou.ToList();
 
-                        if (SCSites.Count == 0)
+                        if (user.SitesCoordinated.Count == 0)
                         {
-                            // a site coordinator with no sites; treat them as a site coordinator with no sites
+                            // a site coordinator with no sites
                             E_MessageBoxResults mbres = await MessageBox(this,
                                 "No Sites",
                                 "Site Coordinator but no Sites assigned.",
                                 E_MessageBoxButtons.Ok);
 
-                            Global.SelectedSite = null;
-                            Global.SCSites = SCSites;
-                            Global.DetailsCameFrom = E_CameFrom.Login;
+                            Global.SelectedSiteSlug = null;
+                            Global.ViewCameFrom = E_ViewCameFrom.Login;
+
                             PerformSegue("Segue_LoginToSCSites", this);
                         }
-                        else if (SCSites.Count == 1)
+                        else if (user.SitesCoordinated.Count == 1)
                         {
-                            Global.SelectedSite = SCSites[0];
-                            Global.SCSites = SCSites;
-                            Global.DetailsCameFrom = E_CameFrom.Login;
+                            C_SiteCoordinated sc = user.SitesCoordinated[0];
+
+                            Global.SelectedSiteSlug = sc.Slug;
+                            Global.ViewCameFrom = E_ViewCameFrom.Login;
+
                             PerformSegue("Segue_LoginToSCSite", this);
                         }
-                        else
+                        else // manages more than one site
                         {
-                            Global.SelectedSite = null;
-                            Global.SCSites = SCSites;
-                            Global.DetailsCameFrom = E_CameFrom.Login;
+                            Global.SelectedSiteSlug = null;
+                            Global.ViewCameFrom = E_ViewCameFrom.Login;
+
                             PerformSegue("Segue_LoginToSCSites", this);
                         }
                     }
@@ -169,8 +171,9 @@ namespace vitavol
                                          E_MessageBoxButtons.Ok);
                     }
                 }
-                catch
+                catch (Exception ex)
                 {
+                    Console.WriteLine(ex.Message);
                     ShowMessageOnUIThreadAndEnableUI("Error", "Error attempting login.", true);
                 }
 

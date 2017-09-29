@@ -1,0 +1,1 @@
+﻿keytool -list -v -keystore ~/Library/Developer/Xamarin/Keystore/vitasa/vitasa.keystore -alias vitasa -storepass L@stPassD0cs -keypass L@stPassD0cs

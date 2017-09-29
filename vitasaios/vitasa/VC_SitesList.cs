@@ -33,39 +33,15 @@ namespace vitasa
 			AppDelegate myAppDelegate = (AppDelegate)UIApplication.SharedApplication.Delegate;
             Global = myAppDelegate.Global;
 
-			bool reload = Global.AllSites == null;
-			if (!reload)
-			{
-				TimeSpan ts = DateTime.Now - Global.AllSitesSampleDateTime;
-				reload = ts.TotalMinutes > 30;
-			}
-            if (reload)
-				AI_Busy.StartAnimating();
+			AI_Busy.StartAnimating();
 
 			OpenSites = new List<C_VitaSite>();
 
 			Task.Run(async () =>
 			{
-				if (reload)
-                {
-                    // get the json file of sites and details from the web service
-                    Global.AllSites = await C_VitaSite.FetchSitesListX();
-                    Global.AllSitesSampleDateTime = DateTime.Now;
-				}
-
 				C_YMD date = C_YMD.Now;
-                for (int ix = 0; ix != 7; ix++)
-                {
-                    List<C_VitaSite> sitesOnDay = C_VitaSite.SitesOpenOnDay(date, Global.AllSites);
 
-                    foreach(C_VitaSite s in sitesOnDay)
-                    {
-                        if (!OpenSites.Contains(s))
-                            OpenSites.Add(s);
-                    }
-
-                    date = date.AddDays(1);
-                }                                      
+                OpenSites = await Global.GetOpenSitesInDateRange(date, date.AddDays(7));
                 OpenSites.Sort(C_VitaSite.CompareSitesByNameAscending);
 
                 UIApplication.SharedApplication.InvokeOnMainThread(
@@ -199,8 +175,8 @@ namespace vitasa
 
 			public override void RowSelected(UITableView tableView, NSIndexPath indexPath)
 			{
-				Global.DetailsCameFrom = E_CameFrom.List;
-                Global.SelectedSite = Sites[indexPath.Row];
+				Global.ViewCameFrom = E_ViewCameFrom.List;
+                Global.SelectedSiteSlug = Sites[indexPath.Row].Slug;
 
 				ourVC.PerformSegue("Segue_ListToDetails", ourVC);
 			}

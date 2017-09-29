@@ -1,0 +1,29 @@
+﻿Issues:
+* don't believe calendar signups' are working
+* fix the gitignore
+* retries on all api gets? should only retry on the specific error type; C_SiteSchedule for WebException
+* need Season in API /get/site
+* on notification, the graphic is a tiny slice from the middle [later]
+
+Future
+* no way for a volunteer to view past signups?
+* need option to include work intents on user and site; separate control for each past and future
+
+Complete but verification needed
+* riverwalk background not showing up on device [done, previous image was too large]
+* openning image is distorted [done]
+* didn't allow a second signup on a date [done]
+* Add new signup to local calendar [done, need to register a calendar?]
+* use grey on open screen register and about buttons [done]
+* view signup, open/close time were empty string [done]
+* save hours button, grey out, 'save hours' [wnf]
+* new signup, don't know there is no one else signed up [done]
+
+Check:
+* all Console.WriteLine are surrounded by #if DEBUG
+* no un-caught exceptions
+
+Apple: cert (X.509) and key
+Google: api dev account key
+
+

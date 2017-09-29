@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FF000000">
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:id="@+id/space1" />
+    <TextView
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/L_SignsUpToday"
+        android:text="You have xxx signups." />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/B_ViewTodaySignups"
+        android:background="#FF404040"
+        android:textColor="#FFFFFFFF"
+        android:text="View Upcoming Signups" />
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="15dp"
+        android:id="@+id/space1" />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/B_CreateNewSignup"
+        android:background="#FF404040"
+        android:textColor="#FFFFFFFF"
+        android:text="Create New Signup" />
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:id="@+id/space1" />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/B_Suggestions"
+        android:background="#FF404040"
+        android:textColor="#FFFFFFFF"
+        android:text="Suggestions" />
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="15dp"
+        android:id="@+id/space1" />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/B_PostSuggestion"
+        android:background="#FF404040"
+        android:textColor="#FFFFFFFF"
+        android:text="Post a New Suggestion" />
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:id="@+id/space1" />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/B_UpdateProfile"
+        android:background="#FF404040"
+        android:textColor="#FFFFFFFF"
+        android:text="Update Volunteer Profile" />
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/space2" />
+</LinearLayout>

@@ -4,10 +4,14 @@ using System.Json;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Text;
+using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
+
 
 namespace zsquared
 {
-    public enum E_CameFrom { Unknown = 0, List, Map, MySignUps, SCSites, SCSite, Login }
+    public enum E_ViewCameFrom { Unknown = 0, List, Map, MySignUps, SCSites, SCSite, Login, VolOptions }
     public enum E_Message { Unknown = 0, BeforeYoGo, Resources, About, BecomeAVolunteer, Using211, MyFreeTaxes }
 
     public class C_Global
@@ -19,283 +23,548 @@ namespace zsquared
         /// </summary>
         public E_Message MessageToShow;
         public static readonly string N_MessageToShow = "messagetoshow";
-		/// <summary>
-		/// This is the user that we logged into the system with. Includes a valid token.
-		/// </summary>
-		public C_VitaUser LoggedInUser;
-        public static readonly string N_LoggedInUser = "loggedinuser";
-        /// <summary>
-        /// A list of all Sites with their details obtained when the user logged in.
-        /// </summary>
-        public List<C_VitaSite> AllSites;
-        public static readonly string N_AllSites = "allsites";
-        /// <summary>
-        /// Used to keep track of how long since our last sample
-        /// </summary>
-        public DateTime AllSitesSampleDateTime; // used in client app
-        public static readonly string N_AllSitesSampleDateTime = "allsitessampledatetime";
-        /// <summary>
-        /// A list of C_WorkItems found in pulling Site and User data
-        /// </summary>
-        public List<C_WorkItem> WorkItems;
-        public static readonly string N_WorkItems = "workitems";
-        /// <summary>
-        /// List of known users; this is not a list of ALL users, just ones we have seen
-        /// </summary>
-        public List<C_VitaUser> Users;
-        public static readonly string N_Users = "users";
 
 		/// <summary>
-		/// The current selected site for displaying details
+		/// This is the id user that we logged into the system with. This is the user with the valid token.
 		/// </summary>
-		public C_VitaSite SelectedSite;
+		public int LoggedInUserId;
+        public static readonly string N_LoggedInUserId = "loggedinuserid";
+
+        /// <summary>
+        /// A cache of sites we know about. 
+        /// </summary>
+        public List<C_VitaSite> SiteCache;
+        public static readonly string N_SiteCache = "sitecache";
+        public bool AllSitesFetched;
+        const string N_AllSitesFetched = "allsitesfetched";
+
+		/// <summary>
+		/// A list of C_WorkItems found in pulling Site and User data
+		/// </summary>
+		public List<C_WorkItem> WorkItems;
+        public static readonly string N_WorkItems = "workitems";
+
+        ///// <summary>
+        ///// The date for the volunteer work item being modified; used in SCVolunteers and SCVolunteer to keep track
+        ///// of the date in the date picker
+        ///// </summary>
+
+		/// <summary>
+		/// List of known users; this is not a list of ALL users, just ones we have seen
+		/// </summary>
+		public List<C_VitaUser> UserCache;
+		public static readonly string N_UserCache = "usercache";
+
+		/// <summary>
+		/// The slug of the current selected site
+		/// </summary>
+		public string SelectedSiteSlug;
+		public static readonly string N_SelectedSiteSlug = "selectedsiteslug";
+		public string SelectedSiteName;
+		public static readonly string N_SelectedSiteName = "selectedsiteslug";
+
 		/// <summary>
 		/// The selected suggestion.
 		/// </summary>
 		public C_Suggestion SelectedSuggestion;
+		public static readonly string N_SelectedSuggestion = "selectedsuggestion";
+
 		/// <summary>
 		/// In VC_Calendar, this is the date that the user picked, headed to SitesOnDate
 		/// </summary>
 		public C_YMD SelectedDate;
+		public static readonly string N_SelectedDate = "selecteddate";
+
 		/// <summary>
 		/// The details view controller needs to know where to go "Back" to
 		/// </summary>
-		public E_CameFrom DetailsCameFrom = E_CameFrom.Unknown;
-        /// <summary>
-        /// From SCSiteCalendar to SCDefaults, the selected day of the week
-        /// </summary>
-        public int SelectedDayOfWeek = -1;
+		public E_ViewCameFrom ViewCameFrom = E_ViewCameFrom.Unknown;
+        public static readonly string N_ViewCameFrom = "viewcamefrom";
 
-        /// <summary>
-        /// The open sites that need help. Used in SitesOnDateMap after launch from SitesOnDateList, and
-        /// then in SitesOnDateList if return from Map
-        /// </summary>
-        public List<C_VitaSite> OpenSitesThatNeedHelp;
-        ///// <summary>
-        ///// Generated in VC_SitesOnDateList, used in ...Map and SignUp
-        ///// </summary>
-        public List<C_WorkItem> WorkItemsOnSiteOnDate;
-        /// <summary>
-        /// A record of when we took the sample
-        /// </summary>
-        public C_YMD WorkItemsDate;
-        /// <summary>
-        /// The Month and Year last used in the Calendar view.
-        /// </summary>
-        public C_YMD CalendarDate;
-        /// <summary>
-        /// The Sites that the current user, a site coordinator is responsible for.
-        /// </summary>
-        public List<C_VitaSite> SCSites;
+		/// <summary>
+		/// From SCSiteCalendar to SCDefaults, the selected day of the week
+		/// </summary>
+		public int SelectedDayOfWeek = -1;
+		public static readonly string N_SelectedDayOfWeek = "selecteddayofweek";
 
-        // --- passed to SCVolunteer Hours ---
-        // SelectedDate
-        // SelectedSite
-        public C_WorkItem VolunteerWorkItem;
+		/// <summary>
+		/// The open sites that need help. Used in SitesOnDateMap after launch from SitesOnDateList, and
+        /// then in SitesOnDateList if return from Map; this is the slug for the site that needs help
+		/// </summary>
+		public List<string> OpenSitesThatNeedHelp;
+		public static readonly string N_OpenSitesThatNeedHelp = "opensitesthatneedhelp";
+
+		///// <summary>
+		///// Generated in VC_SitesOnDateList, used in ...Map and SignUp
+		///// </summary>
+		public List<C_WorkItem> WorkItemsOnSiteOnDate;
+		public static readonly string N_WorksItemsOnSiteOnDate = "workitemsonsiteondate";
+
+		/// <summary>
+		/// The Month and Year last used in the Calendar view.
+		/// </summary>
+		public C_YMD CalendarDate;
+		public static readonly string N_CalendarDate = "calendardate";
+
+		// --- passed to SCVolunteer Hours ---
+		// SelectedDate
+		// SelectedSite
+		public C_WorkItem VolunteerWorkItem;
+        public static readonly string N_VolunteerWorkItem = "volunteerworkitem";
 
         // --- used in VC_Calendar ---
         public List<C_SiteSchedule> SitesSchedule;
-        /// <summary>
-        /// A record of when we took the SiteSchedule sample.
-        /// </summary>
-        public DateTime SiteScheduleSampleTime;
-        /// <summary>
-        /// A record of when the fetch last ran (mostly for debug)
-        /// </summary>
-        public DateTime LastFetchRunTime;
+		public static readonly string N_SitesSchedule = "sitesschedule";
 
-        public C_Global()
+		public C_Global()
         {
-            
+            LoggedInUserId = -1;
+
+            UserCache = new List<C_VitaUser>();
+            SiteCache = new List<C_VitaSite>();
+            WorkItems = new List<C_WorkItem>();
         }
 
         public C_Global(JsonValue jv)
         {
-            if (jv.ContainsKey(N_MessageToShow))
+			UserCache = new List<C_VitaUser>();
+			SiteCache = new List<C_VitaSite>();
+			WorkItems = new List<C_WorkItem>();
+
+			if (jv.ContainsKey(N_MessageToShow))
                 MessageToShow = Tools.StringToEnum <E_Message> (Tools.JsonProcessString(jv, MessageToShow.ToString()));
 
-            if (jv.ContainsKey(N_LoggedInUser))
-                LoggedInUser = new C_VitaUser(jv[N_LoggedInUser]);
-        }
+            if (jv.ContainsKey(N_LoggedInUserId))
+                LoggedInUserId = Tools.JsonProcessInt(jv[N_LoggedInUserId], LoggedInUserId);
 
-        public string GetJson()
-        {
-            // todo: serialize this entire object as a string
-            string s_global = "";
-			try
-            {
-                StringBuilder sb = new StringBuilder();
-
-                sb.Append("{");
-
-                sb.Append("\"" + N_MessageToShow + "\" : \"" + MessageToShow.ToString() + "\"");
-
-                string s_user = LoggedInUser.GetJson();
-                JsonValue jv_user = JsonValue.Parse(s_user);
-                C_VitaUser test_user = new C_VitaUser(jv_user);
-                if (LoggedInUser != test_user)
-                    throw new ApplicationException("C_VitaUser: to json and back failed");
-                sb.Append(",");
-                sb.Append("\"" + N_LoggedInUser + "\" : " + LoggedInUser.GetJson());
-
-                // many more to do here...
-                sb.Append(",");
-
-
-
-
-
-
-                sb.Append("}");
-
-                s_global = sb.ToString();
-                JsonValue jv_global = JsonValue.Parse(s_global);
-                C_Global test_global = new C_Global(jv_global);
-                if (this != test_global)
-                    throw new ApplicationException("C_Global: to json and back failed");
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
-
-			return s_global;
-        }
-
-        public override bool Equals(System.Object obj)
-        {
-            if (obj == null)
-                return false;
-
-            C_Global g = obj as C_Global;
-            if ((System.Object)g == null)
-                return false;
-
-            bool res = true;
-
-            res &= MessageToShow == g.MessageToShow;
-            res &= LoggedInUser == g.LoggedInUser;
-
-            // and many more to do
-
-
-
-
-
-
-            return res;
-        }
-
-        public static bool operator ==(C_Global a, C_Global b)
-		{
-			// If both are null, or both are same instance, return true.
-			if (System.Object.ReferenceEquals(a, b))
+			if (jv.ContainsKey(N_SiteCache))
 			{
-				return true;
-			}
-
-			// If one is null, but not both, return false.
-			if (((object)a == null) || ((object)b == null))
-			{
-				return false;
-			}
-
-			// Return true if the fields match:
-			return a.Equals(b);
-		}
-
-		public static bool operator !=(C_Global a, C_Global b)
-		{
-			return !(a == b);
-		}
-
-		public override int GetHashCode()
-        {
-			int hash = 269;
-
-            // no good way to has since all of the variables are changing all the time....
-
-			return hash;
-		}
-
-        public async Task<bool> GetAllSites()
-        {
-			// get the all sites details
-			AllSites = await C_VitaSite.FetchSitesListX();
-            if (AllSites == null)
-                AllSites = new List<C_VitaSite>();
-
-			if (WorkItems == null)
-				WorkItems = new List<C_WorkItem>();
-            
-			// move and merge the work intents into our master list of work intents
-			//  [this is to avoid the duplication with the work intents in the user]
-			foreach (C_VitaSite site in AllSites)
-			{
-				List<C_WorkItem> intents = site.WorkIntentsX;
-				site.WorkIntentsX = null;
-				List<C_WorkItem> history = site.WorkHistoryX;
-				site.WorkHistoryX = null;
-
-                foreach(C_WorkItem wi in intents)
-                {
-                    if (!WorkItemsHasId(wi.id))
-                        WorkItems.Add(wi);
-                }
-
-				foreach (C_WorkItem wi in history)
+				SiteCache = new List<C_VitaSite>();
+				foreach (JsonValue jva in jv[N_SiteCache])
 				{
-					if (!WorkItemsHasId(wi.id))
-						WorkItems.Add(wi);
+					C_VitaSite s = new C_VitaSite(jva);
+					SiteCache.Add(s);
 				}
 			}
 
-            return true;
+			if (jv.ContainsKey(N_AllSitesFetched))
+				AllSitesFetched = Tools.JsonProcessBool(jv[N_AllSitesFetched], AllSitesFetched);
+
+			if (jv.ContainsKey(N_WorkItems))
+			{
+                WorkItems = new List<C_WorkItem>();
+				foreach (JsonValue jva in jv[N_WorkItems])
+				{
+                    C_WorkItem s = new C_WorkItem(jva);
+					WorkItems.Add(s);
+				}
+			}
+
+			if (jv.ContainsKey(N_UserCache))
+			{
+                UserCache = new List<C_VitaUser>();
+				foreach (JsonValue jva in jv[N_UserCache])
+				{
+					C_VitaUser s = new C_VitaUser(jva);
+					UserCache.Add(s);
+				}
+			}
+
+            if (jv.ContainsKey(N_SelectedSiteSlug))
+                SelectedSiteSlug = Tools.JsonProcessString(jv[N_SelectedSiteSlug], SelectedSiteSlug);
+
+            if (jv.ContainsKey(N_SelectedSiteName))
+                SelectedSiteName = Tools.JsonProcessString(jv[N_SelectedSiteName], SelectedSiteName);
+
+			if (jv.ContainsKey(N_SelectedSuggestion))
+                SelectedSuggestion = new C_Suggestion(jv[N_SelectedSuggestion]);
+
+            if (jv.ContainsKey(N_SelectedDate))
+                SelectedDate = Tools.JsonProcessDate(jv[N_SelectedDate], SelectedDate);
+
+            if (jv.ContainsKey(N_ViewCameFrom))
+                ViewCameFrom = Tools.StringToEnum<E_ViewCameFrom>(Tools.JsonProcessString(jv[N_ViewCameFrom], ViewCameFrom.ToString()));
+
+            if (jv.ContainsKey(N_SelectedDayOfWeek))
+                SelectedDayOfWeek = Tools.JsonProcessInt(jv[N_SelectedDayOfWeek], SelectedDayOfWeek);
+
+            if (jv.ContainsKey(N_OpenSitesThatNeedHelp))
+			{
+                OpenSitesThatNeedHelp = new List<string>();
+				foreach (JsonValue jva in jv[N_OpenSitesThatNeedHelp])
+				{
+                    string s = Tools.JsonProcessString(jva, null);
+                    if (s != null)
+    					OpenSitesThatNeedHelp.Add(s);
+				}
+			}
+
+            if (jv.ContainsKey(N_WorksItemsOnSiteOnDate))
+			{
+                WorkItemsOnSiteOnDate = new List<C_WorkItem>();
+				foreach (JsonValue jva in jv[N_WorksItemsOnSiteOnDate])
+				{
+					C_WorkItem s = new C_WorkItem(jva);
+					WorkItemsOnSiteOnDate.Add(s);
+				}
+			}
+
+            if (jv.ContainsKey(N_CalendarDate))
+                CalendarDate = Tools.JsonProcessDate(jv[N_CalendarDate], CalendarDate);
+            
+            if (jv.ContainsKey(N_VolunteerWorkItem))
+                VolunteerWorkItem = new C_WorkItem(jv[N_VolunteerWorkItem]);
+
+			if (jv.ContainsKey(N_SitesSchedule))
+			{
+				SitesSchedule = new List<C_SiteSchedule>();
+				foreach (JsonValue jva in jv[N_SitesSchedule])
+				{
+					C_SiteSchedule s = new C_SiteSchedule(jva, null);
+					SitesSchedule.Add(s);
+				}
+			}
 		}
 
-        public async Task<C_VitaUser> GetUserDetails(int id)
+        // ================= site cache mgmt =======================
+
+        public C_VitaSite GetSiteFromCacheNoFetch(string slug)
         {
-            C_VitaUser user = null;
+            var ou = SiteCache.Where(site => site.Slug == slug);
+            return ou.FirstOrDefault();
+        }
 
-            if (Users == null)
-            {
-                Users = new List<C_VitaUser>();
-                if (LoggedInUser != null)
-                    Users.Add(LoggedInUser);
-            }
+		public async Task<C_VitaSite> GetSiteFromCache(string slug)
+		{
+            C_VitaSite res = GetSiteFromCacheNoFetch(slug);
 
-            // check our local cache
-            var ou = Users.Where(u => u.id == id);
-            if (ou.Any())
-                user = ou.First();
-
-            // if not found them pull from the API and store off the workintents
-            if (user == null)
-            {
-                user = await C_VitaUser.FetchUserX(LoggedInUser.Token, id);
-                if (user != null)
+			if (res == null)
+			{
+				res = await C_VitaSite.FetchSitesDetails(slug);
+                if (res != null)
                 {
-                    List<C_WorkItem> intents = user.WorkIntentsX;
-                    user.WorkIntentsX = null;
-                    List<C_WorkItem> history = user.WorkHistoryX;
-                    user.WorkHistoryX = null;
+                    SiteCache.Add(res);
+					CleanWorkItemsFromSite(res);
+				}
+			}
 
-                    foreach (C_WorkItem wi in intents)
-                    {
-                        if (!WorkItemsHasId(wi.id))
-                            WorkItems.Add(wi);
-                    }
+			return res;
+		}
 
-                    foreach (C_WorkItem wi in history)
-                    {
-                        if (!WorkItemsHasId(wi.id))
-                            WorkItems.Add(wi);
-                    }
+		public C_VitaSite GetSiteFromCacheByNameNoFetch(string name)
+		{
+            var ou = SiteCache.Where(s => s.Name == name);
+            return ou.FirstOrDefault();
+		}
+
+		public async Task<bool> EnsureSiteInCache(string slug)
+		{
+            var ou = SiteCache.Where(site => site.Slug == slug);
+            C_VitaSite res = ou.FirstOrDefault();
+
+            if (res == null)
+			{
+				res = await C_VitaSite.FetchSitesDetails(slug);
+                if (res != null)
+                {
+                    SiteCache.Add(res);
+                    CleanWorkItemsFromSite(res);
+                }
+			}
+
+			return res != null;
+		}
+
+        private void CleanWorkItemsFromSite(C_VitaSite site)
+		{
+			List<C_WorkItem> intents = site.WorkIntentsX;
+			site.WorkIntentsX = null;
+			List<C_WorkItem> history = site.WorkHistoryX;
+			site.WorkHistoryX = null;
+
+			foreach (C_WorkItem wi in intents)
+			{
+				if (!WorkItemsHasId(wi.id))
+					WorkItems.Add(wi);
+			}
+
+			foreach (C_WorkItem wi in history)
+			{
+				if (!WorkItemsHasId(wi.id))
+					WorkItems.Add(wi);
+			}
+		}
+
+		public async Task<List<C_VitaSite>> GetOpenSitesOnDate(C_YMD onDate)
+		{
+			// at the current api level, the only option is to get data on ALL sites (slow, lots of data)
+			if (!AllSitesFetched)
+			{
+				List<C_VitaSite> allSites = await C_VitaSite.FetchSitesListX();
+				AllSitesFetched = true;
+
+				foreach (C_VitaSite site in allSites)
+				{
+					if (!SiteCacheContains(site.Slug))
+						SiteCache.Add(site);
+				}
+			}
+
+			List<C_VitaSite> res = new List<C_VitaSite>();
+
+            foreach (C_VitaSite site in SiteCache)
+			{
+				if (site.SiteIsOpenOnDay(onDate))
+					res.Add(site);
+			}
+
+			return res;
+		}
+
+        public async Task<List<C_VitaSite>> GetOpenSitesInDateRange(C_YMD from, C_YMD to)
+		{
+            // at the current api level, the only option is to get data on ALL sites (slow, lots of data)
+            // todo: get an API to fetch just exactly what we want
+            if (!AllSitesFetched)
+            {
+                List<C_VitaSite> allSites = await C_VitaSite.FetchSitesListX();
+                AllSitesFetched = true;
+
+                foreach (C_VitaSite site in allSites)
+                {
+                    if (!SiteCacheContains(site.Slug))
+                        SiteCache.Add(site);
                 }
             }
 
-            return user;
+			List<string> SiteSlugsForOpenSites = new List<string>();
+            foreach (C_VitaSite site in SiteCache)
+			{
+                // scan through the dates
+                C_YMD date = new C_YMD(from);
+                while (date <= to)
+                {
+                    if ((site.SiteIsOpenOnDay(date)) && (!SiteSlugsForOpenSites.Contains(site.Slug)))
+                        SiteSlugsForOpenSites.Add(site.Slug);
+
+					date = date.AddDays(1);
+                }
+			}
+
+			List<C_VitaSite> res = new List<C_VitaSite>();
+			foreach(string slug in SiteSlugsForOpenSites)
+            {
+                C_VitaSite site = GetSiteFromCacheNoFetch(slug);
+                res.Add(site);
+            }
+
+			return res;
+		}
+
+		private bool SiteCacheContains(string slug)
+		{
+			bool res = false;
+
+			foreach (C_VitaSite site in SiteCache)
+			{
+				if (site.Slug == slug)
+				{
+					res = true;
+					break;
+				}
+			}
+
+			return res;
+		}
+
+		// ----------------- user cache mgmt ---------------------
+
+		/// <summary>
+		/// Do the login using the provided email and password. This function makes the API call and
+		/// either returns null or a C_VitaUser with a valid token. No throws from this function.
+		/// </summary>
+		/// <returns>The login.</returns>
+		/// <param name="email">Email.</param>
+		/// <param name="userPassword">User password.</param>
+		public async Task<C_VitaUser> PerformLogin(string email, string userPassword)
+		{
+			C_VitaUser user = null;
+			try
+			{
+				// do the login with the api's
+				string loginUrl = "/login";
+				var client = new HttpClient()
+				{
+					BaseAddress = new Uri(C_Vita.VitaCoreUrlSSL)
+				};
+				client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+				string jsonData = "{"
+					+ "\"email\" : \"" + email + "\""
+					+ ",\"password\" : \"" + userPassword + "\""
+					+ "}";
+
+				var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
+				HttpResponseMessage response = await client.PostAsync(loginUrl, content);
+
+                var responseString = await response.Content.ReadAsStringAsync();
+
+				if (response.StatusCode != HttpStatusCode.OK)
+					return null;
+
+				// success should include the user details
+                JsonValue responseJson = JsonValue.Parse(responseString);
+
+				user = new C_VitaUser(responseJson);
+
+				// the headers should contain our token in the 'Set-Cookie' header
+				var headers = response.Headers;
+
+				string setCookie = null;
+				foreach (KeyValuePair<string, IEnumerable<string>> kvp in headers)
+				{
+					if (kvp.Key == "Set-Cookie")
+					{
+						foreach (string sc in kvp.Value)
+						{
+							setCookie = sc;
+							break;
+						}
+					}
+				}
+
+				string token = null;
+				string[] tokens = setCookie.Split(new char[] { ';' });
+				foreach (string tok in tokens)
+				{
+					if (tok.Contains("_rails-base_session"))
+					{
+						token = tok;
+						break;
+					}
+				}
+
+				user.Token = token;
+                LoggedInUserId = user.id;
+                if (!UserCacheContains(user.id))
+                {
+                    UserCache.Add(user);
+                    CleanWorkItemsFromUser(user);
+                }
+			}
+			catch (Exception e)
+			{
+#if DEBUG
+                Console.WriteLine(e.Message);
+#endif               
+                user = null;
+			}
+
+			return user;
+		}
+
+		public C_VitaUser GetUserFromCacheNoFetch(int id)
+        {
+            var ou = UserCache.Where(u => u.id == id);
+            return ou.FirstOrDefault();
         }
+
+        public async Task<C_VitaUser> GetUserFromCache(int id)
+        {
+            C_VitaUser user = GetUserFromCacheNoFetch(id);
+
+			// if not found them pull from the API and store off the workintents
+			if (user == null)
+			{
+				C_VitaUser loggedInUser = GetUserFromCacheNoFetch(LoggedInUserId);
+
+                if (loggedInUser == null)
+                    return null;
+
+				user = await C_VitaUser.FetchUserX(loggedInUser.Token, id);
+
+				if (user != null)
+				{
+                    UserCache.Add(user);
+                    CleanWorkItemsFromUser(user);
+				}
+			}
+
+			return user;
+        }
+
+		public async Task<bool> EnsureUserInCache(int userid, string token)
+		{
+            C_VitaUser res = GetUserFromCacheNoFetch(userid);
+           
+            if (res == null)
+			{
+                res = await C_VitaUser.FetchUserX(token, userid);
+				if (res != null)
+				{
+					UserCache.Add(res);
+					CleanWorkItemsFromUser(res);
+				}
+			}
+
+			return res != null;
+		}
+
+		private void CleanWorkItemsFromUser(C_VitaUser user)
+        {
+			List<C_WorkItem> intents = user.WorkIntentsX;
+			user.WorkIntentsX = null;
+			List<C_WorkItem> history = user.WorkHistoryX;
+			user.WorkHistoryX = null;
+
+			foreach (C_WorkItem wi in intents)
+			{
+				if (!WorkItemsHasId(wi.id))
+					WorkItems.Add(wi);
+			}
+
+			foreach (C_WorkItem wi in history)
+			{
+				if (!WorkItemsHasId(wi.id))
+					WorkItems.Add(wi);
+			}
+		}
+
+        private bool UserCacheContains(int userId)
+        {
+            var ou = UserCache.Where(u => u.id == userId);
+            return ou.Any();
+        }
+
+        // ---------------- SiteSchedule mgmt -----------
+
+        Dictionary<int, List<C_SiteSchedule>> SitesScheduleCache;
+
+        public async Task<List<C_SiteSchedule>> GetSitesScheduleCached(int year, int month)
+        {
+            if (SitesScheduleCache == null)
+                SitesScheduleCache = new Dictionary<int, List<C_SiteSchedule>>();
+
+            List<C_SiteSchedule> res = null;
+
+            int key = year * 12 + month;
+            if (SitesScheduleCache.ContainsKey(key))
+                res = SitesScheduleCache[key];
+            else
+            {
+                int daysInMonth = DateTime.DaysInMonth(year, month);
+                C_YMD start = new C_YMD(year, month, 1);
+                C_YMD end = new C_YMD(year, month, daysInMonth);
+
+                res = await C_SiteSchedule.FetchSitesSchedulesX(start, end);
+
+                SitesScheduleCache.Add(key, res);
+            }
+
+            return res;
+		}
+
+        // ---------------- workitems mgmt --------------
 
         private bool WorkItemsHasId(int id)
         {
@@ -304,53 +573,18 @@ namespace zsquared
             return ou.Any();
         }
 
-        public enum E_SiteCondition { Open, Closed, Any }
+		public List<C_WorkItem> GetWorkItemsForUser(int userId)
+		{
+			var ou = WorkItems.Where(wi => wi.UserId == userId);
+			List<C_WorkItem> res = ou.ToList();
 
-        /// <summary>
-        /// Returns a list of WorkItems that match the criteria.
-        /// </summary>
-        /// <returns>The work items for site on date for user.</returns>
-        /// <param name="siteSlug">null means all sites</param>
-        /// <param name="onDate">null means all dates</param>
-        /// <param name="userId">null means all users</param>
-        public List<C_WorkItem> GetWorkItemsForSiteOnDateForUser(string siteSlug, C_YMD onDate, int userId, E_SiteCondition condition)
+			return res;
+		}
+
+        public List<C_WorkItem> GetWorkItemsForSiteOnDate(C_YMD onDate, string siteSlug)
         {
-            List<C_WorkItem> res = new List<C_WorkItem>();
-                
-            foreach(C_WorkItem wi in WorkItems)
-            {
-                if (   ((siteSlug == null) || (siteSlug == wi.SiteSlug))
-                    && ((onDate == null)   || (onDate == wi.Date))
-                    && ((userId == -1)     || (userId == wi.UserId))
-                    &&     ((condition == E_SiteCondition.Any) 
-                        || ((onDate != null) && (siteSlug != null) && SiteConditionTest(siteSlug, condition, onDate)))
-                   )
-                    res.Add(wi);
-            }
-
-            return res;
-        }
-
-        private bool SiteConditionTest(string siteSlug, E_SiteCondition condition, C_YMD onDate)
-        {
-            C_VitaSite site = C_VitaSite.GetSiteBySlug(siteSlug, AllSites);
-
-            bool res = false;
-
-            switch (condition)
-            {
-                case E_SiteCondition.Open:
-                    res = site.SiteIsOpenOnDay(onDate);
-                    break;
-                case E_SiteCondition.Closed:
-					res = !site.SiteIsOpenOnDay(onDate);
-					break;
-                case E_SiteCondition.Any:
-                    res = true;
-                    break;
-            }
-
-            return res;
+            var ou = WorkItems.Where(wi => ((wi.Date == onDate) && (wi.SiteSlug == siteSlug)));
+            return ou.ToList();
         }
 
         public void ClearDirtyFlagOnIntents()

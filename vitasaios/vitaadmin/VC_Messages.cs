@@ -68,15 +68,17 @@ namespace vitaadmin
                 EnglishMessage.Text = TxV_English.Text;
                 SpanishMessage.Text = TxV_Spanish.Text;
 
+                C_VitaUser LoggedInUser = Global.GetUserFromCacheNoFetch(Global.LoggedInUserId);
+
                 bool success;
                 if (EnglishMessage.id == -1)
                 {
-                    success = await C_Message.AddMessage(Global.LoggedInUser.Token, EnglishMessage, SpanishMessage);
+                    success = await C_Message.AddMessage(LoggedInUser.Token, EnglishMessage, SpanishMessage);
                 }
                 else
 				{
-                    success = await EnglishMessage.UpdateMessage(Global.LoggedInUser.Token);
-					success &= await SpanishMessage.UpdateMessage(Global.LoggedInUser.Token);
+                    success = await EnglishMessage.UpdateMessage(LoggedInUser.Token);
+					success &= await SpanishMessage.UpdateMessage(LoggedInUser.Token);
 				}
 
                 if (success)

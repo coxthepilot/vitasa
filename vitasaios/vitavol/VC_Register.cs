@@ -131,12 +131,18 @@ namespace vitavol
 
         private bool CheckReadyToSubmit()
         {
-            bool ready = (TB_Name.Text.Length > 4)
-                && (TB_Password.Text.Length > 7)
-                && (TB_Password.Text == TB_VerifyPassword.Text)
-                && ValidPhoneNumber(TB_Phone.Text);
+			bool ok = true;
 
-            return ready;
+			ok &= TB_Name.Text.Length > 4;
+			ok &= TB_Email.Text.Length > 4;
+			ok &= TB_Password.Text.Length > 7;
+			ok &= TB_Password.Text.Length > 7;
+
+			ok &= ValidPhoneNumber(TB_Phone.Text);
+			ok &= TB_Email.Text.Contains("@");
+			ok &= TB_Password.Text == TB_VerifyPassword.Text;
+
+			return ok;
 		}
 
         private bool ValidPhoneNumber(string pn)

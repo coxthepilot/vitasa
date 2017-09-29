@@ -44,7 +44,7 @@ namespace vitaadmin
                 try
                 {
                     // do the actual login API call
-                    C_VitaUser user = await C_Vita.PerformLogin(email, pw);
+                    C_VitaUser user = await Global.PerformLogin(email, pw);
 					// if bad name or pass, we get null; otherwise we get a C_VitaUser
 
 					AI_Spinner.StopAnimating();
@@ -61,7 +61,7 @@ namespace vitaadmin
                         return;
                     }
 
-					Global.LoggedInUser = user;
+                    Global.LoggedInUserId = user.id;
 
 					NSUserDefaults.StandardUserDefaults.SetString(TB_Email.Text, "email");
 					NSUserDefaults.StandardUserDefaults.SetString(TB_Password.Text, "password");

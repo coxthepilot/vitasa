@@ -54,7 +54,7 @@ namespace vitavol
 			Map_Sites.CenterCoordinate = mapCenter;
 			Map_Sites.Region = mapRegion;
 
-            Global.DetailsCameFrom = E_CameFrom.Map;
+            Global.ViewCameFrom = E_ViewCameFrom.Map;
             C_MapDelegateX MapDelegate = new C_MapDelegateX(Global, this, Global.OpenSitesThatNeedHelp);
             Map_Sites.Delegate = MapDelegate;
 
@@ -69,8 +69,10 @@ namespace vitavol
 
 		private void PutPinsOnMap()
 		{
-            foreach (C_VitaSite vs in Global.OpenSitesThatNeedHelp)
+            foreach (string s in Global.OpenSitesThatNeedHelp)
 			{
+                C_VitaSite vs = Global.GetSiteFromCacheNoFetch(s);
+
 				double latitude = double.NaN;
 				double longitude = double.NaN;
                 bool conversionOK = false;
@@ -107,11 +109,18 @@ namespace vitavol
 
 			readonly List<C_VitaSite> Sites;
 
-            public C_MapDelegateX(C_Global global, UIViewController cv, List<C_VitaSite> sites)
+            public C_MapDelegateX(C_Global global, UIViewController cv, List<string> siteSlugs)
 			{
 				Global = global;
 				ourVC = cv;
-				Sites = sites;
+
+                Sites = new List<C_VitaSite>();
+                foreach(string slug in siteSlugs)
+                {
+                    C_VitaSite s = Global.GetSiteFromCacheNoFetch(slug);
+                    if (s != null)
+                        Sites.Add(s);
+                }
 			}
 
 			string pId = "PinAnnotation";
@@ -158,8 +167,8 @@ namespace vitavol
 					{
                         // required for SignUp
                         // SelectedDate - from Calendar
-						Global.SelectedSite = ourSite;
-                        Global.DetailsCameFrom = E_CameFrom.Map;
+                        Global.SelectedSiteSlug = ourSite.Slug;
+                        Global.ViewCameFrom = E_ViewCameFrom.Map;
 
 						ourVC.PerformSegue("Segue_SitesOnDateMapToSignUp", ourVC);
 					};

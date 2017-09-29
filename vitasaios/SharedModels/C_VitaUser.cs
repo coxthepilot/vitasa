@@ -1,15 +1,10 @@
 ﻿using System;
 using System.Json;
-using System.IO;
 using System.Net;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Text;
-using System.Net.Http;
-
-//using UIKit;
 using System.Linq;
-//using Foundation;
 
 namespace zsquared
 {
@@ -17,18 +12,19 @@ namespace zsquared
 
     public class C_VitaUser
     {
-        public readonly int id;
-        public readonly string Name;
-		public readonly string Email;
+        public int id;
+        public string Name;
+        public string Email;
         public string Password; // only used on create new user; never sent from the backend
-        public readonly string Phone;
-        public readonly E_Certification Certification;
+        public string Phone;
+        public E_Certification Certification;
         public List<C_WorkItem> WorkHistoryX;
         public List<C_WorkItem> WorkIntentsX;
-		public List<E_VitaUserRoles> Roles;
+        public List<E_VitaUserRoles> Roles;
         public List<C_Suggestion> Suggestions;
+        public List<C_SiteCoordinated> SitesCoordinated;
 
-        public string Token; // saved across UI transitions
+        public string Token; // saved across UI transitions but not in backedn DB (obviously)
 
         public static readonly string N_ID = "id";
         public static readonly string N_Name = "name";
@@ -37,10 +33,11 @@ namespace zsquared
         public static readonly string N_Phone = "phone";
         public static readonly string N_Certification = "certification";
         public static readonly string N_WorkHistory = "work_history";
-		public static readonly string N_WorkIntents = "work_intents";
+        public static readonly string N_WorkIntents = "work_intents";
         public static readonly string N_Roles = "roles";
         public static readonly string N_Suggestions = "suggestions";
         public static readonly string N_Token = "token";
+        public static readonly string N_SitesCoordinated = "sites_coordinated";
 
         public bool HasAdmin
         {
@@ -51,39 +48,40 @@ namespace zsquared
             }
         }
 
-		public bool HasSiteCoordinator
-		{
-			get
-			{
-				var or = Roles.Where(r => r == E_VitaUserRoles.SiteCoordinator);
-				return or.Any();
-			}
-		}
+        public bool HasSiteCoordinator
+        {
+            get
+            {
+                var or = Roles.Where(r => r == E_VitaUserRoles.SiteCoordinator);
+                return or.Any();
+            }
+        }
 
-		public bool HasVolunteer
-		{
-			get
-			{
-				var or = Roles.Where(r => r == E_VitaUserRoles.Volunteer);
-				return or.Any();
-			}
-		}
+        public bool HasVolunteer
+        {
+            get
+            {
+                var or = Roles.Where(r => r == E_VitaUserRoles.Volunteer);
+                return or.Any();
+            }
+        }
 
-		public bool HasNewUser
-		{
-			get
-			{
+        public bool HasNewUser
+        {
+            get
+            {
                 var or = Roles.Where(r => r == E_VitaUserRoles.NewUser);
-				return or.Any();
-			}
-		}
+                return or.Any();
+            }
+        }
 
-		public C_VitaUser()
+        public C_VitaUser()
         {
             WorkHistoryX = new List<C_WorkItem>();
             WorkIntentsX = new List<C_WorkItem>();
             Roles = new List<E_VitaUserRoles>();
             Suggestions = new List<C_Suggestion>();
+            SitesCoordinated = new List<C_SiteCoordinated>();
         }
 
         public C_VitaUser(int _id, string _email, string _pw)
@@ -92,23 +90,25 @@ namespace zsquared
             Email = _email;
             Password = _pw;
 
-			WorkHistoryX = new List<C_WorkItem>();
-			WorkIntentsX = new List<C_WorkItem>();
-			Roles = new List<E_VitaUserRoles>();
-			Suggestions = new List<C_Suggestion>();
-		}
+            WorkHistoryX = new List<C_WorkItem>();
+            WorkIntentsX = new List<C_WorkItem>();
+            Roles = new List<E_VitaUserRoles>();
+            Suggestions = new List<C_Suggestion>();
+            SitesCoordinated = new List<C_SiteCoordinated>();
+        }
 
         public C_VitaUser(JsonValue jv)
         {
-            // jv should be a JsonObject
-
+#if DEBUG
             if (!(jv is JsonObject))
                 throw new ApplicationException("expecting JsonObject");
+#endif
 
-			WorkHistoryX = new List<C_WorkItem>();
-			WorkIntentsX = new List<C_WorkItem>();
-			Roles = new List<E_VitaUserRoles>();
-			Suggestions = new List<C_Suggestion>();
+            WorkHistoryX = new List<C_WorkItem>();
+            WorkIntentsX = new List<C_WorkItem>();
+            Roles = new List<E_VitaUserRoles>();
+            Suggestions = new List<C_Suggestion>();
+            SitesCoordinated = new List<C_SiteCoordinated>();
 
             if (jv.ContainsKey(N_ID))
                 id = Tools.JsonProcessInt(jv[N_ID], id);
@@ -119,54 +119,59 @@ namespace zsquared
             if (jv.ContainsKey(N_Email))
                 Email = Tools.JsonProcessString(jv[N_Email], Email);
 
+            if (jv.ContainsKey(N_Password))
+                Password = Tools.JsonProcessString(jv[N_Password], Password);
+
             if (jv.ContainsKey(N_Phone))
                 Phone = Tools.JsonProcessString(jv[N_Phone], Phone);
 
-            if (jv.ContainsKey(N_Token))
-                Token = Tools.JsonProcessString(jv[N_Token], Token);
-
-			if (jv.ContainsKey(N_Certification))
+            if (jv.ContainsKey(N_Certification))
             {
                 string cs = Tools.JsonProcessString(jv[N_Certification], "Unknown");
-
-				Certification = Tools.StringToEnum<E_Certification>(cs);
+                Certification = Tools.StringToEnum<E_Certification>(cs);
             }
 
             if (jv.ContainsKey(N_WorkHistory))
             {
-				JsonValue jva = jv[N_WorkHistory]; // should be an array type
+                JsonValue jva = jv[N_WorkHistory]; // should be an array type
 
-				if (!(jva is JsonArray))
-					throw new ApplicationException("must be an array type");
+#if DEBUG
+                if (!(jva is JsonArray))
+                    throw new ApplicationException("must be an array type");
+#endif
 
-				foreach (JsonValue jvav in jva)
-				{
+                foreach (JsonValue jvav in jva)
+                {
                     C_WorkItem wh = new C_WorkItem(jvav);
                     WorkHistoryX.Add(wh);
-				}
-			}
+                }
+            }
 
             if (jv.ContainsKey(N_WorkIntents))
             {
-				JsonValue jva = jv[N_WorkIntents]; // should be an array type
+                JsonValue jva = jv[N_WorkIntents]; // should be an array type
 
-				if (!(jva is JsonArray))
-					throw new ApplicationException("must be an array type");
+#if DEBUG
+                if (!(jva is JsonArray))
+                    throw new ApplicationException("must be an array type");
+#endif
 
-				foreach (JsonValue jvav in jva)
-				{
-					C_WorkItem wh = new C_WorkItem(jvav);
+                foreach (JsonValue jvav in jva)
+                {
+                    C_WorkItem wh = new C_WorkItem(jvav);
                     WorkIntentsX.Add(wh);
-				}
-			}
+                }
+            }
 
             if (jv.ContainsKey(N_Roles))
             {
                 JsonValue jva = jv[N_Roles]; // should be an array type
 
+#if DEBUG
                 if (!(jva is JsonArray))
                     throw new ApplicationException("must be an array type");
-                
+#endif
+
                 foreach (JsonValue jvav in jva)
                 {
                     string role_s = jvav;
@@ -179,8 +184,10 @@ namespace zsquared
             {
                 JsonValue jva = jv[N_Suggestions]; // should be an array type
 
+#if DEBUG
                 if (!(jva is JsonArray))
                     throw new ApplicationException("must be an array type");
+#endif
 
                 foreach (JsonValue jvav in jva)
                 {
@@ -188,179 +195,93 @@ namespace zsquared
                     Suggestions.Add(s);
                 }
             }
-		}
 
-        public string GetJson()
-        {
-            StringBuilder sb = new StringBuilder();
-
-            sb.Append("{");
-
-            sb.Append("\"" + N_ID + "\" : \"" + id.ToString() + "\"");
-			sb.Append(",");
-			sb.Append("\"" + N_Name + "\" : \"" + Name + "\"");
-			sb.Append(",");
-			sb.Append("\"" + N_Email + "\" : \"" + Email + "\"");
-			sb.Append(",");
-			sb.Append("\"" + N_Password + "\" : \"" + Password + "\"");
-			sb.Append(",");
-			sb.Append("\"" + N_Phone + "\" : \"" + Phone + "\"");
-			sb.Append(",");
-            sb.Append("\"" + N_Certification + "\" : \"" + Certification.ToString() + "\"");
-
-			sb.Append(",");
-            sb.Append("\"" + N_Roles + "\" : [");
-            for (int ix = 0; ix != Roles.Count; ix++)
+            if (jv.ContainsKey(N_SitesCoordinated))
             {
-                if (ix != 0) sb.Append(",");
-                sb.Append("\"" + Roles[ix].ToString() + "\"");
+                JsonValue jva = jv[N_SitesCoordinated]; // should be an array type
+
+#if DEBUG
+                if (!(jva is JsonArray))
+                    throw new ApplicationException("must be an array type");
+#endif
+
+                foreach (JsonValue jvav in jva)
+                {
+                    C_SiteCoordinated s = new C_SiteCoordinated(jvav);
+                    SitesCoordinated.Add(s);
+                }
             }
-            sb.Append("]");
 
-			sb.Append(",");
-            sb.Append("\"" + N_Suggestions + "\" : [");
-            for (int ix = 0; ix != Suggestions.Count; ix++)
-			{
-				if (ix != 0) sb.Append(",");
-                sb.Append("\"" + Suggestions[ix].GetJson() + "\"");
-			}
-			sb.Append("]");
-
-			sb.Append(",");
-            sb.Append("\"" + N_Token + "\" : \"" + Token + "\"");
-
-			sb.Append("}");
-
-			return sb.ToString();
+            if (jv.ContainsKey(N_Token))
+                Token = Tools.JsonProcessString(jv[N_Token], Token);
         }
 
-        public override bool Equals(System.Object obj)
+        public string RolesSummary()
         {
-			if (obj == null)
-				return false;
+            string res = "";
+            foreach (E_VitaUserRoles vur in Roles)
+            {
+                if (res.Length != 0)
+                    res += ", ";
+                res += vur.ToString();
 
-            C_VitaUser g = obj as C_VitaUser;
-			if ((System.Object)g == null)
-				return false;
+            }
+            return res;
+        }
 
-			bool res = true;
-
-            res &= id == g.id;
-            if (Name != null)
-                res &= Name == g.Name;
-            if (Email != null)
-                res &= Email == g.Email;
-            if (Password != null)
-                res &= Password == g.Password;
-            if (Phone != null)
-                res &= Phone == g.Phone;
-            res &= Certification == g.Certification;
-            res &= Roles.Count == g.Roles.Count;
-            foreach (E_VitaUserRoles r in Roles)
-                res &= g.Roles.Contains(r);
-            res &= Suggestions.Count == g.Suggestions.Count;
-            for (int ix = 0; ix != Suggestions.Count; ix ++)
-                res &= Suggestions[ix] == g.Suggestions[ix];
-            if (Token != null)
-                res &= Token == g.Token;
-
-			return res;
-		}
-
-        public static bool operator ==(C_VitaUser a, C_VitaUser b)
-		{
-			// If both are null, or both are same instance, return true.
-			if (System.Object.ReferenceEquals(a, b))
-			{
-				return true;
-			}
-
-			// If one is null, but not both, return false.
-			if (((object)a == null) || ((object)b == null))
-			{
-				return false;
-			}
-
-            // Return true if the fields match:
-            return a.Equals(b);
-		}
-
-		public static bool operator !=(C_VitaUser a, C_VitaUser b)
-		{
-			return !(a == b);
-		}        
-
-        public override int GetHashCode()
-        {
-			int hash = 269;
-			hash = (hash * 47) * id.GetHashCode();
-			hash = (hash * 47) * Name.GetHashCode();
-            hash = (hash * 47) * Email.GetHashCode();
-            hash = (hash * 47) * Phone.GetHashCode();
-            hash = (hash * 47) * Certification.GetHashCode();
-
-			return hash;
-		}
-
-		public string RolesSummary()
-		{
-			string res = "";
-			foreach (E_VitaUserRoles vur in Roles)
-			{
-				if (res.Length != 0)
-					res += ", ";
-				res += vur.ToString();
-
-			}
-			return res;
-		}
-
-		public static List<C_VitaUser> ImportUsers(JsonValue jv)
+        public static List<C_VitaUser> ImportUsers(JsonValue jv)
         {
             List<C_VitaUser> res = new List<C_VitaUser>();
 
-			if (!(jv is JsonArray))
-				throw new ApplicationException("must be an array");
-            
-			res = new List<C_VitaUser>();
-			foreach (JsonValue jv1 in jv)
-			{
-				C_VitaUser vu = new C_VitaUser(jv1);
-				res.Add(vu);
-			}
+#if DEBUG
+            if (!(jv is JsonArray))
+                throw new ApplicationException("must be an array");
+#endif
+
+            res = new List<C_VitaUser>();
+            foreach (JsonValue jv1 in jv)
+            {
+                C_VitaUser vu = new C_VitaUser(jv1);
+                res.Add(vu);
+            }
 
             return res;
-		}
+        }
 
         public static async Task<C_VitaUser> FetchUserX(string token, int id)
         {
-			C_VitaUser res = null;
-			try
-			{
-				string usersUrl = "/users/" + id.ToString();
-				WebClient wc = new WebClient()
+            C_VitaUser res = null;
+            try
+            {
+                string usersUrl = "/users/" + id.ToString();
+                WebClient wc = new WebClient()
                 {
                     BaseAddress = C_Vita.VitaCoreUrl
-				};
-				wc.Headers.Add(HttpRequestHeader.Cookie, token);
-				wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
-				wc.Headers.Add(HttpRequestHeader.Accept, "application/json");
+                };
+                wc.Headers.Add(HttpRequestHeader.Cookie, token);
+                wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
+                wc.Headers.Add(HttpRequestHeader.Accept, "application/json");
 
                 string ss = await wc.DownloadStringTaskAsync(usersUrl);
 
-				JsonValue jv = JsonValue.Parse(ss);
+                JsonValue jv = JsonValue.Parse(ss);
 
-				if (!(jv is JsonObject))
-					throw new ApplicationException("must be an object");
+#if DEBUG
+                if (!(jv is JsonObject))
+                    throw new ApplicationException("must be an object");
+#endif
 
-				res = new C_VitaUser(jv);
-			}
-			catch
-			{
-				res = null;
-			}
+                res = new C_VitaUser(jv);
+            }
+            catch (Exception ex)
+            {
+#if DEBUG
+                Console.WriteLine(ex.Message);
+#endif
+                res = null;
+            }
 
-			return res;        
+            return res;
         }
 
         /// <summary>
@@ -369,40 +290,96 @@ namespace zsquared
         /// <returns>The users list.</returns>
         /// <param name="token">Token.</param>
 		public static async Task<List<C_VitaUser>> FetchUsersList(string token)
-		{
+        {
             List<C_VitaUser> res = null;
-			try
-			{
-				string usersUrl = "/users";
-				WebClient wc = new WebClient()
+            try
+            {
+                string usersUrl = "/users";
+                WebClient wc = new WebClient()
                 {
                     BaseAddress = C_Vita.VitaCoreUrl
                 };
                 wc.Headers.Add(HttpRequestHeader.Cookie, token);
-				wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
-				wc.Headers.Add(HttpRequestHeader.Accept, "application/json");
+                wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
+                wc.Headers.Add(HttpRequestHeader.Accept, "application/json");
 
                 string resp = await wc.DownloadStringTaskAsync(usersUrl);
 
-				JsonValue jv = JsonValue.Parse(resp);
+                JsonValue jv = JsonValue.Parse(resp);
 
-				// we are expecting an array
-				if (!(jv is JsonArray))
-					throw new ApplicationException("must be an array");
-                
-				res = new List<C_VitaUser>();
-				foreach (JsonValue jv1 in jv)
-				{
-					C_VitaUser vu = new C_VitaUser(jv1);
-					res.Add(vu);
-				}
-			}
-			catch
-			{
+#if DEBUG
+                // we are expecting an array
+                if (!(jv is JsonArray))
+                    throw new ApplicationException("must be an array");
+#endif
+
+                res = new List<C_VitaUser>();
+                foreach (JsonValue jv1 in jv)
+                {
+                    C_VitaUser vu = new C_VitaUser(jv1);
+                    res.Add(vu);
+                }
+            }
+            catch (Exception ex)
+            {
+#if DEBUG
+                Console.WriteLine(ex.Message);
+#endif
                 res = null;
-			}
+            }
 
             return res;
+        }
+
+        /// <summary>
+        /// Only updates the user name, phone, and certification
+        /// </summary>
+        /// <returns>The user profile.</returns>
+        /// <param name="token">Token.</param>
+        public async Task<bool> UpdateUserProfile(string token)
+        {
+            string bodyjson = "{ "
+                + "\"" + N_Name + "\" : \"" + Name + "\""
+                + ","
+                + "\"" + N_Phone + "\" : \"" + Phone + "\""
+                + ","
+                + "\"" + N_Certification + "\" : \"" + Certification.ToString() + "\""
+                + "}";
+
+            bool success = false;
+            try
+            {
+                string submiturl = "/users/" + id.ToString();
+                WebClient wc = new WebClient()
+                {
+                    BaseAddress = C_Vita.VitaCoreUrl
+                };
+                wc.Headers.Add(HttpRequestHeader.Cookie, token);
+                wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
+                wc.Headers.Add(HttpRequestHeader.Accept, "application/json");
+
+                string responseString = await wc.UploadStringTaskAsync(submiturl, "PUT", bodyjson);
+
+#if DEBUG
+                JsonValue responseJson = JsonValue.Parse(responseString);
+                C_VitaUser userx = new C_VitaUser(responseJson);
+                if ((Name != userx.Name)
+                    || (Phone != userx.Phone)
+                    || (Certification != userx.Certification))
+                    throw new ApplicationException("updated items failed to udpate");
+#endif
+
+                success = true;
+            }
+            catch (Exception e)
+            {
+#if DEBUG
+                Console.WriteLine(e.Message);
+#endif
+                success = false;
+			}
+
+			return success;
 		}
 	}
 }

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scroll"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:id="@+id/TB_Register_Email"
+            android:hint="email" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:id="@+id/TB_Register_Name"
+            android:hint="name" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:id="@+id/TB_Register_Password"
+            android:hint="password"
+            android:password="true" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:id="@+id/TB_Register_VerifyPassword"
+            android:hint="verify password"
+            android:password="true" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:id="@+id/TB_Register_Phone"
+            android:hint="phone" />
+        <CheckBox
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/CB_Register_Advanced"
+            android:text="Advanced" />
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:id="@+id/space2" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/B_Register_Submit"
+            android:text="Submit" />
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:id="@+id/space3" />
+        <TextView
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView4"
+            android:text="Users of the VITA service should not register. Instead, they should download the VITA app for clients."
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp" />
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="500dp"
+            android:id="@+id/space4" />
+    </LinearLayout>
+</ScrollView>

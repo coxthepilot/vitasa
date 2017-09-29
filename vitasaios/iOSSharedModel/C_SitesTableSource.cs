@@ -73,7 +73,7 @@ namespace zsquared
 
 		public override void RowSelected(UITableView tableView, NSIndexPath indexPath)
 		{
-            Global.DetailsCameFrom = E_CameFrom.List;
+            Global.ViewCameFrom = E_ViewCameFrom.List;
 			Global.SelectedSite = Sites[indexPath.Row];
 
             ourVC.PerformSegue(TouchSegue, ourVC);

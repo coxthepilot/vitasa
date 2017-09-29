@@ -13,7 +13,8 @@ namespace zsquared
     public class C_YMD : IComparable
     {
         public static string[] DayOfWeekNames = new string[7] { "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" };
-        int _year = 2013;
+		public static string[] DayOfWeekNamesAbrev = new string[7] { "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat" };
+		int _year = 2013;
         public int Year
         {
             get { return _year; }

@@ -21,8 +21,8 @@ namespace zsquared
         public int UserId;
         public float Hours;
         public bool Approved;
+        public string SiteName;
 
-        public C_VitaUser User; // not save or restored; used in SCVolunteers to avoid re-fetch
         public bool Dirty;      // not saved or restored; used in SCVol and SCVolHours
 
         public static readonly string N_ID = "id";
@@ -31,6 +31,8 @@ namespace zsquared
         public static readonly string N_UserId = "user";
         public static readonly string N_Hours = "hours";
         public static readonly string N_Approved = "approved";
+        public static readonly string N_Dirty = "dirty";
+        public static readonly string N_SiteName = "site_name";
 
         public C_WorkItem(string siteSlug, C_YMD date, int userid, float hours)
         {
@@ -62,11 +64,18 @@ namespace zsquared
 
             if (jv.ContainsKey(N_Approved))
                 Approved = Tools.JsonProcessBool(jv[N_Approved], Approved);
+
+            if (jv.ContainsKey(N_SiteName))
+                SiteName = Tools.JsonProcessString(jv[N_SiteName], SiteName);
+
+            if (jv.ContainsKey(N_Dirty))
+                Dirty = Tools.JsonProcessBool(jv[N_Dirty], Dirty);
         }
 
         public async Task<bool> AddIntent(C_Global Global, int userId)
         {
-            bool res = await AddIntent(Global.LoggedInUser.Token, userId);
+            C_VitaUser LoggedInUser = Global.GetUserFromCacheNoFetch(Global.LoggedInUserId);
+            bool res = await AddIntent(LoggedInUser.Token, userId);
 
             if (res)
                 Global.WorkItems.Add(this);
@@ -106,8 +115,11 @@ namespace zsquared
                     res.Add(wi);
                 }
             }
-            catch
+            catch (Exception ex)
             {
+#if DEBUG
+                Console.WriteLine(ex.Message);
+#endif
                 res = null;
             }
 
@@ -144,13 +156,14 @@ namespace zsquared
                 JsonValue responseJson = JsonValue.Parse(responseString);
                 C_WorkItem wix = new C_WorkItem(responseJson);
                 id = wix.id;
-                // if it parses then it is our success result
 
                 success = true;
             }
             catch (Exception e)
             {
+#if DEBUG
                 Console.WriteLine(e.Message);
+#endif
                 success = false;
             }
 
@@ -159,9 +172,10 @@ namespace zsquared
 
         public async Task<bool> UpdateIntent(C_Global Global)
         {
-            bool res = await UpdateIntent(Global.LoggedInUser.Token);
+            C_VitaUser LoggedInUser = Global.GetUserFromCacheNoFetch(Global.LoggedInUserId);
+            bool res = await UpdateIntent(LoggedInUser.Token);
 
-            // no need to change the intent since it came from the WorkItems list start with
+            // no need to change the intent since it came from the WorkItems list to start with
             // if it didn't, then should be an add
 
             return res;
@@ -174,15 +188,15 @@ namespace zsquared
         /// <param name="token">Token.</param>
 		public async Task<bool> UpdateIntent(string token)
         {
-            string bodyjson = "{ "
-                + "\"approved\" : \"" + (Approved ? "true" : "false") + "\""
-                + ",\"hours\" : \"" + Hours.ToString() + "\""
-                + ",\"user_id\" : \"" + UserId + "\""
-                + "}";
-
             bool success = false;
             try
             {
+                string bodyjson = "{ "
+                    + "\"approved\" : \"" + (Approved ? "true" : "false") + "\""
+                    + ",\"hours\" : \"" + Hours.ToString() + "\""
+                    + ",\"user_id\" : \"" + UserId + "\""
+                    + "}";
+
                 string submiturl = "/signups/" + id.ToString();
                 WebClient wc = new WebClient()
                 {
@@ -194,20 +208,23 @@ namespace zsquared
 
                 string responseString = await wc.UploadStringTaskAsync(submiturl, "PUT", bodyjson);
 
+#if DEBUG
                 JsonValue responseJson = JsonValue.Parse(responseString);
                 C_WorkItem wix = new C_WorkItem(responseJson);
-                // if it parses then it is our success result
+                if (!(this.Equals(wix)))
+                    throw new ApplicationException("update mismatch");
+#endif
 
                 success = true;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
-				success = false;
-			}
+                success = false;
+            }
 
-			return success;
-		}
+            return success;
+        }
 
         /// <summary>
         /// Removes an intent from the DB and our onboard cache
@@ -216,7 +233,8 @@ namespace zsquared
         /// <param name="global">Global.</param>
         public async Task<bool> RemoveIntent(C_Global global)
         {
-            bool res = await RemoveIntent(global.LoggedInUser.Token);
+            C_VitaUser LoggedInUser = global.GetUserFromCacheNoFetch(global.LoggedInUserId);
+            bool res = await RemoveIntent(LoggedInUser.Token);
 
             if (res && global.WorkItems.Contains(this))
                 global.WorkItems.Remove(this);
@@ -230,12 +248,14 @@ namespace zsquared
         /// <returns>The intent.</returns>
         /// <param name="token">Token.</param>
 		public async Task<bool> RemoveIntent(string token)
-		{
-			if (id == -1)
-				throw new ApplicationException("must be an existing id; can't delete one that hasn't been added");
+        {
+#if DEBUG
+            if (id == -1)
+                throw new ApplicationException("must be an existing id; can't delete one that hasn't been added");
+#endif
 
             int retryCount = 0;
-			bool success = false;
+            bool success = false;
             bool retry = false;
             do
             {
@@ -252,9 +272,6 @@ namespace zsquared
                     wc.Headers.Add(HttpRequestHeader.Accept, "application/json");
 
                     string responseString = await wc.UploadStringTaskAsync(submiturl, "DELETE", "");
-
-                    //JsonValue responseJson = JsonValue.Parse(responseString);
-                    // if it parses then it is our success result
 
                     success = true;
                 }
@@ -274,7 +291,9 @@ namespace zsquared
                 }
                 catch (Exception e)
                 {
+#if DEBUG
                     Console.WriteLine(e.Message);
+#endif
                     success = false;
                 }
             }
@@ -311,6 +330,71 @@ namespace zsquared
 
             return res;
         }
+
+		public override bool Equals(System.Object obj)
+        {
+            const float EPSILON = 0.001f;
+
+			if (obj == null)
+				return false;
+
+            C_WorkItem g = obj as C_WorkItem;
+			if ((System.Object)g == null)
+				return false;
+
+			bool res = true;
+
+			res &= id == g.id;
+            if (SiteSlug != null)
+				res &= SiteSlug == g.SiteSlug;
+            if (Date != null)
+				res &= Date == g.Date;
+            res &= UserId == g.UserId;
+            res &= Math.Abs(Hours - g.Hours) < EPSILON;
+            res &= Approved == g.Approved;
+            res &= SiteName == g.SiteName;
+			res &= Dirty == g.Dirty;
+
+			return res;
+		}
+
+		public static bool operator ==(C_WorkItem a, C_WorkItem b)
+		{
+			// If both are null, or both are same instance, return true.
+			if (System.Object.ReferenceEquals(a, b))
+			{
+				return true;
+			}
+
+			// If one is null, but not both, return false.
+			if (((object)a == null) || ((object)b == null))
+			{
+				return false;
+			}
+
+			// Return true if the fields match:
+			return a.Equals(b);
+		}
+
+		public static bool operator !=(C_WorkItem a, C_WorkItem b)
+		{
+			return !(a == b);
+		}
+
+		public override int GetHashCode()
+		{
+			int hash = 269;
+			hash = (hash * 47) * id.GetHashCode();
+            hash = (hash * 47) * SiteSlug.GetHashCode();
+            hash = (hash * 47) * Date.GetHashCode();
+            hash = (hash * 47) * UserId.GetHashCode();
+            hash = (hash * 47) * Hours.GetHashCode();
+            hash = (hash * 47) * Approved.GetHashCode();
+            hash = (hash * 47) * Dirty.GetHashCode();
+            hash = (hash * 47) * SiteName.GetHashCode();
+
+			return hash;
+		}
 
         public static int CompareByDateAscending(C_WorkItem wi1, C_WorkItem wi2)
         {

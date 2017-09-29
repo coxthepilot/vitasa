@@ -52,23 +52,7 @@ namespace vitavol
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UIImageView IMG_Accepting { get; set; }
-
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UIImageView IMG_AtLimit { get; set; }
-
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UIImageView IMG_Closed { get; set; }
-
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UIImageView IMG_Currently { get; set; }
-
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UIImageView IMG_NearLimit { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
@@ -125,29 +109,9 @@ namespace vitavol
                 B_Volunteers = null;
             }
 
-            if (IMG_Accepting != null) {
-                IMG_Accepting.Dispose ();
-                IMG_Accepting = null;
-            }
-
-            if (IMG_AtLimit != null) {
-                IMG_AtLimit.Dispose ();
-                IMG_AtLimit = null;
-            }
-
-            if (IMG_Closed != null) {
-                IMG_Closed.Dispose ();
-                IMG_Closed = null;
-            }
-
             if (IMG_Currently != null) {
                 IMG_Currently.Dispose ();
                 IMG_Currently = null;
-            }
-
-            if (IMG_NearLimit != null) {
-                IMG_NearLimit.Dispose ();
-                IMG_NearLimit = null;
             }
 
             if (L_ClientStatus != null) {

@@ -92,17 +92,17 @@ namespace zsquared
         {
             StringBuilder sb = new StringBuilder();
 
-            sb.Append("{[");
+            sb.Append("{");
 
-            sb.Append("{ " + N_ID + " : " + id.ToString() + "},");
-            sb.Append("{ " + N_SiteID + " : " + SiteID.ToString() + "},");
-            sb.Append("{ " + N_Date + " : " + Date.ToString("yyyy-mm-dd") + "},");
-            sb.Append("{ " + N_OpenTime + " : " + OpenTime.ToString("hh:mm") + "},");
-            sb.Append("{ " + N_CloseTime + " : " + CloseTime.ToString("hh:mm") + "},");
-            sb.Append("{ " + N_IsClosed + " : " + (IsClosed ? "true" : "false") + "},");
-            sb.Append("{ " + N_NumEFilers + " : " + NumEFilers.ToString() + "}");
+            sb.Append("\"" + N_ID + "\" : \"" + id.ToString() + "\",");
+            sb.Append("\"" + N_SiteID + "\" : \"" + SiteID.ToString() + "\",");
+            sb.Append("\"" + N_Date + "\" : \"" + Date.ToString("yyyy-mm-dd") + "\",");
+            sb.Append("\"" + N_OpenTime + "\" : \"" + OpenTime.ToString("hh:mm") + "\",");
+            sb.Append("\"" + N_CloseTime + "\" : \"" + CloseTime.ToString("hh:mm") + "\",");
+            sb.Append("\"" + N_IsClosed + "\" : \"" + (IsClosed ? "true" : "false") + "\",");
+            sb.Append("\"" + N_NumEFilers + "\" : \"" + NumEFilers.ToString() + "\"");
 
-			sb.Append("]}");
+			sb.Append("}");
 
             return sb.ToString();
         }
@@ -136,5 +136,66 @@ namespace zsquared
             return res;
         }
 
+		public override bool Equals(System.Object obj)
+		{
+			if (obj == null)
+				return false;
+
+            C_CalendarEntry g = obj as C_CalendarEntry;
+			if ((System.Object)g == null)
+				return false;
+
+			bool res = true;
+
+			res &= id == g.id;
+            res &= SiteID == g.SiteID;
+            if (Date != null)
+				res &= Date == g.Date;
+            if (OpenTime != null)
+				res &= OpenTime == g.OpenTime;
+            if (CloseTime != null)
+				res &= CloseTime == g.CloseTime;
+            res &= IsClosed == g.IsClosed;
+            res &= NumEFilers == g.NumEFilers;
+
+			return res;
+		}
+
+		public static bool operator ==(C_CalendarEntry a, C_CalendarEntry b)
+		{
+			// If both are null, or both are same instance, return true.
+			if (System.Object.ReferenceEquals(a, b))
+			{
+				return true;
+			}
+
+			// If one is null, but not both, return false.
+			if (((object)a == null) || ((object)b == null))
+			{
+				return false;
+			}
+
+			// Return true if the fields match:
+			return a.Equals(b);
+		}
+
+		public static bool operator !=(C_CalendarEntry a, C_CalendarEntry b)
+		{
+			return !(a == b);
+		}
+
+		public override int GetHashCode()
+		{
+			int hash = 269;
+            hash = (hash * 47) * id.GetHashCode();
+            hash = (hash * 47) * SiteID.GetHashCode();
+            hash = (hash * 47) * Date.GetHashCode();
+            hash = (hash * 47) * OpenTime.GetHashCode();
+            hash = (hash * 47) * CloseTime.GetHashCode();
+            hash = (hash * 47) * IsClosed.GetHashCode();
+            hash = (hash * 47) * NumEFilers.GetHashCode();
+
+			return hash;
+		}
 	}
 }
