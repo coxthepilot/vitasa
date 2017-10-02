@@ -1,13 +1,23 @@
-﻿using System;
-using System.Json;
-using System.Text;
+﻿using System.Json;
 
 namespace zsquared
 {
+    /// <summary>
+    /// The details for a site that a user is a site coordinator for.
+    /// </summary>
     public class C_SiteCoordinated
     {
+        /// <summary>
+        /// The id of the site.
+        /// </summary>
         public int SiteId;
+        /// <summary>
+        /// The slug for the site.
+        /// </summary>
         public string Slug;
+        /// <summary>
+        /// Site name.
+        /// </summary>
         public string Name;
 
         public static readonly string N_SiteID = "id";

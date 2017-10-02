@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Json;
-using System.IO;
 using System.Net;
 using System.Threading.Tasks;
 using System.Collections.Generic;
@@ -26,9 +25,16 @@ namespace zsquared
         public string Latitude;
         public string Longitude;
         public string PlaceID;
-        public int PrimaryCoordinator; // user id of user with site coordinator
+        public int PrimaryCoordinator; // user id of user with site coordinator for this site
         public E_SiteStatus Status = E_SiteStatus.Unknown;
+        /// <summary>
+        /// This is the default calendar for the site, 1 per day of the week. Can be overriden by a calendar
+        /// override, below.
+        /// </summary>
         public C_SiteCalendarEntry[] SiteCalendar;
+        /// <summary>
+        /// The user id of the user that is assigned backup coordinator for the site.
+        /// </summary>
         public int BackupCoordinator;
         public List<C_CalendarEntry> CalendarOverrides;
         public List<C_WorkItem> WorkHistoryX;
@@ -37,9 +43,19 @@ namespace zsquared
         public C_YMD SeasonFirstDate;
         public C_YMD SeasonLastDate;
         public List<E_SiteCapabilities> SiteCapabilities;
+        /// <summary>
+        /// For convenience, the backend returns the name of the primary site coordinator in addition to the userid.
+        /// </summary>
         public string PrimaryCoordinatorName;
-        public string BackupCoordinatorName;
-        public DateTime SampleTime;                 // <<<<<<<<<<<<<<<<<
+		/// <summary>
+		/// For convenience, the backend returns the name of the backup site coordinator in addition to the userid.
+		/// </summary>
+		public string BackupCoordinatorName;
+        /// <summary>
+        /// Not stored in the db; the datetime when this site was read from the back end; things like site
+        /// status, calendar, and capabilities might change in real time.
+        /// </summary>
+        public DateTime SampleTime;
 
         // not saved in the db; updated after the sites list is loaded and user location is determined; not saved across screen changes
         public double DistanceFromUserLocation;
@@ -67,24 +83,6 @@ namespace zsquared
         public static readonly string N_PrimarySiteCoordinatorName = "sitecoordinator_name";
         public static readonly string N_BackupSiteCoordinatorName = "backup_coordinator_name";
         public static readonly string N_SampleTime = "sampledate";
-
-        /// <summary>
-        /// Create a new site with null values for all fields
-        /// </summary>
-        public C_VitaSite()
-        {
-            SiteCalendar = new C_SiteCalendarEntry[7];
-            for (int ix = 0; ix != 7; ix++)
-                SiteCalendar[ix] = new C_SiteCalendarEntry();
-            CalendarOverrides = new List<C_CalendarEntry>();
-            WorkHistoryX = new List<C_WorkItem>();
-            WorkIntentsX = new List<C_WorkItem>();
-            SiteCapabilities = new List<E_SiteCapabilities>();
-
-            // todo; get these from the json when supported by the api
-            SeasonFirstDate = new C_YMD(2017, 09, 01);
-            SeasonLastDate = new C_YMD(2018, 04, 15);
-        }
 
         /// <summary>
         /// Create a vita site from the json values, read from the web service
@@ -278,118 +276,6 @@ namespace zsquared
             return res;
         }
 
-        /// <summary>
-        /// Imports the sites.
-        /// </summary>
-        /// <returns>A list of sites found in the json</returns>
-        /// <param name="json">the value from the backend services that has been Parsed</param>
-        private static List<C_VitaSite> ImportSites(JsonValue json)
-        {
-#if DEBUG
-            if (!(json is JsonArray))
-                throw new ApplicationException("the sites list must be an array");
-#endif
-
-            // create the holding place for the results
-            List<C_VitaSite> res = new List<C_VitaSite>();
-            foreach (JsonValue j in json)
-            {
-                try
-                {
-                    C_VitaSite vs = new C_VitaSite(j);
-                    res.Add(vs);
-                }
-                catch (Exception e)
-                {
-#if DEBUG
-                    Console.WriteLine(e.Message);
-#endif
-                }
-            }
-
-            return res;
-        }
-
-        public async static Task<List<C_VitaSite>> FetchSitesListX()
-        {
-            List<C_VitaSite> siteslist = null;
-            int retryCount = 0;
-            bool error;
-
-            do
-            {
-                try
-                {
-                    error = false;
-                    string sitesUrl = "/sites";
-                    WebClient wc = new WebClient()
-                    {
-                        BaseAddress = C_Vita.VitaCoreUrl
-                    };
-                    wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
-                    wc.Headers.Add(HttpRequestHeader.Accept, "application/json");
-
-                    string responseString = await wc.DownloadStringTaskAsync(sitesUrl);
-
-                    JsonValue responseJson = JsonValue.Parse(responseString);
-
-                    siteslist = ImportSites(responseJson);
-                }
-                catch (Exception e)
-                {
-                    // todo: need an 'if' here to look at the exact error type and only retry those errors
-#if DEBUG
-                    Console.WriteLine(e.Message);
-#endif
-                    siteslist = null;
-                    error = true;
-                    retryCount++;
-                }
-            }
-            while (error && (retryCount < 4));
-
-#if DEBUG
-            if (error)
-                Console.WriteLine("retry exhausted");
-#endif
-
-            return siteslist;
-        }
-
-        public async static Task<C_VitaSite> FetchSitesDetails(string slug)
-        {
-            C_VitaSite site = null;
-
-            try
-            {
-                string siteUrl = "/sites/" + slug;
-                WebClient wc = new WebClient()
-                {
-                    BaseAddress = C_Vita.VitaCoreUrl
-                };
-                wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
-                wc.Headers.Add(HttpRequestHeader.Accept, "application/json");
-
-                string responseString = await wc.DownloadStringTaskAsync(siteUrl);
-
-                JsonValue responseJson = JsonValue.Parse(responseString);
-
-                site = new C_VitaSite(responseJson)
-                {
-                    SampleTime = DateTime.Now
-                };
-            }
-            catch (Exception e)
-            {
-#if DEBUG
-                Console.WriteLine(e.Message);
-#endif
-                site = null;
-            }
-
-            return site;
-        }
-
         public async Task<bool> UpdateDefaultCalendar(int dayOfWeek, C_HMS openTime, C_HMS closeTime, int numefilers, string token)
         {
 #if DEBUG
@@ -398,30 +284,46 @@ namespace zsquared
             if (numefilers < 0)
                 throw new ApplicationException("number of efilers must be greater than 0");
 #endif
+            int retryCount = 0;
+            bool retry = false;
 
             bool success = false;
-            try
+            do
             {
-                string dows = C_YMD.DayOfWeekNames[dayOfWeek].ToLower();
-                string n_opentime = dows + "_open";
-                string n_closetime = dows + "_close";
-                string n_numefilers = dows + "_efilers";
+                try
+                {
+                    retry = false;
+                    string dows = C_YMD.DayOfWeekNames[dayOfWeek].ToLower();
+                    string n_opentime = dows + "_open";
+                    string n_closetime = dows + "_close";
+                    string n_numefilers = dows + "_efilers";
 
-                string bodyjson = "{"
-                      + "\"" + n_opentime + "\" : \"" + openTime.ToString("hh:mm") + "\""
-                      + ",\"" + n_closetime + "\" : \"" + closeTime.ToString("hh:mm") + "\""
-                      + ",\"" + n_numefilers + "\" : \"" + numefilers.ToString() + "\""
-                      + "}";
+                    string bodyjson = "{"
+                          + "\"" + n_opentime + "\" : \"" + openTime.ToString("hh:mm") + "\""
+                          + ",\"" + n_closetime + "\" : \"" + closeTime.ToString("hh:mm") + "\""
+                          + ",\"" + n_numefilers + "\" : \"" + numefilers.ToString() + "\""
+                          + "}";
 
-                success = await UpdateSite(bodyjson, token);
-            }
-            catch (Exception e)
-            {
+                    success = await UpdateSite(bodyjson, token);
+                }
+                catch (WebException we)
+                {
+                    if (we.Status == WebExceptionStatus.ReceiveFailure)
+                    {
+                        success = false;
+                        retry = retryCount < 3;
+                        retryCount++;
+                    }
+                }
+                catch (Exception e)
+                {
 #if DEBUG
-                Console.WriteLine(e.Message);
+                    Console.WriteLine(e.Message);
 #endif
-                success = false;
+                    success = false;
+                }
             }
+            while (retry);
 
             return success;
         }
@@ -434,126 +336,179 @@ namespace zsquared
         /// <param name="calEntry">Cal entry.</param>
         public async Task<bool> CreateCalendarException(string token, C_CalendarEntry calEntry)
         {
+            int retryCount = 0;
+            bool retry = false;
+
             bool success = false;
-            try
+            do
             {
-                string bodyjson = "{ "
-                    + "\"date\" : \"" + calEntry.Date.ToString("yyyy-mm-dd") + "\""
-                    + ",\"open\" : \"" + calEntry.OpenTime.ToString("hh:mm") + "\""
-                    + ",\"close\" : \"" + calEntry.CloseTime.ToString("hh:mm") + "\""
-                    + ",\"is_closed\" : \"" + (calEntry.IsClosed ? "true" : "false") + "\""
-                    + ",\"efilers_needed\" : \"" + calEntry.NumEFilers.ToString() + "\""
-                    + ",\"backup_coordinator_today\" : \"" + "false" + "\""
-                    + "}";
-
-                string updateurl = "/sites/" + Slug + "/calendars/";
-                WebClient wc = new WebClient()
+                try
                 {
-                    BaseAddress = C_Vita.VitaCoreUrl
-                };
-                wc.Headers.Add(HttpRequestHeader.Cookie, token);
-                wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
-                wc.Headers.Add(HttpRequestHeader.Accept, "application/json");
+                    retry = false;
+                    string bodyjson = "{ "
+                        + "\"date\" : \"" + calEntry.Date.ToString("yyyy-mm-dd") + "\""
+                        + ",\"open\" : \"" + calEntry.OpenTime.ToString("hh:mm") + "\""
+                        + ",\"close\" : \"" + calEntry.CloseTime.ToString("hh:mm") + "\""
+                        + ",\"is_closed\" : \"" + (calEntry.IsClosed ? "true" : "false") + "\""
+                        + ",\"efilers_needed\" : \"" + calEntry.NumEFilers.ToString() + "\""
+                        + ",\"backup_coordinator_today\" : \"" + "false" + "\""
+                        + "}";
 
-                string responseString = await wc.UploadStringTaskAsync(updateurl, "POST", bodyjson);
+                    string updateurl = "/sites/" + Slug + "/calendars/";
+                    WebClient wc = new WebClient()
+                    {
+                        BaseAddress = C_Vita.VitaCoreUrl
+                    };
+                    wc.Headers.Add(HttpRequestHeader.Cookie, token);
+                    wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
+                    wc.Headers.Add(HttpRequestHeader.Accept, "application/json");
 
-                JsonValue responseJson = JsonValue.Parse(responseString);
-                C_CalendarEntry cex = new C_CalendarEntry(responseJson);
-                calEntry.id = cex.id;
-                calEntry.SiteID = cex.SiteID;
+                    string responseString = await wc.UploadStringTaskAsync(updateurl, "POST", bodyjson);
+
+                    JsonValue responseJson = JsonValue.Parse(responseString);
+                    C_CalendarEntry cex = new C_CalendarEntry(responseJson);
+                    calEntry.id = cex.id;
+                    calEntry.SiteID = cex.SiteID;
 
 #if DEBUG
-                if (calEntry != cex)
-                    throw new ApplicationException("created exception not equal to submited exception");
+                    if (calEntry != cex)
+                        throw new ApplicationException("created exception not equal to submited exception");
 #endif
 
-                // add it to the current Site instance
-                CalendarOverrides.Add(calEntry);
+                    // add it to the current Site instance
+                    CalendarOverrides.Add(calEntry);
 
-                success = true;
-            }
-            catch (Exception e)
-            {
+                    success = true;
+                }
+                catch (WebException we)
+                {
+                    if (we.Status == WebExceptionStatus.ReceiveFailure)
+                    {
+                        success = false;
+                        retry = retryCount < 3;
+                        retryCount++;
+                    }
+                }
+                catch (Exception e)
+                {
 #if DEBUG
-                Console.WriteLine(e.Message);
+                    Console.WriteLine(e.Message);
 #endif
-                success = false;
+                    success = false;
+                }
             }
+            while (retry);
 
             return success;
         }
 
         public async Task<bool> UpdateCalendarException(string token, C_CalendarEntry calEntry)
         {
+            int retryCount = 0;
+            bool retry = false;
+
             bool success = false;
-            try
+            do
             {
-                string bodyjson = "{ "
-                    + "\"date\" : \"" + calEntry.Date.ToString("yyyy-mm-dd") + "\""
-                    + ",\"open\" : \"" + calEntry.OpenTime.ToString("hh:mm") + "\""
-                    + ",\"close\" : \"" + calEntry.CloseTime.ToString("hh:mm") + "\""
-                    + ",\"efilers_needed\" : \"" + calEntry.NumEFilers.ToString() + "\""
-                    + ",\"is_closed\" : \"" + (calEntry.IsClosed ? "true" : "false") + "\""
-                    + ",\"backup_coordinator_today\" : \"" + "false" + "\""
-                    + "}";
-
-                string updateurl = "/sites/" + Slug + "/calendars/" + calEntry.id.ToString();
-                WebClient wc = new WebClient()
+                try
                 {
-                    BaseAddress = C_Vita.VitaCoreUrl
-                };
-                wc.Headers.Add(HttpRequestHeader.Cookie, token);
-                wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
-                wc.Headers.Add(HttpRequestHeader.Accept, "application/json");
+                    retry = false;
+                    string bodyjson = "{ "
+                        + "\"date\" : \"" + calEntry.Date.ToString("yyyy-mm-dd") + "\""
+                        + ",\"open\" : \"" + calEntry.OpenTime.ToString("hh:mm") + "\""
+                        + ",\"close\" : \"" + calEntry.CloseTime.ToString("hh:mm") + "\""
+                        + ",\"efilers_needed\" : \"" + calEntry.NumEFilers.ToString() + "\""
+                        + ",\"is_closed\" : \"" + (calEntry.IsClosed ? "true" : "false") + "\""
+                        + ",\"backup_coordinator_today\" : \"" + "false" + "\""
+                        + "}";
 
-                string responseString = await wc.UploadStringTaskAsync(updateurl, "PUT", bodyjson);
+                    string updateurl = "/sites/" + Slug + "/calendars/" + calEntry.id.ToString();
+                    WebClient wc = new WebClient()
+                    {
+                        BaseAddress = C_Vita.VitaCoreUrl
+                    };
+                    wc.Headers.Add(HttpRequestHeader.Cookie, token);
+                    wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
+                    wc.Headers.Add(HttpRequestHeader.Accept, "application/json");
+
+                    string responseString = await wc.UploadStringTaskAsync(updateurl, "PUT", bodyjson);
 
 #if DEBUG
-                JsonValue responseJson = JsonValue.Parse(responseString);
-                C_CalendarEntry cex = new C_CalendarEntry(responseJson);
-                if (cex != calEntry)
-                    throw new ApplicationException("response calendar entry does not match");
+                    JsonValue responseJson = JsonValue.Parse(responseString);
+                    C_CalendarEntry cex = new C_CalendarEntry(responseJson);
+                    if (cex != calEntry)
+                        throw new ApplicationException("response calendar entry does not match");
 #endif
 
-                success = true;
+                    success = true;
+                }
+                catch (WebException we)
+                {
+                    if (we.Status == WebExceptionStatus.ReceiveFailure)
+                    {
+                        success = false;
+                        retry = retryCount < 3;
+                        retryCount++;
+                    }
+                }
+                catch (Exception e)
+                {
+#if DEBUG
+                    Console.WriteLine(e.Message);
+#endif
+                    success = false;
+                }
             }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-                success = false;
-            }
+            while (retry);
 
             return success;
         }
 
         public async Task<bool> RemoveCalendarException(string token, C_CalendarEntry calEntry)
         {
+            int retryCount = 0;
+            bool retry = false;
+
             bool success = false;
-            try
+            do
             {
-                string updateurl = "/sites/" + Slug + "/calendars/" + calEntry.id.ToString();
-                WebClient wc = new WebClient()
+                try
                 {
-                    BaseAddress = C_Vita.VitaCoreUrl
-                };
-                wc.Headers.Add(HttpRequestHeader.Cookie, token);
-                wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
-                wc.Headers.Add(HttpRequestHeader.Accept, "application/json");
+                    retry = false;
+                    string updateurl = "/sites/" + Slug + "/calendars/" + calEntry.id.ToString();
+                    WebClient wc = new WebClient()
+                    {
+                        BaseAddress = C_Vita.VitaCoreUrl
+                    };
+                    wc.Headers.Add(HttpRequestHeader.Cookie, token);
+                    wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
+                    wc.Headers.Add(HttpRequestHeader.Accept, "application/json");
 
-                string responseString = await wc.UploadStringTaskAsync(updateurl, "DELETE", "");
-                // the response string has no content, is == ""
-                // remove the calendar entry from this instance
-                CalendarOverrides.Remove(calEntry);
+                    string responseString = await wc.UploadStringTaskAsync(updateurl, "DELETE", "");
+                    // the response string has no content, is == ""
+                    // remove the calendar entry from this instance
+                    CalendarOverrides.Remove(calEntry);
 
-                success = true;
-            }
-            catch (Exception e)
-            {
+                    success = true;
+                }
+                catch (WebException we)
+                {
+                    if (we.Status == WebExceptionStatus.ReceiveFailure)
+                    {
+                        success = false;
+                        retry = retryCount < 3;
+                        retryCount++;
+                    }
+                }
+                catch (Exception e)
+                {
 #if DEBUG
-                Console.WriteLine(e.Message);
+                    Console.WriteLine(e.Message);
 #endif
-                success = false;
+                    success = false;
+                }
             }
+            while (retry);
 
             return success;
         }
@@ -633,29 +588,48 @@ namespace zsquared
         /// <param name="token">Token.</param>
         private async Task<bool> UpdateSite(string jsonString, string token)
         {
+            int retryCount = 0;
+            bool retry = false;
+
             bool res = false;
-            try
+            do
             {
-                string updateurl = "/sites/" + Slug;
-                WebClient wc = new WebClient()
+                try
                 {
-                    BaseAddress = C_Vita.VitaCoreUrl
-                };
-                wc.Headers.Add(HttpRequestHeader.Cookie, token);
-                wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
-                wc.Headers.Add(HttpRequestHeader.Accept, "application/json");
+                    retry = false;
+                    string updateurl = "/sites/" + Slug;
+                    WebClient wc = new WebClient()
+                    {
+                        BaseAddress = C_Vita.VitaCoreUrl
+                    };
+                    wc.Headers.Add(HttpRequestHeader.Cookie, token);
+                    wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
+                    wc.Headers.Add(HttpRequestHeader.Accept, "application/json");
 
-                string responseString = await wc.UploadStringTaskAsync(updateurl, "PUT", jsonString);
+                    string responseString = await wc.UploadStringTaskAsync(updateurl, "PUT", jsonString);
 
-                //JsonValue jvResponse = JsonValue.Parse(responseString);
+                    //JsonValue jvResponse = JsonValue.Parse(responseString);
 
-                res = true;
+                    res = true;
+                }
+                catch (WebException we)
+                {
+                    if (we.Status == WebExceptionStatus.ReceiveFailure)
+                    {
+                        res = false;
+                        retry = retryCount < 3;
+                        retryCount++;
+                    }
+                }
+                catch (Exception e)
+                {
+#if DEBUG
+                    Console.WriteLine(e.Message);
+#endif
+                    res = false;
+                }
             }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-                res = false;
-            }
+            while (retry);
 
             return res;
         }
@@ -728,6 +702,28 @@ namespace zsquared
 			return res;
 		}
 
+		public bool SiteIsOpenOnDay(C_YMD onDate)
+		{
+			int dayOfWeek = (int)onDate.DayOfWeek;
+
+			bool siteIsOpenOnDate =
+				(SiteCalendar[dayOfWeek].OpenTime != SiteCalendar[dayOfWeek].CloseTime)
+				&& (onDate >= SeasonFirstDate)
+				&& (onDate <= SeasonLastDate);
+
+			// scan for an override
+			foreach (C_CalendarEntry ce in CalendarOverrides)
+			{
+				if (ce.Date == onDate)
+				{
+					siteIsOpenOnDate = !ce.IsClosed;
+					break;
+				}
+			}
+
+			return siteIsOpenOnDate;
+		}
+
 		// ------------ static methods -----------
 
 		/// <summary>
@@ -753,28 +749,6 @@ namespace zsquared
 		{
             var ou = sitesList.Where(s => s.SiteIsOpenOnDay(onDate));
             return ou.ToList();
-		}
-
-        public bool SiteIsOpenOnDay(C_YMD onDate)
-        {
-			int dayOfWeek = (int)onDate.DayOfWeek;
-
-            bool siteIsOpenOnDate =
-                (SiteCalendar[dayOfWeek].OpenTime != SiteCalendar[dayOfWeek].CloseTime)
-                && (onDate >= SeasonFirstDate)
-                && (onDate <= SeasonLastDate);
-
-			// scan for an override
-			foreach (C_CalendarEntry ce in CalendarOverrides)
-			{
-                if (ce.Date == onDate)
-				{
-					siteIsOpenOnDate = !ce.IsClosed;
-					break;
-				}
-			}
-
-            return siteIsOpenOnDate;
 		}
 
 		public static int CompareSitesByNameAscending(C_VitaSite s1, C_VitaSite s2)

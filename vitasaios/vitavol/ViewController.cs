@@ -1,15 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
 using UIKit;
-using System.Collections.Generic;
-using System.Linq;
 using Foundation;
-using System.IO;
 using static zsquared.C_MessageBox;
-using Xamarin.Forms;
-using System.Json;
 using EventKit;
-using EventKitUI;
 
 using zsquared;
 
@@ -28,8 +22,6 @@ namespace vitavol
 		{
 			base.DidReceiveMemoryWarning();
 		}
-
-		public static readonly string N_KnownEventsJson = "knowneventsjson";
 
         public override void ViewDidLoad()
         {
@@ -67,7 +59,7 @@ namespace vitavol
             };
 
             // Login is requested; we can only get this when the email and password are long enough
-            B_Login.TouchUpInside += async (sender, e) =>
+            B_Login.TouchUpInside += (sender, e) =>
             {
 				string email = TB_Email.Text;
                 string pw = TB_Password.Text;
@@ -76,107 +68,85 @@ namespace vitavol
                 EnableUI(false);
                 AI_Spinner.StartAnimating();
 
-                try
+                Task.Run(async () =>
                 {
-                    // do the actual login API call
-                    C_VitaUser user = await Global.PerformLogin(email, pw);
-                    // if bad name or pass, we get null; otherwise we get a C_VitaUser
-                    if (user == null)
-                    {
-                        E_MessageBoxResults mbres = await MessageBox(this,
-                                                                     "Error",
-                                                                     "Login failed. Bad email or password",
-                                                                     E_MessageBoxButtons.Ok);
-                        AI_Spinner.StopAnimating();
-                        EnableUI(true);
-                        return;
-                    }
+					// do the actual login API call
+					C_VitaUser user = await Global.PerformLogin(email, pw);
 
-                    //// get the list of all sites. We need this list to find out which sites the user might be a site coordinator in.
-                    //// todo: can Chris include this with User
-                    //// todo: lots of places downstream use this for slug to site name translation
-                    //bool getSitesSuccess = await Global.GetAllSites();
-                    //if (!getSitesSuccess)
-                    //{
-                    //    E_MessageBoxResults mbres = await MessageBox(this,
-                    //                                                 "Error",
-                    //                                                 "Unable to access Sites list",
-                    //                                                 E_MessageBoxButtons.Ok);
-                    //    AI_Spinner.StopAnimating();
-                    //    EnableUI(true);
-                    //    return;
-                    //}
+					UIApplication.SharedApplication.InvokeOnMainThread(
+					new Action(async () =>
+					{
+						// if bad name or pass, we get null; otherwise we get a C_VitaUser
+						if (user == null)
+						{
+							E_MessageBoxResults mbres = await MessageBox(this,
+																		 "Error",
+																		 "Login failed. Bad email or password",
+																		 E_MessageBoxButtons.Ok);
+							AI_Spinner.StopAnimating();
+							EnableUI(true);
+							return;
+						}
 
-                    AI_Spinner.StopAnimating();
-                    EnableUI(true);
-                    Global.LoggedInUserId = user.id;
+						AI_Spinner.StopAnimating();
+						EnableUI(true);
+						Global.LoggedInUserId = user.id;
 
-                    NSUserDefaults.StandardUserDefaults.SetString(TB_Email.Text, "email");
-                    NSUserDefaults.StandardUserDefaults.SetString(TB_Password.Text, "password");
+						NSUserDefaults.StandardUserDefaults.SetString(TB_Email.Text, "email");
+						NSUserDefaults.StandardUserDefaults.SetString(TB_Password.Text, "password");
 
-                    if (user.HasSiteCoordinator)
-                    {
-                        //// get the sites for which this site coordinator is responsible (as primary or backup)
-                        //// if only one, then SCSite; if more than one then SCSites
-                        //var sou = Global.AllSites.Where(s => (s.PrimaryCoordinator == Global.LoggedInUser.id)
-                        //                                  || (s.BackupCoordinator == Global.LoggedInUser.id));
-                        //List<C_VitaSite> SCSites = sou.ToList();
+						if (user.HasSiteCoordinator)
+						{
+							if (user.SitesCoordinated.Count == 0)
+							{
+								// a site coordinator with no sites
+								E_MessageBoxResults mbres = await MessageBox(this,
+									"No Sites",
+									"Site Coordinator but no Sites assigned.",
+									E_MessageBoxButtons.Ok);
 
-                        if (user.SitesCoordinated.Count == 0)
-                        {
-                            // a site coordinator with no sites
-                            E_MessageBoxResults mbres = await MessageBox(this,
-                                "No Sites",
-                                "Site Coordinator but no Sites assigned.",
-                                E_MessageBoxButtons.Ok);
+								Global.SelectedSiteSlug = null;
+								Global.ViewCameFrom = E_ViewCameFrom.Login;
 
-                            Global.SelectedSiteSlug = null;
-                            Global.ViewCameFrom = E_ViewCameFrom.Login;
+								PerformSegue("Segue_LoginToSCSites", this);
+							}
+							else if (user.SitesCoordinated.Count == 1)
+							{
+								C_SiteCoordinated sc = user.SitesCoordinated[0];
 
-                            PerformSegue("Segue_LoginToSCSites", this);
-                        }
-                        else if (user.SitesCoordinated.Count == 1)
-                        {
-                            C_SiteCoordinated sc = user.SitesCoordinated[0];
+								Global.SelectedSiteSlug = sc.Slug;
+								Global.ViewCameFrom = E_ViewCameFrom.Login;
 
-                            Global.SelectedSiteSlug = sc.Slug;
-                            Global.ViewCameFrom = E_ViewCameFrom.Login;
+								PerformSegue("Segue_LoginToSCSite", this);
+							}
+							else // manages more than one site
+							{
+								Global.SelectedSiteSlug = null;
+								Global.ViewCameFrom = E_ViewCameFrom.Login;
 
-                            PerformSegue("Segue_LoginToSCSite", this);
-                        }
-                        else // manages more than one site
-                        {
-                            Global.SelectedSiteSlug = null;
-                            Global.ViewCameFrom = E_ViewCameFrom.Login;
-
-                            PerformSegue("Segue_LoginToSCSites", this);
-                        }
-                    }
-                    else if (user.HasVolunteer)
-                    {
-                        PerformSegue("Segue_LoginToSignUps", this);
-                    }
-                    else if (user.HasNewUser)
-                    {
-                        E_MessageBoxResults mbres = await MessageBox(this,
-                                           "Not Authorized",
-                                           "Staff has not yet acted on your registration.",
-                                           E_MessageBoxButtons.Ok);
-                    }
-                    else
-                    {
-                        E_MessageBoxResults mbres = await MessageBox(this,
-                                         "Error",
-                                         "Authorization failure. Expecting Volunteer or Site Coordinator",
-                                         E_MessageBoxButtons.Ok);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                    ShowMessageOnUIThreadAndEnableUI("Error", "Error attempting login.", true);
-                }
-
+								PerformSegue("Segue_LoginToSCSites", this);
+							}
+						}
+						else if (user.HasVolunteer)
+						{
+							PerformSegue("Segue_LoginToVolunteerOptions", this);
+						}
+						else if (user.HasNewUser)
+						{
+							E_MessageBoxResults mbres = await MessageBox(this,
+											   "Not Authorized",
+											   "Staff has not yet acted on your registration.",
+											   E_MessageBoxButtons.Ok);
+						}
+						else
+						{
+							E_MessageBoxResults mbres = await MessageBox(this,
+											 "Error",
+											 "Authorization failure. Expecting Volunteer, Site Coordinator, or New User",
+											 E_MessageBoxButtons.Ok);
+						}
+					}));
+                });
             }; // end of B_Login lambda
 
             // set the defaults from the settings
@@ -186,16 +156,6 @@ namespace vitavol
 
             I_BackgroundImage.Image = UIImage.FromBundle("Background.jpg");
         }
-
-		private void ShowMessageOnUIThreadAndEnableUI(string title, string message, bool en)
-        {
-			UIApplication.SharedApplication.InvokeOnMainThread(
-			new Action(() =>
-			{
-                MessageBox(this, title, message, E_MessageBoxButtons.Ok);
-                EnableUI(en);
-			}));
-		}
 
         private void EnableUI(bool enable)
         {

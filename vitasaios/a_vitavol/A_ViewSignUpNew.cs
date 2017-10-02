@@ -40,8 +40,6 @@ namespace a_vitavol
 
         List<string> UserNames;
 
-        int _calId;
-
 		protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -52,8 +50,6 @@ namespace a_vitavol
 			Global = g.Global;
 
             SetContentView(Resource.Layout.ViewSignUpNew);
-
-            _calId = Intent.GetIntExtra("calId", -1);
 
 			LoggedInUser = Global.GetUserFromCacheNoFetch(Global.LoggedInUserId);
 			SelectedSite = Global.GetSiteFromCacheNoFetch(Global.SelectedSiteSlug);
@@ -102,16 +98,52 @@ namespace a_vitavol
 					return;
 				}
 
-                C_MessageBox mbox = new C_MessageBox(this, "Add to Calendar?", "Add this signup to your calendar?", E_MessageBoxButtons.YesNo);
+                C_MessageBox mbox = new C_MessageBox(this, 
+                                                     "Add to Calendar?", 
+                                                     "Add this signup to your calendar?", 
+                                                     E_MessageBoxButtons.YesNo);
                 mbox.Dismissed += (sender1, args1) => 
                 {
                     if (args1.Result == E_MessageBoxResults.Yes)
                     {
+                        // first job is to find the calendar to add our item into; we choose to add to the primary calendar
+						var calendarsUri = CalendarContract.Calendars.ContentUri;
+
+						string[] calendarsProjection = {
+            			   CalendarContract.Calendars.InterfaceConsts.Id,
+            			   //CalendarContract.Calendars.InterfaceConsts.CalendarDisplayName,
+            			   //CalendarContract.Calendars.InterfaceConsts.AccountName,
+                           CalendarContract.Calendars.InterfaceConsts.IsPrimary
+            			};
+
+						var loader = new CursorLoader(this, calendarsUri, calendarsProjection, null, null, null);
+						var cursor = (ICursor)loader.LoadInBackground();
+
+						int _calId = -1;
+
+						int ccount = cursor.Count;
+                        cursor.MoveToFirst();
+                        for (int ix = 0; ix != ccount; ix++)
+                        {
+                            int id = cursor.GetInt(0);
+                            //string displayName = cursor.GetString(1);
+                            //string accountName = cursor.GetString(2);
+                            int isPrimary = cursor.GetInt(3);
+
+                            if (isPrimary != 0)
+                            {
+                                _calId = id;
+                                break;
+                            }
+
+                            cursor.MoveToNext();
+                        }
+
 						C_HMS[] openCloseTimes = SelectedSite.GetOpenCloseTimeOnDate(wi.Date);
 						C_HMS openTime = openCloseTimes[0];
 						C_HMS closeTime = openCloseTimes[1];
 
-                        ContentValues eventValues = new ContentValues();
+						ContentValues eventValues = new ContentValues();
 
 						eventValues.Put(CalendarContract.Events.InterfaceConsts.CalendarId, _calId);
 						eventValues.Put(CalendarContract.Events.InterfaceConsts.Title, "VITA Sign-Up");
@@ -195,27 +227,19 @@ namespace a_vitavol
 
         long GetDateTimeMS(C_YMD ymd, C_HMS hms)
 		{
-			//Calendar c = Calendar.GetInstance(Java.Util.TimeZone.Default);
+            //string[] tzid = Java.Util.TimeZone.GetAvailableIDs();
+            var tz = Java.Util.TimeZone.GetTimeZone("US/Central");
+			Calendar c = Calendar.GetInstance(tz);
 
-            //c.Set(CalendarField.Minute, hms.Minutes);
-            //c.Set(CalendarField.HourOfDay, hms.Hour);
-            //c.Set(CalendarField.DayOfMonth, ymd.Day);
-            //c.Set(CalendarField.Month, ymd.Month - 1);
-            //c.Set(CalendarField.Year, ymd.Year);
+			c.Set(CalendarField.Minute, hms.Minutes);
+			c.Set(CalendarField.HourOfDay, hms.Hour);
+			c.Set(CalendarField.DayOfMonth, ymd.Day);
+			c.Set(CalendarField.Month, ymd.Month - 1);
+			c.Set(CalendarField.Year, ymd.Year);
 
-            //long reft = c.TimeInMillis;
+			long reft = c.TimeInMillis;
 
-            DateTime dt = new DateTime(ymd.Year, ymd.Month, ymd.Day, hms.Hour, hms.Minutes, 0, DateTimeKind.Local);
-            DateTime refdt = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Local);
-            TimeSpan ts = dt - refdt;
-            long l_ts = Convert.ToInt64(ts.TotalMilliseconds);
-
-            //long d = Math.Abs(reft - l_ts);
-            //long msinhour = 60 * 60 * 1000;
-            //long x = d / msinhour;
-            //Console.WriteLine("d = " + d.ToString());
-
-            return l_ts;
+            return reft;
 		}
     }
 }

@@ -53,10 +53,8 @@ namespace vitavol
                     IsClosed = OurDefaultCalendarEntry.OpenTime == OurDefaultCalendarEntry.CloseTime,
                     NumEFilers = OurDefaultCalendarEntry.NumEFilers
                 };
-                try { OurCalendarEntry.OpenTime = new C_HMS(OurDefaultCalendarEntry.OpenTime); }
-                catch { OurCalendarEntry.OpenTime = new C_HMS(0, 0, 0); }
-                try { OurCalendarEntry.CloseTime = new C_HMS(OurDefaultCalendarEntry.CloseTime); }
-                catch { OurCalendarEntry.CloseTime = new C_HMS(0, 0, 0); }
+                OurCalendarEntry.OpenTime = OurDefaultCalendarEntry.OpenTime;
+                OurCalendarEntry.CloseTime = OurDefaultCalendarEntry.CloseTime;
 
                 B_SaveCalendarException.SetTitle("Save New Calendar Exception", UIControlState.Normal);
                 NewEntry = true;

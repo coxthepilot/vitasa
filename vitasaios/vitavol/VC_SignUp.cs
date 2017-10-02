@@ -148,8 +148,12 @@ namespace vitavol
                     TV_Users.ReloadData();
                     B_SignMeUp.Enabled = false;
 
+                    Global.ViewCameFrom = E_ViewCameFrom.MySignUps;
+
 					// show the event controller
                     PresentViewController(eventControllerEdit, true, null);
+
+					PerformSegue("Segue_SignUpToMySignUps", this);
 				}
 
 				PerformSegue("Segue_SignUpToMySignUps", this);

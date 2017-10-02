@@ -1,15 +1,9 @@
 ﻿using System;
 using System.Json;
-using System.IO;
 using System.Net;
 using System.Threading.Tasks;
 using System.Collections.Generic;
-using System.Text;
-using System.Net.Http;
-
-//using UIKit;
 using System.Linq;
-//using Foundation;
 
 namespace zsquared
 {
@@ -133,39 +127,56 @@ namespace zsquared
         /// <param name="token">Token.</param>
         public async Task<bool> AddIntent(string token, int userId)
         {
-            string bodyjson = "{ "
-                + "\"site\" : \"" + SiteSlug + "\""
-                + ",\"date\" : \"" + Date.ToString("yyyy-mm-dd") + "\""
-                + ",\"user_id\" : \"" + userId + "\""
-                + "}";
+			int retryCount = 0;
+			bool retry = false;
 
             bool success = false;
-            try
+            do
             {
-                string submiturl = "/signups/";
-                WebClient wc = new WebClient()
+                try
                 {
-                    BaseAddress = C_Vita.VitaCoreUrl
-                };
-                wc.Headers.Add(HttpRequestHeader.Cookie, token);
-                wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
-                wc.Headers.Add(HttpRequestHeader.Accept, "application/json");
+                    retry = false;
+                    string bodyjson = "{ "
+                        + "\"site\" : \"" + SiteSlug + "\""
+                        + ",\"date\" : \"" + Date.ToString("yyyy-mm-dd") + "\""
+                        + ",\"user_id\" : \"" + userId + "\""
+                        + "}";
 
-                string responseString = await wc.UploadStringTaskAsync(submiturl, "POST", bodyjson);
+                    string submiturl = "/signups/";
+                    WebClient wc = new WebClient()
+                    {
+                        BaseAddress = C_Vita.VitaCoreUrl
+                    };
+                    wc.Headers.Add(HttpRequestHeader.Cookie, token);
+                    wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
+                    wc.Headers.Add(HttpRequestHeader.Accept, "application/json");
 
-                JsonValue responseJson = JsonValue.Parse(responseString);
-                C_WorkItem wix = new C_WorkItem(responseJson);
-                id = wix.id;
+                    string responseString = await wc.UploadStringTaskAsync(submiturl, "POST", bodyjson);
 
-                success = true;
-            }
-            catch (Exception e)
-            {
+                    JsonValue responseJson = JsonValue.Parse(responseString);
+                    C_WorkItem wix = new C_WorkItem(responseJson);
+                    id = wix.id;
+
+                    success = true;
+                }
+				catch (WebException we)
+				{
+					if (we.Status == WebExceptionStatus.ReceiveFailure)
+					{
+						success = false;
+                        retry = retryCount < 3;
+                        retryCount++;
+					}
+				}
+				catch (Exception e)
+                {
 #if DEBUG
-                Console.WriteLine(e.Message);
+                    Console.WriteLine(e.Message);
 #endif
-                success = false;
+                    success = false;
+                }
             }
+            while (retry);
 
             return success;
         }
@@ -188,40 +199,57 @@ namespace zsquared
         /// <param name="token">Token.</param>
 		public async Task<bool> UpdateIntent(string token)
         {
-            bool success = false;
-            try
+			int retryCount = 0;
+			bool retry = false;
+
+			bool success = false;
+            do
             {
-                string bodyjson = "{ "
-                    + "\"approved\" : \"" + (Approved ? "true" : "false") + "\""
-                    + ",\"hours\" : \"" + Hours.ToString() + "\""
-                    + ",\"user_id\" : \"" + UserId + "\""
-                    + "}";
-
-                string submiturl = "/signups/" + id.ToString();
-                WebClient wc = new WebClient()
+                try
                 {
-                    BaseAddress = C_Vita.VitaCoreUrl
-                };
-                wc.Headers.Add(HttpRequestHeader.Cookie, token);
-                wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
-                wc.Headers.Add(HttpRequestHeader.Accept, "application/json");
+                    retry = false;
+                    string bodyjson = "{ "
+                        + "\"approved\" : \"" + (Approved ? "true" : "false") + "\""
+                        + ",\"hours\" : \"" + Hours.ToString() + "\""
+                        + ",\"user_id\" : \"" + UserId + "\""
+                        + "}";
 
-                string responseString = await wc.UploadStringTaskAsync(submiturl, "PUT", bodyjson);
+                    string submiturl = "/signups/" + id.ToString();
+                    WebClient wc = new WebClient()
+                    {
+                        BaseAddress = C_Vita.VitaCoreUrl
+                    };
+                    wc.Headers.Add(HttpRequestHeader.Cookie, token);
+                    wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
+                    wc.Headers.Add(HttpRequestHeader.Accept, "application/json");
+
+                    string responseString = await wc.UploadStringTaskAsync(submiturl, "PUT", bodyjson);
 
 #if DEBUG
-                JsonValue responseJson = JsonValue.Parse(responseString);
-                C_WorkItem wix = new C_WorkItem(responseJson);
-                if (!(this.Equals(wix)))
-                    throw new ApplicationException("update mismatch");
+                    JsonValue responseJson = JsonValue.Parse(responseString);
+                    C_WorkItem wix = new C_WorkItem(responseJson);
+                    if (!(this.Equals(wix)))
+                        throw new ApplicationException("update mismatch");
 #endif
 
-                success = true;
+                    success = true;
+                }
+				catch (WebException we)
+				{
+					if (we.Status == WebExceptionStatus.ReceiveFailure)
+					{
+						success = false;
+						retry = retryCount < 3;
+						retryCount++;
+					}
+				}
+				catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    success = false;
+                }
             }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-                success = false;
-            }
+            while (retry);
 
             return success;
         }
@@ -253,11 +281,11 @@ namespace zsquared
             if (id == -1)
                 throw new ApplicationException("must be an existing id; can't delete one that hasn't been added");
 #endif
-
             int retryCount = 0;
-            bool success = false;
             bool retry = false;
-            do
+
+			bool success = false;
+			do
             {
                 try
                 {
@@ -275,21 +303,16 @@ namespace zsquared
 
                     success = true;
                 }
-                catch (WebException we)
-                {
-                    success = false;
-                    if (we.Status == WebExceptionStatus.ReceiveFailure)
-                    {
-                        if (retryCount < 3)
-                        {
-                            retry = true;
-                            retryCount++;
-                        }
-                        else
-                            Console.WriteLine("exceeded retry");
-                    }
-                }
-                catch (Exception e)
+				catch (WebException we)
+				{
+					success = false;
+					if (we.Status == WebExceptionStatus.ReceiveFailure)
+					{
+						retry = retryCount < 3;
+						retryCount++;
+					}
+				}
+				catch (Exception e)
                 {
 #if DEBUG
                     Console.WriteLine(e.Message);
@@ -297,7 +320,7 @@ namespace zsquared
                     success = false;
                 }
             }
-            while (!success && retry);
+            while (retry);
 
 			return success;
 		}

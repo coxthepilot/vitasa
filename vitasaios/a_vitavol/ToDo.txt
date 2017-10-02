@@ -1,15 +1,47 @@
-﻿Issues:
-* don't believe calendar signups' are working
-* fix the gitignore
-* retries on all api gets? should only retry on the specific error type; C_SiteSchedule for WebException
-* need Season in API /get/site
+﻿----- Issues -----
+
+Android
+* need Season in API /get/site [in progress from Chris]
+* for SC: volunteer approvals calendar
+* add vol phone on sitevol and volhours screens
 * on notification, the graphic is a tiny slice from the middle [later]
+* sort sites based on distance to user [defer]
+* screen shots [appears to be broken, defer]
+
+
+iOS: 
+* need Season in API /get/site [in progress from Chris]
+* vol options screen: show number of signups in future for this user
+* for SC: volunteer approvals calendar
+* test notifications
+* release version with distribution certificate [later]
+
+
+Chris
+* [DateTime, iso format] Need Season fields added to Site
+* Verify notifications re Apple and Google (firebase) [he will poke me when ready to test]
+
 
 Future
 * no way for a volunteer to view past signups?
-* need option to include work intents on user and site; separate control for each past and future
+* need option to include work intents on user and site, or not; separate control for each past and future
+* use notifications as way to know content has changed rather than timeouts
+* means to tell app it has to upgrade? [defer]
 
-Complete but verification needed
+
+Completed
+* [fixed] Need Status included in Suggestions
+* verify that suggestions that have changed status cannot be edited or deleted. [done]
+* updated icon (in all sizes!) [ios, done]
+* add vol phone on sitevol and volhours screens [ios, done]
+* add volunteer options screen [done]
+* add profile update screen [done]
+* move site capabilities buttons to common screen [done]
+* expire some content (SitesSchedule, Sites, Users) - handle in the cache? [done]
+* on fetch sitesschedule, autofetch the next one also? especially at end of month [done]
+* retries on all api gets? should only retry on the specific error type; C_SiteSchedule for WebException [done!!!]
+* fix the gitignore [done]
+* don't believe calendar signups' are working [done]
 * riverwalk background not showing up on device [done, previous image was too large]
 * openning image is distorted [done]
 * didn't allow a second signup on a date [done]
@@ -18,12 +50,4 @@ Complete but verification needed
 * view signup, open/close time were empty string [done]
 * save hours button, grey out, 'save hours' [wnf]
 * new signup, don't know there is no one else signed up [done]
-
-Check:
-* all Console.WriteLine are surrounded by #if DEBUG
-* no un-caught exceptions
-
-Apple: cert (X.509) and key
-Google: api dev account key
-
 

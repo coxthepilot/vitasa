@@ -3,7 +3,6 @@ using System.Json;
 using System.Net;
 using System.Threading.Tasks;
 using System.Collections.Generic;
-using System.Text;
 using System.Linq;
 
 namespace zsquared
@@ -136,15 +135,17 @@ namespace zsquared
             List<C_SiteSchedule> res = new List<C_SiteSchedule>();
             foreach (JsonValue j in json)
             {
-                C_SiteSchedule vs = new C_SiteSchedule(j, date);
-                vs.SampleTime = DateTime.Now;
+                C_SiteSchedule vs = new C_SiteSchedule(j, date)
+                {
+                    SampleTime = DateTime.Now
+                };
                 res.Add(vs);
             }
 
             return res;
         }
 
-        public static async Task<List<C_SiteSchedule>> FetchSitesSchedulesX(C_YMD from, C_YMD to)
+        public static async Task<List<C_SiteSchedule>> FetchSitesSchedules(C_YMD from, C_YMD to)
         {
             List<C_SiteSchedule> res = new List<C_SiteSchedule>();
 
@@ -156,19 +157,40 @@ namespace zsquared
                 {
                     retry = false;
 
-                    bool success = await FetchSitesScheduleX_func(from, to, res);
-                }
+					string sitesUrl = "/schedule/?start=" + from.ToString("yyyy-mm-dd") + ";end=" + to.ToString("yyyy-mm-dd");
+					WebClient wc = new WebClient()
+					{
+						BaseAddress = C_Vita.VitaCoreUrl
+					};
+					wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
+					wc.Headers.Add(HttpRequestHeader.Accept, "application/json");
+
+					C_YMD date = null;
+					string ds = await wc.DownloadStringTaskAsync(sitesUrl);
+
+					JsonValue jdoc = JsonValue.Parse(ds);
+
+					foreach (JsonValue jv in jdoc)
+					{
+						if (jv.ContainsKey("date"))
+							date = Tools.JsonProcessDate(jv["date"], date);
+
+						if (jv.ContainsKey("sites"))
+						{
+							JsonValue jvx = jv["sites"];
+							List<C_SiteSchedule> resx = ImportSitesSchedules(jvx, date);
+							res.AddRange(resx);
+						}
+					}
+				}
                 catch (WebException we)
                 {
                     if (we.Status == WebExceptionStatus.ReceiveFailure)
                     {
                         res = new List<C_SiteSchedule>();
-                        if (retryCount < 3)
-                        {
-                            retry = true;
-                            retryCount++;
-                        }
-                    }
+						retry = retryCount < 3;
+						retryCount++;
+					}
                 }
                 catch (Exception e2)
                 {
@@ -182,37 +204,6 @@ namespace zsquared
 
 			return res;
         }
-
-        public static async Task<bool> FetchSitesScheduleX_func(C_YMD from, C_YMD to, List<C_SiteSchedule> res)
-        {
-			string sitesUrl = "/schedule/?start=" + from.ToString("yyyy-mm-dd") + ";end=" + to.ToString("yyyy-mm-dd");
-			WebClient wc = new WebClient()
-			{
-				BaseAddress = C_Vita.VitaCoreUrl
-			};
-			wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
-			wc.Headers.Add(HttpRequestHeader.Accept, "application/json");
-
-			C_YMD date = null;
-			string ds = await wc.DownloadStringTaskAsync(sitesUrl);
-
-			JsonValue jdoc = JsonValue.Parse(ds);
-
-			foreach (JsonValue jv in jdoc)
-			{
-				if (jv.ContainsKey("date"))
-					date = Tools.JsonProcessDate(jv["date"], date);
-
-				if (jv.ContainsKey("sites"))
-				{
-					JsonValue jvx = jv["sites"];
-					List<C_SiteSchedule> resx = ImportSitesSchedules(jvx, date);
-					res.AddRange(resx);
-				}
-			}
-
-            return true;
-		}
 
         public static List<C_SiteSchedule> GetSiteScheduleForSiteOnDate(string siteSlug, C_YMD onDate, List<C_SiteSchedule> sitesSchedules)
         {

@@ -19,7 +19,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)C_Suggestion.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)C_Registration.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)C_SiteCalendarEntry.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)C_NotificationX.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)C_WorkItem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)C_SiteSchedule.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)C_Message.cs" />

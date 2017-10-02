@@ -148,10 +148,7 @@ namespace vitavol
 
 			TB_CloseTime.InputView = DP_CloseTime;
 			TB_CloseTime.InputAccessoryView = ToolBar_CloseTime;
-            C_HMS closeTime = null;
-			try { closeTime = new C_HMS(calDefaults.CloseTime); }
-            catch {}
-			TB_CloseTime.Text = closeTime.ToString("hh:mm p");
+			TB_CloseTime.Text = calDefaults.CloseTime.ToString("hh:mm p");
 
             // number of efilers
             UIPickerView PV_EFilers = new UIPickerView()

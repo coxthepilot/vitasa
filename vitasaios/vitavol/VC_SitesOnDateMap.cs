@@ -165,8 +165,6 @@ namespace vitavol
 					detailButton = UIButton.FromType(UIButtonType.DetailDisclosure);
 					detailButton.TouchUpInside += (s, e) =>
 					{
-                        // required for SignUp
-                        // SelectedDate - from Calendar
                         Global.SelectedSiteSlug = ourSite.Slug;
                         Global.ViewCameFrom = E_ViewCameFrom.Map;
 

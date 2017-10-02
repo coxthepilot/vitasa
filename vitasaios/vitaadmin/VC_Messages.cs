@@ -57,8 +57,10 @@ namespace vitaadmin
                 SpanishMessage = await C_Message.GetMessage(C_Message.E_Language.Spanish, TB_Slug.Text);
                 if (SpanishMessage == null)
                 {
-                    SpanishMessage = new C_Message(TB_Slug.Text, "", C_Message.E_Language.Spanish);
-                    SpanishMessage.Slug = TB_Slug.Text;
+                    SpanishMessage = new C_Message(TB_Slug.Text, "", C_Message.E_Language.Spanish)
+                    {
+                        Slug = TB_Slug.Text
+                    };
                 }
                 TxV_Spanish.Text = SpanishMessage.Text;
 			};

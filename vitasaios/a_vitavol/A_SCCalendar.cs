@@ -77,9 +77,9 @@ namespace a_vitavol
 
                 L_Date.Text = Global.SelectedDate.ToString("mmm yyyy");
 
-				C_DateDetails[] details = BuildDateStateArray(Global.SelectedDate);
-				C_DateDetails[] dayDetails = BuildDayStateArray(OurSite);
-                GVHelper.SetNewDateDetails(details, dayDetails);
+				C_DateDetails[] detailsx = BuildDateStateArray(Global.SelectedDate);
+				C_DateDetails[] dayDetailsx = BuildDayStateArray(OurSite);
+                GVHelper.SetNewDateDetails(detailsx, dayDetailsx);
 			};
 
             B_PrevMonth.Click += (sender, e) => 
@@ -91,53 +91,36 @@ namespace a_vitavol
 
 				L_Date.Text = Global.SelectedDate.ToString("mmm yyyy");
 
-				C_DateDetails[] details = BuildDateStateArray(Global.SelectedDate);
-				C_DateDetails[] dayDetails = BuildDayStateArray(OurSite);
-				GVHelper.SetNewDateDetails(details, dayDetails);
+				C_DateDetails[] detailsx = BuildDateStateArray(Global.SelectedDate);
+				C_DateDetails[] dayDetailsx = BuildDayStateArray(OurSite);
+				GVHelper.SetNewDateDetails(detailsx, dayDetailsx);
 			};
 
 			AI_Busy.Show();
-            EnableUI(false);
 
 			L_Date.Text = Global.SelectedDate.ToString("mmm yyyy");
 
-			Task.Run(async () => 
-            {
-				Global.SitesSchedule = await Global.GetSitesScheduleCached(Global.SelectedDate.Year, Global.SelectedDate.Month);
-				//int daysInMonth = DateTime.DaysInMonth(Global.SelectedDate.Year, Global.SelectedDate.Month);
-				//C_YMD start = new C_YMD(Global.SelectedDate.Year, Global.SelectedDate.Month, 1);
-				//C_YMD end = new C_YMD(Global.SelectedDate.Year, Global.SelectedDate.Month, daysInMonth);
+            OurSite = Global.GetSiteFromCacheNoFetch(Global.SelectedSiteSlug);
 
-				//if (Global.SitesSchedule == null)
-					//Global.SitesSchedule = await C_SiteSchedule.FetchSitesSchedules(start, end);
-                // todo: need a timeout on the SitesSchedule
+            AI_Busy.Cancel();
 
-                OurSite = await Global.GetSiteFromCache(Global.SelectedSiteSlug);
+			C_DateDetails[] details = BuildDateStateArray(Global.SelectedDate);
+            C_DateDetails[] dayDetails = BuildDayStateArray(OurSite);
+			GVHelper = new C_GVHelper(this, GV_Calendar);
 
-                RunOnUiThread(() => 
-                {
-                    AI_Busy.Cancel();
-                    EnableUI(true);
+            GVHelper.SetResourceID(C_GVHelper.ID_Background, Resource.Drawable.background);
+            GVHelper.SetResourceID(C_GVHelper.ID_OpenWithNeeds, Resource.Drawable.openwithneeds);
+            GVHelper.SetResourceID(C_GVHelper.ID_OpenWithNeedsBoxed, Resource.Drawable.openwithneedsboxed);
+            GVHelper.SetResourceID(C_GVHelper.ID_OpenNoNeeds, Resource.Drawable.opennoneeds);
+            GVHelper.SetResourceID(C_GVHelper.ID_OpenNoNeedsBoxed, Resource.Drawable.opennoneedsboxed);
+            GVHelper.SetResourceID(C_GVHelper.ID_Closed, Resource.Drawable.closed);
+            GVHelper.SetResourceID(C_GVHelper.ID_ClosedBoxed, Resource.Drawable.closedboxed);
+            GVHelper.SetResourceID(C_GVHelper.ID_GridCell, Resource.Layout.GridCell);
+            GVHelper.SetResourceID(C_GVHelper.ID_GridCellText, Resource.Id.L_Cell);
 
-					C_DateDetails[] details = BuildDateStateArray(Global.SelectedDate);
-                    C_DateDetails[] dayDetails = BuildDayStateArray(OurSite);
-					GVHelper = new C_GVHelper(this, GV_Calendar);
-
-                    GVHelper.SetResourceID(C_GVHelper.ID_Background, Resource.Drawable.background);
-                    GVHelper.SetResourceID(C_GVHelper.ID_OpenWithNeeds, Resource.Drawable.openwithneeds);
-                    GVHelper.SetResourceID(C_GVHelper.ID_OpenWithNeedsBoxed, Resource.Drawable.openwithneedsboxed);
-                    GVHelper.SetResourceID(C_GVHelper.ID_OpenNoNeeds, Resource.Drawable.opennoneeds);
-                    GVHelper.SetResourceID(C_GVHelper.ID_OpenNoNeedsBoxed, Resource.Drawable.opennoneedsboxed);
-                    GVHelper.SetResourceID(C_GVHelper.ID_Closed, Resource.Drawable.closed);
-                    GVHelper.SetResourceID(C_GVHelper.ID_ClosedBoxed, Resource.Drawable.closedboxed);
-                    GVHelper.SetResourceID(C_GVHelper.ID_GridCell, Resource.Layout.GridCell);
-                    GVHelper.SetResourceID(C_GVHelper.ID_GridCellText, Resource.Id.L_Cell);
-
-					GVHelper.SetNewDateDetails(details, dayDetails);
-                    GVHelper.DateTouched += GVHelper_DateTouched;
-                    GVHelper.DayOfWeekTouched += GVHelper_DayOfWeekTouched;
-				});
-			});
+			GVHelper.SetNewDateDetails(details, dayDetails);
+            GVHelper.DateTouched += GVHelper_DateTouched;
+            GVHelper.DayOfWeekTouched += GVHelper_DayOfWeekTouched;
 		}
 
 		void GVHelper_DateTouched(object sender, C_DateTouchedEventArgs e)
@@ -228,11 +211,6 @@ namespace a_vitavol
 			}
 
 			return DateState;
-		}
-
-		private void EnableUI(bool en)
-		{
-			//B_Date.Enabled = en;
 		}
 
 		public override void OnBackPressed()

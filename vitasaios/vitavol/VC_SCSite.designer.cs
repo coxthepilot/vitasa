@@ -36,15 +36,15 @@ namespace vitavol
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UIButton B_EditSiteDetails { get; set; }
-
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UIButton B_NearLimit { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UIButton B_SiteCalendar { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UIButton B_UpdateProfile { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
@@ -61,6 +61,18 @@ namespace vitavol
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UILabel L_SiteName { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UISwitch SW_DropOff { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UISwitch SW_Express { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UISwitch SW_MFT { get; set; }
 
         void ReleaseDesignerOutlets ()
         {
@@ -89,11 +101,6 @@ namespace vitavol
                 B_Closed = null;
             }
 
-            if (B_EditSiteDetails != null) {
-                B_EditSiteDetails.Dispose ();
-                B_EditSiteDetails = null;
-            }
-
             if (B_NearLimit != null) {
                 B_NearLimit.Dispose ();
                 B_NearLimit = null;
@@ -102,6 +109,11 @@ namespace vitavol
             if (B_SiteCalendar != null) {
                 B_SiteCalendar.Dispose ();
                 B_SiteCalendar = null;
+            }
+
+            if (B_UpdateProfile != null) {
+                B_UpdateProfile.Dispose ();
+                B_UpdateProfile = null;
             }
 
             if (B_Volunteers != null) {
@@ -122,6 +134,21 @@ namespace vitavol
             if (L_SiteName != null) {
                 L_SiteName.Dispose ();
                 L_SiteName = null;
+            }
+
+            if (SW_DropOff != null) {
+                SW_DropOff.Dispose ();
+                SW_DropOff = null;
+            }
+
+            if (SW_Express != null) {
+                SW_Express.Dispose ();
+                SW_Express = null;
+            }
+
+            if (SW_MFT != null) {
+                SW_MFT.Dispose ();
+                SW_MFT = null;
             }
         }
     }

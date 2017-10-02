@@ -1,0 +1,8 @@
+/Users/Billy/Documents/source/vitasa/vitasaios/vitaadmin/bin/iPhoneSimulator/Debug/vitaadmin.app:/Users/Billy/Documents/source/vitasa/vitasaios/vitaadmin/obj/iPhoneSimulator/Debug/mtouch-cache/32/Link/vitaadmin.exe
+/Users/Billy/Documents/source/vitasa/vitasaios/vitaadmin/bin/iPhoneSimulator/Debug/vitaadmin.app:/Users/Billy/Documents/source/vitasa/vitasaios/vitaadmin/obj/iPhoneSimulator/Debug/mtouch-cache/32/Link/mscorlib.dll
+/Users/Billy/Documents/source/vitasa/vitasaios/vitaadmin/bin/iPhoneSimulator/Debug/vitaadmin.app:/Users/Billy/Documents/source/vitasa/vitasaios/vitaadmin/obj/iPhoneSimulator/Debug/mtouch-cache/32/Link/Xamarin.iOS.dll
+/Users/Billy/Documents/source/vitasa/vitasaios/vitaadmin/bin/iPhoneSimulator/Debug/vitaadmin.app:/Users/Billy/Documents/source/vitasa/vitasaios/vitaadmin/obj/iPhoneSimulator/Debug/mtouch-cache/32/Link/System.dll
+/Users/Billy/Documents/source/vitasa/vitasaios/vitaadmin/bin/iPhoneSimulator/Debug/vitaadmin.app:/Users/Billy/Documents/source/vitasa/vitasaios/vitaadmin/obj/iPhoneSimulator/Debug/mtouch-cache/32/Link/Mono.Security.dll
+/Users/Billy/Documents/source/vitasa/vitasaios/vitaadmin/bin/iPhoneSimulator/Debug/vitaadmin.app:/Users/Billy/Documents/source/vitasa/vitasaios/vitaadmin/obj/iPhoneSimulator/Debug/mtouch-cache/32/Link/System.Core.dll
+/Users/Billy/Documents/source/vitasa/vitasaios/vitaadmin/bin/iPhoneSimulator/Debug/vitaadmin.app:/Users/Billy/Documents/source/vitasa/vitasaios/vitaadmin/obj/iPhoneSimulator/Debug/mtouch-cache/32/Link/System.Json.dll
+/Users/Billy/Documents/source/vitasa/vitasaios/vitaadmin/bin/iPhoneSimulator/Debug/vitaadmin.app:/Users/Billy/Documents/source/vitasa/vitasaios/vitaadmin/obj/iPhoneSimulator/Debug/mtouch-cache/32/Link/System.Net.Http.dll

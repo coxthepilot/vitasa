@@ -193,7 +193,7 @@ namespace vitavol
                     TableSource = new C_WorkItemsTableSourceSCVolunteers(Global, Global.WorkItemsOnSiteOnDate, this);
                     TV_Volunteers.Source = TableSource;
 					TV_Volunteers.ReloadData();
-					B_ApproveHours.Enabled = Global.WorkItemsOnSiteOnDate.Count != 0;
+					B_ApproveHours.Enabled = (Global.WorkItemsOnSiteOnDate.Count != 0) && (Global.SelectedDate <= C_YMD.Now);
 				}));
             });
         }
@@ -247,7 +247,8 @@ namespace vitavol
             TB_Date.Enabled = enable;
             TV_Volunteers.UserInteractionEnabled = enable;
             B_Back.Enabled = enable;
-            B_ApproveHours.Enabled = enable;
+
+            B_ApproveHours.Enabled = enable && (Global.WorkItemsOnSiteOnDate.Count != 0) && (Global.SelectedDate <= C_YMD.Now);
         }
 
 		public class C_WorkItemsTableSourceSCVolunteers : UITableViewSource
@@ -285,7 +286,7 @@ namespace vitavol
                 string s_cert = user.Certification.ToString();
 
                 cell.TextLabel.Text = user.Name;
-                cell.DetailTextLabel.Text = s_cert + " - " + signup.Hours.ToString() + " hours";
+                cell.DetailTextLabel.Text = "[" + user.Phone + "] " + s_cert + " - " + signup.Hours.ToString() + " hours";
 
 				return cell;
 			}

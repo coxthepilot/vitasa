@@ -51,7 +51,6 @@ namespace vitavol
     	        {
 	                int numRequired = site.GetNumEFilersRequiredOnDate(Global.SelectedDate);
 
-
                     List<C_WorkItem> workItemsForSiteOnDate = Global.GetWorkItemsForSiteOnDate(Global.SelectedDate, site.Slug);
 
     				if (numRequired > workItemsForSiteOnDate.Count)
@@ -129,19 +128,12 @@ namespace vitavol
 
 			public override void RowSelected(UITableView tableView, NSIndexPath indexPath)
 			{
-				//// figure out if the user is already signed up for this date
-				//List<C_WorkItem> LoggedInUserWorkItems = Global.GetWorkItemsForUser(Global.LoggedInUserId);
-				//var ou = LoggedInUserWorkItems.Where(wi => wi.Date == Global.SelectedDate);
+                Global.SelectedSiteSlug = Sites[indexPath.Row].Slug;
+                Global.WorkItemsOnSiteOnDate = Global.GetWorkItemsForSiteOnDate(Global.SelectedDate, Global.SelectedSiteSlug);
 
-                //if (!ou.Any())
-                //{
-                    Global.SelectedSiteSlug = Sites[indexPath.Row].Slug;
-                    Global.WorkItemsOnSiteOnDate = Global.GetWorkItemsForSiteOnDate(Global.SelectedDate, Global.SelectedSiteSlug);
+                Global.ViewCameFrom = E_ViewCameFrom.List;
 
-                    Global.ViewCameFrom = E_ViewCameFrom.List;
-
-                    ourVC.PerformSegue("Segue_SitesOnDateListToSignUp", ourVC);
-                //}
+                ourVC.PerformSegue("Segue_SitesOnDateListToSignUp", ourVC);
 			}
 		}
     }

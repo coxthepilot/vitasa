@@ -3,7 +3,6 @@ using System.Json;
 using System.Net;
 using System.Threading.Tasks;
 using System.Collections.Generic;
-using System.Text;
 using System.Linq;
 
 namespace zsquared
@@ -12,33 +11,73 @@ namespace zsquared
 
     public class C_VitaUser
     {
+        /// <summary>
+        /// This users ID. Most other structures simply refer to the user id rather than name or keep a 
+        /// copy of the user structure.
+        /// </summary>
         public int id;
+        /// <summary>
+        /// The users name.
+        /// </summary>
         public string Name;
+        /// <summary>
+        /// The users email (and their login credential)
+        /// </summary>
         public string Email;
-        public string Password; // only used on create new user; never sent from the backend
+        /// <summary>
+        /// The users password; only used on creating a new user
+        /// </summary>
+        public string Password;
+        /// <summary>
+        /// The users phone
+        /// </summary>
         public string Phone;
+        /// <summary>
+        /// The certification level for this user
+        /// </summary>
         public E_Certification Certification;
+        /// <summary>
+        /// The work history for this user. This field will normally be emtpy since the functions that
+        /// read the history copy them to a general store and remove from here.
+        /// </summary>
         public List<C_WorkItem> WorkHistoryX;
-        public List<C_WorkItem> WorkIntentsX;
+		/// <summary>
+		/// The work intents for this user. This field will normally be emtpy since the functions that
+		/// read the history copy them to a general store and remove from here.
+		/// </summary>
+		public List<C_WorkItem> WorkIntentsX;
+        /// <summary>
+        /// The roles assigned to this user.
+        /// </summary>
         public List<E_VitaUserRoles> Roles;
+        /// <summary>
+        /// The suggestions created by this user.
+        /// </summary>
         public List<C_Suggestion> Suggestions;
+        /// <summary>
+        /// The list of sites that this person is either a primary or back site coordinator for.
+        /// </summary>
         public List<C_SiteCoordinated> SitesCoordinated;
 
-        public string Token; // saved across UI transitions but not in backedn DB (obviously)
+        public string Token; // saved across UI transitions but not in backend DB
 
-        public static readonly string N_ID = "id";
-        public static readonly string N_Name = "name";
-        public static readonly string N_Email = "email";
-        public static readonly string N_Password = "password";
-        public static readonly string N_Phone = "phone";
-        public static readonly string N_Certification = "certification";
-        public static readonly string N_WorkHistory = "work_history";
-        public static readonly string N_WorkIntents = "work_intents";
-        public static readonly string N_Roles = "roles";
-        public static readonly string N_Suggestions = "suggestions";
-        public static readonly string N_Token = "token";
-        public static readonly string N_SitesCoordinated = "sites_coordinated";
+        public const string N_ID = "id";
+        public const string N_Name = "name";
+        public const string N_Email = "email";
+        public const string N_Password = "password";
+        public const string N_Phone = "phone";
+        public const string N_Certification = "certification";
+        public const string N_WorkHistory = "work_history";
+        public const string N_WorkIntents = "work_intents";
+        public const string N_Roles = "roles";
+        public const string N_Suggestions = "suggestions";
+        public const string N_Token = "token";
+        public const string N_SitesCoordinated = "sites_coordinated";
 
+        /// <summary>
+        /// Returns true if this user has admin privilidge.
+        /// </summary>
+        /// <value><c>true</c> if has admin; otherwise, <c>false</c>.</value>
         public bool HasAdmin
         {
             get
@@ -48,6 +87,10 @@ namespace zsquared
             }
         }
 
+        /// <summary>
+        /// Returns true if this user has site coordinator privilidge (either primary or backup)
+        /// </summary>
+        /// <value><c>true</c> if has site coordinator; otherwise, <c>false</c>.</value>
         public bool HasSiteCoordinator
         {
             get
@@ -57,6 +100,10 @@ namespace zsquared
             }
         }
 
+        /// <summary>
+        /// Returns true if this user has volunteer privilidge
+        /// </summary>
+        /// <value><c>true</c> if has volunteer; otherwise, <c>false</c>.</value>
         public bool HasVolunteer
         {
             get
@@ -66,6 +113,10 @@ namespace zsquared
             }
         }
 
+        /// <summary>
+        /// Returns true if this use is still flagged as a new user (awaiting approval from bak office)
+        /// </summary>
+        /// <value><c>true</c> if has new user; otherwise, <c>false</c>.</value>
         public bool HasNewUser
         {
             get
@@ -75,35 +126,17 @@ namespace zsquared
             }
         }
 
-        public C_VitaUser()
-        {
-            WorkHistoryX = new List<C_WorkItem>();
-            WorkIntentsX = new List<C_WorkItem>();
-            Roles = new List<E_VitaUserRoles>();
-            Suggestions = new List<C_Suggestion>();
-            SitesCoordinated = new List<C_SiteCoordinated>();
-        }
-
-        public C_VitaUser(int _id, string _email, string _pw)
-        {
-            id = _id;
-            Email = _email;
-            Password = _pw;
-
-            WorkHistoryX = new List<C_WorkItem>();
-            WorkIntentsX = new List<C_WorkItem>();
-            Roles = new List<E_VitaUserRoles>();
-            Suggestions = new List<C_Suggestion>();
-            SitesCoordinated = new List<C_SiteCoordinated>();
-        }
-
+        /// <summary>
+        /// Create an instance of a user populated from the Json values. This is the normal
+        /// path for populating from the backend.
+        /// </summary>
+        /// <param name="jv">Jv.</param>
         public C_VitaUser(JsonValue jv)
         {
 #if DEBUG
             if (!(jv is JsonObject))
                 throw new ApplicationException("expecting JsonObject");
 #endif
-
             WorkHistoryX = new List<C_WorkItem>();
             WorkIntentsX = new List<C_WorkItem>();
             Roles = new List<E_VitaUserRoles>();
@@ -216,6 +249,10 @@ namespace zsquared
                 Token = Tools.JsonProcessString(jv[N_Token], Token);
         }
 
+        /// <summary>
+        /// Returns a string representing the roles for this user.
+        /// </summary>
+        /// <returns>The summary.</returns>
         public string RolesSummary()
         {
             string res = "";
@@ -229,108 +266,6 @@ namespace zsquared
             return res;
         }
 
-        public static List<C_VitaUser> ImportUsers(JsonValue jv)
-        {
-            List<C_VitaUser> res = new List<C_VitaUser>();
-
-#if DEBUG
-            if (!(jv is JsonArray))
-                throw new ApplicationException("must be an array");
-#endif
-
-            res = new List<C_VitaUser>();
-            foreach (JsonValue jv1 in jv)
-            {
-                C_VitaUser vu = new C_VitaUser(jv1);
-                res.Add(vu);
-            }
-
-            return res;
-        }
-
-        public static async Task<C_VitaUser> FetchUserX(string token, int id)
-        {
-            C_VitaUser res = null;
-            try
-            {
-                string usersUrl = "/users/" + id.ToString();
-                WebClient wc = new WebClient()
-                {
-                    BaseAddress = C_Vita.VitaCoreUrl
-                };
-                wc.Headers.Add(HttpRequestHeader.Cookie, token);
-                wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
-                wc.Headers.Add(HttpRequestHeader.Accept, "application/json");
-
-                string ss = await wc.DownloadStringTaskAsync(usersUrl);
-
-                JsonValue jv = JsonValue.Parse(ss);
-
-#if DEBUG
-                if (!(jv is JsonObject))
-                    throw new ApplicationException("must be an object");
-#endif
-
-                res = new C_VitaUser(jv);
-            }
-            catch (Exception ex)
-            {
-#if DEBUG
-                Console.WriteLine(ex.Message);
-#endif
-                res = null;
-            }
-
-            return res;
-        }
-
-        /// <summary>
-        /// Fetchs the users list. Must have admin privilege to run.
-        /// </summary>
-        /// <returns>The users list.</returns>
-        /// <param name="token">Token.</param>
-		public static async Task<List<C_VitaUser>> FetchUsersList(string token)
-        {
-            List<C_VitaUser> res = null;
-            try
-            {
-                string usersUrl = "/users";
-                WebClient wc = new WebClient()
-                {
-                    BaseAddress = C_Vita.VitaCoreUrl
-                };
-                wc.Headers.Add(HttpRequestHeader.Cookie, token);
-                wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
-                wc.Headers.Add(HttpRequestHeader.Accept, "application/json");
-
-                string resp = await wc.DownloadStringTaskAsync(usersUrl);
-
-                JsonValue jv = JsonValue.Parse(resp);
-
-#if DEBUG
-                // we are expecting an array
-                if (!(jv is JsonArray))
-                    throw new ApplicationException("must be an array");
-#endif
-
-                res = new List<C_VitaUser>();
-                foreach (JsonValue jv1 in jv)
-                {
-                    C_VitaUser vu = new C_VitaUser(jv1);
-                    res.Add(vu);
-                }
-            }
-            catch (Exception ex)
-            {
-#if DEBUG
-                Console.WriteLine(ex.Message);
-#endif
-                res = null;
-            }
-
-            return res;
-        }
-
         /// <summary>
         /// Only updates the user name, phone, and certification
         /// </summary>
@@ -338,46 +273,63 @@ namespace zsquared
         /// <param name="token">Token.</param>
         public async Task<bool> UpdateUserProfile(string token)
         {
-            string bodyjson = "{ "
-                + "\"" + N_Name + "\" : \"" + Name + "\""
-                + ","
-                + "\"" + N_Phone + "\" : \"" + Phone + "\""
-                + ","
-                + "\"" + N_Certification + "\" : \"" + Certification.ToString() + "\""
-                + "}";
+			int retryCount = 0;
+			bool retry = false;
 
-            bool success = false;
-            try
+			bool success = false;
+            do
             {
-                string submiturl = "/users/" + id.ToString();
-                WebClient wc = new WebClient()
+                try
                 {
-                    BaseAddress = C_Vita.VitaCoreUrl
-                };
-                wc.Headers.Add(HttpRequestHeader.Cookie, token);
-                wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
-                wc.Headers.Add(HttpRequestHeader.Accept, "application/json");
+                    retry = false;
+                    string bodyjson = "{ "
+                        + "\"" + N_Name + "\" : \"" + Name + "\""
+                        + ","
+                        + "\"" + N_Phone + "\" : \"" + Phone + "\""
+                        + ","
+                        + "\"" + N_Certification + "\" : \"" + Certification.ToString() + "\""
+                        + "}";
 
-                string responseString = await wc.UploadStringTaskAsync(submiturl, "PUT", bodyjson);
+                    string submiturl = "/users/" + id.ToString();
+                    WebClient wc = new WebClient()
+                    {
+                        BaseAddress = C_Vita.VitaCoreUrl
+                    };
+                    wc.Headers.Add(HttpRequestHeader.Cookie, token);
+                    wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
+                    wc.Headers.Add(HttpRequestHeader.Accept, "application/json");
+
+                    string responseString = await wc.UploadStringTaskAsync(submiturl, "PUT", bodyjson);
 
 #if DEBUG
-                JsonValue responseJson = JsonValue.Parse(responseString);
-                C_VitaUser userx = new C_VitaUser(responseJson);
-                if ((Name != userx.Name)
-                    || (Phone != userx.Phone)
-                    || (Certification != userx.Certification))
-                    throw new ApplicationException("updated items failed to udpate");
+                    JsonValue responseJson = JsonValue.Parse(responseString);
+                    C_VitaUser userx = new C_VitaUser(responseJson);
+                    if ((Name != userx.Name)
+                        || (Phone != userx.Phone)
+                        || (Certification != userx.Certification))
+                        throw new ApplicationException("updated items failed to udpate");
 #endif
 
-                success = true;
+                    success = true;
+                }
+				catch (WebException we)
+				{
+					if (we.Status == WebExceptionStatus.ReceiveFailure)
+					{
+						success = false;
+						retry = retryCount < 3;
+						retryCount++;
+					}
+				}
+				catch (Exception e)
+                {
+#if DEBUG
+                    Console.WriteLine(e.Message);
+#endif
+                    success = false;
+                }
             }
-            catch (Exception e)
-            {
-#if DEBUG
-                Console.WriteLine(e.Message);
-#endif
-                success = false;
-			}
+            while (retry);
 
 			return success;
 		}

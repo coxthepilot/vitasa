@@ -1,13 +1,9 @@
 ﻿using System;
 using System.Json;
-using System.IO;
 using System.Net;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Text;
-using System.Net.Http;
-//using UIKit;
-using System.Linq;
 
 namespace zsquared
 {
@@ -19,8 +15,9 @@ namespace zsquared
         public readonly int UserId;
         public string Subject;
         public string Text;
-        public readonly C_YMD Date;
-        public E_SuggestionStatus Status;
+        public readonly C_YMD CreateDate;
+		public readonly C_YMD UpdateDate;
+		public E_SuggestionStatus Status;
         public readonly bool FromPublic;
         public bool dirty; // not saved or restored
 
@@ -28,8 +25,9 @@ namespace zsquared
         public static readonly string N_UserId = "user_id";
         public static readonly string N_Subject = "subject";
         public static readonly string N_Text = "details";
-        public static readonly string N_Date = "created_at";
-        public static readonly string N_Status = "status";
+        public static readonly string N_CreateDate = "created_at";
+		public static readonly string N_UpdateDate = "created_at";
+		public static readonly string N_Status = "status";
         public static readonly string N_FromPublic = "from_public";
 
         public C_Suggestion(int userId, C_YMD date, bool fromPublic)
@@ -38,7 +36,8 @@ namespace zsquared
             Status = E_SuggestionStatus.Open;
 
             UserId = userId;
-            Date = date;
+            CreateDate = date;
+            UpdateDate = CreateDate;
             FromPublic = fromPublic;
         }
 
@@ -65,10 +64,13 @@ namespace zsquared
                     Text = unescapedText.Replace("\\n", "\n");
             }
 
-            if (j.ContainsKey(N_Date))
-                Date = Tools.JsonProcessDate(j[N_Date], Date);
+            if (j.ContainsKey(N_CreateDate))
+                CreateDate = Tools.JsonProcessDate(j[N_CreateDate], CreateDate);
 
-            if (j.ContainsKey(N_Status))
+            if (j.ContainsKey(N_UpdateDate))
+                UpdateDate = Tools.JsonProcessDate(j[N_UpdateDate], UpdateDate);
+
+			if (j.ContainsKey(N_Status))
             {
                 string ssv = Tools.JsonProcessString(j[N_Status], E_SuggestionStatus.Unknown.ToString());
                 Status = Tools.StringToEnum<E_SuggestionStatus>(ssv);
@@ -95,7 +97,7 @@ namespace zsquared
             res &= UserId == s.UserId;
             res &= Subject == s.Subject;
             res &= Text == s.Text;
-            res &= Date == s.Date;
+            res &= CreateDate == s.CreateDate;
             res &= Status == s.Status;
             res &= FromPublic == s.FromPublic;
 
@@ -130,68 +132,149 @@ namespace zsquared
             int hash = 269;
             hash = (hash * 47) * id.GetHashCode();
             hash = (hash * 47) * UserId.GetHashCode();
-            hash = (hash * 47) * Date.GetHashCode();
+            hash = (hash * 47) * CreateDate.GetHashCode();
             hash = (hash * 47) * FromPublic.GetHashCode();
 
             return hash;
         }
 
-        public static List<C_Suggestion> ImportSuggestion(JsonValue json)
-        {
-            if (!(json is JsonArray))
-                throw new ApplicationException("the sites list must be an array");
+        public static async Task<List<C_Suggestion>> GetAllSuggestions(string token)
+		{
+            List<C_Suggestion> res;
 
-            // create the holding place for the results
-            List<C_Suggestion> res = new List<C_Suggestion>();
-            foreach (JsonValue j in json)
-            {
-                C_Suggestion vs = new C_Suggestion(j);
-                res.Add(vs);
-            }
+			int retryCount = 0;
+			bool retry = false;
 
-            return res;
-        }
+			res = null;
+			do
+			{
+				try
+				{
+					retry = false;
 
-        public async Task<bool> AddSuggestion(string token)
-        {
-            bool success = false;
-            try
-            {
-                string escapedText = Text.Replace("\n", "\\n");
-                string bodyjson = "{ "
-                    + "\"subject\" : \"" + Subject + "\""
-                    + ",\"details\" : \"" + escapedText + "\""
-                    + ",\"from_public\" : \"" + (FromPublic ? "true" : "false") + "\""
-                    + "}";
+					string submiturl = "/suggestions";
+					WebClient wc = new WebClient()
+					{
+						BaseAddress = C_Vita.VitaCoreUrl
+					};
+					if (token != null)
+						wc.Headers.Add(HttpRequestHeader.Cookie, token);
+					wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
+					wc.Headers.Add(HttpRequestHeader.Accept, "application/json");
 
-                string submiturl = "/suggestions";
-                WebClient wc = new WebClient()
-                {
-                    BaseAddress = C_Vita.VitaCoreUrl
-                };
-                if (token != null)
-                    wc.Headers.Add(HttpRequestHeader.Cookie, token);
-                wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
-                wc.Headers.Add(HttpRequestHeader.Accept, "application/json");
+                    // do the actual web request
+                    string responseString = await wc.DownloadStringTaskAsync(submiturl);
 
-                // do the actual web request
-                string responseString = await wc.UploadStringTaskAsync(submiturl, "POST", bodyjson);
+					// get and parse the response
+					JsonValue responseJson = JsonValue.Parse(responseString);
 
-                // get and parse the response
-                JsonValue responseJson = JsonValue.Parse(responseString);
-
-                C_Suggestion nsug = new C_Suggestion(responseJson);
-                id = nsug.id;
-
-                success = true;
-            }
-            catch (Exception e)
-            {
+                    res = ImportSuggestions(responseJson);
+				}
+				catch (WebException we)
+				{
+					if (we.Status == WebExceptionStatus.ReceiveFailure)
+					{
+                        res = null;
+						retry = retryCount < 3;
+						retryCount++;
+					}
+				}
+				catch (Exception e)
+				{
 #if DEBUG
-                Console.WriteLine(e.Message);
+					Console.WriteLine(e.Message);
 #endif
-                success = false;
+                    res = null;
+				}
+			}
+			while (retry);
+
+			return res;
+		}
+
+        private static List<C_Suggestion> ImportSuggestions(JsonValue jv)
+        {
+#if DEBUG
+			if (!(jv is JsonArray))
+				throw new ApplicationException("the sites list must be an array");
+#endif
+			// create the holding place for the results
+            List<C_Suggestion> res = new List<C_Suggestion>();
+			foreach (JsonValue j in jv)
+			{
+				try
+				{
+					C_Suggestion vs = new C_Suggestion(j);
+					res.Add(vs);
+				}
+				catch (Exception e)
+				{
+#if DEBUG
+					Console.WriteLine(e.Message);
+#endif
+				}
+			}
+
+			return res;
+		}
+
+		public async Task<bool> AddSuggestion(string token)
+        {
+			int retryCount = 0;
+			bool retry = false;
+			
+            bool success = false;
+            do
+            {
+                try
+                {
+                    retry = false;
+                    string escapedText = Text.Replace("\n", "\\n");
+                    string bodyjson = "{ "
+                        + "\"subject\" : \"" + Subject + "\""
+                        + ",\"details\" : \"" + escapedText + "\""
+                        + ",\"from_public\" : \"" + (FromPublic ? "true" : "false") + "\""
+                        + "}";
+
+                    string submiturl = "/suggestions";
+                    WebClient wc = new WebClient()
+                    {
+                        BaseAddress = C_Vita.VitaCoreUrl
+                    };
+                    if (token != null)
+                        wc.Headers.Add(HttpRequestHeader.Cookie, token);
+                    wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
+                    wc.Headers.Add(HttpRequestHeader.Accept, "application/json");
+
+                    // do the actual web request
+                    string responseString = await wc.UploadStringTaskAsync(submiturl, "POST", bodyjson);
+
+                    // get and parse the response
+                    JsonValue responseJson = JsonValue.Parse(responseString);
+
+                    C_Suggestion nsug = new C_Suggestion(responseJson);
+                    id = nsug.id;
+
+                    success = true;
+                }
+				catch (WebException we)
+				{
+					if (we.Status == WebExceptionStatus.ReceiveFailure)
+					{
+						success = false;
+						retry = retryCount < 3;
+						retryCount++;
+					}
+				}
+				catch (Exception e)
+                {
+#if DEBUG
+                    Console.WriteLine(e.Message);
+#endif
+                    success = false;
+                }
             }
+            while (retry);
 
             return success;
         }
@@ -206,47 +289,65 @@ namespace zsquared
             if (id == -1)
                 throw new ApplicationException("can't update a Suggestion that hasn't been submitted yet");
 #endif
+			int retryCount = 0;
+			bool retry = false;
 
-            bool success = false;
-            try
+			bool success = false;
+            do
             {
-                string escapedText = Text.Replace("\n", "\\n");
-                string bodyjson = "{ "
-                    + "\"user\" : \"" + id.ToString() + "\""
-                    + ",\"details\" : \"" + escapedText + "\""
-                    + ",\"subject\" : \"" + Subject + "\""
-                    + "}";
-
-                string submiturl = "/suggestions/" + id.ToString();
-                WebClient wc = new WebClient()
+                try
                 {
-                    BaseAddress = C_Vita.VitaCoreUrl
-                };
-                if (token != null)
-                    wc.Headers.Add(HttpRequestHeader.Cookie, token);
-                wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
-                wc.Headers.Add(HttpRequestHeader.Accept, "application/json");
+                    retry = false;
+                    string escapedText = Text.Replace("\n", "\\n");
+                    string bodyjson = "{ "
+                        + "\"" + N_Text + "\" : \"" + escapedText + "\""
+                        + ","
+                        + "\"" + N_Subject + "\" : \"" + Subject + "\""
+						+ ","
+						+ "\"" + N_Status + "\" : \"" + Status.ToString() + "\""
+                        + "}";
 
-                string responseString = await wc.UploadStringTaskAsync(submiturl, "PUT", bodyjson);
+                    string submiturl = "/suggestions/" + id.ToString();
+                    WebClient wc = new WebClient()
+                    {
+                        BaseAddress = C_Vita.VitaCoreUrl
+                    };
+                    if (token != null)
+                        wc.Headers.Add(HttpRequestHeader.Cookie, token);
+                    wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
+                    wc.Headers.Add(HttpRequestHeader.Accept, "application/json");
 
-                // get and parse the response
-                JsonValue responseJson = JsonValue.Parse(responseString);
+                    string responseString = await wc.UploadStringTaskAsync(submiturl, "PUT", bodyjson);
+
+                    // get and parse the response
+                    JsonValue responseJson = JsonValue.Parse(responseString);
 
 #if DEBUG
-                C_Suggestion nsug = new C_Suggestion(responseJson);
-                if (!(nsug.Equals(this)))
-                    throw new ApplicationException("response mismatch");
+                    C_Suggestion nsug = new C_Suggestion(responseJson);
+                    if (!(nsug.Equals(this)))
+                        throw new ApplicationException("response mismatch");
 #endif
 
-                success = true;
-            }
-            catch (Exception ex)
-            {
+                    success = true;
+                }
+                catch (WebException we)
+                {
+                    if (we.Status == WebExceptionStatus.ReceiveFailure)
+                    {
+                        success = false;
+                        retry = retryCount < 3;
+                        retryCount++;
+                    }
+                }
+                catch (Exception ex)
+                {
 #if DEBUG
-                Console.WriteLine(ex.Message);
+                    Console.WriteLine(ex.Message);
 #endif
-                success = false;
+                    success = false;
+                }
             }
+            while (retry);
 
             return success;
         }
@@ -261,34 +362,50 @@ namespace zsquared
             if (id == -1)
                 throw new ApplicationException("must be an existing id; can't delete one that hasn't been added");
 #endif
+			int retryCount = 0;
+			bool retry = false;
 
-            bool success = false;
-            try
+			bool success = false;
+            do
             {
-                string submiturl = "/suggestions/" + id.ToString();
-                WebClient wc = new WebClient()
+                try
                 {
-                    BaseAddress = C_Vita.VitaCoreUrl
-                };
-                if (token != null)
-                    wc.Headers.Add(HttpRequestHeader.Cookie, token);
-                wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
-                wc.Headers.Add(HttpRequestHeader.Accept, "application/json");
+                    retry = false;
+                    string submiturl = "/suggestions/" + id.ToString();
+                    WebClient wc = new WebClient()
+                    {
+                        BaseAddress = C_Vita.VitaCoreUrl
+                    };
+                    if (token != null)
+                        wc.Headers.Add(HttpRequestHeader.Cookie, token);
+                    wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
+                    wc.Headers.Add(HttpRequestHeader.Accept, "application/json");
 
 
-                byte[] dataBytes = Encoding.UTF8.GetBytes("");
-                // do the actual web request
-                byte[] responseBytes = await wc.UploadDataTaskAsync(submiturl, "DELETE", dataBytes);
-                // there is no response from a delete
-                success = true;
-            }
-            catch (Exception ex)
-            {
+                    byte[] dataBytes = Encoding.UTF8.GetBytes("");
+                    // do the actual web request
+                    byte[] responseBytes = await wc.UploadDataTaskAsync(submiturl, "DELETE", dataBytes);
+                    // there is no response from a delete
+                    success = true;
+                }
+				catch (WebException we)
+				{
+					if (we.Status == WebExceptionStatus.ReceiveFailure)
+					{
+						success = false;
+						retry = retryCount < 3;
+						retryCount++;
+					}
+				}
+				catch (Exception ex)
+                {
 #if DEBUG
-                Console.WriteLine(ex.Message);
+                    Console.WriteLine(ex.Message);
 #endif
-                success = false;
-			}
+                    success = false;
+                }
+            }
+            while (retry);
 
 			return success;
 		}

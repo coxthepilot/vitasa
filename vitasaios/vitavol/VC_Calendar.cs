@@ -44,7 +44,7 @@ namespace vitavol
 				Global.CalendarDate = C_YMD.Now;
 
 			B_Back.TouchUpInside += (sender, e) => 
-                PerformSegue("Segue_CalendarToSignUps", this);
+                PerformSegue("Segue_CalendarToVolunteerOptions", this);
 
             B_NextMonth.TouchUpInside += (sender, e) =>
             {

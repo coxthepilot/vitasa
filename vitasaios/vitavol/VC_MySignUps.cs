@@ -35,17 +35,7 @@ namespace vitavol
             LoggedInUser = Global.GetUserFromCacheNoFetch(Global.LoggedInUserId);
 
 			B_Back.TouchUpInside += (sender, e) =>
-                PerformSegue("Segue_SignUpsToLogin", this);
-
-            B_Suggestion.TouchUpInside += (sender, e) =>
-                PerformSegue("Segue_SignUpsToSuggestions", this);
-
-            B_SignUp.TouchUpInside += (sender, e) =>
-                PerformSegue("Segue_SignUpsToCalendar", this);
-
-            // since the login process includes the user work history and intents, we don't need to fetch again
-            // todo: after some amount of time, these values are stale? Since this user is the only one that can change
-            //   them then perhaps they are ok; can backoffice change their intents? when approved and moves to history?
+                PerformSegue("Segue_MySignUpsToVolunteerOptions", this);
 
             // get all workintents for this user
             List<C_WorkItem> OurWorkItems = Global.GetWorkItemsForUser(Global.LoggedInUserId);
@@ -57,6 +47,9 @@ namespace vitavol
             // sort to make the list nicer
             OurWorkItems2.Sort(C_WorkItem.CompareByDateAscending);
 
+            AI_Busy.StartAnimating();
+            EnableUI(false);
+
             // make sure the site cache has the details on the sites listed in our workitems
             Task.Run(async () => 
             {
@@ -67,6 +60,9 @@ namespace vitavol
 				UIApplication.SharedApplication.InvokeOnMainThread(
                 new Action(() =>
                 {
+                    AI_Busy.StopAnimating();
+                    EnableUI(true);
+
                 	Global.ViewCameFrom = E_ViewCameFrom.MySignUps;
                 	C_MySignUpsTableSourceWorkIntents ts = new C_MySignUpsTableSourceWorkIntents(Global, OurWorkItems2);
                 	TV_SignUps.Source = ts;
@@ -87,8 +83,6 @@ namespace vitavol
         {
             TV_SignUps.UserInteractionEnabled = en;
             B_Back.Enabled = en;
-            B_SignUp.Enabled = en;
-            B_Suggestion.Enabled = en;
         }
 
         /// <summary>
@@ -151,7 +145,6 @@ namespace vitavol
 			const string CellIdentifier = "TableCell_SignUpsTableSourceMySignUps";
             public List<C_WorkItem> OurWorkItems;
             readonly C_Global Global;
-            List<C_VitaSite> AllSites;
 
             public C_MySignUpsTableSourceWorkIntents(C_Global global, List<C_WorkItem> ourWorkItems)
 			{

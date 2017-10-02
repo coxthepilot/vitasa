@@ -8,11 +8,9 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 
-
 namespace zsquared
 {
-    public enum E_ViewCameFrom { Unknown = 0, List, Map, MySignUps, SCSites, SCSite, Login, VolOptions }
-    public enum E_Message { Unknown = 0, BeforeYoGo, Resources, About, BecomeAVolunteer, Using211, MyFreeTaxes }
+    public enum E_ViewCameFrom { Unknown = 0, List, Map, MySignUps, SCSites, SCSite, Login, VolOptions, Suggestions }
 
     public class C_Global
     {
@@ -43,11 +41,6 @@ namespace zsquared
 		/// </summary>
 		public List<C_WorkItem> WorkItems;
         public static readonly string N_WorkItems = "workitems";
-
-        ///// <summary>
-        ///// The date for the volunteer work item being modified; used in SCVolunteers and SCVolunteer to keep track
-        ///// of the date in the date picker
-        ///// </summary>
 
 		/// <summary>
 		/// List of known users; this is not a list of ALL users, just ones we have seen
@@ -125,110 +118,144 @@ namespace zsquared
             WorkItems = new List<C_WorkItem>();
         }
 
-        public C_Global(JsonValue jv)
-        {
-			UserCache = new List<C_VitaUser>();
-			SiteCache = new List<C_VitaSite>();
-			WorkItems = new List<C_WorkItem>();
+		// ================= site cache mgmt =======================
 
-			if (jv.ContainsKey(N_MessageToShow))
-                MessageToShow = Tools.StringToEnum <E_Message> (Tools.JsonProcessString(jv, MessageToShow.ToString()));
-
-            if (jv.ContainsKey(N_LoggedInUserId))
-                LoggedInUserId = Tools.JsonProcessInt(jv[N_LoggedInUserId], LoggedInUserId);
-
-			if (jv.ContainsKey(N_SiteCache))
+		/// <summary>
+		/// Imports the sites.
+		/// </summary>
+		/// <returns>A list of sites found in the json</returns>
+		/// <param name="json">the value from the backend services that has been Parsed</param>
+		private List<C_VitaSite> ImportSites(JsonValue json)
+		{
+#if DEBUG
+			if (!(json is JsonArray))
+				throw new ApplicationException("the sites list must be an array");
+#endif
+			// create the holding place for the results
+			List<C_VitaSite> res = new List<C_VitaSite>();
+			foreach (JsonValue j in json)
 			{
-				SiteCache = new List<C_VitaSite>();
-				foreach (JsonValue jva in jv[N_SiteCache])
+				try
 				{
-					C_VitaSite s = new C_VitaSite(jva);
-					SiteCache.Add(s);
+					C_VitaSite vs = new C_VitaSite(j);
+					res.Add(vs);
+
+                    if (!SiteCacheContains(vs.Slug))
+    					SiteCache.Add(vs);
+                    
+					CleanWorkItemsFromSite(vs);
+				}
+				catch (Exception e)
+				{
+#if DEBUG
+					Console.WriteLine(e.Message);
+#endif
 				}
 			}
 
-			if (jv.ContainsKey(N_AllSitesFetched))
-				AllSitesFetched = Tools.JsonProcessBool(jv[N_AllSitesFetched], AllSitesFetched);
+            AllSitesFetched = true;
 
-			if (jv.ContainsKey(N_WorkItems))
-			{
-                WorkItems = new List<C_WorkItem>();
-				foreach (JsonValue jva in jv[N_WorkItems])
-				{
-                    C_WorkItem s = new C_WorkItem(jva);
-					WorkItems.Add(s);
-				}
-			}
-
-			if (jv.ContainsKey(N_UserCache))
-			{
-                UserCache = new List<C_VitaUser>();
-				foreach (JsonValue jva in jv[N_UserCache])
-				{
-					C_VitaUser s = new C_VitaUser(jva);
-					UserCache.Add(s);
-				}
-			}
-
-            if (jv.ContainsKey(N_SelectedSiteSlug))
-                SelectedSiteSlug = Tools.JsonProcessString(jv[N_SelectedSiteSlug], SelectedSiteSlug);
-
-            if (jv.ContainsKey(N_SelectedSiteName))
-                SelectedSiteName = Tools.JsonProcessString(jv[N_SelectedSiteName], SelectedSiteName);
-
-			if (jv.ContainsKey(N_SelectedSuggestion))
-                SelectedSuggestion = new C_Suggestion(jv[N_SelectedSuggestion]);
-
-            if (jv.ContainsKey(N_SelectedDate))
-                SelectedDate = Tools.JsonProcessDate(jv[N_SelectedDate], SelectedDate);
-
-            if (jv.ContainsKey(N_ViewCameFrom))
-                ViewCameFrom = Tools.StringToEnum<E_ViewCameFrom>(Tools.JsonProcessString(jv[N_ViewCameFrom], ViewCameFrom.ToString()));
-
-            if (jv.ContainsKey(N_SelectedDayOfWeek))
-                SelectedDayOfWeek = Tools.JsonProcessInt(jv[N_SelectedDayOfWeek], SelectedDayOfWeek);
-
-            if (jv.ContainsKey(N_OpenSitesThatNeedHelp))
-			{
-                OpenSitesThatNeedHelp = new List<string>();
-				foreach (JsonValue jva in jv[N_OpenSitesThatNeedHelp])
-				{
-                    string s = Tools.JsonProcessString(jva, null);
-                    if (s != null)
-    					OpenSitesThatNeedHelp.Add(s);
-				}
-			}
-
-            if (jv.ContainsKey(N_WorksItemsOnSiteOnDate))
-			{
-                WorkItemsOnSiteOnDate = new List<C_WorkItem>();
-				foreach (JsonValue jva in jv[N_WorksItemsOnSiteOnDate])
-				{
-					C_WorkItem s = new C_WorkItem(jva);
-					WorkItemsOnSiteOnDate.Add(s);
-				}
-			}
-
-            if (jv.ContainsKey(N_CalendarDate))
-                CalendarDate = Tools.JsonProcessDate(jv[N_CalendarDate], CalendarDate);
-            
-            if (jv.ContainsKey(N_VolunteerWorkItem))
-                VolunteerWorkItem = new C_WorkItem(jv[N_VolunteerWorkItem]);
-
-			if (jv.ContainsKey(N_SitesSchedule))
-			{
-				SitesSchedule = new List<C_SiteSchedule>();
-				foreach (JsonValue jva in jv[N_SitesSchedule])
-				{
-					C_SiteSchedule s = new C_SiteSchedule(jva, null);
-					SitesSchedule.Add(s);
-				}
-			}
+			return res;
 		}
 
-        // ================= site cache mgmt =======================
+		public async Task<List<C_VitaSite>> FetchSitesList()
+		{
+			int retryCount = 0;
+			bool retry = false;
 
-        public C_VitaSite GetSiteFromCacheNoFetch(string slug)
+			List<C_VitaSite> siteslist = null;
+			do
+			{
+				try
+				{
+					retry = false;
+					string sitesUrl = "/sites";
+					WebClient wc = new WebClient()
+					{
+						BaseAddress = C_Vita.VitaCoreUrl
+					};
+					wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
+					wc.Headers.Add(HttpRequestHeader.Accept, "application/json");
+
+					string responseString = await wc.DownloadStringTaskAsync(sitesUrl);
+
+					JsonValue responseJson = JsonValue.Parse(responseString);
+
+					siteslist = ImportSites(responseJson);
+				}
+				catch (WebException we)
+				{
+					if (we.Status == WebExceptionStatus.ReceiveFailure)
+					{
+						siteslist = null;
+						retry = retryCount < 3;
+						retryCount++;
+					}
+				}
+				catch (Exception e)
+				{
+#if DEBUG
+					Console.WriteLine(e.Message);
+#endif
+					siteslist = null;
+					retry = false;
+				}
+			}
+			while (retry);
+
+			return siteslist;
+		}
+
+        private async static Task<C_VitaSite> FetchSitesDetails(string slug)
+		{
+			int retryCount = 0;
+			bool retry = false;
+
+			C_VitaSite site = null;
+			do
+			{
+				try
+				{
+					retry = false;
+					string siteUrl = "/sites/" + slug;
+					WebClient wc = new WebClient()
+					{
+						BaseAddress = C_Vita.VitaCoreUrl
+					};
+					wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
+					wc.Headers.Add(HttpRequestHeader.Accept, "application/json");
+
+					string responseString = await wc.DownloadStringTaskAsync(siteUrl);
+
+					JsonValue responseJson = JsonValue.Parse(responseString);
+
+					site = new C_VitaSite(responseJson)
+					{
+						SampleTime = DateTime.Now
+					};
+				}
+				catch (WebException we)
+				{
+					if (we.Status == WebExceptionStatus.ReceiveFailure)
+					{
+						site = null;
+						retry = retryCount < 3;
+						retryCount++;
+					}
+				}
+				catch (Exception e)
+				{
+#if DEBUG
+					Console.WriteLine(e.Message);
+#endif
+					site = null;
+				}
+			}
+			while (retry);
+
+			return site;
+		}
+		public C_VitaSite GetSiteFromCacheNoFetch(string slug)
         {
             var ou = SiteCache.Where(site => site.Slug == slug);
             return ou.FirstOrDefault();
@@ -238,12 +265,21 @@ namespace zsquared
 		{
             C_VitaSite res = GetSiteFromCacheNoFetch(slug);
 
-			if (res == null)
+            bool refetch = res == null;
+            if (!refetch)
+            {
+                DateTime dt = res.SampleTime;
+                TimeSpan ts = DateTime.Now - dt;
+                refetch = ts.TotalMinutes > 30;
+            }
+
+            if (refetch)
 			{
-				res = await C_VitaSite.FetchSitesDetails(slug);
+				res = await FetchSitesDetails(slug);
                 if (res != null)
                 {
-                    SiteCache.Add(res);
+					if (!SiteCacheContains(res.Slug))
+						SiteCache.Add(res);
 					CleanWorkItemsFromSite(res);
 				}
 			}
@@ -264,10 +300,11 @@ namespace zsquared
 
             if (res == null)
 			{
-				res = await C_VitaSite.FetchSitesDetails(slug);
+				res = await FetchSitesDetails(slug);
                 if (res != null)
                 {
-                    SiteCache.Add(res);
+					if (!SiteCacheContains(res.Slug))
+						SiteCache.Add(res);
                     CleanWorkItemsFromSite(res);
                 }
 			}
@@ -300,13 +337,14 @@ namespace zsquared
 			// at the current api level, the only option is to get data on ALL sites (slow, lots of data)
 			if (!AllSitesFetched)
 			{
-				List<C_VitaSite> allSites = await C_VitaSite.FetchSitesListX();
+				List<C_VitaSite> allSites = await FetchSitesList();
 				AllSitesFetched = true;
 
 				foreach (C_VitaSite site in allSites)
 				{
 					if (!SiteCacheContains(site.Slug))
 						SiteCache.Add(site);
+                    CleanWorkItemsFromSite(site);
 				}
 			}
 
@@ -327,13 +365,14 @@ namespace zsquared
             // todo: get an API to fetch just exactly what we want
             if (!AllSitesFetched)
             {
-                List<C_VitaSite> allSites = await C_VitaSite.FetchSitesListX();
+                List<C_VitaSite> allSites = await FetchSitesList();
                 AllSitesFetched = true;
 
                 foreach (C_VitaSite site in allSites)
                 {
                     if (!SiteCacheContains(site.Slug))
                         SiteCache.Add(site);
+                    CleanWorkItemsFromSite(site);
                 }
             }
 
@@ -363,18 +402,8 @@ namespace zsquared
 
 		private bool SiteCacheContains(string slug)
 		{
-			bool res = false;
-
-			foreach (C_VitaSite site in SiteCache)
-			{
-				if (site.Slug == slug)
-				{
-					res = true;
-					break;
-				}
-			}
-
-			return res;
+            var ou = SiteCache.Where(s => s.Slug == slug);
+            return ou.Any();
 		}
 
 		// ----------------- user cache mgmt ---------------------
@@ -395,7 +424,7 @@ namespace zsquared
 				string loginUrl = "/login";
 				var client = new HttpClient()
 				{
-					BaseAddress = new Uri(C_Vita.VitaCoreUrlSSL)
+					BaseAddress = new Uri(C_Vita.VitaCoreUrl)
 				};
 				client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
@@ -463,6 +492,133 @@ namespace zsquared
 			return user;
 		}
 
+		/// <summary>
+		/// Fetchs the users list. Must have admin privilege to run.
+		/// </summary>
+		/// <returns>The users list.</returns>
+		/// <param name="token">Token.</param>
+        public async Task<List<C_VitaUser>> FetchUsersList(string token)
+		{
+			int retryCount = 0;
+			bool retry = false;
+
+			List<C_VitaUser> res = null;
+			do
+			{
+				try
+				{
+					retry = false;
+					string usersUrl = "/users";
+					WebClient wc = new WebClient()
+					{
+						BaseAddress = C_Vita.VitaCoreUrl
+					};
+					wc.Headers.Add(HttpRequestHeader.Cookie, token);
+					wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
+					wc.Headers.Add(HttpRequestHeader.Accept, "application/json");
+
+					string resp = await wc.DownloadStringTaskAsync(usersUrl);
+
+					JsonValue jv = JsonValue.Parse(resp);
+
+#if DEBUG
+					// we are expecting an array
+					if (!(jv is JsonArray))
+						throw new ApplicationException("must be an array");
+#endif
+
+					res = new List<C_VitaUser>();
+					foreach (JsonValue jv1 in jv)
+					{
+						C_VitaUser vu = new C_VitaUser(jv1);
+						res.Add(vu);
+
+						UserCache.Add(vu);
+						CleanWorkItemsFromUser(vu);
+
+					}
+				}
+				catch (WebException we)
+				{
+					if (we.Status == WebExceptionStatus.ReceiveFailure)
+					{
+						res = null;
+						retry = retryCount < 3;
+						retryCount++;
+					}
+				}
+				catch (Exception ex)
+				{
+#if DEBUG
+					Console.WriteLine(ex.Message);
+#endif
+					res = null;
+				}
+			}
+			while (retry);
+
+			return res;
+		}
+
+		/// <summary>
+		/// Get the data for the specified user from the backend.
+		/// </summary>
+		/// <returns>The user</returns>
+		/// <param name="token">security token (required)</param>
+		/// <param name="id">id of the user to get details on</param>
+        private async Task<C_VitaUser> FetchUser(string token, int id)
+		{
+			int retryCount = 0;
+			bool retry = false;
+
+			C_VitaUser res = null;
+			do
+			{
+				try
+				{
+					retry = false;
+					string usersUrl = "/users/" + id.ToString();
+					WebClient wc = new WebClient()
+					{
+						BaseAddress = C_Vita.VitaCoreUrl
+					};
+					wc.Headers.Add(HttpRequestHeader.Cookie, token);
+					wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
+					wc.Headers.Add(HttpRequestHeader.Accept, "application/json");
+
+					string ss = await wc.DownloadStringTaskAsync(usersUrl);
+
+					JsonValue jv = JsonValue.Parse(ss);
+
+#if DEBUG
+					if (!(jv is JsonObject))
+						throw new ApplicationException("must be an object");
+#endif
+
+					res = new C_VitaUser(jv);
+				}
+				catch (WebException we)
+				{
+					if (we.Status == WebExceptionStatus.ReceiveFailure)
+					{
+						res = null;
+						retry = retryCount < 3;
+						retryCount++;
+					}
+				}
+				catch (Exception ex)
+				{
+#if DEBUG
+					Console.WriteLine(ex.Message);
+#endif
+					res = null;
+				}
+			}
+			while (retry);
+
+			return res;
+		}
+
 		public C_VitaUser GetUserFromCacheNoFetch(int id)
         {
             var ou = UserCache.Where(u => u.id == id);
@@ -481,7 +637,7 @@ namespace zsquared
                 if (loggedInUser == null)
                     return null;
 
-				user = await C_VitaUser.FetchUserX(loggedInUser.Token, id);
+				user = await FetchUser(loggedInUser.Token, id);
 
 				if (user != null)
 				{
@@ -499,7 +655,7 @@ namespace zsquared
            
             if (res == null)
 			{
-                res = await C_VitaUser.FetchUserX(token, userid);
+                res = await FetchUser(token, userid);
 				if (res != null)
 				{
 					UserCache.Add(res);
@@ -550,15 +706,55 @@ namespace zsquared
             int key = year * 12 + month;
             if (SitesScheduleCache.ContainsKey(key))
                 res = SitesScheduleCache[key];
-            else
+
+            // if the siteschedule we fetched has expired data, then we need to force a refetch
+            bool refetch = res == null;
+            if (!refetch && (res.Count != 0))
             {
-                int daysInMonth = DateTime.DaysInMonth(year, month);
+                DateTime dt = res[0].SampleTime;
+                TimeSpan ts = DateTime.Now - dt;
+                refetch = ts.TotalMinutes > 30;
+            }
+
+            if (refetch)
+            {
+                // if we fetch any data, we will always fetch 2 months at once
                 C_YMD start = new C_YMD(year, month, 1);
-                C_YMD end = new C_YMD(year, month, daysInMonth);
+                C_YMD nextMonth = new C_YMD(start);
+                nextMonth.AddMonths(1);
+                int daysInMonth = DateTime.DaysInMonth(nextMonth.Year, nextMonth.Month);
+                C_YMD end = new C_YMD(nextMonth.Year, nextMonth.Month, daysInMonth);
 
-                res = await C_SiteSchedule.FetchSitesSchedulesX(start, end);
+                // get the siteschedules in our time range (2 months)
+                List<C_SiteSchedule> sslist = await C_SiteSchedule.FetchSitesSchedules(start, end);
 
-                SitesScheduleCache.Add(key, res);
+                // split into the 2 different months since that is how we cache them
+                List<C_SiteSchedule> month0 = new List<C_SiteSchedule>();
+                List<C_SiteSchedule> month1 = new List<C_SiteSchedule>();
+                foreach(C_SiteSchedule ss in sslist)
+                {
+                    if ((ss.Date.Year == year) && (ss.Date.Month == month))
+                        month0.Add(ss);
+                    else
+                        month1.Add(ss);
+                }
+
+                // build the keys for the 2 months
+                int key0 = key;
+                int key1 = nextMonth.Year * 12 + nextMonth.Month;
+
+                // if those entries are already there, remove them
+                if (SitesScheduleCache.ContainsKey(key0))
+                    SitesScheduleCache.Remove(key0);
+				if (SitesScheduleCache.ContainsKey(key1))
+					SitesScheduleCache.Remove(key1);
+
+                // finally, add the new month schedule into the cache
+				SitesScheduleCache.Add(key0, month0);
+                SitesScheduleCache.Add(key1, month1);
+
+                // and return the one the user was actually asking for...
+                res = month0;
             }
 
             return res;

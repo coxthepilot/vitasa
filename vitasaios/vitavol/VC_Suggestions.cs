@@ -31,7 +31,7 @@ namespace vitavol
 			// --------- button handlers -----------
 
 			B_Back.TouchUpInside += (sender, e) => 
-                PerformSegue("Segue_SuggestionsToSignUps", this);
+                PerformSegue("Segue_SuggestionsToVolunteerOptions", this);
 
             B_NewSuggestion.TouchUpInside += OnNewSuggestion;
 
@@ -164,7 +164,7 @@ namespace vitavol
                 string text = suggestion.Text ?? "<null>";
 
 				cell.TextLabel.Text = subject;
-                cell.DetailTextLabel.Text = suggestion.Date.ToString("mmm dd,yyyy") + ":" + text;
+                cell.DetailTextLabel.Text = suggestion.CreateDate.ToString("mmm dd,yyyy") + ":" + text;
 
 				return cell;
 			}
@@ -172,7 +172,7 @@ namespace vitavol
 			public override void RowSelected(UITableView tableView, NSIndexPath indexPath)
 			{
 				Global.SelectedSuggestion = Suggestions[indexPath.Row];
-
+                Global.ViewCameFrom = E_ViewCameFrom.Suggestions;
 				ourVC.PerformSegue("Segue_SuggestionsToSuggestion", ourVC);
 			}
 		}

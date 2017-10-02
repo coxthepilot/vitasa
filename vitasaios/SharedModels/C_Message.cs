@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 
 namespace zsquared
 {
+	public enum E_Message { Unknown = 0, BeforeYoGo, Resources, About, BecomeAVolunteer, Using211, MyFreeTaxes }
+	
     public class C_Message
     {
         public enum E_Language { Unknown = 0, English, Spanish }
@@ -85,75 +87,107 @@ namespace zsquared
 
         public static async Task<C_Message> GetMessage(E_Language language, string slug)
         {
-            C_Message msg = null;
+			int retryCount = 0;
+			bool retry = false;
 
-            try
+			C_Message msg = null;
+            do
             {
-                string acceptLanguage = language == E_Language.Spanish ? "es" : "en";
-
-                string submiturl = "/resources/" + slug + "/";
-
-                WebClient wc = new WebClient()
+                try
                 {
-                    BaseAddress = C_Vita.VitaCoreUrl
-                };
-                wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
-                wc.Headers.Add(HttpRequestHeader.Accept, "application/json");
-                wc.Headers.Add(HttpRequestHeader.AcceptLanguage, acceptLanguage);
+                    retry = false;
+                    string acceptLanguage = language == E_Language.Spanish ? "es" : "en";
 
-                string responseString = await wc.DownloadStringTaskAsync(submiturl);
+                    string submiturl = "/resources/" + slug + "/";
 
-                JsonValue responseJson = JsonValue.Parse(responseString);
+                    WebClient wc = new WebClient()
+                    {
+                        BaseAddress = C_Vita.VitaCoreUrl
+                    };
+                    wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
+                    wc.Headers.Add(HttpRequestHeader.Accept, "application/json");
+                    wc.Headers.Add(HttpRequestHeader.AcceptLanguage, acceptLanguage);
 
-                msg = new C_Message(responseJson);
-            }
-            catch (Exception e)
-            {
+                    string responseString = await wc.DownloadStringTaskAsync(submiturl);
+
+                    JsonValue responseJson = JsonValue.Parse(responseString);
+
+                    msg = new C_Message(responseJson);
+                }
+				catch (WebException we)
+				{
+					if (we.Status == WebExceptionStatus.ReceiveFailure)
+					{
+                        msg = null;
+						retry = retryCount < 3;
+						retryCount++;
+					}
+				}
+				catch (Exception e)
+                {
 #if DEBUG
-                Console.WriteLine(e.Message);
+                    Console.WriteLine(e.Message);
 #endif
-                msg = null;
+                    msg = null;
+                }
             }
+            while (retry);
 
             return msg;
         }
 
         public static async Task<bool> AddMessage(string token, C_Message english, C_Message spanish)
         {
-            bool success = false;
+			int retryCount = 0;
+			bool retry = false;
 
-            string bodyjson = "{ "
-                + "\"" + "slug" + "\" : \"" + english.Slug + "\""
-                + ",\"" + "text_en" + "\" : \"" + EscapeText(english.Text) + "\""
-                + ",\"" + "text_es" + "\" : \"" + EscapeText(spanish.Text) + "\""
-                + "}";
-
-            try
+			bool success = false;
+            do
             {
-                string submiturl = "/resources";
-
-                WebClient wc = new WebClient()
+                try
                 {
-                    BaseAddress = C_Vita.VitaCoreUrl
-                };
-                wc.Headers.Add(HttpRequestHeader.Cookie, token);
-                wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
-                wc.Headers.Add(HttpRequestHeader.Accept, "application/json");
+                    retry = false;
+                    string bodyjson = "{ "
+                        + "\"" + "slug" + "\" : \"" + english.Slug + "\""
+                        + ",\"" + "text_en" + "\" : \"" + EscapeText(english.Text) + "\""
+                        + ",\"" + "text_es" + "\" : \"" + EscapeText(spanish.Text) + "\""
+                        + "}";
 
-                string responseString = await wc.UploadStringTaskAsync(submiturl, "POST", bodyjson);
+                    string submiturl = "/resources";
 
-                JsonValue responseJson = JsonValue.Parse(responseString);
-                // what is the parsed result?
+                    WebClient wc = new WebClient()
+                    {
+                        BaseAddress = C_Vita.VitaCoreUrl
+                    };
+                    wc.Headers.Add(HttpRequestHeader.Cookie, token);
+                    wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
+                    wc.Headers.Add(HttpRequestHeader.Accept, "application/json");
 
-                success = true;
-            }
-            catch (Exception e)
-            {
+                    string responseString = await wc.UploadStringTaskAsync(submiturl, "POST", bodyjson);
+
+                    JsonValue responseJson = JsonValue.Parse(responseString);
+                    // what is the parsed result?
+
+                    success = true;
+                }
+				catch (WebException we)
+				{
+					if (we.Status == WebExceptionStatus.ReceiveFailure)
+					{
+						success = false;
+						retry = retryCount < 3;
+						retryCount++;
+					}
+				}
+				catch (Exception e)
+                {
 #if DEBUG
-                Console.WriteLine(e.Message);
+                    Console.WriteLine(e.Message);
 #endif
-                success = false;
+                    success = false;
+                }
             }
+            while (retry);
 
             return success;
         }
@@ -165,70 +199,104 @@ namespace zsquared
 
         public async Task<bool> UpdateMessage(string token)
         {
-            string messageLanguage = Language == E_Language.Spanish ? "text_es" : "text_en";
-            string bodyjson = "{ "
-                + "\"" + messageLanguage + "\" : \"" + Text + "\""
-                + "}";
+			int retryCount = 0;
+			bool retry = false;
 
             bool success = false;
-            try
+            do
             {
-                string submiturl = "/resources/" + Slug + "/";
-                WebClient wc = new WebClient()
+                try
                 {
-                    BaseAddress = C_Vita.VitaCoreUrl
-                };
-                wc.Headers.Add(HttpRequestHeader.Cookie, token);
-                wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
-                wc.Headers.Add(HttpRequestHeader.Accept, "application/json");
+                    retry = false;
+                    string messageLanguage = Language == E_Language.Spanish ? "text_es" : "text_en";
+                    string bodyjson = "{ "
+                        + "\"" + messageLanguage + "\" : \"" + Text + "\""
+                        + "}";
 
-                string responseString = await wc.UploadStringTaskAsync(submiturl, "PUT", bodyjson);
+                    string submiturl = "/resources/" + Slug + "/";
+                    WebClient wc = new WebClient()
+                    {
+                        BaseAddress = C_Vita.VitaCoreUrl
+                    };
+                    wc.Headers.Add(HttpRequestHeader.Cookie, token);
+                    wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
+                    wc.Headers.Add(HttpRequestHeader.Accept, "application/json");
 
-                JsonValue responseJson = JsonValue.Parse(responseString);
-                // what is the response
+                    string responseString = await wc.UploadStringTaskAsync(submiturl, "PUT", bodyjson);
 
-                success = true;
-            }
-            catch (Exception e)
-            {
+                    JsonValue responseJson = JsonValue.Parse(responseString);
+                    // what is the response
+
+                    success = true;
+                }
+				catch (WebException we)
+				{
+					if (we.Status == WebExceptionStatus.ReceiveFailure)
+					{
+						success = false;
+						retry = retryCount < 3;
+						retryCount++;
+					}
+				}
+				catch (Exception e)
+                {
 #if DEBUG
-                Console.WriteLine(e.Message);
+                    Console.WriteLine(e.Message);
 #endif
-                success = false;
+                    success = false;
+                }
             }
+            while (retry);
 
             return success;
         }
 
         public async Task<bool> RemoveMessage(string token)
         {
-            bool success = false;
-            try
+			int retryCount = 0;
+			bool retry = false;
+
+			bool success = false;
+            do
             {
-                string submiturl = "/resources/" + Slug + "/";
-                WebClient wc = new WebClient()
+                try
                 {
-                    BaseAddress = C_Vita.VitaCoreUrl
-                };
-                wc.Headers.Add(HttpRequestHeader.Cookie, token);
-                wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
-                wc.Headers.Add(HttpRequestHeader.Accept, "application/json");
+                    retry = false;
+                    string submiturl = "/resources/" + Slug + "/";
+                    WebClient wc = new WebClient()
+                    {
+                        BaseAddress = C_Vita.VitaCoreUrl
+                    };
+                    wc.Headers.Add(HttpRequestHeader.Cookie, token);
+                    wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
+                    wc.Headers.Add(HttpRequestHeader.Accept, "application/json");
 
-                string responseString = await wc.UploadStringTaskAsync(submiturl, "DELETE", "");
-                // what is the response?
-                //string responseString = Encoding.UTF8.GetString(responseBytes);
-                //JsonValue responseJson = JsonValue.Parse(responseString);
-                // if it parses then it is our success result
+                    string responseString = await wc.UploadStringTaskAsync(submiturl, "DELETE", "");
+                    // what is the response?
+                    //string responseString = Encoding.UTF8.GetString(responseBytes);
+                    //JsonValue responseJson = JsonValue.Parse(responseString);
+                    // if it parses then it is our success result
 
-                success = true;
-            }
-            catch (Exception e)
-            {
+                    success = true;
+                }
+				catch (WebException we)
+				{
+					if (we.Status == WebExceptionStatus.ReceiveFailure)
+					{
+						success = true;
+						retry = retryCount < 3;
+						retryCount++;
+					}
+				}
+				catch (Exception e)
+                {
 #if DEBUG
-                Console.WriteLine(e.Message);
+                    Console.WriteLine(e.Message);
 #endif
-                success = false;
-			}
+                    success = false;
+                }
+            }
+            while (retry);
 
 			return success;
 		}

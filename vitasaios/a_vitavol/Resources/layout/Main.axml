@@ -31,7 +31,8 @@
         android:textColor="#FF000000"
         android:hint="email"
         android:paddingLeft="10dp"
-        android:paddingRight="10dp" />
+        android:paddingRight="10dp"
+        android:inputType="textEmailAddress" />
     <TextView
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:layout_width="match_parent"

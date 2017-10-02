@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Xamarin.Forms.2.4.0.282\build\netstandard1.0\Xamarin.Forms.props" Condition="Exists('..\packages\Xamarin.Forms.2.4.0.282\build\netstandard1.0\Xamarin.Forms.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">iPhoneSimulator</Platform>
@@ -24,7 +25,7 @@
     <MtouchNoSymbolStrip>true</MtouchNoSymbolStrip>
     <MtouchFastDev>true</MtouchFastDev>
     <IOSDebuggerPort>31979</IOSDebuggerPort>
-    <MtouchLink>None</MtouchLink>
+    <MtouchLink>SdkOnly</MtouchLink>
     <MtouchArch>i386, x86_64</MtouchArch>
     <MtouchHttpClientHandler>HttpClientHandler</MtouchHttpClientHandler>
     <CodesignProvision>vita vol dev</CodesignProvision>
@@ -87,16 +88,16 @@
     <Reference Include="System.Json" />
     <Reference Include="System.Net.Http" />
     <Reference Include="Xamarin.Forms.Core">
-      <HintPath>..\packages\Xamarin.Forms.2.3.4.270\lib\Xamarin.iOS10\Xamarin.Forms.Core.dll</HintPath>
+      <HintPath>..\packages\Xamarin.Forms.2.4.0.282\lib\Xamarin.iOS10\Xamarin.Forms.Core.dll</HintPath>
     </Reference>
     <Reference Include="Xamarin.Forms.Platform">
-      <HintPath>..\packages\Xamarin.Forms.2.3.4.270\lib\Xamarin.iOS10\Xamarin.Forms.Platform.dll</HintPath>
+      <HintPath>..\packages\Xamarin.Forms.2.4.0.282\lib\Xamarin.iOS10\Xamarin.Forms.Platform.dll</HintPath>
     </Reference>
     <Reference Include="Xamarin.Forms.Platform.iOS">
-      <HintPath>..\packages\Xamarin.Forms.2.3.4.270\lib\Xamarin.iOS10\Xamarin.Forms.Platform.iOS.dll</HintPath>
+      <HintPath>..\packages\Xamarin.Forms.2.4.0.282\lib\Xamarin.iOS10\Xamarin.Forms.Platform.iOS.dll</HintPath>
     </Reference>
     <Reference Include="Xamarin.Forms.Xaml">
-      <HintPath>..\packages\Xamarin.Forms.2.3.4.270\lib\Xamarin.iOS10\Xamarin.Forms.Xaml.dll</HintPath>
+      <HintPath>..\packages\Xamarin.Forms.2.4.0.282\lib\Xamarin.iOS10\Xamarin.Forms.Xaml.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -113,13 +114,15 @@
     <ImageAsset Include="Assets.xcassets\blackstatus.jpg.imageset\Contents.json" />
     <ImageAsset Include="Assets.xcassets\blackstatus.jpg.imageset\black.jpg" />
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vv29.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vv58.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vv87.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vv80.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vv120.png" />
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vv57.png" />
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vv114.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vv180.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vitaiconv2 58.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vitaiconv2 87.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vitaiconv2 40.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vitaiconv2 80.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vitaiconv2 120.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vitaiconv2 180.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vitaiconv2 1024.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
@@ -219,6 +222,14 @@
     <Compile Include="VC_EditSiteDetails.designer.cs">
       <DependentUpon>VC_EditSiteDetails.cs</DependentUpon>
     </Compile>
+    <Compile Include="VC_VolunteerOptions.cs" />
+    <Compile Include="VC_VolunteerOptions.designer.cs">
+      <DependentUpon>VC_VolunteerOptions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VC_UpdateProfile.cs" />
+    <Compile Include="VC_UpdateProfile.designer.cs">
+      <DependentUpon>VC_UpdateProfile.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="GlobalInitForTesting.js" />
@@ -227,5 +238,5 @@
   <Import Project="..\iOSSharedModel\iOSSharedModels.projitems" Label="Shared" Condition="Exists('..\iOSSharedModel\iOSSharedModels.projitems')" />
   <Import Project="..\SharedModels\SharedModels.projitems" Label="Shared" Condition="Exists('..\SharedModels\SharedModels.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
-  <Import Project="..\packages\Xamarin.Forms.2.3.4.270\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.2.3.4.270\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />
+  <Import Project="..\packages\Xamarin.Forms.2.4.0.282\build\netstandard1.0\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.2.4.0.282\build\netstandard1.0\Xamarin.Forms.targets')" />
 </Project>

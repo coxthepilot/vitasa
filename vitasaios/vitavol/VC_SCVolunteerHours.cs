@@ -42,7 +42,10 @@ namespace vitavol
                         Global.VolunteerWorkItem.Hours = h;
                     }
 				}
-				catch { }
+				catch 
+                {
+                    Global.VolunteerWorkItem.Dirty = false;
+                }
 
 				PerformSegue("Segue_SCVolunteerHoursToSCVolunteers", this);
             };
@@ -50,10 +53,10 @@ namespace vitavol
             C_VitaUser user = Global.GetUserFromCacheNoFetch(Global.VolunteerWorkItem.UserId);
 
             L_Date.Text = Global.VolunteerWorkItem.Date.ToString("dow mmm dd, yyyy");
-            //C_VitaSite site = C_VitaSite.GetSiteBySlug(Global.VolunteerWorkItem.SiteSlug, Global.AllSites);
             L_Site.Text = Global.VolunteerWorkItem.SiteName;
             L_Volunteer.Text = user.Name;
             L_ApprovedState.Text = Global.VolunteerWorkItem.Approved ? "Approved" : "not approved";
+            L_Phone.Text = user.Phone;
 
             TB_Hours.Text = Global.VolunteerWorkItem.Hours.ToString();
         }

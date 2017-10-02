@@ -61,8 +61,9 @@ namespace a_vitavol
 
             TB_Hours = FindViewById<EditText>(Resource.Id.TB_Hours);
 
+			L_Site.Text = OurWorkItem.SiteName;
+
 			L_Date.Text = OurWorkItem.Date.ToString("mmm dd, yyyy");
-            L_Site.Text = OurWorkItem.SiteName;
             L_Volunteer.Text = OurUser.Name;
             L_Approval.Text = OurWorkItem.Approved ? "Approved" : "Not Approved";
 

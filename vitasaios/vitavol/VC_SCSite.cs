@@ -1,21 +1,19 @@
 using Foundation;
 using System;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 using UIKit;
 using zsquared;
+using static zsquared.C_MessageBox;
 
 namespace vitavol
 {
     public partial class VC_SCSite : UIViewController
     {
-        // Input
-        //   DetailsCameFrom
-        //   SelectedSite
-        //   LoggedInUser
-
         C_Global Global;
 
         C_VitaUser LoggedInUser;
+        C_VitaSite OurSite;
 
         public VC_SCSite (IntPtr handle) : base (handle)
         {
@@ -29,6 +27,7 @@ namespace vitavol
 			Global = myAppDelegate.Global;
 
             LoggedInUser = Global.GetUserFromCacheNoFetch(Global.LoggedInUserId);
+            OurSite = Global.GetSiteFromCacheNoFetch(Global.SelectedSiteSlug);
 
 			// set the standard background color
             View.BackgroundColor = C_Common.StandardBackground;
@@ -131,19 +130,61 @@ namespace vitavol
             };
 
             B_SiteCalendar.TouchUpInside += (sender, e) => 
-            {
                 PerformSegue("Segue_SCSiteToSCSiteCalendar", this);
+
+            B_UpdateProfile.TouchUpInside += (sender, e) =>
+            {
+                Global.ViewCameFrom = E_ViewCameFrom.SCSite;
+                PerformSegue("Segue_SCSiteToUpdateProfile", this);
             };
 
-            B_EditSiteDetails.TouchUpInside += (sender, e) => 
-            {
-                PerformSegue("Segue_SCSiteToEditSiteDetails", this);
-            };
+            bool killChanges = false;
+			SW_DropOff.ValueChanged += async (sender, e) =>
+			{
+                if (killChanges) return;
+
+				bool success = await UpdateSiteCapabilities();
+
+                if (!success)
+                {
+                    var ok = await C_MessageBox.MessageBox(this, "Error", "Unable to update site capability.", E_MessageBoxButtons.Ok);
+                }
+			};
+
+			SW_Express.ValueChanged += async (sender, e) =>
+			{
+				if (killChanges) return;
+
+				bool success = await UpdateSiteCapabilities();
+
+				if (!success)
+				{
+					var ok = await C_MessageBox.MessageBox(this, "Error", "Unable to update site capability.", E_MessageBoxButtons.Ok);
+				}
+			};
+
+			SW_MFT.ValueChanged += async (sender, e) =>
+			{
+				if (killChanges) return;
+
+				bool success = await UpdateSiteCapabilities();
+
+				if (!success)
+				{
+					var ok = await C_MessageBox.MessageBox(this, "Error", "Unable to update site capability.", E_MessageBoxButtons.Ok);
+				}
+			};
 
             //IMG_Closed.Image = UIImage.FromBundle("blackstatus.jpg");
             //IMG_Accepting.Image = UIImage.FromBundle("greenstatus.jpg");
             //IMG_NearLimit.Image = UIImage.FromBundle("yellowstatus.jpg");
             //IMG_AtLimit.Image = UIImage.FromBundle("redstatus.jpg");
+
+            killChanges = true;
+			SW_DropOff.On = OurSite.SiteCapabilities.Contains(E_SiteCapabilities.DropOff);
+			SW_Express.On = OurSite.SiteCapabilities.Contains(E_SiteCapabilities.Express);
+            SW_MFT.On = OurSite.SiteCapabilities.Contains(E_SiteCapabilities.MFT);
+            killChanges = false;
 		}
 
         private void EnableUI(bool enable)
@@ -178,7 +219,33 @@ namespace vitavol
             B_Volunteers.Enabled = enable;
             B_SiteCalendar.Enabled = enable;
 
+            SW_DropOff.Enabled = enable;
+            SW_Express.Enabled = enable;
+            SW_MFT.Enabled = enable;
+
             B_Back.Enabled = enable;
 		}
-    }
+
+		private async Task<bool> UpdateSiteCapabilities()
+		{
+			EnableUI(false);
+            AI_Busy.StartAnimating();
+
+			OurSite.SiteCapabilities = new List<E_SiteCapabilities>();
+			if (SW_DropOff.On)
+				OurSite.SiteCapabilities.Add(E_SiteCapabilities.DropOff);
+            if (SW_Express.On)
+				OurSite.SiteCapabilities.Add(E_SiteCapabilities.Express);
+            if (SW_MFT.On)
+				OurSite.SiteCapabilities.Add(E_SiteCapabilities.MFT);
+
+			bool success = await OurSite.UpdateSiteCapabilities(LoggedInUser.Token);
+
+			EnableUI(true);
+            AI_Busy.StopAnimating();
+
+			return success;
+		}
+
+	}
 }

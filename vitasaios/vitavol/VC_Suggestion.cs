@@ -27,9 +27,6 @@ namespace vitavol
 
             LoggedInUser = Global.GetUserFromCacheNoFetch(Global.LoggedInUserId);
 
-            // set the standard background color
-            View.BackgroundColor = C_Common.StandardBackground;
-
 			// ----------- init the button handlers --------
 
 			B_Back.TouchUpInside += async (sender, e) =>
@@ -71,7 +68,10 @@ namespace vitavol
                     return;
                 }
 
-				PerformSegue("Segue_SuggestionToSuggestions", this);
+                if (Global.ViewCameFrom == E_ViewCameFrom.VolOptions)
+    				PerformSegue("Segue_SuggestionToVolunteerOptions", this);
+                else
+					PerformSegue("Segue_SuggestionToSuggestions", this);
 			};
 
 			B_DeleteThisSuggestion.TouchUpInside += async (sender, e) =>
@@ -147,7 +147,7 @@ namespace vitavol
             // we only allow changing and editing if the suggestion is still in the Open state
 
 			L_Submitter.Text = LoggedInUser.Name;
-			L_Date.Text = Global.SelectedSuggestion.Date.ToString();
+			L_Date.Text = Global.SelectedSuggestion.CreateDate.ToString();
 			L_Status.Text = Global.SelectedSuggestion.Status.ToString();
 			TB_Title.Text = Global.SelectedSuggestion.Subject;
 			TxV_Body.Text = Global.SelectedSuggestion.Text;
@@ -162,6 +162,12 @@ namespace vitavol
                 B_Save.Enabled = false;
                 B_DeleteThisSuggestion.Enabled = false;
             }
+		}
+
+        public override void ViewDidAppear(bool animated)
+        {
+			// set the standard background color
+			View.BackgroundColor = C_Common.StandardBackground;
 		}
 
         private void EnableUI(bool en)

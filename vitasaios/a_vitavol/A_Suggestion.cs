@@ -157,7 +157,7 @@ namespace a_vitavol
             TB_Subject.Text = OurSuggestion.Subject;
             TB_Message.Text = OurSuggestion.Text;
             L_From.Text = OurUser.Name;
-            L_Date.Text = OurSuggestion.Date.ToString("mmm dd, yyyy");
+            L_Date.Text = OurSuggestion.CreateDate.ToString("mmm dd, yyyy");
             L_State.Text = OurSuggestion.Status.ToString();
 		}
 
