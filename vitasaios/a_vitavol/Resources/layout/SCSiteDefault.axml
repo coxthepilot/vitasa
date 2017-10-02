@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/L_SiteName"
+        android:text="...site..."
+        android:gravity="center" />
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:id="@+id/space1" />
+    <TextView
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/L_DayOfWeek"
+        android:text="...day of week..."
+        android:gravity="center" />
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:id="@+id/space1" />
+    <CheckBox
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/CB_SiteIsOpen"
+        android:text="Site Is Open" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Space
+            android:layout_width="10dp"
+            android:layout_height="match_parent"
+            android:id="@+id/space1" />
+        <EditText
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:id="@+id/TB_OpenTime" />
+        <Space
+            android:layout_width="10dp"
+            android:layout_height="match_parent"
+            android:id="@+id/space1" />
+        <TextView
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView2"
+            android:text="Open Time" />
+        <Space
+            android:layout_width="10dp"
+            android:layout_height="match_parent"
+            android:id="@+id/space1" />
+    </LinearLayout>
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:id="@+id/space1" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Space
+            android:layout_width="10dp"
+            android:layout_height="match_parent"
+            android:id="@+id/space1" />
+        <EditText
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:singleLine="true"
+            android:layout_height="wrap_content"
+            android:id="@+id/TB_CloseTime" />
+        <Space
+            android:layout_width="10dp"
+            android:layout_height="match_parent"
+            android:id="@+id/space1" />
+        <TextView
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView2"
+            android:text="Close Time" />
+        <Space
+            android:layout_width="10dp"
+            android:layout_height="match_parent"
+            android:id="@+id/space1" />
+    </LinearLayout>
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:id="@+id/space1" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Space
+            android:layout_width="10dp"
+            android:layout_height="match_parent"
+            android:id="@+id/space1" />
+        <EditText
+            android:inputType="numberDecimal"
+            android:layout_width="0dp"
+            android:singleLine="true"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:id="@+id/TB_NumEFilers" />
+        <Space
+            android:layout_width="10dp"
+            android:layout_height="match_parent"
+            android:id="@+id/space1" />
+        <TextView
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView2"
+            android:text="Num EFilers" />
+        <Space
+            android:layout_width="10dp"
+            android:layout_height="match_parent"
+            android:id="@+id/space1" />
+    </LinearLayout>
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:id="@+id/space1" />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/B_SaveDefaults"
+        android:text="Save Changes to Defaults" />
+</LinearLayout>

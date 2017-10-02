@@ -16,6 +16,8 @@ namespace vitavol
         //    LoggedInUser
 
 		C_Global Global;
+        C_VitaSite OurSite;
+        C_VitaUser LoggedInUser;
         C_CalendarEntry OurCalendarEntry;
         C_SiteCalendarEntry OurDefaultCalendarEntry;
         bool Dirty;             // the item has been modified
@@ -32,34 +34,33 @@ namespace vitavol
 			AppDelegate myAppDelegate = (AppDelegate)UIApplication.SharedApplication.Delegate;
 			Global = myAppDelegate.Global;
 
-			// set the standard background color
-            View.BackgroundColor = C_Common.StandardBackground;
+            OurSite = Global.GetSiteFromCacheNoFetch(Global.SelectedSiteSlug);
+
+            LoggedInUser = Global.GetUserFromCacheNoFetch(Global.LoggedInUserId);
 
             NewEntry = false;
             // see if an exception already exists
-            OurCalendarEntry = Global.SelectedSite.GetCalendarExceptionForDateForSite(Global.SelectedDate);
+            OurCalendarEntry = OurSite.GetCalendarExceptionForDateForSite(Global.SelectedDate);
 			int dayOfWeek = (int)Global.SelectedDate.DayOfWeek;
-			OurDefaultCalendarEntry = Global.SelectedSite.SiteCalendar[dayOfWeek];
+			OurDefaultCalendarEntry = OurSite.SiteCalendar[dayOfWeek];
 			if (OurCalendarEntry == null)
             {
                 // no entry found, create a new one
                 OurCalendarEntry = new C_CalendarEntry()
                 {
-                    SiteID = Global.SelectedSite.id,
+                    SiteID = OurSite.id,
                     Date = Global.SelectedDate,
                     IsClosed = OurDefaultCalendarEntry.OpenTime == OurDefaultCalendarEntry.CloseTime,
                     NumEFilers = OurDefaultCalendarEntry.NumEFilers
                 };
-                try { OurCalendarEntry.OpenTime = new C_HMS(OurDefaultCalendarEntry.OpenTime); }
-                catch { OurCalendarEntry.OpenTime = new C_HMS(0, 0, 0); }
-                try { OurCalendarEntry.CloseTime = new C_HMS(OurDefaultCalendarEntry.CloseTime); }
-                catch { OurCalendarEntry.CloseTime = new C_HMS(0, 0, 0); }
+                OurCalendarEntry.OpenTime = OurDefaultCalendarEntry.OpenTime;
+                OurCalendarEntry.CloseTime = OurDefaultCalendarEntry.CloseTime;
 
                 B_SaveCalendarException.SetTitle("Save New Calendar Exception", UIControlState.Normal);
                 NewEntry = true;
             }
 
-            L_SiteName.Text = Global.SelectedSite.Name;
+            L_SiteName.Text = OurSite.Name;
             L_Date.Text = Global.SelectedDate.ToString("mmm dd, yyyy");
 
 			SW_IsOpen.ValueChanged += (sender, e) =>
@@ -105,10 +106,10 @@ namespace vitavol
                 {
                     if (NewEntry)
                         // create new entry
-                        success = await Global.SelectedSite.CreateCalendarException(Global.LoggedInUser.Token, OurCalendarEntry);
+                        success = await OurSite.CreateCalendarException(LoggedInUser.Token, OurCalendarEntry);
                     else
                         // update the entry
-                        success = await Global.SelectedSite.UpdateCalendarException(Global.LoggedInUser.Token, OurCalendarEntry);
+                        success = await OurSite.UpdateCalendarException(LoggedInUser.Token, OurCalendarEntry);
                 }
                 catch 
                 {
@@ -138,7 +139,7 @@ namespace vitavol
                     bool success = false;
                     try
                     {
-                        success = await Global.SelectedSite.RemoveCalendarException(Global.LoggedInUser.Token, OurCalendarEntry);
+                        success = await OurSite.RemoveCalendarException(LoggedInUser.Token, OurCalendarEntry);
                     }
                     catch
                     {
@@ -173,10 +174,10 @@ namespace vitavol
                 {
                     if (NewEntry)
                         // create new calendar entry
-                        success = await Global.SelectedSite.CreateCalendarException(Global.LoggedInUser.Token, OurCalendarEntry);
+                        success = await OurSite.CreateCalendarException(LoggedInUser.Token, OurCalendarEntry);
                     else
                         // update the entry
-                        success = await Global.SelectedSite.UpdateCalendarException(Global.LoggedInUser.Token, OurCalendarEntry);
+                        success = await OurSite.UpdateCalendarException(LoggedInUser.Token, OurCalendarEntry);
                 }
                 catch
                 {
@@ -307,6 +308,12 @@ namespace vitavol
             SW_IsOpen.On = !OurCalendarEntry.IsClosed;
 		}
 
+        public override void ViewDidAppear(bool animated)
+        {
+			// set the standard background color
+			View.BackgroundColor = C_Common.StandardBackground;
+		}
+
         private void EnableUI(bool en)
         {
             B_Back.Enabled = en;
@@ -320,23 +327,23 @@ namespace vitavol
 
         private void SetDisplayValues()
         {
-			C_HMS defOpenTime = null;
-            try { defOpenTime = new C_HMS(OurDefaultCalendarEntry.OpenTime); }
-            catch {}
-            string defOpenTimeS = defOpenTime == null ? OurDefaultCalendarEntry.OpenTime : defOpenTime.ToString("hh:mm p");
+			//C_HMS defOpenTime = null;
+   //         try { defOpenTime = new C_HMS(OurDefaultCalendarEntry.OpenTime); }
+   //         catch {}
+   //         string defOpenTimeS = defOpenTime == null ? OurDefaultCalendarEntry.OpenTime : defOpenTime.ToString("hh:mm p");
 
-			C_HMS defCloseTime = null;
-            try { defCloseTime = new C_HMS(OurDefaultCalendarEntry.CloseTime); }
-			catch { }
-            string defCloseTimeS = defCloseTime == null ? OurDefaultCalendarEntry.CloseTime : defCloseTime.ToString("hh:mm p");
+			//C_HMS defCloseTime = null;
+   //         try { defCloseTime = new C_HMS(OurDefaultCalendarEntry.CloseTime); }
+			//catch { }
+            //string defCloseTimeS = defCloseTime == null ? OurDefaultCalendarEntry.CloseTime : defCloseTime.ToString("hh:mm p");
 
 			TB_OpenTime.Text = OurCalendarEntry.OpenTime.ToString("hh:mm p");
 			TB_CloseTime.Text = OurCalendarEntry.CloseTime.ToString("hh:mm p");
 			TB_NumEFilers.Text = OurCalendarEntry.NumEFilers.ToString();
             SW_IsOpen.On = OurCalendarEntry.OpenTime != OurCalendarEntry.CloseTime;
 
-			L_DefaultOpenTime.Text = "(" + defOpenTimeS + ")";
-			L_DefaultCloseTime.Text = "(" + defCloseTimeS + ")";
+            L_DefaultOpenTime.Text = "(" + OurDefaultCalendarEntry.OpenTime.ToString("hh:mm p") + ")";
+            L_DefaultCloseTime.Text = "(" + OurDefaultCalendarEntry.CloseTime.ToString("hh:mm p") + ")";
 			L_DefaultEFilers.Text = "(" + OurDefaultCalendarEntry.NumEFilers + ")";
 		}
 

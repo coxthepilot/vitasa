@@ -10,6 +10,7 @@ namespace vitavol
     public partial class VC_Suggestions : UIViewController
     {
         C_Global Global;
+        C_VitaUser LoggedInUser;
 
         public VC_Suggestions (IntPtr handle) : base (handle)
         {
@@ -22,28 +23,30 @@ namespace vitavol
 			AppDelegate myAppDelegate = (AppDelegate)UIApplication.SharedApplication.Delegate;
             Global = myAppDelegate.Global;
 
+            LoggedInUser = Global.GetUserFromCacheNoFetch(Global.LoggedInUserId);
+
             // set the standard background color
             View.BackgroundColor = C_Common.StandardBackground;
 
 			// --------- button handlers -----------
 
 			B_Back.TouchUpInside += (sender, e) => 
-                PerformSegue("Segue_SuggestionsToSignUps", this);
+                PerformSegue("Segue_SuggestionsToVolunteerOptions", this);
 
             B_NewSuggestion.TouchUpInside += OnNewSuggestion;
 
 			// since the login process provides us this users suggestions, we don't need to pull anything additional
 
-            C_SuggestionsTableSource ts = new C_SuggestionsTableSource(Global, this, Global.LoggedInUser.Suggestions);
+            C_SuggestionsTableSource ts = new C_SuggestionsTableSource(Global, this, LoggedInUser.Suggestions);
 			TV_ListOfSuggestions.Source = ts;
-            TV_ListOfSuggestions.Delegate = new C_SuggestionsTableDelegate(Global, this, Global.LoggedInUser.Suggestions, ts);
+            TV_ListOfSuggestions.Delegate = new C_SuggestionsTableDelegate(Global, this, LoggedInUser.Suggestions, ts);
 			TV_ListOfSuggestions.ReloadData();
 		}
 
 		public void OnNewSuggestion(object s, EventArgs e)
 		{
 			// create the new suggestion
-            C_Suggestion sug = new C_Suggestion(Global.LoggedInUser.id, C_YMD.Now, false)
+            C_Suggestion sug = new C_Suggestion(LoggedInUser.id, C_YMD.Now, false)
 			{
 				Status = E_SuggestionStatus.Open,
 				Subject = "",
@@ -66,6 +69,7 @@ namespace vitavol
 		public class C_SuggestionsTableDelegate : UITableViewDelegate
 		{
 			readonly C_Global Global;
+            readonly C_VitaUser LoggedInUser;
 			readonly VC_Suggestions OurVC;
 			readonly List<C_Suggestion> Suggestions;
 			C_SuggestionsTableSource TableSource;
@@ -76,6 +80,8 @@ namespace vitavol
 				OurVC = vc;
                 Suggestions = suggestions;
 				TableSource = tsource;
+
+                LoggedInUser = Global.GetUserFromCacheNoFetch(Global.LoggedInUserId);
 			}
 
 			public override UITableViewRowAction[] EditActionsForRow(UITableView tableView, NSIndexPath indexPath)
@@ -88,8 +94,8 @@ namespace vitavol
 
                     C_Suggestion suggestionToRemove = Suggestions[indexPath.Row];
 
-                    bool success = await suggestionToRemove.RemoveSuggestion(Global.LoggedInUser.Token);
-                    Global.LoggedInUser.Suggestions.Remove(suggestionToRemove);
+                    bool success = await suggestionToRemove.RemoveSuggestion(LoggedInUser.Token);
+                    LoggedInUser.Suggestions.Remove(suggestionToRemove);
                     //bool success = await Global.LoggedInUser.RemoveSuggestion(suggestionToRemove);
 
 					UIApplication.SharedApplication.InvokeOnMainThread(
@@ -158,7 +164,7 @@ namespace vitavol
                 string text = suggestion.Text ?? "<null>";
 
 				cell.TextLabel.Text = subject;
-                cell.DetailTextLabel.Text = suggestion.Date.ToString("mmm dd,yyyy") + ":" + text;
+                cell.DetailTextLabel.Text = suggestion.CreateDate.ToString("mmm dd,yyyy") + ":" + text;
 
 				return cell;
 			}
@@ -166,7 +172,7 @@ namespace vitavol
 			public override void RowSelected(UITableView tableView, NSIndexPath indexPath)
 			{
 				Global.SelectedSuggestion = Suggestions[indexPath.Row];
-
+                Global.ViewCameFrom = E_ViewCameFrom.Suggestions;
 				ourVC.PerformSegue("Segue_SuggestionsToSuggestion", ourVC);
 			}
 		}

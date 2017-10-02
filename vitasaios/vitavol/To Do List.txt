@@ -20,7 +20,6 @@ For Sheila/Alejandra
     Web design and DNS access
 
 For Chris
-* Some calls just return {true} as a bool; expected? Example: update site calendar [tell him what we need]
 * Protocol version; do I need to signal the API version I'm using? [post a github issue]
 * >> Need api to register a push API token (string) along with user type (vol/sc vs client); for APNS
 * >> Need GET/users/{id} to include the sites for which the user is a site coordinator?
@@ -29,9 +28,7 @@ For Chris
 * Registrations of an email address already in the system generates a 'system error' [change error message]; error 422 [model validation failed]; expected? Post as an issue
 * URL for production and staging
 
-* client notification, would need a certificate on both ends [have cnn apps that do this]
-* 422 on POST on /resources [issue posted; chris says fixed]
-* (backend) need site capabilities as a list [issue posted]
+* [defered] client notification, would need a certificate on both ends [have cnn apps that do this]
 
 Alejandra:
 * Contact in IT for DNS cname and web update [in progress]
@@ -39,6 +36,8 @@ Alejandra:
 * Web site design - do the mobile fix first
 
 Issues:
+* Chris: Drop-off to DropOff [done]
+* Really should just store an id for sites, users, and work items in the serialized version
 * Make another pass at the icon(s); use the VITA graphic
 * Need DNS redirect
 

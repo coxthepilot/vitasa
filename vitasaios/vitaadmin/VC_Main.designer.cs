@@ -22,6 +22,14 @@ namespace vitaadmin
         [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UIButton B_Messages { get; set; }
 
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UIButton B_Suggestions { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UIButton B_WorkItems { get; set; }
+
         void ReleaseDesignerOutlets ()
         {
             if (B_Back != null) {
@@ -32,6 +40,16 @@ namespace vitaadmin
             if (B_Messages != null) {
                 B_Messages.Dispose ();
                 B_Messages = null;
+            }
+
+            if (B_Suggestions != null) {
+                B_Suggestions.Dispose ();
+                B_Suggestions = null;
+            }
+
+            if (B_WorkItems != null) {
+                B_WorkItems.Dispose ();
+                B_WorkItems = null;
             }
         }
     }

@@ -18,6 +18,8 @@ namespace vitasa
         C_MapDelegate mapDelegate;
         C_Global Global;
 
+        C_VitaSite SelectedSite;
+
 		public VC_SiteDetails (IntPtr handle) : base (handle)
         {
             
@@ -30,13 +32,15 @@ namespace vitasa
 			AppDelegate myAppDelegate = (AppDelegate)UIApplication.SharedApplication.Delegate;
             Global = myAppDelegate.Global;
 
+            SelectedSite = Global.GetSiteFromCacheNoFetch(Global.SelectedSiteSlug);
+
 			// connect action code to the Back button
 			B_Back.TouchUpInside += (object sender, EventArgs e) =>
 			{
 				string segueToPerform = "";
-				if (myAppDelegate.Global.DetailsCameFrom == E_CameFrom.List)
+				if (myAppDelegate.Global.ViewCameFrom == E_ViewCameFrom.List)
 					segueToPerform = "Segue_DetailsToList";
-				else if (myAppDelegate.Global.DetailsCameFrom == E_CameFrom.Map)
+				else if (myAppDelegate.Global.ViewCameFrom == E_ViewCameFrom.Map)
 					segueToPerform = "Segue_DetailsToMap";
 
 				this.PerformSegue(segueToPerform, this);
@@ -46,9 +50,9 @@ namespace vitasa
 			{
 				// the destination is the site the user selected
 				// the source address is unspecified which makes it the user's current location
-				string destinationAddress = Global.SelectedSite.Street + ", "
-												  + Global.SelectedSite.City + " "
-												  + Global.SelectedSite.State;
+				string destinationAddress = SelectedSite.Street + ", "
+												  + SelectedSite.City + " "
+												  + SelectedSite.State;
 				string url = "http://maps.apple.com/?daddr=" + destinationAddress;  // + "&saddr=<destination>";
 				url = url.Replace(" ", "%20");
 				if (UIApplication.SharedApplication.CanOpenUrl(new NSUrl(url)))
@@ -78,8 +82,8 @@ namespace vitasa
             bool conversionOK = true;
             try
             {
-                lat = Convert.ToDouble(myAppDelegate.Global.SelectedSite.Latitude);
-                lon = Convert.ToDouble(myAppDelegate.Global.SelectedSite.Longitude);
+                lat = Convert.ToDouble(SelectedSite.Latitude);
+                lon = Convert.ToDouble(SelectedSite.Longitude);
             }
             catch { conversionOK = false; }
 
@@ -96,20 +100,20 @@ namespace vitasa
             {
                 MKPointAnnotation pa = new MKPointAnnotation()
                 {
-                    Title = myAppDelegate.Global.SelectedSite.Name,
+                    Title = SelectedSite.Name,
                     Coordinate = new CLLocationCoordinate2D(lat, lon)
                 };
                 Map_SiteMap.AddAnnotations(pa);
             }
 
             // populate the controls to explain this site in more detail
-            L_SiteName.Text = myAppDelegate.Global.SelectedSite.Name;
-            L_Address.Text = myAppDelegate.Global.SelectedSite.Street;
-            L_CityStateZip.Text = myAppDelegate.Global.SelectedSite.City
-                + ", " + myAppDelegate.Global.SelectedSite.State 
-                + " " + myAppDelegate.Global.SelectedSite.Zip;
+            L_SiteName.Text = SelectedSite.Name;
+            L_Address.Text = SelectedSite.Street;
+            L_CityStateZip.Text = SelectedSite.City
+                + ", " + SelectedSite.State 
+                + " " + SelectedSite.Zip;
             B_GetDirections.SetTitle(AppResources.Main_B_Directions, UIControlState.Normal);
-            switch (myAppDelegate.Global.SelectedSite.Status)
+            switch (SelectedSite.Status)
             {
                 case E_SiteStatus.Accepting:
                     I_SiteStatus.Image = UIImage.FromBundle("greenstatus.jpg");
@@ -128,7 +132,10 @@ namespace vitasa
                     L_SiteStatus.Text = AppResources.Main_N_At_Limit;
                     break;
             }
-        }
+            L_DropOff.Enabled = SelectedSite.SiteCapabilities.Contains(E_SiteCapabilities.DropOff);
+            L_Express.Enabled = SelectedSite.SiteCapabilities.Contains(E_SiteCapabilities.Express);
+            L_MyFreeTaxes.Enabled = SelectedSite.SiteCapabilities.Contains(E_SiteCapabilities.MFT);
+		}
 
 		public override void ViewDidAppear(bool animated)
 		{
@@ -166,15 +173,7 @@ namespace vitasa
 				if (pinView == null)
 					pinView = new MKPinAnnotationView(annotation, pId);
 
-				C_VitaSite ourSite = null;
-				foreach (C_VitaSite s in Global.AllSites)
-				{
-					if (s.Name == thisWhich)
-					{
-						ourSite = s;
-						break;
-					}
-				}
+                C_VitaSite ourSite = Global.GetSiteFromCacheByNameNoFetch(thisWhich);
 
 				if (ourSite == null)
 				{
@@ -203,8 +202,8 @@ namespace vitasa
 					detailButton = UIButton.FromType(UIButtonType.DetailDisclosure);
 					detailButton.TouchUpInside += (s, e) =>
 					{
-						Global.SelectedSite = ourSite;
-						Global.DetailsCameFrom = E_CameFrom.Map;
+                        Global.SelectedSiteSlug = ourSite.Slug;
+						Global.ViewCameFrom = E_ViewCameFrom.Map;
 						ourVC.PerformSegue("Segue_MapToDetails", ourVC);
 					};
 					pinView.RightCalloutAccessoryView = detailButton;

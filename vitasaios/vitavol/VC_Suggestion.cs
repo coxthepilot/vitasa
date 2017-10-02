@@ -11,6 +11,7 @@ namespace vitavol
     public partial class VC_Suggestion : UIViewController
     {
 		C_Global Global;
+        C_VitaUser LoggedInUser;
         bool Dirty;
 
 		public VC_Suggestion (IntPtr handle) : base (handle)
@@ -24,8 +25,7 @@ namespace vitavol
 			AppDelegate myAppDelegate = (AppDelegate)UIApplication.SharedApplication.Delegate;
             Global = myAppDelegate.Global;
 
-            // set the standard background color
-            View.BackgroundColor = C_Common.StandardBackground;
+            LoggedInUser = Global.GetUserFromCacheNoFetch(Global.LoggedInUserId);
 
 			// ----------- init the button handlers --------
 
@@ -68,7 +68,10 @@ namespace vitavol
                     return;
                 }
 
-				PerformSegue("Segue_SuggestionToSuggestions", this);
+                if (Global.ViewCameFrom == E_ViewCameFrom.VolOptions)
+    				PerformSegue("Segue_SuggestionToVolunteerOptions", this);
+                else
+					PerformSegue("Segue_SuggestionToSuggestions", this);
 			};
 
 			B_DeleteThisSuggestion.TouchUpInside += async (sender, e) =>
@@ -88,8 +91,8 @@ namespace vitavol
                 AI_Busy.StartAnimating();
                 EnableUI(false);
 
-                bool success = await Global.SelectedSuggestion.RemoveSuggestion(Global.LoggedInUser.Token);
-                Global.LoggedInUser.Suggestions.Remove(Global.SelectedSuggestion);
+                bool success = await Global.SelectedSuggestion.RemoveSuggestion(LoggedInUser.Token);
+                LoggedInUser.Suggestions.Remove(Global.SelectedSuggestion);
 
                 AI_Busy.StopAnimating();
                 EnableUI(true);
@@ -143,8 +146,8 @@ namespace vitavol
 			// ---------- init the fields --------
             // we only allow changing and editing if the suggestion is still in the Open state
 
-			L_Submitter.Text = Global.LoggedInUser.Name;
-			L_Date.Text = Global.SelectedSuggestion.Date.ToString();
+			L_Submitter.Text = LoggedInUser.Name;
+			L_Date.Text = Global.SelectedSuggestion.CreateDate.ToString();
 			L_Status.Text = Global.SelectedSuggestion.Status.ToString();
 			TB_Title.Text = Global.SelectedSuggestion.Subject;
 			TxV_Body.Text = Global.SelectedSuggestion.Text;
@@ -159,6 +162,12 @@ namespace vitavol
                 B_Save.Enabled = false;
                 B_DeleteThisSuggestion.Enabled = false;
             }
+		}
+
+        public override void ViewDidAppear(bool animated)
+        {
+			// set the standard background color
+			View.BackgroundColor = C_Common.StandardBackground;
 		}
 
         private void EnableUI(bool en)
@@ -177,12 +186,12 @@ namespace vitavol
             {
                 if (Global.SelectedSuggestion.id == -1)
                 {
-                    success = await Global.SelectedSuggestion.AddSuggestion(Global.LoggedInUser.Token);
+                    success = await Global.SelectedSuggestion.AddSuggestion(LoggedInUser.Token);
                     //success = await Global.LoggedInUser.AddSuggestion(Global.SelectedSuggestion);
-                    Global.LoggedInUser.Suggestions.Add(Global.SelectedSuggestion);
+                    LoggedInUser.Suggestions.Add(Global.SelectedSuggestion);
                 }
                 else
-                    success = await Global.SelectedSuggestion.UpdateSuggestion(Global.LoggedInUser.Token);
+                    success = await Global.SelectedSuggestion.UpdateSuggestion(LoggedInUser.Token);
                     //success = await Global.LoggedInUser.UpdateSuggestion(Global.SelectedSuggestion);
                 Dirty = false;
             }

@@ -24,14 +24,6 @@ namespace vitavol
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UIButton B_SignUp { get; set; }
-
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UIButton B_Suggestion { get; set; }
-
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UITableView TV_SignUps { get; set; }
 
         void ReleaseDesignerOutlets ()
@@ -44,16 +36,6 @@ namespace vitavol
             if (B_Back != null) {
                 B_Back.Dispose ();
                 B_Back = null;
-            }
-
-            if (B_SignUp != null) {
-                B_SignUp.Dispose ();
-                B_SignUp = null;
-            }
-
-            if (B_Suggestion != null) {
-                B_Suggestion.Dispose ();
-                B_Suggestion = null;
             }
 
             if (TV_SignUps != null) {

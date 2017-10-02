@@ -2,6 +2,8 @@ using Foundation;
 using System;
 using UIKit;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using static zsquared.C_MessageBox;
 
 using zsquared;
 
@@ -32,7 +34,7 @@ namespace vitavol
                 PerformSegue("Segue_SCSitesToLogin", this);
             };
 
-            TV_Sites.Source = new C_SitesTableSourceSCSites(Global, Global.SCSites, this);
+            TV_Sites.Source = new C_SitesTableSourceSCSites(Global, this);
             TV_Sites.ReloadData();
         }
 
@@ -45,23 +47,20 @@ namespace vitavol
 		public class C_SitesTableSourceSCSites : UITableViewSource
 		{
 			readonly C_Global Global;
-            public List<C_VitaSite> Sites; // this is public so a remove operations doesn't require a re-fetch of the list
 			const string CellIdentifier = "TableCell_SitesTableSourceSCSites";
             readonly VC_SCSites OurVC;
+            readonly C_VitaUser LoggedInUser;
 
-            public C_SitesTableSourceSCSites(C_Global pac, List<C_VitaSite> sites, VC_SCSites vc)
+            public C_SitesTableSourceSCSites(C_Global pac, VC_SCSites vc)
 			{
 				Global = pac;
-				Sites = sites;
                 OurVC = vc;
-			}
+				LoggedInUser = Global.GetUserFromCacheNoFetch(Global.LoggedInUserId);
+                			}
 
 			public override nint RowsInSection(UITableView tableview, nint section)
 			{
-				int count = 0;
-				if (Sites != null)
-					count = Sites.Count;
-				return count;
+                return LoggedInUser.SitesCoordinated.Count;
 			}
 
 			public override UITableViewCell GetCell(UITableView tableView, NSIndexPath indexPath)
@@ -71,23 +70,38 @@ namespace vitavol
 				if (cell == null)
 					cell = new UITableViewCell(UITableViewCellStyle.Subtitle, CellIdentifier);
 
-                C_VitaSite oursite = Sites[indexPath.Row];
+                C_SiteCoordinated sc = LoggedInUser.SitesCoordinated[indexPath.Row];
 
-				cell.TextLabel.Text = oursite.Name;
-                cell.DetailTextLabel.Text = oursite.Street;
+				cell.TextLabel.Text = sc.Name;
 
 				return cell;
 			}
 
             public override void RowSelected(UITableView tableView, NSIndexPath indexPath)
             {
-				C_VitaSite SelectedSite = Sites[indexPath.Row];
+                C_SiteCoordinated sc = LoggedInUser.SitesCoordinated[indexPath.Row];
 
-				// these are required by VC_SCSite
-				Global.DetailsCameFrom = E_CameFrom.SCSites;
-				Global.SelectedSite = SelectedSite;
+                Task.Run(async () => 
+                {
+					bool success = await Global.EnsureSiteInCache(sc.Slug);
 
-				OurVC.PerformSegue("Segue_SCSitesToSCSite", OurVC);
+					Global.ViewCameFrom = E_ViewCameFrom.SCSites;
+                    Global.SelectedSiteName = sc.Name;
+					Global.SelectedSiteSlug = sc.Slug;
+
+					UIApplication.SharedApplication.InvokeOnMainThread(
+					new Action(async () =>
+					{
+    					if (success)
+    					{
+							OurVC.PerformSegue("Segue_SCSitesToSCSite", OurVC);
+    					}
+    					else
+    					{
+							E_MessageBoxResults mbres = await MessageBox(OurVC, "Error", "Error loading the site data.", E_MessageBoxButtons.Ok);
+    					}
+					}));
+				});
 			}
 		}
     }

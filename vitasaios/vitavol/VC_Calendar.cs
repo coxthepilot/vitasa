@@ -44,7 +44,7 @@ namespace vitavol
 				Global.CalendarDate = C_YMD.Now;
 
 			B_Back.TouchUpInside += (sender, e) => 
-                PerformSegue("Segue_CalendarToSignUps", this);
+                PerformSegue("Segue_CalendarToVolunteerOptions", this);
 
             B_NextMonth.TouchUpInside += (sender, e) =>
             {
@@ -55,16 +55,16 @@ namespace vitavol
 
 				L_MonthYear.Text = Global.CalendarDate.ToString("mmm-yyyy");
 
-				int daysInMonth = DateTime.DaysInMonth(Global.CalendarDate.Year, Global.CalendarDate.Month);
-				C_YMD start = new C_YMD(Global.CalendarDate.Year, Global.CalendarDate.Month, 1);
-				C_YMD end = new C_YMD(Global.CalendarDate.Year, Global.CalendarDate.Month, daysInMonth);
+				//int daysInMonth = DateTime.DaysInMonth(Global.CalendarDate.Year, Global.CalendarDate.Month);
+				//C_YMD start = new C_YMD(Global.CalendarDate.Year, Global.CalendarDate.Month, 1);
+				//C_YMD end = new C_YMD(Global.CalendarDate.Year, Global.CalendarDate.Month, daysInMonth);
 
 				AI_Loading.StartAnimating();
 				EnableUI(false);
 				Task.Run(async () =>
 				{
-					Global.SitesSchedule = await C_SiteSchedule.FetchSitesSchedules(start, end);
-					Global.SiteScheduleSampleTime = DateTime.Now;
+                    Global.SitesSchedule = await Global.GetSitesScheduleCached(Global.CalendarDate.Year, Global.CalendarDate.Month);
+					//Global.SitesSchedule = await C_SiteSchedule.FetchSitesSchedules(start, end);
 
 					DateState = BuildDateStateArray(Global.CalendarDate);
 
@@ -90,16 +90,16 @@ namespace vitavol
 
 				L_MonthYear.Text = Global.CalendarDate.ToString("mmm-yyyy");
 
-				int daysInMonth = DateTime.DaysInMonth(Global.CalendarDate.Year, Global.CalendarDate.Month);
-				C_YMD start = new C_YMD(Global.CalendarDate.Year, Global.CalendarDate.Month, 1);
-				C_YMD end = new C_YMD(Global.CalendarDate.Year, Global.CalendarDate.Month, daysInMonth);
+				//int daysInMonth = DateTime.DaysInMonth(Global.CalendarDate.Year, Global.CalendarDate.Month);
+				//C_YMD start = new C_YMD(Global.CalendarDate.Year, Global.CalendarDate.Month, 1);
+				//C_YMD end = new C_YMD(Global.CalendarDate.Year, Global.CalendarDate.Month, daysInMonth);
 
 				AI_Loading.StartAnimating();
 				EnableUI(false);
 				Task.Run(async () => 
                 {
-					Global.SitesSchedule = await C_SiteSchedule.FetchSitesSchedules(start, end);
-					Global.SiteScheduleSampleTime = DateTime.Now;
+					Global.SitesSchedule = await Global.GetSitesScheduleCached(Global.CalendarDate.Year, Global.CalendarDate.Month);
+					//Global.SitesSchedule = await C_SiteSchedule.FetchSitesSchedules(start, end);
 
 					DateState = BuildDateStateArray(Global.CalendarDate);
 
@@ -133,22 +133,22 @@ namespace vitavol
             {
                 try
                 {
-                    int daysInMonth = DateTime.DaysInMonth(Global.CalendarDate.Year, Global.CalendarDate.Month);
-                    C_YMD start = new C_YMD(Global.CalendarDate.Year, Global.CalendarDate.Month, 1);
-                    C_YMD end = new C_YMD(Global.CalendarDate.Year, Global.CalendarDate.Month, daysInMonth);
+                    //int daysInMonth = DateTime.DaysInMonth(Global.CalendarDate.Year, Global.CalendarDate.Month);
+                    //C_YMD start = new C_YMD(Global.CalendarDate.Year, Global.CalendarDate.Month, 1);
+                    //C_YMD end = new C_YMD(Global.CalendarDate.Year, Global.CalendarDate.Month, daysInMonth);
 
                     if (Global.SitesSchedule == null)
                     {
-                        Global.SitesSchedule = await C_SiteSchedule.FetchSitesSchedules(start, end);
-                        Global.SiteScheduleSampleTime = DateTime.Now;
+						Global.SitesSchedule = await Global.GetSitesScheduleCached(Global.CalendarDate.Year, Global.CalendarDate.Month);
+						//Global.SitesSchedule = await C_SiteSchedule.FetchSitesSchedules(start, end);
                     }
 
-                    TimeSpan ts = DateTime.Now - Global.SiteScheduleSampleTime;
-                    if (ts.TotalMinutes > 10)
-                    {
-                        Global.SitesSchedule = await C_SiteSchedule.FetchSitesSchedules(start, end);
-                        Global.SiteScheduleSampleTime = DateTime.Now;
-                    }
+                    //TimeSpan ts = DateTime.Now - Global.SiteScheduleSampleTime;
+                    //if (ts.TotalMinutes > 10)
+                    //{
+                    //    Global.SitesSchedule = await C_SiteSchedule.FetchSitesSchedules(start, end);
+                    //    Global.SiteScheduleSampleTime = DateTime.Now;
+                    //}
 
                     // get the actual screen size so we can adjust the cell sizes accordingly
                     DateState = BuildDateStateArray(Global.CalendarDate);
@@ -205,13 +205,10 @@ namespace vitavol
                 };
 
                 // see if the user is already signed up somewhere that day
-                List<C_WorkItem> LoggedInUserWorkItemsOnDate = Global.GetWorkItemsForSiteOnDateForUser(
-					null,
-					ourDate,
-                    Global.LoggedInUser.id,
-					C_Global.E_SiteCondition.Any);
+                List<C_WorkItem> LoggedInUserWorkItems = Global.GetWorkItemsForUser(Global.LoggedInUserId);
+                var oux = LoggedInUserWorkItems.Where(wi => wi.Date == ourDate);
 
-                dayState.ShowBox = LoggedInUserWorkItemsOnDate.Count != 0;
+                dayState.ShowBox = oux.Any();
 
 				List<C_SiteSchedule> sitesOnDateSchedule = C_SiteSchedule.GetSiteScheduleForSiteOnDate(null, ourDate, Global.SitesSchedule);
 

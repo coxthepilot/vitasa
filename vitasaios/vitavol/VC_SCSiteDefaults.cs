@@ -15,6 +15,8 @@ namespace vitavol
         //   SelectedDayOfWeek
 
 		C_Global Global;
+        C_VitaSite OurSite;
+        C_VitaUser LoggedInUser;
 
         // a flag to tell if the user made changes
         bool Dirty;
@@ -30,8 +32,9 @@ namespace vitavol
 			AppDelegate myAppDelegate = (AppDelegate)UIApplication.SharedApplication.Delegate;
 			Global = myAppDelegate.Global;
 
-			// set the standard background color
-            View.BackgroundColor = C_Common.StandardBackground;
+            OurSite = Global.GetSiteFromCacheNoFetch(Global.SelectedSiteSlug);
+
+            LoggedInUser = Global.GetUserFromCacheNoFetch(Global.LoggedInUserId);
 
 			B_Back.TouchUpInside += async (sender, e) => 
             {
@@ -49,23 +52,16 @@ namespace vitavol
 					}
                         
                     bool success = await SaveChanges();
-                    if (!success)
-                    {
-						C_MessageBox.E_MessageBoxResults mbres1 = await C_MessageBox.MessageBox(this,
-								                                                  "Error",
-								                                                  "Unable to save the changes?",
-                                                                                  C_MessageBox.E_MessageBoxButtons.Ok);
-                        return;
-					}
+
                 }
 
                 PerformSegue("Segue_SCSiteDefaultsToSCSiteCalendar", this);
             };
 
-            L_SiteName.Text = Global.SelectedSite.Name;
+            L_SiteName.Text = OurSite.Name;
             L_DayOfWeek.Text = C_YMD.DayOfWeekNames[Global.SelectedDayOfWeek];
 
-            C_SiteCalendarEntry calDefaults = Global.SelectedSite.SiteCalendar[Global.SelectedDayOfWeek];
+            C_SiteCalendarEntry calDefaults = OurSite.SiteCalendar[Global.SelectedDayOfWeek];
 
             SW_IsOpen.On = calDefaults.OpenTime != calDefaults.CloseTime;
 
@@ -81,14 +77,6 @@ namespace vitavol
             B_SaveDefaults.TouchUpInside += async (sender, e) => 
             {
 				bool success = await SaveChanges();
-				if (!success)
-				{
-					C_MessageBox.E_MessageBoxResults mbres1 = await C_MessageBox.MessageBox(this,
-																			  "Error",
-																			  "Unable to save the changes?",
-																			  C_MessageBox.E_MessageBoxButtons.Ok);
-					return;
-				}
 
 				PerformSegue("Segue_SCSiteDefaultsToSCSiteCalendar", this);
 			};
@@ -98,7 +86,7 @@ namespace vitavol
 			UIDatePicker DP_OpenTime = new UIDatePicker()
             {
                 Mode = UIDatePickerMode.Time,
-                Date = C_NSDateConversions.BuildNSDateFromTime(calDefaults.OpenTime)
+                Date = C_NSDateConversions.BuildNSDateFromTime(calDefaults.OpenTime.ToString("hh:mm"))
 			};
 
             UIToolbar ToolBar_OpenTime = new UIToolbar()
@@ -126,16 +114,13 @@ namespace vitavol
 
 			TB_OpenTime.InputView = DP_OpenTime;
 			TB_OpenTime.InputAccessoryView = ToolBar_OpenTime;
-			C_HMS openTime = null;
-            try { openTime = new C_HMS(calDefaults.OpenTime); }
-			catch { }
-			TB_OpenTime.Text = openTime.ToString("hh:mm p");
+			TB_OpenTime.Text = calDefaults.OpenTime.ToString("hh:mm p");
 
 			// close time
 			UIDatePicker DP_CloseTime = new UIDatePicker()
 			{
 				Mode = UIDatePickerMode.Time,
-                Date = C_NSDateConversions.BuildNSDateFromTime(calDefaults.CloseTime)
+                Date = C_NSDateConversions.BuildNSDateFromTime(calDefaults.CloseTime.ToString("hh:mm"))
 			};
 
 			UIToolbar ToolBar_CloseTime = new UIToolbar()
@@ -163,10 +148,7 @@ namespace vitavol
 
 			TB_CloseTime.InputView = DP_CloseTime;
 			TB_CloseTime.InputAccessoryView = ToolBar_CloseTime;
-            C_HMS closeTime = null;
-			try { closeTime = new C_HMS(calDefaults.CloseTime); }
-            catch {}
-			TB_CloseTime.Text = closeTime.ToString("hh:mm p");
+			TB_CloseTime.Text = calDefaults.CloseTime.ToString("hh:mm p");
 
             // number of efilers
             UIPickerView PV_EFilers = new UIPickerView()
@@ -212,8 +194,15 @@ namespace vitavol
             SW_IsOpen.Enabled = en;
         }
 
+        public override void ViewDidAppear(bool animated)
+        {
+			// set the standard background color
+			View.BackgroundColor = C_Common.StandardBackground;
+		}
+
         private async Task<bool> SaveChanges()
         {
+            bool success = false;
 			try
 			{
 				C_HMS openTimex = new C_HMS(TB_OpenTime.Text);
@@ -226,28 +215,28 @@ namespace vitavol
                 EnableUI(false);
                 AI_Busy.StartAnimating();
 
-				bool success = await Global.SelectedSite.UpdateDefaultCalendar(Global.SelectedDayOfWeek, openTimex, closeTimex, numEFilers, Global.LoggedInUser.Token);
+				success = await OurSite.UpdateDefaultCalendar(Global.SelectedDayOfWeek, openTimex, closeTimex, numEFilers, LoggedInUser.Token);
 
                 EnableUI(true);
                 AI_Busy.StopAnimating();
 
-                C_SiteCalendarEntry ce = Global.SelectedSite.SiteCalendar[Global.SelectedDayOfWeek];
-                ce.OpenTime = openTimex.ToString("hh:mm");
-                ce.CloseTime = closeTimex.ToString("hh:mm");
-                ce.NumEFilers = numEFilers;
+                if (success)
+                {
+                    C_SiteCalendarEntry ce = OurSite.SiteCalendar[Global.SelectedDayOfWeek];
+                    ce.OpenTime = openTimex;
+                    ce.CloseTime = closeTimex;
+                    ce.NumEFilers = numEFilers;
 
-                if (!success)
+					Dirty = false;
+					B_SaveDefaults.Enabled = false;
+				}
+                else
                 {
                     C_MessageBox.E_MessageBoxResults mbres = await C_MessageBox.MessageBox(this, 
                                                                              "Error", 
                                                                              "Failed to update the Site calendar", 
                                                                              C_MessageBox.E_MessageBoxButtons.Ok);
                 }
-                else
-                {
-                    Dirty = false;
-                    B_SaveDefaults.Enabled = false;
-				}
 			}
             catch { }
 

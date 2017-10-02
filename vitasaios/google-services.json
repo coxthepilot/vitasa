@@ -1,0 +1,73 @@
+{
+  "project_info": {
+    "project_number": "654168577862",
+    "firebase_url": "https://vitamaps-181121.firebaseio.com",
+    "project_id": "vitamaps-181121",
+    "storage_bucket": "vitamaps-181121.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:654168577862:android:bc97f56734c467b3",
+        "android_client_info": {
+          "package_name": "net.zsquared.vitavolandroid"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "654168577862-g1afdm8h69srdmjbku8btkvvq2bjl337.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCNGYQpLC6BtWjGf1sE-ubhZABHbZ1Upn4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:654168577862:android:497ca5efbe25d531",
+        "android_client_info": {
+          "package_name": "net.zsquared.a_vitavol"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "654168577862-g1afdm8h69srdmjbku8btkvvq2bjl337.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCNGYQpLC6BtWjGf1sE-ubhZABHbZ1Upn4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

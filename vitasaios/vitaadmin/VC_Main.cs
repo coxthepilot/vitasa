@@ -24,6 +24,15 @@ namespace vitaadmin
                 PerformSegue("Segue_MainToMessages", this);
             };
 
+            B_Suggestions.TouchUpInside += (sender, e) => 
+            {
+                PerformSegue("Segue_MainToSuggestions", this);
+            };
+
+            B_WorkItems.TouchUpInside += (sender, e) => 
+            {
+                PerformSegue("Segue_MainToWorkItems", this);
+            };
         }
     }
 }

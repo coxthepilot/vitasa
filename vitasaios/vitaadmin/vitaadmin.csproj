@@ -23,7 +23,7 @@
     <MtouchNoSymbolStrip>true</MtouchNoSymbolStrip>
     <MtouchFastDev>true</MtouchFastDev>
     <IOSDebuggerPort>17907</IOSDebuggerPort>
-    <MtouchLink>None</MtouchLink>
+    <MtouchLink>SdkOnly</MtouchLink>
     <MtouchArch>i386, x86_64</MtouchArch>
     <MtouchHttpClientHandler>HttpClientHandler</MtouchHttpClientHandler>
     <DeviceSpecificBuild>false</DeviceSpecificBuild>
@@ -125,6 +125,14 @@
     <Compile Include="VC_Messages.cs" />
     <Compile Include="VC_Messages.designer.cs">
       <DependentUpon>VC_Messages.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VC_Suggestions.cs" />
+    <Compile Include="VC_Suggestions.designer.cs">
+      <DependentUpon>VC_Suggestions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VC_WorkItems.cs" />
+    <Compile Include="VC_WorkItems.designer.cs">
+      <DependentUpon>VC_WorkItems.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <Import Project="..\iOSSharedModel\iOSSharedModels.projitems" Label="Shared" Condition="Exists('..\iOSSharedModel\iOSSharedModels.projitems')" />

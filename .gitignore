@@ -1,0 +1,29 @@
+<<<<<<< HEAD
+
+.DS_Store
+=======
+*.pyc
+__pycache__
+.vscode/*
+.cache/*
+*.zip
+
+# MacOS Desktop Services Store file
+.DS_Store
+
+# Logfiles
+*.log
+>>>>>>> origin/master
+vitasaios/a_vitavol/bin
+vitasaios/a_vitavol/obj
+vitasaios/vitasa/bin
+vitasaios/vitasa/obj
+vitasaios/vitasaadmin/bin
+vitasaios/vitasaadmin/obj
+vitasaios/vitavol/bin
+vitasaios/vitavol/obj
+vitasaios/vitavolandroid/packages.config
+
+vitasaios/vitavolandroid/A_About.cs
+
+vitasaios/vitavolandroid/A_About.cs

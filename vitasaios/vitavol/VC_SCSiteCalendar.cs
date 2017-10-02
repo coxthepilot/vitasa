@@ -21,6 +21,8 @@ namespace vitavol
         C_DayState[] DayState;
 		C_CVHelper CollectionViewHelper;
 
+        C_VitaSite OurSite;
+
 		public static UIColor Color_OpenDefault = UIColor.FromRGB(244, 167, 45);
 		//public static UIColor Color_NoStaffingNeeds = UIColor.FromRGB(67, 202, 67);
 		public static UIColor Color_ClosedDefault = UIColor.LightGray;
@@ -39,6 +41,8 @@ namespace vitavol
 			if (Global.CalendarDate == null)
 				Global.CalendarDate = C_YMD.Now;
 
+            OurSite = Global.GetSiteFromCacheNoFetch(Global.SelectedSiteSlug);
+
             B_Back.TouchUpInside += (sender, e) => 
             {
                 PerformSegue("Segue_SCSiteCalendarToSCSite", this);
@@ -53,8 +57,8 @@ namespace vitavol
 
 				L_MonthYear.Text = Global.CalendarDate.ToString("mmm-yyyy");
 
-				DateState = BuildDateStateArray(Global.CalendarDate, Global.SelectedSite);
-				DayState = BuildDayStateArray(Global.SelectedSite);
+				DateState = BuildDateStateArray(Global.CalendarDate, OurSite);
+				DayState = BuildDayStateArray(OurSite);
 
                 CollectionViewHelper.SetDayState(DateState, DayState);
 
@@ -70,8 +74,8 @@ namespace vitavol
 
 				L_MonthYear.Text = Global.CalendarDate.ToString("mmm-yyyy");
 
-				DateState = BuildDateStateArray(Global.CalendarDate, Global.SelectedSite);
-				DayState = BuildDayStateArray(Global.SelectedSite);
+				DateState = BuildDateStateArray(Global.CalendarDate, OurSite);
+				DayState = BuildDayStateArray(OurSite);
 
 				CollectionViewHelper.SetDayState(DateState, DayState);
 
@@ -83,8 +87,8 @@ namespace vitavol
             IMG_ExceptionBase.BackgroundColor = UIColor.Black;
             IMG_ExceptionTop.BackgroundColor = UIColor.White;
 
-            DateState = BuildDateStateArray(Global.CalendarDate, Global.SelectedSite);
-            DayState = BuildDayStateArray(Global.SelectedSite);
+            DateState = BuildDateStateArray(Global.CalendarDate, OurSite);
+            DayState = BuildDayStateArray(OurSite);
 
 			L_MonthYear.Text = Global.CalendarDate.ToString("mmm-yyyy");
 

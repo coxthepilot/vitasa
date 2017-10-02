@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Globalization;
 
 namespace zsquared
@@ -12,8 +9,11 @@ namespace zsquared
     /// </summary>
     public class C_YMD : IComparable
     {
-        public static string[] DayOfWeekNames = new string[7] { "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" };
-        int _year = 2013;
+        public static string[] DayOfWeekNames = { "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" };
+		public static string[] DayOfWeekNamesAbrev = { "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat" };
+		static readonly List<string> MonthNames = new List<string>() { "xxx", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
+
+		int _year = 2013;
         public int Year
         {
             get { return _year; }
@@ -37,7 +37,7 @@ namespace zsquared
             }
         }
 
-        int _day = 0;
+        int _day;
         public int Day
         {
             get { return _day; }
@@ -275,8 +275,7 @@ namespace zsquared
         {
             if (o == null) return 1;
 
-            C_YMD otherYMD = o as C_YMD;
-            if (otherYMD != null)
+            if (o is C_YMD otherYMD)
                 return CompareTo(otherYMD);
             else
                 throw new ApplicationException("Object is not a C_YMD");
@@ -294,27 +293,21 @@ namespace zsquared
 
         public static bool operator >(C_YMD v1, C_YMD v2)
         {
-            bool res = false;
-
-            if ((v1.Year > v2.Year)
+            bool res = ((v1.Year > v2.Year)
                 || ((v1.Year == v2.Year) && (v1.Month > v2.Month))
                 || ((v1.Year == v2.Year) && (v1.Month == v2.Month) && (v1.Day > v2.Day))
-                )
-                res = true;
+                       );
 
             return res;
         }
 
         public static bool operator >=(C_YMD v1, C_YMD v2)
         {
-            bool res = false;
-
-            if (((v1.Year == v2.Year) && (v1.Month == v2.Month) && (v1.Day == v2.Day))
+            bool res = (((v1.Year == v2.Year) && (v1.Month == v2.Month) && (v1.Day == v2.Day))
                 || (v1.Year > v2.Year)
                 || ((v1.Year == v2.Year) && (v1.Month > v2.Month))
                 || ((v1.Year == v2.Year) && (v1.Month == v2.Month) && (v1.Day > v2.Day))
-                )
-                res = true;
+                       );
 
             return res;
         }
@@ -322,11 +315,10 @@ namespace zsquared
         public static bool operator <(C_YMD v1, C_YMD v2)
         {
             bool yearsEqual = v1.Year == v2.Year;
-            if ((yearsEqual) && (v1.Month == v2.Month) && (v1.Day < v2.Day))
-                return true;
-            else if ((yearsEqual) && (v1.Month < v2.Month))
-                return true;
-            else if (v1.Year < v2.Year)
+
+            if (((yearsEqual) && (v1.Month == v2.Month) && (v1.Day < v2.Day))
+                || ((yearsEqual) && (v1.Month < v2.Month))
+                || (v1.Year < v2.Year))
                 return true;
 
             return false;
@@ -334,14 +326,12 @@ namespace zsquared
 
         public static bool operator <=(C_YMD v1, C_YMD v2)
         {
-            bool res = false;
-
-            if (((v1.Year == v2.Year) && (v1.Month == v2.Month) && (v1.Day == v2.Day))
+            bool res = (
+                   ((v1.Year == v2.Year) && (v1.Month == v2.Month) && (v1.Day == v2.Day))
                 || (v1.Year < v2.Year)
                 || ((v1.Year == v2.Year) && (v1.Month < v2.Month))
                 || ((v1.Year == v2.Year) && (v1.Month == v2.Month) && (v1.Day < v2.Day))
-                )
-                res = true;
+                       );
 
             return res;
         }
@@ -387,7 +377,6 @@ namespace zsquared
             return Year.ToString("D4") + "-" + Month.ToString("D2") + "-" + Day.ToString("D2");
         }
 
-        static readonly List<string> MonthNames = new List<string>() { "xxx", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
         /// <summary>
         /// returns a formated time using the provided format
         /// "yyyy" is replaced with 4 digit year, "yy" is replaced with last two digits of year
@@ -419,7 +408,7 @@ namespace zsquared
             }
             else if (res.Contains("mm"))
                 res = res.Replace("mm", Month.ToString("D2"));
-            
+
             if (res.Contains("dd"))
                 res = res.Replace("dd", Day.ToString("D2"));
 

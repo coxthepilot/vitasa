@@ -22,6 +22,8 @@ namespace vitavol
     public partial class VC_SignUp : UIViewController
     {
 		C_Global Global;
+        C_VitaUser LoggedInUser;
+        C_VitaSite SelectedSite;
         bool SignUpListHasOurUser;
         bool HousrAreDirty;
         protected CreateEventEditViewDelegate eventControllerDelegate;
@@ -38,26 +40,25 @@ namespace vitavol
 			AppDelegate myAppDelegate = (AppDelegate)UIApplication.SharedApplication.Delegate;
 			Global = myAppDelegate.Global;
 
+            LoggedInUser = Global.GetUserFromCacheNoFetch(Global.LoggedInUserId);
+            SelectedSite = Global.GetSiteFromCacheNoFetch(Global.SelectedSiteSlug);
+
 			// set the standard background color
 			View.BackgroundColor = C_Common.StandardBackground;
 
-            Global.WorkItemsOnSiteOnDate = Global.GetWorkItemsForSiteOnDateForUser(
-                Global.SelectedSite.Slug,
-                Global.SelectedDate,
-                -1,
-                C_Global.E_SiteCondition.Any);
+            Global.WorkItemsOnSiteOnDate = Global.GetWorkItemsForSiteOnDate(Global.SelectedDate, Global.SelectedSiteSlug);
 
 			B_Back.TouchUpInside += (sender, e) => 
             {
-                switch (Global.DetailsCameFrom)
+                switch (Global.ViewCameFrom)
                 {
-                    case E_CameFrom.List:
+                    case E_ViewCameFrom.List:
                         PerformSegue("Segue_SignUpToSitesOnDateList", this);
                         break;
-                    case E_CameFrom.Map:
+                    case E_ViewCameFrom.Map:
                         PerformSegue("Segue_SignUpToSitesOnDateMap", this);
                         break;
-                    case E_CameFrom.MySignUps:
+                    case E_ViewCameFrom.MySignUps:
                         PerformSegue("Segue_SignUpToMySignUps", this);
                         break;
                 }
@@ -72,9 +73,9 @@ namespace vitavol
 				AI_Busy.StartAnimating();
                 EnableUI(false);
 
-				C_WorkItem wi = new C_WorkItem(Global.SelectedSite.Slug, Global.SelectedDate, Global.LoggedInUser.id, 0);
+				C_WorkItem wi = new C_WorkItem(Global.SelectedSiteSlug, Global.SelectedDate, LoggedInUser.id, 0);
 
-                bool success = await wi.AddIntent(Global, Global.LoggedInUser.id);
+                bool success = await wi.AddIntent(Global, LoggedInUser.id);
 
 				AI_Busy.StopAnimating();
                 EnableUI(true);
@@ -108,7 +109,7 @@ namespace vitavol
                     newEvent.AddAlarm(EKAlarm.FromTimeInterval(-60));
 
                     // get the site info so we can compute the time for the calendar event based on the site open/close for that date
-                    C_VitaSite site = C_VitaSite.GetSiteBySlug(wi.SiteSlug, Global.AllSites);
+                    C_VitaSite site = Global.GetSiteFromCacheNoFetch(wi.SiteSlug);
                     C_HMS[] openCloseTimes = site.GetOpenCloseTimeOnDate(wi.Date);
                     C_HMS openTime = openCloseTimes[0];
                     C_HMS closeTime = openCloseTimes[1];
@@ -142,13 +143,17 @@ namespace vitavol
                     eventControllerEdit.Event = newEvent;
                     // add this signup to the current list and disable the signup button
                     Global.WorkItemsOnSiteOnDate.Add(wi);
-                    UserNames.Add(Global.LoggedInUser.Name);
+                    UserNames.Add(LoggedInUser.Name);
                     UserNames.Sort();
                     TV_Users.ReloadData();
                     B_SignMeUp.Enabled = false;
 
+                    Global.ViewCameFrom = E_ViewCameFrom.MySignUps;
+
 					// show the event controller
                     PresentViewController(eventControllerEdit, true, null);
+
+					PerformSegue("Segue_SignUpToMySignUps", this);
 				}
 
 				PerformSegue("Segue_SignUpToMySignUps", this);
@@ -158,9 +163,9 @@ namespace vitavol
             {
                 // the destination is the site the user selected
                 // the source address is unspecified which makes it the user's current location
-                string destinationAddress = Global.SelectedSite.Street + ", "
-                                                  + Global.SelectedSite.City + " "
-                                                  + Global.SelectedSite.State;
+                string destinationAddress = SelectedSite.Street + ", "
+                                                  + SelectedSite.City + " "
+                                                  + SelectedSite.State;
                 string url = "http://maps.apple.com/?daddr=" + destinationAddress;  // + "&saddr=<destination>";
                 url = url.Replace(" ", "%20");
 				if (UIApplication.SharedApplication.CanOpenUrl(new NSUrl(url)))
@@ -177,9 +182,7 @@ namespace vitavol
 
             B_SaveHours.TouchUpInside += async (sender, e) => 
             {
-
-				// remove the signup for this user
-				var ourUserSignup = Global.WorkItemsOnSiteOnDate.Where(wix => wix.UserId == Global.LoggedInUser.id);
+				var ourUserSignup = Global.WorkItemsOnSiteOnDate.Where(wix => wix.UserId == LoggedInUser.id);
 
                 // if we didn't find the signup to save, then just return
                 if (!ourUserSignup.Any())
@@ -232,10 +235,11 @@ namespace vitavol
 
                 foreach(C_WorkItem wi in Global.WorkItemsOnSiteOnDate)
                 {
-                    C_VitaUser user = await Global.GetUserDetails(wi.UserId);
-                    UserNames.Add(user.Name);
+                    C_VitaUser user = await Global.GetUserFromCache(wi.UserId);
+                    if (!UserNames.Contains(user.Name))
+                        UserNames.Add(user.Name);
 
-                    if (wi.UserId == Global.LoggedInUser.id)
+                    if (wi.UserId == LoggedInUser.id)
                     {
                         SignUpListHasOurUser = true;
                         ourUserWorkItem = wi;
@@ -266,15 +270,22 @@ namespace vitavol
                     B_SaveHours.Enabled = SignUpListHasOurUser;
 
 					int dayOfWeek = (int)Global.SelectedDate.DayOfWeek;
-					C_HMS openTime = new C_HMS(Global.SelectedSite.SiteCalendar[dayOfWeek].OpenTime);
-					C_HMS closeTime = new C_HMS(Global.SelectedSite.SiteCalendar[dayOfWeek].CloseTime);
+					C_HMS openTime = new C_HMS(SelectedSite.SiteCalendar[dayOfWeek].OpenTime);
+					C_HMS closeTime = new C_HMS(SelectedSite.SiteCalendar[dayOfWeek].CloseTime);
+					// see if there is an exception for today
+					C_CalendarEntry ce = SelectedSite.GetCalendarExceptionForDateForSite(Global.SelectedDate);
+					if (ce != null)
+					{
+						openTime = ce.OpenTime;
+						closeTime = ce.CloseTime;
+					}
 
-					L_Site.Text = Global.SelectedSite.Name;
+					L_Site.Text = SelectedSite.Name;
 					L_DateAndTime.Text = Global.SelectedDate.ToString("mmm dd, yyyy") 
                         + " [" + openTime.ToString("hh:mm p") + " - " + closeTime.ToString("hh:mm p") + "]";
 
-                    L_Address.Text = Global.SelectedSite.Street;
-                    L_CityStateZip.Text = Global.SelectedSite.City + ", " + Global.SelectedSite.State + " " + Global.SelectedSite.Zip;
+                    L_Address.Text = SelectedSite.Street;
+                    L_CityStateZip.Text = SelectedSite.City + ", " + SelectedSite.State + " " + SelectedSite.Zip;
 
                     B_GetDirections.Enabled = true;
 				}));

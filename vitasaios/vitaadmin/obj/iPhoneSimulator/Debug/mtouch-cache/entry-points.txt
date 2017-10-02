@@ -1,0 +1,27 @@
+Function=xamarin_get_block_descriptor
+	/Users/Billy/Documents/source/vitasa/vitasaios/vitaadmin/obj/iPhoneSimulator/Debug/mtouch-cache/32/Link/Xamarin.iOS.dll
+Function=UIApplicationMain
+	/Users/Billy/Documents/source/vitasa/vitasaios/vitaadmin/obj/iPhoneSimulator/Debug/mtouch-cache/32/Link/Xamarin.iOS.dll
+Function=xamarin_timezone_get_data
+	/Users/Billy/Documents/source/vitasa/vitasaios/vitaadmin/obj/iPhoneSimulator/Debug/mtouch-cache/32/Link/mscorlib.dll
+Function=xamarin_GetFolderPath
+	/Users/Billy/Documents/source/vitasa/vitasaios/vitaadmin/obj/iPhoneSimulator/Debug/mtouch-cache/32/Link/mscorlib.dll
+Function=xamarin_log
+	/Users/Billy/Documents/source/vitasa/vitasaios/vitaadmin/obj/iPhoneSimulator/Debug/mtouch-cache/32/Link/mscorlib.dll
+Function=CreateZStream
+	/Users/Billy/Documents/source/vitasa/vitasaios/vitaadmin/obj/iPhoneSimulator/Debug/mtouch-cache/32/Link/System.dll
+Function=CloseZStream
+	/Users/Billy/Documents/source/vitasa/vitasaios/vitaadmin/obj/iPhoneSimulator/Debug/mtouch-cache/32/Link/System.dll
+Function=Flush
+	/Users/Billy/Documents/source/vitasa/vitasaios/vitaadmin/obj/iPhoneSimulator/Debug/mtouch-cache/32/Link/System.dll
+Function=ReadZStream
+	/Users/Billy/Documents/source/vitasa/vitasaios/vitaadmin/obj/iPhoneSimulator/Debug/mtouch-cache/32/Link/System.dll
+Function=WriteZStream
+	/Users/Billy/Documents/source/vitasa/vitasaios/vitaadmin/obj/iPhoneSimulator/Debug/mtouch-cache/32/Link/System.dll
+Function=xamarin_start_wwan
+	/Users/Billy/Documents/source/vitasa/vitasaios/vitaadmin/obj/iPhoneSimulator/Debug/mtouch-cache/32/Link/System.dll
+Function=mono_pmip
+Function=xamarin_dyn_objc_msgSend
+Function=xamarin_dyn_objc_msgSendSuper
+Function=xamarin_dyn_objc_msgSend_stret
+Function=xamarin_dyn_objc_msgSendSuper_stret

@@ -57,8 +57,10 @@ namespace vitaadmin
                 SpanishMessage = await C_Message.GetMessage(C_Message.E_Language.Spanish, TB_Slug.Text);
                 if (SpanishMessage == null)
                 {
-                    SpanishMessage = new C_Message(TB_Slug.Text, "", C_Message.E_Language.Spanish);
-                    SpanishMessage.Slug = TB_Slug.Text;
+                    SpanishMessage = new C_Message(TB_Slug.Text, "", C_Message.E_Language.Spanish)
+                    {
+                        Slug = TB_Slug.Text
+                    };
                 }
                 TxV_Spanish.Text = SpanishMessage.Text;
 			};
@@ -68,15 +70,17 @@ namespace vitaadmin
                 EnglishMessage.Text = TxV_English.Text;
                 SpanishMessage.Text = TxV_Spanish.Text;
 
+                C_VitaUser LoggedInUser = Global.GetUserFromCacheNoFetch(Global.LoggedInUserId);
+
                 bool success;
                 if (EnglishMessage.id == -1)
                 {
-                    success = await C_Message.AddMessage(Global.LoggedInUser.Token, EnglishMessage, SpanishMessage);
+                    success = await C_Message.AddMessage(LoggedInUser.Token, EnglishMessage, SpanishMessage);
                 }
                 else
 				{
-                    success = await EnglishMessage.UpdateMessage(Global.LoggedInUser.Token);
-					success &= await SpanishMessage.UpdateMessage(Global.LoggedInUser.Token);
+                    success = await EnglishMessage.UpdateMessage(LoggedInUser.Token);
+					success &= await SpanishMessage.UpdateMessage(LoggedInUser.Token);
 				}
 
                 if (success)

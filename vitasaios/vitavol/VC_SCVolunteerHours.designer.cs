@@ -28,6 +28,10 @@ namespace vitavol
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UILabel L_Phone { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UILabel L_Site { get; set; }
 
         [Outlet]
@@ -53,6 +57,11 @@ namespace vitavol
             if (L_Date != null) {
                 L_Date.Dispose ();
                 L_Date = null;
+            }
+
+            if (L_Phone != null) {
+                L_Phone.Dispose ();
+                L_Phone = null;
             }
 
             if (L_Site != null) {
