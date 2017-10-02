@@ -292,14 +292,14 @@ namespace a_vitavol
 			// aapt resource value: 0x7f08001a
 			public const int B_About = 2131230746;
 			
-			// aapt resource value: 0x7f080077
-			public const int B_CreateNewSignup = 2131230839;
+			// aapt resource value: 0x7f08007d
+			public const int B_CreateNewSignup = 2131230845;
 			
-			// aapt resource value: 0x7f080056
-			public const int B_DeleteSuggestion = 2131230806;
+			// aapt resource value: 0x7f08005c
+			public const int B_DeleteSuggestion = 2131230812;
 			
-			// aapt resource value: 0x7f080062
-			public const int B_GetDirections = 2131230818;
+			// aapt resource value: 0x7f080068
+			public const int B_GetDirections = 2131230824;
 			
 			// aapt resource value: 0x7f080016
 			public const int B_Login = 2131230742;
@@ -307,8 +307,8 @@ namespace a_vitavol
 			// aapt resource value: 0x7f08002c
 			public const int B_NextMonth = 2131230764;
 			
-			// aapt resource value: 0x7f080079
-			public const int B_PostSuggestion = 2131230841;
+			// aapt resource value: 0x7f08007f
+			public const int B_PostSuggestion = 2131230847;
 			
 			// aapt resource value: 0x7f08002a
 			public const int B_PrevMonth = 2131230762;
@@ -322,8 +322,8 @@ namespace a_vitavol
 			// aapt resource value: 0x7f080029
 			public const int B_Register_Submit = 2131230761;
 			
-			// aapt resource value: 0x7f080063
-			public const int B_RemoveThisSignup = 2131230819;
+			// aapt resource value: 0x7f080069
+			public const int B_RemoveThisSignup = 2131230825;
 			
 			// aapt resource value: 0x7f080048
 			public const int B_RestoreDefaults = 2131230792;
@@ -352,35 +352,32 @@ namespace a_vitavol
 			// aapt resource value: 0x7f08004b
 			public const int B_SCSiteVol_ApproveHours = 2131230795;
 			
-			// aapt resource value: 0x7f08004a
-			public const int B_SCSiteVol_Date = 2131230794;
-			
 			// aapt resource value: 0x7f080043
 			public const int B_SaveDefaults = 2131230787;
 			
-			// aapt resource value: 0x7f080064
-			public const int B_SaveHours = 2131230820;
+			// aapt resource value: 0x7f08006a
+			public const int B_SaveHours = 2131230826;
 			
-			// aapt resource value: 0x7f080055
-			public const int B_SaveSuggestion = 2131230805;
+			// aapt resource value: 0x7f08005b
+			public const int B_SaveSuggestion = 2131230811;
+			
+			// aapt resource value: 0x7f08007e
+			public const int B_Suggestions = 2131230846;
+			
+			// aapt resource value: 0x7f080080
+			public const int B_UpdateProfile = 2131230848;
+			
+			// aapt resource value: 0x7f080070
+			public const int B_ViewSignUpNew_GetDirections = 2131230832;
+			
+			// aapt resource value: 0x7f080071
+			public const int B_ViewSignUpNew_SignMeUp = 2131230833;
 			
 			// aapt resource value: 0x7f080078
-			public const int B_Suggestions = 2131230840;
+			public const int B_ViewSitesOnMap = 2131230840;
 			
-			// aapt resource value: 0x7f08007a
-			public const int B_UpdateProfile = 2131230842;
-			
-			// aapt resource value: 0x7f08006a
-			public const int B_ViewSignUpNew_GetDirections = 2131230826;
-			
-			// aapt resource value: 0x7f08006b
-			public const int B_ViewSignUpNew_SignMeUp = 2131230827;
-			
-			// aapt resource value: 0x7f080072
-			public const int B_ViewSitesOnMap = 2131230834;
-			
-			// aapt resource value: 0x7f080076
-			public const int B_ViewTodaySignups = 2131230838;
+			// aapt resource value: 0x7f08007c
+			public const int B_ViewTodaySignups = 2131230844;
 			
 			// aapt resource value: 0x7f080021
 			public const int CB_Profile_Advanced = 2131230753;
@@ -409,23 +406,38 @@ namespace a_vitavol
 			// aapt resource value: 0x7f080030
 			public const int IMG_Exception = 2131230768;
 			
+			// aapt resource value: 0x7f080051
+			public const int IMG_FutureDateFullyStaffed = 2131230801;
+			
+			// aapt resource value: 0x7f080052
+			public const int IMG_FutureDateHaveNeeds = 2131230802;
+			
+			// aapt resource value: 0x7f08004e
+			public const int IMG_NoVolunteers = 2131230798;
+			
 			// aapt resource value: 0x7f08002f
 			public const int IMG_Open = 2131230767;
 			
-			// aapt resource value: 0x7f08006e
-			public const int IMG_OpenNoNeeds = 2131230830;
+			// aapt resource value: 0x7f080074
+			public const int IMG_OpenNoNeeds = 2131230836;
 			
-			// aapt resource value: 0x7f080070
-			public const int IMG_OpenNoNeedsBoxed = 2131230832;
+			// aapt resource value: 0x7f080076
+			public const int IMG_OpenNoNeedsBoxed = 2131230838;
 			
-			// aapt resource value: 0x7f08006d
-			public const int IMG_OpenWithNeeds = 2131230829;
+			// aapt resource value: 0x7f080073
+			public const int IMG_OpenWithNeeds = 2131230835;
 			
-			// aapt resource value: 0x7f08006f
-			public const int IMG_OpenWithNeedsBoxed = 2131230831;
+			// aapt resource value: 0x7f080075
+			public const int IMG_OpenWithNeedsBoxed = 2131230837;
 			
-			// aapt resource value: 0x7f080065
-			public const int LV_OtherVolunteers = 2131230821;
+			// aapt resource value: 0x7f080050
+			public const int IMG_PastDateNeedsApproval = 2131230800;
+			
+			// aapt resource value: 0x7f08004f
+			public const int IMG_PastDateNoApprovals = 2131230799;
+			
+			// aapt resource value: 0x7f08006b
+			public const int LV_OtherVolunteers = 2131230827;
 			
 			// aapt resource value: 0x7f08004d
 			public const int LV_SCSiteVol_List = 2131230797;
@@ -433,32 +445,32 @@ namespace a_vitavol
 			// aapt resource value: 0x7f08001b
 			public const int LV_SignUps = 2131230747;
 			
-			// aapt resource value: 0x7f08006c
-			public const int LV_ViewSignUpNew_OtherVolunteers = 2131230828;
+			// aapt resource value: 0x7f080072
+			public const int LV_ViewSignUpNew_OtherVolunteers = 2131230834;
 			
-			// aapt resource value: 0x7f080073
-			public const int LV_VolPickSite_Sites = 2131230835;
+			// aapt resource value: 0x7f080079
+			public const int LV_VolPickSite_Sites = 2131230841;
 			
-			// aapt resource value: 0x7f080060
-			public const int L_Address = 2131230816;
+			// aapt resource value: 0x7f080066
+			public const int L_Address = 2131230822;
 			
-			// aapt resource value: 0x7f080052
-			public const int L_Approval = 2131230802;
+			// aapt resource value: 0x7f080058
+			public const int L_Approval = 2131230808;
 			
-			// aapt resource value: 0x7f08005e
-			public const int L_Body = 2131230814;
+			// aapt resource value: 0x7f080064
+			public const int L_Body = 2131230820;
 			
 			// aapt resource value: 0x7f08000e
 			public const int L_Cell = 2131230734;
 			
-			// aapt resource value: 0x7f080061
-			public const int L_CityStateZip = 2131230817;
+			// aapt resource value: 0x7f080067
+			public const int L_CityStateZip = 2131230823;
 			
 			// aapt resource value: 0x7f08002b
 			public const int L_Date = 2131230763;
 			
-			// aapt resource value: 0x7f08005f
-			public const int L_DateAndTimes = 2131230815;
+			// aapt resource value: 0x7f080065
+			public const int L_DateAndTimes = 2131230821;
 			
 			// aapt resource value: 0x7f08003e
 			public const int L_DayOfWeek = 2131230782;
@@ -472,8 +484,11 @@ namespace a_vitavol
 			// aapt resource value: 0x7f080044
 			public const int L_DefaultOpenTime = 2131230788;
 			
-			// aapt resource value: 0x7f080053
-			public const int L_From = 2131230803;
+			// aapt resource value: 0x7f080059
+			public const int L_From = 2131230809;
+			
+			// aapt resource value: 0x7f080055
+			public const int L_Phone = 2131230805;
 			
 			// aapt resource value: 0x7f08001e
 			public const int L_Profile_Email = 2131230750;
@@ -484,47 +499,50 @@ namespace a_vitavol
 			// aapt resource value: 0x7f080031
 			public const int L_SCMySite_SiteName = 2131230769;
 			
+			// aapt resource value: 0x7f08004a
+			public const int L_SCSiteVol_Date = 2131230794;
+			
 			// aapt resource value: 0x7f080049
 			public const int L_SCSiteVol_SiteName = 2131230793;
 			
 			// aapt resource value: 0x7f08004c
 			public const int L_SCSiteVol_Volunteers = 2131230796;
 			
-			// aapt resource value: 0x7f080075
-			public const int L_SignsUpToday = 2131230837;
+			// aapt resource value: 0x7f08007b
+			public const int L_SignsUpToday = 2131230843;
 			
-			// aapt resource value: 0x7f08004e
-			public const int L_Site = 2131230798;
+			// aapt resource value: 0x7f080053
+			public const int L_Site = 2131230803;
 			
 			// aapt resource value: 0x7f08003d
 			public const int L_SiteName = 2131230781;
 			
+			// aapt resource value: 0x7f08005a
+			public const int L_State = 2131230810;
+			
+			// aapt resource value: 0x7f080063
+			public const int L_Time = 2131230819;
+			
 			// aapt resource value: 0x7f080054
-			public const int L_State = 2131230804;
+			public const int L_User = 2131230804;
 			
-			// aapt resource value: 0x7f08005d
-			public const int L_Time = 2131230813;
+			// aapt resource value: 0x7f08006e
+			public const int L_ViewSignUpNew_Address = 2131230830;
 			
-			// aapt resource value: 0x7f08004f
-			public const int L_User = 2131230799;
+			// aapt resource value: 0x7f08006f
+			public const int L_ViewSignUpNew_CityStateZip = 2131230831;
 			
-			// aapt resource value: 0x7f080068
-			public const int L_ViewSignUpNew_Address = 2131230824;
+			// aapt resource value: 0x7f08006d
+			public const int L_ViewSignUpNew_DateAndTimes = 2131230829;
 			
-			// aapt resource value: 0x7f080069
-			public const int L_ViewSignUpNew_CityStateZip = 2131230825;
+			// aapt resource value: 0x7f08006c
+			public const int L_ViewSignUpNew_Site = 2131230828;
 			
-			// aapt resource value: 0x7f080067
-			public const int L_ViewSignUpNew_DateAndTimes = 2131230823;
+			// aapt resource value: 0x7f080077
+			public const int L_VolPickSite_Date = 2131230839;
 			
-			// aapt resource value: 0x7f080066
-			public const int L_ViewSignUpNew_Site = 2131230822;
-			
-			// aapt resource value: 0x7f080071
-			public const int L_VolPickSite_Date = 2131230833;
-			
-			// aapt resource value: 0x7f080074
-			public const int Map_Sites = 2131230836;
+			// aapt resource value: 0x7f08007a
+			public const int Map_Sites = 2131230842;
 			
 			// aapt resource value: 0x7f080041
 			public const int TB_CloseTime = 2131230785;
@@ -532,11 +550,11 @@ namespace a_vitavol
 			// aapt resource value: 0x7f080012
 			public const int TB_Email = 2131230738;
 			
-			// aapt resource value: 0x7f080051
-			public const int TB_Hours = 2131230801;
+			// aapt resource value: 0x7f080057
+			public const int TB_Hours = 2131230807;
 			
-			// aapt resource value: 0x7f080059
-			public const int TB_MessageSuggestion = 2131230809;
+			// aapt resource value: 0x7f08005f
+			public const int TB_MessageSuggestion = 2131230815;
 			
 			// aapt resource value: 0x7f080042
 			public const int TB_NumEFilers = 2131230786;
@@ -568,17 +586,17 @@ namespace a_vitavol
 			// aapt resource value: 0x7f080026
 			public const int TB_Register_VerifyPassword = 2131230758;
 			
-			// aapt resource value: 0x7f080057
-			public const int TB_SubjectSuggestion = 2131230807;
+			// aapt resource value: 0x7f08005d
+			public const int TB_SubjectSuggestion = 2131230813;
 			
-			// aapt resource value: 0x7f08005a
-			public const int Text = 2131230810;
+			// aapt resource value: 0x7f080060
+			public const int Text = 2131230816;
 			
-			// aapt resource value: 0x7f08005b
-			public const int Text1 = 2131230811;
+			// aapt resource value: 0x7f080061
+			public const int Text1 = 2131230817;
 			
-			// aapt resource value: 0x7f08005c
-			public const int Text2 = 2131230812;
+			// aapt resource value: 0x7f080062
+			public const int Text2 = 2131230818;
 			
 			// aapt resource value: 0x7f08000d
 			public const int WV_About_About = 2131230733;
@@ -649,11 +667,11 @@ namespace a_vitavol
 			// aapt resource value: 0x7f080013
 			public const int textView4 = 2131230739;
 			
-			// aapt resource value: 0x7f080050
-			public const int textView5 = 2131230800;
+			// aapt resource value: 0x7f080056
+			public const int textView5 = 2131230806;
 			
-			// aapt resource value: 0x7f080058
-			public const int textView6 = 2131230808;
+			// aapt resource value: 0x7f08005e
+			public const int textView6 = 2131230814;
 			
 			// aapt resource value: 0x7f080009
 			public const int wide = 2131230729;
@@ -724,37 +742,40 @@ namespace a_vitavol
 			public const int SCSiteVol = 2130968587;
 			
 			// aapt resource value: 0x7f04000c
-			public const int SCVolHours = 2130968588;
+			public const int SCSiteVolCalendar = 2130968588;
 			
 			// aapt resource value: 0x7f04000d
-			public const int Suggestion = 2130968589;
+			public const int SCVolHours = 2130968589;
 			
 			// aapt resource value: 0x7f04000e
-			public const int SuggestionCell = 2130968590;
+			public const int Suggestion = 2130968590;
 			
 			// aapt resource value: 0x7f04000f
-			public const int Suggestions = 2130968591;
+			public const int SuggestionCell = 2130968591;
 			
 			// aapt resource value: 0x7f040010
-			public const int ViewNotification = 2130968592;
+			public const int Suggestions = 2130968592;
 			
 			// aapt resource value: 0x7f040011
-			public const int ViewSignUpExisting = 2130968593;
+			public const int ViewNotification = 2130968593;
 			
 			// aapt resource value: 0x7f040012
-			public const int ViewSignUpNew = 2130968594;
+			public const int ViewSignUpExisting = 2130968594;
 			
 			// aapt resource value: 0x7f040013
-			public const int VolCalendar = 2130968595;
+			public const int ViewSignUpNew = 2130968595;
 			
 			// aapt resource value: 0x7f040014
-			public const int VolPickSite = 2130968596;
+			public const int VolCalendar = 2130968596;
 			
 			// aapt resource value: 0x7f040015
-			public const int VolPickSiteMap = 2130968597;
+			public const int VolPickSite = 2130968597;
 			
 			// aapt resource value: 0x7f040016
-			public const int VolunteerOptions = 2130968598;
+			public const int VolPickSiteMap = 2130968598;
+			
+			// aapt resource value: 0x7f040017
+			public const int VolunteerOptions = 2130968599;
 			
 			static Layout()
 			{
@@ -785,8 +806,8 @@ namespace a_vitavol
 		public partial class String
 		{
 			
-			// aapt resource value: 0x7f060018
-			public const int app_name = 2131099672;
+			// aapt resource value: 0x7f060011
+			public const int app_name = 2131099665;
 			
 			// aapt resource value: 0x7f060001
 			public const int common_google_play_services_enable_button = 2131099649;
@@ -838,27 +859,6 @@ namespace a_vitavol
 			
 			// aapt resource value: 0x7f060010
 			public const int common_signin_button_text_long = 2131099664;
-			
-			// aapt resource value: 0x7f060013
-			public const int default_web_client_id = 2131099667;
-			
-			// aapt resource value: 0x7f060014
-			public const int firebase_database_url = 2131099668;
-			
-			// aapt resource value: 0x7f060011
-			public const int gcm_defaultSenderId = 2131099665;
-			
-			// aapt resource value: 0x7f060015
-			public const int google_api_key = 2131099669;
-			
-			// aapt resource value: 0x7f060012
-			public const int google_app_id = 2131099666;
-			
-			// aapt resource value: 0x7f060016
-			public const int google_crash_reporting_api_key = 2131099670;
-			
-			// aapt resource value: 0x7f060017
-			public const int google_storage_bucket = 2131099671;
 			
 			static String()
 			{

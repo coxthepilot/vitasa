@@ -1,5 +1,7 @@
 using Foundation;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using UIKit;
 
 using zsquared;
@@ -60,6 +62,17 @@ namespace vitavol
 				Global.ViewCameFrom = E_ViewCameFrom.VolOptions;
 				PerformSegue("Segue_VolunteerOptionToUpdateProfile", this);
             };
+
+			// get all workintents for this user
+			List<C_WorkItem> OurWorkItems = Global.GetWorkItemsForUser(Global.LoggedInUserId);
+
+			// make sure we only look at the current items (today and beyond)
+			C_YMD today = C_YMD.Now;
+			var ou = OurWorkItems.Where(wi => wi.Date >= today);
+			List<C_WorkItem> OurComingWorkItems = ou.ToList();
+
+            L_SignUps.Text = "You have " + OurComingWorkItems.Count.ToString() + " signups.";
+
 		}
 
 		public override void ViewDidAppear(bool animated)

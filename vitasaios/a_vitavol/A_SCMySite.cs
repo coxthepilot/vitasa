@@ -74,7 +74,8 @@ namespace a_vitavol
 
 			B_ManageVolunteers.Click += (sender, e) => 
             {
-                StartActivity(new Intent(this, typeof(A_SCSiteVol)));
+                StartActivity(new Intent(this, typeof(A_SCSiteVolCalendar)));
+				//StartActivity(new Intent(this, typeof(A_SCSiteVol)));
 			};
 
             B_EditSiteCalendar.Click += (sender, e) => 

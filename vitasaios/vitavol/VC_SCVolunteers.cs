@@ -49,7 +49,7 @@ namespace vitavol
 
                 if (!ou.Any())
                 {
-					PerformSegue("Segue_SCVolunteersToSCSite", this);
+					PerformSegue("Segue_SCVolunteersToSCSiteVolCal", this);
                     return;
 				}
                 
@@ -62,7 +62,7 @@ namespace vitavol
                     return;
                 else if (mbres == C_MessageBox.E_MessageBoxResults.No)
                 {
-					PerformSegue("Segue_SCVolunteersToSCSite", this);
+					PerformSegue("Segue_SCVolunteersToSCSiteVolCal", this);
 					return;
                 }
 
@@ -83,7 +83,7 @@ namespace vitavol
                     return;
                 }
 
-                PerformSegue("Segue_SCVolunteersToSCSite", this);
+                PerformSegue("Segue_SCVolunteersToSCSiteVolCal", this);
             };
 
             B_ApproveHours.TouchUpInside += async (sender, e) =>
@@ -114,57 +114,13 @@ namespace vitavol
 				}
 			};
 
-            // Setup the textfield for the date to use a date picker in an action sheet/toolbar
-            UIDatePicker DP_Date = new UIDatePicker()
-            {
-                Mode = UIDatePickerMode.Date,
-                Date = C_NSDateConversions.YMDToNSDate(Global.SelectedDate)
-            };
-
-            UIToolbar ToolBar_Date = new UIToolbar()
-            {
-                BarStyle = UIBarStyle.Black,
-                Translucent = true
-            };
-            ToolBar_Date.SizeToFit();
-
-			UIBarButtonItem doneButton = new UIBarButtonItem("Done", UIBarButtonItemStyle.Done, async (s, e) =>
-			{
-                TB_Date.Text = FriendlyDate(DP_Date.Date);
-	            TB_Date.ResignFirstResponder();
-                Global.SelectedDate = new C_YMD(C_NSDateConversions.NSDateToDateTime(DP_Date.Date));
-                EnableUI(false);
-                TableSource.DoNotDisplayValues = true;
-                TV_Volunteers.ReloadData();
-
-                AI_Busy.StartAnimating();
-
-				bool success = await RebuildWorkItemsOnDateChange();
-
-                AI_Busy.StopAnimating();
-
-                TableSource.DoNotDisplayValues = false;
-                TV_Volunteers.ReloadData();
-            	EnableUI(true);
-                B_ApproveHours.Enabled = (Global.WorkItemsOnSiteOnDate.Count != 0) && (Global.SelectedDate <= C_YMD.Now);
-			});
-
-			ToolBar_Date.SetItems(new UIBarButtonItem[] { doneButton }, true);
-            UITextAttributes uita = new UITextAttributes()
-            {
-                TextColor = UIColor.White
-            };
-            doneButton.SetTitleTextAttributes(uita, UIControlState.Normal);
-
-			TB_Date.InputView = DP_Date;
-			TB_Date.InputAccessoryView = ToolBar_Date;
-            TB_Date.Text = Global.SelectedDate.ToString("mmm dd, yyyy");
-
+			L_Date.Text = Global.SelectedDate.ToString("mmm dd, yyyy");
+			
             // ----- initialize the view -----
 
-            if (Global.WorkItemsOnSiteOnDate == null)
-                // find out how many Volunteers signed up to work on this date
-                Global.WorkItemsOnSiteOnDate = Global.GetWorkItemsForSiteOnDate(Global.SelectedDate, OurSite.Slug);
+			//if (Global.WorkItemsOnSiteOnDate == null)
+			// find out how many Volunteers signed up to work on this date
+			Global.WorkItemsOnSiteOnDate = Global.GetWorkItemsForSiteOnDate(Global.SelectedDate, OurSite.Slug);
 
             Task.Run(async () => 
             {
@@ -244,7 +200,6 @@ namespace vitavol
 
         private void EnableUI(bool enable)
         {
-            TB_Date.Enabled = enable;
             TV_Volunteers.UserInteractionEnabled = enable;
             B_Back.Enabled = enable;
 

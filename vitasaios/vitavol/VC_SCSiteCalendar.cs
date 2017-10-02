@@ -92,7 +92,7 @@ namespace vitavol
 
 			L_MonthYear.Text = Global.CalendarDate.ToString("mmm-yyyy");
 
-            CollectionViewHelper = new C_CVHelper(UIColor.FromRGB(240, 240, 240), CV_Grid, DateState, DayState);
+            CollectionViewHelper = new C_CVHelper(UIColor.FromRGB(240, 240, 240), CV_Grid, DateState, DayState, false);
 			CollectionViewHelper.DateTouched += (sender, e) =>
 			{
 				C_DateTouchedEventArgs ea = e;

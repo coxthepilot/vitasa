@@ -123,6 +123,16 @@
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vitaiconv2 120.png" />
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vitaiconv2 180.png" />
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vitaiconv2 1024.png" />
+    <ImageAsset Include="Assets.xcassets\opennoneeds.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\opennoneeds.imageset\opennoneeds.jpg" />
+    <ImageAsset Include="Assets.xcassets\opennoneedsboxed.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\opennoneedsboxed.imageset\opennoneedsboxed.jpg" />
+    <ImageAsset Include="Assets.xcassets\openwithneeds.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\openwithneeds.imageset\openwithneeds.jpg" />
+    <ImageAsset Include="Assets.xcassets\openwithneedsboxed.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\openwithneedsboxed.imageset\openwithneedsboxed.jpg" />
+    <ImageAsset Include="Assets.xcassets\closed.imageset\closed.jpg" />
+    <ImageAsset Include="Assets.xcassets\closed.imageset\Contents.json" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
@@ -131,6 +141,11 @@
     <Folder Include="Assets.xcassets\redstatus.jpg.imageset\" />
     <Folder Include="Assets.xcassets\yellowstatus.jpg.imageset\" />
     <Folder Include="Assets.xcassets\blackstatus.jpg.imageset\" />
+    <Folder Include="Assets.xcassets\opennoneeds.imageset\" />
+    <Folder Include="Assets.xcassets\opennoneedsboxed.imageset\" />
+    <Folder Include="Assets.xcassets\openwithneeds.imageset\" />
+    <Folder Include="Assets.xcassets\openwithneedsboxed.imageset\" />
+    <Folder Include="Assets.xcassets\closed.imageset\" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="LaunchScreen.storyboard" />
@@ -218,10 +233,6 @@
     <Compile Include="I_LocalNotification.cs" />
     <Compile Include="C_NotificationEvent.cs" />
     <Compile Include="C_CVHelper.cs" />
-    <Compile Include="VC_EditSiteDetails.cs" />
-    <Compile Include="VC_EditSiteDetails.designer.cs">
-      <DependentUpon>VC_EditSiteDetails.cs</DependentUpon>
-    </Compile>
     <Compile Include="VC_VolunteerOptions.cs" />
     <Compile Include="VC_VolunteerOptions.designer.cs">
       <DependentUpon>VC_VolunteerOptions.cs</DependentUpon>
@@ -229,6 +240,10 @@
     <Compile Include="VC_UpdateProfile.cs" />
     <Compile Include="VC_UpdateProfile.designer.cs">
       <DependentUpon>VC_UpdateProfile.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VC_SCSiteVolCalendar.cs" />
+    <Compile Include="VC_SCSiteVolCalendar.designer.cs">
+      <DependentUpon>VC_SCSiteVolCalendar.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

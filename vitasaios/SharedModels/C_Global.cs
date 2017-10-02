@@ -255,6 +255,7 @@ namespace zsquared
 
 			return site;
 		}
+
 		public C_VitaSite GetSiteFromCacheNoFetch(string slug)
         {
             var ou = SiteCache.Where(site => site.Slug == slug);
@@ -338,14 +339,6 @@ namespace zsquared
 			if (!AllSitesFetched)
 			{
 				List<C_VitaSite> allSites = await FetchSitesList();
-				AllSitesFetched = true;
-
-				foreach (C_VitaSite site in allSites)
-				{
-					if (!SiteCacheContains(site.Slug))
-						SiteCache.Add(site);
-                    CleanWorkItemsFromSite(site);
-				}
 			}
 
 			List<C_VitaSite> res = new List<C_VitaSite>();

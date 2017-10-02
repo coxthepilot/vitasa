@@ -27,10 +27,6 @@ namespace vitavol
 			Global = myAppDelegate.Global;
 
             LoggedInUser = Global.GetUserFromCacheNoFetch(Global.LoggedInUserId);
-            OurSite = Global.GetSiteFromCacheNoFetch(Global.SelectedSiteSlug);
-
-			// set the standard background color
-            View.BackgroundColor = C_Common.StandardBackground;
 
 			if (Global.ViewCameFrom == E_ViewCameFrom.Login)
                 B_Back.SetTitle("< Login", UIControlState.Normal);
@@ -44,10 +40,6 @@ namespace vitavol
                 else
                     PerformSegue("Segue_SCSiteToSCSites", this);
             };
-
-            L_SiteName.Text = Global.SelectedSiteName;
-
-            EnableUI(true);
 
             B_Closed.TouchUpInside += async (sender, e) => 
             {
@@ -126,8 +118,9 @@ namespace vitavol
                 // clear all the dirty flags in the WorkItems to avoid saving stuff we shouldn't
                 Global.ClearDirtyFlagOnIntents();
 
-                PerformSegue("Segue_SCSiteToSCVolunteers", this);
-            };
+                //PerformSegue("Segue_SCSiteToSCVolunteers", this);
+				PerformSegue("Segue_SCSiteToSCSiteVolCal", this);
+			};
 
             B_SiteCalendar.TouchUpInside += (sender, e) => 
                 PerformSegue("Segue_SCSiteToSCSiteCalendar", this);
@@ -175,27 +168,61 @@ namespace vitavol
 				}
 			};
 
-            //IMG_Closed.Image = UIImage.FromBundle("blackstatus.jpg");
-            //IMG_Accepting.Image = UIImage.FromBundle("greenstatus.jpg");
-            //IMG_NearLimit.Image = UIImage.FromBundle("yellowstatus.jpg");
-            //IMG_AtLimit.Image = UIImage.FromBundle("redstatus.jpg");
+			OurSite = Global.GetSiteFromCacheNoFetch(Global.SelectedSiteSlug);
 
-            killChanges = true;
-			SW_DropOff.On = OurSite.SiteCapabilities.Contains(E_SiteCapabilities.DropOff);
-			SW_Express.On = OurSite.SiteCapabilities.Contains(E_SiteCapabilities.Express);
-            SW_MFT.On = OurSite.SiteCapabilities.Contains(E_SiteCapabilities.MFT);
-            killChanges = false;
+            AI_Busy.StartAnimating();
+            DisableUI();
+
+            Task.Run(async () => 
+            {
+                if (OurSite == null)
+                    OurSite = await Global.GetSiteFromCache(Global.SelectedSiteSlug);
+
+                UIApplication.SharedApplication.InvokeOnMainThread(
+                new Action(() =>
+                {
+                    AI_Busy.StopAnimating();
+                    EnableUI(true);
+
+                    L_SiteName.Text = OurSite.Name;
+
+                    EnableUI(true);
+
+                    killChanges = true;
+                    SW_DropOff.On = OurSite.SiteCapabilities.Contains(E_SiteCapabilities.DropOff);
+                    SW_Express.On = OurSite.SiteCapabilities.Contains(E_SiteCapabilities.Express);
+                    SW_MFT.On = OurSite.SiteCapabilities.Contains(E_SiteCapabilities.MFT);
+                    killChanges = false;
+                }));
+			});
+		}
+
+        private void DisableUI()
+        {
+            L_ClientStatus.Text = "";
+            B_Closed.Enabled = false;
+			B_Accepting.Enabled = false;
+			B_NearLimit.Enabled = false;
+			B_AtLimit.Enabled = false;
+
+			B_Volunteers.Enabled = false;
+			B_SiteCalendar.Enabled = false;
+            B_UpdateProfile.Enabled = false;
+
+			SW_DropOff.Enabled = false;
+			SW_Express.Enabled = false;
+			SW_MFT.Enabled = false;
+
+			B_Back.Enabled = false;
 		}
 
         private void EnableUI(bool enable)
         {
-            C_VitaSite site = Global.GetSiteFromCacheNoFetch(Global.SelectedSiteSlug);
-
-			int isiteStatus = (int)site.Status;
+			int isiteStatus = (int)OurSite.Status;
 			string ssitestatus = C_VitaSite.N_SiteStatus[isiteStatus];
 			L_ClientStatus.Text = ssitestatus;
 
-            switch (site.Status)
+            switch (OurSite.Status)
             {
                 case E_SiteStatus.Closed:
                     IMG_Currently.Image = UIImage.FromBundle("blackstatus.jpg");
@@ -211,13 +238,14 @@ namespace vitavol
 					break;
 			}
 
-			B_Closed.Enabled = enable && site.Status != E_SiteStatus.Closed;
-			B_Accepting.Enabled = enable && site.Status != E_SiteStatus.Accepting;
-			B_NearLimit.Enabled = enable && site.Status != E_SiteStatus.NearLimit;
-			B_AtLimit.Enabled = enable && site.Status != E_SiteStatus.NotAccepting;
+			B_Closed.Enabled = enable && OurSite.Status != E_SiteStatus.Closed;
+			B_Accepting.Enabled = enable && OurSite.Status != E_SiteStatus.Accepting;
+			B_NearLimit.Enabled = enable && OurSite.Status != E_SiteStatus.NearLimit;
+			B_AtLimit.Enabled = enable && OurSite.Status != E_SiteStatus.NotAccepting;
 
             B_Volunteers.Enabled = enable;
             B_SiteCalendar.Enabled = enable;
+            B_UpdateProfile.Enabled = enable;
 
             SW_DropOff.Enabled = enable;
             SW_Express.Enabled = enable;
@@ -247,5 +275,10 @@ namespace vitavol
 			return success;
 		}
 
+        public override void ViewDidAppear(bool animated)
+        {
+			// set the standard background color
+			View.BackgroundColor = C_Common.StandardBackground;
+		}
 	}
 }

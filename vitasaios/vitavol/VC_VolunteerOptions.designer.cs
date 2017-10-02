@@ -38,6 +38,10 @@ namespace vitavol
         [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UIButton B_ViewSignUps { get; set; }
 
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UILabel L_SignUps { get; set; }
+
         void ReleaseDesignerOutlets ()
         {
             if (B_Back != null) {
@@ -68,6 +72,11 @@ namespace vitavol
             if (B_ViewSignUps != null) {
                 B_ViewSignUps.Dispose ();
                 B_ViewSignUps = null;
+            }
+
+            if (L_SignUps != null) {
+                L_SignUps.Dispose ();
+                L_SignUps = null;
             }
         }
     }

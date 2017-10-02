@@ -160,7 +160,7 @@ namespace vitavol
                         EnableUI(true);
 
                         UIColor c = UIColor.FromRGB(240, 240, 240);
-                        CollectionViewHelper = new C_CVHelper(c, CV_Grid, DateState, null);
+                        CollectionViewHelper = new C_CVHelper(c, CV_Grid, DateState, null, false);
                         CollectionViewHelper.DateTouched += (sender, e) =>
                         {
                             C_DateTouchedEventArgs ea = (C_DateTouchedEventArgs)e;

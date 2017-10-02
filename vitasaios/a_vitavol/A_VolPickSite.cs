@@ -68,6 +68,22 @@ namespace a_vitavol
 
 			};
 
+			LV_Sites.ItemClick += (sender, e) =>
+			{
+				//// figure out if the user is already signed up for this date
+				//List<C_WorkItem> LoggedInUserWorkItems = Global.GetWorkItemsForUser(Global.LoggedInUserId);
+				//var ou = LoggedInUserWorkItems.Where(wi => wi.Date == Global.SelectedDate);
+
+				//if (!ou.Any())
+				//{
+				Global.SelectedSiteSlug = OpenSitesThatNeedHelp[e.Position].Slug;
+				Global.WorkItemsOnSiteOnDate = Global.GetWorkItemsForSiteOnDate(Global.SelectedDate, Global.SelectedSiteSlug);
+				Global.ViewCameFrom = E_ViewCameFrom.List;
+
+				StartActivity(new Intent(this, typeof(A_ViewSignUpNew)));
+				//}
+			};
+
 			EnableUI(false);
 			AI_Busy.Show();
 
@@ -94,22 +110,6 @@ namespace a_vitavol
 					openSitesThatNeedHelpSlugs.Add(site.Slug);
 
 				Global.OpenSitesThatNeedHelp = openSitesThatNeedHelpSlugs;
-
-				LV_Sites.ItemClick += (sender, e) =>
-				{
-					//// figure out if the user is already signed up for this date
-					//List<C_WorkItem> LoggedInUserWorkItems = Global.GetWorkItemsForUser(Global.LoggedInUserId);
-					//var ou = LoggedInUserWorkItems.Where(wi => wi.Date == Global.SelectedDate);
-
-					//if (!ou.Any())
-					//{
-						Global.SelectedSiteSlug = OpenSitesThatNeedHelp[e.Position].Slug;
-						Global.WorkItemsOnSiteOnDate = Global.GetWorkItemsForSiteOnDate(Global.SelectedDate, Global.SelectedSiteSlug);
-                        Global.ViewCameFrom = E_ViewCameFrom.List;
-
-						StartActivity(new Intent(this, typeof(A_ViewSignUpNew)));
-					//}
-				};
 
 				RunOnUiThread(() =>
                 {

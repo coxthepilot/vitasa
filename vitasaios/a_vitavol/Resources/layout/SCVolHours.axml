@@ -24,6 +24,13 @@
         android:id="@+id/L_User"
         android:gravity="center_horizontal"
         android:text="...user..." />
+    <TextView
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/L_Phone"
+        android:gravity="center_horizontal"
+        android:text="...phone..." />
     <Space
         android:layout_width="match_parent"
         android:layout_height="30dp"

@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,8 +23,9 @@ namespace a_vitavol
 
         TextView L_Date;
         TextView L_Site;
-        TextView L_Volunteer;
+        TextView L_User;
         TextView L_Approval;
+        TextView L_Phone;
 
         EditText TB_Hours;
 
@@ -56,15 +56,16 @@ namespace a_vitavol
 
             L_Date = FindViewById<TextView>(Resource.Id.L_Date);
             L_Site = FindViewById<TextView>(Resource.Id.L_Site);
-            L_Volunteer = FindViewById<TextView>(Resource.Id.L_User);
+            L_User = FindViewById<TextView>(Resource.Id.L_User);
             L_Approval = FindViewById<TextView>(Resource.Id.L_Approval);
+			L_Phone = FindViewById<TextView>(Resource.Id.L_Phone);
 
-            TB_Hours = FindViewById<EditText>(Resource.Id.TB_Hours);
-
-			L_Site.Text = OurWorkItem.SiteName;
+			TB_Hours = FindViewById<EditText>(Resource.Id.TB_Hours);
 
 			L_Date.Text = OurWorkItem.Date.ToString("mmm dd, yyyy");
-            L_Volunteer.Text = OurUser.Name;
+			L_Site.Text = OurWorkItem.SiteName;
+            L_User.Text = OurUser.Name;
+            L_Phone.Text = OurUser.Phone;
             L_Approval.Text = OurWorkItem.Approved ? "Approved" : "Not Approved";
 
             TB_Hours.Text = OurWorkItem.Hours.ToString();

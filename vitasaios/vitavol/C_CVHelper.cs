@@ -25,11 +25,13 @@ namespace vitavol
 		int FirstDayInMonthOffset;
         C_CVSource cvsource;
         UIColor BackgroundColor;
+        bool AllowPastDates;
 
-        public C_CVHelper(UIColor bgcolor, UICollectionView collectionView, C_DateState[] dateState, C_DayState[] dayState)
+        public C_CVHelper(UIColor bgcolor, UICollectionView collectionView, C_DateState[] dateState, C_DayState[] dayState, bool allowPastDates)
 		{
 			BackgroundColor = bgcolor;
 			DateState = dateState;
+            AllowPastDates = allowPastDates;
 			try
             {
                 FirstDayInMonthOffset = (int)dateState[0].Date.DayOfWeek;
@@ -38,7 +40,7 @@ namespace vitavol
 
                 collectionView.RegisterClassForCell(typeof(C_GridCell), gridCellId);
 
-                cvsource = new C_CVSource(DateState, DayState)
+                cvsource = new C_CVSource(DateState, DayState, allowPastDates)
                 {
                     BackgroundColor = BackgroundColor
                 };
@@ -106,7 +108,7 @@ namespace vitavol
                     if ((dayOfMonth >= 0) && (dayOfMonth < DateState.Length))
                     {
                         C_DateState dayState = DateState[dayOfMonth];
-                        if (dayState.CanClick && (dayState.Date >= C_YMD.Now))
+                        if (dayState.CanClick && ((dayState.Date >= C_YMD.Now) || AllowPastDates))
                             DateTouched?.Invoke(this, new C_DateTouchedEventArgs(dayState.Date));
                     }
                 }
@@ -124,12 +126,14 @@ namespace vitavol
             int FirstDayInMonthOffset;
             readonly string[] AbrevDayOfWeek = { "Su", "M", "Tu", "W", "Th", "F", "Sa" };
             public UIColor BackgroundColor;
+            readonly bool AllowPastDates;
 
-            public C_CVSource(C_DateState[] dateState, C_DayState[] dayState)
+            public C_CVSource(C_DateState[] dateState, C_DayState[] dayState, bool allowPastDates)
 			{
 				DateState = dateState;
                 DayState = dayState;
 				FirstDayInMonthOffset = (int)dateState[0].Date.DayOfWeek;
+                AllowPastDates = allowPastDates;
 			}
 
             public void SetDayState(C_DateState[] dateState, C_DayState[] dayState)
@@ -189,7 +193,7 @@ namespace vitavol
 
                             UIColor normColor = dateState.NormalColor;
                             UIColor textColor = dateState.TextColor;
-                            if (dateState.Date < now)
+                            if (!AllowPastDates && (dateState.Date < now))
                             {
                                 normColor = BackgroundColor;
                                 textColor = UIColor.Black;
@@ -199,7 +203,7 @@ namespace vitavol
                             cell.ContentView.Layer.BorderColor = normColor.CGColor;
                             cell.Label.TextColor = textColor;
 
-                            if ((dateState.ShowBox) && (dateState.Date >= now))
+                            if ((dateState.ShowBox) && ((dateState.Date >= now) || AllowPastDates))  
                                 cell.ContentView.Layer.BorderColor = dateState.BoxColor.CGColor;
                         }
                         else

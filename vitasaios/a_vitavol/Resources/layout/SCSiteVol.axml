@@ -10,11 +10,13 @@
         android:id="@+id/L_SCSiteVol_SiteName"
         android:text="...site name..."
         android:gravity="center_horizontal" />
-    <Button
+    <TextView
+        android:textAppearance="?android:attr/textAppearanceMedium"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/B_SCSiteVol_Date"
-        android:text="Select Date" />
+        android:id="@+id/L_SCSiteVol_Date"
+        android:text="...date..."
+        android:gravity="center_horizontal" />
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

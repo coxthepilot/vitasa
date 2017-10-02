@@ -119,6 +119,7 @@
     <Compile Include="A_VolPickSite.cs" />
     <Compile Include="A_VolPickSiteMap.cs" />
     <Compile Include="A_VolunteerActivity.cs" />
+    <Compile Include="A_SCSiteVolCalendar.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\AndroidManifest.xml" />
@@ -171,12 +172,16 @@
     <AndroidResource Include="Resources\drawable\vitaiconv2.png" />
     <AndroidResource Include="Resources\drawable\vitavol.jpg" />
     <AndroidResource Include="Resources\drawable\riverwalk2.jpg" />
+    <AndroidResource Include="Resources\layout\SCSiteVolCalendar.axml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable\" />
   </ItemGroup>
   <ItemGroup>
     <GoogleServicesJson Include="google-services.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\about.htm" />
   </ItemGroup>
   <Import Project="..\AndroidSharedModels\AndroidSharedModels.projitems" Label="Shared" Condition="Exists('..\AndroidSharedModels\AndroidSharedModels.projitems')" />
   <Import Project="..\SharedModels\SharedModels.projitems" Label="Shared" Condition="Exists('..\SharedModels\SharedModels.projitems')" />

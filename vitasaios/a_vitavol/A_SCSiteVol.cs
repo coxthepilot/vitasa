@@ -26,11 +26,11 @@ namespace a_vitavol
 
 		ProgressDialog AI_Busy;
 
-        Button B_Date;
 		Button B_ApproveHours;
 
 		TextView L_SiteName;
 		TextView L_SiteVol;
+        TextView L_Date;
 
         ListView LV_List;
 
@@ -49,13 +49,13 @@ namespace a_vitavol
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.SCSiteVol);
 
-            B_Date = FindViewById<Button>(Resource.Id.B_SCSiteVol_Date);
             B_ApproveHours = FindViewById<Button>(Resource.Id.B_SCSiteVol_ApproveHours);
 
             L_SiteName = FindViewById<TextView>(Resource.Id.L_SCSiteVol_SiteName);
             L_SiteVol = FindViewById<TextView>(Resource.Id.L_SCSiteVol_Volunteers);
+            L_Date = FindViewById<TextView>(Resource.Id.L_SCSiteVol_Date);
 
-            LV_List = FindViewById<ListView>(Resource.Id.LV_SCSiteVol_List);
+			LV_List = FindViewById<ListView>(Resource.Id.LV_SCSiteVol_List);
 
             AI_Busy = new ProgressDialog(this);
             AI_Busy.SetMessage("Please wait...");
@@ -90,60 +90,10 @@ namespace a_vitavol
                         mbox1.Show();
 						return;
 					}
+
+					StartActivity(new Intent(this, typeof(A_SCSiteVolCalendar)));
 				};
                 mbox.Show();
-
-			};
-
-            B_Date.Click += (sender, e) => 
-            {
-				DatePickerFragment frag = DatePickerFragment.NewInstance(delegate (DateTime time)
-				{
-                    C_YMD date = new C_YMD(time);
-                    B_Date.Text = date.ToString("mmm dd,yyyy");
-
-					Global.SelectedDate = date;
-					EnableUI(false);
-
-                    LV_List.Visibility = ViewStates.Invisible;
-
-                    AI_Busy.Show();
-
-                    Task.Run(async () => 
-                    {
-						bool success = await RebuildWorkItemsOnDateChange();
-                        if (success)
-                        {
-                            RunOnUiThread(() =>
-                            {
-								// find out how many are required
-								int dayOfWeek = (int)Global.SelectedDate.DayOfWeek;
-								int requiredVolunteers = OurSite.SiteCalendar[dayOfWeek].NumEFilers;
-								C_CalendarEntry SiteCalendarEntry = OurSite.GetCalendarExceptionForDateForSite(Global.SelectedDate);
-								if (SiteCalendarEntry != null)
-									requiredVolunteers = SiteCalendarEntry.NumEFilers;
-
-								RunOnUiThread(() =>
-								{
-									AI_Busy.Cancel();
-									EnableUI(true);
-
-                                    LV_List.Visibility = ViewStates.Visible;
-									LV_List.Adapter = new SignUpAdapter(this, Global.WorkItemsOnSiteOnDate, Global);
-
-									L_SiteName.Text = OurSite.Name;
-									L_SiteVol.Text = "Volunteers: " + Global.WorkItemsOnSiteOnDate.Count.ToString() + " of " + requiredVolunteers.ToString();
-
-									B_ApproveHours.Enabled = (Global.WorkItemsOnSiteOnDate.Count != 0) && (Global.SelectedDate <= C_YMD.Now);
-
-									EnableUI(true);
-								});
-							});
-                        }
-					});
-				});
-                frag.TimeToStart = Global.SelectedDate.ToDateTime();
-				frag.Show(FragmentManager, DatePickerFragment.TAG);
 			};
 
             LV_List.ItemClick += (sender, e) => 
@@ -156,7 +106,7 @@ namespace a_vitavol
 			AI_Busy.Show();
 			EnableUI(false);
 
-            B_Date.Text = Global.SelectedDate.ToString("mmm dd, yyyy");
+            L_Date.Text = Global.SelectedDate.ToString("mmm dd, yyyy");
 
 			Task.Run(async () =>
 			{
@@ -194,12 +144,12 @@ namespace a_vitavol
 
 		private void EnableUI(bool en)
 		{
-            B_Date.Enabled = en;
+            B_ApproveHours.Enabled = en && (Global.WorkItemsOnSiteOnDate.Count != 0) && (Global.SelectedDate <= C_YMD.Now);
 		}
 
 		public override void OnBackPressed()
 		{
-            StartActivity(new Intent(this, typeof(A_SCMySite)));
+            StartActivity(new Intent(this, typeof(A_SCSiteVolCalendar)));
 		}
 
 		private async Task<bool> SaveChangedItems()
@@ -274,7 +224,7 @@ namespace a_vitavol
                 C_VitaUser user = Global.GetUserFromCacheNoFetch(wi.UserId);
 
 				view.FindViewById<TextView>(Resource.Id.Text1).Text = user.Name;
-                view.FindViewById<TextView>(Resource.Id.Text2).Text = user.Certification.ToString() + "  " + wi.Hours.ToString() + " hours";
+                view.FindViewById<TextView>(Resource.Id.Text2).Text = "[" + user.Phone + "] " + user.Certification.ToString() + "  " + wi.Hours.ToString() + " hours";
 
 				return view;
 			}

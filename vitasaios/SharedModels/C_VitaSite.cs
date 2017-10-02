@@ -9,6 +9,7 @@ using System.Linq;
 namespace zsquared
 {
     public enum E_SiteStatus { Closed, Accepting, NearLimit, NotAccepting, Unknown }
+
     public enum E_SiteCapabilities { DropOff, Express, MFT }
 
     public class C_VitaSite
@@ -84,175 +85,184 @@ namespace zsquared
         public static readonly string N_BackupSiteCoordinatorName = "backup_coordinator_name";
         public static readonly string N_SampleTime = "sampledate";
 
+        private void BaseInit()
+        {
+			SiteCalendar = new C_SiteCalendarEntry[7];
+			for (int ix = 0; ix != 7; ix++)
+				SiteCalendar[ix] = new C_SiteCalendarEntry();
+			CalendarOverrides = new List<C_CalendarEntry>();
+			WorkHistoryX = new List<C_WorkItem>();
+			WorkIntentsX = new List<C_WorkItem>();
+			SiteCapabilities = new List<E_SiteCapabilities>();
+		}
+
         /// <summary>
         /// Create a vita site from the json values, read from the web service
         /// </summary>
         /// <param name="j">Must be Parsed already</param>
-        public C_VitaSite(JsonValue j)
+        public C_VitaSite(JsonValue jv)
         {
-            SiteCalendar = new C_SiteCalendarEntry[7];
-            for (int ix = 0; ix != 7; ix++)
-                SiteCalendar[ix] = new C_SiteCalendarEntry();
-            CalendarOverrides = new List<C_CalendarEntry>();
-            WorkHistoryX = new List<C_WorkItem>();
-            WorkIntentsX = new List<C_WorkItem>();
-            SiteCapabilities = new List<E_SiteCapabilities>();
+            BaseInit();
 
-            SeasonFirstDate = new C_YMD(2017, 09, 01);
-            SeasonLastDate = new C_YMD(2018, 04, 15);
-
-            try
-            {
-                if (j.ContainsKey(N_ID))
-                    id = Tools.JsonProcessInt(j[N_ID], id);
-
-                if (j.ContainsKey(N_Name))
-                    Name = Tools.JsonProcessString(j[N_Name], Name);
-
-                if (j.ContainsKey(N_Slug))
-                    Slug = Tools.JsonProcessString(j[N_Slug], Slug);
-
-                if (j.ContainsKey(N_Street))
-                    Street = Tools.JsonProcessString(j[N_Street], Street);
-
-                if (j.ContainsKey(N_City))
-                    City = Tools.JsonProcessString(j[N_City], City);
-
-                if (j.ContainsKey(N_State))
-                    State = Tools.JsonProcessString(j[N_State], State);
-
-                if (j.ContainsKey(N_Zip))
-                    Zip = Tools.JsonProcessString(j[N_Zip], Zip);
-
-                if (j.ContainsKey(N_Latitude))
-                    Latitude = Tools.JsonProcessString(j[N_Latitude], Latitude);
-
-                if (j.ContainsKey(N_Longitude))
-                    Longitude = Tools.JsonProcessString(j[N_Longitude], Longitude);
-
-                if (j.ContainsKey(N_PlaceID))
-                    PlaceID = Tools.JsonProcessString(j[N_PlaceID], PlaceID);
-
-                if (j.ContainsKey(N_Coordinator))
-                    PrimaryCoordinator = Tools.JsonProcessInt(j[N_Coordinator], PrimaryCoordinator);
-
-                if (j.ContainsKey(N_Status))
-                {
-                    string ssv = Tools.JsonProcessString(j[N_Status], "Unknown");
-                    Status = Tools.StringToEnum<E_SiteStatus>(ssv);
-                }
-
-                if (j.ContainsKey(N_SiteCalendar))
-                {
-                    int ix = 0;
-                    var jv = j[N_SiteCalendar];
-                    if (jv is JsonArray)
-                    {
-                        foreach (JsonValue jav in jv)
-                        {
-                            C_SiteCalendarEntry sce = new C_SiteCalendarEntry(jav);
-                            SiteCalendar[ix] = sce;
-                            ix++;
-                        }
-                    }
-                }
-
-                if (j.ContainsKey(N_BackupCoordinator))
-                    BackupCoordinator = Tools.JsonProcessInt(j[N_BackupCoordinator], BackupCoordinator);
-
-                if (j.ContainsKey(N_CalendarOverrides))
-                {
-                    var jv = j[N_CalendarOverrides];
-                    if (jv is JsonArray)
-                    {
-                        foreach (JsonValue jav in jv)
-                        {
-                            C_CalendarEntry ce = new C_CalendarEntry(jav);
-                            CalendarOverrides.Add(ce);
-                        }
-                    }
-                }
-
-                if (j.ContainsKey(N_WorkHistory))
-                {
-                    if (j[N_WorkHistory] is JsonArray)
-                    {
-                        WorkHistoryX = new List<C_WorkItem>();
-                        JsonArray ja = (JsonArray)j[N_WorkHistory];
-                        foreach (JsonValue jav in ja)
-                        {
-                            C_WorkItem wi = new C_WorkItem(jav);
-                            WorkHistoryX.Add(wi);
-                        }
-                    }
-                }
-
-                if (j.ContainsKey(N_WorkIntents))
-                {
-                    if (j[N_WorkIntents] is JsonArray)
-                    {
-                        WorkIntentsX = new List<C_WorkItem>();
-                        JsonArray ja = (JsonArray)j[N_WorkIntents];
-                        foreach (JsonValue jav in ja)
-                        {
-                            C_WorkItem wi = new C_WorkItem(jav);
-                            WorkIntentsX.Add(wi);
-                        }
-                    }
-                }
-
-                if (j.ContainsKey(N_SeasonFirstDate))
-                    SeasonFirstDate = Tools.JsonProcessDate(j[N_SeasonFirstDate], SeasonFirstDate);
-
-                if (j.ContainsKey(N_SeasonLastDate))
-                    SeasonLastDate = Tools.JsonProcessDate(j[N_SeasonLastDate], SeasonLastDate);
-
-                if (j.ContainsKey(N_SiteCapabilities))
-                {
-                    var jv = j[N_SiteCapabilities];
-                    if (jv is JsonArray)
-                    {
-                        foreach (JsonValue jav in jv)
-                        {
-                            string s_jav = Tools.JsonProcessString(jav, "Unknown");
-                            E_SiteCapabilities sc = Tools.StringToEnum<E_SiteCapabilities>(s_jav);
-                            SiteCapabilities.Add(sc);
-                        }
-                    }
-                }
-
-                if (j.ContainsKey(N_PrimarySiteCoordinatorName))
-                    PrimaryCoordinatorName = Tools.JsonProcessString(j[N_PrimarySiteCoordinatorName], PrimaryCoordinatorName);
-
-                if (j.ContainsKey(N_BackupSiteCoordinatorName))
-                    BackupCoordinatorName = Tools.JsonProcessString(j[N_BackupSiteCoordinatorName], BackupCoordinatorName);
-
-                // the following is used to read the data from the api
-                // parse through the <day of week>_<open | close | efiler> values
-                foreach (string k in ((JsonObject)j).Keys)
-                {
-                    int dow = FindDayOfWeekInKey(k);
-                    if (((k.Contains("_open")) || (k.Contains("_close")) || (k.Contains("_efilers"))) && (dow != -1))
-                    {
-                        if (k.Contains("_open"))
-                            SiteCalendar[dow].OpenTime = Tools.JsonProcessTime(j[k], SiteCalendar[dow].OpenTime);
-                        else if (k.Contains("_close"))
-                            SiteCalendar[dow].CloseTime = Tools.JsonProcessTime(j[k], SiteCalendar[dow].CloseTime);
-                        else if (k.Contains("_efilers"))
-                            SiteCalendar[dow].NumEFilers = Tools.JsonProcessInt(j[k], SiteCalendar[dow].NumEFilers);
-                    }
-                }
-
-                if (j.ContainsKey(N_SampleTime))
-                    SampleTime = Tools.JsonProcessDateTime(j[N_SampleTime], SampleTime);
-            }
-            catch (Exception e)
-            {
-#if DEBUG
-                Console.WriteLine(e.Message);
-#endif
-            }
+            LoadJson(jv);
         }
+
+        private void LoadJson(JsonValue j)
+        {
+			SeasonFirstDate = new C_YMD(2017, 09, 01);
+			SeasonLastDate = new C_YMD(2018, 04, 15);
+
+			try
+			{
+				if (j.ContainsKey(N_ID))
+					id = Tools.JsonProcessInt(j[N_ID], id);
+
+				if (j.ContainsKey(N_Name))
+					Name = Tools.JsonProcessString(j[N_Name], Name);
+
+				if (j.ContainsKey(N_Slug))
+					Slug = Tools.JsonProcessString(j[N_Slug], Slug);
+
+				if (j.ContainsKey(N_Street))
+					Street = Tools.JsonProcessString(j[N_Street], Street);
+
+				if (j.ContainsKey(N_City))
+					City = Tools.JsonProcessString(j[N_City], City);
+
+				if (j.ContainsKey(N_State))
+					State = Tools.JsonProcessString(j[N_State], State);
+
+				if (j.ContainsKey(N_Zip))
+					Zip = Tools.JsonProcessString(j[N_Zip], Zip);
+
+				if (j.ContainsKey(N_Latitude))
+					Latitude = Tools.JsonProcessString(j[N_Latitude], Latitude);
+
+				if (j.ContainsKey(N_Longitude))
+					Longitude = Tools.JsonProcessString(j[N_Longitude], Longitude);
+
+				if (j.ContainsKey(N_PlaceID))
+					PlaceID = Tools.JsonProcessString(j[N_PlaceID], PlaceID);
+
+				if (j.ContainsKey(N_Coordinator))
+					PrimaryCoordinator = Tools.JsonProcessInt(j[N_Coordinator], PrimaryCoordinator);
+
+				if (j.ContainsKey(N_Status))
+				{
+					string ssv = Tools.JsonProcessString(j[N_Status], "Unknown");
+					Status = Tools.StringToEnum<E_SiteStatus>(ssv);
+				}
+
+				if (j.ContainsKey(N_SiteCalendar))
+				{
+					int ix = 0;
+					var jv = j[N_SiteCalendar];
+					if (jv is JsonArray)
+					{
+						foreach (JsonValue jav in jv)
+						{
+							C_SiteCalendarEntry sce = new C_SiteCalendarEntry(jav);
+							SiteCalendar[ix] = sce;
+							ix++;
+						}
+					}
+				}
+
+				if (j.ContainsKey(N_BackupCoordinator))
+					BackupCoordinator = Tools.JsonProcessInt(j[N_BackupCoordinator], BackupCoordinator);
+
+				if (j.ContainsKey(N_CalendarOverrides))
+				{
+					var jv = j[N_CalendarOverrides];
+					if (jv is JsonArray)
+					{
+						foreach (JsonValue jav in jv)
+						{
+							C_CalendarEntry ce = new C_CalendarEntry(jav);
+							CalendarOverrides.Add(ce);
+						}
+					}
+				}
+
+				if (j.ContainsKey(N_WorkHistory))
+				{
+					if (j[N_WorkHistory] is JsonArray)
+					{
+						WorkHistoryX = new List<C_WorkItem>();
+						JsonArray ja = (JsonArray)j[N_WorkHistory];
+						foreach (JsonValue jav in ja)
+						{
+							C_WorkItem wi = new C_WorkItem(jav);
+							WorkHistoryX.Add(wi);
+						}
+					}
+				}
+
+				if (j.ContainsKey(N_WorkIntents))
+				{
+					if (j[N_WorkIntents] is JsonArray)
+					{
+						WorkIntentsX = new List<C_WorkItem>();
+						JsonArray ja = (JsonArray)j[N_WorkIntents];
+						foreach (JsonValue jav in ja)
+						{
+							C_WorkItem wi = new C_WorkItem(jav);
+							WorkIntentsX.Add(wi);
+						}
+					}
+				}
+
+				if (j.ContainsKey(N_SeasonFirstDate))
+					SeasonFirstDate = Tools.JsonProcessDate(j[N_SeasonFirstDate], SeasonFirstDate);
+
+				if (j.ContainsKey(N_SeasonLastDate))
+					SeasonLastDate = Tools.JsonProcessDate(j[N_SeasonLastDate], SeasonLastDate);
+
+				if (j.ContainsKey(N_SiteCapabilities))
+				{
+					var jv = j[N_SiteCapabilities];
+					if (jv is JsonArray)
+					{
+						foreach (JsonValue jav in jv)
+						{
+							string s_jav = Tools.JsonProcessString(jav, "Unknown");
+							E_SiteCapabilities sc = Tools.StringToEnum<E_SiteCapabilities>(s_jav);
+							SiteCapabilities.Add(sc);
+						}
+					}
+				}
+
+				if (j.ContainsKey(N_PrimarySiteCoordinatorName))
+					PrimaryCoordinatorName = Tools.JsonProcessString(j[N_PrimarySiteCoordinatorName], PrimaryCoordinatorName);
+
+				if (j.ContainsKey(N_BackupSiteCoordinatorName))
+					BackupCoordinatorName = Tools.JsonProcessString(j[N_BackupSiteCoordinatorName], BackupCoordinatorName);
+
+				// the following is used to read the data from the api
+				// parse through the <day of week>_<open | close | efiler> values
+				foreach (string k in ((JsonObject)j).Keys)
+				{
+					int dow = FindDayOfWeekInKey(k);
+					if (((k.Contains("_open")) || (k.Contains("_close")) || (k.Contains("_efilers"))) && (dow != -1))
+					{
+						if (k.Contains("_open"))
+							SiteCalendar[dow].OpenTime = Tools.JsonProcessTime(j[k], SiteCalendar[dow].OpenTime);
+						else if (k.Contains("_close"))
+							SiteCalendar[dow].CloseTime = Tools.JsonProcessTime(j[k], SiteCalendar[dow].CloseTime);
+						else if (k.Contains("_efilers"))
+							SiteCalendar[dow].NumEFilers = Tools.JsonProcessInt(j[k], SiteCalendar[dow].NumEFilers);
+					}
+				}
+
+				if (j.ContainsKey(N_SampleTime))
+					SampleTime = Tools.JsonProcessDateTime(j[N_SampleTime], SampleTime);
+			}
+			catch (Exception e)
+			{
+#if DEBUG
+				Console.WriteLine(e.Message);
+#endif
+			}        }
 
         private int FindDayOfWeekInKey(string k)
         {
