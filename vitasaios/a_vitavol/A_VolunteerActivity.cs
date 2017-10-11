@@ -27,6 +27,7 @@ namespace a_vitavol
         Button B_Suggestions;
 		Button B_UpdateProfile;
         TextView L_TodaySignups;
+        Button B_Resubmit;
         
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -45,7 +46,7 @@ namespace a_vitavol
             B_Suggestions = FindViewById<Button>(Resource.Id.B_Suggestions);
 			B_UpdateProfile = FindViewById<Button>(Resource.Id.B_UpdateProfile);
 			L_TodaySignups = FindViewById<TextView>(Resource.Id.L_SignsUpToday);
-            //L_TodaySignups.SetBackgroundResource(Resource.Drawable.riverwalk);
+            B_Resubmit = FindViewById<Button>(Resource.Id.B_Resubmit);
 
 			// get all workintents for this user
 			List<C_WorkItem> OurWorkItems = Global.GetWorkItemsForUser(Global.LoggedInUserId);
@@ -57,7 +58,35 @@ namespace a_vitavol
 
             L_TodaySignups.Text = "You have " + OurComingWorkItems.Count.ToString() + " signups.";
 
-            B_ViewTodaySignups.Click += (sender, e) => 
+			B_Resubmit.Click += async (sender, e) =>
+			{
+				var sharedPreferences = GetSharedPreferences("vitasa", FileCreationMode.MultiProcess);
+				string token = sharedPreferences.GetString("firebasetoken", "");
+
+                if (!string.IsNullOrEmpty(token))
+                {
+                    C_VitaUser user = Global.GetUserFromCacheNoFetch(Global.LoggedInUserId);
+
+                    if (user != null)
+                    {
+                        
+                        bool success = await C_Notifications.RegisterNotificationToken(C_Notifications.E_Platform.Android, token, user.Token);
+
+                        if (success)
+                        {
+                            C_MessageBox mbox = new C_MessageBox(this, "Success", "Token was successfully registered.", E_MessageBoxButtons.Ok);
+                            mbox.Show();
+                        }
+                        else
+                        {
+							C_MessageBox mbox = new C_MessageBox(this, "Error", "Failed to successfully register the Token.", E_MessageBoxButtons.Ok);
+							mbox.Show();
+						}
+                    }
+                }
+			};
+
+			B_ViewTodaySignups.Click += (sender, e) => 
             {
                 Intent i = new Intent(this, typeof(A_MySignUps));
 				StartActivity(i);

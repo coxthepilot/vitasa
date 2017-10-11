@@ -27,7 +27,7 @@ namespace a_vitavol
         Button B_Register;
         Button B_About;
 
-        ProgressDialog AI_Busy;
+		ProgressDialog AI_Busy;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
