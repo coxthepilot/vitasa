@@ -1,0 +1,22 @@
+[
+        {"name": "Guadalupe Community Center", 		"latlng": { "lat":29.4219597, "lng":-98.5173321}, "features": [ "Express" ] },
+        {"name": "Ed Cody Library", 			"latlng": { "lat":29.5324397, "lng":-98.590141 }, "features": []         },
+        {"name": "Thousand Oaks Library", 		"latlng": { "lat":29.5450580, "lng":-98.4036457}, "features": [ "DropOff" ] },
+        {"name": "Westfall Library", 			"latlng": { "lat":29.4856260, "lng":-98.5359567}, "features": [ "MFT" ]    },
+        {"name": "Claude Black Community Center", 	"latlng": { "lat":29.4200353, "lng":-98.44685  }, "features": [ "Express", "MFT" ] },
+        {"name": "Ella Austin Community Center", 	"latlng": { "lat":29.4320520, "lng":-98.4732177}, "features": [] },
+        {"name": "St. Philips College", 		"latlng": { "lat":29.4168448, "lng":-98.4552904}, "features": [ "MFT" ] },
+        {"name": "Bazan Library", 			"latlng": { "lat":29.4271180, "lng":-98.5219287}, "features": [ "Express" ] },
+        {"name": "Forest Hills Library", 		"latlng": { "lat":29.4641466, "lng":-98.5908126}, "features": [] },
+        {"name": "Henry Guerra Library", 		"latlng": { "lat":29.424577, "lng":-98.6276827}, "features": [ "MFT" ] },
+        {"name": "Mission Library", 			"latlng": { "lat":29.3651247, "lng":-98.4822682}, "features": [ "MFT" ] },
+        {"name": "Brook Hollow Library", 		"latlng": { "lat":29.5695725, "lng":-98.4753906}, "features": [] },
+        {"name": "The Neighborhood Place", 		"latlng": { "lat":29.4417519, "lng":-98.5585306}, "features": [ "DropOff" ]  },
+        {"name": "YWCA Of San Antonio", 		"latlng": { "lat":29.4184536, "lng":-98.5509283}, "features": [] },
+        {"name": "Presa Community Center", 		"latlng": { "lat":29.3862758, "lng":-98.4796398}, "features": [] },
+        {"name": "St. Mary's University", 		"latlng": { "lat":29.4598819, "lng":-98.5684166}, "features": [] },
+        {"name": "Hill Country Community Council",      "latlng": { "lat":30.2869861, "lng":-98.8536045}, "features": [] },
+        {"name": "Frank Garrett Multi-Service Center",  "latlng": { "lat":29.4421336, "lng":-98.5333535}, "features": [] },
+        {"name": "Millers Pond Community Center",       "latlng": { "lat":29.3445204, "lng":-98.6214773}, "features": [] },
+        {"name": "Palo Alto College", 			"latlng": { "lat":29.3245560, "lng":-98.5462837}, "features": [] }
+]

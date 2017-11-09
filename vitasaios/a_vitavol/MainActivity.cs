@@ -33,12 +33,12 @@ namespace a_vitavol
         {
             base.OnCreate(savedInstanceState);
 
-   //         if (Intent.Extras != null)
+            //if (Intent.Extras != null)
 			//{
 			//	foreach (var key in Intent.Extras.KeySet())
 			//	{
 			//		var value = Intent.Extras.GetString(key);
-			//		Log.Debug("VITA", "Key: {0} Value: {1}", key, value);
+			//		Log.Debug("VITA Extras", "Key: {0} Value: {1}", key, value);
 			//	}
 			//}			
 
@@ -62,6 +62,25 @@ namespace a_vitavol
 			B_About = FindViewById<Button>(Resource.Id.B_About);
 
 			var sharedPreferences = GetSharedPreferences("vitasa", FileCreationMode.MultiProcess);
+
+            if (Intent.Extras != null)
+            {
+                Console.WriteLine("found extras");
+                string m_id = Intent.Extras.GetString("google.message_id");
+                if (m_id != null)
+                {
+                    Console.WriteLine("id: " + m_id);
+                    string fb_message = sharedPreferences.GetString("firebase_message", "");
+                    string fb_id = sharedPreferences.GetString("firebase_messageid", "");
+
+                    if (m_id == fb_id)
+                    {
+                        Console.WriteLine("Found message: " + fb_message);
+                        C_MessageBox mbox = new C_MessageBox(this, "Notification", fb_message, E_MessageBoxButtons.Ok);
+						mbox.Show();
+					}
+                }
+            }
 
 			AI_Busy = new ProgressDialog(this);
 			AI_Busy.SetMessage("Please wait...");

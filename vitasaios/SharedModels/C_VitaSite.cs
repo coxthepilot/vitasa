@@ -77,8 +77,8 @@ namespace zsquared
         public static readonly string N_CalendarOverrides = "calendar_overrides";
         public static readonly string N_WorkHistory = "work_history";
         public static readonly string N_WorkIntents = "work_intents";
-        public static readonly string N_SeasonFirstDate = "season_first_date";
-        public static readonly string N_SeasonLastDate = "season_last_date";
+        public static readonly string N_SeasonFirstDate = "season_start";
+        public static readonly string N_SeasonLastDate = "season_end";
         public static readonly string N_SiteCapabilities = "site_features";
         public static readonly string N_SiteCalendar = "sitecalendar"; // only used in serialization (not from backend)
         public static readonly string N_PrimarySiteCoordinatorName = "sitecoordinator_name";
@@ -99,7 +99,7 @@ namespace zsquared
         /// <summary>
         /// Create a vita site from the json values, read from the web service
         /// </summary>
-        /// <param name="j">Must be Parsed already</param>
+        /// <param name="jv">Must be Parsed already</param>
         public C_VitaSite(JsonValue jv)
         {
             BaseInit();
@@ -644,9 +644,19 @@ namespace zsquared
             return res;
         }
 
+        /// <summary>
+        /// Get the number of eFilers required on a date. Returns the value from the default
+        /// calendar unless an exception exists, will then use the exception. If the site is outside
+        /// the season, returns 0.
+        /// </summary>
+        /// <returns>The number EF ilers required on date.</returns>
+        /// <param name="onDate">On date.</param>
         public int GetNumEFilersRequiredOnDate(C_YMD onDate)
         {
-            int dayOfWeek = (int)onDate.DayOfWeek;
+			if ((onDate < SeasonFirstDate) || (onDate > SeasonLastDate))
+				return 0;
+
+			int dayOfWeek = (int)onDate.DayOfWeek;
 
             int OverrideNumEFilers = SiteCalendar[dayOfWeek].NumEFilers; // set the default value
 
@@ -661,6 +671,7 @@ namespace zsquared
                     break;
                 }
             }
+
             return OverrideNumEFilers;
         }
 
@@ -712,8 +723,17 @@ namespace zsquared
 			return res;
 		}
 
+        /// <summary>
+        /// Returns true if the site is open on the specified date. If outside the season for the site,
+        /// returns false. If in season, uses the default calendar. If an exception, then uses the exception.
+        /// </summary>
+        /// <returns><c>true</c>, if is open on day was sited, <c>false</c> otherwise.</returns>
+        /// <param name="onDate">On date.</param>
 		public bool SiteIsOpenOnDay(C_YMD onDate)
 		{
+			if ((onDate < SeasonFirstDate) || (onDate > SeasonLastDate))
+				return false;
+
 			int dayOfWeek = (int)onDate.DayOfWeek;
 
 			bool siteIsOpenOnDate =

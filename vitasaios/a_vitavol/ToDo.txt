@@ -1,20 +1,23 @@
 ﻿----- Issues -----
 
 Android
-* need Season in API /get/site [in progress from Chris]
 * test notifications from AWS SNS
 * on notification, the graphic is a tiny slice from the middle [defer]
 * sort sites based on distance to user [defer]
 
 
 iOS: 
-* need Season in API /get/site [in progress from Chris]
+* add support for shifts
+* use updated icon
 * test notifications from AWS SNS
-* release version with distribution certificate [later]
+* vitavol map should use color for needs: green (no needs), red (1 or more needed)
+* NSLocationWhenInUseUsageDescription with a string explaning use of location in the app [CND]
+
+All:
+* set value for season start and end for all sites
 
 
 Chris
-* [DateTime, iso format] Need Season fields added to Site
 * Verify notifications re Apple and Google (firebase) [he will poke me when ready to test]
 * needs help with the web site design
 
@@ -27,6 +30,10 @@ Future
 
 
 Completed
+* release version with distribution certificate [later][done]
+* [DateTime, iso format] Need Season fields added to Site [done]
+* need Season in API /get/site [in progress from Chris] [done]
+* need Season in API /get/site [in progress from Chris] [done]
 * for SC: volunteer approvals calendar [done, ios]
 * updated screen shots [done, ios]
 * screen shots [done, android]

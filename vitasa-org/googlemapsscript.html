@@ -1,0 +1,93 @@
+<script>
+
+	var userLang = (navigator.language) ? navigator.language : navigator.userLanguage;
+	var l2 = userLang.substring(0, 2);
+	if (l2 == "es") {
+		var ix = window.location.href.indexOf("index.html");
+		var rawloc = window.location.href.substring(0, ix);
+		window.location.href = rawloc + "/es/index.html";
+	}
+
+	var OurMap;
+	var OurLastInfoWindow = null;
+
+    let idMainDesktop = "u2306";
+    let idMFTDesktop = "u1842";
+    let idMainPhone = "u1306";
+    let idMFTPhone = "u1371";
+
+    // --- adjust these for the display ---
+    let isMFT = false;
+    let id = idMainPhone;
+
+    function initMap() {
+    	var myLatLng = {lat: 29.4104978, lng:-98.5011676};
+
+        var map = new google.maps.Map(document.getElementById(id), {
+            zoom: 10,
+            center: myLatLng
+            });
+        OurMap = map;
+
+        var request = new XMLHttpRequest();
+        request.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                loadMapPins(this.responseText);
+                }
+            };
+
+        var url = window.location.protocol + '//' + window.location.hostname;
+        url = url + "/vitasa/sites.json";
+
+        request.open("get", url, true);
+        request.send();
+    }
+
+    function loadMapPins(elements) {
+        var locations = JSON.parse(elements);
+
+        for(ix = 0; ix < locations.length; ix++) {
+
+            if ((!isMFT) || (featuresHasMFT(locations[ix].features))) {
+                addMarker(OurMap, locations[ix]);
+            }
+        }
+    }
+
+    function featuresHasMFT(features) {
+        var res = false;
+
+        for(i = 0; i != features.length; i++ ) {
+            if (features[i].toLowerCase() == "mft") {
+                res = true;
+                break;
+            }
+        }
+
+        return res;
+    }
+
+    function addMarker(map, location) {
+        var marker = new google.maps.Marker({
+            position: location.latlng,
+            map: map,
+            title: location.name
+    	   });
+
+        marker.addListener('click', function() {
+        	if (OurLastInfoWindow != null) {
+        		OurLastInfoWindow.close();
+        	}
+
+	        OurLastInfoWindow = new google.maps.InfoWindow({
+				content: location.name
+			});
+
+    		OurLastInfoWindow.open(map, marker);
+  		});
+    };
+
+</script>    
+<script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGzGpzxEbNLKC8pjEE7V88HOvDJhT8whI&callback=initMap">
+</script>

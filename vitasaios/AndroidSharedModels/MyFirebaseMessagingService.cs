@@ -18,9 +18,17 @@ namespace a_vitavol
 		const string TAG = "VITA FirebaseMsgService";
 		public override void OnMessageReceived(RemoteMessage message)
 		{
-			Log.Debug(TAG, "Notification Message Body: " + message.GetNotification().Body);
+            var gmnot = message.GetNotification();
+            if (gmnot != null)
+            {
+                string gmnotb = gmnot.Body;
 
-			SendNotification(message);
+                if (gmnotb != null)
+                {
+					Log.Debug(TAG, "Notification Message Body: " + message.GetNotification().Body);
+					SendNotification(message);
+				}
+            }
 		}
 
         void SendNotification(RemoteMessage rmessage)
@@ -47,5 +55,32 @@ namespace a_vitavol
 			var notificationManager = NotificationManager.FromContext(this);
 			notificationManager.Notify(0, notificationBuilder.Build());
 		}
+
+        public override void HandleIntent(Intent p0)
+        {
+			base.HandleIntent(p0);
+
+			if (p0.Extras != null)
+			{
+			    //foreach (var key in p0.Extras.KeySet())
+			    //{
+			    //    Log.Debug("VITA Extras Intent", "Key: {0}", key);
+			    //}
+
+                string body = p0.GetStringExtra("gcm.notification.body");
+                Log.Debug("VITA Extras Intent", "body: " + body);
+				string id = p0.GetStringExtra("google.message_id");
+				Log.Debug("VITA Extras Intent", "id: " + body);
+				if ((body != null) && (id != null))
+                {
+
+                    var sharedPreferences = GetSharedPreferences("vitasa", FileCreationMode.MultiProcess);
+                    var editor = sharedPreferences.Edit();
+                    editor.PutString("firebase_message", body);
+                    editor.PutString("firebase_messageid", id);
+                    editor.Commit();
+                }
+			}
+        }
     }
 }
