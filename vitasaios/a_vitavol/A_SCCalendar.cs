@@ -100,7 +100,7 @@ namespace a_vitavol
 
 			L_Date.Text = Global.SelectedDate.ToString("mmm yyyy");
 
-            OurSite = Global.GetSiteFromCacheNoFetch(Global.SelectedSiteSlug);
+            OurSite = Global.GetSiteNoFetch(Global.SelectedSiteSlug);
 
             AI_Busy.Cancel();
 

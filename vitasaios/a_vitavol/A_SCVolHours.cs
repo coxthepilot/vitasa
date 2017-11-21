@@ -29,7 +29,7 @@ namespace a_vitavol
 
         EditText TB_Hours;
 
-        C_WorkItem OurWorkItem;
+        C_SignUp OurWorkItem;
 
 		protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -51,7 +51,7 @@ namespace a_vitavol
 			AI_Busy.SetCancelable(false);
 			AI_Busy.SetProgressStyle(ProgressDialogStyle.Spinner);
 
-            OurWorkItem = Global.VolunteerWorkItem;
+            OurWorkItem = Global.VolunteerSignUp;
             C_VitaUser OurUser = Global.GetUserFromCacheNoFetch(OurWorkItem.UserId);
 
             L_Date = FindViewById<TextView>(Resource.Id.L_Date);

@@ -10,7 +10,13 @@
     <RootNamespace>vitavol</RootNamespace>
     <AssemblyName>vitavol</AssemblyName>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
-    <ReleaseVersion>0.2</ReleaseVersion>
+    <ReleaseVersion>2.13</ReleaseVersion>
+    <Description>This is the app for VITA SA Volunteers and Site Coordinators. 
+
+Volunteers us this app to sign up for shifts at sites.
+
+Site Coordinators use this to see signups and manage the site calendar.</Description>
+    <SynchReleaseVersion>false</SynchReleaseVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
     <DebugSymbols>true</DebugSymbols>
@@ -38,13 +44,14 @@
     <DefineConstants></DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <CodesignKey>iPhone Developer</CodesignKey>
+    <CodesignKey>iPhone Distribution</CodesignKey>
     <DeviceSpecificBuild>true</DeviceSpecificBuild>
     <MtouchFloat32>true</MtouchFloat32>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <MtouchLink>SdkOnly</MtouchLink>
     <MtouchArch>ARMv7, ARM64</MtouchArch>
     <MtouchHttpClientHandler>HttpClientHandler</MtouchHttpClientHandler>
+    <CodesignProvision>Automatic:AdHoc</CodesignProvision>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
     <DebugType>pdbonly</DebugType>
@@ -117,13 +124,6 @@
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vv29.png" />
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vv57.png" />
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vv114.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vitaiconv2 58.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vitaiconv2 87.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vitaiconv2 40.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vitaiconv2 80.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vitaiconv2 120.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vitaiconv2 180.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vitaiconv2 1024.png" />
     <ImageAsset Include="Assets.xcassets\opennoneeds.imageset\Contents.json" />
     <ImageAsset Include="Assets.xcassets\opennoneeds.imageset\opennoneeds.jpg" />
     <ImageAsset Include="Assets.xcassets\opennoneedsboxed.imageset\Contents.json" />
@@ -134,6 +134,14 @@
     <ImageAsset Include="Assets.xcassets\openwithneedsboxed.imageset\openwithneedsboxed.jpg" />
     <ImageAsset Include="Assets.xcassets\closed.imageset\closed.jpg" />
     <ImageAsset Include="Assets.xcassets\closed.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vitasa 40.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vitasa 60.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vitasa 58.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vitasa 80.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vitasa 120.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vitasa 180.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vitasa 1024.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vitasa 87.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
@@ -245,6 +253,18 @@
     <Compile Include="VC_SCSiteVolCalendar.cs" />
     <Compile Include="VC_SCSiteVolCalendar.designer.cs">
       <DependentUpon>VC_SCSiteVolCalendar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VC_ShiftDetails.cs" />
+    <Compile Include="VC_ShiftDetails.designer.cs">
+      <DependentUpon>VC_ShiftDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VC_SiteShifts.cs" />
+    <Compile Include="VC_SiteShifts.designer.cs">
+      <DependentUpon>VC_SiteShifts.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VC_VolSiteShifts.cs" />
+    <Compile Include="VC_VolSiteShifts.designer.cs">
+      <DependentUpon>VC_VolSiteShifts.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

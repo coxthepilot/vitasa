@@ -62,10 +62,10 @@ namespace a_vitavol
 				OpenSitesThatNeedHelp = new List<C_VitaSite>();
 				foreach (C_VitaSite site in openSitesOnDate)
 				{
-					int numRequired = site.GetNumEFilersRequiredOnDate(Global.SelectedDate);
+					int numRequired = site.GetNumEFilersRequiredOnDateAllShifts(Global.SelectedDate);
 
 
-					List<C_WorkItem> workItemsForSiteOnDate = Global.GetWorkItemsForSiteOnDate(Global.SelectedDate, site.Slug);
+					List<C_SignUp> workItemsForSiteOnDate = Global.GetSignUpsForSiteOnDate(Global.SelectedDate, site.Slug);
 
 					if (numRequired > workItemsForSiteOnDate.Count)
 						OpenSitesThatNeedHelp.Add(site);
@@ -175,7 +175,7 @@ namespace a_vitavol
             {
                 Global.SelectedSiteSlug = s.Slug;
                 Global.SelectedSiteName = s.Name;
-				Global.WorkItemsOnSiteOnDate = Global.GetWorkItemsForSiteOnDate(Global.SelectedDate, Global.SelectedSiteSlug);
+				Global.SignUpsOnSiteOnDate = Global.GetSignUpsForSiteOnDate(Global.SelectedDate, Global.SelectedSiteSlug);
                 Global.ViewCameFrom = E_ViewCameFrom.Map;
 
 				StartActivity(new Intent(this, typeof(A_ViewSignUpNew)));

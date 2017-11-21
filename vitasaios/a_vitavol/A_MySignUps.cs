@@ -24,7 +24,7 @@ namespace a_vitavol
     {
 		C_Global Global;
 
-        List<C_WorkItem> OurWorkItemsForToday;
+        List<C_SignUp> OurWorkItemsForToday;
         List<string> Signups;
 
 		ProgressDialog AI_Busy;
@@ -46,17 +46,17 @@ namespace a_vitavol
 			//   them then perhaps they are ok; can backoffice change their intents? when approved and moves to history?
 
 			// get all workintents for this user
-			List<C_WorkItem> OurWorkItems = Global.GetWorkItemsForUser(Global.LoggedInUserId);
+			List<C_SignUp> OurWorkItems = Global.GetSignUpsForUser(Global.LoggedInUserId);
 
 			// make sure we only look at the current items (today and beyond)
 			C_YMD today = C_YMD.Now;
 			var ou = OurWorkItems.Where(wi => wi.Date >= today);
             OurWorkItemsForToday = ou.ToList();
 			// sort to make the list nicer
-			OurWorkItemsForToday.Sort(C_WorkItem.CompareByDateAscending);
+			OurWorkItemsForToday.Sort(C_SignUp.CompareByDateAscending);
 
             Signups = new List<string>();
-            foreach(C_WorkItem wi in OurWorkItemsForToday)
+            foreach(C_SignUp wi in OurWorkItemsForToday)
                 Signups.Add(wi.SiteName);
 
 			AI_Busy = new ProgressDialog(this);
@@ -70,7 +70,7 @@ namespace a_vitavol
 			Task.Run(async () =>
 			{
 				bool success = true;
-				foreach (C_WorkItem wi in OurWorkItemsForToday)
+				foreach (C_SignUp wi in OurWorkItemsForToday)
 					success &= await Global.EnsureSiteInCache(wi.SiteSlug);
 
                 RunOnUiThread(() =>
@@ -85,22 +85,22 @@ namespace a_vitavol
 		protected override void OnListItemClick(ListView l, View v, int position, long id)
 		{
 			string t = Signups[position];
-            C_WorkItem wi = OurWorkItemsForToday[position];
+            C_SignUp wi = OurWorkItemsForToday[position];
             Global.SelectedSiteSlug = wi.SiteSlug;
             Global.SelectedSiteName = wi.SiteName;
             Global.SelectedDate = wi.Date;
-            Global.VolunteerWorkItem = wi;
+            Global.VolunteerSignUp = wi;
 
             StartActivity(new Intent(this, typeof(A_ViewSignUpExisting)));
 		}
 
-		public class SignUpAdapter : BaseAdapter<C_WorkItem>
+		public class SignUpAdapter : BaseAdapter<C_SignUp>
 		{
-			readonly List<C_WorkItem> items;
+			readonly List<C_SignUp> items;
 			readonly Activity context;
 			readonly C_Global Global;
 
-			public SignUpAdapter(Activity context, List<C_WorkItem> items, C_Global global) : base()
+			public SignUpAdapter(Activity context, List<C_SignUp> items, C_Global global) : base()
 			{
 				this.context = context;
 				this.items = items;
@@ -112,7 +112,7 @@ namespace a_vitavol
 				return position;
 			}
 
-			public override C_WorkItem this[int position]
+			public override C_SignUp this[int position]
 			{
 				get { return items[position]; }
 			}
@@ -124,9 +124,9 @@ namespace a_vitavol
 
 			public override View GetView(int position, View convertView, ViewGroup parent)
 			{
-				C_WorkItem wi = items[position];
+				C_SignUp wi = items[position];
 
-				C_VitaSite oursite = Global.GetSiteFromCacheNoFetch(wi.SiteSlug);
+				C_VitaSite oursite = Global.GetSiteNoFetch(wi.SiteSlug);
 
 				C_HMS[] openclose = oursite.GetOpenCloseTimeOnDate(wi.Date);
 

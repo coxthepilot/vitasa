@@ -29,6 +29,17 @@ namespace vitavol
 			{
 				PerformSegue("Segue_AboutToLogin", this);
 			};
+
+			AppDelegate myAppDelegate = (AppDelegate)UIApplication.SharedApplication.Delegate;
+            C_Global Global = myAppDelegate.Global;
+
+			I_Global iad = myAppDelegate as I_Global;
+            long br = iad.GetBytesReceived();
+
+			var verString = NSBundle.MainBundle.InfoDictionary["CFBundleShortVersionString"];
+            L_Version.Text = verString.ToString();
+
+			B_BytesReceived.Text = br.ToString("N0");
 		}
     }
 

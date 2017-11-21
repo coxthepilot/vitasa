@@ -19,7 +19,7 @@ namespace a_vitavol
     {
         C_Global Global;
 
-        List<C_WorkItem> OurComingWorkItems;
+        List<C_SignUp> OurComingWorkItems;
 
 		Button B_ViewTodaySignups;
         Button B_CreateNewSignup;
@@ -49,7 +49,7 @@ namespace a_vitavol
             B_Resubmit = FindViewById<Button>(Resource.Id.B_Resubmit);
 
 			// get all workintents for this user
-			List<C_WorkItem> OurWorkItems = Global.GetWorkItemsForUser(Global.LoggedInUserId);
+			List<C_SignUp> OurWorkItems = Global.GetSignUpsForUser(Global.LoggedInUserId);
 
 			// make sure we only look at the current items (today and beyond)
 			C_YMD today = C_YMD.Now;

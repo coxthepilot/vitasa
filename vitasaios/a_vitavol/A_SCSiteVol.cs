@@ -98,7 +98,7 @@ namespace a_vitavol
 
             LV_List.ItemClick += (sender, e) => 
             {
-                Global.VolunteerWorkItem = Global.WorkItemsOnSiteOnDate[e.Position];
+                Global.VolunteerSignUp = Global.SignUpsOnSiteOnDate[e.Position];
 
                 StartActivity(new Intent(this, typeof(A_SCVolHours)));
 			};
@@ -129,12 +129,12 @@ namespace a_vitavol
                         AI_Busy.Cancel();
                         EnableUI(true);
 
-                        LV_List.Adapter = new SignUpAdapter(this, Global.WorkItemsOnSiteOnDate, Global);
+                        LV_List.Adapter = new SignUpAdapter(this, Global.SignUpsOnSiteOnDate, Global);
 
                         L_SiteName.Text = OurSite.Name;
-                        L_SiteVol.Text = "Volunteers: " + Global.WorkItemsOnSiteOnDate.Count.ToString() + " of " + requiredVolunteers.ToString();
+                        L_SiteVol.Text = "Volunteers: " + Global.SignUpsOnSiteOnDate.Count.ToString() + " of " + requiredVolunteers.ToString();
 
-                        B_ApproveHours.Enabled = (Global.WorkItemsOnSiteOnDate.Count != 0) && (Global.SelectedDate <= C_YMD.Now);
+                        B_ApproveHours.Enabled = (Global.SignUpsOnSiteOnDate.Count != 0) && (Global.SelectedDate <= C_YMD.Now);
 
                         EnableUI(true);
                     });
@@ -144,7 +144,7 @@ namespace a_vitavol
 
 		private void EnableUI(bool en)
 		{
-            B_ApproveHours.Enabled = en && (Global.WorkItemsOnSiteOnDate.Count != 0) && (Global.SelectedDate <= C_YMD.Now);
+            B_ApproveHours.Enabled = en && (Global.SignUpsOnSiteOnDate.Count != 0) && (Global.SelectedDate <= C_YMD.Now);
 		}
 
 		public override void OnBackPressed()
@@ -157,10 +157,10 @@ namespace a_vitavol
 			bool res = true;
 			try
 			{
-				foreach (C_WorkItem wi in Global.WorkItemsOnSiteOnDate)
+				foreach (C_SignUp wi in Global.SignUpsOnSiteOnDate)
 				{
 					wi.Approved = true;
-					bool success = await wi.UpdateIntent(Global);
+					bool success = await wi.UpdateSignUp(Global);
 					res &= success;
 					wi.Dirty = false;
 				}
@@ -173,11 +173,11 @@ namespace a_vitavol
 		private async Task<bool> RebuildWorkItemsOnDateChange()
 		{
 			// find out how many Volunteers signed up to work on this date
-			Global.WorkItemsOnSiteOnDate = Global.GetWorkItemsForSiteOnDate(Global.SelectedDate, OurSite.Slug);
+			Global.SignUpsOnSiteOnDate = Global.GetSignUpsForSiteOnDate(Global.SelectedDate, OurSite.Slug);
 
 			// build a dictionary of user id to user name
 			Dictionary<int, string> UserIdToUser = new Dictionary<int, string>();
-			foreach (C_WorkItem wi in Global.WorkItemsOnSiteOnDate)
+			foreach (C_SignUp wi in Global.SignUpsOnSiteOnDate)
 			{
                 bool success = await Global.EnsureUserInCache(wi.UserId, LoggedInUser.Token);
 			}
@@ -185,13 +185,13 @@ namespace a_vitavol
 			return true;
 		}
 
-		public class SignUpAdapter : BaseAdapter<C_WorkItem>
+		public class SignUpAdapter : BaseAdapter<C_SignUp>
 		{
-            readonly List<C_WorkItem> Items;
+            readonly List<C_SignUp> Items;
             readonly Activity Context;
 			readonly C_Global Global;
 
-			public SignUpAdapter(Activity context, List<C_WorkItem> items, C_Global global) : base()
+			public SignUpAdapter(Activity context, List<C_SignUp> items, C_Global global) : base()
 			{
 				Context = context;
 				Items = items;
@@ -203,7 +203,7 @@ namespace a_vitavol
 				return position;
 			}
 
-			public override C_WorkItem this[int position]
+			public override C_SignUp this[int position]
 			{
 				get { return Items[position]; }
 			}
@@ -219,7 +219,7 @@ namespace a_vitavol
 				if (view == null) // no view to re-use, create new
 					view = Context.LayoutInflater.Inflate(Resource.Layout.SuggestionCell, null);
 
-				C_WorkItem wi = Items[position];
+				C_SignUp wi = Items[position];
 
                 C_VitaUser user = Global.GetUserFromCacheNoFetch(wi.UserId);
 

@@ -47,7 +47,7 @@ namespace a_vitavol
 			if (Global.SelectedDate == null)
 				Global.SelectedDate = C_YMD.Now;
 
-            OurSite = Global.GetSiteFromCacheNoFetch(Global.SelectedSiteSlug);
+            OurSite = Global.GetSiteNoFetch(Global.SelectedSiteSlug);
 
 			// Set our view from the "main" layout resource
             SetContentView(Resource.Layout.SCSiteVolCalendar);
@@ -173,7 +173,7 @@ namespace a_vitavol
 				};
 
 				// get workitems for this date at this site
-				List<C_WorkItem> wiList = Global.GetWorkItemsForSiteOnDate(ourDate, OurSite.Slug);
+				List<C_SignUp> wiList = Global.GetSignUpsForSiteOnDate(ourDate, OurSite.Slug);
 
 				if (ourDate < now)
                 {

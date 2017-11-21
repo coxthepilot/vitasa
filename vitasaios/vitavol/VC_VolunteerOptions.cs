@@ -11,6 +11,7 @@ namespace vitavol
     public partial class VC_VolunteerOptions : UIViewController
     {
 		C_Global Global;
+
         C_VitaUser LoggedInUser;
 
 		public VC_VolunteerOptions (IntPtr handle) : base (handle)
@@ -64,15 +65,14 @@ namespace vitavol
             };
 
 			// get all workintents for this user
-			List<C_WorkItem> OurWorkItems = Global.GetWorkItemsForUser(Global.LoggedInUserId);
+			List<C_SignUp> OurWorkItems = Global.GetSignUpsForUser(Global.LoggedInUserId);
 
 			// make sure we only look at the current items (today and beyond)
 			C_YMD today = C_YMD.Now;
 			var ou = OurWorkItems.Where(wi => wi.Date >= today);
-			List<C_WorkItem> OurComingWorkItems = ou.ToList();
+			List<C_SignUp> OurComingWorkItems = ou.ToList();
 
             L_SignUps.Text = "You have " + OurComingWorkItems.Count.ToString() + " signups.";
-
 		}
 
 		public override void ViewDidAppear(bool animated)
@@ -80,7 +80,5 @@ namespace vitavol
 			// set the standard background color
 			View.BackgroundColor = C_Common.StandardBackground;
 		}
-
-
 	}
 }

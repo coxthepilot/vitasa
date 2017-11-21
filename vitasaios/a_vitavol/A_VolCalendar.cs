@@ -204,7 +204,7 @@ namespace a_vitavol
                 else
                 {
                     // see if the user is already signed up somewhere that day
-                    List<C_WorkItem> LoggedInUserWorkItems = Global.GetWorkItemsForUser(Global.LoggedInUserId);
+                    List<C_SignUp> LoggedInUserWorkItems = Global.GetSignUpsForUser(Global.LoggedInUserId);
                     var oux = LoggedInUserWorkItems.Where(wi => wi.Date == ourDate);
 
                     dayState.Boxed = oux.Any();

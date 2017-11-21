@@ -77,7 +77,7 @@ namespace a_vitavol
 				//if (!ou.Any())
 				//{
 				Global.SelectedSiteSlug = OpenSitesThatNeedHelp[e.Position].Slug;
-				Global.WorkItemsOnSiteOnDate = Global.GetWorkItemsForSiteOnDate(Global.SelectedDate, Global.SelectedSiteSlug);
+				Global.SignUpsOnSiteOnDate = Global.GetSignUpsForSiteOnDate(Global.SelectedDate, Global.SelectedSiteSlug);
 				Global.ViewCameFrom = E_ViewCameFrom.List;
 
 				StartActivity(new Intent(this, typeof(A_ViewSignUpNew)));
@@ -96,10 +96,10 @@ namespace a_vitavol
 				OpenSitesThatNeedHelp = new List<C_VitaSite>();
 				foreach (C_VitaSite site in openSitesOnDate)
 				{
-					int numRequired = site.GetNumEFilersRequiredOnDate(Global.SelectedDate);
+					int numRequired = site.GetNumEFilersRequiredOnDateAllShifts(Global.SelectedDate);
 
 
-					List<C_WorkItem> workItemsForSiteOnDate = Global.GetWorkItemsForSiteOnDate(Global.SelectedDate, site.Slug);
+					List<C_SignUp> workItemsForSiteOnDate = Global.GetSignUpsForSiteOnDate(Global.SelectedDate, site.Slug);
 
 					if (numRequired > workItemsForSiteOnDate.Count)
 						OpenSitesThatNeedHelp.Add(site);
@@ -185,16 +185,16 @@ namespace a_vitavol
 
 				// figure out if the user is already signed up for this date at this site
 				// get all of this users work items
-				List<C_WorkItem> LoggedInUserWorkItems = Global.GetWorkItemsForUser(Global.LoggedInUserId);
+				List<C_SignUp> LoggedInUserWorkItems = Global.GetSignUpsForUser(Global.LoggedInUserId);
 				// filter for this date
 				var ou = LoggedInUserWorkItems.Where(wi => wi.Date == Global.SelectedDate);
-				List<C_WorkItem> LoggedInUserWorksItemsOnSelectedDate = ou.ToList();
+				List<C_SignUp> LoggedInUserWorksItemsOnSelectedDate = ou.ToList();
 				// filter for this site
 				var ou1 = LoggedInUserWorksItemsOnSelectedDate.Where(wi => wi.SiteSlug == site.Slug);
 				// if any remain, then the user is signed up for this site on this date
 				bool LoggedInUserWorkingThisDateThisSite = ou1.Any();
 
-				int numEF = site.GetNumEFilersRequiredOnDate(Global.SelectedDate);
+				int numEF = site.GetNumEFilersRequiredOnDateAllShifts(Global.SelectedDate);
 
                 string t2;
 				if (LoggedInUserWorkingThisDateThisSite)

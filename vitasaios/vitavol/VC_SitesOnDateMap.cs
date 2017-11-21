@@ -71,7 +71,7 @@ namespace vitavol
 		{
             foreach (string s in Global.OpenSitesThatNeedHelp)
 			{
-                C_VitaSite vs = Global.GetSiteFromCacheNoFetch(s);
+                C_VitaSite vs = Global.GetSiteNoFetch(s);
 
 				double latitude = double.NaN;
 				double longitude = double.NaN;
@@ -102,6 +102,7 @@ namespace vitavol
 		public class C_MapDelegateX : MKMapViewDelegate
 		{
             readonly C_Global Global;
+            readonly C_VitaUser User;
 
             UIButton detailButton;
 
@@ -114,10 +115,12 @@ namespace vitavol
 				Global = global;
 				ourVC = cv;
 
+                User = Global.GetUserFromCacheNoFetch(Global.LoggedInUserId);
+
                 Sites = new List<C_VitaSite>();
                 foreach(string slug in siteSlugs)
                 {
-                    C_VitaSite s = Global.GetSiteFromCacheNoFetch(slug);
+                    C_VitaSite s = Global.GetSiteNoFetch(slug);
                     if (s != null)
                         Sites.Add(s);
                 }
@@ -144,32 +147,37 @@ namespace vitavol
                 if (sou.Any())
 				{
                     C_VitaSite ourSite = sou.First();
-                    switch (ourSite.Status)
-                    {
-                        case E_SiteStatus.Accepting:
-                            ((MKPinAnnotationView)pinView).PinTintColor = UIColor.Green;
-                            break;
-                        case E_SiteStatus.Closed:
-                            ((MKPinAnnotationView)pinView).PinTintColor = UIColor.Black;
-                            break;
-                        case E_SiteStatus.NearLimit:
-                            ((MKPinAnnotationView)pinView).PinTintColor = UIColor.Yellow;
-                            break;
-                        case E_SiteStatus.NotAccepting:
-                            ((MKPinAnnotationView)pinView).PinTintColor = UIColor.Red;
-                            break;
-                    }
 
-                    pinView.CanShowCallout = true;
+					C_CalendarEntry ce = ourSite.GetCalendarEntryForDate(Global.SelectedDate);
+					int numNeeded = 0;
+					int numHave = 0;
+					foreach (C_WorkShift ws in ce.WorkShifts)
+					{
+						C_SiteSchedule ss = Global.GetSiteScheduleForDay(Global.SelectedDate, ourSite.Slug);
+                        foreach (C_SiteScheduleShift sss in ss.Shifts)
+                        {
+                            numNeeded += User.Certification == E_Certification.Basic ? sss.eFilersNeededBasic : sss.eFilersNeededAdvanced;
+							numHave += User.Certification == E_Certification.Basic ? sss.eFilersSignedUpBasic : sss.eFilersSignedUpAdvanced;
+                        }
+					}
+					int numEF = numNeeded - numHave;
+
+                    if (numEF == 0)
+                        ((MKPinAnnotationView)pinView).PinTintColor = UIColor.Green;
+                    else
+						((MKPinAnnotationView)pinView).PinTintColor = UIColor.Red;
+
+					pinView.CanShowCallout = true;
 
 					detailButton = UIButton.FromType(UIButtonType.DetailDisclosure);
-					detailButton.TouchUpInside += (s, e) =>
-					{
-                        Global.SelectedSiteSlug = ourSite.Slug;
-                        Global.ViewCameFrom = E_ViewCameFrom.Map;
+                    // we cannot go to the sign up from here since we need to know the shift...
+					//detailButton.TouchUpInside += (s, e) =>
+					//{
+     //                   Global.SelectedSiteSlug = ourSite.Slug;
+     //                   Global.ViewCameFrom = E_ViewCameFrom.Map;
 
-						ourVC.PerformSegue("Segue_SitesOnDateMapToSignUp", ourVC);
-					};
+					//	ourVC.PerformSegue("Segue_SitesOnDateMapToSignUp", ourVC);
+					//};
 					pinView.RightCalloutAccessoryView = detailButton;
 				}
 

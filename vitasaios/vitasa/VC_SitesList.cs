@@ -152,18 +152,18 @@ namespace vitasa
                 cell.TextLabel.Text = site.Name;
 				cell.DetailTextLabel.Text = "(DO, Ex, MFT) " + site.Street + ", " + site.City + ", " + site.State + " " + site.Zip;
 
-                switch (site.Status)
+                switch (site.ClientStatus)
                 {
-                    case E_SiteStatus.Accepting:
+                    case E_ClientSiteStatus.Accepting:
                         cell.ImageView.Image = UIImage.FromBundle("greenstatus.jpg");
                         break;
-                    case E_SiteStatus.NearLimit:
+                    case E_ClientSiteStatus.NearLimit:
                         cell.ImageView.Image = UIImage.FromBundle("yellowstatus.jpg");
                         break;
-                    case E_SiteStatus.NotAccepting:
+                    case E_ClientSiteStatus.NotAccepting:
                         cell.ImageView.Image = UIImage.FromBundle("redstatus.jpg");
                         break;
-                    case E_SiteStatus.Closed:
+                    case E_ClientSiteStatus.Closed:
                         cell.ImageView.Image = UIImage.FromBundle("blackstatus.jpg");
                         break;
                 }

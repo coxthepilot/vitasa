@@ -24,6 +24,10 @@ namespace vitavol
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UIButton B_NewShift { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UIButton B_SaveDefaults { get; set; }
 
         [Outlet]
@@ -40,15 +44,7 @@ namespace vitavol
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UITextField TB_CloseTime { get; set; }
-
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UITextField TB_EFilers { get; set; }
-
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UITextField TB_OpenTime { get; set; }
+        UIKit.UITableView TV_Shifts { get; set; }
 
         void ReleaseDesignerOutlets ()
         {
@@ -60,6 +56,11 @@ namespace vitavol
             if (B_Back != null) {
                 B_Back.Dispose ();
                 B_Back = null;
+            }
+
+            if (B_NewShift != null) {
+                B_NewShift.Dispose ();
+                B_NewShift = null;
             }
 
             if (B_SaveDefaults != null) {
@@ -82,19 +83,9 @@ namespace vitavol
                 SW_IsOpen = null;
             }
 
-            if (TB_CloseTime != null) {
-                TB_CloseTime.Dispose ();
-                TB_CloseTime = null;
-            }
-
-            if (TB_EFilers != null) {
-                TB_EFilers.Dispose ();
-                TB_EFilers = null;
-            }
-
-            if (TB_OpenTime != null) {
-                TB_OpenTime.Dispose ();
-                TB_OpenTime = null;
+            if (TV_Shifts != null) {
+                TV_Shifts.Dispose ();
+                TV_Shifts = null;
             }
         }
     }

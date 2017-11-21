@@ -10,16 +10,16 @@ namespace vitavol
 {
     public partial class VC_SCVolunteers : UIViewController
     {
-        // Globals to be set on start of ViewController
-        // - SelectedSite
-
         C_WorkItemsTableSourceSCVolunteers TableSource;
 
         C_Global Global;
 
-        C_VitaSite OurSite;
+		C_VitaUser LoggedInUser;
+		C_VitaSite SelectedSite;
+        C_YMD SelectedDate;
+        C_WorkShift SelectedShift;
 
-		public VC_SCVolunteers (IntPtr handle) : base (handle)
+        public VC_SCVolunteers(IntPtr handle) : base(handle)
         {
         }
 
@@ -30,26 +30,26 @@ namespace vitavol
             AppDelegate myAppDelegate = (AppDelegate)UIApplication.SharedApplication.Delegate;
             Global = myAppDelegate.Global;
 
-            OurSite = Global.GetSiteFromCacheNoFetch(Global.SelectedSiteSlug);
-
-			// set the standard background color
-            View.BackgroundColor = C_Common.StandardBackground;
-
-            // ----- init variables -----
-
-            if (Global.SelectedDate == null)
-                Global.SelectedDate = C_YMD.Now;
-
+			LoggedInUser = Global.GetUserFromCacheNoFetch(Global.LoggedInUserId);
+			SelectedSite = Global.GetSiteNoFetch(Global.SelectedSiteSlug);
+            SelectedDate = Global.SelectedDate;
+            SelectedShift = Global.SelectedShift;
+#if DEBUG
+            if ((SelectedSite == null)
+                || (SelectedDate == null)
+                || (LoggedInUser == null)
+                || (SelectedShift == null))
+                throw new ApplicationException("missing values");
+#endif
             // ----- button handlers -----
 
             B_Back.TouchUpInside += async (sender, e) =>
             {
                 // see if any of the items were changed and not saved
-                var ou = Global.WorkItemsOnSiteOnDate.Where(wi => wi.Dirty);
-
-                if (!ou.Any())
+                var ou1 = Global.WorkShiftSignUpsOnDate.Where(wssu => wssu.TheSignUp.Dirty);
+                if (!ou1.Any())
                 {
-					PerformSegue("Segue_SCVolunteersToSCSiteVolCal", this);
+					PerformSegue("Segue_SCVolunteersToSiteShifts", this);
                     return;
 				}
                 
@@ -62,14 +62,14 @@ namespace vitavol
                     return;
                 else if (mbres == C_MessageBox.E_MessageBoxResults.No)
                 {
-					PerformSegue("Segue_SCVolunteersToSCSiteVolCal", this);
+					PerformSegue("Segue_SCVolunteersToSiteShifts", this);
 					return;
                 }
 
                 AI_Busy.StartAnimating();
                 EnableUI(false);
                 
-                bool success = await SaveChangedItems();
+                bool success = await SaveChangedItems(false);
 
                 AI_Busy.StopAnimating();
                 EnableUI(true);
@@ -83,7 +83,7 @@ namespace vitavol
                     return;
                 }
 
-                PerformSegue("Segue_SCVolunteersToSCSiteVolCal", this);
+                PerformSegue("Segue_SCVolunteersToSiteShifts", this);
             };
 
             B_ApproveHours.TouchUpInside += async (sender, e) =>
@@ -99,7 +99,7 @@ namespace vitavol
 				AI_Busy.StartAnimating();
 				EnableUI(false);
 
-				bool success = await SaveChangedItems();
+				bool success = await SaveChangedItems(true);
 
 				AI_Busy.StopAnimating();
 				EnableUI(true);
@@ -108,63 +108,87 @@ namespace vitavol
 				{
 					C_MessageBox.E_MessageBoxResults mbres1 = await C_MessageBox.MessageBox(this,
 																			"Error",
-																			"Unble to save the work item",
+                                                                            "Unble to save the work item(s)",
 																			 C_MessageBox.E_MessageBoxButtons.Ok);
 					return;
 				}
 			};
 
-			L_Date.Text = Global.SelectedDate.ToString("mmm dd, yyyy");
-			
-            // ----- initialize the view -----
+			L_SiteName.Text = SelectedSite.Name;
+			L_Date.Text = SelectedDate.ToString("mmm dd, yyyy");
+            L_Shift.Text = SelectedShift.OpenTime.ToString("hh:mm p") + " - " + SelectedShift.CloseTime.ToString("hh:mm p");
 
-			//if (Global.WorkItemsOnSiteOnDate == null)
-			// find out how many Volunteers signed up to work on this date
-			Global.WorkItemsOnSiteOnDate = Global.GetWorkItemsForSiteOnDate(Global.SelectedDate, OurSite.Slug);
+            AI_Busy.StartAnimating();
+            EnableUI(false);
+
+            // ----- initialize the view -----
 
             Task.Run(async () => 
             {
-                C_VitaUser LoggedInUser = Global.GetUserFromCacheNoFetch(Global.LoggedInUserId);
+				// get the list os signups for this shift
+                Global.WorkShiftSignUpsOnDate = SelectedShift.SignUps;
 
-                // make sure each workitem has the user name
-				foreach (C_WorkItem wi in Global.WorkItemsOnSiteOnDate)
+				// compute the number needed vs have
+				int numBasicHave = 0;
+				int numAdvHave = 0;
+
+				int numBasicNeeded = SelectedShift.NumBasicEFilers;
+				int numAdvNeeded = SelectedShift.NumAdvEFilers;
+
+				foreach (C_WorkShiftSignUp wi in Global.WorkShiftSignUpsOnDate)
 				{
-                    bool success = await Global.EnsureUserInCache(wi.UserId, LoggedInUser.Token);
+                    if (wi.User.Certification == E_Certification.Basic)
+						numBasicHave++;
+					else if (wi.User.Certification == E_Certification.Advanced)
+						numAdvHave++;
 				}
 
-				// find out how many are required
-				int dayOfWeek = (int)Global.SelectedDate.DayOfWeek;
-				int requiredVolunteers = OurSite.SiteCalendar[dayOfWeek].NumEFilers;
-				C_CalendarEntry SiteCalendarEntry = OurSite.GetCalendarExceptionForDateForSite(Global.SelectedDate);
-				if (SiteCalendarEntry != null)
-					requiredVolunteers = SiteCalendarEntry.NumEFilers;
+                // get the actual signup for each one so we can modify the number of hours worked
+                foreach(C_WorkShiftSignUp wssu in Global.WorkShiftSignUpsOnDate)
+                {
+                    if (wssu.TheSignUp == null)
+                    {
+                        C_SignUp su = await Global.FetchSignUpById(LoggedInUser.Token, wssu.User.UserId, wssu.id);
+                        wssu.TheSignUp = su;
+                    }
+                }
 
 				UIApplication.SharedApplication.InvokeOnMainThread(
                 new Action(() =>
                 {
-					// set up the view elements
-					L_SiteName.Text = OurSite.Name;
-                    L_Volunteers.Text = Global.WorkItemsOnSiteOnDate.Count.ToString() + " of " + requiredVolunteers.ToString();
+                    AI_Busy.StopAnimating();
+                    EnableUI(true);
 
-                    TableSource = new C_WorkItemsTableSourceSCVolunteers(Global, Global.WorkItemsOnSiteOnDate, this);
+					// set up the view elements
+                    L_BasicVolunteers.Text = numBasicHave.ToString() + " of " + numBasicNeeded.ToString();
+                    L_AdvancedVolunteers.Text = numAdvHave.ToString() + " of " + numAdvNeeded.ToString();
+
+                    TableSource = new C_WorkItemsTableSourceSCVolunteers(Global, Global.WorkShiftSignUpsOnDate, this);
                     TV_Volunteers.Source = TableSource;
 					TV_Volunteers.ReloadData();
-					B_ApproveHours.Enabled = (Global.WorkItemsOnSiteOnDate.Count != 0) && (Global.SelectedDate <= C_YMD.Now);
+                    B_ApproveHours.Enabled = (Global.WorkShiftSignUpsOnDate.Count != 0) && (SelectedDate <= C_YMD.Now);
 				}));
             });
         }
 
-        private async Task<bool> SaveChangedItems()
+        public override void ViewDidAppear(bool animated)
+        {
+			// set the standard background color
+			View.BackgroundColor = C_Common.StandardBackground;
+		}
+
+        private async Task<bool> SaveChangedItems(bool approveHours)
         {
             bool res = true;
             try
             {
-                foreach (C_WorkItem wi in Global.WorkItemsOnSiteOnDate)
+                foreach (C_WorkShiftSignUp wi in Global.WorkShiftSignUpsOnDate)
                 {
-                    wi.Approved = true;
-                    bool success = await wi.UpdateIntent(Global);
+                    if (approveHours)
+                        wi.TheSignUp.Approved = true;
+                    bool success = await wi.TheSignUp.UpdateSignUp(LoggedInUser.Token);
                     res &= success;
-                    wi.Dirty = false;
+                    wi.TheSignUp.Dirty = false;
                 }
             }
             catch {}
@@ -172,58 +196,31 @@ namespace vitavol
             return res;
         }
 
-        private async Task<bool> RebuildWorkItemsOnDateChange()
-        {
-            C_VitaUser LoggedInUser = Global.GetUserFromCacheNoFetch(Global.LoggedInUserId);
-
-            // find out how many Volunteers signed up to work on this date
-            Global.WorkItemsOnSiteOnDate = Global.GetWorkItemsForSiteOnDate(Global.SelectedDate, OurSite.Slug);
-
-			// build a dictionary of user id to user name
-			Dictionary<int, string> UserIdToUser = new Dictionary<int, string>();
-			foreach (C_WorkItem wi in Global.WorkItemsOnSiteOnDate)
-			{
-                bool success = await Global.EnsureUserInCache(wi.UserId, LoggedInUser.Token);
-			}
-
-            TableSource.WorkItems = Global.WorkItemsOnSiteOnDate;
-
-            return true;
-		}
-
-        private string FriendlyDate(NSDate nsd)
-        {
-            DateTime dt = C_NSDateConversions.NSDateToDateTime(nsd);
-			C_YMD ymd = new C_YMD(dt);
-            return ymd.ToString("dow mmm dd, yyyy");
-		}
-
         private void EnableUI(bool enable)
         {
             TV_Volunteers.UserInteractionEnabled = enable;
             B_Back.Enabled = enable;
 
-            B_ApproveHours.Enabled = enable && (Global.WorkItemsOnSiteOnDate.Count != 0) && (Global.SelectedDate <= C_YMD.Now);
+            B_ApproveHours.Enabled = enable && (Global.WorkShiftSignUpsOnDate.Count != 0) && (SelectedDate <= C_YMD.Now);
         }
 
 		public class C_WorkItemsTableSourceSCVolunteers : UITableViewSource
 		{
 			readonly C_Global Global;
-            public List<C_WorkItem> WorkItems;
+            public List<C_WorkShiftSignUp> SignUps;
 			const string CellIdentifier = "TableCell_SignUpsTableSourceSCVolunteers";
             readonly VC_SCVolunteers OurVC;
-            public bool DoNotDisplayValues;
 
-            public C_WorkItemsTableSourceSCVolunteers(C_Global pac, List<C_WorkItem> workitems, VC_SCVolunteers ourvc)
+            public C_WorkItemsTableSourceSCVolunteers(C_Global pac, List<C_WorkShiftSignUp> signups, VC_SCVolunteers ourvc)
 			{
 				Global = pac;
-                WorkItems = workitems;
+                SignUps = signups;
                 OurVC = ourvc;
 			}
 
 			public override nint RowsInSection(UITableView tableview, nint section)
 			{
-                int count = DoNotDisplayValues ? 0 : WorkItems.Count;
+				int count = SignUps.Count;
 
 				return count;
 			}
@@ -235,20 +232,19 @@ namespace vitavol
 				if (cell == null)
 					cell = new UITableViewCell(UITableViewCellStyle.Subtitle, CellIdentifier);
 
-                C_WorkItem signup = WorkItems[indexPath.Row];
-                C_VitaUser user = Global.GetUserFromCacheNoFetch(signup.UserId);
+                C_WorkShiftSignUp signup = SignUps[indexPath.Row];
 
-                string s_cert = user.Certification.ToString();
+                string s_cert = signup.User.Certification.ToString();
 
-                cell.TextLabel.Text = user.Name;
-                cell.DetailTextLabel.Text = "[" + user.Phone + "] " + s_cert + " - " + signup.Hours.ToString() + " hours";
+                cell.TextLabel.Text = signup.User.UserName;
+                cell.DetailTextLabel.Text = "[" + signup.User.Phone + "] " + signup.User.Certification.ToString() + " - " + signup.TheSignUp.Hours.ToString() + " hours";
 
 				return cell;
 			}
 
             public override void RowSelected(UITableView tableView, NSIndexPath indexPath)
             {
-				Global.VolunteerWorkItem = WorkItems[indexPath.Row];
+                Global.VolunteerWorkShiftSignUp = SignUps[indexPath.Row];
 
 				OurVC.PerformSegue("Segue_SCVolunteersToSCVolunteerHours", OurVC);
 			}

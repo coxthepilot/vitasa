@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 using System.Json;
 using System.Net;
 
@@ -21,56 +22,52 @@ namespace zsquared
         /// <param name="authToken">this is the cookie that allows us to access the backend</param>
         public static async Task<bool> RegisterNotificationToken(E_Platform platform, string deviceToken, string authToken)
         {
-			int retryCount = 0;
-			bool retry = false;
+            C_JsonBuilder jb = new C_JsonBuilder();
+            jb.Add(deviceToken, N_RegistrationToken);
+            jb.Add(platform.ToString().ToLower(), N_Platform);
+            string bodyjson = jb.ToString();
 
-			bool success = false;
-            do
+			string submiturl = "/notification_registrations";
+
+            string responseString = await Tools.Upload("POST", submiturl, bodyjson, authToken);
+
+            return responseString != null;
+		}
+    }
+
+    public class C_Notification
+    {
+        public int id;
+        public string Text;
+
+        public const string N_Id = "id";
+        public const string N_Text = "text";
+
+        public C_Notification(JsonValue j)
+        {
+            
+        }
+
+        public static async Task<List<C_Notification>> FetchAllNotifications(string token)
+        {
+            List<C_Notification> res = new List<C_Notification>();
+
+            string url = "/notifications/";
+
+            string responseString = await Tools.Download(url, token);
+
+            if (responseString != null)
             {
-                try
+                JsonValue responseJson = JsonValue.Parse(responseString);
+
+                foreach(JsonValue jv in responseJson)
                 {
-                    retry = false;
-                    string bodyjson = "{ "
-                        + "\"" + N_RegistrationToken + "\" : \"" + deviceToken + "\""
-                        + ","
-                        + "\"" + N_Platform + "\" : \"" + platform.ToString().ToLower() + "\""
-                        + "}";
-
-                    string submiturl = "/notification_registrations";
-                    WebClient wc = new WebClient()
-                    {
-                        BaseAddress = C_Vita.VitaCoreUrl
-                    };
-                    wc.Headers.Add(HttpRequestHeader.Cookie, authToken);
-                    wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
-                    wc.Headers.Add(HttpRequestHeader.Accept, "application/json");
-
-                    string responseString = await wc.UploadStringTaskAsync(submiturl, "POST", bodyjson);
-
-                    JsonValue responseJson = JsonValue.Parse(responseString);
-                    // what is the response?
-                    success = true;
-                }
-				catch (WebException we)
-				{
-					if (we.Status == WebExceptionStatus.ReceiveFailure)
-					{
-						success = false;
-						retry = retryCount < 3;
-						retryCount++;
-					}
-				}
-				catch (Exception e)
-                {
-#if DEBUG
-                    Console.WriteLine(e.Message);
-#endif
-                    success = false;
+                    C_Notification n = new C_Notification(jv);
+                    res.Add(n);
                 }
             }
-            while (retry);
 
-			return success;
-		}
+            return res;
+        }
     }
 }

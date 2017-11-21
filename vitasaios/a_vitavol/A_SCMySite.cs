@@ -127,7 +127,7 @@ namespace a_vitavol
 
             B_Closed.Click += async (sender, e) => 
             {
-				E_SiteStatus newStatus = E_SiteStatus.Closed;
+				E_ClientSiteStatus newStatus = E_ClientSiteStatus.Closed;
 
 				EnableUI(false);
                 AI_Busy.Show();
@@ -145,7 +145,7 @@ namespace a_vitavol
 
             B_Accepting.Click += async (sender, e) =>
 			{
-                E_SiteStatus newStatus = E_SiteStatus.Accepting;
+                E_ClientSiteStatus newStatus = E_ClientSiteStatus.Accepting;
 
 				EnableUI(false);
 				AI_Busy.Show();
@@ -163,7 +163,7 @@ namespace a_vitavol
 
             B_NearLimit.Click += async (sender, e) =>
 			{
-                E_SiteStatus newStatus = E_SiteStatus.NearLimit;
+                E_ClientSiteStatus newStatus = E_ClientSiteStatus.NearLimit;
 
 				EnableUI(false);
 				AI_Busy.Show();
@@ -181,7 +181,7 @@ namespace a_vitavol
 
             B_AtLimit.Click += async (sender, e) =>
 			{
-                E_SiteStatus newStatus = E_SiteStatus.NotAccepting;
+                E_ClientSiteStatus newStatus = E_ClientSiteStatus.NotAccepting;
 
 				EnableUI(false);
 				AI_Busy.Show();
@@ -217,7 +217,7 @@ namespace a_vitavol
             if (en)
             {
                 killChanges = true;
-                L_ClientStatus.Text = "Client status currently: " + C_VitaSite.N_SiteStatus[(int)OurSite.Status];
+                L_ClientStatus.Text = "Client status currently: " + C_VitaSite.N_ClientStatusNames[(int)OurSite.ClientStatus];
                 CB_DropOff.Checked = OurSite.SiteCapabilities.Contains(E_SiteCapabilities.DropOff);
                 CB_Express.Checked = OurSite.SiteCapabilities.Contains(E_SiteCapabilities.Express);
                 CB_MFT.Checked = OurSite.SiteCapabilities.Contains(E_SiteCapabilities.MFT);
@@ -232,10 +232,10 @@ namespace a_vitavol
             CB_Express.Enabled = en;
             CB_MFT.Enabled = en;
 
-            B_Closed.Enabled = en && (OurSite.Status != E_SiteStatus.Closed);
-            B_Accepting.Enabled = en && (OurSite.Status != E_SiteStatus.Accepting);
-            B_NearLimit.Enabled = en && (OurSite.Status != E_SiteStatus.NearLimit);
-            B_AtLimit.Enabled = en && (OurSite.Status != E_SiteStatus.NotAccepting);
+            B_Closed.Enabled = en && (OurSite.ClientStatus != E_ClientSiteStatus.Closed);
+            B_Accepting.Enabled = en && (OurSite.ClientStatus != E_ClientSiteStatus.Accepting);
+            B_NearLimit.Enabled = en && (OurSite.ClientStatus != E_ClientSiteStatus.NearLimit);
+            B_AtLimit.Enabled = en && (OurSite.ClientStatus != E_ClientSiteStatus.NotAccepting);
 		}
 
 		public override void OnBackPressed()

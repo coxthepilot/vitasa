@@ -32,14 +32,6 @@ namespace vitavol
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UIImageView IMG_ExceptionBase { get; set; }
-
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UIImageView IMG_ExceptionTop { get; set; }
-
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UIImageView IMG_SiteIsClosed { get; set; }
 
         [Outlet]
@@ -70,16 +62,6 @@ namespace vitavol
             if (CV_Grid != null) {
                 CV_Grid.Dispose ();
                 CV_Grid = null;
-            }
-
-            if (IMG_ExceptionBase != null) {
-                IMG_ExceptionBase.Dispose ();
-                IMG_ExceptionBase = null;
-            }
-
-            if (IMG_ExceptionTop != null) {
-                IMG_ExceptionTop.Dispose ();
-                IMG_ExceptionTop = null;
             }
 
             if (IMG_SiteIsClosed != null) {

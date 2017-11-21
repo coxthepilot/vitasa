@@ -7,11 +7,12 @@ namespace vitaadmin
     // The UIApplicationDelegate for the application. This class is responsible for launching the
     // User Interface of the application, as well as listening (and optionally responding) to application events from iOS.
     [Register("AppDelegate")]
-    public class AppDelegate : UIApplicationDelegate
+    public class AppDelegate : UIApplicationDelegate, I_Global
     {
         public C_Global Global;
+		private long _BytesReceived;
 
-        public override UIWindow Window
+		public override UIWindow Window
         {
             get;
             set;
@@ -27,13 +28,25 @@ namespace vitaadmin
 			// only needed once when the app starts; this lets us handle the certificate from abandonedfactory.net
 			C_Vita.SetupCertificateHandling();
 
-
-
-
 			return true;
         }
 
-        public override void OnResignActivation(UIApplication application)
+        public C_Global GetGlobal()
+        {
+            return Global;
+        }
+
+		public long GetBytesReceived()
+		{
+			return _BytesReceived;
+		}
+
+		public void UpdateBytesReceived(int v)
+		{
+			_BytesReceived += v;
+		}
+
+		public override void OnResignActivation(UIApplication application)
         {
             // Invoked when the application is about to move from active to inactive state.
             // This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) 

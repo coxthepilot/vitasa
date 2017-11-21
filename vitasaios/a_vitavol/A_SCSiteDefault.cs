@@ -48,7 +48,7 @@ namespace a_vitavol
             if (Global.SelectedDate == null)
                 Global.SelectedDate = C_YMD.Now;
 
-            OurSite = Global.GetSiteFromCacheNoFetch(Global.SelectedSiteSlug);
+            OurSite = Global.GetSiteNoFetch(Global.SelectedSiteSlug);
             LoggedInUser = Global.GetUserFromCacheNoFetch(Global.LoggedInUserId);
 
             // Set our view from the "main" layout resource

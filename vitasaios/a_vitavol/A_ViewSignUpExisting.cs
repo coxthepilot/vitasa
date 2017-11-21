@@ -82,7 +82,7 @@ namespace a_vitavol
                 AI_Busy.Show();
                 EnableUI(false);
 
-                bool success = await Global.VolunteerWorkItem.RemoveIntent(Global);
+                bool success = await Global.VolunteerSignUp.RemoveIntent(Global);
 
                 AI_Busy.Cancel();
                 EnableUI(true);
@@ -103,13 +103,13 @@ namespace a_vitavol
 
             B_SaveHours.Click += async (sender, e) => 
             {
-				try { Global.VolunteerWorkItem.Hours = Convert.ToSingle(TB_Hours.Text); }
+				try { Global.VolunteerSignUp.Hours = Convert.ToSingle(TB_Hours.Text); }
 				catch { }
 
                 AI_Busy.Show();
                 EnableUI(false);
 
-				bool success = await Global.VolunteerWorkItem.UpdateIntent(Global);
+				bool success = await Global.VolunteerSignUp.UpdateSignUp(Global);
 
                 AI_Busy.Cancel();
                 EnableUI(true);
@@ -128,11 +128,11 @@ namespace a_vitavol
 
 			Task.Run(async () => 
             {
-				Global.WorkItemsOnSiteOnDate = Global.GetWorkItemsForSiteOnDate(Global.SelectedDate, Global.SelectedSiteSlug);
+				Global.SignUpsOnSiteOnDate = Global.GetSignUpsForSiteOnDate(Global.SelectedDate, Global.SelectedSiteSlug);
 
 				UserNames = new List<string>();
 
-				foreach (C_WorkItem wi in Global.WorkItemsOnSiteOnDate)
+				foreach (C_SignUp wi in Global.SignUpsOnSiteOnDate)
 				{
 					C_VitaUser user = await Global.GetUserFromCache(wi.UserId);
                     if (!UserNames.Contains(user.Name))
@@ -158,9 +158,9 @@ namespace a_vitavol
                     AI_Busy.Cancel();
                     EnableUI(true);
 
-                    TB_Hours.Text = Global.VolunteerWorkItem.Hours.ToString();
-                    B_SaveHours.Enabled = !Global.VolunteerWorkItem.Approved;
-                    TB_Hours.Enabled = !Global.VolunteerWorkItem.Approved;
+                    TB_Hours.Text = Global.VolunteerSignUp.Hours.ToString();
+                    B_SaveHours.Enabled = !Global.VolunteerSignUp.Approved;
+                    TB_Hours.Enabled = !Global.VolunteerSignUp.Approved;
 
                     LV_OtherVolunteers.Adapter = new ArrayAdapter<String>(this, Android.Resource.Layout.SimpleListItem1, UserNames);
 
@@ -177,7 +177,7 @@ namespace a_vitavol
         private void EnableUI(bool en)
         {
             B_SaveHours.Enabled = en;
-            B_RemoveSignup.Enabled = en && !Global.VolunteerWorkItem.Approved;
+            B_RemoveSignup.Enabled = en && !Global.VolunteerSignUp.Approved;
             B_GetDirections.Enabled = en;
 
             TB_Hours.Enabled = en;

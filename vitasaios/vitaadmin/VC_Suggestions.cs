@@ -56,7 +56,7 @@ namespace vitaadmin
 
             Task.Run(async () => 
             {
-                Suggestions = await C_Suggestion.GetAllSuggestions(LoggedInUser.Token);
+                Suggestions = await C_Suggestion.FetchAllSuggestions(LoggedInUser.Token);
 
 				UIApplication.SharedApplication.InvokeOnMainThread(
 				new Action(() =>

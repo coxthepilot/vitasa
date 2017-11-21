@@ -52,7 +52,7 @@ namespace a_vitavol
             SetContentView(Resource.Layout.ViewSignUpNew);
 
 			LoggedInUser = Global.GetUserFromCacheNoFetch(Global.LoggedInUserId);
-			SelectedSite = Global.GetSiteFromCacheNoFetch(Global.SelectedSiteSlug);
+			SelectedSite = Global.GetSiteNoFetch(Global.SelectedSiteSlug);
 
             LV_Others = FindViewById<ListView>(Resource.Id.LV_ViewSignUpNew_OtherVolunteers);
 			B_SignMeUp = FindViewById<Button>(Resource.Id.B_ViewSignUpNew_SignMeUp);
@@ -80,9 +80,9 @@ namespace a_vitavol
                 AI_Busy.Show();
 				EnableUI(false);
 
-				C_WorkItem wi = new C_WorkItem(Global.SelectedSiteSlug, Global.SelectedDate, LoggedInUser.id, 0);
+				C_SignUp wi = new C_SignUp(Global.SelectedSiteSlug, Global.SelectedDate, LoggedInUser.id, 0);
 
-				bool success = await wi.AddIntent(Global, LoggedInUser.id);
+				bool success = await wi.AddSignUp(Global, LoggedInUser.id);
 
                 AI_Busy.Cancel();
 				EnableUI(true);
@@ -169,9 +169,9 @@ namespace a_vitavol
 			{
 				// Build a list of user names to display. Keep watch for our user in the list
 				UserNames = new List<string>();
-				C_WorkItem ourUserWorkItem = null;
+				C_SignUp ourUserWorkItem = null;
 
-				foreach (C_WorkItem wi in Global.WorkItemsOnSiteOnDate)
+				foreach (C_SignUp wi in Global.SignUpsOnSiteOnDate)
 				{
 					C_VitaUser user = await Global.GetUserFromCache(wi.UserId);
 					if (!UserNames.Contains(user.Name))
