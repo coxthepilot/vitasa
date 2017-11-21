@@ -37,12 +37,11 @@ namespace vitavol
             {
 				LoggedInUser.Name = TB_Name.Text;
 				LoggedInUser.Phone = TB_Phone.Text;
-                LoggedInUser.Certification = (SC_Certification.SelectedSegment == 0) ? E_Certification.Basic : E_Certification.Advanced;
 
                 AI_Busy.StartAnimating();
 				EnableUI(false);
 
-				bool success = await LoggedInUser.UpdateUserProfile(LoggedInUser.Token);
+                bool success = await LoggedInUser.UpdateUserProfile();
 
                 AI_Busy.StopAnimating();
 				EnableUI(true);
@@ -65,7 +64,6 @@ namespace vitavol
             TB_Name.Text = LoggedInUser.Name;
             TB_Email.Text = LoggedInUser.Email;
             TB_Phone.Text = LoggedInUser.Phone;
-            SC_Certification.SelectedSegment = (LoggedInUser.Certification == E_Certification.Basic) ? 0 : 1;
 		}
 
         private void EnableUI(bool en)

@@ -35,6 +35,13 @@ namespace zsquared
 			return date;
 		}
 
+        public static NSDate BuildNSDateFromDate(C_YMD ymd)
+        {
+            NSDate res = DateTimeToNSDate(ymd.ToDateTime());
+
+            return res;
+        }
+
 		public static NSDate BuildNSDateFromTime(string time)
 		{
 			NSDate res = null;

@@ -10,18 +10,11 @@ namespace vitavol
 {
     public partial class VC_SCSiteCalendar : UIViewController
     {
-        // Input
-        //   LoggedInUser
-        //   SelectedDate
-        //   SelectedSite
-        //   SelectedDayOfWeek
-
 		C_Global Global;
         C_DateState[] DateState;
-        C_DayState[] DayState;
 		C_CVHelper CollectionViewHelper;
 
-        C_VitaSite OurSite;
+        C_VitaSite SelectedSite;
 
 		public static UIColor Color_OpenDefault = UIColor.FromRGB(244, 167, 45);
 		//public static UIColor Color_NoStaffingNeeds = UIColor.FromRGB(67, 202, 67);
@@ -41,7 +34,7 @@ namespace vitavol
 			if (Global.CalendarDate == null)
 				Global.CalendarDate = C_YMD.Now;
 
-            OurSite = Global.GetSiteFromCacheNoFetch(Global.SelectedSiteSlug);
+            SelectedSite = Global.GetSiteNoFetch(Global.SelectedSiteSlug);
 
             B_Back.TouchUpInside += (sender, e) => 
             {
@@ -57,10 +50,9 @@ namespace vitavol
 
 				L_MonthYear.Text = Global.CalendarDate.ToString("mmm-yyyy");
 
-				DateState = BuildDateStateArray(Global.CalendarDate, OurSite);
-				DayState = BuildDayStateArray(OurSite);
+				DateState = BuildDateStateArray(Global.CalendarDate, SelectedSite);
 
-                CollectionViewHelper.SetDayState(DateState, DayState);
+                CollectionViewHelper.SetDayState(DateState, null);
 
 				CV_Grid.ReloadData();
 			};
@@ -74,36 +66,26 @@ namespace vitavol
 
 				L_MonthYear.Text = Global.CalendarDate.ToString("mmm-yyyy");
 
-				DateState = BuildDateStateArray(Global.CalendarDate, OurSite);
-				DayState = BuildDayStateArray(OurSite);
+				DateState = BuildDateStateArray(Global.CalendarDate, SelectedSite);
 
-				CollectionViewHelper.SetDayState(DateState, DayState);
+				CollectionViewHelper.SetDayState(DateState, null);
 
 				CV_Grid.ReloadData();
 			};
 
             IMG_SiteIsClosed.BackgroundColor = Color_ClosedDefault;
             IMG_SiteIsOpen.BackgroundColor = Color_OpenDefault;
-            IMG_ExceptionBase.BackgroundColor = UIColor.Black;
-            IMG_ExceptionTop.BackgroundColor = UIColor.White;
 
-            DateState = BuildDateStateArray(Global.CalendarDate, OurSite);
-            DayState = BuildDayStateArray(OurSite);
+            DateState = BuildDateStateArray(Global.CalendarDate, SelectedSite);
 
 			L_MonthYear.Text = Global.CalendarDate.ToString("mmm-yyyy");
 
-            CollectionViewHelper = new C_CVHelper(UIColor.FromRGB(240, 240, 240), CV_Grid, DateState, DayState, false);
+            CollectionViewHelper = new C_CVHelper(UIColor.FromRGB(240, 240, 240), CV_Grid, DateState, null, false);
 			CollectionViewHelper.DateTouched += (sender, e) =>
 			{
 				C_DateTouchedEventArgs ea = e;
 				Global.SelectedDate = ea.Date;
 				PerformSegue("Segue_SCSiteCalendarToSCSiteOnDate", this);
-			};
-            CollectionViewHelper.DayOfWeekTouched += (sender, e) =>
-			{
-                C_DayOfWeekTouchedEventArgs ea = e;
-                Global.SelectedDayOfWeek = ea.DayOfWeek;
-				PerformSegue("Segue_SCSiteCalendarToSCSiteDefaults", this);
 			};
 		}
 
@@ -133,74 +115,50 @@ namespace vitavol
 
 				int ourDayOfWeek = (int)ourDate.DayOfWeek;
 
-				C_SiteCalendarEntry sce = site.SiteCalendar[ourDayOfWeek];
-				bool defOpen = sce.OpenTime != sce.CloseTime;
-                if (defOpen)
+                C_CalendarEntry sce = site.GetCalendarEntryForDate(ourDate);
+                if (sce == null)
                 {
-                    dayState.NormalColor = Color_OpenDefault;
-					dayState.HighlightedColor = Color_OpenDefault;
-                    dayState.TextColor = UIColor.Black;
+                    dayState.NormalColor = C_Common.StandardBackground;
+					dayState.TextColor = UIColor.Black;
+                    dayState.CanClick = false;
+				}
+                else if (!sce.SiteIsOpen)
+                {
+					dayState.NormalColor = Color_ClosedDefault;
+					dayState.HighlightedColor = Color_ClosedDefault;
+					dayState.TextColor = UIColor.Black;
 				}
                 else
                 {
-                    dayState.NormalColor = Color_ClosedDefault;
-					dayState.HighlightedColor = Color_ClosedDefault;
-                    dayState.TextColor = UIColor.Black;
+					dayState.NormalColor = Color_OpenDefault;
+					dayState.HighlightedColor = Color_OpenDefault;
+					dayState.TextColor = UIColor.Black;
 				}
 
-				// see if this date has an exception
-				C_CalendarEntry siteExceptionOnDate = site.GetCalendarExceptionForDateForSite(ourDate);
-                if (siteExceptionOnDate != null)
-                {
-                    if (!siteExceptionOnDate.IsClosed)
-                    {
-                        dayState.ShowBox = true;
-						dayState.NormalColor = Color_OpenDefault;
-						dayState.HighlightedColor = Color_OpenDefault;
-						dayState.TextColor = UIColor.Black;
-					}
-                    else
-                    {
-                        dayState.ShowBox = true;
-						dayState.NormalColor = Color_ClosedDefault;
-						dayState.HighlightedColor = Color_ClosedDefault;
-						dayState.TextColor = UIColor.Black;
-					}
-                }
-
-				// todo: add a check for out of season
+				//// see if this date has an exception
+				//C_CalendarEntry siteExceptionOnDate = site.GetCalendarExceptionForDateForSite(ourDate);
+     //           if (siteExceptionOnDate != null)
+     //           {
+     //               if (siteExceptionOnDate.SiteIsOpen)
+     //               {
+     //                   dayState.ShowBox = true;
+					//	dayState.NormalColor = Color_OpenDefault;
+					//	dayState.HighlightedColor = Color_OpenDefault;
+					//	dayState.TextColor = UIColor.Black;
+					//}
+     //               else
+     //               {
+     //                   dayState.ShowBox = true;
+					//	dayState.NormalColor = Color_ClosedDefault;
+					//	dayState.HighlightedColor = Color_ClosedDefault;
+					//	dayState.TextColor = UIColor.Black;
+					//}
+                //}
 
 				DateState[day - 1] = dayState;
 			}
 
             return DateState;
-		}
-
-		public C_DayState[] BuildDayStateArray(C_VitaSite site)
-        {
-            C_DayState[] DayOfWeekState = new C_DayState[7];
-			for (int ix = 0; ix != 7; ix++)
-			{
-				C_SiteCalendarEntry sce = site.SiteCalendar[ix];
-				bool isOpen = sce.OpenTime != sce.CloseTime;
-
-                C_DayState dayState = new C_DayState(ix);
-                if (isOpen)
-                {
-					dayState.NormalColor = Color_OpenDefault;
-					dayState.HighlightedColor = Color_OpenDefault;
-					dayState.TextColor = UIColor.White;
-				}
-                else
-                {
-					dayState.NormalColor = Color_ClosedDefault;
-					dayState.HighlightedColor = Color_ClosedDefault;
-					dayState.TextColor = UIColor.White;
-				}
-                DayOfWeekState[ix] = dayState;
-			}
-
-            return DayOfWeekState;
 		}
     }
 }

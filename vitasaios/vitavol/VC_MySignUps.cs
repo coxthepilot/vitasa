@@ -37,25 +37,22 @@ namespace vitavol
 			B_Back.TouchUpInside += (sender, e) =>
                 PerformSegue("Segue_MySignUpsToVolunteerOptions", this);
 
-            // get all workintents for this user
-            List<C_WorkItem> OurWorkItems = Global.GetWorkItemsForUser(Global.LoggedInUserId);
-
-            // make sure we only look at the current items (today and beyond)
-            C_YMD today = C_YMD.Now;
-            var ou = OurWorkItems.Where(wi => wi.Date >= today);
-            List<C_WorkItem> OurWorkItems2 = ou.ToList();
-            // sort to make the list nicer
-            OurWorkItems2.Sort(C_WorkItem.CompareByDateAscending);
-
             AI_Busy.StartAnimating();
             EnableUI(false);
 
-            // make sure the site cache has the details on the sites listed in our workitems
             Task.Run(async () => 
             {
-                bool success = true;
-                foreach(C_WorkItem wi in OurWorkItems2)
-                    success &= await Global.EnsureSiteInCache(wi.SiteSlug);
+				// get all workintents for this user
+				List<C_SignUp> OurSignUps = Global.GetSignUpsForUser(Global.LoggedInUserId);
+
+				// make sure we only look at the current items (today and beyond)
+				C_YMD today = C_YMD.Now;
+                var ou = OurSignUps.Where(wi => wi.Date >= today);
+				List<C_SignUp> OurWorkItems2 = ou.ToList();
+				// sort to make the list nicer
+				OurWorkItems2.Sort(C_SignUp.CompareByDateAscending);
+
+				bool succ1 = await Global.EnsureShiftsInCacheForSignUps(LoggedInUser.Token, OurSignUps);
 
 				UIApplication.SharedApplication.InvokeOnMainThread(
                 new Action(() =>
@@ -63,7 +60,6 @@ namespace vitavol
                     AI_Busy.StopAnimating();
                     EnableUI(true);
 
-                	Global.ViewCameFrom = E_ViewCameFrom.MySignUps;
                 	C_MySignUpsTableSourceWorkIntents ts = new C_MySignUpsTableSourceWorkIntents(Global, OurWorkItems2);
                 	TV_SignUps.Source = ts;
                 	TV_SignUps.Delegate = new C_MySignUpsTableDelegateWorkIntents(Global, this, ts);
@@ -86,7 +82,7 @@ namespace vitavol
         }
 
         /// <summary>
-        /// Class is the table view delegate to handle slide, aka delete of signup
+        /// Class is the table view delegate to handle slide, aka delete of signup; and the touch of a row
         /// </summary>
         public class C_MySignUpsTableDelegateWorkIntents : UITableViewDelegate
         {
@@ -106,13 +102,40 @@ namespace vitavol
                 UITableViewRowAction hiButton = UITableViewRowAction.Create(UITableViewRowActionStyle.Default, "Remove",
                 async delegate
                 {
-                    C_WorkItem intentToRemove = TableSource.OurWorkItems[indexPath.Row];
+                    C_SignUp signupToRemove = TableSource.OurSignUps[indexPath.Row];
 
                     OurVC.AI_Busy.StartAnimating();
                     OurVC.EnableUI(false);
 
-                    bool success = await intentToRemove.RemoveIntent(Global);
-                    TableSource.OurWorkItems.Remove(intentToRemove);
+                    C_VitaUser loggedInUser = Global.GetUserFromCacheNoFetch(Global.LoggedInUserId);
+					C_VitaSite site = Global.GetSiteNoFetch(signupToRemove.SiteSlug);
+
+					bool success = await signupToRemove.RemoveIntent(loggedInUser.Token);
+
+                    Global.RemoveFromSignUps(signupToRemove);
+                    Global.AdjustSiteSchedueCacheForRemovedSignUp(signupToRemove, loggedInUser, site);
+                    // remove from the calendar entry, shifts, signups
+                    C_CalendarEntry calEntry = site.GetCalendarEntryForDate(signupToRemove.Date);
+					foreach(C_WorkShift ws in calEntry.WorkShifts)
+                    {
+						C_WorkShiftSignUp str = null;
+						foreach(C_WorkShiftSignUp wssu in ws.SignUps)
+                        {
+                            if (wssu.User.UserId == Global.LoggedInUserId)
+                            {
+                                str = wssu;
+                                break;
+                            }
+                        }
+                        if (str != null)
+                        {
+                            ws.SignUps.Remove(str);
+
+                            break;
+                        }
+                    }
+
+                    TableSource.OurSignUps.Remove(signupToRemove);
 
                     OurVC.EnableUI(true);
                     OurVC.AI_Busy.StopAnimating();
@@ -126,15 +149,18 @@ namespace vitavol
             public override void RowSelected(UITableView tableView, NSIndexPath indexPath)
             {
                 // identify the specific signup
-                C_WorkItem SelectedSignUp = TableSource.OurWorkItems[indexPath.Row];
+                Global.SelectedSignUp = TableSource.OurSignUps[indexPath.Row];
 
 				// make sure the calendar starts on today if we get there
 				Global.CalendarDate = null;
 
                 // these are required by VC_SignUp
                 Global.ViewCameFrom = E_ViewCameFrom.MySignUps;
-                Global.SelectedDate = SelectedSignUp.Date;
-                Global.SelectedSiteSlug = SelectedSignUp.SiteSlug;
+                Global.SelectedDate = Global.SelectedSignUp.Date;
+                Global.SelectedSiteSlug = Global.SelectedSignUp.SiteSlug;
+
+				C_WorkShift ws = Global.GetWorkShiftById(Global.SelectedSignUp.ShiftId);
+                Global.SelectedShift = ws;
 
 				OurVC.PerformSegue("Segue_MySignUpsToSignUp", OurVC);
 			}
@@ -143,20 +169,20 @@ namespace vitavol
 		public class C_MySignUpsTableSourceWorkIntents : UITableViewSource
 		{
 			const string CellIdentifier = "TableCell_SignUpsTableSourceMySignUps";
-            public List<C_WorkItem> OurWorkItems;
+            public List<C_SignUp> OurSignUps;
             readonly C_Global Global;
 
-            public C_MySignUpsTableSourceWorkIntents(C_Global global, List<C_WorkItem> ourWorkItems)
+            public C_MySignUpsTableSourceWorkIntents(C_Global global, List<C_SignUp> ourWorkItems)
 			{
                 Global = global;
-                OurWorkItems = ourWorkItems;
+                OurSignUps = ourWorkItems;
 			}
 
 			public override nint RowsInSection(UITableView tableview, nint section)
 			{
 				int count = 0;
-				if (OurWorkItems != null)
-					count = OurWorkItems.Count;
+				if (OurSignUps != null)
+					count = OurSignUps.Count;
 				return count;
 			}
 
@@ -167,16 +193,12 @@ namespace vitavol
 				if (cell == null)
 					cell = new UITableViewCell(UITableViewCellStyle.Subtitle, CellIdentifier);
 
-				C_WorkItem wi = OurWorkItems[indexPath.Row];
+				C_SignUp wi = OurSignUps[indexPath.Row];
+                C_WorkShift ws = Global.GetWorkShiftById(wi.ShiftId);
 
-                C_VitaSite oursite = Global.GetSiteFromCacheNoFetch(wi.SiteSlug);
-
-                //C_VitaSite oursite = C_VitaSite.GetSiteBySlug(wi.SiteSlug, AllSites);
-                C_HMS[] openclose = oursite.GetOpenCloseTimeOnDate(wi.Date);
-
-                cell.TextLabel.Text = oursite.Name;
+                cell.TextLabel.Text = wi.SiteName;
                 cell.DetailTextLabel.Text = wi.Date.ToString() 
-                    + " [" + openclose[0].ToString("hh:mm p").Trim() + " - " + openclose[1].ToString("hh:mm p") + "]";
+                    + " [" + ws.OpenTime.ToString("hh:mm p").Trim() + " - " + ws.CloseTime.ToString("hh:mm p") + "]";
 
 				return cell;
 			}

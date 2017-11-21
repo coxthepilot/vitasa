@@ -20,7 +20,11 @@ namespace vitavol
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UITextView TB_About { get; set; }
+        UIKit.UILabel B_BytesReceived { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UILabel L_Version { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
@@ -33,9 +37,14 @@ namespace vitavol
                 B_Back = null;
             }
 
-            if (TB_About != null) {
-                TB_About.Dispose ();
-                TB_About = null;
+            if (B_BytesReceived != null) {
+                B_BytesReceived.Dispose ();
+                B_BytesReceived = null;
+            }
+
+            if (L_Version != null) {
+                L_Version.Dispose ();
+                L_Version = null;
             }
 
             if (WV_About != null) {

@@ -160,18 +160,18 @@ namespace vitasa
 				}
 				else
 				{
-					switch (ourSite.Status)
+					switch (ourSite.ClientStatus)
 					{
-						case E_SiteStatus.Accepting:
+						case E_ClientSiteStatus.Accepting:
 							((MKPinAnnotationView)pinView).PinTintColor = UIColor.Green;
 							break;
-						case E_SiteStatus.Closed:
+						case E_ClientSiteStatus.Closed:
 							((MKPinAnnotationView)pinView).PinTintColor = UIColor.Black;
 							break;
-						case E_SiteStatus.NearLimit:
+						case E_ClientSiteStatus.NearLimit:
 							((MKPinAnnotationView)pinView).PinTintColor = UIColor.Yellow;
 							break;
-						case E_SiteStatus.NotAccepting:
+						case E_ClientSiteStatus.NotAccepting:
 							((MKPinAnnotationView)pinView).PinTintColor = UIColor.Red;
 							break;
 					}

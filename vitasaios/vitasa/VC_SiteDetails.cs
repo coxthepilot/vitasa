@@ -32,7 +32,7 @@ namespace vitasa
 			AppDelegate myAppDelegate = (AppDelegate)UIApplication.SharedApplication.Delegate;
             Global = myAppDelegate.Global;
 
-            SelectedSite = Global.GetSiteFromCacheNoFetch(Global.SelectedSiteSlug);
+            SelectedSite = Global.GetSiteNoFetch(Global.SelectedSiteSlug);
 
 			// connect action code to the Back button
 			B_Back.TouchUpInside += (object sender, EventArgs e) =>
@@ -113,21 +113,21 @@ namespace vitasa
                 + ", " + SelectedSite.State 
                 + " " + SelectedSite.Zip;
             B_GetDirections.SetTitle(AppResources.Main_B_Directions, UIControlState.Normal);
-            switch (SelectedSite.Status)
+            switch (SelectedSite.ClientStatus)
             {
-                case E_SiteStatus.Accepting:
+                case E_ClientSiteStatus.Accepting:
                     I_SiteStatus.Image = UIImage.FromBundle("greenstatus.jpg");
                     L_SiteStatus.Text = AppResources.Main_N_Accepting;
                     break;
-                case E_SiteStatus.Closed:
+                case E_ClientSiteStatus.Closed:
                     I_SiteStatus.Image = UIImage.FromBundle("blackstatus.jpg");
                     L_SiteStatus.Text = AppResources.Main_N_Closed;
                     break;
-                case E_SiteStatus.NearLimit:
+                case E_ClientSiteStatus.NearLimit:
                     I_SiteStatus.Image = UIImage.FromBundle("yellowstatus.jpg");
                     L_SiteStatus.Text = AppResources.Main_N_NearLimit;
                     break;
-                case E_SiteStatus.NotAccepting:
+                case E_ClientSiteStatus.NotAccepting:
                     I_SiteStatus.Image = UIImage.FromBundle("redstatus.jpg");
                     L_SiteStatus.Text = AppResources.Main_N_At_Limit;
                     break;
@@ -173,7 +173,7 @@ namespace vitasa
 				if (pinView == null)
 					pinView = new MKPinAnnotationView(annotation, pId);
 
-                C_VitaSite ourSite = Global.GetSiteFromCacheByNameNoFetch(thisWhich);
+                C_VitaSite ourSite = Global.GetSiteByNameNoFetch(thisWhich);
 
 				if (ourSite == null)
 				{
@@ -181,18 +181,18 @@ namespace vitasa
 				}
 				else
 				{
-					switch (ourSite.Status)
+					switch (ourSite.ClientStatus)
 					{
-						case E_SiteStatus.Accepting:
+						case E_ClientSiteStatus.Accepting:
 							((MKPinAnnotationView)pinView).PinTintColor = UIColor.Green;
 							break;
-						case E_SiteStatus.Closed:
+						case E_ClientSiteStatus.Closed:
 							((MKPinAnnotationView)pinView).PinTintColor = UIColor.Black;
 							break;
-						case E_SiteStatus.NearLimit:
+						case E_ClientSiteStatus.NearLimit:
 							((MKPinAnnotationView)pinView).PinTintColor = UIColor.Yellow;
 							break;
-						case E_SiteStatus.NotAccepting:
+						case E_ClientSiteStatus.NotAccepting:
 							((MKPinAnnotationView)pinView).PinTintColor = UIColor.Red;
 							break;
 					}

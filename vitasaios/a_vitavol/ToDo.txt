@@ -1,25 +1,27 @@
 ﻿----- Issues -----
 
+
 Android
-* test notifications from AWS SNS
+* add support for shifts
+* use updated icon
+* version number
 * on notification, the graphic is a tiny slice from the middle [defer]
 * sort sites based on distance to user [defer]
 
 
 iOS: 
-* add support for shifts
-* use updated icon
-* test notifications from AWS SNS
-* vitavol map should use color for needs: green (no needs), red (1 or more needed)
-* NSLocationWhenInUseUsageDescription with a string explaning use of location in the app [CND]
+* version number
 
-All:
-* set value for season start and end for all sites
-
+vitaadmin:
+* add user management
+* add ability to send notifications
+* hours summary (with export)
+* finish installing site calendar and shifts on sites
+* tool to set basic/adv number on shift
 
 Chris
-* Verify notifications re Apple and Google (firebase) [he will poke me when ready to test]
-* needs help with the web site design
+* error 500 on shift update to site closed on a date
+* web ui
 
 
 Future
@@ -30,6 +32,24 @@ Future
 
 
 Completed
+* change to shift values, not updated in siteschedule? [done]
+* in a series of logins, create signup, the delete, re-login, still shows in the list; on delete
+  remove from signups in global; and from site schedule [done]
+* fix app name on the screen [done]
+* all I/O through Download and Upload [done]
+* on add signup, modify any stored site schedule [done]
+* updated icon [done]
+* Make Apple notifications work [done]
+* test notifications from AWS SNS [done]
+* NSLocationWhenInUseUsageDescription with a string explaning use of location in the app [CND]
+* add support for shifts [done]
+* [vitavol, vol and sc] Needs list of signups (with userid, name, cert) on a given shift [done]
+* [vitavol, sc] way to get list of signups for a site on a date? [done]
+* [vitavol] Get on /schedule gets 500 [done]
+* [vitavol, vitaadmin] Get on /signup/?user={id} gets error 500; is this the correct call? or /users/{id}/signups/ (which gets 404)? [done]
+* [vitavol] Date not being returned in signup; was sent with post, but not getting returned [done]
+* set value for season start and end for all sites [done]
+* vitavol map should use color for needs: green (no needs), red (1 or more needed) [done]
 * release version with distribution certificate [later][done]
 * [DateTime, iso format] Need Season fields added to Site [done]
 * need Season in API /get/site [in progress from Chris] [done]

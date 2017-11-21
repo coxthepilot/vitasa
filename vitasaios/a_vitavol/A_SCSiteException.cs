@@ -56,7 +56,7 @@ namespace a_vitavol
             if (Global.SelectedDate == null)
                 Global.SelectedDate = C_YMD.Now;
 
-            OurSite = Global.GetSiteFromCacheNoFetch(Global.SelectedSiteSlug);
+            OurSite = Global.GetSiteNoFetch(Global.SelectedSiteSlug);
             LoggedInUser = Global.GetUserFromCacheNoFetch(Global.LoggedInUserId);
 
             // Set our view from the "main" layout resource
@@ -180,10 +180,10 @@ namespace a_vitavol
                     {
                         if (NewEntry)
                             // create new calendar entry
-                            success = await OurSite.CreateCalendarException(LoggedInUser.Token, OurCalendarEntry);
+                            success = await OurSite.CreateCalendarEntry(LoggedInUser.Token, OurCalendarEntry);
                         else
                             // update the entry
-                            success = await OurSite.UpdateCalendarException(LoggedInUser.Token, OurCalendarEntry);
+                            success = await OurSite.UpdateCalendarEntry(LoggedInUser.Token, OurCalendarEntry);
                     }
                     catch
                     {
@@ -227,7 +227,7 @@ namespace a_vitavol
                         bool success = false;
                         try
                         {
-                            success = await OurSite.RemoveCalendarException(LoggedInUser.Token, OurCalendarEntry);
+                            success = await OurSite.RemoveCalendarEntry(LoggedInUser.Token, OurCalendarEntry);
                         }
                         catch
                         {

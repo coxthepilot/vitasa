@@ -40,7 +40,7 @@ namespace zsquared
 				SiteName = Tools.JsonProcessString(j[N_SiteName], SiteName);
 		}
 
-		public C_NotificationEvent(C_WorkItem wi)
+		public C_NotificationEvent(C_SignUp wi)
 		{
 			WorkItemId = wi.id;
 			NotificationIssued = false;

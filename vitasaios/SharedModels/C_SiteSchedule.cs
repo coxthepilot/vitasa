@@ -7,123 +7,43 @@ using System.Linq;
 
 namespace zsquared
 {
+    /// <summary>
+    /// This is the data structure for the specialty API call to get a summary of signups.
+    /// </summary>
     public class C_SiteSchedule
     {
         public C_YMD Date;
+        public bool SiteIsOpen;
         public string SiteSlug;
-        public int EFilersNeeded;
-        public int EFilersSignedUp;
-        public bool IsClosed;
-        public C_HMS OpenTime;
-        public C_HMS CloseTime;
+        public List<C_SiteScheduleShift> Shifts;
+
+        public const string N_IsClosed = "is_closed";
+        public const string N_Shifts = "shifts";
+        public const string N_Slug = "slug";
+
         public bool LoggedInUserSignedUp;
         public DateTime SampleTime;
 
-        public static readonly string N_Date = "date";
-        public static readonly string N_SiteSlug = "slug";
-        public static readonly string N_EFilersNeeded = "efilers_needed";
-        public static readonly string N_EFilersSignedUp = "efilers_signed_up";
-        public static readonly string N_IsClosed = "is_closed";
-        public static readonly string N_OpenTime = "open";
-        public static readonly string N_CloseTime = "close";
-        public static readonly string N_LoggedInUserSignedUp = "this_user_signup";
-        public static readonly string N_SampleTime = "sampletime";
-
         public C_SiteSchedule(JsonValue j, C_YMD date)
         {
-            if (!(j is JsonObject))
-                throw new ApplicationException("we can only work with an object");
-
-            if (date != null)
-                Date = date;
-            else if (j.ContainsKey(N_Date))
-                Date = Tools.JsonProcessDate(j[N_Date], Date);
-
-            if (j.ContainsKey(N_SiteSlug))
-                SiteSlug = Tools.JsonProcessString(j[N_SiteSlug], SiteSlug);
-
-            if (j.ContainsKey(N_EFilersNeeded))
-                EFilersNeeded = Tools.JsonProcessInt(j[N_EFilersNeeded], EFilersNeeded);
-
-            if (j.ContainsKey(N_EFilersSignedUp))
-                EFilersSignedUp = Tools.JsonProcessInt(j[N_EFilersSignedUp], EFilersSignedUp);
+            Date = date;
 
             if (j.ContainsKey(N_IsClosed))
-                IsClosed = Tools.JsonProcessBool(j[N_IsClosed], IsClosed);
+                SiteIsOpen = !Tools.JsonProcessBool(j[N_IsClosed], !SiteIsOpen);
 
-            if (j.ContainsKey(N_OpenTime))
-                OpenTime = Tools.JsonProcessTime(j[N_OpenTime], OpenTime);
+            if (j.ContainsKey(N_Slug))
+                SiteSlug = Tools.JsonProcessString(j[N_Slug], SiteSlug);
 
-            if (j.ContainsKey(N_CloseTime))
-                CloseTime = Tools.JsonProcessTime(j[N_CloseTime], CloseTime);
-
-            if (j.ContainsKey(N_LoggedInUserSignedUp))
-                LoggedInUserSignedUp = Tools.JsonProcessBool(j[N_LoggedInUserSignedUp], LoggedInUserSignedUp);
-
-            if (j.ContainsKey(N_SampleTime))
-                SampleTime = DateTime.Parse(Tools.JsonProcessString(j[N_SampleTime], null), null, System.Globalization.DateTimeStyles.RoundtripKind);
-        }
-
-        public override bool Equals(System.Object obj)
-        {
-            if (obj == null)
-                return false;
-
-            C_SiteSchedule g = obj as C_SiteSchedule;
-            if ((System.Object)g == null)
-                return false;
-
-            bool res = true;
-
-            res &= Date == g.Date;
-            res &= SiteSlug == g.SiteSlug;
-            res &= EFilersNeeded == g.EFilersNeeded;
-            res &= EFilersSignedUp == g.EFilersSignedUp;
-            res &= IsClosed == g.IsClosed;
-            res &= OpenTime == g.OpenTime;
-            res &= CloseTime == g.CloseTime;
-            res &= LoggedInUserSignedUp == g.LoggedInUserSignedUp;
-            res &= SampleTime == g.SampleTime;
-
-            return res;
-        }
-
-        public static bool operator ==(C_SiteSchedule a, C_SiteSchedule b)
-        {
-            // If both are null, or both are same instance, return true.
-            if (System.Object.ReferenceEquals(a, b))
+            if (j.ContainsKey(N_Shifts))
             {
-                return true;
+                Shifts = new List<C_SiteScheduleShift>();
+                JsonValue jj = j[N_Shifts];
+                foreach(JsonValue jv in jj)
+                {
+                    C_SiteScheduleShift sss = new C_SiteScheduleShift(jv);
+                    Shifts.Add(sss);
+                }
             }
-
-            // If one is null, but not both, return false.
-            if (((object)a == null) || ((object)b == null))
-            {
-                return false;
-            }
-
-            // Return true if the fields match:
-            return a.Equals(b);
-        }
-
-        public static bool operator !=(C_SiteSchedule a, C_SiteSchedule b)
-        {
-            return !(a == b);
-        }
-
-        public override int GetHashCode()
-        {
-            int hash = 269;
-            hash = (hash * 47) * Date.GetHashCode();
-            hash = (hash * 47) * SiteSlug.GetHashCode();
-            hash = (hash * 47) * EFilersNeeded.GetHashCode();
-            hash = (hash * 47) * EFilersSignedUp.GetHashCode();
-            hash = (hash * 47) * IsClosed.GetHashCode();
-            hash = (hash * 47) * OpenTime.GetHashCode();
-            hash = (hash * 47) * CloseTime.GetHashCode();
-            hash = (hash * 47) * LoggedInUserSignedUp.GetHashCode();
-
-            return hash;
         }
 
         private static List<C_SiteSchedule> ImportSitesSchedules(JsonValue json, C_YMD date)
@@ -148,70 +68,70 @@ namespace zsquared
         public static async Task<List<C_SiteSchedule>> FetchSitesSchedules(C_YMD from, C_YMD to)
         {
             List<C_SiteSchedule> res = new List<C_SiteSchedule>();
+            C_YMD date = null;
 
-            int retryCount = 0;
-            bool retry = false;
-            do
+			string sitesUrl = "/schedule/?start=" + from.ToString("yyyy-mm-dd") + ";end=" + to.ToString("yyyy-mm-dd");
+
+            string responseString = await Tools.Download(sitesUrl, null);
+
+            if (responseString != null)
             {
-                try
+                JsonValue jdoc = JsonValue.Parse(responseString);
+
+                foreach (JsonValue jv in jdoc)
                 {
-                    retry = false;
+                    if (jv.ContainsKey("date"))
+                        date = Tools.JsonProcessDate(jv["date"], date);
 
-					string sitesUrl = "/schedule/?start=" + from.ToString("yyyy-mm-dd") + ";end=" + to.ToString("yyyy-mm-dd");
-					WebClient wc = new WebClient()
-					{
-						BaseAddress = C_Vita.VitaCoreUrl
-					};
-					wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
-					wc.Headers.Add(HttpRequestHeader.Accept, "application/json");
-
-					C_YMD date = null;
-					string ds = await wc.DownloadStringTaskAsync(sitesUrl);
-
-					JsonValue jdoc = JsonValue.Parse(ds);
-
-					foreach (JsonValue jv in jdoc)
-					{
-						if (jv.ContainsKey("date"))
-							date = Tools.JsonProcessDate(jv["date"], date);
-
-						if (jv.ContainsKey("sites"))
-						{
-							JsonValue jvx = jv["sites"];
-							List<C_SiteSchedule> resx = ImportSitesSchedules(jvx, date);
-							res.AddRange(resx);
-						}
-					}
-				}
-                catch (WebException we)
-                {
-                    if (we.Status == WebExceptionStatus.ReceiveFailure)
+                    if (jv.ContainsKey("sites"))
                     {
-                        res = new List<C_SiteSchedule>();
-						retry = retryCount < 3;
-						retryCount++;
-					}
-                }
-                catch (Exception e2)
-                {
-#if DEBUG
-                    Console.WriteLine(e2.Message);
-#endif
-                    res = new List<C_SiteSchedule>();
+                        JsonValue jvx = jv["sites"];
+                        List<C_SiteSchedule> resx = ImportSitesSchedules(jvx, date);
+                        res.AddRange(resx);
+                    }
                 }
             }
-            while (retry);
 
-			return res;
+            return res;
         }
 
-        public static List<C_SiteSchedule> GetSiteScheduleForSiteOnDate(string siteSlug, C_YMD onDate, List<C_SiteSchedule> sitesSchedules)
+		public static async Task<List<C_SiteSchedule>> FetchSiteSchedules(C_YMD from, C_YMD to, string siteSlug)
+		{
+			List<C_SiteSchedule> res = new List<C_SiteSchedule>();
+			C_YMD date = null;
+
+            string sitesUrl = "/schedule/?start=" + from.ToString("yyyy-mm-dd") + ";end=" + to.ToString("yyyy-mm-dd") + ";site=" + siteSlug;
+
+			string responseString = await Tools.Download(sitesUrl, null);
+
+			if (responseString != null)
+			{
+				JsonValue jdoc = JsonValue.Parse(responseString);
+
+				foreach (JsonValue jv in jdoc)
+				{
+					if (jv.ContainsKey("date"))
+						date = Tools.JsonProcessDate(jv["date"], date);
+
+					if (jv.ContainsKey("sites"))
+					{
+						JsonValue jvx = jv["sites"];
+						List<C_SiteSchedule> resx = ImportSitesSchedules(jvx, date);
+						res.AddRange(resx);
+					}
+				}
+			}
+
+			return res;
+		}
+
+		public static List<C_SiteSchedule> GetSiteScheduleForSiteOnDate(string siteSlug, C_YMD onDate, List<C_SiteSchedule> sitesSchedules)
         {
             List<C_SiteSchedule> res = new List<C_SiteSchedule>();
 
-			var ou = sitesSchedules.Where(ss => (
+            var ou = sitesSchedules.Where(ss => (
                 (siteSlug == null) || (siteSlug == ss.SiteSlug))
-			 && ((onDate == null) || (onDate == ss.Date)));
+             && ((onDate == null) || (onDate == ss.Date)));
 
             res = ou.ToList();
 
@@ -222,9 +142,9 @@ namespace zsquared
         {
             bool res = true;
 
-            foreach(C_SiteSchedule ss in sitesSchedule)
+            foreach (C_SiteSchedule ss in sitesSchedule)
             {
-                if (!ss.IsClosed)
+                if (ss.SiteIsOpen)
                 {
                     res = false;
                     break;
@@ -235,4 +155,42 @@ namespace zsquared
             return res;
         }
     }
+
+    public class C_SiteScheduleShift
+    {
+        public C_HMS OpenTime;
+        public C_HMS CloseTime;
+        public int eFilersNeededAdvanced;
+        public int eFilersNeededBasic;
+        public int eFilersSignedUpAdvanced;
+        public int eFilersSignedUpBasic;
+
+        public const string N_OpenTime = "open";
+        public const string N_CloseTime = "close";
+        public const string N_eFilersNeededAdvanced = "efilers_needed_advanced";
+		public const string N_eFilersNeededBasic = "efilers_needed_basic";
+		public const string N_eFilersSignedUpAdvanced = "efilers_signed_up_advanced";
+		public const string N_eFilersSignedUpBasic = "efilers_signed_up_basic";
+
+		public C_SiteScheduleShift(JsonValue j)
+		{
+			if (j.ContainsKey(N_OpenTime))
+                OpenTime = Tools.JsonProcessTime(j[N_OpenTime], OpenTime);
+
+			if (j.ContainsKey(N_CloseTime))
+				CloseTime = Tools.JsonProcessTime(j[N_CloseTime], CloseTime);
+
+            if (j.ContainsKey(N_eFilersNeededAdvanced))
+                eFilersNeededAdvanced = Tools.JsonProcessInt(j[N_eFilersNeededAdvanced], eFilersNeededAdvanced);
+
+			if (j.ContainsKey(N_eFilersNeededBasic))
+				eFilersNeededBasic = Tools.JsonProcessInt(j[N_eFilersNeededBasic], eFilersNeededBasic);
+
+			if (j.ContainsKey(N_eFilersSignedUpAdvanced))
+				eFilersSignedUpAdvanced = Tools.JsonProcessInt(j[N_eFilersSignedUpAdvanced], eFilersSignedUpAdvanced);
+
+			if (j.ContainsKey(N_eFilersSignedUpBasic))
+				eFilersSignedUpBasic = Tools.JsonProcessInt(j[N_eFilersSignedUpBasic], eFilersSignedUpBasic);
+		}
+	}
 }

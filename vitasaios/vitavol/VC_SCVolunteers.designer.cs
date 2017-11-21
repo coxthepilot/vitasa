@@ -28,15 +28,23 @@ namespace vitavol
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UILabel L_AdvancedVolunteers { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UILabel L_BasicVolunteers { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UILabel L_Date { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UILabel L_SiteName { get; set; }
+        UIKit.UILabel L_Shift { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UILabel L_Volunteers { get; set; }
+        UIKit.UILabel L_SiteName { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
@@ -59,19 +67,29 @@ namespace vitavol
                 B_Back = null;
             }
 
+            if (L_AdvancedVolunteers != null) {
+                L_AdvancedVolunteers.Dispose ();
+                L_AdvancedVolunteers = null;
+            }
+
+            if (L_BasicVolunteers != null) {
+                L_BasicVolunteers.Dispose ();
+                L_BasicVolunteers = null;
+            }
+
             if (L_Date != null) {
                 L_Date.Dispose ();
                 L_Date = null;
             }
 
+            if (L_Shift != null) {
+                L_Shift.Dispose ();
+                L_Shift = null;
+            }
+
             if (L_SiteName != null) {
                 L_SiteName.Dispose ();
                 L_SiteName = null;
-            }
-
-            if (L_Volunteers != null) {
-                L_Volunteers.Dispose ();
-                L_Volunteers = null;
             }
 
             if (TV_Volunteers != null) {

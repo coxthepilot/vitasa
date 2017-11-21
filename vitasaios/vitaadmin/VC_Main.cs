@@ -33,6 +33,16 @@ namespace vitaadmin
             {
                 PerformSegue("Segue_MainToWorkItems", this);
             };
+
+            B_Sites.TouchUpInside += (sender, e) => 
+            {
+                PerformSegue("Segue_MainToSites", this);
+            };
+
+            B_Notifications.TouchUpInside += (sender, e) => 
+            {
+                PerformSegue("Segue_MainToNotifications", this);
+            };
         }
     }
 }

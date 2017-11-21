@@ -11,11 +11,8 @@ namespace vitavol
 {
     public partial class ViewController : UIViewController
     {
-		public EKEventStore EventStore;
-
 		protected ViewController(IntPtr handle) : base(handle)
         {
-            // place no init logic here
         }
 
 		public override void DidReceiveMemoryWarning()
@@ -28,8 +25,8 @@ namespace vitavol
             base.ViewDidLoad();
 
             AppDelegate myAppDelegate = (AppDelegate)UIApplication.SharedApplication.Delegate;
+            myAppDelegate.Global = new C_Global();
             C_Global Global = myAppDelegate.Global;
-            EventStore = myAppDelegate.EventStore;
 
             View.BackgroundColor = C_Common.StandardBackground;
 
@@ -38,14 +35,14 @@ namespace vitavol
                 PerformSegue("Segue_LoginToAbout", this);
             };
 
-            // keep track of the length of text in the email box, allow login when email and password are long enought
+            // keep track of the length of text in the email box, allow login when email and password are long enough
             TB_Email.AddTarget((sender, e) =>
             {
                 B_Login.Enabled = (TB_Email.Text.Length > 6) && (TB_Password.Text.Length > 6);
 
             }, UIControlEvent.EditingChanged);
 
-            // keep track of the length of text in the passwrd box, allow login when email and password are long enought
+            // keep track of the length of text in the password box, allow login when email and password are long enough
             TB_Password.AddTarget((sender, e) =>
             {
                 B_Login.Enabled = (TB_Email.Text.Length > 6) && (TB_Password.Text.Length > 6);
@@ -88,8 +85,20 @@ namespace vitavol
 							return;
 						}
 
+						// do the device registration if present
+                        string deviceTokenUpdated = NSUserDefaults.StandardUserDefaults.StringForKey(AppDelegate.N_PushDeviceTokenUpdated);
+                        if (deviceTokenUpdated == "true")
+                        {
+							string deviceToken = NSUserDefaults.StandardUserDefaults.StringForKey(AppDelegate.N_PushDeviceToken);
+
+                            bool success = await C_Notifications.RegisterNotificationToken(C_Notifications.E_Platform.iOS, deviceToken, user.Token);
+
+							NSUserDefaults.StandardUserDefaults.SetString("false", AppDelegate.N_PushDeviceTokenUpdated);
+						}
+
 						AI_Spinner.StopAnimating();
 						EnableUI(true);
+
 						Global.LoggedInUserId = user.id;
 
 						NSUserDefaults.StandardUserDefaults.SetString(TB_Email.Text, "email");
@@ -116,6 +125,7 @@ namespace vitavol
 
 								Global.SelectedSiteSlug = sc.Slug;
 								Global.ViewCameFrom = E_ViewCameFrom.Login;
+                                Console.WriteLine("[login]: " + Global.SelectedSiteSlug);
 
 								PerformSegue("Segue_LoginToSCSite", this);
 							}

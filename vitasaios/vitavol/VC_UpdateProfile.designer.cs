@@ -28,10 +28,6 @@ namespace vitavol
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UISegmentedControl SC_Certification { get; set; }
-
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UITextField TB_Email { get; set; }
 
         [Outlet]
@@ -57,11 +53,6 @@ namespace vitavol
             if (B_Submit != null) {
                 B_Submit.Dispose ();
                 B_Submit = null;
-            }
-
-            if (SC_Certification != null) {
-                SC_Certification.Dispose ();
-                SC_Certification = null;
             }
 
             if (TB_Email != null) {

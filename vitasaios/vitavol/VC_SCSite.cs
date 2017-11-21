@@ -13,7 +13,7 @@ namespace vitavol
         C_Global Global;
 
         C_VitaUser LoggedInUser;
-        C_VitaSite OurSite;
+        C_VitaSite SelectedSite;
 
         public VC_SCSite (IntPtr handle) : base (handle)
         {
@@ -35,7 +35,7 @@ namespace vitavol
 
             B_Back.TouchUpInside += (sender, e) => 
             {
-                if (Global.ViewCameFrom == E_ViewCameFrom.Login)
+                if (LoggedInUser.SitesCoordinated.Count == 1)
                     PerformSegue("Segue_SCSiteToLogin", this);
                 else
                     PerformSegue("Segue_SCSiteToSCSites", this);
@@ -43,17 +43,12 @@ namespace vitavol
 
             B_Closed.TouchUpInside += async (sender, e) => 
             {
-                E_SiteStatus newStatus = E_SiteStatus.Closed;
+                E_ClientSiteStatus newStatus = E_ClientSiteStatus.Closed;
 
 				EnableUI(false);
 				AI_Busy.StartAnimating();
 
-                C_VitaSite site = await Global.GetSiteFromCache(Global.SelectedSiteSlug);
-
-                if (site != null)
-                {
-                    bool success = await site.UpdateSiteStatus(newStatus, LoggedInUser.Token);
-                }
+                bool success = await SelectedSite.UpdateSiteStatus(newStatus, LoggedInUser.Token);
 
 				AI_Busy.StopAnimating();
 				EnableUI(true);
@@ -61,17 +56,15 @@ namespace vitavol
 
             B_Accepting.TouchUpInside += async (sender, e) => 
             {
-				E_SiteStatus newStatus = E_SiteStatus.Accepting;
+				E_ClientSiteStatus newStatus = E_ClientSiteStatus.Accepting;
 
                 EnableUI(false);
 				AI_Busy.StartAnimating();
 
-				C_VitaSite site = await Global.GetSiteFromCache(Global.SelectedSiteSlug);
+				EnableUI(false);
+				AI_Busy.StartAnimating();
 
-				if (site != null)
-				{
-					bool success = await site.UpdateSiteStatus(newStatus, LoggedInUser.Token);
-				}
+				bool success = await SelectedSite.UpdateSiteStatus(newStatus, LoggedInUser.Token);
 
 				AI_Busy.StopAnimating();
 				EnableUI(true);
@@ -79,17 +72,12 @@ namespace vitavol
 
             B_NearLimit.TouchUpInside += async (sender, e) => 
             {
-                E_SiteStatus newStatus = E_SiteStatus.NearLimit;
+                E_ClientSiteStatus newStatus = E_ClientSiteStatus.NearLimit;
 
 				EnableUI(false);
 				AI_Busy.StartAnimating();
 
-				C_VitaSite site = await Global.GetSiteFromCache(Global.SelectedSiteSlug);
-
-				if (site != null)
-				{
-					bool success = await site.UpdateSiteStatus(newStatus, LoggedInUser.Token);
-				}
+				bool success = await SelectedSite.UpdateSiteStatus(newStatus, LoggedInUser.Token);
 
 				AI_Busy.StopAnimating();
 				EnableUI(true);
@@ -97,17 +85,12 @@ namespace vitavol
 
             B_AtLimit.TouchUpInside += async (sender, e) => 
             {
-                E_SiteStatus newStatus = E_SiteStatus.NotAccepting;
+                E_ClientSiteStatus newStatus = E_ClientSiteStatus.NotAccepting;
 
 				EnableUI(false);
 				AI_Busy.StartAnimating();
 
-				C_VitaSite site = await Global.GetSiteFromCache(Global.SelectedSiteSlug);
-
-				if (site != null)
-				{
-					bool success = await site.UpdateSiteStatus(newStatus, LoggedInUser.Token);
-				}
+				bool success = await SelectedSite.UpdateSiteStatus(newStatus, LoggedInUser.Token);
 
 				AI_Busy.StopAnimating();
 				EnableUI(true);
@@ -116,9 +99,8 @@ namespace vitavol
             B_Volunteers.TouchUpInside += (sender, e) => 
             {
                 // clear all the dirty flags in the WorkItems to avoid saving stuff we shouldn't
-                Global.ClearDirtyFlagOnIntents();
+                Global.ClearDirtyFlagOnSignUps();
 
-                //PerformSegue("Segue_SCSiteToSCVolunteers", this);
 				PerformSegue("Segue_SCSiteToSCSiteVolCal", this);
 			};
 
@@ -168,82 +150,68 @@ namespace vitavol
 				}
 			};
 
-			OurSite = Global.GetSiteFromCacheNoFetch(Global.SelectedSiteSlug);
-
             AI_Busy.StartAnimating();
-            DisableUI();
+			EnableUI(false);
 
             Task.Run(async () => 
             {
-                if (OurSite == null)
-                    OurSite = await Global.GetSiteFromCache(Global.SelectedSiteSlug);
+                SelectedSite = await Global.GetSiteFromCache(Global.SelectedSiteSlug);
 
-                UIApplication.SharedApplication.InvokeOnMainThread(
+				UIApplication.SharedApplication.InvokeOnMainThread(
                 new Action(() =>
                 {
                     AI_Busy.StopAnimating();
                     EnableUI(true);
 
-                    L_SiteName.Text = OurSite.Name;
+					L_SiteName.Text = SelectedSite.Name;
 
-                    EnableUI(true);
-
-                    killChanges = true;
-                    SW_DropOff.On = OurSite.SiteCapabilities.Contains(E_SiteCapabilities.DropOff);
-                    SW_Express.On = OurSite.SiteCapabilities.Contains(E_SiteCapabilities.Express);
-                    SW_MFT.On = OurSite.SiteCapabilities.Contains(E_SiteCapabilities.MFT);
-                    killChanges = false;
-                }));
-			});
-		}
-
-        private void DisableUI()
-        {
-            L_ClientStatus.Text = "";
-            B_Closed.Enabled = false;
-			B_Accepting.Enabled = false;
-			B_NearLimit.Enabled = false;
-			B_AtLimit.Enabled = false;
-
-			B_Volunteers.Enabled = false;
-			B_SiteCalendar.Enabled = false;
-            B_UpdateProfile.Enabled = false;
-
-			SW_DropOff.Enabled = false;
-			SW_Express.Enabled = false;
-			SW_MFT.Enabled = false;
-
-			B_Back.Enabled = false;
+					killChanges = true;
+					SW_DropOff.On = SelectedSite.SiteCapabilities.Contains(E_SiteCapabilities.DropOff);
+					SW_Express.On = SelectedSite.SiteCapabilities.Contains(E_SiteCapabilities.Express);
+					SW_MFT.On = SelectedSite.SiteCapabilities.Contains(E_SiteCapabilities.MFT);
+					killChanges = false;
+				}));
+           });
 		}
 
         private void EnableUI(bool enable)
         {
-			int isiteStatus = (int)OurSite.Status;
-			string ssitestatus = C_VitaSite.N_SiteStatus[isiteStatus];
-			L_ClientStatus.Text = ssitestatus;
-
-            switch (OurSite.Status)
+            if (SelectedSite != null)
             {
-                case E_SiteStatus.Closed:
-                    IMG_Currently.Image = UIImage.FromBundle("blackstatus.jpg");
-                    break;
-                case E_SiteStatus.Accepting:
-					IMG_Currently.Image = UIImage.FromBundle("greenstatus.jpg");
-					break;
-                case E_SiteStatus.NearLimit:
-					IMG_Currently.Image = UIImage.FromBundle("yellowstatus.jpg");
-					break;
-				case E_SiteStatus.NotAccepting:
-					IMG_Currently.Image = UIImage.FromBundle("redstatus.jpg");
-					break;
+    			int isiteStatus = (int)SelectedSite.ClientStatus;
+    			string ssitestatus = C_VitaSite.N_ClientStatusNames[isiteStatus];
+    			L_ClientStatus.Text = ssitestatus;
+
+                switch (SelectedSite.ClientStatus)
+                {
+                    case E_ClientSiteStatus.Closed:
+                        IMG_Currently.Image = UIImage.FromBundle("blackstatus.jpg");
+                        break;
+                    case E_ClientSiteStatus.Accepting:
+    					IMG_Currently.Image = UIImage.FromBundle("greenstatus.jpg");
+    					break;
+                    case E_ClientSiteStatus.NearLimit:
+    					IMG_Currently.Image = UIImage.FromBundle("yellowstatus.jpg");
+    					break;
+    				case E_ClientSiteStatus.NotAccepting:
+    					IMG_Currently.Image = UIImage.FromBundle("redstatus.jpg");
+    					break;
+    			}
+
+    			B_Closed.Enabled = enable && SelectedSite.ClientStatus != E_ClientSiteStatus.Closed;
+    			B_Accepting.Enabled = enable && SelectedSite.ClientStatus != E_ClientSiteStatus.Accepting;
+    			B_NearLimit.Enabled = enable && SelectedSite.ClientStatus != E_ClientSiteStatus.NearLimit;
+    			B_AtLimit.Enabled = enable && SelectedSite.ClientStatus != E_ClientSiteStatus.NotAccepting;
+			}
+            else
+            {
+                B_Closed.Enabled = false;
+				B_Accepting.Enabled = false;
+				B_NearLimit.Enabled = false;
+				B_AtLimit.Enabled = false;
 			}
 
-			B_Closed.Enabled = enable && OurSite.Status != E_SiteStatus.Closed;
-			B_Accepting.Enabled = enable && OurSite.Status != E_SiteStatus.Accepting;
-			B_NearLimit.Enabled = enable && OurSite.Status != E_SiteStatus.NearLimit;
-			B_AtLimit.Enabled = enable && OurSite.Status != E_SiteStatus.NotAccepting;
-
-            B_Volunteers.Enabled = enable;
+			B_Volunteers.Enabled = enable;
             B_SiteCalendar.Enabled = enable;
             B_UpdateProfile.Enabled = enable;
 
@@ -259,15 +227,15 @@ namespace vitavol
 			EnableUI(false);
             AI_Busy.StartAnimating();
 
-			OurSite.SiteCapabilities = new List<E_SiteCapabilities>();
+			SelectedSite.SiteCapabilities = new List<E_SiteCapabilities>();
 			if (SW_DropOff.On)
-				OurSite.SiteCapabilities.Add(E_SiteCapabilities.DropOff);
+				SelectedSite.SiteCapabilities.Add(E_SiteCapabilities.DropOff);
             if (SW_Express.On)
-				OurSite.SiteCapabilities.Add(E_SiteCapabilities.Express);
+				SelectedSite.SiteCapabilities.Add(E_SiteCapabilities.Express);
             if (SW_MFT.On)
-				OurSite.SiteCapabilities.Add(E_SiteCapabilities.MFT);
+				SelectedSite.SiteCapabilities.Add(E_SiteCapabilities.MFT);
 
-			bool success = await OurSite.UpdateSiteCapabilities(LoggedInUser.Token);
+			bool success = await SelectedSite.UpdateSiteCapabilities(LoggedInUser.Token);
 
 			EnableUI(true);
             AI_Busy.StopAnimating();

@@ -251,9 +251,9 @@ namespace vitavol
 							Center = ContentView.Center,
 							TextColor = UIColor.White,
 							Frame = new CGRect(5, 5, 30, 20),
-							Font = UIFont.FromName(Label.Font.Name, 9),
 							AdjustsFontSizeToFitWidth = true
 						};
+                        Label.Font = UIFont.FromName(Label.Font.Name, 9);
 					}
                     else
                     {

@@ -13,14 +13,13 @@ namespace vitavol
 {
     public partial class VC_Calendar : UIViewController
     {
-        // todo: really should cache the SiteSchedule to reduce load times when cycling through the months
-
-        // Input:
-        //   CalendarDate (optional) (used on return from downstream screens to remember where we were)
-        //   LoggedInUser
-        //   AllSites
+        // We get here from the ViewOptions where the user has selected Create new signup. This happens
+        //  by first selecting the date (where we shows needing help), then selecting the site/shift,
+        //  then by actually signing up.
 
 		C_Global Global;
+        C_VitaUser LoggedInUser;
+
         C_DateState[] DateState;
         C_CVHelper CollectionViewHelper;
 
@@ -38,6 +37,7 @@ namespace vitavol
 
 			AppDelegate myAppDelegate = (AppDelegate)UIApplication.SharedApplication.Delegate;
             Global = myAppDelegate.Global;
+            LoggedInUser = Global.GetUserFromCacheNoFetch(Global.LoggedInUserId);
 
 			// use the date from our previous visit if it exists
 			if (Global.CalendarDate == null)
@@ -55,16 +55,11 @@ namespace vitavol
 
 				L_MonthYear.Text = Global.CalendarDate.ToString("mmm-yyyy");
 
-				//int daysInMonth = DateTime.DaysInMonth(Global.CalendarDate.Year, Global.CalendarDate.Month);
-				//C_YMD start = new C_YMD(Global.CalendarDate.Year, Global.CalendarDate.Month, 1);
-				//C_YMD end = new C_YMD(Global.CalendarDate.Year, Global.CalendarDate.Month, daysInMonth);
-
 				AI_Loading.StartAnimating();
 				EnableUI(false);
 				Task.Run(async () =>
 				{
                     Global.SitesSchedule = await Global.GetSitesScheduleCached(Global.CalendarDate.Year, Global.CalendarDate.Month);
-					//Global.SitesSchedule = await C_SiteSchedule.FetchSitesSchedules(start, end);
 
 					DateState = BuildDateStateArray(Global.CalendarDate);
 
@@ -90,16 +85,11 @@ namespace vitavol
 
 				L_MonthYear.Text = Global.CalendarDate.ToString("mmm-yyyy");
 
-				//int daysInMonth = DateTime.DaysInMonth(Global.CalendarDate.Year, Global.CalendarDate.Month);
-				//C_YMD start = new C_YMD(Global.CalendarDate.Year, Global.CalendarDate.Month, 1);
-				//C_YMD end = new C_YMD(Global.CalendarDate.Year, Global.CalendarDate.Month, daysInMonth);
-
 				AI_Loading.StartAnimating();
 				EnableUI(false);
 				Task.Run(async () => 
                 {
 					Global.SitesSchedule = await Global.GetSitesScheduleCached(Global.CalendarDate.Year, Global.CalendarDate.Month);
-					//Global.SitesSchedule = await C_SiteSchedule.FetchSitesSchedules(start, end);
 
 					DateState = BuildDateStateArray(Global.CalendarDate);
 
@@ -129,26 +119,13 @@ namespace vitavol
 
 			AI_Loading.StartAnimating();
             EnableUI(false);
+
             Task.Run(async () => 
             {
                 try
                 {
-                    //int daysInMonth = DateTime.DaysInMonth(Global.CalendarDate.Year, Global.CalendarDate.Month);
-                    //C_YMD start = new C_YMD(Global.CalendarDate.Year, Global.CalendarDate.Month, 1);
-                    //C_YMD end = new C_YMD(Global.CalendarDate.Year, Global.CalendarDate.Month, daysInMonth);
-
                     if (Global.SitesSchedule == null)
-                    {
 						Global.SitesSchedule = await Global.GetSitesScheduleCached(Global.CalendarDate.Year, Global.CalendarDate.Month);
-						//Global.SitesSchedule = await C_SiteSchedule.FetchSitesSchedules(start, end);
-                    }
-
-                    //TimeSpan ts = DateTime.Now - Global.SiteScheduleSampleTime;
-                    //if (ts.TotalMinutes > 10)
-                    //{
-                    //    Global.SitesSchedule = await C_SiteSchedule.FetchSitesSchedules(start, end);
-                    //    Global.SiteScheduleSampleTime = DateTime.Now;
-                    //}
 
                     // get the actual screen size so we can adjust the cell sizes accordingly
                     DateState = BuildDateStateArray(Global.CalendarDate);
@@ -205,35 +182,49 @@ namespace vitavol
                 };
 
                 // see if the user is already signed up somewhere that day
-                List<C_WorkItem> LoggedInUserWorkItems = Global.GetWorkItemsForUser(Global.LoggedInUserId);
+                List<C_SignUp> LoggedInUserWorkItems = Global.GetSignUpsForUser(Global.LoggedInUserId);
                 var oux = LoggedInUserWorkItems.Where(wi => wi.Date == ourDate);
-
                 dayState.ShowBox = oux.Any();
 
 				List<C_SiteSchedule> sitesOnDateSchedule = C_SiteSchedule.GetSiteScheduleForSiteOnDate(null, ourDate, Global.SitesSchedule);
-
 				bool allClosed = C_SiteSchedule.AllSitesClosed(sitesOnDateSchedule);
                 if (allClosed)
                 {
-                    //dayState.State = C_DayState.E_DayState.AllClosed;
                     dayState.NormalColor = Color_AllSitesClosed;
                     dayState.HighlightedColor = Color_AllSitesClosed;
                     dayState.TextColor = UIColor.White;
-                }
+					dayState.CanClick = false;
+				}
 				else
 				{
-					var ou = sitesOnDateSchedule.Where(ss => ss.EFilersNeeded > ss.EFilersSignedUp);
-
-                    if (ou.Any())
+					List<C_SiteSchedule> slist = new List<C_SiteSchedule>();
+                    foreach(C_SiteSchedule ss in sitesOnDateSchedule)
                     {
-						//C_DayState.E_DayState.OnePlusHasNeeds
+                        bool anyNeed = false;
+                        foreach(C_SiteScheduleShift sss in ss.Shifts)
+                        {
+                            if (
+                                ((sss.eFilersSignedUpBasic < sss.eFilersNeededBasic) && (LoggedInUser.Certification == E_Certification.Basic))
+                                || ((sss.eFilersSignedUpAdvanced < sss.eFilersNeededAdvanced) && (LoggedInUser.Certification == E_Certification.Advanced))
+                            )
+                            {
+                                anyNeed = true;
+                                break;
+                            }
+                        }
+                        if (anyNeed)
+                            slist.Add(ss);
+                    }
+
+					if (slist.Count != 0)
+                    {
                         dayState.NormalColor = Color_StaffingNeeded;
 						dayState.HighlightedColor = Color_StaffingNeeded;
                         dayState.TextColor = UIColor.Black;
+						dayState.CanClick = true;
 					}
                     else
                     {
-						//C_DayState.E_DayState.NoNeeds
                         dayState.NormalColor = Color_NoStaffingNeeds;
 						dayState.HighlightedColor = Color_NoStaffingNeeds;
                         dayState.TextColor = UIColor.White;

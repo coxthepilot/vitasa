@@ -8,6 +8,21 @@
 	<dict/>
 	<key>com.apple.ibtool.document.warnings</key>
 	<dict>
+		<key>11260</key>
+		<array>
+			<dict>
+				<key>affected-objects</key>
+				<array>
+					<string>11260</string>
+				</array>
+				<key>message</key>
+				<string>Prototype table cells must have reuse identifiers</string>
+				<key>type</key>
+				<string>IBUnsupportedConfiguration</string>
+				<key>type-value</key>
+				<integer>9</integer>
+			</dict>
+		</array>
 		<key>2286</key>
 		<array>
 			<dict>
@@ -23,12 +38,42 @@
 				<integer>9</integer>
 			</dict>
 		</array>
+		<key>33937</key>
+		<array>
+			<dict>
+				<key>affected-objects</key>
+				<array>
+					<string>33937</string>
+				</array>
+				<key>message</key>
+				<string>Prototype table cells must have reuse identifiers</string>
+				<key>type</key>
+				<string>IBUnsupportedConfiguration</string>
+				<key>type-value</key>
+				<integer>9</integer>
+			</dict>
+		</array>
 		<key>5297</key>
 		<array>
 			<dict>
 				<key>affected-objects</key>
 				<array>
 					<string>5297</string>
+				</array>
+				<key>message</key>
+				<string>Prototype table cells must have reuse identifiers</string>
+				<key>type</key>
+				<string>IBUnsupportedConfiguration</string>
+				<key>type-value</key>
+				<integer>9</integer>
+			</dict>
+		</array>
+		<key>6889</key>
+		<array>
+			<dict>
+				<key>affected-objects</key>
+				<array>
+					<string>6889</string>
 				</array>
 				<key>message</key>
 				<string>Prototype table cells must have reuse identifiers</string>

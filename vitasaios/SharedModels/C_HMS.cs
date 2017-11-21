@@ -266,6 +266,8 @@ namespace zsquared
                         ampm = "am";
                     }
                 }
+                else if (ampmHour == 12)
+                    ampm = "pm";
                 else
                     ampm = "am";
             }

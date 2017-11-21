@@ -10,7 +10,7 @@ using System.Net.Http.Headers;
 
 namespace zsquared
 {
-    public enum E_ViewCameFrom { Unknown = 0, List, Map, MySignUps, SCSites, SCSite, Login, VolOptions, Suggestions }
+    public enum E_ViewCameFrom { Unknown = 0, List, Map, MySignUps, SCSites, SCSite, Login, VolOptions, Suggestions, CalEntry, CalDefaults }
 
     public class C_Global
     {
@@ -20,94 +20,82 @@ namespace zsquared
         /// Used in client; the message to show
         /// </summary>
         public E_Message MessageToShow;
-        public static readonly string N_MessageToShow = "messagetoshow";
 
 		/// <summary>
 		/// This is the id user that we logged into the system with. This is the user with the valid token.
 		/// </summary>
 		public int LoggedInUserId;
-        public static readonly string N_LoggedInUserId = "loggedinuserid";
 
         /// <summary>
         /// A cache of sites we know about. 
         /// </summary>
         public List<C_VitaSite> SiteCache;
-        public static readonly string N_SiteCache = "sitecache";
         public bool AllSitesFetched;
-        const string N_AllSitesFetched = "allsitesfetched";
 
 		/// <summary>
-		/// A list of C_WorkItems found in pulling Site and User data
+		/// A list of C_WorkItems found in Site and User data
 		/// </summary>
-		public List<C_WorkItem> WorkItems;
-        public static readonly string N_WorkItems = "workitems";
+		public List<C_SignUp> SignUps;
 
 		/// <summary>
 		/// List of known users; this is not a list of ALL users, just ones we have seen
 		/// </summary>
 		public List<C_VitaUser> UserCache;
-		public static readonly string N_UserCache = "usercache";
+        public bool AllUsersFetched;
+
+        /// <summary>
+        /// A list of all WorkShifts we've seen
+        /// </summary>
+        public List<C_WorkShift> WorkShifts;
 
 		/// <summary>
 		/// The slug of the current selected site
 		/// </summary>
 		public string SelectedSiteSlug;
-		public static readonly string N_SelectedSiteSlug = "selectedsiteslug";
 		public string SelectedSiteName;
-		public static readonly string N_SelectedSiteName = "selectedsiteslug";
 
 		/// <summary>
 		/// The selected suggestion.
 		/// </summary>
 		public C_Suggestion SelectedSuggestion;
-		public static readonly string N_SelectedSuggestion = "selectedsuggestion";
 
 		/// <summary>
 		/// In VC_Calendar, this is the date that the user picked, headed to SitesOnDate
 		/// </summary>
 		public C_YMD SelectedDate;
-		public static readonly string N_SelectedDate = "selecteddate";
 
 		/// <summary>
 		/// The details view controller needs to know where to go "Back" to
 		/// </summary>
 		public E_ViewCameFrom ViewCameFrom = E_ViewCameFrom.Unknown;
-        public static readonly string N_ViewCameFrom = "viewcamefrom";
-
-		/// <summary>
-		/// From SCSiteCalendar to SCDefaults, the selected day of the week
-		/// </summary>
-		public int SelectedDayOfWeek = -1;
-		public static readonly string N_SelectedDayOfWeek = "selecteddayofweek";
 
 		/// <summary>
 		/// The open sites that need help. Used in SitesOnDateMap after launch from SitesOnDateList, and
         /// then in SitesOnDateList if return from Map; this is the slug for the site that needs help
 		/// </summary>
 		public List<string> OpenSitesThatNeedHelp;
-		public static readonly string N_OpenSitesThatNeedHelp = "opensitesthatneedhelp";
 
-		///// <summary>
-		///// Generated in VC_SitesOnDateList, used in ...Map and SignUp
-		///// </summary>
-		public List<C_WorkItem> WorkItemsOnSiteOnDate;
-		public static readonly string N_WorksItemsOnSiteOnDate = "workitemsonsiteondate";
+        public List<C_WorkShiftSignUp> WorkShiftSignUpsOnDate; // used in SCVolunteers
 
 		/// <summary>
 		/// The Month and Year last used in the Calendar view.
 		/// </summary>
 		public C_YMD CalendarDate;
-		public static readonly string N_CalendarDate = "calendardate";
 
-		// --- passed to SCVolunteer Hours ---
-		// SelectedDate
-		// SelectedSite
-		public C_WorkItem VolunteerWorkItem;
-        public static readonly string N_VolunteerWorkItem = "volunteerworkitem";
+		public C_SignUp VolunteerSignUp;
+        public C_WorkShiftSignUp VolunteerWorkShiftSignUp;
 
         // --- used in VC_Calendar ---
         public List<C_SiteSchedule> SitesSchedule;
-		public static readonly string N_SitesSchedule = "sitesschedule";
+
+        // used in ShiftDetails
+        public C_WorkShift SelectedShift;
+
+        // used in VC_SignUp
+        public C_SignUp SelectedSignUp;
+
+		Dictionary<int, List<C_SiteSchedule>> SitesScheduleCache;
+        Dictionary<string, Dictionary<int, List<C_SiteSchedule>>> SiteScheduleBySiteCache;
 
 		public C_Global()
         {
@@ -115,10 +103,11 @@ namespace zsquared
 
             UserCache = new List<C_VitaUser>();
             SiteCache = new List<C_VitaSite>();
-            WorkItems = new List<C_WorkItem>();
+            SignUps = new List<C_SignUp>();
+            WorkShifts = new List<C_WorkShift>();
         }
 
-		// ================= site cache mgmt =======================
+		// ================= sites cache mgmt =======================
 
 		/// <summary>
 		/// Imports the sites.
@@ -127,11 +116,6 @@ namespace zsquared
 		/// <param name="json">the value from the backend services that has been Parsed</param>
 		private List<C_VitaSite> ImportSites(JsonValue json)
 		{
-#if DEBUG
-			if (!(json is JsonArray))
-				throw new ApplicationException("the sites list must be an array");
-#endif
-			// create the holding place for the results
 			List<C_VitaSite> res = new List<C_VitaSite>();
 			foreach (JsonValue j in json)
 			{
@@ -158,105 +142,59 @@ namespace zsquared
 			return res;
 		}
 
-		public async Task<List<C_VitaSite>> FetchSitesList()
+		public async Task<List<C_VitaSite>> FetchAllSites()
 		{
-			int retryCount = 0;
-			bool retry = false;
-
 			List<C_VitaSite> siteslist = null;
-			do
-			{
-				try
-				{
-					retry = false;
-					string sitesUrl = "/sites";
-					WebClient wc = new WebClient()
-					{
-						BaseAddress = C_Vita.VitaCoreUrl
-					};
-					wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
-					wc.Headers.Add(HttpRequestHeader.Accept, "application/json");
 
-					string responseString = await wc.DownloadStringTaskAsync(sitesUrl);
+            string sitesUrl = "/sites";
 
-					JsonValue responseJson = JsonValue.Parse(responseString);
+            string responseString = await Tools.Download(sitesUrl, null);
 
-					siteslist = ImportSites(responseJson);
-				}
-				catch (WebException we)
-				{
-					if (we.Status == WebExceptionStatus.ReceiveFailure)
-					{
-						siteslist = null;
-						retry = retryCount < 3;
-						retryCount++;
-					}
-				}
-				catch (Exception e)
-				{
-#if DEBUG
-					Console.WriteLine(e.Message);
-#endif
-					siteslist = null;
-					retry = false;
-				}
-			}
-			while (retry);
+            if (responseString != null)
+            {
+                JsonValue responseJson = JsonValue.Parse(responseString);
 
-			return siteslist;
+                siteslist = ImportSites(responseJson);
+            }
+
+            return siteslist;
 		}
 
-        private async static Task<C_VitaSite> FetchSitesDetails(string slug)
+        public List<C_VitaSite> GetAllSitesNoCache()
+        {
+            List<C_VitaSite> res = new List<C_VitaSite>();
+
+            if (!AllSitesFetched)
+                return res;
+
+            foreach (C_VitaSite site in SiteCache)
+                res.Add(site);
+
+            return res;
+        }
+
+        private async static Task<C_VitaSite> FetchSite(string slug)
 		{
-			int retryCount = 0;
-			bool retry = false;
-
 			C_VitaSite site = null;
-			do
-			{
-				try
-				{
-					retry = false;
-					string siteUrl = "/sites/" + slug;
-					WebClient wc = new WebClient()
-					{
-						BaseAddress = C_Vita.VitaCoreUrl
-					};
-					wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
-					wc.Headers.Add(HttpRequestHeader.Accept, "application/json");
 
-					string responseString = await wc.DownloadStringTaskAsync(siteUrl);
+			string siteUrl = "/sites/" + slug;
 
-					JsonValue responseJson = JsonValue.Parse(responseString);
+            string responseString = await Tools.Download(siteUrl, null);
 
-					site = new C_VitaSite(responseJson)
-					{
-						SampleTime = DateTime.Now
-					};
-				}
-				catch (WebException we)
-				{
-					if (we.Status == WebExceptionStatus.ReceiveFailure)
-					{
-						site = null;
-						retry = retryCount < 3;
-						retryCount++;
-					}
-				}
-				catch (Exception e)
-				{
-#if DEBUG
-					Console.WriteLine(e.Message);
-#endif
-					site = null;
-				}
-			}
-			while (retry);
+            if (responseString != null)
+            {
+                JsonValue responseJson = JsonValue.Parse(responseString);
 
-			return site;
+                site = new C_VitaSite(responseJson)
+                {
+                    SampleTime = DateTime.Now
+                };
+            }
+
+            return site;
 		}
 
-		public C_VitaSite GetSiteFromCacheNoFetch(string slug)
+		public C_VitaSite GetSiteNoFetch(string slug)
         {
             var ou = SiteCache.Where(site => site.Slug == slug);
             return ou.FirstOrDefault();
@@ -264,7 +202,7 @@ namespace zsquared
 
 		public async Task<C_VitaSite> GetSiteFromCache(string slug)
 		{
-            C_VitaSite res = GetSiteFromCacheNoFetch(slug);
+            C_VitaSite res = GetSiteNoFetch(slug);
 
             bool refetch = res == null;
             if (!refetch)
@@ -276,7 +214,7 @@ namespace zsquared
 
             if (refetch)
 			{
-				res = await FetchSitesDetails(slug);
+				res = await FetchSite(slug);
                 if (res != null)
                 {
 					if (!SiteCacheContains(res.Slug))
@@ -288,7 +226,7 @@ namespace zsquared
 			return res;
 		}
 
-		public C_VitaSite GetSiteFromCacheByNameNoFetch(string name)
+		public C_VitaSite GetSiteByNameNoFetch(string name)
 		{
             var ou = SiteCache.Where(s => s.Name == name);
             return ou.FirstOrDefault();
@@ -301,7 +239,7 @@ namespace zsquared
 
             if (res == null)
 			{
-				res = await FetchSitesDetails(slug);
+				res = await FetchSite(slug);
                 if (res != null)
                 {
 					if (!SiteCacheContains(res.Slug))
@@ -315,21 +253,21 @@ namespace zsquared
 
         private void CleanWorkItemsFromSite(C_VitaSite site)
 		{
-			List<C_WorkItem> intents = site.WorkIntentsX;
+			List<C_SignUp> intents = site.WorkIntentsX;
 			site.WorkIntentsX = null;
-			List<C_WorkItem> history = site.WorkHistoryX;
+			List<C_SignUp> history = site.WorkHistoryX;
 			site.WorkHistoryX = null;
 
-			foreach (C_WorkItem wi in intents)
+			foreach (C_SignUp wi in intents)
 			{
-				if (!WorkItemsHasId(wi.id))
-					WorkItems.Add(wi);
+				if (!SignUpsHasId(wi.id))
+					SignUps.Add(wi);
 			}
 
-			foreach (C_WorkItem wi in history)
+			foreach (C_SignUp wi in history)
 			{
-				if (!WorkItemsHasId(wi.id))
-					WorkItems.Add(wi);
+				if (!SignUpsHasId(wi.id))
+					SignUps.Add(wi);
 			}
 		}
 
@@ -338,7 +276,7 @@ namespace zsquared
 			// at the current api level, the only option is to get data on ALL sites (slow, lots of data)
 			if (!AllSitesFetched)
 			{
-				List<C_VitaSite> allSites = await FetchSitesList();
+				List<C_VitaSite> allSites = await FetchAllSites();
 			}
 
 			List<C_VitaSite> res = new List<C_VitaSite>();
@@ -358,7 +296,7 @@ namespace zsquared
             // todo: get an API to fetch just exactly what we want
             if (!AllSitesFetched)
             {
-                List<C_VitaSite> allSites = await FetchSitesList();
+                List<C_VitaSite> allSites = await FetchAllSites();
                 AllSitesFetched = true;
 
                 foreach (C_VitaSite site in allSites)
@@ -386,7 +324,7 @@ namespace zsquared
 			List<C_VitaSite> res = new List<C_VitaSite>();
 			foreach(string slug in SiteSlugsForOpenSites)
             {
-                C_VitaSite site = GetSiteFromCacheNoFetch(slug);
+                C_VitaSite site = GetSiteNoFetch(slug);
                 res.Add(site);
             }
 
@@ -430,6 +368,8 @@ namespace zsquared
 				HttpResponseMessage response = await client.PostAsync(loginUrl, content);
 
                 var responseString = await response.Content.ReadAsStringAsync();
+
+				Tools.UpdateBytesCounter(responseString.Length);
 
 				if (response.StatusCode != HttpStatusCode.OK)
 					return null;
@@ -490,7 +430,7 @@ namespace zsquared
 		/// </summary>
 		/// <returns>The users list.</returns>
 		/// <param name="token">Token.</param>
-        public async Task<List<C_VitaUser>> FetchUsersList(string token)
+        public async Task<List<C_VitaUser>> FetchAllUsers(string token)
 		{
 			int retryCount = 0;
 			bool retry = false;
@@ -514,12 +454,6 @@ namespace zsquared
 
 					JsonValue jv = JsonValue.Parse(resp);
 
-#if DEBUG
-					// we are expecting an array
-					if (!(jv is JsonArray))
-						throw new ApplicationException("must be an array");
-#endif
-
 					res = new List<C_VitaUser>();
 					foreach (JsonValue jv1 in jv)
 					{
@@ -539,64 +473,12 @@ namespace zsquared
 						retry = retryCount < 3;
 						retryCount++;
 					}
-				}
-				catch (Exception ex)
-				{
+                    else
+                    {
 #if DEBUG
-					Console.WriteLine(ex.Message);
+						Console.WriteLine(we.Message);
 #endif
-					res = null;
-				}
-			}
-			while (retry);
-
-			return res;
-		}
-
-		/// <summary>
-		/// Get the data for the specified user from the backend.
-		/// </summary>
-		/// <returns>The user</returns>
-		/// <param name="token">security token (required)</param>
-		/// <param name="id">id of the user to get details on</param>
-        private async Task<C_VitaUser> FetchUser(string token, int id)
-		{
-			int retryCount = 0;
-			bool retry = false;
-
-			C_VitaUser res = null;
-			do
-			{
-				try
-				{
-					retry = false;
-					string usersUrl = "/users/" + id.ToString();
-					WebClient wc = new WebClient()
-					{
-						BaseAddress = C_Vita.VitaCoreUrl
-					};
-					wc.Headers.Add(HttpRequestHeader.Cookie, token);
-					wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
-					wc.Headers.Add(HttpRequestHeader.Accept, "application/json");
-
-					string ss = await wc.DownloadStringTaskAsync(usersUrl);
-
-					JsonValue jv = JsonValue.Parse(ss);
-
-#if DEBUG
-					if (!(jv is JsonObject))
-						throw new ApplicationException("must be an object");
-#endif
-
-					res = new C_VitaUser(jv);
-				}
-				catch (WebException we)
-				{
-					if (we.Status == WebExceptionStatus.ReceiveFailure)
-					{
 						res = null;
-						retry = retryCount < 3;
-						retryCount++;
 					}
 				}
 				catch (Exception ex)
@@ -609,7 +491,45 @@ namespace zsquared
 			}
 			while (retry);
 
+            AllUsersFetched |= res != null;
+
 			return res;
+		}
+
+        public List<C_VitaUser> GetAllUsers()
+        {
+            List<C_VitaUser> res = new List<C_VitaUser>();
+            if (!AllUsersFetched)
+                return res;
+
+            foreach (C_VitaUser user in UserCache)
+                res.Add(user);
+            
+            return res;
+        }
+
+		/// <summary>
+		/// Get the data for the specified user from the backend.
+		/// </summary>
+		/// <returns>The user</returns>
+		/// <param name="token">security token (required)</param>
+		/// <param name="id">id of the user to get details on</param>
+        private async Task<C_VitaUser> FetchUser(string token, int id)
+		{
+            C_VitaUser res = null;
+
+			string usersUrl = "/users/" + id.ToString();
+
+            string responseString = await Tools.Download(usersUrl, token);
+
+            if (responseString != null)
+            {
+				JsonValue responseJson = JsonValue.Parse(responseString);
+
+				res = new C_VitaUser(responseJson);
+			}
+
+            return res;
 		}
 
 		public C_VitaUser GetUserFromCacheNoFetch(int id)
@@ -661,21 +581,21 @@ namespace zsquared
 
 		private void CleanWorkItemsFromUser(C_VitaUser user)
         {
-			List<C_WorkItem> intents = user.WorkIntentsX;
+			List<C_SignUp> intents = user.WorkIntentsX;
 			user.WorkIntentsX = null;
-			List<C_WorkItem> history = user.WorkHistoryX;
+			List<C_SignUp> history = user.WorkHistoryX;
 			user.WorkHistoryX = null;
 
-			foreach (C_WorkItem wi in intents)
+			foreach (C_SignUp wi in intents)
 			{
-				if (!WorkItemsHasId(wi.id))
-					WorkItems.Add(wi);
+				if (!SignUpsHasId(wi.id))
+					SignUps.Add(wi);
 			}
 
-			foreach (C_WorkItem wi in history)
+			foreach (C_SignUp wi in history)
 			{
-				if (!WorkItemsHasId(wi.id))
-					WorkItems.Add(wi);
+				if (!SignUpsHasId(wi.id))
+					SignUps.Add(wi);
 			}
 		}
 
@@ -686,8 +606,6 @@ namespace zsquared
         }
 
         // ---------------- SiteSchedule mgmt -----------
-
-        Dictionary<int, List<C_SiteSchedule>> SitesScheduleCache;
 
         public async Task<List<C_SiteSchedule>> GetSitesScheduleCached(int year, int month)
         {
@@ -753,33 +671,396 @@ namespace zsquared
             return res;
 		}
 
-        // ---------------- workitems mgmt --------------
-
-        private bool WorkItemsHasId(int id)
-        {
-            var ou = WorkItems.Where(wi => wi.id == id);
-
-            return ou.Any();
-        }
-
-		public List<C_WorkItem> GetWorkItemsForUser(int userId)
+		public async Task<List<C_SiteSchedule>> GetSitesScheduleForSiteCached(int year, int month, string siteSlug)
 		{
-			var ou = WorkItems.Where(wi => wi.UserId == userId);
-			List<C_WorkItem> res = ou.ToList();
+            if (SiteScheduleBySiteCache == null)
+                SiteScheduleBySiteCache = new Dictionary<string, Dictionary<int, List<C_SiteSchedule>>>();
+
+			List<C_SiteSchedule> res = null;
+
+			int key = year * 12 + month;
+			if (SiteScheduleBySiteCache.ContainsKey(siteSlug))
+            {
+                Dictionary<int, List<C_SiteSchedule>> d = SiteScheduleBySiteCache[siteSlug];
+                if (d.ContainsKey(key))
+                    res = d[key];
+            }
+            else
+            {
+                Dictionary<int, List<C_SiteSchedule>> d = new Dictionary<int, List<C_SiteSchedule>>();
+                SiteScheduleBySiteCache.Add(siteSlug, d);
+			}
+
+			// if the siteschedule we fetched has expired data, then we need to force a refetch
+			bool refetch = res == null;
+			if (!refetch && (res.Count != 0))
+			{
+				DateTime dt = res[0].SampleTime;
+				TimeSpan ts = DateTime.Now - dt;
+				refetch = ts.TotalMinutes > 30;
+			}
+
+			if (refetch)
+			{
+				C_YMD start = new C_YMD(year, month, 1);
+                C_YMD end = new C_YMD(start.Year, start.Month, DateTime.DaysInMonth(start.Year, start.Month));
+
+                res = await C_SiteSchedule.FetchSiteSchedules(start, end, siteSlug);
+                if (res != null)
+                {
+					Dictionary<int, List<C_SiteSchedule>> d = SiteScheduleBySiteCache[siteSlug];
+                    d.Add(key, res);
+                }
+			}
 
 			return res;
 		}
 
-        public List<C_WorkItem> GetWorkItemsForSiteOnDate(C_YMD onDate, string siteSlug)
+        public void RemoveSiteFromSiteCache(string siteSlug)
         {
-            var ou = WorkItems.Where(wi => ((wi.Date == onDate) && (wi.SiteSlug == siteSlug)));
+            if (SiteScheduleBySiteCache == null)
+                return;
+            
+            if (SiteScheduleBySiteCache.ContainsKey(siteSlug))
+                SiteScheduleBySiteCache.Remove(siteSlug);
+        }
+		
+        public C_SiteSchedule GetSiteScheduleForDay(C_YMD onDate, string siteSlug)
+        {
+            C_SiteSchedule res = null;
+
+            if (SitesScheduleCache == null)
+                return res;
+
+            int key = onDate.Year * 12 + onDate.Month;
+            if (SitesScheduleCache.ContainsKey(key))
+            {
+                List<C_SiteSchedule> sslist = SitesScheduleCache[key];
+                var ou = sslist.Where(ss => (ss.SiteSlug == siteSlug) && (ss.Date == onDate));
+                List<C_SiteSchedule> sslist2 = ou.ToList();
+                if (sslist2.Count != 0)
+                    res = sslist2[0];
+            }
+
+            return res;
+        }
+
+        // ---------------- workitems mgmt --------------
+
+        public async Task<C_SignUp> FetchSignUpById(string token, int userId, int signUpId)
+        {
+            C_SignUp res = null;
+
+            string submitUrl = "/signups/" + signUpId.ToString();
+
+            string responseString = await Tools.Download(submitUrl, token);
+
+            if (responseString != null)
+            {
+                JsonValue responseJson = JsonValue.Parse(responseString);
+                res = new C_SignUp(responseJson);
+            }
+
+            return res;
+        }
+
+        public void AddToSignUps(C_SignUp su)
+        {
+            if (!SignUps.Contains(su))
+                SignUps.Add(su);
+        }
+
+        public void RemoveFromSignUps(C_SignUp su)
+        {
+            if (SignUps.Contains(su))
+                SignUps.Remove(su);
+        }
+
+        public void AdjustSiteCacheForNewSignUp(C_SignUp su, C_VitaUser user, C_VitaSite site)
+        {
+            // find the actual shift for this signup
+			C_CalendarEntry ce = site.GetCalendarEntryForDate(su.Date);
+            C_WorkShift ws = null;
+			if ((ce != null) && ce.HaveShifts)
+			{
+                var ou = ce.WorkShifts.Where(wsx => wsx.id == su.ShiftId);
+                ws = ou.FirstOrDefault();
+			}
+            if (ws == null)
+                return;
+
+            // get the site schedule for us to adjust
+			C_SiteSchedule ss = GetSiteScheduleForDay(su.Date, su.SiteSlug);
+            if (ss == null)
+                return;
+
+            // now find the SiteSchedule WorkShift that matches the shift
+            C_SiteScheduleShift sss = null;
+            foreach(C_SiteScheduleShift sssx in ss.Shifts)
+            {
+                if ((ws.OpenTime == sssx.OpenTime) && (ws.CloseTime == sssx.CloseTime))
+                {
+                    sss = sssx;
+                    break;
+                }
+            }
+            if (sss == null)
+                return;
+
+            if (user.Certification == E_Certification.Basic)
+                sss.eFilersSignedUpBasic++;
+            else if (user.Certification == E_Certification.Advanced)
+                sss.eFilersSignedUpAdvanced++;
+        }
+
+		public void AdjustSiteSchedueCacheForRemovedSignUp(C_SignUp su, C_VitaUser user, C_VitaSite site)
+		{
+            if (user == null)
+                return;
+            if (site == null) 
+                return;
+
+			// find the actual shift for this signup
+			C_CalendarEntry ce = site.GetCalendarEntryForDate(su.Date);
+			C_WorkShift ws = null;
+			if ((ce != null) && ce.HaveShifts)
+			{
+				var ou = ce.WorkShifts.Where(wsx => wsx.id == su.ShiftId);
+				ws = ou.FirstOrDefault();
+			}
+			if (ws == null)
+				return;
+
+			// get the site schedule for us to adjust
+			C_SiteSchedule ss = GetSiteScheduleForDay(su.Date, su.SiteSlug);
+			if (ss == null)
+				return;
+
+			// now find the SiteSchedule WorkShift that matches the shift
+			C_SiteScheduleShift sss = null;
+			foreach (C_SiteScheduleShift sssx in ss.Shifts)
+			{
+				if ((ws.OpenTime == sssx.OpenTime) && (ws.CloseTime == sssx.CloseTime))
+				{
+					sss = sssx;
+					break;
+				}
+			}
+			if (sss == null)
+				return;
+
+			if (user.Certification == E_Certification.Basic)
+				sss.eFilersSignedUpBasic--;
+			else if (user.Certification == E_Certification.Advanced)
+				sss.eFilersSignedUpAdvanced--;
+		}
+
+		private bool SignUpsHasId(int id)
+        {
+            var ou = SignUps.Where(wi => wi.id == id);
+
+            return ou.Any();
+        }
+
+		public List<C_SignUp> GetSignUpsForUser(int userId)
+		{
+			var ou = SignUps.Where(wi => wi.UserId == userId);
+			List<C_SignUp> res = ou.ToList();
+
+			return res;
+		}
+
+        public List<C_SignUp> GetSignUpsForSiteOnDate(C_YMD onDate, string siteSlug)
+        {
+            var ou = SignUps.Where(wi => ((wi.Date == onDate) && (wi.SiteSlug == siteSlug)));
             return ou.ToList();
         }
 
-        public void ClearDirtyFlagOnIntents()
+        public void ClearDirtyFlagOnSignUps()
         {
-            foreach (C_WorkItem wi in WorkItems)
+            foreach (C_SignUp wi in SignUps)
                 wi.Dirty = false;
+        }
+
+        public List<C_SignUp> GetSignUpsByShiftId(int shiftId)
+        {
+            var ou = SignUps.Where(wi => wi.ShiftId == shiftId);
+            return ou.ToList();
+        }
+
+        public int GetCountOfSignUpsByShiftId(int shiftId)
+		{
+			var ou = SignUps.Where(wi => wi.ShiftId == shiftId);
+            return ou.Count();
+		}
+
+		// ------------- workshifts mgmt ----------------
+
+		/// <summary>
+		/// Create a new work shift
+		/// </summary>
+		/// <returns>true if successful</returns>
+		/// <param name="token">Token.</param>
+		/// <param name="shift">shift to create</param>
+		/// <param name="calEntry">Calendar Entry to add the shift to</param>
+		public async Task<bool> CreateShift(string token, string siteSlug, C_WorkShift shift, C_CalendarEntry calEntry)
+		{
+			string bodyjson = shift.ToJson();
+
+			string updateurl = "/sites/" + siteSlug + "/calendars/" + calEntry.id.ToString() + "/shifts/";
+
+			string responseString = await Tools.Upload("POST", updateurl, bodyjson, token);
+
+			if (responseString != null)
+			{
+				JsonValue responseJson = JsonValue.Parse(responseString);
+
+				C_WorkShift cex = new C_WorkShift(responseJson);
+				shift.id = cex.id;
+				if (cex.SiteSlug != null)
+					shift.SiteSlug = cex.SiteSlug;
+
+				// add it to the current Site instance
+				calEntry.WorkShifts.Add(shift);
+                WorkShifts.Add(shift);
+			}
+
+			return responseString != null;
+		}
+
+		/// <summary>
+		/// Update a shift
+		/// </summary>
+		/// <returns>true if successful</returns>
+		/// <param name="token">Token.</param>
+		/// <param name="shift">shift to update</param>
+		public async Task<bool> UpdateShift(string token, string siteSlug, C_WorkShift shift, C_CalendarEntry calEntry)
+		{
+			string bodyjson = shift.ToJson();
+
+			string updateurl = "/sites/" + siteSlug + "/calendars/" + calEntry.id.ToString() + "/shifts/" + shift.id.ToString();
+
+            string responseString = await Tools.Upload("PUT", updateurl, bodyjson, token);
+
+            if (responseString != null)
+            {
+				JsonValue responseJson = JsonValue.Parse(responseString);
+
+				C_WorkShift cex = new C_WorkShift(responseJson);
+				shift.id = cex.id;
+				//shift.SiteSlug = cex.SiteSlug;
+                shift.Dirty = false;
+			}
+
+            return responseString != null;
+		}
+
+		/// <summary>
+		/// Remove a shift
+		/// </summary>
+		/// <returns>true if successful</returns>
+		/// <param name="token">Token.</param>
+		/// <param name="shift">shift to remove</param>
+		/// <param name="calEntry">Calendar Entry to remove the shift from</param>
+		public async Task<bool> RemoveShift(string token, string siteSlug, C_WorkShift shift, C_CalendarEntry calEntry)
+		{
+			string bodyjson = shift.ToJson();
+
+			string updateurl = "/sites/" + siteSlug + "/calendars/" + calEntry.id.ToString() + "/shifts/" + shift.id.ToString();
+
+            string responseString = await Tools.Upload("DELETE", updateurl, bodyjson, token);
+
+            calEntry.WorkShifts.Remove(shift);
+            WorkShifts.Remove(shift);
+
+            return responseString != null;
+		}
+
+        public async Task<bool> EnsureShiftsInCacheForSignUps(string token, List<C_SignUp> signups)
+        {
+            foreach(C_SignUp su in signups)
+            {
+                // see if the workshift is already in our cache
+                C_WorkShift wsfid = GetWorkShiftById(su.ShiftId);
+                if (wsfid == null)
+                {
+                    // if not, we need to fetch the calendar then the shift
+                    C_VitaSite site = await GetSiteFromCache(su.SiteSlug);
+                    C_CalendarEntry ce = site.GetCalendarEntryForDate(su.Date);
+                    List<C_WorkShift> shifts = await FetchAllShiftsForCalendarEntry(token, su.SiteSlug, ce);
+                }
+            }
+
+            return true;
+        }
+
+		/// <summary>
+		/// Get a list of all shifts for a calendar entry
+		/// </summary>
+		/// <returns>list of shifts for this calendar item</returns>
+		/// <param name="token">Token.</param>
+		public async Task<List<C_WorkShift>> FetchAllShiftsForCalendarEntry(string token, string siteSlug, C_CalendarEntry calEntry)
+		{
+			List<C_WorkShift> shifts = new List<C_WorkShift>();
+            calEntry.WorkShifts = shifts;
+
+			string updateurl = "/sites/" + siteSlug + "/calendars/" + calEntry.id.ToString() + "/shifts";
+
+			string responseString = await Tools.Download(updateurl, token);
+
+			if (responseString != null)
+			{
+				JsonValue responseJson = JsonValue.Parse(responseString);
+
+				foreach (JsonValue jv in responseJson)
+				{
+					C_WorkShift ws = new C_WorkShift(jv)
+					{
+						SiteSlug = siteSlug
+					};
+					shifts.Add(ws);
+
+                    if (!WorkShifts.Contains(ws))
+                        WorkShifts.Add(ws);
+				}
+
+				calEntry.WorkShifts = shifts;
+				calEntry.HaveShifts = true;
+			}
+			else
+			{
+				shifts = new List<C_WorkShift>();
+				calEntry.WorkShifts = shifts;
+			}
+
+			return shifts;
+		}
+
+        public async Task<C_WorkShift> FetchWorkShiftById(int shiftId, string token, string siteSlug, C_CalendarEntry ce)
+		{
+			C_WorkShift res = null;
+
+            string shiftUrl = "/sites/" + siteSlug + "/calendars/" + ce.id.ToString() + "/shifts/" + shiftId.ToString();
+
+            string responseString = await Tools.Download(shiftUrl, token);
+
+            if (responseString != null)
+            {
+                JsonValue responseJson = JsonValue.Parse(responseString);
+
+                res = new C_WorkShift(responseJson);
+
+                if (!WorkShifts.Contains(res))
+                    WorkShifts.Add(res);
+            }
+
+            return res;
+		}
+
+		public C_WorkShift GetWorkShiftById(int id)
+        {
+            var ou = WorkShifts.Where(ws => ws.id == id);
+            return ou.FirstOrDefault();
         }
     }
 }

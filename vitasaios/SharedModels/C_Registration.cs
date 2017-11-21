@@ -10,63 +10,29 @@ namespace zsquared
 
     public static class C_Registration
     {
+        public const string N_Name = "name";
+        public const string N_Email = "email";
+        public const string N_Password = "password";
+        public const string N_PasswordConfirmation = "password_confirmation";
+        public const string N_Phone = "phone";
+        public const string N_Certification = "certification";
+
         public static async Task<bool> SubmitRegistration(string username, string email, string password, string phone, E_Certification cert)
         {
-			int retryCount = 0;
-			bool retry = false;
-			
-            bool success = false;
-            do
-            {
-                try
-                {
-                    retry = false;
-                    string bodyjson = "{ "
-                        + "\"name\" : \"" + username + "\""
-                        + ",\"email\" : \"" + email + "\""
-                        + ",\"password\" : \"" + password + "\""
-                        + ",\"password_confirmation\" : \"" + password + "\""
-                        + ",\"phone\" : \"" + phone + "\""
-                        + ",\"certification\" : \"" + cert.ToString() + "\""
-                        + "}";
+            C_JsonBuilder jb = new C_JsonBuilder();
+            jb.Add(username, N_Name);
+            jb.Add(email, N_Email);
+            jb.Add(password, N_Password);
+            jb.Add(password, N_PasswordConfirmation);
+            jb.Add(phone, N_Phone);
+            jb.Add(cert.ToString(), N_Certification);
+            string bodyjson = jb.ToString();
 
-                    string submiturl = "/users";
-                    WebClient wc = new WebClient()
-                    {
-                        BaseAddress = C_Vita.VitaCoreUrl
-                    };
-                    wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
-                    wc.Headers.Add(HttpRequestHeader.Accept, "application/json");
+			string submiturl = "/users/";
 
-                    byte[] dataBytes = Encoding.UTF8.GetBytes(bodyjson);
-                    // do the actual web request
-                    byte[] responseBytes = await wc.UploadDataTaskAsync(submiturl, "POST", dataBytes);
+            string responseString = await Tools.Upload("POST", submiturl, bodyjson, null);
 
-                    string responseString = Encoding.UTF8.GetString(responseBytes);
-                    JsonValue responseJson = JsonValue.Parse(responseString);
-                    // what is the response?
-                    success = true;
-                }
-				catch (WebException we)
-				{
-					if (we.Status == WebExceptionStatus.ReceiveFailure)
-					{
-						success = false;
-						retry = retryCount < 3;
-						retryCount++;
-					}
-				}
-				catch (Exception e)
-                {
-#if DEBUG
-                    Console.WriteLine(e.Message);
-#endif
-                    success = false;
-                }
-            }
-            while (retry);
-
-			return success;        
+            return responseString != null;
         }
     }
 }

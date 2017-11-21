@@ -2,14 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>CFBundleName</key>
-	<string>vitavol</string>
 	<key>CFBundleIdentifier</key>
 	<string>net.zsquared.vitavol</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
+	<string>1.1</string>
 	<key>CFBundleVersion</key>
-	<string>1.0</string>
+	<string>1.1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>MinimumOSVersion</key>
@@ -39,5 +37,7 @@
 	</array>
 	<key>NSCalendarsUsageDescription</key>
 	<string>Calendar, Reminder</string>
+	<key>CFBundleName</key>
+	<string>VITA SA</string>
 </dict>
 </plist>

@@ -24,27 +24,11 @@ namespace vitavol
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UIButton B_RestoreDefaults { get; set; }
-
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UIButton B_SaveCalendarException { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UILabel L_Date { get; set; }
-
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UILabel L_DefaultCloseTime { get; set; }
-
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UILabel L_DefaultEFilers { get; set; }
-
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UILabel L_DefaultOpenTime { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
@@ -56,15 +40,7 @@ namespace vitavol
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UITextField TB_CloseTime { get; set; }
-
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UITextField TB_NumEFilers { get; set; }
-
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UITextField TB_OpenTime { get; set; }
+        UIKit.UITableView TV_Shifts { get; set; }
 
         void ReleaseDesignerOutlets ()
         {
@@ -78,11 +54,6 @@ namespace vitavol
                 B_Back = null;
             }
 
-            if (B_RestoreDefaults != null) {
-                B_RestoreDefaults.Dispose ();
-                B_RestoreDefaults = null;
-            }
-
             if (B_SaveCalendarException != null) {
                 B_SaveCalendarException.Dispose ();
                 B_SaveCalendarException = null;
@@ -91,21 +62,6 @@ namespace vitavol
             if (L_Date != null) {
                 L_Date.Dispose ();
                 L_Date = null;
-            }
-
-            if (L_DefaultCloseTime != null) {
-                L_DefaultCloseTime.Dispose ();
-                L_DefaultCloseTime = null;
-            }
-
-            if (L_DefaultEFilers != null) {
-                L_DefaultEFilers.Dispose ();
-                L_DefaultEFilers = null;
-            }
-
-            if (L_DefaultOpenTime != null) {
-                L_DefaultOpenTime.Dispose ();
-                L_DefaultOpenTime = null;
             }
 
             if (L_SiteName != null) {
@@ -118,19 +74,9 @@ namespace vitavol
                 SW_IsOpen = null;
             }
 
-            if (TB_CloseTime != null) {
-                TB_CloseTime.Dispose ();
-                TB_CloseTime = null;
-            }
-
-            if (TB_NumEFilers != null) {
-                TB_NumEFilers.Dispose ();
-                TB_NumEFilers = null;
-            }
-
-            if (TB_OpenTime != null) {
-                TB_OpenTime.Dispose ();
-                TB_OpenTime = null;
+            if (TV_Shifts != null) {
+                TV_Shifts.Dispose ();
+                TV_Shifts = null;
             }
         }
     }

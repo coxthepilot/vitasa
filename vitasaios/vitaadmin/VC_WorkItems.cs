@@ -38,9 +38,9 @@ namespace vitaadmin
 			Task.Run(async () =>
 			{
                 // we make sure all sites have been read in, which gives us a complete list of all work items
-                List<C_VitaSite> sitesList = await Global.FetchSitesList();
+                List<C_VitaSite> sitesList = await Global.FetchAllSites();
 
-                Global.WorkItems.Sort(C_WorkItem.CompareByDateAscending);
+                Global.SignUps.Sort(C_SignUp.CompareByDateAscending);
 
 				UIApplication.SharedApplication.InvokeOnMainThread(
 				new Action(() =>
@@ -48,7 +48,7 @@ namespace vitaadmin
 					AI_Busy.StopAnimating();
 					EnableUI(true);
 
-                    C_WorkItemsTableSource ts = new C_WorkItemsTableSource(Global, Global.WorkItems);
+                    C_WorkItemsTableSource ts = new C_WorkItemsTableSource(Global, Global.SignUps);
                     TV_WorkItems.Source = ts;
 					TV_WorkItems.Delegate = new C_WorkItemsTableDelegate(Global, this, ts);
 					TV_WorkItems.ReloadData();
@@ -58,7 +58,7 @@ namespace vitaadmin
 
         private void PopulateWorkItem()
         {
-            C_WorkItem wi = Global.VolunteerWorkItem;
+            C_SignUp wi = Global.VolunteerSignUp;
             if (wi == null)
                 return;
 
@@ -122,12 +122,12 @@ namespace vitaadmin
 				UITableViewRowAction hiButton = UITableViewRowAction.Create(UITableViewRowActionStyle.Default, "Remove",
 				async delegate
 				{
-                    C_WorkItem workitemToRemove = TableSource.OurWorkItems[indexPath.Row];
+                    C_SignUp workitemToRemove = TableSource.OurWorkItems[indexPath.Row];
 
 					OurVC.AI_Busy.StartAnimating();
 					OurVC.EnableUI(false);
 
-                    bool succ = await workitemToRemove.RemoveIntent(Global);
+                    bool succ = await workitemToRemove.RemoveIntent(Token);
 					TableSource.OurWorkItems.Remove(workitemToRemove);
 
 					OurVC.EnableUI(true);
@@ -142,7 +142,7 @@ namespace vitaadmin
 			public override void RowSelected(UITableView tableView, NSIndexPath indexPath)
 			{
 				// identify the specific signup
-                Global.VolunteerWorkItem = TableSource.OurWorkItems[indexPath.Row];
+                Global.VolunteerSignUp = TableSource.OurWorkItems[indexPath.Row];
 
 				OurVC.PopulateWorkItem();
 			}
@@ -151,10 +151,10 @@ namespace vitaadmin
 		public class C_WorkItemsTableSource : UITableViewSource
 		{
 			const string CellIdentifier = "TableCell_WorkItemsTableSource";
-            public List<C_WorkItem> OurWorkItems;
+            public List<C_SignUp> OurWorkItems;
 			readonly C_Global Global;
 
-			public C_WorkItemsTableSource(C_Global global, List<C_WorkItem> ourWorkitems)
+			public C_WorkItemsTableSource(C_Global global, List<C_SignUp> ourWorkitems)
 			{
 				Global = global;
                 OurWorkItems = ourWorkitems;
@@ -176,7 +176,7 @@ namespace vitaadmin
 				if (cell == null)
 					cell = new UITableViewCell(UITableViewCellStyle.Subtitle, CellIdentifier);
 
-                C_WorkItem workitem = OurWorkItems[indexPath.Row];
+                C_SignUp workitem = OurWorkItems[indexPath.Row];
 
                 cell.DetailTextLabel.Text = workitem.Date.ToString("mmm dd, yyy") + " at " + workitem.SiteName;
 

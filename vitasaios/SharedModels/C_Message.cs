@@ -31,9 +31,6 @@ namespace zsquared
 
         public C_Message(JsonValue jv)
         {
-            if (!(jv is JsonObject))
-                throw new ApplicationException("expecting JsonObject");
-
             if (jv.ContainsKey(N_ID))
                 id = Tools.JsonProcessInt(jv[N_ID], id);
 
@@ -110,7 +107,9 @@ namespace zsquared
 
                     string responseString = await wc.DownloadStringTaskAsync(submiturl);
 
-                    JsonValue responseJson = JsonValue.Parse(responseString);
+                    Tools.UpdateBytesCounter(responseString.Length);
+
+					JsonValue responseJson = JsonValue.Parse(responseString);
 
                     msg = new C_Message(responseJson);
                 }
@@ -165,7 +164,9 @@ namespace zsquared
 
                     string responseString = await wc.UploadStringTaskAsync(submiturl, "POST", bodyjson);
 
-                    JsonValue responseJson = JsonValue.Parse(responseString);
+					Tools.UpdateBytesCounter(responseString.Length);
+
+					JsonValue responseJson = JsonValue.Parse(responseString);
                     // what is the parsed result?
 
                     success = true;
@@ -224,7 +225,9 @@ namespace zsquared
 
                     string responseString = await wc.UploadStringTaskAsync(submiturl, "PUT", bodyjson);
 
-                    JsonValue responseJson = JsonValue.Parse(responseString);
+					Tools.UpdateBytesCounter(responseString.Length);
+
+					JsonValue responseJson = JsonValue.Parse(responseString);
                     // what is the response
 
                     success = true;
@@ -272,12 +275,14 @@ namespace zsquared
                     wc.Headers.Add(HttpRequestHeader.Accept, "application/json");
 
                     string responseString = await wc.UploadStringTaskAsync(submiturl, "DELETE", "");
-                    // what is the response?
-                    //string responseString = Encoding.UTF8.GetString(responseBytes);
-                    //JsonValue responseJson = JsonValue.Parse(responseString);
-                    // if it parses then it is our success result
+					// what is the response?
+					//string responseString = Encoding.UTF8.GetString(responseBytes);
+					//JsonValue responseJson = JsonValue.Parse(responseString);
+					// if it parses then it is our success result
 
-                    success = true;
+					Tools.UpdateBytesCounter(responseString.Length);
+
+					success = true;
                 }
 				catch (WebException we)
 				{

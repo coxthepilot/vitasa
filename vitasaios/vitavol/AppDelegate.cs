@@ -18,21 +18,24 @@ namespace vitavol
     // The UIApplicationDelegate for the application. This class is responsible for launching the
     // User Interface of the application, as well as listening (and optionally responding) to application events from iOS.
     [Register("AppDelegate")]
-    public class AppDelegate : UIApplicationDelegate
+    public class AppDelegate : UIApplicationDelegate, I_Global
     {
         public static readonly string N_KnownEventsJson = "knowneventsjson";
         public static readonly string N_Email = "email";
         public static readonly string N_Password = "password";
         public static readonly string N_PushDeviceToken = "PushDeviceToken";
+		public static readonly string N_PushDeviceTokenUpdated = "PushDeviceTokenUpdated";
 
-        /// <summary>
-        /// These are values that get pass from ViewController to ViewController.
-        /// </summary>
-        public C_Global Global;
+		/// <summary>
+		/// These are values that get pass from ViewController to ViewController.
+		/// </summary>
+		public C_Global Global;
         /// <summary>
         /// The event store used to access the reminders and calendar items.
         /// </summary>
         public EKEventStore EventStore;
+
+        private long _BytesReceived;
 
         public override UIWindow Window
         {
@@ -40,11 +43,27 @@ namespace vitavol
             set;
         }
 
+        public C_Global GetGlobal()
+        {
+            return Global;
+        }
+
+        public long GetBytesReceived()
+        {
+            return _BytesReceived;
+        }
+
+        public void UpdateBytesReceived(int v)
+        {
+            _BytesReceived += v;
+        }
+
         public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
         {
             // initialize the variables that are shared across pages
             Global = new C_Global();
             EventStore = new EKEventStore();
+            _BytesReceived = 0;
 
             // only needed once when the app starts; this lets us handle the certificate from abandonedfactory.net
             C_Vita.SetupCertificateHandling();
@@ -58,7 +77,13 @@ namespace vitavol
                 if (UIDevice.CurrentDevice.CheckSystemVersion(10, 0))
                 {
                     // Request Permissions
-                    UNUserNotificationCenter.Current.RequestAuthorization(UNAuthorizationOptions.Alert, (granted, error) => { });
+                    UNUserNotificationCenter.Current.RequestAuthorization(UNAuthorizationOptions.Alert, (granted, error) => 
+                    {
+                        if (granted)
+                            Console.WriteLine("[AppDelegate] User Notification Request Authorization granted");
+                        if (error != null)
+                            Console.WriteLine("[AppDelegate] Notification error: " + error.ToString());
+                    });
 
                     //UIRemoteNotificationType notificationTypes = UIRemoteNotificationType.Alert | UIRemoteNotificationType.Sound;
                     //UIApplication.SharedApplication.RegisterForRemoteNotificationTypes(notificationTypes);
@@ -114,11 +139,14 @@ namespace vitavol
 
 			// Save new device token
 			NSUserDefaults.StandardUserDefaults.SetString(DeviceToken, N_PushDeviceToken);
+			NSUserDefaults.StandardUserDefaults.SetString("true", N_PushDeviceTokenUpdated);
 		}
 
 		public override void FailedToRegisterForRemoteNotifications(UIApplication application, NSError error)
 		{
-            Console.WriteLine("Failed to register token");
+            Console.WriteLine("[AppDelegate] Failed to register token");
+			if (error != null)
+				Console.WriteLine("[AppDelegate] Notification error: " + error.ToString());
 		}
 
    //     public override void PerformFetch(UIApplication application, Action<UIBackgroundFetchResult> completionHandler)

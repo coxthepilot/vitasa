@@ -99,6 +99,15 @@
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json" />
     <ImageAsset Include="Assets.xcassets\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vitasa 40.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vitasa 20.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vitaiconv2 1024.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vitasa 29.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vitasa 58.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vitasa 80.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vitasa 76.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vitasa 152.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vitasa 167.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
@@ -134,6 +143,18 @@
     <Compile Include="VC_WorkItems.cs" />
     <Compile Include="VC_WorkItems.designer.cs">
       <DependentUpon>VC_WorkItems.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VC_Sites.cs" />
+    <Compile Include="VC_Sites.designer.cs">
+      <DependentUpon>VC_Sites.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VC_Calendar.cs" />
+    <Compile Include="VC_Calendar.designer.cs">
+      <DependentUpon>VC_Calendar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VC_Notifications.cs" />
+    <Compile Include="VC_Notifications.designer.cs">
+      <DependentUpon>VC_Notifications.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <Import Project="..\iOSSharedModel\iOSSharedModels.projitems" Label="Shared" Condition="Exists('..\iOSSharedModel\iOSSharedModels.projitems')" />
