@@ -1,9 +1,5 @@
 ﻿<Properties StartupConfiguration="{6A54BBFE-FE39-4316-BA0B-E74DA172F56E}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="vitavol/VC_Register.cs">
-    <Files>
-      <File FileName="vitavol/VC_Register.cs" Line="141" Column="1" />
-    </Files>
-  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workbench />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|iPhoneSimulator" />
   <MonoDevelop.Ide.ItemProperties.a__vitavol AndroidDesignerPreferredDevice="Nexus 4" PreferredExecutionTarget="Android.Android_Accelerated_x86" HideGettingStarted="True" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

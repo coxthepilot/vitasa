@@ -1,8 +1,3 @@
-/Users/Billy/Documents/source/vitasa/vitasaios/vitaadmin/obj/iPhoneSimulator/Debug/ibtool/_BundleResourceWithLogicalName.items
-/Users/Billy/Documents/source/vitasa/vitasaios/vitaadmin/obj/iPhoneSimulator/Debug/actool/_PartialAppManifest.items
-/Users/Billy/Documents/source/vitasa/vitasaios/vitaadmin/obj/iPhoneSimulator/Debug/actool/_BundleResourceWithLogicalName.items
-/Users/Billy/Documents/source/vitasa/vitasaios/vitaadmin/obj/iPhoneSimulator/Debug/optimized/
-/Users/Billy/Documents/source/vitasa/vitasaios/vitaadmin/obj/iPhoneSimulator/Debug/vitaadmin.csproj.CoreCompileInputs.cache
 /Users/Billy/Documents/source/vitasa/vitasaios/vitaadmin/bin/iPhoneSimulator/Debug/vitaadmin.exe
 /Users/Billy/Documents/source/vitasa/vitasaios/vitaadmin/bin/iPhoneSimulator/Debug/vitaadmin.pdb
 /Users/Billy/Documents/source/vitasa/vitasaios/vitaadmin/bin/iPhoneSimulator/Debug/Xamarin.Forms.Core.dll
@@ -51,6 +46,10 @@
 /Users/Billy/Documents/source/vitasa/vitasaios/vitaadmin/bin/iPhoneSimulator/Debug/zh-HK/Xamarin.Forms.Platform.iOS.resources.dll
 /Users/Billy/Documents/source/vitasa/vitasaios/vitaadmin/bin/iPhoneSimulator/Debug/zh-Hans/Xamarin.Forms.Platform.iOS.resources.dll
 /Users/Billy/Documents/source/vitasa/vitasaios/vitaadmin/bin/iPhoneSimulator/Debug/zh-Hant/Xamarin.Forms.Platform.iOS.resources.dll
+/Users/Billy/Documents/source/vitasa/vitasaios/vitaadmin/obj/iPhoneSimulator/Debug/ibtool/_BundleResourceWithLogicalName.items
+/Users/Billy/Documents/source/vitasa/vitasaios/vitaadmin/obj/iPhoneSimulator/Debug/actool/_PartialAppManifest.items
+/Users/Billy/Documents/source/vitasa/vitasaios/vitaadmin/obj/iPhoneSimulator/Debug/actool/_BundleResourceWithLogicalName.items
+/Users/Billy/Documents/source/vitasa/vitasaios/vitaadmin/obj/iPhoneSimulator/Debug/optimized/
+/Users/Billy/Documents/source/vitasa/vitasaios/vitaadmin/obj/iPhoneSimulator/Debug/vitaadmin.csproj.CoreCompileInputs.cache
 /Users/Billy/Documents/source/vitasa/vitasaios/vitaadmin/obj/iPhoneSimulator/Debug/vitaadmin.exe
 /Users/Billy/Documents/source/vitasa/vitasaios/vitaadmin/obj/iPhoneSimulator/Debug/vitaadmin.pdb
-/Users/Billy/Documents/source/vitasa/vitasaios/vitaadmin/obj/iPhoneSimulator/Debug/vitaadmin.csprojResolveAssemblyReference.cache

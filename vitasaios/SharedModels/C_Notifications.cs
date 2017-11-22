@@ -37,22 +37,54 @@ namespace zsquared
 
     public class C_Notification
     {
+        public enum E_NotificationAudience { SiteCoordinators, Volunteers }
+
         public int id;
-        public string Text;
+        public string Message;
+        public E_NotificationAudience Audience;
+        public DateTime CreatedDT;
+        public DateTime UpdatedDT;
+        public DateTime SentDT;
 
         public const string N_Id = "id";
-        public const string N_Text = "text";
+        public const string N_Message = "message";
+        public const string N_Audience = "audience";
+        public const string N_CreatedDT = "created_at";
+        public const string N_UpdatedDT = "updated_at";
+        public const string N_SentDT = "sent";
 
         public C_Notification(JsonValue j)
         {
-            
-        }
+            if (j.ContainsKey(N_Id))
+                id = Tools.JsonProcessInt(j[N_Id], id);
+
+            if (j.ContainsKey(N_Message))
+                Message = Tools.JsonProcessString(j[N_Message], Message);
+
+            if (j.ContainsKey(N_Audience))
+            {
+                string au = Tools.JsonProcessString(j[N_Audience], Audience.ToString());
+                if (au.ToLower() == "volunteers")
+                    Audience = E_NotificationAudience.Volunteers;
+                else if (au.ToLower() == "sc")
+                    Audience = E_NotificationAudience.SiteCoordinators;
+            }
+
+            if (j.ContainsKey(N_CreatedDT))
+                CreatedDT = Tools.JsonProcessDateTime(j[N_CreatedDT], CreatedDT);
+
+			if (j.ContainsKey(N_UpdatedDT))
+				UpdatedDT = Tools.JsonProcessDateTime(j[N_UpdatedDT], UpdatedDT);
+
+			if (j.ContainsKey(N_SentDT))
+                SentDT = Tools.JsonProcessDateTime(j[N_SentDT], SentDT);
+		}
 
         public static async Task<List<C_Notification>> FetchAllNotifications(string token)
         {
             List<C_Notification> res = new List<C_Notification>();
 
-            string url = "/notifications/";
+            string url = "/notification_requests/";
 
             string responseString = await Tools.Download(url, token);
 
