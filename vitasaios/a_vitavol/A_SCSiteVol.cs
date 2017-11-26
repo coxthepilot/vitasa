@@ -22,17 +22,20 @@ namespace a_vitavol
 		C_Global Global;
 
 		C_VitaUser LoggedInUser;
-		C_VitaSite OurSite;
+        C_VitaSite SelectedSite;
+		C_YMD SelectedDate;
+		C_WorkShift SelectedShift;
 
 		ProgressDialog AI_Busy;
 
 		Button B_ApproveHours;
 
 		TextView L_SiteName;
-		TextView L_SiteVol;
-        TextView L_Date;
+        TextView L_SiteBasicVol;
+		TextView L_SiteAdvVol;
+		TextView L_Date;
 
-        ListView LV_List;
+        ListView LV_Volunteers;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -43,8 +46,17 @@ namespace a_vitavol
                 g.Global = new C_Global();
             Global = g.Global;
 
-            if (Global.SelectedDate == null)
-                Global.SelectedDate = C_YMD.Now;
+			LoggedInUser = Global.GetUserFromCacheNoFetch(Global.LoggedInUserId);
+			SelectedSite = Global.GetSiteNoFetch(Global.SelectedSiteSlug);
+			SelectedDate = Global.SelectedDate;
+			SelectedShift = Global.SelectedShift;
+#if DEBUG
+			if ((SelectedSite == null)
+				|| (SelectedDate == null)
+				|| (LoggedInUser == null)
+				|| (SelectedShift == null))
+				throw new ApplicationException("missing values");
+#endif
 
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.SCSiteVol);
@@ -52,10 +64,11 @@ namespace a_vitavol
             B_ApproveHours = FindViewById<Button>(Resource.Id.B_SCSiteVol_ApproveHours);
 
             L_SiteName = FindViewById<TextView>(Resource.Id.L_SCSiteVol_SiteName);
-            L_SiteVol = FindViewById<TextView>(Resource.Id.L_SCSiteVol_Volunteers);
-            L_Date = FindViewById<TextView>(Resource.Id.L_SCSiteVol_Date);
+            L_SiteBasicVol = FindViewById<TextView>(Resource.Id.L_SCSiteVol_BasicVolunteers);
+            L_SiteAdvVol = FindViewById<TextView>(Resource.Id.L_SCSiteVol_AdvVolunteers);
+			L_Date = FindViewById<TextView>(Resource.Id.L_SCSiteVol_Date);
 
-			LV_List = FindViewById<ListView>(Resource.Id.LV_SCSiteVol_List);
+            LV_Volunteers = FindViewById<ListView>(Resource.Id.LV_SCSiteVol_List);
 
             AI_Busy = new ProgressDialog(this);
             AI_Busy.SetMessage("Please wait...");
@@ -76,7 +89,7 @@ namespace a_vitavol
                     AI_Busy.Show();
 					EnableUI(false);
 
-					bool success = await SaveChangedItems();
+					bool success = await SaveChangedItems(true);
 
                     AI_Busy.Cancel();
 					EnableUI(true);
@@ -96,11 +109,11 @@ namespace a_vitavol
                 mbox.Show();
 			};
 
-            LV_List.ItemClick += (sender, e) => 
+            LV_Volunteers.ItemClick += (sender, e) => 
             {
-                Global.VolunteerSignUp = Global.SignUpsOnSiteOnDate[e.Position];
+                Global.VolunteerWorkShiftSignUp = Global.WorkShiftSignUpsOnDate[e.Position];
 
-                StartActivity(new Intent(this, typeof(A_SCVolHours)));
+				StartActivity(new Intent(this, typeof(A_SCVolHours)));
 			};
 
 			AI_Busy.Show();
@@ -110,59 +123,115 @@ namespace a_vitavol
 
 			Task.Run(async () =>
 			{
-				LoggedInUser = Global.GetUserFromCacheNoFetch(Global.LoggedInUserId);
-				OurSite = await Global.GetSiteFromCache(Global.SelectedSiteSlug);
+				// get the list os signups for this shift
+				Global.WorkShiftSignUpsOnDate = SelectedShift.SignUps;
 
-                bool success = await RebuildWorkItemsOnDateChange();
+				// compute the number needed vs have
+				int numBasicHave = 0;
+				int numAdvHave = 0;
 
-                if (success)
+				int numBasicNeeded = SelectedShift.NumBasicEFilers;
+				int numAdvNeeded = SelectedShift.NumAdvEFilers;
+
+				foreach (C_WorkShiftSignUp wi in Global.WorkShiftSignUpsOnDate)
+				{
+					if (wi.User.Certification == E_Certification.Basic)
+						numBasicHave++;
+					else if (wi.User.Certification == E_Certification.Advanced)
+						numAdvHave++;
+				}
+
+				// get the actual signup for each one so we can modify the number of hours worked
+				foreach (C_WorkShiftSignUp wssu in Global.WorkShiftSignUpsOnDate)
+				{
+					if (wssu.TheSignUp == null)
+					{
+						C_SignUp su = await Global.FetchSignUpById(LoggedInUser.Token, wssu.User.UserId, wssu.id);
+						wssu.TheSignUp = su;
+					}
+				}
+
+                RunOnUiThread(() =>
                 {
-                    // find out how many are required
-                    int dayOfWeek = (int)Global.SelectedDate.DayOfWeek;
-                    int requiredVolunteers = OurSite.SiteCalendar[dayOfWeek].NumEFilers;
-                    C_CalendarEntry SiteCalendarEntry = OurSite.GetCalendarExceptionForDateForSite(Global.SelectedDate);
-                    if (SiteCalendarEntry != null)
-                        requiredVolunteers = SiteCalendarEntry.NumEFilers;
+                    AI_Busy.Cancel();
+                    EnableUI(true);
 
-                    RunOnUiThread(() =>
-                    {
-                        AI_Busy.Cancel();
-                        EnableUI(true);
+                    LV_Volunteers.Adapter = new ShiftAdapter(this, Global.WorkShiftSignUpsOnDate, Global);
 
-                        LV_List.Adapter = new SignUpAdapter(this, Global.SignUpsOnSiteOnDate, Global);
+                    L_SiteName.Text = SelectedSite.Name;
+                    L_SiteBasicVol.Text = "Basic Volunteers: " + numBasicHave.ToString() + " of " + numBasicNeeded.ToString();
+                    L_SiteAdvVol.Text = "Advanced Volunteers: " + numAdvHave.ToString() + " of " + numAdvNeeded.ToString();
 
-                        L_SiteName.Text = OurSite.Name;
-                        L_SiteVol.Text = "Volunteers: " + Global.SignUpsOnSiteOnDate.Count.ToString() + " of " + requiredVolunteers.ToString();
+                    B_ApproveHours.Enabled = (Global.WorkShiftSignUpsOnDate.Count != 0) && (SelectedDate <= C_YMD.Now);
 
-                        B_ApproveHours.Enabled = (Global.SignUpsOnSiteOnDate.Count != 0) && (Global.SelectedDate <= C_YMD.Now);
-
-                        EnableUI(true);
-                    });
-                }
+                    EnableUI(true);
+                });
 			});
 		}
 
 		private void EnableUI(bool en)
 		{
-            B_ApproveHours.Enabled = en && (Global.SignUpsOnSiteOnDate.Count != 0) && (Global.SelectedDate <= C_YMD.Now);
+            B_ApproveHours.Enabled = en && (Global.WorkShiftSignUpsOnDate.Count != 0) && (SelectedDate <= C_YMD.Now);
 		}
 
 		public override void OnBackPressed()
 		{
-            StartActivity(new Intent(this, typeof(A_SCSiteVolCalendar)));
+			// see if any of the items were changed and not saved
+			var ou1 = Global.WorkShiftSignUpsOnDate.Where(wssu => wssu.TheSignUp.Dirty);
+			if (!ou1.Any())
+			{
+                StartActivity(new Intent(this, typeof(A_SCSiteShifts)));
+				return;
+			}
+
+			C_MessageBox mbox = new C_MessageBox(this,
+            	 "Items Changed?",
+            	 "Approve signups on this date?",
+                 E_MessageBoxButtons.YesNoCancel);
+			mbox.Dismissed += async (sender1, args1) =>
+			{
+                if (args1.Result == E_MessageBoxResults.Cancel)
+					return;
+                else if (args1.Result == E_MessageBoxResults.No)
+                {
+					StartActivity(new Intent(this, typeof(A_SCSiteShifts)));
+                    return;
+				}
+
+				AI_Busy.Show();
+				EnableUI(false);
+
+				bool success = await SaveChangedItems(false);
+
+				AI_Busy.Cancel();
+				EnableUI(true);
+
+				if (!success)
+				{
+					C_MessageBox mbox1 = new C_MessageBox(this,
+								"Error",
+								"Unble to save the work item",
+								 E_MessageBoxButtons.Ok);
+					mbox1.Show();
+					return;
+				}
+
+				StartActivity(new Intent(this, typeof(A_SCSiteShifts)));
+			};
+			mbox.Show();
 		}
 
-		private async Task<bool> SaveChangedItems()
+		private async Task<bool> SaveChangedItems(bool approveHours)
 		{
 			bool res = true;
 			try
 			{
-				foreach (C_SignUp wi in Global.SignUpsOnSiteOnDate)
+				foreach (C_WorkShiftSignUp wi in Global.WorkShiftSignUpsOnDate)
 				{
-					wi.Approved = true;
-					bool success = await wi.UpdateSignUp(Global);
+                    wi.TheSignUp.Approved |= approveHours;
+					bool success = await wi.TheSignUp.UpdateSignUp(LoggedInUser.Token);
 					res &= success;
-					wi.Dirty = false;
+					wi.TheSignUp.Dirty = false;
 				}
 			}
 			catch { }
@@ -170,31 +239,16 @@ namespace a_vitavol
 			return res;
 		}
 
-		private async Task<bool> RebuildWorkItemsOnDateChange()
+        public class ShiftAdapter : BaseAdapter<C_WorkShiftSignUp>
 		{
-			// find out how many Volunteers signed up to work on this date
-			Global.SignUpsOnSiteOnDate = Global.GetSignUpsForSiteOnDate(Global.SelectedDate, OurSite.Slug);
-
-			// build a dictionary of user id to user name
-			Dictionary<int, string> UserIdToUser = new Dictionary<int, string>();
-			foreach (C_SignUp wi in Global.SignUpsOnSiteOnDate)
-			{
-                bool success = await Global.EnsureUserInCache(wi.UserId, LoggedInUser.Token);
-			}
-
-			return true;
-		}
-
-		public class SignUpAdapter : BaseAdapter<C_SignUp>
-		{
-            readonly List<C_SignUp> Items;
+            readonly List<C_WorkShiftSignUp> SignUps;
             readonly Activity Context;
 			readonly C_Global Global;
 
-			public SignUpAdapter(Activity context, List<C_SignUp> items, C_Global global) : base()
+            public ShiftAdapter(Activity context, List<C_WorkShiftSignUp> signUps, C_Global global) : base()
 			{
 				Context = context;
-				Items = items;
+				SignUps = signUps;
                 Global = global;
 			}
 
@@ -203,14 +257,14 @@ namespace a_vitavol
 				return position;
 			}
 
-			public override C_SignUp this[int position]
+            public override C_WorkShiftSignUp this[int position]
 			{
-				get { return Items[position]; }
+				get { return SignUps[position]; }
 			}
 
 			public override int Count
 			{
-				get { return Items.Count; }
+				get { return SignUps.Count; }
 			}
 
 			public override View GetView(int position, View convertView, ViewGroup parent)
@@ -219,54 +273,12 @@ namespace a_vitavol
 				if (view == null) // no view to re-use, create new
 					view = Context.LayoutInflater.Inflate(Resource.Layout.SuggestionCell, null);
 
-				C_SignUp wi = Items[position];
+                C_WorkShiftSignUp signup = SignUps[position];
 
-                C_VitaUser user = Global.GetUserFromCacheNoFetch(wi.UserId);
-
-				view.FindViewById<TextView>(Resource.Id.Text1).Text = user.Name;
-                view.FindViewById<TextView>(Resource.Id.Text2).Text = "[" + user.Phone + "] " + user.Certification.ToString() + "  " + wi.Hours.ToString() + " hours";
+				view.FindViewById<TextView>(Resource.Id.Text1).Text = signup.User.UserName;
+                view.FindViewById<TextView>(Resource.Id.Text2).Text = "[" + signup.User.Phone + "] " + signup.User.Certification.ToString() + " - " + signup.TheSignUp.Hours.ToString() + " hours";
 
 				return view;
-			}
-		}
-
-		public class DatePickerFragment : DialogFragment,
-								  DatePickerDialog.IOnDateSetListener
-		{
-			// TAG can be any string of your choice.
-			public static readonly string TAG = "X:" + typeof(DatePickerFragment).Name.ToUpper();
-
-            public DateTime TimeToStart;
-
-			// Initialize this value to prevent NullReferenceExceptions.
-			Action<DateTime> _dateSelectedHandler = delegate { };
-
-			public static DatePickerFragment NewInstance(Action<DateTime> onDateSelected)
-			{
-                DatePickerFragment frag = new DatePickerFragment()
-                {
-                    _dateSelectedHandler = onDateSelected
-                };
-                return frag;
-			}
-
-			public override Dialog OnCreateDialog(Bundle savedInstanceState)
-			{
-				//DateTime currently = DateTime.Now;
-				DatePickerDialog dialog = new DatePickerDialog(Activity,
-															   this,
-															   TimeToStart.Year,
-															   TimeToStart.Month -1,
-															   TimeToStart.Day);
-				return dialog;
-			}
-
-			public void OnDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth)
-			{
-				// Note: monthOfYear is a value between 0 and 11, not 1 and 12!
-				DateTime selectedDate = new DateTime(year, monthOfYear + 1, dayOfMonth);
-				//Log.Debug(TAG, selectedDate.ToLongDateString());
-				_dateSelectedHandler(selectedDate);
 			}
 		}
 	}

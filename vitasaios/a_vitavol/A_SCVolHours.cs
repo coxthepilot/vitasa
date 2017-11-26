@@ -29,7 +29,7 @@ namespace a_vitavol
 
         EditText TB_Hours;
 
-        C_SignUp OurWorkItem;
+		const float EPSILON = 0.001f;
 
 		protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -51,9 +51,6 @@ namespace a_vitavol
 			AI_Busy.SetCancelable(false);
 			AI_Busy.SetProgressStyle(ProgressDialogStyle.Spinner);
 
-            OurWorkItem = Global.VolunteerSignUp;
-            C_VitaUser OurUser = Global.GetUserFromCacheNoFetch(OurWorkItem.UserId);
-
             L_Date = FindViewById<TextView>(Resource.Id.L_Date);
             L_Site = FindViewById<TextView>(Resource.Id.L_Site);
             L_User = FindViewById<TextView>(Resource.Id.L_User);
@@ -62,20 +59,48 @@ namespace a_vitavol
 
 			TB_Hours = FindViewById<EditText>(Resource.Id.TB_Hours);
 
-			L_Date.Text = OurWorkItem.Date.ToString("mmm dd, yyyy");
-			L_Site.Text = OurWorkItem.SiteName;
-            L_User.Text = OurUser.Name;
-            L_Phone.Text = OurUser.Phone;
-            L_Approval.Text = OurWorkItem.Approved ? "Approved" : "Not Approved";
+            L_Phone.Click += (sender, e) => 
+            {
+				string phoneNumber = Global.VolunteerWorkShiftSignUp.User.Phone;
+				// clean up the number before we use it to make the call
+				phoneNumber = phoneNumber.Replace("-", "");
+				phoneNumber = phoneNumber.Trim();
+				phoneNumber = phoneNumber.Replace(" ", "");
+				phoneNumber = phoneNumber.Replace("(", "");
+				phoneNumber = phoneNumber.Replace(")", "");
 
-            TB_Hours.Text = OurWorkItem.Hours.ToString();
+                var uri = Android.Net.Uri.Parse("tel:" + phoneNumber);
+
+				StartActivity(new Intent(Intent.ActionDial, uri));            
+            };
+
+			L_Date.Text = Global.VolunteerWorkShiftSignUp.TheSignUp.Date.ToString("dow mmm dd, yyyy");
+			L_Site.Text = Global.VolunteerWorkShiftSignUp.TheSignUp.SiteName;
+			L_User.Text = Global.VolunteerWorkShiftSignUp.User.UserName;
+			L_Approval.Text = Global.VolunteerWorkShiftSignUp.TheSignUp.Approved ? "Approved" : "not approved";
+			L_Phone.Text = Global.VolunteerWorkShiftSignUp.User.Phone;
+
+			TB_Hours.Text = Global.VolunteerWorkShiftSignUp.TheSignUp.Hours.ToString();
+
+            TB_Hours.Enabled = (Global.VolunteerWorkShiftSignUp.TheSignUp.Date <= C_YMD.Now);
 		}
 
 		public override void OnBackPressed()
 		{
-            try { OurWorkItem.Hours = Convert.ToSingle(TB_Hours.Text); }
-            catch {}                                           
-            
+			try
+			{
+				float h = Convert.ToSingle(TB_Hours.Text);
+				if (Math.Abs(h - Global.VolunteerWorkShiftSignUp.TheSignUp.Hours) > EPSILON)
+				{
+					Global.VolunteerWorkShiftSignUp.TheSignUp.Dirty = true;
+					Global.VolunteerWorkShiftSignUp.TheSignUp.Hours = h;
+				}
+			}
+			catch
+			{
+				Global.VolunteerWorkShiftSignUp.TheSignUp.Dirty = false;
+			}
+
             StartActivity(new Intent(this, typeof(A_SCSiteVol)));
 		}
 	}

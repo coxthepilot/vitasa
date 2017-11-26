@@ -20,6 +20,7 @@ namespace a_vitavol
     public class A_VolCalendar : Activity
     {
 		C_Global Global;
+		C_VitaUser LoggedInUser;
 
 		C_GVHelper GVHelper;
 
@@ -42,7 +43,9 @@ namespace a_vitavol
 			MyAppDelegate g = (MyAppDelegate)Application;
 			if (g.Global == null)
 				g.Global = new C_Global();
+            
 			Global = g.Global;
+			LoggedInUser = Global.GetUserFromCacheNoFetch(Global.LoggedInUserId);
 
 			SetContentView(Resource.Layout.VolCalendar);
 
@@ -61,8 +64,8 @@ namespace a_vitavol
 			AI_Busy.SetCancelable(false);
 			AI_Busy.SetProgressStyle(ProgressDialogStyle.Spinner);
 
-            if (Global.SelectedDate == null)
-                Global.SelectedDate = C_YMD.Now;
+            if (Global.CalendarDate == null)
+                Global.CalendarDate = C_YMD.Now;
 
 			IMG_Closed.SetImageResource(Resource.Drawable.closed);
             IMG_OpenNoNeeds.SetImageResource(Resource.Drawable.opennoneeds);
@@ -72,20 +75,20 @@ namespace a_vitavol
 
 			B_NextMonth.Click += (sender, e) =>
 			{
-				C_YMD d = Global.SelectedDate;
+                C_YMD d = Global.CalendarDate;
 				d.Day = 1;
 				d.AddMonths(1);
-				Global.SelectedDate = d;
+				Global.CalendarDate = d;
 
-				L_Date.Text = Global.SelectedDate.ToString("mmm yyyy");
+				L_Date.Text = Global.CalendarDate.ToString("mmm yyyy");
 
                 AI_Busy.Show();
 
 				Task.Run(async () =>
 				{
-					Global.SitesSchedule = await Global.GetSitesScheduleCached(Global.SelectedDate.Year, Global.SelectedDate.Month);
+					Global.SitesSchedule = await Global.GetSitesScheduleCached(Global.CalendarDate.Year, Global.CalendarDate.Month);
 
-					C_DateDetails[] details = BuildDateStateArray(Global.SelectedDate);
+					C_DateDetails[] details = BuildDateStateArray(Global.CalendarDate);
 					C_DateDetails[] dayDetails = BuildDayStateArray();
 
 					RunOnUiThread(() =>
@@ -98,19 +101,19 @@ namespace a_vitavol
 
 			B_PrevMonth.Click += (sender, e) =>
 			{
-				C_YMD d = Global.SelectedDate;
+				C_YMD d = Global.CalendarDate;
 				d.Day = 1;
 				d.SubtractMonths(1);
-				Global.SelectedDate = d;
+				Global.CalendarDate = d;
 
-				L_Date.Text = Global.SelectedDate.ToString("mmm yyyy");
+				L_Date.Text = Global.CalendarDate.ToString("mmm yyyy");
 
                 AI_Busy.Show();
                 Task.Run(async () => 
                 {
-					Global.SitesSchedule = await Global.GetSitesScheduleCached(Global.SelectedDate.Year, Global.SelectedDate.Month);
+					Global.SitesSchedule = await Global.GetSitesScheduleCached(Global.CalendarDate.Year, Global.CalendarDate.Month);
 					
-					C_DateDetails[] details = BuildDateStateArray(Global.SelectedDate);
+					C_DateDetails[] details = BuildDateStateArray(Global.CalendarDate);
 					C_DateDetails[] dayDetails = BuildDayStateArray();
 
 					RunOnUiThread(() => 
@@ -125,16 +128,16 @@ namespace a_vitavol
 
 			Task.Run(async () =>
 			{
-				L_Date.Text = Global.SelectedDate.ToString("mmm yyyy");
+				L_Date.Text = Global.CalendarDate.ToString("mmm yyyy");
 
-				Global.SitesSchedule = await Global.GetSitesScheduleCached(Global.SelectedDate.Year, Global.SelectedDate.Month);
+				Global.SitesSchedule = await Global.GetSitesScheduleCached(Global.CalendarDate.Year, Global.CalendarDate.Month);
 				// todo: need a timeout on the SitesSchedule
 
 				RunOnUiThread(() =>
 				{
 					AI_Busy.Cancel();
 
-					C_DateDetails[] details = BuildDateStateArray(Global.SelectedDate);
+                    C_DateDetails[] details = BuildDateStateArray(Global.CalendarDate);
 					C_DateDetails[] dayDetails = BuildDayStateArray();
 					GVHelper = new C_GVHelper(this, GV_Calendar);
 
@@ -206,11 +209,9 @@ namespace a_vitavol
                     // see if the user is already signed up somewhere that day
                     List<C_SignUp> LoggedInUserWorkItems = Global.GetSignUpsForUser(Global.LoggedInUserId);
                     var oux = LoggedInUserWorkItems.Where(wi => wi.Date == ourDate);
-
                     dayState.Boxed = oux.Any();
 
                     List<C_SiteSchedule> sitesOnDateSchedule = C_SiteSchedule.GetSiteScheduleForSiteOnDate(null, ourDate, Global.SitesSchedule);
-
                     bool allClosed = C_SiteSchedule.AllSitesClosed(sitesOnDateSchedule);
                     if (allClosed)
                     {
@@ -218,9 +219,27 @@ namespace a_vitavol
                     }
                     else
                     {
-                        var ou = sitesOnDateSchedule.Where(ss => ss.EFilersNeeded > ss.EFilersSignedUp);
+						List<C_SiteSchedule> slist = new List<C_SiteSchedule>();
+						foreach (C_SiteSchedule ss in sitesOnDateSchedule)
+						{
+							bool anyNeed = false;
+							foreach (C_SiteScheduleShift sss in ss.Shifts)
+							{
+								if (
+									((sss.eFilersSignedUpBasic < sss.eFilersNeededBasic) && (LoggedInUser.Certification == E_Certification.Basic))
+									|| ((sss.eFilersSignedUpAdvanced < sss.eFilersNeededAdvanced) && (LoggedInUser.Certification == E_Certification.Advanced))
+								)
+								{
+									anyNeed = true;
+									break;
+								}
+							}
+							if (anyNeed)
+								slist.Add(ss);
+						}
 
-                        dayState.SiteState = ou.Any() ? E_SiteState.OpenWithNeeds : E_SiteState.OpenNoNeeds;
+
+                        dayState.SiteState = (slist.Count != 0) ? E_SiteState.OpenWithNeeds : E_SiteState.OpenNoNeeds;
                     }
                 }
 

@@ -283,6 +283,9 @@ namespace zsquared
 						case E_SiteState.OpenWithNeeds:
                             idx = item.Boxed ? ResourceIds[C_GVHelper.ID_OpenWithNeedsBoxed] : ResourceIds[C_GVHelper.ID_OpenWithNeeds];
 							break;
+                        case E_SiteState.Background:
+                            idx = ResourceIds[C_GVHelper.ID_Background];
+                            break;
 					}
 					L_Cell.SetBackgroundResource(idx);
 					break;

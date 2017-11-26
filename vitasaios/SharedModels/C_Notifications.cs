@@ -46,6 +46,8 @@ namespace zsquared
         public DateTime UpdatedDT;
         public DateTime SentDT;
 
+        public bool Dirty; // is only used by the UI; not save in the DB
+
         public const string N_Id = "id";
         public const string N_Message = "message";
         public const string N_Audience = "audience";
@@ -53,13 +55,29 @@ namespace zsquared
         public const string N_UpdatedDT = "updated_at";
         public const string N_SentDT = "sent";
 
+        public C_Notification()
+        {
+            id = -1;
+            Message = "";
+            Audience = E_NotificationAudience.Volunteers;
+            CreatedDT = DateTime.MinValue;
+            UpdatedDT = DateTime.MinValue;
+            SentDT = DateTime.MinValue;
+            Dirty = false;
+        }
+
         public C_Notification(JsonValue j)
         {
+            SentDT = DateTime.MinValue;
+
             if (j.ContainsKey(N_Id))
                 id = Tools.JsonProcessInt(j[N_Id], id);
 
             if (j.ContainsKey(N_Message))
-                Message = Tools.JsonProcessString(j[N_Message], Message);
+            {
+                string unescapedMessage = Tools.JsonProcessString(j[N_Message], Message);
+                Message = unescapedMessage.Replace("\\n", "\n");
+			}
 
             if (j.ContainsKey(N_Audience))
             {
@@ -78,6 +96,8 @@ namespace zsquared
 
 			if (j.ContainsKey(N_SentDT))
                 SentDT = Tools.JsonProcessDateTime(j[N_SentDT], SentDT);
+
+            Dirty = false;
 		}
 
         public static async Task<List<C_Notification>> FetchAllNotifications(string token)
@@ -101,5 +121,69 @@ namespace zsquared
 
             return res;
         }
+
+        public async Task<bool> Update(string token)
+        {
+            string responseString = null;
+
+            string auds = Audience == E_NotificationAudience.Volunteers ? "volunteers" : "sc";
+
+            string escapedMessage = Message.Replace("\n", "\\n");
+
+			C_JsonBuilder jb = new C_JsonBuilder();
+            jb.Add(escapedMessage, N_Message);
+            jb.Add(auds, N_Audience);
+            string bodyjson = jb.ToString();
+
+            // check to see if this is a create or update
+            if (id == -1)
+            {
+                // is a create
+                string url = "/notification_requests/";
+
+				responseString = await Tools.Upload("POST", url, bodyjson, token);
+
+                JsonValue responseJson = JsonValue.Parse(responseString);
+                if (responseJson.ContainsKey(N_Id))
+                    id = Tools.JsonProcessInt(responseJson[N_Id], id);
+			}
+            else
+            {
+                // is an update
+				string url = "/notification_requests/" + id.ToString();
+
+                responseString = await Tools.Upload("PUT", url, bodyjson, token);
+			}
+
+            if (responseString != null)
+                Dirty = false;
+
+            return responseString != null;
+        }
+
+        public async Task<bool> Delete(string token)
+        {
+            if (id == -1)
+                return true;
+            
+            string responseString = null;
+
+            string url = "/notification_requests/" + id.ToString();
+
+            responseString = await Tools.Upload("DELETE", url, "", token);
+
+            return responseString != null;
+        }
+
+        public async Task<bool> Send(string token)
+        {
+			string url = "/notification_requests/" + id.ToString() + "/resend/";
+            if (SentDT == DateTime.MinValue)
+                url = "/notification_requests/" + id.ToString() + "/send/";
+
+			string responseString = await Tools.Upload("POST", url, "", token);
+
+            return responseString != null;
+		}
     }
 }

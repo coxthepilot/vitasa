@@ -27,8 +27,6 @@ namespace a_vitavol
         EditText TB_Name;
         EditText TB_Phone;
 
-        CheckBox CB_Advanced;
-
         Button B_Submit;
 
 		ProgressDialog AI_Busy;
@@ -53,12 +51,9 @@ namespace a_vitavol
 
             B_Submit = FindViewById<Button>(Resource.Id.B_Profile_Submit);
 
-            CB_Advanced = FindViewById<CheckBox>(Resource.Id.CB_Profile_Advanced);
-
 			TB_Name.Text = LoggedInUser.Name;
             L_Email.Text = LoggedInUser.Email;
             TB_Phone.Text = LoggedInUser.Phone;
-            CB_Advanced.Checked = LoggedInUser.Certification == E_Certification.Advanced;
 
 			AI_Busy = new ProgressDialog(this);
 			AI_Busy.SetMessage("Please wait...");
@@ -69,12 +64,11 @@ namespace a_vitavol
             {
                 LoggedInUser.Name = TB_Name.Text;
                 LoggedInUser.Phone = TB_Phone.Text;
-                LoggedInUser.Certification = CB_Advanced.Checked ? E_Certification.Advanced : E_Certification.Basic;
 
                 AI_Busy.Show();
                 EnableUI(false);
 
-                bool success = await LoggedInUser.UpdateUserProfile(LoggedInUser.Token);
+                bool success = await LoggedInUser.UpdateUserProfile();
 
                 AI_Busy.Cancel();
                 EnableUI(true);
@@ -111,7 +105,6 @@ namespace a_vitavol
         {
             TB_Name.Enabled = en;
             TB_Phone.Enabled = en;
-            CB_Advanced.Enabled = en;
             B_Submit.Enabled = en;
         }
     }

@@ -50,40 +50,24 @@ namespace a_vitavol
 
             OurUser = Global.GetUserFromCacheNoFetch(Global.LoggedInUserId);
 
+            OpenSitesThatNeedHelp = new List<C_VitaSite>();
+            foreach(string s in Global.OpenSitesThatNeedHelp)
+            {
+                C_VitaSite site = Global.GetSiteNoFetch(s);
+                OpenSitesThatNeedHelp.Add(site);
+            }
+
 			// Set our view from the "main" layout resource
             SetContentView(Resource.Layout.VolPickSiteMap);
 
-            Task.Run(async () => 
-            {
-				// build a list of all open sites on this date
-				List<C_VitaSite> openSitesOnDate = await Global.GetOpenSitesOnDate(Global.SelectedDate);
+			if (C_GooglePlayHelper.IsGooglePlayServicesInstalled(this))
+			{
+				// pass in the Context, ConnectionListener and ConnectionFailedListener
+				apiClient = new GoogleApiClient.Builder(this, this, this)
+					.AddApi(LocationServices.API).Build();
+			}
 
-				// then filter to those sites that need help on this date
-				OpenSitesThatNeedHelp = new List<C_VitaSite>();
-				foreach (C_VitaSite site in openSitesOnDate)
-				{
-					int numRequired = site.GetNumEFilersRequiredOnDateAllShifts(Global.SelectedDate);
-
-
-					List<C_SignUp> workItemsForSiteOnDate = Global.GetSignUpsForSiteOnDate(Global.SelectedDate, site.Slug);
-
-					if (numRequired > workItemsForSiteOnDate.Count)
-						OpenSitesThatNeedHelp.Add(site);
-				}
-
-                RunOnUiThread(() => 
-                {
-					if (C_GooglePlayHelper.IsGooglePlayServicesInstalled(this))
-					{
-						// pass in the Context, ConnectionListener and ConnectionFailedListener
-						apiClient = new GoogleApiClient.Builder(this, this, this)
-							.AddApi(LocationServices.API).Build();
-					}
-
-					InitMapFragment();
-				});
-
-			});
+			InitMapFragment();
 		}
 
 		private void InitMapFragment()
@@ -138,7 +122,7 @@ namespace a_vitavol
 		{
 			_map = map;
 
-            _map.InfoWindowClick += MapOnInfoWindowClick;
+            //_map.InfoWindowClick += MapOnInfoWindowClick;
 
             // default starting location, center of San Antonio
 			LatLng location = new LatLng(29.415411, -98.4918232);
@@ -167,20 +151,20 @@ namespace a_vitavol
                 }
             }
 		}
-		private void MapOnInfoWindowClick(object sender, GoogleMap.InfoWindowClickEventArgs e)
-		{
-            Marker myMarker = e.Marker;
-            C_VitaSite s = GetSiteFromName(e.Marker.Title);
-            if (s != null)
-            {
-                Global.SelectedSiteSlug = s.Slug;
-                Global.SelectedSiteName = s.Name;
-				Global.SignUpsOnSiteOnDate = Global.GetSignUpsForSiteOnDate(Global.SelectedDate, Global.SelectedSiteSlug);
-                Global.ViewCameFrom = E_ViewCameFrom.Map;
+		//private void MapOnInfoWindowClick(object sender, GoogleMap.InfoWindowClickEventArgs e)
+		//{
+  //          Marker myMarker = e.Marker;
+  //          C_VitaSite s = GetSiteFromName(e.Marker.Title);
+  //          if (s != null)
+  //          {
+  //              Global.SelectedSiteSlug = s.Slug;
+  //              Global.SelectedSiteName = s.Name;
+		//		Global.SignUpsOnSiteOnDate = Global.GetSignUpsForSiteOnDate(Global.SelectedDate, Global.SelectedSiteSlug);
+  //              Global.ViewCameFrom = E_ViewCameFrom.Map;
 
-				StartActivity(new Intent(this, typeof(A_ViewSignUpNew)));
-			}
-		}
+		//		StartActivity(new Intent(this, typeof(A_ViewSignUpNew)));
+		//	}
+		//}
 
         private C_VitaSite GetSiteFromName(string name)
         {

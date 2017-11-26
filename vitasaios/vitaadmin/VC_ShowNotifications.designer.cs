@@ -24,6 +24,10 @@ namespace vitaadmin
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UIButton B_CreateNew { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UIButton B_Save { get; set; }
 
         [Outlet]
@@ -64,6 +68,11 @@ namespace vitaadmin
             if (B_Back != null) {
                 B_Back.Dispose ();
                 B_Back = null;
+            }
+
+            if (B_CreateNew != null) {
+                B_CreateNew.Dispose ();
+                B_CreateNew = null;
             }
 
             if (B_Save != null) {

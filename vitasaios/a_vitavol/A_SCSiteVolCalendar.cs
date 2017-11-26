@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Text;
 
 using Android.App;
@@ -18,11 +19,11 @@ namespace a_vitavol
     public class A_SCSiteVolCalendar : Activity
     {
 		C_Global Global;
+        C_VitaSite SelectedSite;
 
 		ProgressDialog AI_Busy;
 
 		C_GVHelper GVHelper;
-        C_VitaSite OurSite;
 
 		GridView GV_Calendar;
         Button B_PrevMonth;
@@ -44,10 +45,10 @@ namespace a_vitavol
 				g.Global = new C_Global();
 			Global = g.Global;
 
-			if (Global.SelectedDate == null)
-				Global.SelectedDate = C_YMD.Now;
+			if (Global.CalendarDate == null)
+				Global.CalendarDate = C_YMD.Now;
 
-            OurSite = Global.GetSiteNoFetch(Global.SelectedSiteSlug);
+            SelectedSite = Global.GetSiteNoFetch(Global.SelectedSiteSlug);
 
 			// Set our view from the "main" layout resource
             SetContentView(Resource.Layout.SCSiteVolCalendar);
@@ -70,63 +71,93 @@ namespace a_vitavol
 
 			B_NextMonth.Click += (sender, e) =>
 			{
-				C_YMD d = Global.SelectedDate;
+				C_YMD d = Global.CalendarDate;
 				d.Day = 1;
 				d.AddMonths(1);
-				Global.SelectedDate = d;
+				Global.CalendarDate = d;
 
-				L_Date.Text = Global.SelectedDate.ToString("mmm yyyy");
+				L_Date.Text = Global.CalendarDate.ToString("mmm yyyy");
 
-				C_DateDetails[] detailsx = BuildDateStateArray(Global.SelectedDate);
-				C_DateDetails[] dayDetailsx = BuildDayStateArray();
-				GVHelper.SetNewDateDetails(detailsx, dayDetailsx);
+                AI_Busy.Show();
+                Task.Run(async () => 
+                {
+					Global.SitesSchedule = await Global.GetSitesScheduleForSiteCached(Global.CalendarDate.Year, Global.CalendarDate.Month, SelectedSite.Slug);
+
+					RunOnUiThread(() => 
+                    {
+                        AI_Busy.Cancel();
+
+						C_DateDetails[] detailsx = BuildDateStateArray(Global.CalendarDate);
+						C_DateDetails[] dayDetailsx = BuildDayStateArray();
+						GVHelper.SetNewDateDetails(detailsx, dayDetailsx);
+					});
+                });
 			};
 
 			B_PrevMonth.Click += (sender, e) =>
 			{
-				C_YMD d = Global.SelectedDate;
+				C_YMD d = Global.CalendarDate;
 				d.Day = 1;
 				d.SubtractMonths(1);
-				Global.SelectedDate = d;
+				Global.CalendarDate = d;
 
-				L_Date.Text = Global.SelectedDate.ToString("mmm yyyy");
+				L_Date.Text = Global.CalendarDate.ToString("mmm yyyy");
 
-				C_DateDetails[] detailsx = BuildDateStateArray(Global.SelectedDate);
-				C_DateDetails[] dayDetailsx = BuildDayStateArray();
-				GVHelper.SetNewDateDetails(detailsx, dayDetailsx);
+				AI_Busy.Show();
+				Task.Run(async () =>
+				{
+					Global.SitesSchedule = await Global.GetSitesScheduleForSiteCached(Global.CalendarDate.Year, Global.CalendarDate.Month, SelectedSite.Slug);
+
+					RunOnUiThread(() =>
+					{
+						AI_Busy.Cancel();
+
+						C_DateDetails[] detailsx = BuildDateStateArray(Global.CalendarDate);
+						C_DateDetails[] dayDetailsx = BuildDayStateArray();
+						GVHelper.SetNewDateDetails(detailsx, dayDetailsx);
+					});
+				});
 			};
 
-			L_Date.Text = Global.SelectedDate.ToString("mmm yyyy");
+			L_Date.Text = Global.CalendarDate.ToString("mmm yyyy");
 
-			C_DateDetails[] details = BuildDateStateArray(Global.SelectedDate);
-			C_DateDetails[] dayDetails = BuildDayStateArray();
-			GVHelper = new C_GVHelper(this, GV_Calendar);
+            Task.Run(async () => 
+            {
+				Global.SitesSchedule = await Global.GetSitesScheduleForSiteCached(Global.CalendarDate.Year, Global.CalendarDate.Month, SelectedSite.Slug);
 
-			GVHelper.SetResourceID(C_GVHelper.ID_Background, Resource.Drawable.background);
-			GVHelper.SetResourceID(C_GVHelper.ID_OpenWithNeeds, Resource.Drawable.openwithneeds);
-			GVHelper.SetResourceID(C_GVHelper.ID_OpenWithNeedsBoxed, Resource.Drawable.openwithneedsboxed);
-			GVHelper.SetResourceID(C_GVHelper.ID_OpenNoNeeds, Resource.Drawable.opennoneeds);
-			GVHelper.SetResourceID(C_GVHelper.ID_OpenNoNeedsBoxed, Resource.Drawable.opennoneedsboxed);
-			GVHelper.SetResourceID(C_GVHelper.ID_Closed, Resource.Drawable.closed);
-			GVHelper.SetResourceID(C_GVHelper.ID_ClosedBoxed, Resource.Drawable.closedboxed);
-			GVHelper.SetResourceID(C_GVHelper.ID_GridCell, Resource.Layout.GridCell);
-			GVHelper.SetResourceID(C_GVHelper.ID_GridCellText, Resource.Id.L_Cell);
+                RunOnUiThread(() => 
+                {
+					C_DateDetails[] details = BuildDateStateArray(Global.CalendarDate);
+					C_DateDetails[] dayDetails = BuildDayStateArray();
+					GVHelper = new C_GVHelper(this, GV_Calendar);
 
-			GVHelper.SetNewDateDetails(details, dayDetails);
-			GVHelper.DateTouched += GVHelper_DateTouched;
-			// we take no action on day of week being touched
+					GVHelper.SetResourceID(C_GVHelper.ID_Background, Resource.Drawable.background);
+					GVHelper.SetResourceID(C_GVHelper.ID_OpenWithNeeds, Resource.Drawable.openwithneeds);
+					GVHelper.SetResourceID(C_GVHelper.ID_OpenWithNeedsBoxed, Resource.Drawable.openwithneedsboxed);
+					GVHelper.SetResourceID(C_GVHelper.ID_OpenNoNeeds, Resource.Drawable.opennoneeds);
+					GVHelper.SetResourceID(C_GVHelper.ID_OpenNoNeedsBoxed, Resource.Drawable.opennoneedsboxed);
+					GVHelper.SetResourceID(C_GVHelper.ID_Closed, Resource.Drawable.closed);
+					GVHelper.SetResourceID(C_GVHelper.ID_ClosedBoxed, Resource.Drawable.closedboxed);
+					GVHelper.SetResourceID(C_GVHelper.ID_GridCell, Resource.Layout.GridCell);
+					GVHelper.SetResourceID(C_GVHelper.ID_GridCellText, Resource.Id.L_Cell);
 
-            IMG_NoVolunteers.SetImageResource(Resource.Drawable.closed);
-            IMG_PastDateNoApprovals.SetImageResource(Resource.Drawable.opennoneeds);
-            IMG_PastDateNeedsApproval.SetImageResource(Resource.Drawable.opennoneedsboxed);
-            IMG_FutureDateFullyStaffed.SetImageResource(Resource.Drawable.openwithneeds);
-            IMG_FutureDateHaveNeeds.SetImageResource(Resource.Drawable.openwithneedsboxed);
+					GVHelper.SetNewDateDetails(details, dayDetails);
+					GVHelper.DateTouched += GVHelper_DateTouched;
+					// we take no action on day of week being touched
+
+					IMG_NoVolunteers.SetImageResource(Resource.Drawable.closed);
+					IMG_PastDateNoApprovals.SetImageResource(Resource.Drawable.opennoneeds);
+					IMG_PastDateNeedsApproval.SetImageResource(Resource.Drawable.opennoneedsboxed);
+					IMG_FutureDateFullyStaffed.SetImageResource(Resource.Drawable.openwithneeds);
+					IMG_FutureDateHaveNeeds.SetImageResource(Resource.Drawable.openwithneedsboxed);
+				});
+			});
 		}
 
 		void GVHelper_DateTouched(object sender, C_DateTouchedEventArgs e)
 		{
 			Global.SelectedDate = e.Date;
-            StartActivity(new Intent(this, typeof(A_SCSiteVol)));
+            StartActivity(new Intent(this, typeof(A_SCSiteShifts)));
 		}
 
 		public C_DateDetails[] BuildDayStateArray()
@@ -172,10 +203,22 @@ namespace a_vitavol
 					Boxed = false
 				};
 
-				// get workitems for this date at this site
-				List<C_SignUp> wiList = Global.GetSignUpsForSiteOnDate(ourDate, OurSite.Slug);
+				List<C_SiteSchedule> siteOnDateSchedule = C_SiteSchedule.GetSiteScheduleForSiteOnDate(Global.SelectedSiteSlug, ourDate, Global.SitesSchedule);
+				C_SiteSchedule ourSiteSchedule = null;
+				if (siteOnDateSchedule.Count != 0)
+					ourSiteSchedule = siteOnDateSchedule[0];
 
-				if (ourDate < now)
+				// get workitems for this date at this site
+				List<C_SignUp> wiList = Global.GetSignUpsForSiteOnDate(ourDate, SelectedSite.Slug); // <<<<<<<< this doesn't work; only current user!
+
+				// find out how many we need today
+				C_CalendarEntry ce = SelectedSite.GetCalendarEntryForDate(ourDate);
+
+                if (ce == null)
+                {
+                    dayState.SiteState = E_SiteState.Background;
+                }
+				else if (ourDate < now)
                 {
                     // if there are no signups on a date, then show as "no volunteers"
                     if (wiList.Count == 0)
@@ -195,33 +238,15 @@ namespace a_vitavol
                 }
 				else
 				{
-					// find out how many we need today
-					int dayOfWeek = (int)ourDate.DayOfWeek;
-					C_SiteCalendarEntry ce = OurSite.SiteCalendar[dayOfWeek];
-					// see if this date has an exception
-					C_CalendarEntry siteExceptionOnDate = OurSite.GetCalendarExceptionForDateForSite(ourDate);
-                    bool isClosed = ce.OpenTime == ce.CloseTime;
-                    if (siteExceptionOnDate != null)
-                        isClosed = siteExceptionOnDate.IsClosed;
-
-                    if (isClosed)
+                    if (!ce.SiteIsOpen)
 					{
                         dayState.SiteState = E_SiteState.Closed;
                         dayState.Boxed = false;
 					}
-					else if (wiList.Count == 0)
-                    {
-						dayState.SiteState = E_SiteState.OpenWithNeeds;
-                        dayState.Boxed = true;
-					}
                     else
                     {
-						int needed = ce.NumEFilers;
-						if (siteExceptionOnDate != null)
-							needed = siteExceptionOnDate.NumEFilers;
-
 						dayState.SiteState = E_SiteState.OpenWithNeeds;
-                        dayState.Boxed = wiList.Count < needed;
+                        dayState.Boxed = AnyShiftIsUnderStaffed(ourSiteSchedule);
                     }
 				}
 
@@ -231,14 +256,27 @@ namespace a_vitavol
 			return DateState;
 		}
 
+		private bool AnyShiftIsUnderStaffed(C_SiteSchedule ss)
+		{
+			bool anyNeed = false;
 
+			if (ss != null)
+			{
+				foreach (C_SiteScheduleShift sss in ss.Shifts)
+				{
+					anyNeed = (sss.eFilersSignedUpBasic < sss.eFilersNeededBasic)
+						|| (sss.eFilersSignedUpAdvanced < sss.eFilersNeededAdvanced);
+					if (anyNeed)
+						break;
+				}
+			}
+
+			return anyNeed;
+		}
 
 		public override void OnBackPressed()
 		{
             StartActivity(new Intent(this, typeof(A_SCMySite)));
 		}
-
-
-
 	}
 }

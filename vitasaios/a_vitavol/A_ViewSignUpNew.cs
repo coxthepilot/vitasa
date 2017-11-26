@@ -25,7 +25,17 @@ namespace a_vitavol
     {
         C_Global Global;
 		
-        Button B_SignMeUp;
+        C_VitaUser LoggedInUser;
+
+		C_YMD SelectedDate;
+		C_VitaSite SelectedSite;
+		C_WorkShift SelectedShift;
+		C_SignUp SelectedSignUp;
+
+		bool SignUpListHasOurUser;
+		bool HousrAreDirty;
+
+		Button B_SignMeUp;
         Button B_Directions;
 		ListView LV_Others;
         TextView L_Site;
@@ -34,9 +44,6 @@ namespace a_vitavol
         TextView L_CityStateZip;
 
 		ProgressDialog AI_Busy;
-
-        C_VitaUser LoggedInUser;
-        C_VitaSite SelectedSite;
 
         List<string> UserNames;
 
@@ -53,8 +60,20 @@ namespace a_vitavol
 
 			LoggedInUser = Global.GetUserFromCacheNoFetch(Global.LoggedInUserId);
 			SelectedSite = Global.GetSiteNoFetch(Global.SelectedSiteSlug);
+			SelectedDate = Global.SelectedDate;
+			SelectedSignUp = Global.SelectedSignUp;
+			SelectedShift = Global.SelectedShift;
+#if DEBUG
+			if ((LoggedInUser == null)
+				|| (SelectedDate == null)
+				|| (SelectedSite == null)
+				|| (SelectedSignUp == null)
+				|| (SelectedShift == null)
+			   )
+				throw new ApplicationException("missing a value");
+#endif
 
-            LV_Others = FindViewById<ListView>(Resource.Id.LV_ViewSignUpNew_OtherVolunteers);
+			LV_Others = FindViewById<ListView>(Resource.Id.LV_ViewSignUpNew_OtherVolunteers);
 			B_SignMeUp = FindViewById<Button>(Resource.Id.B_ViewSignUpNew_SignMeUp);
             B_Directions = FindViewById<Button>(Resource.Id.B_ViewSignUpNew_GetDirections);
 
@@ -77,14 +96,25 @@ namespace a_vitavol
 
 			B_SignMeUp.Click += async (sender, e) => 
             {
+				// sign me up should only get enabled if the user is not already in the list
+				if (SignUpListHasOurUser)
+					return;
+				
                 AI_Busy.Show();
 				EnableUI(false);
 
-				C_SignUp wi = new C_SignUp(Global.SelectedSiteSlug, Global.SelectedDate, LoggedInUser.id, 0);
+				bool success = await SelectedSignUp.AddSignUp(LoggedInUser.Token, LoggedInUser.id);
 
-				bool success = await wi.AddSignUp(Global, LoggedInUser.id);
+				if (success)
+				{
+					Global.AddToSignUps(SelectedSignUp);
+					Global.AdjustSiteCacheForNewSignUp(SelectedSignUp, LoggedInUser, SelectedSite);
+					C_WorkShiftSignUpUser wsuser = new C_WorkShiftSignUpUser(LoggedInUser.id, LoggedInUser.Name, LoggedInUser.Certification, LoggedInUser.Phone);
+					C_WorkShiftSignUp wssu = new C_WorkShiftSignUp(wsuser);
+					SelectedShift.SignUps.Add(wssu);
+				}
 
-                AI_Busy.Cancel();
+				AI_Busy.Cancel();
 				EnableUI(true);
 
 				if (!success)
@@ -111,8 +141,6 @@ namespace a_vitavol
 
 						string[] calendarsProjection = {
             			   CalendarContract.Calendars.InterfaceConsts.Id,
-            			   //CalendarContract.Calendars.InterfaceConsts.CalendarDisplayName,
-            			   //CalendarContract.Calendars.InterfaceConsts.AccountName,
                            CalendarContract.Calendars.InterfaceConsts.IsPrimary
             			};
 
@@ -126,9 +154,7 @@ namespace a_vitavol
                         for (int ix = 0; ix != ccount; ix++)
                         {
                             int id = cursor.GetInt(0);
-                            //string displayName = cursor.GetString(1);
-                            //string accountName = cursor.GetString(2);
-                            int isPrimary = cursor.GetInt(3);
+							int isPrimary = cursor.GetInt(1);
 
                             if (isPrimary != 0)
                             {
@@ -139,17 +165,13 @@ namespace a_vitavol
                             cursor.MoveToNext();
                         }
 
-						C_HMS[] openCloseTimes = SelectedSite.GetOpenCloseTimeOnDate(wi.Date);
-						C_HMS openTime = openCloseTimes[0];
-						C_HMS closeTime = openCloseTimes[1];
-
 						ContentValues eventValues = new ContentValues();
 
 						eventValues.Put(CalendarContract.Events.InterfaceConsts.CalendarId, _calId);
 						eventValues.Put(CalendarContract.Events.InterfaceConsts.Title, "VITA Sign-Up");
                         eventValues.Put(CalendarContract.Events.InterfaceConsts.Description, SelectedSite.Street + ", " + SelectedSite.City + " " + SelectedSite.Zip);
-                        eventValues.Put(CalendarContract.Events.InterfaceConsts.Dtstart, GetDateTimeMS(Global.SelectedDate, openTime));
-                        eventValues.Put(CalendarContract.Events.InterfaceConsts.Dtend, GetDateTimeMS(Global.SelectedDate, closeTime));
+                        eventValues.Put(CalendarContract.Events.InterfaceConsts.Dtstart, GetDateTimeMS(Global.SelectedDate, SelectedShift.OpenTime));
+                        eventValues.Put(CalendarContract.Events.InterfaceConsts.Dtend, GetDateTimeMS(Global.SelectedDate, SelectedShift.CloseTime));
 
 						eventValues.Put(CalendarContract.Events.InterfaceConsts.EventTimezone, "CST");
 						eventValues.Put(CalendarContract.Events.InterfaceConsts.EventEndTimezone, "CST");
@@ -165,43 +187,33 @@ namespace a_vitavol
             AI_Busy.Show();
 			EnableUI(false);
 
-			Task.Run(async () =>
+			Task.Run(() =>
 			{
 				// Build a list of user names to display. Keep watch for our user in the list
 				UserNames = new List<string>();
-				C_SignUp ourUserWorkItem = null;
+				SignUpListHasOurUser = false;
 
-				foreach (C_SignUp wi in Global.SignUpsOnSiteOnDate)
+				// get a list of all work items at this site on this date, regardless of shift
+				List<C_WorkShiftSignUp> signUpsAtSiteOnDateOnShift = SelectedShift.SignUps;
+
+				foreach (C_WorkShiftSignUp wi in signUpsAtSiteOnDateOnShift)
 				{
-					C_VitaUser user = await Global.GetUserFromCache(wi.UserId);
-					if (!UserNames.Contains(user.Name))
-						UserNames.Add(user.Name);
-
-					if (wi.UserId == LoggedInUser.id)
-						ourUserWorkItem = wi;
+					if (wi.User.UserId == LoggedInUser.id)
+						SignUpListHasOurUser = true;
+					else
+						UserNames.Add(wi.User.UserName);
 				}
 
-    			RunOnUiThread(() =>
+				RunOnUiThread(() =>
     			{
                     AI_Busy.Cancel();
 					EnableUI(true);
 
                     LV_Others.Adapter = new ArrayAdapter<String>(this, Android.Resource.Layout.SimpleListItem1, UserNames);
 
-					int dayOfWeek = (int)Global.SelectedDate.DayOfWeek;
-					C_HMS openTime = SelectedSite.SiteCalendar[dayOfWeek].OpenTime;
-					C_HMS closeTime = SelectedSite.SiteCalendar[dayOfWeek].CloseTime;
-					// see if there is an exception for today
-					C_CalendarEntry ce = SelectedSite.GetCalendarExceptionForDateForSite(Global.SelectedDate);
-					if (ce != null)
-					{
-						openTime = ce.OpenTime;
-						closeTime = ce.CloseTime;
-					}
-
 					L_Site.Text = SelectedSite.Name;
 					L_DateAndTime.Text = Global.SelectedDate.ToString("mmm dd, yyyy")
-						+ " [" + openTime.ToString("hh:mm p") + " - " + closeTime.ToString("hh:mm p") + "]";
+						+ "[" + SelectedShift.OpenTime.ToString("hh:mm p") + " - " + SelectedShift.CloseTime.ToString("hh:mm p") + "]";
 
 					L_Address.Text = SelectedSite.Street;
 					L_CityStateZip.Text = SelectedSite.City + ", " + SelectedSite.State + " " + SelectedSite.Zip;
@@ -227,7 +239,6 @@ namespace a_vitavol
 
         long GetDateTimeMS(C_YMD ymd, C_HMS hms)
 		{
-            //string[] tzid = Java.Util.TimeZone.GetAvailableIDs();
             var tz = Java.Util.TimeZone.GetTimeZone("US/Central");
 			Calendar c = Calendar.GetInstance(tz);
 

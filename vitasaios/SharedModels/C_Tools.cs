@@ -72,7 +72,7 @@ namespace zsquared
                 {
                     res = new C_YMD((string)jv);
                 }
-                catch 
+                catch
                 {
                     res = defValue;
                 }
@@ -111,9 +111,9 @@ namespace zsquared
                 res = defValue;
             else if (jv.JsonType == JsonType.String)
             {
-                try 
-                { 
-                    res = new C_HMS((string)jv); 
+                try
+                {
+                    res = new C_HMS((string)jv);
                 }
                 catch
                 {
@@ -126,41 +126,41 @@ namespace zsquared
                 int min = 0;
                 if (jv.ContainsKey("hour"))
                     hour = JsonProcessInt(jv["hour"], 0);
-				if (jv.ContainsKey("minute"))
-					min = JsonProcessInt(jv["minute"], 0);
-				res = new C_HMS(hour, min, 0);
+                if (jv.ContainsKey("minute"))
+                    min = JsonProcessInt(jv["minute"], 0);
+                res = new C_HMS(hour, min, 0);
             }
 
-			return res;
-		}
+            return res;
+        }
 
-		public static float JsonProcessFloat(JsonValue jv, float defValue)
-		{
-			float res = defValue;
+        public static float JsonProcessFloat(JsonValue jv, float defValue)
+        {
+            float res = defValue;
 
             if (jv == null)
                 res = defValue;
             else if (jv.JsonType == JsonType.Number)
-				res = (float)jv;
+                res = (float)jv;
             else if (jv.JsonType == JsonType.String)
             {
-                try 
+                try
                 {
                     string ns = jv;
                     res = Convert.ToSingle(ns);
                 }
-                catch 
+                catch
                 {
                     res = defValue;
                 }
             }
 
-			return res;
-		}
+            return res;
+        }
 
-		public static bool JsonProcessBool(JsonValue jv, bool defValue)
-		{
-			bool res = defValue;
+        public static bool JsonProcessBool(JsonValue jv, bool defValue)
+        {
+            bool res = defValue;
 
             if (jv == null)
                 res = defValue;
@@ -169,14 +169,18 @@ namespace zsquared
             else if (jv.JsonType == JsonType.String)
                 res = (string)jv == "true";
 
-			return res;
-		}
+            return res;
+        }
 
         public static void UpdateBytesCounter(int b)
         {
-			var myAppDelegate = UIKit.UIApplication.SharedApplication.Delegate;
+#if __ANDROID__
+            a_vitavol.MainActivity.BytesReceived += b;
+#else
+            var myAppDelegate = UIKit.UIApplication.SharedApplication.Delegate;
             I_Global iad = myAppDelegate as I_Global;
             iad.UpdateBytesReceived(b);
+#endif
 		}
 
 		public static async Task<string> Upload(string httpOp, string submiturl, string bodyjson, string token)

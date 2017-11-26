@@ -37,6 +37,15 @@
             android:layout_width="match_parent"
             android:layout_height="10dp"
             android:id="@+id/space1" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/B_SCMySite_EditProfile"
+            android:text="Edit My Profile" />
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:id="@+id/space1" />
         <TextView
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_width="match_parent"
@@ -126,14 +135,5 @@
                 android:layout_height="match_parent"
                 android:id="@+id/space1" />
         </LinearLayout>
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="10dp"
-            android:id="@+id/space1" />
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/B_SCMySite_EditProfile"
-            android:text="Edit My Profile" />
     </LinearLayout>
 </ScrollView>
