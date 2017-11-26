@@ -98,7 +98,7 @@ namespace zsquared
                 throw new ApplicationException("Conversion error (" + e.Message + ")");
             }
 
-            if (isPM)
+            if (isPM && (_hour != 12))
                 _hour += 12;
             if (_hour == 24)
                 _hour = 0;

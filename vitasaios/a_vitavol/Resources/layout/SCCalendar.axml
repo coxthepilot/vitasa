@@ -82,24 +82,4 @@
             android:gravity="center_vertical"
             android:text="Site Open" />
     </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <ImageView
-            android:src="@android:drawable/ic_menu_gallery"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:id="@+id/IMG_Exception"
-            android:paddingTop="5dp"
-            android:paddingRight="5dp"
-            android:paddingBottom="5dp"
-            android:paddingLeft="5dp" />
-        <TextView
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:id="@+id/textView2"
-            android:text="Site Exception"
-            android:gravity="center_vertical" />
-    </LinearLayout>
 </LinearLayout>

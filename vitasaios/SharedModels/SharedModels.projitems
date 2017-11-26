@@ -27,8 +27,5 @@
     <Compile Include="$(MSBuildThisFileDirectory)C_Notifications.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)C_WorkShift.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)C_JsonBuilder.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)C_ShiftTableSource.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)C_TimePicker.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)C_ItemPicker.cs" />
   </ItemGroup>
 </Project>

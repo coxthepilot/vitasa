@@ -53,3 +53,4 @@
 /Users/Billy/Documents/source/vitasa/vitasaios/vitaadmin/obj/iPhoneSimulator/Debug/vitaadmin.csproj.CoreCompileInputs.cache
 /Users/Billy/Documents/source/vitasa/vitasaios/vitaadmin/obj/iPhoneSimulator/Debug/vitaadmin.exe
 /Users/Billy/Documents/source/vitasa/vitasaios/vitaadmin/obj/iPhoneSimulator/Debug/vitaadmin.pdb
+/Users/Billy/Documents/source/vitasa/vitasaios/vitaadmin/obj/iPhoneSimulator/Debug/vitaadmin.csprojResolveAssemblyReference.cache

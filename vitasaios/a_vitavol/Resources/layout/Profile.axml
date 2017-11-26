@@ -53,16 +53,10 @@
             android:layout_height="wrap_content"
             android:singleLine="true"
             android:id="@+id/TB_Profile_Phone"
-            android:hint="phone" />
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="10dp"
-            android:id="@+id/space4" />
-        <CheckBox
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/CB_Profile_Advanced"
-            android:text="Advanced" />
+            android:hint="phone"
+            android:phoneNumber="true"
+            android:password="false"
+            android:inputType="phone" />
         <Space
             android:layout_width="match_parent"
             android:layout_height="20dp"

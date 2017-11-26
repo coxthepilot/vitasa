@@ -21,6 +21,13 @@ namespace a_vitavol
     {
 		C_Global Global;
 
+        C_VitaUser LoggedInUser;
+
+		C_YMD SelectedDate;
+		C_VitaSite SelectedSite;
+		C_WorkShift SelectedShift;
+		C_SignUp SelectedSignUp;
+
 		EditText TB_Hours;
 
 		Button B_GetDirections;
@@ -38,6 +45,8 @@ namespace a_vitavol
 
         List<string> UserNames;
 
+        bool HoursAreDirty;
+
 		protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -47,8 +56,23 @@ namespace a_vitavol
 				g.Global = new C_Global();
 			Global = g.Global;
 
+            LoggedInUser = Global.GetUserFromCacheNoFetch(Global.LoggedInUserId);
+
+			SelectedSite = Global.GetSiteNoFetch(Global.SelectedSiteSlug);
+			SelectedDate = Global.SelectedDate;
+			SelectedSignUp = Global.SelectedSignUp;
+			SelectedShift = Global.SelectedShift;
+#if DEBUG
+			if ((LoggedInUser == null)
+				|| (SelectedDate == null)
+				|| (SelectedSite == null)
+				|| (SelectedSignUp == null)
+				|| (SelectedShift == null)
+			   )
+				throw new ApplicationException("missing a value");
+#endif
 			// Set our view from the "main" layout resource
-            SetContentView(Resource.Layout.ViewSignUpExisting);
+			SetContentView(Resource.Layout.ViewSignUpExisting);
 
             TB_Hours = FindViewById<EditText>(Resource.Id.TB_Hours);
 
@@ -68,10 +92,8 @@ namespace a_vitavol
 			AI_Busy.SetCancelable(false);
 			AI_Busy.SetProgressStyle(ProgressDialogStyle.Spinner);
 
-			B_GetDirections.Click += async (sender, e) => 
+			B_GetDirections.Click += (sender, e) => 
             {
-				C_VitaSite SelectedSite = await Global.GetSiteFromCache(Global.SelectedSiteSlug);
-
                 var geoUri = Android.Net.Uri.Parse("geo:" + SelectedSite.Latitude + "," + SelectedSite.Longitude);
 				var mapIntent = new Intent(Intent.ActionView, geoUri);
 				StartActivity(mapIntent);            
@@ -82,9 +104,32 @@ namespace a_vitavol
                 AI_Busy.Show();
                 EnableUI(false);
 
-                bool success = await Global.VolunteerSignUp.RemoveIntent(Global);
+                bool success = await SelectedSignUp.RemoveIntent(LoggedInUser.Token);
 
-                AI_Busy.Cancel();
+				Global.RemoveFromSignUps(SelectedSignUp);
+                Global.AdjustSiteSchedueCacheForRemovedSignUp(SelectedSignUp, LoggedInUser, SelectedSite);
+				// remove from the calendar entry, shifts, signups
+				C_CalendarEntry calEntry = SelectedSite.GetCalendarEntryForDate(SelectedSignUp.Date);
+				foreach (C_WorkShift ws in calEntry.WorkShifts)
+				{
+					C_WorkShiftSignUp str = null;
+					foreach (C_WorkShiftSignUp wssu in ws.SignUps)
+					{
+						if (wssu.User.UserId == Global.LoggedInUserId)
+						{
+							str = wssu;
+							break;
+						}
+					}
+					if (str != null)
+					{
+						ws.SignUps.Remove(str);
+
+						break;
+					}
+				}
+
+				AI_Busy.Cancel();
                 EnableUI(true);
 
                 if (success)
@@ -103,70 +148,65 @@ namespace a_vitavol
 
             B_SaveHours.Click += async (sender, e) => 
             {
-				try { Global.VolunteerSignUp.Hours = Convert.ToSingle(TB_Hours.Text); }
+				try { Global.SelectedSignUp.Hours = Convert.ToSingle(TB_Hours.Text); }
 				catch { }
 
                 AI_Busy.Show();
                 EnableUI(false);
 
-				bool success = await Global.VolunteerSignUp.UpdateSignUp(Global);
+                bool success = await SelectedSignUp.UpdateSignUp(LoggedInUser.Token);
 
                 AI_Busy.Cancel();
                 EnableUI(true);
 
                 if (!success)
                 {
-					C_MessageBox mbox = new C_MessageBox(this, "Error", "Unable to update hours", E_MessageBoxButtons.Ok);
-					mbox.Show();
+                    C_MessageBox mbox = new C_MessageBox(this, "Error", "Unable to update hours", E_MessageBoxButtons.Ok);
+                    mbox.Show();
 
-					return;
-				}
+                    return;
+                }
+                else
+                    HoursAreDirty = false;
 			};
+
+            TB_Hours.TextChanged += (sender, e) => 
+            {
+                HoursAreDirty = true;
+            };
 
             EnableUI(false);
             AI_Busy.Show();
 
-			Task.Run(async () => 
+			Task.Run(() => 
             {
-				Global.SignUpsOnSiteOnDate = Global.GetSignUpsForSiteOnDate(Global.SelectedDate, Global.SelectedSiteSlug);
-
+				// Build a list of user names to display. Keep watch for our user in the list
 				UserNames = new List<string>();
 
-				foreach (C_SignUp wi in Global.SignUpsOnSiteOnDate)
+				// get a list of all work items at this site on this date, regardless of shift
+				List<C_WorkShiftSignUp> signUpsAtSiteOnDateOnShift = SelectedShift.SignUps;
+
+				foreach (C_WorkShiftSignUp wi in signUpsAtSiteOnDateOnShift)
 				{
-					C_VitaUser user = await Global.GetUserFromCache(wi.UserId);
-                    if (!UserNames.Contains(user.Name))
-    					UserNames.Add(user.Name);
+					if (wi.User.UserId != LoggedInUser.id)
+						UserNames.Add(wi.User.UserName);
 				}
-				UserNames.Sort();
-
-                C_VitaSite SelectedSite = await Global.GetSiteFromCache(Global.SelectedSiteSlug);
-
-				int dayOfWeek = (int)Global.SelectedDate.DayOfWeek;
-				C_HMS openTime = SelectedSite.SiteCalendar[dayOfWeek].OpenTime;
-				C_HMS closeTime = SelectedSite.SiteCalendar[dayOfWeek].CloseTime;
-                // see if there is an exception for today
-                C_CalendarEntry ce = SelectedSite.GetCalendarExceptionForDateForSite(Global.SelectedDate);
-                if (ce != null)
-                {
-                    openTime = ce.OpenTime;
-                    closeTime = ce.CloseTime;
-                }
 
 				RunOnUiThread(() =>
 				{
                     AI_Busy.Cancel();
                     EnableUI(true);
 
-                    TB_Hours.Text = Global.VolunteerSignUp.Hours.ToString();
-                    B_SaveHours.Enabled = !Global.VolunteerSignUp.Approved;
-                    TB_Hours.Enabled = !Global.VolunteerSignUp.Approved;
+                    TB_Hours.Text = Global.SelectedSignUp.Hours.ToString();
+                    B_SaveHours.Enabled = !Global.SelectedSignUp.Approved;
+                    TB_Hours.Enabled = !Global.SelectedSignUp.Approved;
+                    HoursAreDirty = false; // required after the init of the field
 
                     LV_OtherVolunteers.Adapter = new ArrayAdapter<String>(this, Android.Resource.Layout.SimpleListItem1, UserNames);
 
 					L_Site.Text = SelectedSite.Name;
-                    L_DateAndHours.Text = Global.SelectedDate.ToString("mmm dd, yyyy")
-						+ " [" + openTime.ToString("hh:mm p") + " - " + closeTime.ToString("hh:mm p") + "]";
+					L_DateAndHours.Text = SelectedDate.ToString("mmm dd, yyyy")
+						+ " [" + SelectedShift.OpenTime.ToString("hh:mm p") + " - " + SelectedShift.CloseTime.ToString("hh:mm p") + "]";
 
 					L_Address.Text = SelectedSite.Street;
 					L_CityStateZip.Text = SelectedSite.City + ", " + SelectedSite.State + " " + SelectedSite.Zip;
@@ -176,8 +216,8 @@ namespace a_vitavol
 
         private void EnableUI(bool en)
         {
-            B_SaveHours.Enabled = en;
-            B_RemoveSignup.Enabled = en && !Global.VolunteerSignUp.Approved;
+            B_SaveHours.Enabled = en && !Global.SelectedSignUp.Approved;
+            B_RemoveSignup.Enabled = en;
             B_GetDirections.Enabled = en;
 
             TB_Hours.Enabled = en;

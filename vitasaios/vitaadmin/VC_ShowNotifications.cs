@@ -15,8 +15,12 @@ namespace vitaadmin
 
 		List<C_Notification> _Notifications;
 
+        C_Notification SelectedNotification;
+
 		C_NotificationsTableSource NotificationsTableSource;
 		C_NotificationsTableDelegate NotificationsTableDelegate;
+
+        bool killChanges;
 
 		public VC_ShowNotifications (IntPtr handle) : base (handle)
         {
@@ -33,6 +37,110 @@ namespace vitaadmin
 
             B_Back.TouchUpInside += (sender, e) => 
                 PerformSegue("Segue_NotificationsToMain", this);
+
+            TV_Message.Changed += (sender, e) => 
+            {
+                if (killChanges) return;
+                SelectedNotification.Dirty = true;
+				B_Send.Enabled = ValidMessage();
+                B_Save.Enabled = SelectedNotification.Dirty;
+			};
+
+            SC_Audience.ValueChanged += (sender, e) => 
+            {
+                if (killChanges) return;
+				SelectedNotification.Dirty = true;
+				B_Send.Enabled = ValidMessage();
+				B_Save.Enabled = SelectedNotification.Dirty;
+			};
+
+            B_Save.TouchUpInside += async (sender, e) => 
+            {
+                AI_Busy.StartAnimating();
+                EnableUI(false);
+                EnableNotificationUI(false);
+
+                SelectedNotification.Message = TV_Message.Text;
+                SelectedNotification.Audience = SC_Audience.SelectedSegment == 0 ? C_Notification.E_NotificationAudience.Volunteers : C_Notification.E_NotificationAudience.SiteCoordinators;
+
+                bool success = await SelectedNotification.Update(LoggedInUser.Token);
+
+				AI_Busy.StopAnimating();
+				EnableUI(true);
+				EnableNotificationUI(true);
+
+				if (!success)
+                {
+                    C_MessageBox.E_MessageBoxResults mbres = await C_MessageBox.MessageBox(this, "Error", "Unable to save the notification", C_MessageBox.E_MessageBoxButtons.Ok);
+                }
+                else
+                {
+                    B_Save.Enabled = false;
+                    TV_Notifications.ReloadData();
+                }
+            };
+
+            B_Send.TouchUpInside += async (sender, e) => 
+            {
+                if (SelectedNotification.id == -1)
+                {
+					C_MessageBox.E_MessageBoxResults mbres = await C_MessageBox.MessageBox(this, "Error", "The notification must be saved first.", C_MessageBox.E_MessageBoxButtons.Ok);
+                    return;
+				}
+
+				AI_Busy.StartAnimating();
+				EnableUI(false);
+				EnableNotificationUI(false);
+
+				SelectedNotification.Message = TV_Message.Text;
+				SelectedNotification.Audience = SC_Audience.SelectedSegment == 0 ? C_Notification.E_NotificationAudience.Volunteers : C_Notification.E_NotificationAudience.SiteCoordinators;
+                TV_Notifications.ReloadData();
+
+				bool success = await SelectedNotification.Send(LoggedInUser.Token);
+
+                AI_Busy.StopAnimating();
+                EnableUI(true);
+                EnableNotificationUI(true);
+
+				if (!success)
+				{
+					C_MessageBox.E_MessageBoxResults mbres = await C_MessageBox.MessageBox(this, "Error", "Unable to send the notification", C_MessageBox.E_MessageBoxButtons.Ok);
+				}
+			};
+
+            B_CreateNew.TouchUpInside += (sender, e) => 
+            {
+                C_Notification note = new C_Notification();
+
+                SelectedNotification = note;
+
+				EnableNotificationUI(true);
+
+				TB_Created.Text = SelectedNotification.CreatedDT.ToString("G");
+				TB_Updated.Text = SelectedNotification.UpdatedDT.ToString("G");
+				TB_Sent.Text = SelectedNotification.SentDT.ToString("G");
+
+				TV_Message.Text = SelectedNotification.Message;
+
+				SC_Audience.SelectedSegment = SelectedNotification.Audience == C_Notification.E_NotificationAudience.Volunteers ? 0 : 1;
+
+				B_Save.Enabled = ValidMessage();
+				B_Send.Enabled = ValidMessage();
+
+                _Notifications.Add(note);
+                TV_Notifications.ReloadData();
+			};
+
+			EnableNotificationUI(false);
+            B_Save.Enabled = false;
+            B_Send.Enabled = false;
+
+			TB_Created.UserInteractionEnabled = false;
+            TB_Updated.UserInteractionEnabled = false;
+            TB_Sent.UserInteractionEnabled = false;
+
+			AI_Busy.StartAnimating();
+            EnableUI(false);
             
 			Task.Run(async () =>
 			{
@@ -41,33 +149,152 @@ namespace vitaadmin
 				UIApplication.SharedApplication.InvokeOnMainThread(
 				new Action(() =>
 				{
+                    AI_Busy.StopAnimating();
+                    EnableUI(true);
+                    
 					NotificationsTableSource = new C_NotificationsTableSource(_Notifications);
 					TV_Notifications.Source = NotificationsTableSource;
+
 					NotificationsTableDelegate = new C_NotificationsTableDelegate(this, NotificationsTableSource);
 					TV_Notifications.Delegate = NotificationsTableDelegate;
+
 					NotificationsTableDelegate.NotificationsTableRowSelect += NotificationsTableDelegate_NotificationsTableRowSelect;
 					NotificationsTableDelegate.NotificationsTableRowDeselect += NotificationsTableDelegate_NotificationsTableRowDeselect;
 					NotificationsTableDelegate.NotificationsTableRowRemove += NotificationsTableDelegate_NotificationsTableRowRemove;
+
 					TV_Notifications.ReloadData();
 				}));
 			});
 		}
 
+        private void EnableUI(bool en)
+        {
+            TV_Notifications.UserInteractionEnabled = en;
+        }
 
-		void NotificationsTableDelegate_NotificationsTableRowSelect(object sender, C_NotificationsTableDelegate.C_NotificationsTableEvent a)
+        private void EnableNotificationUI(bool en)
+        {
+            SC_Audience.Enabled = en;
+            TB_Created.Enabled = en;
+            TB_Updated.Enabled = en;
+            TB_Sent.Enabled = en;
+            TV_Message.UserInteractionEnabled = en;
+        }
+
+		void NotificationsTableDelegate_NotificationsTableRowSelect(object sender, C_NotificationsTableEvent a)
 		{
+            SelectedNotification = a.Notification;
 
+            EnableNotificationUI(true);
+
+            TB_Created.Text = SelectedNotification.CreatedDT.ToString("G");
+            TB_Updated.Text = SelectedNotification.UpdatedDT.ToString("G");
+            TB_Sent.Text = SelectedNotification.SentDT.ToString("G");
+
+            killChanges = true;
+            TV_Message.Text = SelectedNotification.Message;
+            SC_Audience.SelectedSegment = SelectedNotification.Audience == C_Notification.E_NotificationAudience.Volunteers ? 0 : 1;
+            killChanges = false;
+
+            B_Save.Enabled = SelectedNotification.Dirty;
+            B_Send.Enabled = ValidMessage();
 		}
 
-		void NotificationsTableDelegate_NotificationsTableRowDeselect(object sender, C_NotificationsTableDelegate.C_NotificationsTableEvent a)
+		void NotificationsTableDelegate_NotificationsTableRowDeselect(object sender, C_NotificationsTableEvent a)
 		{
+            if (SelectedNotification.Dirty)
+            {
+				C_Notification selNote = SelectedNotification; // save a pointer to the item being deselected in case foreground wants to change it
+                UIApplication.SharedApplication.InvokeOnMainThread(
+                    new Action(async () => 
+                {
+					C_MessageBox.E_MessageBoxResults mbres = await C_MessageBox.MessageBox(this, "Not Saved", "The notification has been changed. Save?", C_MessageBox.E_MessageBoxButtons.YesNo);
+                    if (mbres == C_MessageBox.E_MessageBoxResults.No)
+                    {
+                        selNote.Dirty = false;
+                        return;
+                    }
 
+                    AI_Busy.StartAnimating();
+					EnableUI(false);
+					EnableNotificationUI(false);
+
+					selNote.Message = TV_Message.Text;
+					selNote.Audience = SC_Audience.SelectedSegment == 0 ? C_Notification.E_NotificationAudience.Volunteers : C_Notification.E_NotificationAudience.SiteCoordinators;
+                    TV_Notifications.ReloadData();
+
+					bool success = await selNote.Update(LoggedInUser.Token);
+
+					AI_Busy.StopAnimating();
+					EnableUI(true);
+					EnableNotificationUI(true);
+
+					if (!success)
+					{
+						C_MessageBox.E_MessageBoxResults mbresx = await C_MessageBox.MessageBox(this, "Error", "Unable to save the notification", C_MessageBox.E_MessageBoxButtons.Ok);
+					}
+					else
+					{
+						B_Save.Enabled = false;
+                        DePopulateNotification();
+					}
+				}));
+            }
+
+            DePopulateNotification();
 		}
 
-		void NotificationsTableDelegate_NotificationsTableRowRemove(object sender, C_NotificationsTableDelegate.C_NotificationsTableEvent a)
+		void NotificationsTableDelegate_NotificationsTableRowRemove(object sender, C_NotificationsTableEvent a)
 		{
+            C_Notification selNote = a.Notification;
+            UIApplication.SharedApplication.InvokeOnMainThread(
+                new Action(async () => 
+            { 
+                C_MessageBox.E_MessageBoxResults mbres = await C_MessageBox.MessageBox(this, "Delete?", "Permanentaly delete the notification?", C_MessageBox.E_MessageBoxButtons.YesNo);
+                if (mbres == C_MessageBox.E_MessageBoxResults.No)
+                    return;
 
+                AI_Busy.StartAnimating();
+                EnableUI(false);
+                EnableNotificationUI(false);
+                B_Save.Enabled = false;
+                B_Send.Enabled = false;
+
+                bool success = await selNote.Delete(LoggedInUser.Token);
+
+                AI_Busy.StopAnimating();;
+                EnableUI(true);
+                EnableNotificationUI(true);
+                B_Save.Enabled = SelectedNotification.Dirty;
+                B_Send.Enabled = true;
+
+				if (!success)
+				{
+					C_MessageBox.E_MessageBoxResults mbresx = await C_MessageBox.MessageBox(this, "Error", "Unable to delete the notification", C_MessageBox.E_MessageBoxButtons.Ok);
+				}
+				else
+				{
+                    _Notifications.Remove(selNote);
+                    TV_Notifications.ReloadData();
+				}
+			}));
 		}
+
+        private bool ValidMessage()
+        {
+            return TV_Message.Text.Length != 0;
+        }
+
+        private void DePopulateNotification()
+        {
+            TB_Created.Text = "";
+            TB_Updated.Text = "";
+            TB_Sent.Text = "";
+            killChanges = true;
+            SC_Audience.SelectedSegment = 0;
+            TV_Message.Text = "";
+            killChanges = false;
+        }
 
 		public class C_NotificationsTableDelegate : UITableViewDelegate
 		{
@@ -104,19 +331,19 @@ namespace vitaadmin
 			{
 				NotificationsTableRowSelect?.Invoke(this, new C_NotificationsTableEvent(TableSource.Notifications[indexPath.Row]));
 			}
-
-			public class C_NotificationsTableEvent : EventArgs
-			{
-				public C_Notification Notification;
-
-				public C_NotificationsTableEvent(C_Notification notification)
-				{
-					Notification = notification;
-				}
-			}
-
-			public delegate void NotificationTableEventHandler(object sender, C_NotificationsTableEvent a);
 		}
+
+		public class C_NotificationsTableEvent : EventArgs
+		{
+			public C_Notification Notification;
+
+			public C_NotificationsTableEvent(C_Notification notification)
+			{
+				Notification = notification;
+			}
+		}
+
+		public delegate void NotificationTableEventHandler(object sender, C_NotificationsTableEvent a);
 
 		public class C_NotificationsTableSource : UITableViewSource
 		{

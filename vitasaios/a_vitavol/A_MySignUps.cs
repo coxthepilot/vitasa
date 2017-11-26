@@ -23,6 +23,7 @@ namespace a_vitavol
     public class A_MySignUps : ListActivity
     {
 		C_Global Global;
+        C_VitaUser LoggedInUser;
 
         List<C_SignUp> OurWorkItemsForToday;
         List<string> Signups;
@@ -38,26 +39,7 @@ namespace a_vitavol
 				g.Global = new C_Global();
 			Global = g.Global;
 
-			// Set our view from the "main" layout resource
-			//SetContentView(Resource.Layout.MySignUps);
-
-			// since the login process includes the user work history and intents, we don't need to fetch again
-			// todo: after some amount of time, these values are stale? Since this user is the only one that can change
-			//   them then perhaps they are ok; can backoffice change their intents? when approved and moves to history?
-
-			// get all workintents for this user
-			List<C_SignUp> OurWorkItems = Global.GetSignUpsForUser(Global.LoggedInUserId);
-
-			// make sure we only look at the current items (today and beyond)
-			C_YMD today = C_YMD.Now;
-			var ou = OurWorkItems.Where(wi => wi.Date >= today);
-            OurWorkItemsForToday = ou.ToList();
-			// sort to make the list nicer
-			OurWorkItemsForToday.Sort(C_SignUp.CompareByDateAscending);
-
-            Signups = new List<string>();
-            foreach(C_SignUp wi in OurWorkItemsForToday)
-                Signups.Add(wi.SiteName);
+            LoggedInUser = Global.GetUserFromCacheNoFetch(Global.LoggedInUserId);
 
 			AI_Busy = new ProgressDialog(this);
 			AI_Busy.SetMessage("Please wait...");
@@ -69,6 +51,22 @@ namespace a_vitavol
 			// make sure the site cache has the details on the sites listed in our workitems
 			Task.Run(async () =>
 			{
+				// get all workintents for this user
+                List<C_SignUp> OurSignUps = Global.GetSignUpsForUser(Global.LoggedInUserId);
+
+				// make sure we only look at the current items (today and beyond)
+				C_YMD today = C_YMD.Now;
+				var ou = OurSignUps.Where(wi => wi.Date >= today);
+				OurWorkItemsForToday = ou.ToList();
+				// sort to make the list nicer
+				OurWorkItemsForToday.Sort(C_SignUp.CompareByDateAscending);
+
+				bool succ1 = await Global.EnsureShiftsInCacheForSignUps(LoggedInUser.Token, OurSignUps);
+
+				Signups = new List<string>();
+				foreach (C_SignUp wi in OurWorkItemsForToday)
+					Signups.Add(wi.SiteName);
+
 				bool success = true;
 				foreach (C_SignUp wi in OurWorkItemsForToday)
 					success &= await Global.EnsureSiteInCache(wi.SiteSlug);
@@ -89,9 +87,12 @@ namespace a_vitavol
             Global.SelectedSiteSlug = wi.SiteSlug;
             Global.SelectedSiteName = wi.SiteName;
             Global.SelectedDate = wi.Date;
-            Global.VolunteerSignUp = wi;
+            Global.SelectedSignUp = wi;
 
-            StartActivity(new Intent(this, typeof(A_ViewSignUpExisting)));
+			C_WorkShift ws = Global.GetWorkShiftById(wi.ShiftId);
+			Global.SelectedShift = ws;
+
+			StartActivity(new Intent(this, typeof(A_ViewSignUpExisting)));
 		}
 
 		public class SignUpAdapter : BaseAdapter<C_SignUp>
@@ -124,19 +125,16 @@ namespace a_vitavol
 
 			public override View GetView(int position, View convertView, ViewGroup parent)
 			{
-				C_SignUp wi = items[position];
-
-				C_VitaSite oursite = Global.GetSiteNoFetch(wi.SiteSlug);
-
-				C_HMS[] openclose = oursite.GetOpenCloseTimeOnDate(wi.Date);
-
 				View view = convertView;
 				if (view == null) // no view to re-use, create new
 					view = context.LayoutInflater.Inflate(Resource.Layout.SuggestionCell, null);
 
-				view.FindViewById<TextView>(Resource.Id.Text1).Text = oursite.Name;
-				view.FindViewById<TextView>(Resource.Id.Text2).Text = wi.Date.ToString()
-					+ " [" + openclose[0].ToString("hh:mm p").Trim() + " - " + openclose[1].ToString("hh:mm p") + "]";
+				C_SignUp wi = items[position];
+				C_WorkShift ws = Global.GetWorkShiftById(wi.ShiftId);
+
+                view.FindViewById<TextView>(Resource.Id.Text1).Text = wi.SiteName;
+                view.FindViewById<TextView>(Resource.Id.Text2).Text = wi.Date.ToString("mmm dd, yyyy")
+                    + " [" + ws.OpenTime.ToString("hh:mm p").Trim() + " - " + ws.CloseTime.ToString("hh:mm p") + "]";
 
 				return view;
 			}

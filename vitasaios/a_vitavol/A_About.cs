@@ -20,6 +20,8 @@ namespace a_vitavol
         C_Global Global;
 
 		WebView WV_About;
+        TextView L_Bytes;
+        TextView L_Version;
 
 		protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -36,6 +38,14 @@ namespace a_vitavol
             IList<string> alist = this.Intent.GetStringArrayListExtra("global");
 
 			WV_About = FindViewById<WebView>(Resource.Id.WV_About_About);
+            L_Bytes = FindViewById<TextView>(Resource.Id.L_Bytes);
+            L_Version = FindViewById<TextView>(Resource.Id.L_Version);
+
+			I_Global iad = g as I_Global;
+            L_Bytes.Text = MainActivity.BytesReceived.ToString("N0");
+
+            string version = Application.Context.PackageManager.GetPackageInfo(Application.Context.PackageName, 0).VersionName;
+            L_Version.Text = version;
 
 			string content;
 			AssetManager assets = Assets;

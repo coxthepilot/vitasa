@@ -1864,6 +1864,22 @@
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </variation>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="39698">
+                                <rect key="frame" x="40" y="890" width="319" height="36"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <state key="normal" title="Create New Notification">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <real key="value" value="8"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <variation key="heightClass=regular-widthClass=regular">
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </variation>
+                            </button>
                         </subviews>
                         <variation key="default">
                             <mask key="subviews">
@@ -1883,6 +1899,7 @@
                                 <exclude reference="37860"/>
                                 <exclude reference="37862"/>
                                 <exclude reference="37863"/>
+                                <exclude reference="39698"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=regular">
@@ -1903,13 +1920,14 @@
                                 <include reference="37860"/>
                                 <include reference="37862"/>
                                 <include reference="37863"/>
+                                <include reference="39698"/>
                             </mask>
                             <color key="backgroundColor" colorSpace="calibratedRGB" red="0.011764705882352941" green="0" blue="0.27450980392156865" alpha="1"/>
                         </variation>
                     </view>
                     <connections>
                         <outlet property="TV_Notifications" destination="36202" id="name-outlet-36202"/>
-                        <segue id="36382" destination="399" kind="show" identifier="Segue_NotificationsToMain"/>
+                        <segue id="36382" destination="399" kind="show" identifier="Segue_NotificationsToMain" animates="NO"/>
                         <outlet property="AI_Busy" destination="37425" id="name-outlet-37425"/>
                         <outlet property="B_Back" destination="36299" id="name-outlet-36299"/>
                         <outlet property="SC_Audience" destination="37850" id="name-outlet-37850"/>
@@ -1919,6 +1937,7 @@
                         <outlet property="TV_Message" destination="37860" id="name-outlet-37860"/>
                         <outlet property="B_Send" destination="37863" id="name-outlet-37863"/>
                         <outlet property="B_Save" destination="37862" id="name-outlet-37862"/>
+                        <outlet property="B_CreateNew" destination="39698" id="name-outlet-39698"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="35890" userLabel="First Responder" sceneMemberID="firstResponder"/>

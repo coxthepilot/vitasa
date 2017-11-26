@@ -29,6 +29,8 @@ namespace a_vitavol
     public class A_VolPickSite : Activity
     {
 		C_Global Global;
+		C_VitaUser LoggedInUser;
+		C_YMD SelectedDate;
 
 		TextView L_Date;
         ListView LV_Sites;
@@ -36,23 +38,31 @@ namespace a_vitavol
 
 		ProgressDialog AI_Busy;
 
-        List<C_VitaSite> OpenSitesThatNeedHelp;
+        List<C_VitaSite> SitesThatNeedHelp;
 
 		protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
 
-			MyAppDelegate g = (MyAppDelegate)Application;
+            MyAppDelegate g = (MyAppDelegate)Application;
 			if (g.Global == null)
 				g.Global = new C_Global();
 			Global = g.Global;
 
-            SetContentView(Resource.Layout.VolPickSite);
+			SelectedDate = Global.SelectedDate;
+			LoggedInUser = Global.GetUserFromCacheNoFetch(Global.LoggedInUserId);
+#if DEBUG
+			if ((SelectedDate == null)
+				|| (LoggedInUser == null)
+			   )
+				throw new ApplicationException("missing values");
+#endif
+			SetContentView(Resource.Layout.VolPickSite);
 
             L_Date = FindViewById<TextView>(Resource.Id.L_VolPickSite_Date);
             LV_Sites = FindViewById<ListView>(Resource.Id.LV_VolPickSite_Sites);
 
-            L_Date.Text = Global.SelectedDate.ToString("mmm dd,yyyy");
+            L_Date.Text = SelectedDate.ToString("mmm dd,yyyy");
 
 			AI_Busy = new ProgressDialog(this);
 			AI_Busy.SetMessage("Please wait...");
@@ -63,25 +73,36 @@ namespace a_vitavol
             B_ViewOnMap.Enabled = IsGooglePlayServicesInstalled();
 
             B_ViewOnMap.Click += (sender, e) => 
-            {
                 StartActivity(new Intent(this, typeof(A_VolPickSiteMap)));
-
-			};
 
 			LV_Sites.ItemClick += (sender, e) =>
 			{
-				//// figure out if the user is already signed up for this date
-				//List<C_WorkItem> LoggedInUserWorkItems = Global.GetWorkItemsForUser(Global.LoggedInUserId);
-				//var ou = LoggedInUserWorkItems.Where(wi => wi.Date == Global.SelectedDate);
+                C_VitaSite site = SitesThatNeedHelp[e.Position];
+				Global.SelectedSiteSlug = site.Slug;
 
-				//if (!ou.Any())
-				//{
-				Global.SelectedSiteSlug = OpenSitesThatNeedHelp[e.Position].Slug;
-				Global.SignUpsOnSiteOnDate = Global.GetSignUpsForSiteOnDate(Global.SelectedDate, Global.SelectedSiteSlug);
-				Global.ViewCameFrom = E_ViewCameFrom.List;
+				int numNeeded = 0;
+				int numHave = 0;
+				C_SiteSchedule ss = Global.GetSiteScheduleForDay(Global.SelectedDate, site.Slug);
+				foreach (C_SiteScheduleShift sss in ss.Shifts)
+				{
+                    numNeeded += LoggedInUser.Certification == E_Certification.Basic ? sss.eFilersNeededBasic : sss.eFilersNeededAdvanced;
+					numHave += LoggedInUser.Certification == E_Certification.Basic ? sss.eFilersSignedUpBasic : sss.eFilersSignedUpAdvanced;
+				}
+				int numEF = numNeeded - numHave;
 
-				StartActivity(new Intent(this, typeof(A_ViewSignUpNew)));
-				//}
+				if (numEF == 0)
+					return;
+
+				Global.SelectedSignUp = new C_SignUp(site.Slug, Global.SelectedDate, Global.LoggedInUserId, 0)
+				{
+					id = -1,
+					SiteName = site.Name,
+					ShiftId = site.id
+				};
+
+   				Global.ViewCameFrom = E_ViewCameFrom.List;
+
+                StartActivity(new Intent(this, typeof(A_VolPickShift)));
 			};
 
 			EnableUI(false);
@@ -89,34 +110,50 @@ namespace a_vitavol
 
 			Task.Run(async () =>
 			{
-				// build a list of all open sites on this date
-				List<C_VitaSite> openSitesOnDate = await Global.GetOpenSitesOnDate(Global.SelectedDate);
+				// Since we got here after coming through the calendar which loaded the siteschedules into
+				//  the siteschedulecache, we can use that to see which sites are open on this date.
+				List<C_SiteSchedule> sitesOpen2 = await Global.GetSitesScheduleCached(SelectedDate.Year, SelectedDate.Month);
+				var ou = sitesOpen2.Where(ss => (ss.Date == SelectedDate) && (ss.SiteIsOpen));
+				List<C_SiteSchedule> sitesOpen1 = ou.ToList();
 
-				// then filter to those sites that need help on this date
-				OpenSitesThatNeedHelp = new List<C_VitaSite>();
-				foreach (C_VitaSite site in openSitesOnDate)
+				List<C_SiteSchedule> sitesOpenAndNeedOurUserHelp = new List<C_SiteSchedule>();
+				foreach (C_SiteSchedule ss in sitesOpen1)
 				{
-					int numRequired = site.GetNumEFilersRequiredOnDateAllShifts(Global.SelectedDate);
+					bool needsHelp = false;
 
+					foreach (C_SiteScheduleShift sss in ss.Shifts)
+					{
+						int need = LoggedInUser.Certification == E_Certification.Basic ? sss.eFilersNeededBasic : sss.eFilersNeededAdvanced;
+						int have = LoggedInUser.Certification == E_Certification.Basic ? sss.eFilersSignedUpBasic : sss.eFilersSignedUpAdvanced;
+						needsHelp |= have < need;
+					}
 
-					List<C_SignUp> workItemsForSiteOnDate = Global.GetSignUpsForSiteOnDate(Global.SelectedDate, site.Slug);
-
-					if (numRequired > workItemsForSiteOnDate.Count)
-						OpenSitesThatNeedHelp.Add(site);
+					if (needsHelp)
+						sitesOpenAndNeedOurUserHelp.Add(ss);
 				}
 
 				List<string> openSitesThatNeedHelpSlugs = new List<string>();
-				foreach (C_VitaSite site in OpenSitesThatNeedHelp)
-					openSitesThatNeedHelpSlugs.Add(site.Slug);
+				foreach (C_SiteSchedule ws in sitesOpenAndNeedOurUserHelp)
+				{
+					if (!openSitesThatNeedHelpSlugs.Contains(ws.SiteSlug))
+						openSitesThatNeedHelpSlugs.Add(ws.SiteSlug);
+				}
 
-				Global.OpenSitesThatNeedHelp = openSitesThatNeedHelpSlugs;
+				Global.OpenSitesThatNeedHelp = openSitesThatNeedHelpSlugs; // we save this so Maps doesn't have to recompute
+
+                SitesThatNeedHelp = new List<C_VitaSite>();
+				foreach (C_SiteSchedule ss in sitesOpenAndNeedOurUserHelp)
+				{
+					C_VitaSite site = await Global.GetSiteFromCache(ss.SiteSlug);
+					SitesThatNeedHelp.Add(site);
+				}
 
 				RunOnUiThread(() =>
                 {
 					EnableUI(true);
 					AI_Busy.Cancel();
 
-                    LV_Sites.Adapter = new SitesAdapter(this, OpenSitesThatNeedHelp, Global);
+                    LV_Sites.Adapter = new SitesAdapter(this, SitesThatNeedHelp, Global, LoggedInUser);
 				});
 			});
 		}
@@ -152,15 +189,17 @@ namespace a_vitavol
 
 		public class SitesAdapter : BaseAdapter<C_VitaSite>
 		{
-            readonly List<C_VitaSite> items;
+            readonly List<C_VitaSite> Sites;
 			readonly Activity context;
             readonly C_Global Global;
+            readonly C_VitaUser User;
 
-            public SitesAdapter(Activity context, List<C_VitaSite> items, C_Global global) : base()
+            public SitesAdapter(Activity context, List<C_VitaSite> sites, C_Global global, C_VitaUser user) : base()
 			{
 				this.context = context;
-				this.items = items;
+				this.Sites = sites;
                 this.Global = global;
+                this.User = user;
 			}
 
 			public override long GetItemId(int position)
@@ -170,43 +209,40 @@ namespace a_vitavol
 
 			public override C_VitaSite this[int position]
 			{
-				get { return items[position]; }
+				get { return Sites[position]; }
 			}
 
 			public override int Count
 			{
-				get { return items.Count; }
+				get { return Sites.Count; }
 			}
 
 			public override View GetView(int position, View convertView, ViewGroup parent)
 			{
-                C_VitaSite site = items[position];
-
-
-				// figure out if the user is already signed up for this date at this site
-				// get all of this users work items
-				List<C_SignUp> LoggedInUserWorkItems = Global.GetSignUpsForUser(Global.LoggedInUserId);
-				// filter for this date
-				var ou = LoggedInUserWorkItems.Where(wi => wi.Date == Global.SelectedDate);
-				List<C_SignUp> LoggedInUserWorksItemsOnSelectedDate = ou.ToList();
-				// filter for this site
-				var ou1 = LoggedInUserWorksItemsOnSelectedDate.Where(wi => wi.SiteSlug == site.Slug);
-				// if any remain, then the user is signed up for this site on this date
-				bool LoggedInUserWorkingThisDateThisSite = ou1.Any();
-
-				int numEF = site.GetNumEFilersRequiredOnDateAllShifts(Global.SelectedDate);
-
-                string t2;
-				if (LoggedInUserWorkingThisDateThisSite)
-					t2 = "Already signed up at this site.";
-				else
-					t2 = numEF.ToString() + " needed.";
-
 				View view = convertView;
 				if (view == null) // no view to re-use, create new
 					view = context.LayoutInflater.Inflate(Resource.Layout.SuggestionCell, null);
 
-                view.FindViewById<TextView>(Resource.Id.Text1).Text = site.Name;
+				C_VitaSite site = Sites[position];
+
+				// compute the gap from need to signedup
+				int numNeeded = 0;
+				int numHave = 0;
+				C_SiteSchedule ss = Global.GetSiteScheduleForDay(Global.SelectedDate, site.Slug);
+				foreach (C_SiteScheduleShift sss in ss.Shifts)
+				{
+					numNeeded += User.Certification == E_Certification.Basic ? sss.eFilersNeededBasic : sss.eFilersNeededAdvanced;
+					numHave += User.Certification == E_Certification.Basic ? sss.eFilersSignedUpBasic : sss.eFilersSignedUpAdvanced;
+				}
+				int numEF = numNeeded - numHave;
+
+
+				// figure out if our user is already signed up for a shift on this date
+				bool ourUserIsSignedUp = ss.LoggedInUserSignedUp; // todo: is this working?
+
+                string t2 = ourUserIsSignedUp ? "Already signed up for this site." : numEF.ToString() + " needed across all shifts.";
+
+				view.FindViewById<TextView>(Resource.Id.Text1).Text = site.Name;
                 view.FindViewById<TextView>(Resource.Id.Text2).Text = t2;
 
 				return view;

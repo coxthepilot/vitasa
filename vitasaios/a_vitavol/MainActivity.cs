@@ -10,9 +10,6 @@ using System.Threading.Tasks;
 
 using Android.Gms.Common.Apis;
 
-// how to send message through the api
-// curl --header "Authorization: key=<YOUR_KEY_GOES_HERE>" --header Content-Type:"application/json" https://fcm.googleapis.com/fcm/send  -d "{\"to\":\"/topics/news\",\"notification\": {\"title\": \"Click Action Message\",\"text\": \"Sample message\",\"click_action\":\"OPEN_ACTIVITY_1\"}}"
-
 namespace a_vitavol
 {
     [Activity(Label = "VITA San Antonio", MainLauncher = true)]
@@ -29,26 +26,19 @@ namespace a_vitavol
 
 		ProgressDialog AI_Busy;
 
+        public static long BytesReceived;
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
 
-            //if (Intent.Extras != null)
-			//{
-			//	foreach (var key in Intent.Extras.KeySet())
-			//	{
-			//		var value = Intent.Extras.GetString(key);
-			//		Log.Debug("VITA Extras", "Key: {0} Value: {1}", key, value);
-			//	}
-			//}			
-
             MyAppDelegate g = (MyAppDelegate)Application;
-			if (g.Global == null)
-				g.Global = new C_Global();
+            if (g.Global == null)
+                BytesReceived = 0;
+            // reset the global values on each login; this avoids some issues on login with different credentials (SC -> vol -> SC)
+			g.Global = new C_Global();
 			Global = g.Global;
 
-            // to ensure a fresh messaging token, delete the app from the emulator or device, then clear and RE-build
-            // only needed once when the app starts; this lets us handle the certificate from abandonedfactory.net
             C_Vita.SetupCertificateHandling();
 
 			// Set our view from the "main" layout resource
@@ -65,17 +55,17 @@ namespace a_vitavol
 
             if (Intent.Extras != null)
             {
-                Console.WriteLine("found extras");
+                //Console.WriteLine("found extras");
                 string m_id = Intent.Extras.GetString("google.message_id");
                 if (m_id != null)
                 {
-                    Console.WriteLine("id: " + m_id);
+                    //Console.WriteLine("id: " + m_id);
                     string fb_message = sharedPreferences.GetString("firebase_message", "");
                     string fb_id = sharedPreferences.GetString("firebase_messageid", "");
 
                     if (m_id == fb_id)
                     {
-                        Console.WriteLine("Found message: " + fb_message);
+                        //Console.WriteLine("Found message: " + fb_message);
                         C_MessageBox mbox = new C_MessageBox(this, "Notification", fb_message, E_MessageBoxButtons.Ok);
 						mbox.Show();
 					}
@@ -124,19 +114,16 @@ namespace a_vitavol
 
 					RunOnUiThread(() => 
                     {
+						EnableUI_Login(true);
+						AI_Busy.Cancel();
+
 						if (user == null)
 						{
-							EnableUI_Login(true);
-							AI_Busy.Cancel();
-
 							C_MessageBox mbox = new C_MessageBox(this, "Error", "Unable to login. Might be bad email or password", E_MessageBoxButtons.Ok);
 							mbox.Show();
 
 							return;
 						}
-
-						EnableUI_Login(true);
-						AI_Busy.Cancel();
 
 						Global.LoggedInUserId = user.id;
 

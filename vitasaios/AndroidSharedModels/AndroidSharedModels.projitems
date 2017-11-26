@@ -15,5 +15,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)C_GooglePlayHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MyFirebaseIIDService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MyFirebaseMessagingService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)C_ToolsExtra.cs" />
   </ItemGroup>
 </Project>
