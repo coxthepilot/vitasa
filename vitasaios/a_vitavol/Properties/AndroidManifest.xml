@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionName="1.2.2" package="net.zsquared.a_vitavol" android:versionCode="3">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionName="1.2.3" package="net.zsquared.a_vitavol" android:versionCode="4">
 	<uses-sdk android:minSdkVersion="16" />
 	<uses-permission android:name="android.permission.READ_CALENDAR" />
 	<uses-permission android:name="android.permission.WRITE_CALENDAR" />
@@ -20,7 +20,7 @@
 	<!-- These are optional, but recommended. They will allow Maps to use the My Location provider. -->
 	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-	<application android:allowBackup="true" android:name=".MyAppDelegate" android:icon="@drawable/vitaiconv2" android:label="@string/app_name">
+	<application android:allowBackup="true" android:name=".MyAppDelegate" android:icon="@drawable/vitasaicon" android:label="@string/app_name">
 		<receiver android:name="com.google.firebase.iid.FirebaseInstanceIdInternalReceiver" android:exported="false" />
 		<receiver android:name="com.google.firebase.iid.FirebaseInstanceIdReceiver" android:exported="true" android:permission="com.google.android.c2dm.permission.SEND">
 			<intent-filter>

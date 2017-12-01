@@ -271,10 +271,7 @@ namespace a_vitavol
 			public const int riverwalk2 = 2130837534;
 			
 			// aapt resource value: 0x7f02001f
-			public const int vitaiconv2 = 2130837535;
-			
-			// aapt resource value: 0x7f020020
-			public const int vitavol = 2130837536;
+			public const int vitasaicon = 2130837535;
 			
 			static Drawable()
 			{

@@ -171,14 +171,13 @@
     <AndroidResource Include="Resources\drawable\openwithneeds.jpg" />
     <AndroidResource Include="Resources\drawable\openwithneedsboxed.jpg" />
     <AndroidResource Include="Resources\drawable\riverwalk.jpg" />
-    <AndroidResource Include="Resources\drawable\vitaiconv2.png" />
-    <AndroidResource Include="Resources\drawable\vitavol.jpg" />
     <AndroidResource Include="Resources\drawable\riverwalk2.jpg" />
     <AndroidResource Include="Resources\layout\SCSiteVolCalendar.axml" />
     <AndroidResource Include="Resources\layout\VolPickShift.axml" />
     <AndroidResource Include="Resources\layout\SCSiteShifts.axml" />
     <AndroidResource Include="Resources\layout\SCSiteCalShifts.axml" />
     <AndroidResource Include="Resources\layout\SCShiftDetails.axml" />
+    <AndroidResource Include="Resources\drawable\vitasaicon.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable\" />

@@ -46,7 +46,7 @@ namespace a_vitavol
 			var pendingIntent = PendingIntent.GetActivity(this, 0, intent, PendingIntentFlags.OneShot);
 
 			var notificationBuilder = new Notification.Builder(this)
-				.SetSmallIcon(Resource.Drawable.vitaiconv2)
+				.SetSmallIcon(Resource.Drawable.vitasaicon)
 				.SetContentTitle("VITA Message")
 				.SetContentText(messageBody)
 				.SetAutoCancel(true)
