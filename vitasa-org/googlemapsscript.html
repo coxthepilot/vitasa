@@ -8,19 +8,55 @@
 		window.location.href = rawloc + "/es/index.html";
 	}
 
+	var lang = "en";
+	var lix = window.location.href.indexOf("/es/");
+	if (lix >= 0)
+		lang = "es";
+
 	var OurMap;
 	var OurLastInfoWindow = null;
 
-    let idMainDesktop = "u2306";
-    let idMFTDesktop = "u1842";
-    let idMainPhone = "u1306";
-    let idMFTPhone = "u1371";
+	// these are the id's of the map object; determined by inspection!
+    var idMainDesktop = "u2306";
+    var idMFTDesktop = "u1842";
+    var idMainPhone = "u1306";
+    var idMFTPhone = "u1371";
 
-    // --- adjust these for the display ---
-    let isMFT = false;
-    let id = idMainPhone;
+    var isMFT = false;
+    var id = null;
 
     function initMap() {
+	    // figure out which screen we are on by trying to get the map object
+	    var idx = document.getElementById(idMainDesktop);
+	    if (idx != null) {
+	    	id = idMainDesktop;
+	    	isMFT = false;
+	    }
+
+	    if (idx == null) {
+	    	idx = document.getElementById(idMFTDesktop);
+		    if (idx != null) {
+		    	id = idMFTDesktop;
+		    	isMFT = true;
+		    }
+	    }
+
+	    if (idx == null) {
+	    	idx = document.getElementById(idMainPhone);
+		    if (idx != null) {
+		    	id = idMainPhone;
+		    	isMFT = false;
+		    }
+	    }
+
+	    if (idx == null) {
+	    	idx = document.getElementById(idMFTPhone);
+		    if (idx != null) {
+		    	id = idMFTPhone;
+		    	isMFT = true;
+		    }
+	    }
+
     	var myLatLng = {lat: 29.4104978, lng:-98.5011676};
 
         var map = new google.maps.Map(document.getElementById(id), {
@@ -37,7 +73,7 @@
             };
 
         var url = window.location.protocol + '//' + window.location.hostname;
-        url = url + "/vitasa/sites.json";
+        url = url + "/vitasa/sitesjson.html";
 
         request.open("get", url, true);
         request.send();
@@ -79,8 +115,25 @@
         		OurLastInfoWindow.close();
         	}
 
+        	// compute the address of the anchor on the sites page
+        	var h = window.location.href;
+        	var hix = h.indexOf("index.html");
+        	var h1 = h.substring(0, hix);
+        	var h2 = h1 + "vita-sites.html" + "#" + location.anchor;
+        	if (lang == "es")
+        		h2 = h1 + "los-sitios-de-vita-en-san-antonio.html" + "#" + location.anchor;
+
+        	var g = "https://www.google.com/maps/search/?api=1";
+        	var g1 = g + "&query=" + location.latlng.lat + "," + location.latlng.lng;
+        	var g2 = g1 + "&query_place_id=" + location.placeid;
+
+        	var contentString = '<div>' 
+        	+ '<a href="' + h2 + '"><b>' + location.name + '</b></a><br/>'
+        	+ '<a href="' + g2 + '" target="_blank">' + location.address +  '</a><br/>'
+        	+ location.days + '<br/>'
+        	+ '</div>';
 	        OurLastInfoWindow = new google.maps.InfoWindow({
-				content: location.name
+				content: contentString
 			});
 
     		OurLastInfoWindow.open(map, marker);
@@ -89,5 +142,5 @@
 
 </script>    
 <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGzGpzxEbNLKC8pjEE7V88HOvDJhT8whI&callback=initMap">
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD8AYki3JiwLdceI5uQT0HcMf1MAH7GII4&callback=initMap">
 </script>

@@ -96,5 +96,14 @@ namespace zsquared
 
 			IsFirst = FirstQueue.Dequeue();
 		}
+
+        public void AddArrayElement(string s)
+        {
+			if (!IsFirst)
+				sb.Append(",");
+			IsFirst = false;
+
+			sb.Append("\"" + s + "\"");
+		}
 	}
 }

@@ -29,18 +29,45 @@ namespace vitaadmin
 
 			LoggedInUser = Global.GetUserFromCacheNoFetch(Global.LoggedInUserId);
 
-			B_Back.TouchUpInside += (sender, e) =>
-				PerformSegue("Segue_WorkItemsToMain", this);
+            B_Back.TouchUpInside += (sender, e) =>
+            {
+                switch (Global.ViewCameFrom)
+                {
+                    case E_ViewCameFrom.Main:
+                        PerformSegue("Segue_WorkItemsToMain", this);
+                        break;
+                    case E_ViewCameFrom.Users:
+                        PerformSegue("Segue_SignUpsToUsers", this);
+                        break;
+                    case E_ViewCameFrom.SCSites:
+                        PerformSegue("Segue_SignUpsToSites", this);
+                        break;
+                }
+            };
 
 			AI_Busy.StartAnimating();
 			EnableUI(false);
 
 			Task.Run(async () =>
 			{
-                // we make sure all sites have been read in, which gives us a complete list of all work items
-                List<C_VitaSite> sitesList = await Global.FetchAllSites();
+				int userid = Global.SelectedUser == null ? -1 : Global.SelectedUser.id;
+
+				// we make sure all sites have been read in, which gives us a complete list of all work items
+				List<C_VitaSite> sitesList = await Global.FetchAllSites();
 
                 Global.SignUps.Sort(C_SignUp.CompareByDateAscending);
+
+                // get the workshifts for the items we care about
+                List<C_SignUp> sus = new List<C_SignUp>();
+                foreach(C_SignUp su in Global.SignUps)
+                {
+					if (((userid == -1) || (userid == su.UserId))
+	                    && ((Global.SelectedSiteSlug == null) || (su.SiteSlug == Global.SelectedSiteSlug)))
+                    {
+                        sus.Add(su);
+                    }
+				}
+                bool success = await Global.EnsureShiftsInCacheForSignUps(LoggedInUser.Token, sus);
 
 				UIApplication.SharedApplication.InvokeOnMainThread(
 				new Action(() =>
@@ -48,7 +75,7 @@ namespace vitaadmin
 					AI_Busy.StopAnimating();
 					EnableUI(true);
 
-                    C_WorkItemsTableSource ts = new C_WorkItemsTableSource(Global, Global.SignUps);
+                    C_WorkItemsTableSource ts = new C_WorkItemsTableSource(Global, Global.SignUps, userid, Global.SelectedSiteSlug);
                     TV_WorkItems.Source = ts;
 					TV_WorkItems.Delegate = new C_WorkItemsTableDelegate(Global, this, ts);
 					TV_WorkItems.ReloadData();
@@ -64,6 +91,14 @@ namespace vitaadmin
 
             L_Site.Text = wi.SiteName;
             L_Date.Text = wi.Date.ToString("mmm dd, yyyy");
+
+            C_WorkShift ws = Global.GetWorkShiftById(wi.ShiftId);
+
+            if (ws != null)
+                L_Shift.Text = ws.OpenTime.ToString("hh:mm p") + " to " + ws.CloseTime.ToString("hh:mm p");
+            else
+                L_Shift.Text = "";
+
             TB_Hours.Text = wi.Hours.ToString();
             SC_Approval.SelectedSegment = wi.Approved ? 0 : 1;
             B_Update.Enabled = false;
@@ -153,11 +188,23 @@ namespace vitaadmin
 			const string CellIdentifier = "TableCell_WorkItemsTableSource";
             public List<C_SignUp> OurWorkItems;
 			readonly C_Global Global;
+            readonly int UserId;
+            readonly string SiteSlug;
 
-			public C_WorkItemsTableSource(C_Global global, List<C_SignUp> ourWorkitems)
+			public C_WorkItemsTableSource(C_Global global, List<C_SignUp> ourWorkitems, int userId, string siteSlug)
 			{
 				Global = global;
-                OurWorkItems = ourWorkitems;
+                //OurWorkItems = ourWorkitems;
+                UserId = userId;
+                SiteSlug = siteSlug;
+
+                OurWorkItems = new List<C_SignUp>();
+                foreach(C_SignUp su in ourWorkitems)
+                {
+                    if (((UserId == -1) || (UserId == su.UserId))
+                        && ((SiteSlug == null) || (su.SiteSlug == SiteSlug)))
+                        OurWorkItems.Add(su);
+                }
 			}
 
 			public override nint RowsInSection(UITableView tableview, nint section)
@@ -178,7 +225,7 @@ namespace vitaadmin
 
                 C_SignUp workitem = OurWorkItems[indexPath.Row];
 
-                cell.DetailTextLabel.Text = workitem.Date.ToString("mmm dd, yyy") + " at " + workitem.SiteName;
+                cell.DetailTextLabel.Text = workitem.Date.ToString("mmm dd, yyyy") + " at " + workitem.SiteName;
 
                 C_VitaUser user = Global.GetUserFromCacheNoFetch(workitem.UserId);
                 if (user == null)

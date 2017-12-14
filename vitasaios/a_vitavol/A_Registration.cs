@@ -131,7 +131,24 @@ namespace a_vitavol
 			ok &= TB_Register_Email.Text.Contains("@");
 			ok &= TB_Register_Password.Text == TB_Register_VerifyPassword.Text;
 
-			B_Register_Submit.Enabled = ok;
+            B_Register_Submit.Enabled = ok;
+
+            Android.Graphics.Color nc = TB_Register_Name.Text.Length > 4 ? Android.Graphics.Color.DarkGreen : Android.Graphics.Color.DarkGray;
+            TB_Register_Name.SetBackgroundColor(nc);
+
+            bool emailOk = (TB_Register_Email.Text.Length > 4) && (TB_Register_Email.Text.Contains("@"));
+            Android.Graphics.Color ec = emailOk ? Android.Graphics.Color.DarkGreen : Android.Graphics.Color.DarkGray;
+            TB_Register_Email.SetBackgroundColor(ec);
+
+            bool passOk = (TB_Register_Password.Text.Length > 7) && (TB_Register_VerifyPassword.Text.Length > 7)
+                && (TB_Register_Password.Text == TB_Register_VerifyPassword.Text);
+			Android.Graphics.Color pwc = passOk ? Android.Graphics.Color.DarkGreen : Android.Graphics.Color.DarkGray;
+            TB_Register_Password.SetBackgroundColor(pwc);
+            TB_Register_VerifyPassword.SetBackgroundColor(pwc);
+
+            bool phoneOk = ValidPhoneNumber(TB_Register_Phone.Text);
+			Android.Graphics.Color phc = phoneOk ? Android.Graphics.Color.DarkGreen : Android.Graphics.Color.DarkGray;
+            TB_Register_Phone.SetBackgroundColor(phc);
 		}
 
 		private bool ValidPhoneNumber(string pn)

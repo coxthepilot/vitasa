@@ -36,6 +36,10 @@ namespace vitaadmin
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UIButton B_Users { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UIButton B_WorkItems { get; set; }
 
         void ReleaseDesignerOutlets ()
@@ -63,6 +67,11 @@ namespace vitaadmin
             if (B_Suggestions != null) {
                 B_Suggestions.Dispose ();
                 B_Suggestions = null;
+            }
+
+            if (B_Users != null) {
+                B_Users.Dispose ();
+                B_Users = null;
             }
 
             if (B_WorkItems != null) {

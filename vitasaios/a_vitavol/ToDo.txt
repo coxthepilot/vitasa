@@ -1,5 +1,9 @@
 ﻿----- Issues -----
 
+* both: Registration, not clear why Submit button is not enabled; highlight the box green when entry is ok
+* can't get to submit button on 5S
+* admin: not updating the backup site coordinator
+
 
 Android
 * add support for shifts

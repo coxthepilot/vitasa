@@ -32,6 +32,10 @@ namespace vitaadmin
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UILabel L_Shift { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UILabel L_Site { get; set; }
 
         [Outlet]
@@ -70,6 +74,11 @@ namespace vitaadmin
             if (L_Date != null) {
                 L_Date.Dispose ();
                 L_Date = null;
+            }
+
+            if (L_Shift != null) {
+                L_Shift.Dispose ();
+                L_Shift = null;
             }
 
             if (L_Site != null) {

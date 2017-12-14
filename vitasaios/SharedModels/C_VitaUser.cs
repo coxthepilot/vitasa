@@ -18,7 +18,7 @@ namespace zsquared
         public string Phone;    // user phone
         public E_Certification Certification;   // certification level for this user
         public List<C_SignUp> WorkHistoryX;     // signups history
-		public List<C_SignUp> WorkIntentsX;     // signups pending
+        public List<C_SignUp> WorkIntentsX;     // signups pending
         public List<E_VitaUserRoles> Roles;     // roles assigned to this user
         public List<C_Suggestion> Suggestions;  // suggestions created by this user
         public List<C_SiteCoordinated> SitesCoordinated;    // list of sites coordinated by this user
@@ -29,6 +29,7 @@ namespace zsquared
         public const string N_Name = "name";
         public const string N_Email = "email";
         public const string N_Password = "password";
+        public const string N_PasswordConfirmation = "password_confirmation";
         public const string N_Phone = "phone";
         public const string N_Certification = "certification";
         public const string N_WorkHistory = "work_history";
@@ -36,13 +37,13 @@ namespace zsquared
         public const string N_Roles = "roles";
         public const string N_Suggestions = "suggestions";
         public const string N_SitesCoordinated = "sites_coordinated";
-		public const string N_Token = "token";
+        public const string N_Token = "token";
 
-		/// <summary>
-		/// Returns true if this user has admin privilidge.
-		/// </summary>
-		/// <value><c>true</c> if has admin; otherwise, <c>false</c>.</value>
-		public bool HasAdmin
+        /// <summary>
+        /// Returns true if this user has admin privilidge.
+        /// </summary>
+        /// <value><c>true</c> if has admin; otherwise, <c>false</c>.</value>
+        public bool HasAdmin
         {
             get
             {
@@ -77,11 +78,11 @@ namespace zsquared
             }
         }
 
-		/// <summary>
-		/// Returns true if this use is still flagged as a new user (awaiting approval from bak office)
-		/// </summary>
-		/// <value><c>true</c> if has new user; otherwise, <c>false</c>.</value>
-		public bool HasNewUser
+        /// <summary>
+        /// Returns true if this use is still flagged as a new user (awaiting approval from bak office)
+        /// </summary>
+        /// <value><c>true</c> if has new user; otherwise, <c>false</c>.</value>
+        public bool HasNewUser
         {
             get
             {
@@ -99,7 +100,7 @@ namespace zsquared
         {
             if (!(jv is JsonObject))
                 return;
-            
+
             WorkHistoryX = new List<C_SignUp>();
             WorkIntentsX = new List<C_SignUp>();
             Roles = new List<E_VitaUserRoles>();
@@ -204,16 +205,91 @@ namespace zsquared
             return res;
         }
 
-		public async Task<bool> UpdateUserProfile()
+        public async Task<bool> UpdateUserPassword(string token)
         {
-			C_JsonBuilder jb = new C_JsonBuilder();
-			jb.Add(Name, N_Name);
-			jb.Add(Phone, N_Phone);
+            if (token == null)
+                token = Token;
+
+            C_JsonBuilder jb = new C_JsonBuilder();
+            jb.Add(Password, N_Password);
+            jb.Add(Password, N_PasswordConfirmation);
 			string bodyjson = jb.ToString();
 
 			string submiturl = "/users/" + id.ToString();
 
+			string responseString = await Tools.Upload("PUT", submiturl, bodyjson, token);
+
+			return responseString != null;
+		}
+
+        public async Task<bool> UpdateUserProfile()
+        {
+            C_JsonBuilder jb = new C_JsonBuilder();
+            jb.Add(Name, N_Name);
+            jb.Add(Phone, N_Phone);
+            string bodyjson = jb.ToString();
+
+            string submiturl = "/users/" + id.ToString();
+
             string responseString = await Tools.Upload("PUT", submiturl, bodyjson, Token);
+
+            return responseString != null;
+        }
+
+        public async Task<bool> UpdateUserProfile(string token)
+        {
+            C_JsonBuilder jb = new C_JsonBuilder();
+            jb.Add(Name, N_Name);
+            jb.Add(Phone, N_Phone);
+            jb.Add(Email, N_Email);
+            jb.Add(Certification.ToString(), N_Certification);
+            jb.StartArray(N_Roles);
+            foreach (E_VitaUserRoles role in Roles)
+                jb.AddArrayElement(role.ToString());
+            jb.EndArray();
+            string bodyjson = jb.ToString();
+
+            string submiturl = "/users/" + id.ToString();
+
+            string responseString = await Tools.Upload("PUT", submiturl, bodyjson, token);
+
+#if DEBUG
+            if (responseString != null)
+            {
+                JsonValue jvu = JsonValue.Parse(responseString);
+                C_VitaUser tuser = new C_VitaUser(jvu);
+
+                if ((tuser.Name != Name)
+                    || (tuser.Phone != Phone)
+                    || (tuser.Email != Email)
+                    || (tuser.Certification != Certification)
+                    || (tuser.Roles.Count != Roles.Count))
+                    responseString = null;
+
+                if (tuser.Roles.Count == Roles.Count)
+                {
+                    tuser.Roles.Sort();
+                    Roles.Sort();
+                    foreach(E_VitaUserRoles role in tuser.Roles)
+                    {
+                        bool found = false;
+                        foreach(E_VitaUserRoles r in Roles)
+                        {
+                            if (role == r)
+                            {
+                                found = true;
+                                break;
+                            }
+                        }
+                        if (!found)
+                        {
+                            responseString = null;
+                            break;
+                        }
+                    }
+                }
+            }
+#endif
 
             return responseString != null;
 		}

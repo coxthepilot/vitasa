@@ -10,7 +10,7 @@ using System.Net.Http.Headers;
 
 namespace zsquared
 {
-    public enum E_ViewCameFrom { Unknown = 0, List, Map, MySignUps, SCSites, SCSite, Login, VolOptions, Suggestions, CalEntry, CalDefaults }
+    public enum E_ViewCameFrom { Unknown = 0, List, Map, MySignUps, SCSites, SCSite, Login, VolOptions, Suggestions, CalEntry, CalDefaults, Users, Main }
 
     public class C_Global
     {
@@ -96,6 +96,9 @@ namespace zsquared
 
 		Dictionary<int, List<C_SiteSchedule>> SitesScheduleCache;
         Dictionary<string, Dictionary<int, List<C_SiteSchedule>>> SiteScheduleBySiteCache;
+
+        // used in vitaadmin, in Users for displaying signups for a user
+        public C_VitaUser SelectedUser;
 
 		public C_Global()
         {
@@ -530,6 +533,15 @@ namespace zsquared
 			}
 
             return res;
+		}
+
+        public async Task<bool> RemoveUser(int id, string token)
+        {
+			string usersUrl = "/users/" + id.ToString();
+
+            string responseString = await Tools.Upload("DELETE", usersUrl, "", token);
+
+            return responseString != null;
 		}
 
 		public C_VitaUser GetUserFromCacheNoFetch(int id)
