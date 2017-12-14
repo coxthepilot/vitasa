@@ -12,7 +12,9 @@
             android:layout_height="wrap_content"
             android:singleLine="true"
             android:id="@+id/TB_Register_Email"
-            android:hint="email" />
+            android:hint="email"
+            android:inputType="textEmailAddress"
+            android:textColor="#ffffffff" />
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -62,7 +64,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/textView4"
-            android:text="Users of the VITA service should not register. Instead, they should download the VITA app for clients."
+            android:text="Users of the VITA service should not register. Instead, they should use vitasa.org."
             android:paddingLeft="10dp"
             android:paddingRight="10dp" />
         <Space

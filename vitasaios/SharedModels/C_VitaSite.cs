@@ -62,6 +62,7 @@ namespace zsquared
         public static readonly string N_PrimaryCoordinatorId = "sitecoordinator";
 		public static readonly string N_PrimarySiteCoordinatorName = "sitecoordinator_name";
         public static readonly string N_BackupCoordinatorId = "backup_coordinator";
+		public static readonly string N_BackupCoordinatorIdForPut = "backup_coordinator_id";
 		public static readonly string N_BackupSiteCoordinatorName = "backup_coordinator_name";
 
         public static readonly string N_ClientStatus = "sitestatus";
@@ -272,7 +273,7 @@ namespace zsquared
                 jb.Add(Longitude, N_Longitude);
                 jb.Add(PlaceID, N_PlaceID);
                 jb.Add(PrimaryCoordinatorId, N_PrimaryCoordinatorId);
-                jb.Add(BackupCoordinatorId, N_BackupCoordinatorId);
+                jb.Add(BackupCoordinatorId, N_BackupCoordinatorIdForPut);
                 jb.Add(SeasonFirstDate, N_SeasonFirstDate);
                 jb.Add(SeasonLastDate, N_SeasonLastDate);
                 string bodyjson = jb.ToString();

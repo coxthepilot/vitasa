@@ -2,11 +2,15 @@ using Foundation;
 using System;
 using UIKit;
 
+using zsquared;
+
 namespace vitaadmin
 {
     public partial class VC_Main : UIViewController
     {
-        public VC_Main (IntPtr handle) : base (handle)
+		C_Global Global;
+
+		public VC_Main (IntPtr handle) : base (handle)
         {
         }
 
@@ -14,6 +18,9 @@ namespace vitaadmin
         {
             base.ViewDidLoad();
 
+			AppDelegate myAppDelegate = (AppDelegate)UIApplication.SharedApplication.Delegate;
+			Global = myAppDelegate.Global;
+			
             B_Back.TouchUpInside += (sender, e) => 
             {
                 PerformSegue("Segue_MainToLogin", this);
@@ -31,6 +38,9 @@ namespace vitaadmin
 
             B_WorkItems.TouchUpInside += (sender, e) => 
             {
+                Global.SelectedUser = null;
+                Global.SelectedSiteSlug = null;
+                Global.ViewCameFrom = E_ViewCameFrom.Main;
                 PerformSegue("Segue_MainToWorkItems", this);
             };
 
@@ -42,6 +52,11 @@ namespace vitaadmin
             B_Notifications.TouchUpInside += (sender, e) => 
             {
                 PerformSegue("Segue_MainToNotifications", this);
+            };
+
+            B_Users.TouchUpInside += (sender, e) => 
+            {
+                PerformSegue("Segue_MainToUsers", this);
             };
         }
     }

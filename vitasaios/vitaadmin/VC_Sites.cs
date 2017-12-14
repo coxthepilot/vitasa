@@ -288,6 +288,16 @@ namespace vitaadmin
 				EnableUI(true);
             };
 
+            B_WorkItems.TouchUpInside += (sender, e) => 
+            {
+                Global.SelectedSiteSlug = null;
+                if (SelectedSite != null)
+                    Global.SelectedSiteSlug = SelectedSite.Slug;
+                Global.SelectedUser = null;
+                Global.ViewCameFrom = E_ViewCameFrom.SCSites;
+                PerformSegue("Segue_SitesToSignUps", this);
+            };
+
             SiteEnable(false);
 
 			AI_Busy.StartAnimating();
@@ -520,8 +530,14 @@ namespace vitaadmin
             catch {}
             try { SelectedSite.SeasonLastDate = new C_YMD(TB_SeasonEnd.Text); }
 			catch { }
+            int psc = (int)PV_PrimarySiteCoordinator.SelectedRowInComponent(0);
+            int pscid = Users[psc].id;
+            SelectedSite.PrimaryCoordinatorId = pscid;
+            int bsc = (int)PV_BackupSiteCoordinator.SelectedRowInComponent(0);
+			int bscid = Users[bsc].id;
+            SelectedSite.BackupCoordinatorId = bscid;
 
-            bool success = await SelectedSite.UpdateSimpleFields(LoggedInUser.Token);
+			bool success = await SelectedSite.UpdateSimpleFields(LoggedInUser.Token);
             if (success)
                 Dirty = false;
 

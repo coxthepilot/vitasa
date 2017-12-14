@@ -27,6 +27,7 @@ namespace vitaadmin
 			// Perform any additional setup after loading the view, typically from a nib.
 
 			AppDelegate myAppDelegate = (AppDelegate)UIApplication.SharedApplication.Delegate;
+			myAppDelegate.Global = new C_Global();
 			Global = myAppDelegate.Global;
 
 			B_Login.TouchUpInside += async (sender, e) =>

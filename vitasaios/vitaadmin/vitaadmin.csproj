@@ -156,6 +156,10 @@
     <Compile Include="VC_ShowNotifications.designer.cs">
       <DependentUpon>VC_ShowNotifications.cs</DependentUpon>
     </Compile>
+    <Compile Include="VC_Users.cs" />
+    <Compile Include="VC_Users.designer.cs">
+      <DependentUpon>VC_Users.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <Import Project="..\iOSSharedModel\iOSSharedModels.projitems" Label="Shared" Condition="Exists('..\iOSSharedModel\iOSSharedModels.projitems')" />
   <Import Project="..\SharedModels\SharedModels.projitems" Label="Shared" Condition="Exists('..\SharedModels\SharedModels.projitems')" />
