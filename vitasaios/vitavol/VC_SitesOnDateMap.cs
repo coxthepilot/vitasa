@@ -71,7 +71,7 @@ namespace vitavol
 		{
             foreach (string s in Global.OpenSitesThatNeedHelp)
 			{
-                C_VitaSite vs = Global.GetSiteNoFetch(s);
+                C_VitaSite vs = Global.GetSiteFromSlugNoFetch(s);
 
 				double latitude = double.NaN;
 				double longitude = double.NaN;
@@ -120,7 +120,7 @@ namespace vitavol
                 Sites = new List<C_VitaSite>();
                 foreach(string slug in siteSlugs)
                 {
-                    C_VitaSite s = Global.GetSiteNoFetch(slug);
+                    C_VitaSite s = Global.GetSiteFromSlugNoFetch(slug);
                     if (s != null)
                         Sites.Add(s);
                 }

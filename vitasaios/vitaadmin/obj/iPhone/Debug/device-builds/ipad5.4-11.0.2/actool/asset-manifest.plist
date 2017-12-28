@@ -29,7 +29,7 @@
 			<key>catalog</key>
 			<string>/Users/Billy/Documents/source/vitasa/vitasaios/vitaadmin/obj/iPhone/Debug/device-builds/ipad5.4-11.0.2/actool/cloned-assets/Assets.xcassets</string>
 			<key>message</key>
-			<string>(null)</string>
+			<string>76x76@1x app icons only apply to iPad apps targeting releases of iOS prior to 10.0.</string>
 			<key>type</key>
 			<string>Inapplicable Content</string>
 		</dict>

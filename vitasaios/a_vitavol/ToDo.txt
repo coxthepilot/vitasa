@@ -1,41 +1,63 @@
 ﻿----- Issues -----
 
-* both: Registration, not clear why Submit button is not enabled; highlight the box green when entry is ok
-* can't get to submit button on 5S
-* admin: not updating the backup site coordinator
+
+Shared Models:
 
 
-Android
-* add support for shifts
-* use updated icon
-* version number
+Android:
+* past dates do not show up correctly; need api to only get signups for a site in a date range [done]
+* accept certificates for abandoned factory and volunteer-savvy [done]
+* about needs reference to privacy polcy [done]
+* register needs refernece to privacy policy [done]
+* make sure I/O error handling is correct [done]
 * on notification, the graphic is a tiny slice from the middle [defer]
 * sort sites based on distance to user [defer]
 
 
 iOS: 
-* version number
+* past dates do not show up correctly; need api to only get signups for a site in a date range [done]
+
 
 vitaadmin:
-* add user management
-* add ability to send notifications
+* generate email to all volunteers and site coordinators [done]
+* check enabling of controls on sites; can select Calendar when no site selected
+* show values from config.json
 * hours summary (with export)
 * finish installing site calendar and shifts on sites
 * tool to set basic/adv number on shift
 
-Chris
-* error 500 on shift update to site closed on a date
-* web ui
 
+Chris
+* migrate to DO backend over Christmas [done]
 
 Future
 * no way for a volunteer to view past signups?
 * need option to include work intents on user and site, or not; separate control for each past and future
 * use notifications as way to know content has changed rather than timeouts
-* means to tell app it has to upgrade? [defer]
 
 
 Completed
+* support for offline and user message [done]
+* support for out of date app version [done]
+* fix the certificate handling to accept other domains [done]
+* can't update backup site coordinator [cnd]
+* about needs to reference the privacy polcy [done]
+* fetch config.json from s3 [done]
+* in I/O, use URL from config, test for out of date [done]
+* in I/O use enhanced return codes (more than bool) [done]
+* [ios] can't get to submit button on 5S [done]
+* [ios] registration page needs reference to privacy policy [done]
+
+* support for offline and user message [done]
+* support for out of date app version [done]
+* version number [done]
+* add user management [done]
+* add ability to send notifications [done]
+* admin: not updating the backup site coordinator [done]
+* both: Registration, not clear why Submit button is not enabled; highlight the box green when entry is ok [done] 
+* add support for shifts [done]
+* use updated icon [done]
+* version number [done]
 * change to shift values, not updated in siteschedule? [done]
 * in a series of logins, create signup, the delete, re-login, still shows in the list; on delete
   remove from signups in global; and from site schedule [done]

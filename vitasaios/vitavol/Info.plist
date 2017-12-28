@@ -4,10 +4,6 @@
 <dict>
 	<key>CFBundleIdentifier</key>
 	<string>net.zsquared.vitavol</string>
-	<key>CFBundleShortVersionString</key>
-	<string>1.2</string>
-	<key>CFBundleVersion</key>
-	<string>1.2</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>MinimumOSVersion</key>
@@ -39,5 +35,14 @@
 	<string>Calendar, Reminder</string>
 	<key>CFBundleName</key>
 	<string>VITA SA</string>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
+	<key>CFBundleShortVersionString</key>
+	<string>1.4</string>
+	<key>CFBundleVersion</key>
+	<string>1.4</string>
 </dict>
 </plist>

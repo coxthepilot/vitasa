@@ -28,7 +28,7 @@ namespace vitavol
             Global = myAppDelegate.Global;
 
             LoggedInUser = Global.GetUserFromCacheNoFetch(Global.LoggedInUserId);
-            SelectedSite = Global.GetSiteNoFetch(Global.SelectedSiteSlug);
+            SelectedSite = Global.GetSiteFromSlugNoFetch(Global.SelectedSiteSlug);
             SelectedDate = Global.SelectedDate;
 
 #if DEBUG

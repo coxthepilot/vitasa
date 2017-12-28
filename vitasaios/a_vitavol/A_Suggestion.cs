@@ -89,16 +89,16 @@ namespace a_vitavol
                 AI_Busy.Show();
 				EnableUI(false);
 
-				bool success = await SaveSuggestion();
+                C_IOResult ior = await SaveSuggestion();
 
                 AI_Busy.Cancel();
 				EnableUI(true);
 
-				if (!success)
+				if (!ior.Success)
 				{
                     C_MessageBox mbox = new C_MessageBox(this,
 						 "Error",
-						 "Unable to add or update the suggestion",
+                         "Unable to add or update the suggestion [" + ior.ErrorMessage + "]",
 						 E_MessageBoxButtons.Ok);
                     mbox.Show();
 
@@ -112,9 +112,9 @@ namespace a_vitavol
             B_Delete.Click += (sende1r, e1) => 
             {
                 C_MessageBox mbox = new C_MessageBox(this,
-															   "Delete item?",
-															   "Are you sure you want to delete this suggestion?",
-															   E_MessageBoxButtons.YesNo);
+						   "Delete item?",
+						   "Are you sure you want to delete this suggestion?",
+						   E_MessageBoxButtons.YesNo);
                 mbox.Dismissed += async (sender2, args2) => 
                 {
 					if ((args2.Result == E_MessageBoxResults.No) || (Global.SelectedSuggestion.id == -1))
@@ -130,19 +130,19 @@ namespace a_vitavol
                     AI_Busy.Show();
 					EnableUI(false);
 
-                    bool success = await Global.SelectedSuggestion.RemoveSuggestion(OurUser.Token);
+                    C_IOResult ior = await Global.RemoveSuggestion(Global.SelectedSuggestion, OurUser.Token);
                     OurUser.Suggestions.Remove(Global.SelectedSuggestion);
                     Global.SelectedSuggestion = null;
 
                     AI_Busy.Cancel();
 					EnableUI(true);
 
-					if (!success)
+                    if (!ior.Success)
 					{
                         C_MessageBox mbox1 = new C_MessageBox(this,
-																	  "Error",
-																	  "Unable to delete the suggestion.",
-																	   E_MessageBoxButtons.Ok);
+															  "Error",
+                                                              "Unable to delete the suggestion [" + ior.ErrorMessage + "]",
+														      E_MessageBoxButtons.Ok);
                         mbox.Show();
                         return;
 					}
@@ -175,28 +175,22 @@ namespace a_vitavol
             TB_Subject.Enabled = en;
 		}
 
-		private async Task<bool> SaveSuggestion()
+        private async Task<C_IOResult> SaveSuggestion()
 		{
-			bool success = false;
-			try
-			{
-				if (Global.SelectedSuggestion.id == -1)
-				{
-					success = await Global.SelectedSuggestion.AddSuggestion(OurUser.Token);
-					//success = await Global.LoggedInUser.AddSuggestion(Global.SelectedSuggestion);
-					OurUser.Suggestions.Add(Global.SelectedSuggestion);
-				}
-				else
-					success = await Global.SelectedSuggestion.UpdateSuggestion(OurUser.Token);
-                
-				Global.SelectedSuggestion.dirty = false;
-			}
-			catch
-			{
-				success = false;
-			}
+            C_IOResult ior = null;
 
-			return success;
+			if (Global.SelectedSuggestion.id == -1)
+			{
+                ior = await Global.AddSuggestion(Global.SelectedSuggestion, OurUser.Token);
+				//success = await Global.LoggedInUser.AddSuggestion(Global.SelectedSuggestion);
+				OurUser.Suggestions.Add(Global.SelectedSuggestion);
+			}
+			else
+                ior = await Global.UpdateSuggestion(Global.SelectedSuggestion, OurUser.Token);
+            
+			Global.SelectedSuggestion.dirty = false;
+
+            return ior;
 		}
 	}
 }

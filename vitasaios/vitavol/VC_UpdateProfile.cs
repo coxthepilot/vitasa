@@ -41,12 +41,12 @@ namespace vitavol
                 AI_Busy.StartAnimating();
 				EnableUI(false);
 
-                bool success = await LoggedInUser.UpdateUserProfile();
+                C_IOResult ior = await Global.UpdateUserProfile(LoggedInUser);
 
                 AI_Busy.StopAnimating();
 				EnableUI(true);
 
-				if (!success)
+                if (!ior.Success)
 				{
 					// tell the user that the staff will approve, check back later
 					C_MessageBox.E_MessageBoxResults mbres = await C_MessageBox.MessageBox(this,

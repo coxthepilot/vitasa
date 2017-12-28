@@ -57,16 +57,10 @@ namespace a_vitavol
             L_TodaySignups.Text = "You have " + OurComingWorkItems.Count.ToString() + " signups.";
 
 			B_ViewTodaySignups.Click += (sender, e) => 
-            {
-                Intent i = new Intent(this, typeof(A_MySignUps));
-				StartActivity(i);
-			};
+                StartActivity(new Intent(this, typeof(A_MySignUps)));
 
             B_Suggestions.Click += (sender, e) => 
-            {
-                Intent i = new Intent(this, typeof(A_Suggestions));
-				StartActivity(i);
-			};
+                StartActivity(new Intent(this, typeof(A_Suggestions)));
 
             B_UpdateProfile.Click += (sender, e) =>
 			{
@@ -84,21 +78,16 @@ namespace a_vitavol
                 };
                 Global.SelectedSuggestion = sug;
 
-                Intent i = new Intent(this, typeof(A_Suggestion));
-				StartActivity(i);
+                StartActivity(new Intent(this, typeof(A_Suggestion)));
 			};
 
             B_CreateNewSignup.Click += (sender, e) => 
-            {
-                Intent i = new Intent(this, typeof(A_VolCalendar));
-				StartActivity(i);
-			};
+                StartActivity(new Intent(this, typeof(A_VolCalendar)));
 		}
 
 		public override void OnBackPressed()
 		{
-            Intent i = new Intent(this, typeof(MainActivity));
-			StartActivity(i);
+            StartActivity(new Intent(this, typeof(MainActivity)));
 		}
 	}
 }

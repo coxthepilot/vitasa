@@ -56,7 +56,7 @@ namespace a_vitavol
 			Global = g.Global;
 
 			LoggedInUser = Global.GetUserFromCacheNoFetch(Global.LoggedInUserId);
-			SelectedSite = Global.GetSiteNoFetch(Global.SelectedSiteSlug);
+			SelectedSite = Global.GetSiteFromSlugNoFetch(Global.SelectedSiteSlug);
 			SelectedDate = Global.SelectedDate;
 			SelectedCalendarEntry = SelectedSite.GetCalendarEntryForDate(SelectedDate);
 #if DEBUG
@@ -100,21 +100,27 @@ namespace a_vitavol
 				B_SaveChanges.Enabled = true;
 			};
 
-            B_SaveChanges.Click += async (sender, e) =>
+            B_SaveChanges.Click += (sender, e) =>
 			{
                 AI_Busy.Show();
 
-				bool success = await UpdateCalendarAndShifts();
-
-				AI_Busy.Cancel();
-
-				if (!success)
+                Task.Run(async () => 
                 {
-					C_MessageBox mbox = new C_MessageBox(this, "Error", "Unable to update site calendar", E_MessageBoxButtons.Ok);
-					mbox.Show();
-				}
+                    C_IOResult ior = await UpdateCalendarAndShifts();
 
-                StartActivity(new Intent(this, typeof(A_SCCalendar)));
+                    RunOnUiThread(() => 
+                    {
+                        AI_Busy.Cancel();
+
+                        if (!ior.Success)
+                        {
+                            C_MessageBox mbox = new C_MessageBox(this, "Error", "Unable to update site calendar [" + ior.ErrorMessage + "]", E_MessageBoxButtons.Ok);
+                            mbox.Show();
+                        }
+
+                        StartActivity(new Intent(this, typeof(A_SCCalendar)));
+                    });
+                });
 			};
 
 			EnableUI(false);
@@ -145,7 +151,7 @@ namespace a_vitavol
                 	 "Items have changed",
                 	 "Save the changes?",
                 	 E_MessageBoxButtons.YesNoCancel);
-				mbox.Dismissed += async (sender1, args1) =>
+				mbox.Dismissed += (sender1, args1) =>
 				{
                     if (args1.Result == E_MessageBoxResults.Cancel)
 						return;
@@ -158,22 +164,28 @@ namespace a_vitavol
 					AI_Busy.Show();
 					EnableUI(false);
 
-					bool success = await UpdateCalendarAndShifts();
+                    Task.Run(async () => 
+                    {
+                        C_IOResult ior = await UpdateCalendarAndShifts();
 
-					AI_Busy.Cancel();
-					EnableUI(true);
+                        RunOnUiThread(() => 
+                        {
+                            AI_Busy.Cancel();
+                            EnableUI(true);
 
-					if (!success)
-					{
-						C_MessageBox mbox1 = new C_MessageBox(this,
-									"Error",
-									"Unble to save the changes.",
-									 E_MessageBoxButtons.Ok);
-						mbox1.Show();
-						return;
-					}
+                            if (!ior.Success)
+                            {
+                                C_MessageBox mbox1 = new C_MessageBox(this,
+                                            "Error",
+                                            "Unble to save the changes [" + ior.ErrorMessage + "]",
+                                             E_MessageBoxButtons.Ok);
+                                mbox1.Show();
+                                return;
+                            }
 
-					StartActivity(new Intent(this, typeof(A_SCCalendar)));
+                            StartActivity(new Intent(this, typeof(A_SCCalendar)));
+                        });
+                    });
 				};
 				mbox.Show();
                 return;
@@ -187,25 +199,30 @@ namespace a_vitavol
             LV_Shifts.Enabled = en;
         }
 
-		private async Task<bool> UpdateCalendarAndShifts()
+        private async Task<C_IOResult> UpdateCalendarAndShifts()
 		{
-			bool success = true;
-			try
+            C_IOResult ior = new C_IOResult
+            {
+                Success = true,
+                ResultCode = E_IOResultCode.NoError
+            };
+
+            try
 			{
                 SelectedCalendarEntry.SiteIsOpen = CB_SiteIsOpen.Checked;
-				// update the entry
-				if (SelectedCalendarEntry.Dirty)
-					success &= await SelectedSite.UpdateCalendarEntry(LoggedInUser.Token, SelectedCalendarEntry);
+                // update the entry
+                if (SelectedCalendarEntry.Dirty)
+                    ior = await Global.UpdateCalendarEntry(SelectedSite, LoggedInUser.Token, SelectedCalendarEntry);
 
-				if (success)
+                if (ior.Success)
 				{
 					// now update all of the shifts
 					foreach (C_WorkShift ws in SelectedCalendarEntry.WorkShifts)
 					{
 						if (ws.Dirty)
 						{
-							success &= await Global.UpdateShift(LoggedInUser.Token, SelectedSite.Slug, ws, SelectedCalendarEntry);
-							if (!success)
+                            ior = await Global.UpdateShift(LoggedInUser.Token, SelectedSite.Slug, ws, SelectedCalendarEntry);
+							if (!ior.Success)
 								break;
 						}
 					}
@@ -217,11 +234,12 @@ namespace a_vitavol
 			}
 			catch (Exception e)
 			{
-				Console.WriteLine(e.Message);
-				success = false;
+#if DEBUG
+                Console.WriteLine(e.Message);
+#endif
 			}
 
-			return success;
+			return ior;
 		}
 
 		private bool CalendarOrShiftsAreDirty(C_CalendarEntry calEntry)
@@ -241,7 +259,7 @@ namespace a_vitavol
             readonly C_Global Global;
             readonly C_VitaUser User;
 
-            public ShiftsAdapter(Activity context, List<C_WorkShift> shifts, C_Global global, C_VitaUser user) : base()
+            public ShiftsAdapter(Activity context, List<C_WorkShift> shifts, C_Global global, C_VitaUser user)
 			{
 				this.context = context;
 				this.Shifts = shifts;

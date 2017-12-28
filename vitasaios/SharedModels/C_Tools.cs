@@ -172,134 +172,23 @@ namespace zsquared
             return res;
         }
 
-        public static void UpdateBytesCounter(int b)
-        {
-#if __ANDROID__
-            a_vitavol.MainActivity.BytesReceived += b;
-#else
-            var myAppDelegate = UIKit.UIApplication.SharedApplication.Delegate;
-            I_Global iad = myAppDelegate as I_Global;
-            iad.UpdateBytesReceived(b);
-#endif
-		}
-
-		public static async Task<string> Upload(string httpOp, string submiturl, string bodyjson, string token)
-		{
-			int retryCount = 0;
-			bool retry = false;
-			string responseString = null;
-			do
-			{
-				try
-				{
-					retry = false;
-
-					WebClient wc = new WebClient()
-					{
-						BaseAddress = C_Vita.VitaCoreUrl
-					};
-                    if (token != null)
-	    				wc.Headers.Add(HttpRequestHeader.Cookie, token);
-					wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
-					wc.Headers.Add(HttpRequestHeader.Accept, "application/json");
-
-					responseString = await wc.UploadStringTaskAsync(submiturl, httpOp, bodyjson);
-
-					UpdateBytesCounter(responseString.Length);
-				}
-				catch (WebException we)
-				{
-					if (we.Status == WebExceptionStatus.ReceiveFailure)
-					{
-						retry = retryCount < 3;
-						retryCount++;
-#if DEBUG
-						Console.WriteLine(we.Message);
-#endif
-					}
-					else
-					{
-#if DEBUG
-						Console.WriteLine(we.Message);
-#endif
-						retry = false;
-					}
-				}
-				catch (Exception e)
-				{
-#if DEBUG
-					Console.WriteLine(e.Message);
-#endif
-				}
-			}
-			while (retry);
-
-			return responseString;
-		}
-
-		public static async Task<string> Download(string submiturl, string token)
-		{
-			int retryCount = 0;
-			bool retry = false;
-			string responseString = null;
-			do
-			{
-				try
-				{
-					retry = false;
-
-					WebClient wc = new WebClient()
-					{
-						BaseAddress = C_Vita.VitaCoreUrl
-					};
-                    if (token != null)
-    					wc.Headers.Add(HttpRequestHeader.Cookie, token);
-					wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
-					wc.Headers.Add(HttpRequestHeader.Accept, "application/json");
-
-                    responseString = await wc.DownloadStringTaskAsync(submiturl);
-
-					UpdateBytesCounter(responseString.Length);
-				}
-				catch (WebException we)
-				{
-					if (we.Status == WebExceptionStatus.ReceiveFailure)
-					{
-						retry = retryCount < 3;
-						retryCount++;
-#if DEBUG
-						Console.WriteLine(we.Message);
-#endif
-					}
-					else
-					{
-#if DEBUG
-						Console.WriteLine(we.Message);
-#endif
-						retry = false;
-                        responseString = null;
-					}
-				}
-				catch (Exception e)
-				{
-#if DEBUG
-					Console.WriteLine(e.Message);
-#endif
-                    responseString = null;
-                    retry = false;
-				}
-			}
-			while (retry);
-
-			return responseString;
-		}
+//        public static void UpdateBytesCounter(int b)
+//        {
+//#if __ANDROID__
+//            a_vitavol.MainActivity.BytesReceived += b;
+//#else
+//            var myAppDelegate = UIKit.UIApplication.SharedApplication.Delegate;
+//            I_Global iad = myAppDelegate as I_Global;
+//            iad.UpdateBytesReceived(b);
+//#endif
+		//}
 
 	}
 
-    public interface I_Global
-    {
-        C_Global GetGlobal();
-        long GetBytesReceived();
-        void UpdateBytesReceived(int v);
-    }
+    //public interface I_Global
+    //{
+    //    C_Global GetGlobal();
+    //    long GetBytesReceived();
+    //    void UpdateBytesReceived(int v);
+    //}
 }

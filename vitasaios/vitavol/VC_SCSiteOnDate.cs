@@ -32,7 +32,7 @@ namespace vitavol
             Global = myAppDelegate.Global;
 
             LoggedInUser = Global.GetUserFromCacheNoFetch(Global.LoggedInUserId);
-            SelectedSite = Global.GetSiteNoFetch(Global.SelectedSiteSlug);
+            SelectedSite = Global.GetSiteFromSlugNoFetch(Global.SelectedSiteSlug);
             SelectedDate = Global.SelectedDate;
             SelectedCalendarEntry = SelectedSite.GetCalendarEntryForDate(SelectedDate);
 #if DEBUG
@@ -144,7 +144,10 @@ namespace vitavol
 				SelectedCalendarEntry.SiteIsOpen = SW_IsOpen.On;
                 // update the entry
                 if (SelectedCalendarEntry.Dirty)
-    				success &= await SelectedSite.UpdateCalendarEntry(LoggedInUser.Token, SelectedCalendarEntry);
+                {
+                    C_IOResult ior1 = await Global.UpdateCalendarEntry(SelectedSite, LoggedInUser.Token, SelectedCalendarEntry);
+                    success &= ior1.Success;
+                }
 
 				if (success)
 				{
@@ -153,7 +156,10 @@ namespace vitavol
 					{
                         if (ws.Dirty)
                         {
-                            success &= await Global.UpdateShift(LoggedInUser.Token, SelectedSite.Slug, ws, SelectedCalendarEntry);
+                            C_IOResult ior2 = await Global.UpdateShift(LoggedInUser.Token, SelectedSite.Slug, ws, SelectedCalendarEntry);
+
+                            success &= ior2.Success;
+
                             if (!success)
                                 break;
                         }

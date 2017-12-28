@@ -89,113 +89,19 @@ namespace a_vitavol
                 StartActivity(new Intent(this, typeof(A_Profile)));
 			};
 
-            CB_DropOff.CheckedChange += async (sender, e) => 
-            {
-                if (killChanges) return;
-                bool success = await UpdateSiteCapabilities();
+            CB_DropOff.CheckedChange += (sender, e) => CommonSiteCapabilitiesUpdate();
 
-                if (!success)
-                {
-                    C_MessageBox mbox = new C_MessageBox(this, "Error", "Unable to update site capabilities", E_MessageBoxButtons.Ok);
-                    mbox.Show();
-                }
-			};
+            CB_Express.CheckedChange += (sender, e) => CommonSiteCapabilitiesUpdate();
 
-            CB_Express.CheckedChange += async (sender, e) => 
-            {
-				if (killChanges) return;
-				bool success = await UpdateSiteCapabilities();
+            CB_MFT.CheckedChange += (sender, e) => CommonSiteCapabilitiesUpdate();
 
-				if (!success)
-				{
-					C_MessageBox mbox = new C_MessageBox(this, "Error", "Unable to update site capabilities", E_MessageBoxButtons.Ok);
-					mbox.Show();
-				}
-			};
+            B_Closed.Click += (sender, e) => CommonSiteStatusUpdate(E_ClientSiteStatus.Closed);
 
-            CB_MFT.CheckedChange += async (sender, e) => 
-            {
-				if (killChanges) return;
-				bool success = await UpdateSiteCapabilities();
+            B_Accepting.Click += (sender, e) => CommonSiteStatusUpdate(E_ClientSiteStatus.Accepting);
 
-				if (!success)
-				{
-					C_MessageBox mbox = new C_MessageBox(this, "Error", "Unable to update site capabilities", E_MessageBoxButtons.Ok);
-					mbox.Show();
-				}
-			};
+            B_NearLimit.Click += (sender, e) => CommonSiteStatusUpdate(E_ClientSiteStatus.NearLimit);
 
-            B_Closed.Click += async (sender, e) => 
-            {
-				E_ClientSiteStatus newStatus = E_ClientSiteStatus.Closed;
-
-				EnableUI(false);
-                AI_Busy.Show();
-
-				C_VitaSite site = await Global.GetSiteFromCache(Global.SelectedSiteSlug);
-
-				if (site != null)
-				{
-					bool success = await site.UpdateSiteStatus(newStatus, LoggedInUser.Token);
-				}
-
-                AI_Busy.Cancel();
-				EnableUI(true);
-			};
-
-            B_Accepting.Click += async (sender, e) =>
-			{
-                E_ClientSiteStatus newStatus = E_ClientSiteStatus.Accepting;
-
-				EnableUI(false);
-				AI_Busy.Show();
-
-				C_VitaSite site = await Global.GetSiteFromCache(Global.SelectedSiteSlug);
-
-				if (site != null)
-				{
-					bool success = await site.UpdateSiteStatus(newStatus, LoggedInUser.Token);
-				}
-
-				AI_Busy.Cancel();
-				EnableUI(true);
-			};
-
-            B_NearLimit.Click += async (sender, e) =>
-			{
-                E_ClientSiteStatus newStatus = E_ClientSiteStatus.NearLimit;
-
-				EnableUI(false);
-				AI_Busy.Show();
-
-				C_VitaSite site = await Global.GetSiteFromCache(Global.SelectedSiteSlug);
-
-				if (site != null)
-				{
-					bool success = await site.UpdateSiteStatus(newStatus, LoggedInUser.Token);
-				}
-
-				AI_Busy.Cancel();
-				EnableUI(true);
-			};
-
-            B_AtLimit.Click += async (sender, e) =>
-			{
-                E_ClientSiteStatus newStatus = E_ClientSiteStatus.NotAccepting;
-
-				EnableUI(false);
-				AI_Busy.Show();
-
-				C_VitaSite site = await Global.GetSiteFromCache(Global.SelectedSiteSlug);
-
-				if (site != null)
-				{
-					bool success = await site.UpdateSiteStatus(newStatus, LoggedInUser.Token);
-				}
-
-				AI_Busy.Cancel();
-				EnableUI(true);
-			};
+            B_AtLimit.Click += (sender, e) => CommonSiteStatusUpdate(E_ClientSiteStatus.NotAccepting);
 
             Task.Run(async () => 
             {
@@ -211,7 +117,69 @@ namespace a_vitavol
 			});
 		}
 
-        bool killChanges = false;
+        private void CommonSiteCapabilitiesUpdate()
+        {
+            if (killChanges) return;
+            EnableUI(false);
+            AI_Busy.Show();
+
+            OurSite.SiteCapabilities = new List<E_SiteCapabilities>();
+            if (CB_DropOff.Checked)
+                OurSite.SiteCapabilities.Add(E_SiteCapabilities.DropOff);
+            if (CB_Express.Checked)
+                OurSite.SiteCapabilities.Add(E_SiteCapabilities.Express);
+            if (CB_MFT.Checked)
+                OurSite.SiteCapabilities.Add(E_SiteCapabilities.MFT);
+
+            Task.Run(async () => 
+            {
+                C_IOResult ior = await Global.UpdateSiteCapabilities(OurSite, LoggedInUser.Token);
+
+                RunOnUiThread(() => 
+                {
+                    EnableUI(true);
+                    AI_Busy.Cancel();
+
+                    if (!ior.Success)
+                    {
+                        C_MessageBox mbox = new C_MessageBox(this, "Error", "Unable to update site capabilities [" + ior.ErrorMessage + "]", E_MessageBoxButtons.Ok);
+                        mbox.Show();
+                    }
+                });
+            });
+        }
+
+        private void CommonSiteStatusUpdate(E_ClientSiteStatus newStatus)
+        {
+            EnableUI(false);
+
+            Task.Run(async () => 
+            {
+                C_VitaSite site = await Global.GetSiteFromCache(Global.SelectedSiteSlug);
+                if (site == null)
+                {
+                    RunOnUiThread(() => 
+                    {
+                        EnableUI(true);
+                        return;
+                    });
+                }
+
+                C_IOResult ior = await Global.UpdateSiteStatus(site, newStatus, LoggedInUser.Token);
+
+                RunOnUiThread(() => 
+                {
+                    EnableUI(true);
+                    if (!ior.Success)
+                    {
+                        C_MessageBox mbox = new C_MessageBox(this, "Error", "Unable to update site status [" + ior.ErrorMessage + "]", E_MessageBoxButtons.Ok);
+                        mbox.Show();
+                    }
+                });
+            });
+        }
+
+        bool killChanges;
         private void EnableUI(bool en)
         {
             if (en)
@@ -250,27 +218,6 @@ namespace a_vitavol
                 Intent i = new Intent(this, typeof(A_SCMySites));
 				StartActivity(i);
 			}
-		}
-
-        private async Task<bool> UpdateSiteCapabilities()
-        {
-			EnableUI(false);
-			AI_Busy.Show();
-
-			OurSite.SiteCapabilities = new List<E_SiteCapabilities>();
-            if (CB_DropOff.Checked)
-                OurSite.SiteCapabilities.Add(E_SiteCapabilities.DropOff);
-            if (CB_Express.Checked)
-                OurSite.SiteCapabilities.Add(E_SiteCapabilities.Express);
-            if (CB_MFT.Checked)
-                OurSite.SiteCapabilities.Add(E_SiteCapabilities.MFT);
-
-            bool success = await OurSite.UpdateSiteCapabilities(LoggedInUser.Token);
-
-			EnableUI(true);
-			AI_Busy.Cancel();
-
-			return success;
 		}
 	}
 }

@@ -26,20 +26,18 @@ namespace a_vitavol
 
 		ProgressDialog AI_Busy;
 
-        public static long BytesReceived;
-
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
 
             MyAppDelegate g = (MyAppDelegate)Application;
-            if (g.Global == null)
-                BytesReceived = 0;
             // reset the global values on each login; this avoids some issues on login with different credentials (SC -> vol -> SC)
+            long bytes = 0;
+            if (g.Global != null)
+                bytes = g.Global.BytesReceived;
 			g.Global = new C_Global();
 			Global = g.Global;
-
-            C_Vita.SetupCertificateHandling();
+            Global.BytesReceived = bytes;
 
 			// Set our view from the "main" layout resource
 			SetContentView(Resource.Layout.Main);
@@ -84,7 +82,8 @@ namespace a_vitavol
 
                 Task.Run(async () => 
                 {
-					C_VitaUser user = await Global.PerformLogin(TB_Email.Text, TB_Password.Text);
+                    C_IOResult ior = await Global.PerformLogin(TB_Email.Text, TB_Password.Text);
+                    C_VitaUser user = ior.User;
 
                     if ((user != null) && (C_GooglePlayHelper.IsGooglePlayServicesInstalled(this)))
 					{
@@ -96,12 +95,12 @@ namespace a_vitavol
 							if (!string.IsNullOrEmpty(messagingToken))
 							{
 								// the current token can be found at: FirebaseInstanceId.Instance.Token
-								bool success = await C_Notifications.RegisterNotificationToken(C_Notifications.E_Platform.Android, messagingToken, user.Token);
+                                C_IOResult ior1 = await Global.RegisterNotificationToken(E_Platform.Android, messagingToken, user.Token);
 #if DEBUG
-								if (!success)
+                                if (!ior1.Success)
 									Console.WriteLine("unable to register token");
 #endif
-								if (success)
+                                if (ior1.Success)
 								{
 									// show that we have updated the token on the backend
 									var editorx = sharedPreferences.Edit();
@@ -116,6 +115,14 @@ namespace a_vitavol
                     {
 						EnableUI_Login(true);
 						AI_Busy.Cancel();
+
+                        if (!ior.Success)
+                        {
+                            C_MessageBox mbox = new C_MessageBox(this, "Error", ior.ErrorMessage, E_MessageBoxButtons.Ok);
+                            mbox.Show();
+
+                            return;
+                        }
 
 						if (user == null)
 						{

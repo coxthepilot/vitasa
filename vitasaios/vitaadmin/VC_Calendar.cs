@@ -46,7 +46,7 @@ namespace vitaadmin
             Global = myAppDelegate.Global;
 
             LoggedInUser = Global.GetUserFromCacheNoFetch(Global.LoggedInUserId);
-            SelectedSite = Global.GetSiteNoFetch(Global.SelectedSiteSlug);
+            SelectedSite = Global.GetSiteFromSlugNoFetch(Global.SelectedSiteSlug);
 
             EnableCalendarEntry(false);
 
@@ -99,11 +99,11 @@ namespace vitaadmin
                 try { SelectedShift.NumAdvEFilers = Convert.ToInt32(TB_ExcAdvShift.Text); }
 				catch { }
 
-                bool success = await Global.UpdateShift(LoggedInUser.Token, SelectedSite.Slug, SelectedShift, SelectedCalendarEntry);
+                C_IOResult ior = await Global.UpdateShift(LoggedInUser.Token, SelectedSite.Slug, SelectedShift, SelectedCalendarEntry);
 
-                if (!success)
+                if (!ior.Success)
 				{
-					var ok = await C_MessageBox.MessageBox(this, "Error", "Unable to update shift.", E_MessageBoxButtons.Ok);
+                    var ok = await C_MessageBox.MessageBox(this, "Error", ior.ErrorMessage, E_MessageBoxButtons.Ok);
 				}
 
                 B_ExcSave.Enabled = false;
@@ -124,13 +124,13 @@ namespace vitaadmin
 
                 AI_Busy.StartAnimating();
 
-                bool success = await Global.CreateShift(LoggedInUser.Token, SelectedSite.Slug, nws, SelectedCalendarEntry);
+                C_IOResult ior = await Global.CreateShift(LoggedInUser.Token, SelectedSite.Slug, nws, SelectedCalendarEntry);
 
                 AI_Busy.StopAnimating();
 
-                if (!success)
+                if (!ior.Success)
 				{
-					var ok = await C_MessageBox.MessageBox(this, "Error", "Unable to create new shift.", E_MessageBoxButtons.Ok);
+                    var ok = await C_MessageBox.MessageBox(this, "Error", ior.ErrorMessage, E_MessageBoxButtons.Ok);
 				}
                 ShiftTableManager.ReloadData();
 			};
@@ -141,11 +141,11 @@ namespace vitaadmin
 
                 AI_Busy.StartAnimating();
 
-                bool success = await SelectedSite.UpdateCalendarEntry(LoggedInUser.Token, SelectedCalendarEntry);
+                C_IOResult ior = await Global.UpdateCalendarEntry(SelectedSite, LoggedInUser.Token, SelectedCalendarEntry);
 
 				AI_Busy.StopAnimating();
 
-				if (!success)
+                if (!ior.Success)
 				{
 					var ok = await C_MessageBox.MessageBox(this, "Error", "Unable to create new shift.", E_MessageBoxButtons.Ok);
 				}
@@ -212,7 +212,8 @@ namespace vitaadmin
                         List<C_SignUp> usignups = Global.GetSignUpsByShiftId(ws.id);
                         foreach(C_SignUp su in usignups)
                         {
-                            successx &= await su.RemoveIntent(LoggedInUser.Token);
+                            C_IOResult ior2 = await Global.RemoveIntent(su, LoggedInUser.Token);
+                            successx &= ior2.Success;
                             if (!successx) 
                                 break;
                         }
@@ -220,7 +221,8 @@ namespace vitaadmin
                             break;
 
                         // now that we know there is nothing linked to this shift, delete the shift
-                        successx &= await Global.RemoveShift(LoggedInUser.Token, SelectedSite.Slug, ws, calEntry);
+                        C_IOResult ior1 = await Global.RemoveShift(LoggedInUser.Token, SelectedSite.Slug, ws, calEntry);
+                        successx &= ior1.Success;
                         if (!successx) 
                             break;
                     }
@@ -229,7 +231,7 @@ namespace vitaadmin
 
 					// set the pattern for this calendar entry
 					calEntry.SiteIsOpen = pattern_IsOpen;
-                    bool success = await SelectedSite.UpdateCalendarEntry(LoggedInUser.Token, calEntry);
+                    C_IOResult ior = await Global.UpdateCalendarEntry(SelectedSite, LoggedInUser.Token, calEntry);
                     calEntry.WorkShifts = new List<C_WorkShift>();
                     foreach(C_WorkShift ws in pattern_shifts)
                     {
@@ -238,7 +240,8 @@ namespace vitaadmin
                             CalendarId = calEntry.id
                         };
                         //calEntry.WorkShifts.Add(nws);
-                        successx &= await Global.CreateShift(LoggedInUser.Token, SelectedSite.Slug, nws, calEntry);
+                        C_IOResult ior3 = await Global.CreateShift(LoggedInUser.Token, SelectedSite.Slug, nws, calEntry);
+                        successx &= ior.Success;
 						if (!successx) break;
 					}
 					if (!successx) break;
@@ -321,8 +324,8 @@ namespace vitaadmin
 			ShiftTableManager.RowDelete += async (sender, e) =>
 			{
                 C_WorkShift shiftToDelete = e.Shift;
-                bool success = await Global.RemoveShift(LoggedInUser.Token, SelectedSite.Slug, shiftToDelete, SelectedCalendarEntry);
-                if (success)
+                C_IOResult ior = await Global.RemoveShift(LoggedInUser.Token, SelectedSite.Slug, shiftToDelete, SelectedCalendarEntry);
+                if (ior.Success)
                     SelectedCalendarEntry.WorkShifts.Remove(shiftToDelete);
                 ShiftTableManager.ReloadData();
 			};

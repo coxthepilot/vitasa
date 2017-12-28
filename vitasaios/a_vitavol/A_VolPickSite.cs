@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -194,7 +193,7 @@ namespace a_vitavol
             readonly C_Global Global;
             readonly C_VitaUser User;
 
-            public SitesAdapter(Activity context, List<C_VitaSite> sites, C_Global global, C_VitaUser user) : base()
+            public SitesAdapter(Activity context, List<C_VitaSite> sites, C_Global global, C_VitaUser user)
 			{
 				this.context = context;
 				this.Sites = sites;

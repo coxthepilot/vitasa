@@ -14,8 +14,6 @@ namespace vitaadmin
 {
     public partial class ViewController : UIViewController
     {
-        C_Global Global;
-
         protected ViewController(IntPtr handle) : base(handle)
         {
             // Note: this .ctor should not contain any initialization logic.
@@ -26,9 +24,13 @@ namespace vitaadmin
             base.ViewDidLoad();
 			// Perform any additional setup after loading the view, typically from a nib.
 
-			AppDelegate myAppDelegate = (AppDelegate)UIApplication.SharedApplication.Delegate;
-			myAppDelegate.Global = new C_Global();
-			Global = myAppDelegate.Global;
+            AppDelegate myAppDelegate = (AppDelegate)UIApplication.SharedApplication.Delegate;
+            long bytes = 0; // save the amount of data transfered across logins
+            if (myAppDelegate.Global != null)
+                bytes = myAppDelegate.Global.BytesReceived;
+            myAppDelegate.Global = new C_Global();
+            C_Global Global = myAppDelegate.Global;
+            Global.BytesReceived = bytes;
 
 			B_Login.TouchUpInside += async (sender, e) =>
             {
@@ -45,12 +47,24 @@ namespace vitaadmin
                 try
                 {
                     // do the actual login API call
-                    C_VitaUser user = await Global.PerformLogin(email, pw);
+                    C_IOResult ior = await Global.PerformLogin(email, pw);
 					// if bad name or pass, we get null; otherwise we get a C_VitaUser
 
 					AI_Spinner.StopAnimating();
 					EnableUI(true);
 
+					if (!ior.Success)
+					{
+						E_MessageBoxResults mbres = await MessageBox(this,
+																	 "Error",
+																	 ior.ErrorMessage,
+																	 E_MessageBoxButtons.Ok);
+						AI_Spinner.StopAnimating();
+						EnableUI(true);
+						return;
+					}
+
+					C_VitaUser user = ior.User;
 					if (user == null)
                     {
                         E_MessageBoxResults mbres = await MessageBox(this,

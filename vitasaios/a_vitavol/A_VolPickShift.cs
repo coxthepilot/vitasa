@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -54,7 +53,7 @@ namespace a_vitavol
 
 			SelectedDate = Global.SelectedDate;
 			LoggedInUser = Global.GetUserFromCacheNoFetch(Global.LoggedInUserId);
-            SelectedSite = Global.GetSiteNoFetch(Global.SelectedSiteSlug);
+            SelectedSite = Global.GetSiteFromSlugNoFetch(Global.SelectedSiteSlug);
 			SelectedCalendarEntry = SelectedSite.GetCalendarEntryForDate(SelectedDate);
 #if DEBUG
 			if ((SelectedDate == null)
@@ -100,7 +99,7 @@ namespace a_vitavol
 				Global.SelectedSignUp = new C_SignUp(shift.SiteSlug, Global.SelectedDate, Global.LoggedInUserId, 0)
 				{
 					id = -1,
-					SiteName = Global.GetSiteNoFetch(shift.SiteSlug).Name,
+					SiteName = Global.GetSiteFromSlugNoFetch(shift.SiteSlug).Name,
 					ShiftId = shift.id
 				};
 				Global.SelectedShift = shift;

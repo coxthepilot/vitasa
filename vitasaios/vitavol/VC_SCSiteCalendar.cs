@@ -34,7 +34,7 @@ namespace vitavol
 			if (Global.CalendarDate == null)
 				Global.CalendarDate = C_YMD.Now;
 
-            SelectedSite = Global.GetSiteNoFetch(Global.SelectedSiteSlug);
+            SelectedSite = Global.GetSiteFromSlugNoFetch(Global.SelectedSiteSlug);
 
             B_Back.TouchUpInside += (sender, e) => 
             {

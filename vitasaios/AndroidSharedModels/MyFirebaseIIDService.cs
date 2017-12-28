@@ -43,8 +43,8 @@ namespace FCMClient
                 {
                     Task.Run(async () => 
                     {
-						bool success = await C_Notifications.RegisterNotificationToken(C_Notifications.E_Platform.Android, token, user.Token);
-                        if (success)
+                        C_IOResult ior = await Global.RegisterNotificationToken(E_Platform.Android, token, user.Token);
+                        if (ior.Success)
                         {
 							Log.Debug(TAG, "Saved the token");
 							editor.PutString("firebasetoken_updated", "false");

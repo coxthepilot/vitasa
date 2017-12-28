@@ -46,18 +46,20 @@ namespace vitaadmin
 
             B_Load.TouchUpInside += async (sender, e) => 
             {
-                EnglishMessage = await C_Message.GetMessage(C_Message.E_Language.English, TB_Slug.Text);
+                C_IOResult ior = await Global.GetMessage(E_Language.English, TB_Slug.Text);
+                EnglishMessage = ior.Message;
                 if (EnglishMessage == null)
                 {
-                    EnglishMessage = new C_Message(TB_Slug.Text, "", C_Message.E_Language.English);
+                    EnglishMessage = new C_Message(TB_Slug.Text, "", E_Language.English);
                     EnglishMessage.Slug = TB_Slug.Text;
                 }
                 TxV_English.Text = EnglishMessage.Text;
 
-                SpanishMessage = await C_Message.GetMessage(C_Message.E_Language.Spanish, TB_Slug.Text);
+                C_IOResult ior1 = await Global.GetMessage(E_Language.Spanish, TB_Slug.Text);
+                SpanishMessage = ior1.Message;
                 if (SpanishMessage == null)
                 {
-                    SpanishMessage = new C_Message(TB_Slug.Text, "", C_Message.E_Language.Spanish)
+                    SpanishMessage = new C_Message(TB_Slug.Text, "", E_Language.Spanish)
                     {
                         Slug = TB_Slug.Text
                     };
@@ -75,12 +77,14 @@ namespace vitaadmin
                 bool success;
                 if (EnglishMessage.id == -1)
                 {
-                    success = await C_Message.AddMessage(LoggedInUser.Token, EnglishMessage, SpanishMessage);
+                    C_IOResult ior = await Global.AddMessage(LoggedInUser.Token, EnglishMessage, SpanishMessage);
+                    success = ior.Success;
                 }
                 else
 				{
-                    success = await EnglishMessage.UpdateMessage(LoggedInUser.Token);
-					success &= await SpanishMessage.UpdateMessage(LoggedInUser.Token);
+                    C_IOResult iore = await Global.UpdateMessage(EnglishMessage, LoggedInUser.Token);
+                    C_IOResult iors = await Global.UpdateMessage(SpanishMessage, LoggedInUser.Token);
+                    success = iore.Success && iors.Success;
 				}
 
                 if (success)

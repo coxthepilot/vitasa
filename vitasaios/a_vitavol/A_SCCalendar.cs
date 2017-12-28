@@ -44,7 +44,7 @@ namespace a_vitavol
 				g.Global = new C_Global();
 			Global = g.Global;
 
-			SelectedSite = Global.GetSiteNoFetch(Global.SelectedSiteSlug);
+			SelectedSite = Global.GetSiteFromSlugNoFetch(Global.SelectedSiteSlug);
 
 			if (Global.CalendarDate == null)
 				Global.CalendarDate = C_YMD.Now;

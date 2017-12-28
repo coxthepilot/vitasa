@@ -24,6 +24,10 @@ namespace vitavol
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UIButton B_ShowPrivacyPolicy { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UIButton B_Submit { get; set; }
 
         [Outlet]
@@ -60,6 +64,11 @@ namespace vitavol
             if (B_Back != null) {
                 B_Back.Dispose ();
                 B_Back = null;
+            }
+
+            if (B_ShowPrivacyPolicy != null) {
+                B_ShowPrivacyPolicy.Dispose ();
+                B_ShowPrivacyPolicy = null;
             }
 
             if (B_Submit != null) {

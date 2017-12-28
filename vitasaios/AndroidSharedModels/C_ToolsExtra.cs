@@ -28,13 +28,12 @@ namespace zsquared
     {
         public C_ToolsExtra()
         {
-        }
+		}
 
-		public void UpdateBytesCounter(int b)
-		{
-            a_vitavol.MyAppDelegate myAppDelegate = (a_vitavol.MyAppDelegate)Application;
-			I_Global iad = myAppDelegate as I_Global;
-			iad.UpdateBytesReceived(b);
+        public static string GetVersion()
+        {
+			string ourVerString = Application.Context.PackageManager.GetPackageInfo(Application.Context.PackageName, 0).VersionName;
+            return ourVerString;
 		}
 	}
 }

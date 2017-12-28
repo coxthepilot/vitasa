@@ -47,7 +47,8 @@ namespace vitaadmin
 
                 Task.Run(async () => 
                 {
-                    bool success = await Global.SelectedSuggestion.UpdateSuggestion(LoggedInUser.Token);
+                    //bool success = await Global.SelectedSuggestion.UpdateSuggestion(LoggedInUser.Token);
+                    C_IOResult ior = await Global.UpdateSuggestion(Global.SelectedSuggestion, LoggedInUser.Token);
                 });
 			};
 
@@ -56,7 +57,7 @@ namespace vitaadmin
 
             Task.Run(async () => 
             {
-                Suggestions = await C_Suggestion.FetchAllSuggestions(LoggedInUser.Token);
+                Suggestions = await Global.FetchAllSuggestions(LoggedInUser.Token);
 
 				UIApplication.SharedApplication.InvokeOnMainThread(
 				new Action(() =>
@@ -139,7 +140,7 @@ namespace vitaadmin
 					OurVC.AI_Busy.StartAnimating();
 					OurVC.EnableUI(false);
 
-                    bool succ = await suggestionToRemove.RemoveSuggestion(Token);
+                    C_IOResult ior = await Global.RemoveSuggestion(suggestionToRemove, Token);
 					TableSource.OurSuggestions.Remove(suggestionToRemove);
 
 					OurVC.EnableUI(true);

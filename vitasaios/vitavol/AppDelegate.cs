@@ -18,7 +18,7 @@ namespace vitavol
     // The UIApplicationDelegate for the application. This class is responsible for launching the
     // User Interface of the application, as well as listening (and optionally responding) to application events from iOS.
     [Register("AppDelegate")]
-    public class AppDelegate : UIApplicationDelegate, I_Global
+    public class AppDelegate : UIApplicationDelegate
     {
         public static readonly string N_KnownEventsJson = "knowneventsjson";
         public static readonly string N_Email = "email";
@@ -35,38 +35,20 @@ namespace vitavol
         /// </summary>
         public EKEventStore EventStore;
 
-        private long _BytesReceived;
-
         public override UIWindow Window
         {
             get;
             set;
         }
 
-        public C_Global GetGlobal()
-        {
-            return Global;
-        }
-
-        public long GetBytesReceived()
-        {
-            return _BytesReceived;
-        }
-
-        public void UpdateBytesReceived(int v)
-        {
-            _BytesReceived += v;
-        }
-
         public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
         {
             // initialize the variables that are shared across pages
-            Global = new C_Global();
+            //Global = new C_Global();
             EventStore = new EKEventStore();
-            _BytesReceived = 0;
 
             // only needed once when the app starts; this lets us handle the certificate from abandonedfactory.net
-            C_Vita.SetupCertificateHandling();
+            //C_Vita.SetupCertificateHandling();
 
             try
             {

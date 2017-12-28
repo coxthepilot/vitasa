@@ -55,11 +55,11 @@ namespace vitaadmin
 				// we make sure all sites have been read in, which gives us a complete list of all work items
 				List<C_VitaSite> sitesList = await Global.FetchAllSites();
 
-                Global.SignUps.Sort(C_SignUp.CompareByDateAscending);
+                Global.SignUpsList.Sort(C_SignUp.CompareByDateAscending);
 
                 // get the workshifts for the items we care about
                 List<C_SignUp> sus = new List<C_SignUp>();
-                foreach(C_SignUp su in Global.SignUps)
+                foreach(C_SignUp su in Global.SignUpsList)
                 {
 					if (((userid == -1) || (userid == su.UserId))
 	                    && ((Global.SelectedSiteSlug == null) || (su.SiteSlug == Global.SelectedSiteSlug)))
@@ -75,7 +75,7 @@ namespace vitaadmin
 					AI_Busy.StopAnimating();
 					EnableUI(true);
 
-                    C_WorkItemsTableSource ts = new C_WorkItemsTableSource(Global, Global.SignUps, userid, Global.SelectedSiteSlug);
+                    C_WorkItemsTableSource ts = new C_WorkItemsTableSource(Global, Global.SignUpsList, userid, Global.SelectedSiteSlug);
                     TV_WorkItems.Source = ts;
 					TV_WorkItems.Delegate = new C_WorkItemsTableDelegate(Global, this, ts);
 					TV_WorkItems.ReloadData();
@@ -162,8 +162,9 @@ namespace vitaadmin
 					OurVC.AI_Busy.StartAnimating();
 					OurVC.EnableUI(false);
 
-                    bool succ = await workitemToRemove.RemoveIntent(Token);
-					TableSource.OurWorkItems.Remove(workitemToRemove);
+                    C_IOResult ior = await Global.RemoveIntent(workitemToRemove, Token);
+                    if (ior.Success)
+    					TableSource.OurWorkItems.Remove(workitemToRemove);
 
 					OurVC.EnableUI(true);
 					OurVC.AI_Busy.StopAnimating();

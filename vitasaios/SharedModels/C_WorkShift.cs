@@ -107,7 +107,7 @@ namespace zsquared
 
     public class C_WorkShiftSignUp
     {
-        public int id;
+        public int SignUpId;
         public C_WorkShiftSignUpUser User;
 
         public C_SignUp TheSignUp; // only used in SCVolunteers to hold the actual signup for hours CRUD and approval
@@ -117,14 +117,14 @@ namespace zsquared
 
         public C_WorkShiftSignUp(C_WorkShiftSignUpUser wsuser)
         {
-            id = -1;
+            SignUpId = -1;
             User = wsuser;
         }
 
         public C_WorkShiftSignUp(JsonValue jv)
         {
             if (jv.ContainsKey(N_ID))
-                id = Tools.JsonProcessInt(jv[N_ID], id);
+                SignUpId = Tools.JsonProcessInt(jv[N_ID], SignUpId);
 
             if (jv.ContainsKey(N_User))
                 User = new C_WorkShiftSignUpUser(jv[N_User]);
