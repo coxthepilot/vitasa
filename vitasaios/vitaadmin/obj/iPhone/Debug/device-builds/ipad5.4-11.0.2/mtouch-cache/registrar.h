@@ -8,22 +8,23 @@
 #include <objc/message.h>
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-#import <WebKit/WebKit.h>
-#import <QuartzCore/QuartzCore.h>
+#import <MessageUI/MessageUI.h>
 #import <CloudKit/CloudKit.h>
+#import <QuartzCore/QuartzCore.h>
 #import <Intents/Intents.h>
 #import <CoreGraphics/CoreGraphics.h>
 
 @protocol UIPickerViewModel;
 @class __MonoMac_NSActionDispatcher;
 @class __MonoMac_NSAsyncActionDispatcher;
+@class MessageUI_Mono_MFMailComposeViewControllerDelegate;
 @class UIKit_UIControlEventProxy;
 @class zsquared_C_PickerModel;
 @class zsquared_C_ShiftsTableSource;
 @class AppDelegate;
-@class VC_Main;
 @class zsquared_C_ItemPicker_C_PickerDataModel;
 @class ViewController;
+@class VC_Main;
 @class vitaadmin_VC_Messages_MessagePickerViewModel;
 @class VC_Messages;
 @class vitaadmin_VC_Suggestions_C_SuggestionsTableSource;
@@ -37,6 +38,8 @@
 @class VC_ShowNotifications;
 @class vitaadmin_VC_Users_C_UsersTableSource;
 @class VC_Users;
+@class vitaadmin_VC_Config_C_VersionsTableSource;
+@class VC_Config;
 @class vitaadmin_VC_Suggestions_C_SuggestionsTableDelegate;
 @class vitaadmin_VC_WorkItems_C_WorkItemsTableDelegate;
 @class vitaadmin_VC_WorkItems_C_WorkItemsTableSource;
@@ -53,10 +56,10 @@
 @class __NSObject_Disposer;
 @class __UILongPressGestureRecognizer;
 @class __UIPanGestureRecognizer;
-@class __UIPinchGestureRecognizer;
 @class UIKit_UIBarButtonItem_Callback;
 @class __UIRotationGestureRecognizer;
 @class __UITapGestureRecognizer;
+@class __UIPinchGestureRecognizer;
 @class __UISwipeGestureRecognizer;
 @class __UIScreenEdgePanGestureRecognizer;
 @class UIKit_UIScrollView__UIScrollViewDelegate;
@@ -108,37 +111,6 @@
 	-(id) init;
 @end
 
-@interface VC_Main : UIViewController {
-}
-	@property (nonatomic, assign) UIButton * B_Back;
-	@property (nonatomic, assign) UIButton * B_Messages;
-	@property (nonatomic, assign) UIButton * B_Notifications;
-	@property (nonatomic, assign) UIButton * B_Sites;
-	@property (nonatomic, assign) UIButton * B_Suggestions;
-	@property (nonatomic, assign) UIButton * B_Users;
-	@property (nonatomic, assign) UIButton * B_WorkItems;
-	-(void) release;
-	-(id) retain;
-	-(int) xamarinGetGCHandle;
-	-(void) xamarinSetGCHandle: (int) gchandle;
-	-(UIButton *) B_Back;
-	-(void) setB_Back:(UIButton *)p0;
-	-(UIButton *) B_Messages;
-	-(void) setB_Messages:(UIButton *)p0;
-	-(UIButton *) B_Notifications;
-	-(void) setB_Notifications:(UIButton *)p0;
-	-(UIButton *) B_Sites;
-	-(void) setB_Sites:(UIButton *)p0;
-	-(UIButton *) B_Suggestions;
-	-(void) setB_Suggestions:(UIButton *)p0;
-	-(UIButton *) B_Users;
-	-(void) setB_Users:(UIButton *)p0;
-	-(UIButton *) B_WorkItems;
-	-(void) setB_WorkItems:(UIButton *)p0;
-	-(void) viewDidLoad;
-	-(BOOL) conformsToProtocol:(void *)p0;
-@end
-
 @interface zsquared_C_ItemPicker_C_PickerDataModel : NSObject<UIPickerViewModel> {
 }
 	-(void) release;
@@ -171,6 +143,43 @@
 	-(void) setTB_Password:(UITextField *)p0;
 	-(void) viewDidLoad;
 	-(void) didReceiveMemoryWarning;
+	-(BOOL) conformsToProtocol:(void *)p0;
+@end
+
+@interface VC_Main : UIViewController {
+}
+	@property (nonatomic, assign) UIButton * B_Back;
+	@property (nonatomic, assign) UIButton * B_Config;
+	@property (nonatomic, assign) UIButton * B_EmailToUsers;
+	@property (nonatomic, assign) UIButton * B_Messages;
+	@property (nonatomic, assign) UIButton * B_Notifications;
+	@property (nonatomic, assign) UIButton * B_Sites;
+	@property (nonatomic, assign) UIButton * B_Suggestions;
+	@property (nonatomic, assign) UIButton * B_Users;
+	@property (nonatomic, assign) UIButton * B_WorkItems;
+	-(void) release;
+	-(id) retain;
+	-(int) xamarinGetGCHandle;
+	-(void) xamarinSetGCHandle: (int) gchandle;
+	-(UIButton *) B_Back;
+	-(void) setB_Back:(UIButton *)p0;
+	-(UIButton *) B_Config;
+	-(void) setB_Config:(UIButton *)p0;
+	-(UIButton *) B_EmailToUsers;
+	-(void) setB_EmailToUsers:(UIButton *)p0;
+	-(UIButton *) B_Messages;
+	-(void) setB_Messages:(UIButton *)p0;
+	-(UIButton *) B_Notifications;
+	-(void) setB_Notifications:(UIButton *)p0;
+	-(UIButton *) B_Sites;
+	-(void) setB_Sites:(UIButton *)p0;
+	-(UIButton *) B_Suggestions;
+	-(void) setB_Suggestions:(UIButton *)p0;
+	-(UIButton *) B_Users;
+	-(void) setB_Users:(UIButton *)p0;
+	-(UIButton *) B_WorkItems;
+	-(void) setB_WorkItems:(UIButton *)p0;
+	-(void) viewDidLoad;
 	-(BOOL) conformsToProtocol:(void *)p0;
 @end
 
@@ -605,6 +614,51 @@
 	-(void) setTB_Phone:(UITextField *)p0;
 	-(UITableView *) TV_Users;
 	-(void) setTV_Users:(UITableView *)p0;
+	-(void) viewDidLoad;
+	-(BOOL) conformsToProtocol:(void *)p0;
+@end
+
+@interface vitaadmin_VC_Config_C_VersionsTableSource : NSObject<UIScrollViewDelegate> {
+}
+	-(void) release;
+	-(id) retain;
+	-(int) xamarinGetGCHandle;
+	-(void) xamarinSetGCHandle: (int) gchandle;
+	-(NSInteger) tableView:(UITableView *)p0 numberOfRowsInSection:(NSInteger)p1;
+	-(UITableViewCell *) tableView:(UITableView *)p0 cellForRowAtIndexPath:(NSIndexPath *)p1;
+	-(BOOL) conformsToProtocol:(void *)p0;
+@end
+
+@interface VC_Config : UIViewController {
+}
+	@property (nonatomic, assign) UIActivityIndicatorView * AI_Busy;
+	@property (nonatomic, assign) UIButton * B_Back;
+	@property (nonatomic, assign) UILabel * L_AdminVersion;
+	@property (nonatomic, assign) UILabel * L_BackendURL;
+	@property (nonatomic, assign) UILabel * L_ConfigURL;
+	@property (nonatomic, assign) UILabel * L_Offline;
+	@property (nonatomic, assign) UILabel * L_SitesJsonURL;
+	@property (nonatomic, assign) UITableView * TV_Versions;
+	-(void) release;
+	-(id) retain;
+	-(int) xamarinGetGCHandle;
+	-(void) xamarinSetGCHandle: (int) gchandle;
+	-(UIActivityIndicatorView *) AI_Busy;
+	-(void) setAI_Busy:(UIActivityIndicatorView *)p0;
+	-(UIButton *) B_Back;
+	-(void) setB_Back:(UIButton *)p0;
+	-(UILabel *) L_AdminVersion;
+	-(void) setL_AdminVersion:(UILabel *)p0;
+	-(UILabel *) L_BackendURL;
+	-(void) setL_BackendURL:(UILabel *)p0;
+	-(UILabel *) L_ConfigURL;
+	-(void) setL_ConfigURL:(UILabel *)p0;
+	-(UILabel *) L_Offline;
+	-(void) setL_Offline:(UILabel *)p0;
+	-(UILabel *) L_SitesJsonURL;
+	-(void) setL_SitesJsonURL:(UILabel *)p0;
+	-(UITableView *) TV_Versions;
+	-(void) setTV_Versions:(UITableView *)p0;
 	-(void) viewDidLoad;
 	-(BOOL) conformsToProtocol:(void *)p0;
 @end

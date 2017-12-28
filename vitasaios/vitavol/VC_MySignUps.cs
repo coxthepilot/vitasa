@@ -108,9 +108,9 @@ namespace vitavol
                     OurVC.EnableUI(false);
 
                     C_VitaUser loggedInUser = Global.GetUserFromCacheNoFetch(Global.LoggedInUserId);
-					C_VitaSite site = Global.GetSiteNoFetch(signupToRemove.SiteSlug);
+					C_VitaSite site = Global.GetSiteFromSlugNoFetch(signupToRemove.SiteSlug);
 
-					bool success = await signupToRemove.RemoveIntent(loggedInUser.Token);
+                    C_IOResult ior = await Global.RemoveIntent(signupToRemove, loggedInUser.Token);
 
                     Global.RemoveFromSignUps(signupToRemove);
                     Global.AdjustSiteSchedueCacheForRemovedSignUp(signupToRemove, loggedInUser, site);

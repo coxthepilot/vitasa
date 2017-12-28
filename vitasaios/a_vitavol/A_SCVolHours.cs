@@ -31,6 +31,8 @@ namespace a_vitavol
 
 		const float EPSILON = 0.001f;
 
+        C_YMD Now;
+
 		protected override void OnCreate(Bundle savedInstanceState)
         {
 			base.OnCreate(savedInstanceState);
@@ -39,6 +41,8 @@ namespace a_vitavol
 			if (g.Global == null)
 				g.Global = new C_Global();
 			Global = g.Global;
+
+            Now = C_YMD.Now;
 
 			if (Global.SelectedDate == null)
 				Global.SelectedDate = C_YMD.Now;
@@ -82,7 +86,7 @@ namespace a_vitavol
 
 			TB_Hours.Text = Global.VolunteerWorkShiftSignUp.TheSignUp.Hours.ToString();
 
-            TB_Hours.Enabled = (Global.VolunteerWorkShiftSignUp.TheSignUp.Date <= C_YMD.Now);
+            TB_Hours.Enabled = (Global.VolunteerWorkShiftSignUp.TheSignUp.Date <= Now);
 		}
 
 		public override void OnBackPressed()

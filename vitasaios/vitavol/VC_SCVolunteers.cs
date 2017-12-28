@@ -19,6 +19,8 @@ namespace vitavol
         C_YMD SelectedDate;
         C_WorkShift SelectedShift;
 
+        C_YMD Now;
+
         public VC_SCVolunteers(IntPtr handle) : base(handle)
         {
         }
@@ -31,9 +33,12 @@ namespace vitavol
             Global = myAppDelegate.Global;
 
 			LoggedInUser = Global.GetUserFromCacheNoFetch(Global.LoggedInUserId);
-			SelectedSite = Global.GetSiteNoFetch(Global.SelectedSiteSlug);
+			SelectedSite = Global.GetSiteFromSlugNoFetch(Global.SelectedSiteSlug);
             SelectedDate = Global.SelectedDate;
             SelectedShift = Global.SelectedShift;
+
+            Now = C_YMD.Now;
+
 #if DEBUG
             if ((SelectedSite == null)
                 || (SelectedDate == null)
@@ -69,7 +74,7 @@ namespace vitavol
                 AI_Busy.StartAnimating();
                 EnableUI(false);
                 
-                bool success = await SaveChangedItems(false);
+                bool success = await SaveChangedItems();
 
                 AI_Busy.StopAnimating();
                 EnableUI(true);
@@ -99,7 +104,7 @@ namespace vitavol
 				AI_Busy.StartAnimating();
 				EnableUI(false);
 
-				bool success = await SaveChangedItems(true);
+				bool success = await SaveChangedItems();
 
 				AI_Busy.StopAnimating();
 				EnableUI(true);
@@ -148,8 +153,9 @@ namespace vitavol
                 {
                     if (wssu.TheSignUp == null)
                     {
-                        C_SignUp su = await Global.FetchSignUpById(LoggedInUser.Token, wssu.User.UserId, wssu.id);
-                        wssu.TheSignUp = su;
+                        C_IOResult ior = await Global.FetchSignUpBySignUpId(LoggedInUser.Token, wssu.SignUpId);
+                        if (ior.Success)
+                            wssu.TheSignUp = ior.SignUp;
                     }
                 }
 
@@ -166,7 +172,7 @@ namespace vitavol
                     TableSource = new C_WorkItemsTableSourceSCVolunteers(Global, Global.WorkShiftSignUpsOnDate, this);
                     TV_Volunteers.Source = TableSource;
 					TV_Volunteers.ReloadData();
-                    B_ApproveHours.Enabled = (Global.WorkShiftSignUpsOnDate.Count != 0) && (SelectedDate <= C_YMD.Now);
+                    B_ApproveHours.Enabled = (Global.WorkShiftSignUpsOnDate.Count != 0) && (SelectedDate <= Now);
 				}));
             });
         }
@@ -177,17 +183,16 @@ namespace vitavol
 			View.BackgroundColor = C_Common.StandardBackground;
 		}
 
-        private async Task<bool> SaveChangedItems(bool approveHours)
+        private async Task<bool> SaveChangedItems()
         {
             bool res = true;
             try
             {
                 foreach (C_WorkShiftSignUp wi in Global.WorkShiftSignUpsOnDate)
                 {
-                    if (approveHours)
-                        wi.TheSignUp.Approved = true;
-                    bool success = await wi.TheSignUp.UpdateSignUp(LoggedInUser.Token);
-                    res &= success;
+                    wi.TheSignUp.Approved = true;
+                    C_IOResult ior = await Global.UpdateSignUp(wi.TheSignUp, LoggedInUser.Token);
+                    res &= ior.Success;
                     wi.TheSignUp.Dirty = false;
                 }
             }
@@ -201,7 +206,7 @@ namespace vitavol
             TV_Volunteers.UserInteractionEnabled = enable;
             B_Back.Enabled = enable;
 
-            B_ApproveHours.Enabled = enable && (Global.WorkShiftSignUpsOnDate.Count != 0) && (SelectedDate <= C_YMD.Now);
+            B_ApproveHours.Enabled = enable && (Global.WorkShiftSignUpsOnDate.Count != 0) && (SelectedDate <= Now);
         }
 
 		public class C_WorkItemsTableSourceSCVolunteers : UITableViewSource

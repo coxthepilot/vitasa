@@ -25,8 +25,12 @@ namespace vitavol
             base.ViewDidLoad();
 
             AppDelegate myAppDelegate = (AppDelegate)UIApplication.SharedApplication.Delegate;
+            long bytes = 0; // save the amount of data transfered across logins
+            if (myAppDelegate.Global != null)
+                bytes = myAppDelegate.Global.BytesReceived;
             myAppDelegate.Global = new C_Global();
             C_Global Global = myAppDelegate.Global;
+            Global.BytesReceived = bytes;
 
             View.BackgroundColor = C_Common.StandardBackground;
 
@@ -67,12 +71,26 @@ namespace vitavol
 
                 Task.Run(async () =>
                 {
-					// do the actual login API call
-					C_VitaUser user = await Global.PerformLogin(email, pw);
+                    // do the actual login API call
+                    C_IOResult ior = await Global.PerformLogin(email, pw);
+                    //C_VitaUser user = await Global.PerformLogin(email, pw);
+
 
 					UIApplication.SharedApplication.InvokeOnMainThread(
 					new Action(async () =>
 					{
+                        if (!ior.Success)
+                        {
+							E_MessageBoxResults mbres = await MessageBox(this,
+																		 "Error",
+                                                                         ior.ErrorMessage,
+																		 E_MessageBoxButtons.Ok);
+							AI_Spinner.StopAnimating();
+							EnableUI(true);
+							return;
+						}
+
+                        C_VitaUser user = ior.User;
 						// if bad name or pass, we get null; otherwise we get a C_VitaUser
 						if (user == null)
 						{
@@ -91,9 +109,10 @@ namespace vitavol
                         {
 							string deviceToken = NSUserDefaults.StandardUserDefaults.StringForKey(AppDelegate.N_PushDeviceToken);
 
-                            bool success = await C_Notifications.RegisterNotificationToken(C_Notifications.E_Platform.iOS, deviceToken, user.Token);
+                            C_IOResult iorx = await Global.RegisterNotificationToken(E_Platform.iOS, deviceToken, user.Token);
 
-							NSUserDefaults.StandardUserDefaults.SetString("false", AppDelegate.N_PushDeviceTokenUpdated);
+                            if (iorx.Success)
+    							NSUserDefaults.StandardUserDefaults.SetString("false", AppDelegate.N_PushDeviceTokenUpdated);
 						}
 
 						AI_Spinner.StopAnimating();

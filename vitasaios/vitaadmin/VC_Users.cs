@@ -46,14 +46,15 @@ namespace vitaadmin
 
                 UpdateUserDetails();
 
-                bool success = await SelectedUser.UpdateUserProfile(LoggedInUser.Token);
+                //bool success = await SelectedUser.UpdateUserProfile(LoggedInUser.Token);
+                C_IOResult ior = await Global.UpdateUserProfile(SelectedUser, LoggedInUser.Token);
 
                 AI_Busy.StopAnimating();
                 EnableUI(true);
 
-				if (!success)
+                if (!ior.Success)
 				{
-					C_MessageBox.E_MessageBoxResults mbresx = await C_MessageBox.MessageBox(this, "Error", "Unable to save the user details", C_MessageBox.E_MessageBoxButtons.Ok);
+                    C_MessageBox.E_MessageBoxResults mbresx = await C_MessageBox.MessageBox(this, "Error", ior.ErrorMessage, C_MessageBox.E_MessageBoxButtons.Ok);
 				}
 				else
 				{
@@ -74,14 +75,15 @@ namespace vitaadmin
 				AI_Busy.StartAnimating();
 				EnableUI(false);
 
-				bool success = await SelectedUser.UpdateUserPassword(LoggedInUser.Token);
+				//bool success = await SelectedUser.UpdateUserPassword(LoggedInUser.Token);
+                C_IOResult ior = await Global.UpdateUserPassword(SelectedUser, LoggedInUser.Token);
 
 				AI_Busy.StopAnimating();
 				EnableUI(true);
 
-				if (!success)
+                if (!ior.Success)
 				{
-					C_MessageBox.E_MessageBoxResults mbresx = await C_MessageBox.MessageBox(this, "Error", "Unable to save the password", C_MessageBox.E_MessageBoxButtons.Ok);
+                    C_MessageBox.E_MessageBoxResults mbresx = await C_MessageBox.MessageBox(this, "Error", ior.ErrorMessage, C_MessageBox.E_MessageBoxButtons.Ok);
 				}
 				else
 				{
@@ -277,13 +279,12 @@ namespace vitaadmin
 
                     TV_Users.ReloadData();
 
-
-                    bool success = await user.UpdateUserProfile(LoggedInUser.Token);
+                    C_IOResult ior = await Global.UpdateUserProfile(user);
 
 					AI_Busy.StopAnimating();
 					EnableUI(true);
 
-					if (!success)
+                    if (!ior.Success)
 					{
 						C_MessageBox.E_MessageBoxResults mbresx = await C_MessageBox.MessageBox(this, "Error", "Unable to save the user details", C_MessageBox.E_MessageBoxButtons.Ok);
 					}
@@ -311,14 +312,14 @@ namespace vitaadmin
 				AI_Busy.StartAnimating();
 				EnableUI(false);
 
-                bool success = await Global.RemoveUser(user.id, LoggedInUser.Token);
+                C_IOResult ior = await Global.RemoveUser(user.id, LoggedInUser.Token);
 
 				AI_Busy.StopAnimating();
 				EnableUI(true);
 
-				if (!success)
+                if (!ior.Success)
 				{
-					C_MessageBox.E_MessageBoxResults mbresx = await C_MessageBox.MessageBox(this, "Error", "Unable to delete the notification", C_MessageBox.E_MessageBoxButtons.Ok);
+                    C_MessageBox.E_MessageBoxResults mbresx = await C_MessageBox.MessageBox(this, "Error", ior.ErrorMessage, C_MessageBox.E_MessageBoxButtons.Ok);
 				}
 				else
 				{

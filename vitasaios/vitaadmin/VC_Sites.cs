@@ -52,13 +52,13 @@ namespace vitaadmin
             {
 				if (Dirty)
 				{
-					E_MessageBoxResults mbres = await C_MessageBox.MessageBox(this, "Save Changes?", "Changes were made. Save?", E_MessageBoxButtons.YesNo);
+					E_MessageBoxResults mbres = await MessageBox(this, "Save Changes?", "Changes were made. Save?", E_MessageBoxButtons.YesNo);
 					if (mbres == E_MessageBoxResults.Yes)
 					{
-						bool success = await UpdateSite();
-						if (!success)
+                        C_IOResult ior = await UpdateSite();
+                        if (!ior.Success)
 						{
-							var ok = await C_MessageBox.MessageBox(this, "Error", "Unable to update site.", E_MessageBoxButtons.Ok);
+                            var ok = await MessageBox(this, "Error", ior.ErrorMessage, E_MessageBoxButtons.Ok);
 						}
 					}
 				}
@@ -81,11 +81,11 @@ namespace vitaadmin
 			{
 				if (killChanges) return;
 
-				bool success = await UpdateSiteCapabilities();
+                C_IOResult ior = await UpdateSiteCapabilities();
 
-				if (!success)
+                if (!ior.Success)
 				{
-					var ok = await C_MessageBox.MessageBox(this, "Error", "Unable to update site capability.", E_MessageBoxButtons.Ok);
+                    var ok = await C_MessageBox.MessageBox(this, "Error", ior.ErrorMessage, E_MessageBoxButtons.Ok);
 				}
 			};
 
@@ -93,11 +93,11 @@ namespace vitaadmin
 			{
 				if (killChanges) return;
 
-				bool success = await UpdateSiteCapabilities();
+				C_IOResult ior = await UpdateSiteCapabilities();
 
-				if (!success)
+				if (!ior.Success)
 				{
-					var ok = await C_MessageBox.MessageBox(this, "Error", "Unable to update site capability.", E_MessageBoxButtons.Ok);
+					var ok = await C_MessageBox.MessageBox(this, "Error", ior.ErrorMessage, E_MessageBoxButtons.Ok);
 				}
 			};
 
@@ -105,11 +105,11 @@ namespace vitaadmin
 			{
 				if (killChanges) return;
 
-				bool success = await UpdateSiteCapabilities();
+				C_IOResult ior = await UpdateSiteCapabilities();
 
-				if (!success)
+				if (!ior.Success)
 				{
-					var ok = await C_MessageBox.MessageBox(this, "Error", "Unable to update site capability.", E_MessageBoxButtons.Ok);
+					var ok = await C_MessageBox.MessageBox(this, "Error", ior.ErrorMessage, E_MessageBoxButtons.Ok);
 				}
 			};
 
@@ -131,7 +131,7 @@ namespace vitaadmin
 
 				if (site != null)
 				{
-					bool success = await site.UpdateSiteStatus(newStatus, LoggedInUser.Token);
+                    C_IOResult ior = await Global.UpdateSiteStatus(site, newStatus, LoggedInUser.Token);
 				}
 
 				AI_Busy.StopAnimating();
@@ -157,7 +157,7 @@ namespace vitaadmin
 
 				if (site != null)
 				{
-					bool success = await site.UpdateSiteStatus(newStatus, LoggedInUser.Token);
+                    C_IOResult ior = await Global.UpdateSiteStatus(site, newStatus, LoggedInUser.Token);
 				}
 
 				AI_Busy.StopAnimating();
@@ -183,7 +183,7 @@ namespace vitaadmin
 
 				if (site != null)
 				{
-					bool success = await site.UpdateSiteStatus(newStatus, LoggedInUser.Token);
+					C_IOResult ior = await Global.UpdateSiteStatus(site, newStatus, LoggedInUser.Token);
 				}
 
 				AI_Busy.StopAnimating();
@@ -209,7 +209,7 @@ namespace vitaadmin
 
 				if (site != null)
 				{
-					bool success = await site.UpdateSiteStatus(newStatus, LoggedInUser.Token);
+					C_IOResult ior = await Global.UpdateSiteStatus(site, newStatus, LoggedInUser.Token);
 				}
 
 				AI_Busy.StopAnimating();
@@ -220,10 +220,10 @@ namespace vitaadmin
             {
                 if (!Dirty) return;
 
-				bool success = await UpdateSite();
-				if (!success)
+                C_IOResult ior = await UpdateSite();
+                if (!ior.Success)
 				{
-					var ok = await C_MessageBox.MessageBox(this, "Error", "Unable to update site.", E_MessageBoxButtons.Ok);
+                    var ok = await C_MessageBox.MessageBox(this, "Error", ior.ErrorMessage, E_MessageBoxButtons.Ok);
 				}
 			};
 
@@ -245,9 +245,9 @@ namespace vitaadmin
 
                 foreach(C_CalendarEntry ce in CalendarItemsToRemove)
                 {
-                    bool success = await SelectedSite.RemoveCalendarEntry(LoggedInUser.Token, ce);
-                    error |= !success;
-                    if (error)
+                    C_IOResult ior = await Global.RemoveCalendarEntry(SelectedSite, LoggedInUser.Token, ce);
+                    error |= !ior.Success;
+                    if (!ior.Success)
                         break;
                 }
 
@@ -267,8 +267,9 @@ namespace vitaadmin
                         SiteID = SelectedSite.id,
                         SiteIsOpen = false
                     };
-                    bool success = await SelectedSite.CreateCalendarEntry(LoggedInUser.Token, ce);
-					error |= !success;
+
+                    C_IOResult ior = await Global.CreateCalendarEntry(SelectedSite, LoggedInUser.Token, ce);
+                    error |= !ior.Success;
 					if (error)
 						break;
 
@@ -308,13 +309,13 @@ namespace vitaadmin
                 if (!Global.AllSitesFetched)
                     Sites = await Global.FetchAllSites();
                 else
-                    Sites = Global.GetAllSitesNoCache();
+                    Sites = Global.GetAllSitesNoFetch();
 				Sites.Sort(CompareSitesBySiteName);
 
                 if (!Global.AllUsersFetched)
                     Users = await Global.FetchAllUsers(LoggedInUser.Token);
                 else
-                    Users = Global.GetAllUsers();
+                    Users = Global.GetAllUsersNoCache();
 
 				UIApplication.SharedApplication.InvokeOnMainThread(
                 new Action(() =>
@@ -492,7 +493,7 @@ namespace vitaadmin
             B_SaveChanges.Enabled = true;
 		}
 
-		private async Task<bool> UpdateSiteCapabilities()
+        private async Task<C_IOResult> UpdateSiteCapabilities()
 		{
 			EnableUI(false);
 			AI_Busy.StartAnimating();
@@ -505,15 +506,15 @@ namespace vitaadmin
 			if (SW_MFT.On)
 				SelectedSite.SiteCapabilities.Add(E_SiteCapabilities.MFT);
 
-			bool success = await SelectedSite.UpdateSiteCapabilities(LoggedInUser.Token);
+            C_IOResult ior = await Global.UpdateSiteCapabilities(SelectedSite, LoggedInUser.Token);
 
 			EnableUI(true);
 			AI_Busy.StopAnimating();
 
-			return success;
+			return ior;
 		}
 
-		private async Task<bool> UpdateSite()
+        private async Task<C_IOResult> UpdateSite()
 		{
 			EnableUI(false);
 			AI_Busy.StartAnimating();
@@ -537,14 +538,14 @@ namespace vitaadmin
 			int bscid = Users[bsc].id;
             SelectedSite.BackupCoordinatorId = bscid;
 
-			bool success = await SelectedSite.UpdateSimpleFields(LoggedInUser.Token);
-            if (success)
+            C_IOResult ior = await Global.UpdateSimpleFields(SelectedSite, LoggedInUser.Token);
+            if (ior.Success)
                 Dirty = false;
 
 			EnableUI(true);
 			AI_Busy.StopAnimating();
 
-			return success;
+			return ior;
 		}
 
 		private void EnableUI(bool en)
@@ -567,10 +568,10 @@ namespace vitaadmin
                     E_MessageBoxResults mbres = await C_MessageBox.MessageBox(this, "Save Changes?", "Changes were made. Save?", E_MessageBoxButtons.YesNo);
                     if (mbres == E_MessageBoxResults.Yes)
                     {
-                        bool success = await UpdateSite();
-                        if (!success)
+                        C_IOResult ior = await UpdateSite();
+                        if (!ior.Success)
 						{
-							var ok = await C_MessageBox.MessageBox(this, "Error", "Unable to update site.", E_MessageBoxButtons.Ok);
+                            var ok = await C_MessageBox.MessageBox(this, "Error", ior.ErrorMessage, E_MessageBoxButtons.Ok);
 						}
 					}
     			}

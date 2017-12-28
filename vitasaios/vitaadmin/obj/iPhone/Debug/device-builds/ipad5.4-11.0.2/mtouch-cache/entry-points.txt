@@ -1,13 +1,13 @@
-Function=xamarin_get_block_descriptor
-	/Users/Billy/Documents/source/vitasa/vitasaios/vitaadmin/obj/iPhone/Debug/device-builds/ipad5.4-11.0.2/mtouch-cache/Link/Xamarin.iOS.dll
-Function=UIApplicationMain
-	/Users/Billy/Documents/source/vitasa/vitasaios/vitaadmin/obj/iPhone/Debug/device-builds/ipad5.4-11.0.2/mtouch-cache/Link/Xamarin.iOS.dll
 Function=xamarin_timezone_get_data
 	/Users/Billy/Documents/source/vitasa/vitasaios/vitaadmin/obj/iPhone/Debug/device-builds/ipad5.4-11.0.2/mtouch-cache/Link/mscorlib.dll
 Function=xamarin_GetFolderPath
 	/Users/Billy/Documents/source/vitasa/vitasaios/vitaadmin/obj/iPhone/Debug/device-builds/ipad5.4-11.0.2/mtouch-cache/Link/mscorlib.dll
 Function=xamarin_log
 	/Users/Billy/Documents/source/vitasa/vitasaios/vitaadmin/obj/iPhone/Debug/device-builds/ipad5.4-11.0.2/mtouch-cache/Link/mscorlib.dll
+Function=UIApplicationMain
+	/Users/Billy/Documents/source/vitasa/vitasaios/vitaadmin/obj/iPhone/Debug/device-builds/ipad5.4-11.0.2/mtouch-cache/Link/Xamarin.iOS.dll
+Function=xamarin_get_block_descriptor
+	/Users/Billy/Documents/source/vitasa/vitasaios/vitaadmin/obj/iPhone/Debug/device-builds/ipad5.4-11.0.2/mtouch-cache/Link/Xamarin.iOS.dll
 Function=CreateZStream
 	/Users/Billy/Documents/source/vitasa/vitasaios/vitaadmin/obj/iPhone/Debug/device-builds/ipad5.4-11.0.2/mtouch-cache/Link/System.dll
 Function=CloseZStream

@@ -32,7 +32,7 @@ namespace vitasa
 			AppDelegate myAppDelegate = (AppDelegate)UIApplication.SharedApplication.Delegate;
             Global = myAppDelegate.Global;
 
-            SelectedSite = Global.GetSiteNoFetch(Global.SelectedSiteSlug);
+            SelectedSite = Global.GetSiteFromSlugNoFetch(Global.SelectedSiteSlug);
 
 			// connect action code to the Back button
 			B_Back.TouchUpInside += (object sender, EventArgs e) =>

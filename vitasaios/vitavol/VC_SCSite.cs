@@ -48,7 +48,11 @@ namespace vitavol
 				EnableUI(false);
 				AI_Busy.StartAnimating();
 
-                bool success = await SelectedSite.UpdateSiteStatus(newStatus, LoggedInUser.Token);
+                C_IOResult ior = await Global.UpdateSiteStatus(SelectedSite, newStatus, LoggedInUser.Token);
+                if (!ior.Success)
+				{
+                    var ok = await C_MessageBox.MessageBox(this, "Error", ior.ErrorMessage, E_MessageBoxButtons.Ok);
+				}
 
 				AI_Busy.StopAnimating();
 				EnableUI(true);
@@ -64,7 +68,11 @@ namespace vitavol
 				EnableUI(false);
 				AI_Busy.StartAnimating();
 
-				bool success = await SelectedSite.UpdateSiteStatus(newStatus, LoggedInUser.Token);
+				C_IOResult ior = await Global.UpdateSiteStatus(SelectedSite, newStatus, LoggedInUser.Token);
+				if (!ior.Success)
+				{
+					var ok = await C_MessageBox.MessageBox(this, "Error", ior.ErrorMessage, E_MessageBoxButtons.Ok);
+				}
 
 				AI_Busy.StopAnimating();
 				EnableUI(true);
@@ -77,7 +85,11 @@ namespace vitavol
 				EnableUI(false);
 				AI_Busy.StartAnimating();
 
-				bool success = await SelectedSite.UpdateSiteStatus(newStatus, LoggedInUser.Token);
+				C_IOResult ior = await Global.UpdateSiteStatus(SelectedSite, newStatus, LoggedInUser.Token);
+				if (!ior.Success)
+				{
+					var ok = await C_MessageBox.MessageBox(this, "Error", ior.ErrorMessage, E_MessageBoxButtons.Ok);
+				}
 
 				AI_Busy.StopAnimating();
 				EnableUI(true);
@@ -90,7 +102,11 @@ namespace vitavol
 				EnableUI(false);
 				AI_Busy.StartAnimating();
 
-				bool success = await SelectedSite.UpdateSiteStatus(newStatus, LoggedInUser.Token);
+				C_IOResult ior = await Global.UpdateSiteStatus(SelectedSite, newStatus, LoggedInUser.Token);
+				if (!ior.Success)
+				{
+					var ok = await C_MessageBox.MessageBox(this, "Error", ior.ErrorMessage, E_MessageBoxButtons.Ok);
+				}
 
 				AI_Busy.StopAnimating();
 				EnableUI(true);
@@ -118,11 +134,11 @@ namespace vitavol
 			{
                 if (killChanges) return;
 
-				bool success = await UpdateSiteCapabilities();
+                C_IOResult ior = await UpdateSiteCapabilities();
 
-                if (!success)
+                if (!ior.Success)
                 {
-                    var ok = await C_MessageBox.MessageBox(this, "Error", "Unable to update site capability.", E_MessageBoxButtons.Ok);
+                    var ok = await C_MessageBox.MessageBox(this, "Error", ior.ErrorMessage, E_MessageBoxButtons.Ok);
                 }
 			};
 
@@ -130,11 +146,11 @@ namespace vitavol
 			{
 				if (killChanges) return;
 
-				bool success = await UpdateSiteCapabilities();
+				C_IOResult ior = await UpdateSiteCapabilities();
 
-				if (!success)
+				if (!ior.Success)
 				{
-					var ok = await C_MessageBox.MessageBox(this, "Error", "Unable to update site capability.", E_MessageBoxButtons.Ok);
+					var ok = await C_MessageBox.MessageBox(this, "Error", ior.ErrorMessage, E_MessageBoxButtons.Ok);
 				}
 			};
 
@@ -142,11 +158,11 @@ namespace vitavol
 			{
 				if (killChanges) return;
 
-				bool success = await UpdateSiteCapabilities();
+				C_IOResult ior = await UpdateSiteCapabilities();
 
-				if (!success)
+				if (!ior.Success)
 				{
-					var ok = await C_MessageBox.MessageBox(this, "Error", "Unable to update site capability.", E_MessageBoxButtons.Ok);
+					var ok = await C_MessageBox.MessageBox(this, "Error", ior.ErrorMessage, E_MessageBoxButtons.Ok);
 				}
 			};
 
@@ -222,7 +238,7 @@ namespace vitavol
             B_Back.Enabled = enable;
 		}
 
-		private async Task<bool> UpdateSiteCapabilities()
+        private async Task<C_IOResult> UpdateSiteCapabilities()
 		{
 			EnableUI(false);
             AI_Busy.StartAnimating();
@@ -235,12 +251,12 @@ namespace vitavol
             if (SW_MFT.On)
 				SelectedSite.SiteCapabilities.Add(E_SiteCapabilities.MFT);
 
-			bool success = await SelectedSite.UpdateSiteCapabilities(LoggedInUser.Token);
+            C_IOResult ior = await Global.UpdateSiteCapabilities(SelectedSite, LoggedInUser.Token);
 
 			EnableUI(true);
             AI_Busy.StopAnimating();
 
-			return success;
+			return ior;
 		}
 
         public override void ViewDidAppear(bool animated)

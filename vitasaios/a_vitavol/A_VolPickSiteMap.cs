@@ -53,7 +53,7 @@ namespace a_vitavol
             OpenSitesThatNeedHelp = new List<C_VitaSite>();
             foreach(string s in Global.OpenSitesThatNeedHelp)
             {
-                C_VitaSite site = Global.GetSiteNoFetch(s);
+                C_VitaSite site = Global.GetSiteFromSlugNoFetch(s);
                 OpenSitesThatNeedHelp.Add(site);
             }
 

@@ -17,6 +17,7 @@ namespace vitavol
 		C_CVHelper CollectionViewHelper;
 
         C_VitaSite SelectedSite;
+        C_VitaUser LoggedInUser;
 
         public static UIColor Color_Orange = UIColor.FromRGB(244, 167, 45);
         public static UIColor Color_Green = UIColor.FromRGB(67, 202, 67);
@@ -36,7 +37,8 @@ namespace vitavol
 			if (Global.CalendarDate == null)
 				Global.CalendarDate = C_YMD.Now;
 
-			SelectedSite = Global.GetSiteNoFetch(Global.SelectedSiteSlug);
+			SelectedSite = Global.GetSiteFromSlugNoFetch(Global.SelectedSiteSlug);
+            LoggedInUser = Global.GetUserFromCacheNoFetch(Global.LoggedInUserId);
 
 			B_Back.TouchUpInside += (sender, e) =>
 				PerformSegue("Segue_SCSiteVolCalToSCSite", this);
@@ -55,6 +57,9 @@ namespace vitavol
 				Task.Run(async () =>
 				{
                     Global.SitesSchedule = await Global.GetSitesScheduleForSiteCached(Global.CalendarDate.Year, Global.CalendarDate.Month, SelectedSite.Slug);
+
+                    // we don't need the results here but this causes the items to be pulled from the backend if needed, so they are in place
+                    List<C_SignUp> suList = await Global.GetSignUpsForSiteInDateRangeCached(LoggedInUser.Token, Global.CalendarDate.Year, Global.CalendarDate.Month, SelectedSite.Slug);
 
 					DateState = BuildDateStateArray(Global.CalendarDate);
 
@@ -86,6 +91,9 @@ namespace vitavol
 				{
                     Global.SitesSchedule = await Global.GetSitesScheduleForSiteCached(Global.CalendarDate.Year, Global.CalendarDate.Month, SelectedSite.Slug);
 
+                    // we don't need the results here but this causes the items to be pulled from the backend if needed, so they are in place
+                    List<C_SignUp> suList = await Global.GetSignUpsForSiteInDateRangeCached(LoggedInUser.Token, Global.CalendarDate.Year, Global.CalendarDate.Month, SelectedSite.Slug);
+
 					DateState = BuildDateStateArray(Global.CalendarDate);
 
 					UIApplication.SharedApplication.InvokeOnMainThread(
@@ -113,6 +121,10 @@ namespace vitavol
             Task.Run(async () =>
             {
                 Global.SitesSchedule = await Global.GetSitesScheduleForSiteCached(Global.CalendarDate.Year, Global.CalendarDate.Month, SelectedSite.Slug);
+
+                // we don't need the results here but this causes the items to be pulled from the backend if needed, so they are in place
+                List<C_SignUp> suList = await Global.GetSignUpsForSiteInDateRangeCached(LoggedInUser.Token, Global.CalendarDate.Year, Global.CalendarDate.Month, SelectedSite.Slug);
+
 
 				DateState = BuildDateStateArray(Global.CalendarDate);
 
@@ -178,7 +190,7 @@ namespace vitavol
                     ourSiteSchedule = siteOnDateSchedule[0];
 
 				// get workitems for this date at this site
-                List<C_SignUp> wiList = Global.GetSignUpsForSiteOnDate(ourDate, SelectedSite.Slug); // <<<<<<<< this doesn't work; only current user!
+                List<C_SignUp> wiList = Global.GetSignUpsForSiteOnDate(ourDate, SelectedSite.Slug);
 
 				// find out how many we need today
 				C_CalendarEntry ce = SelectedSite.GetCalendarEntryForDate(ourDate);

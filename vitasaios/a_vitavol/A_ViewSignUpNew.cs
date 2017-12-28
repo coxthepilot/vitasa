@@ -59,7 +59,7 @@ namespace a_vitavol
             SetContentView(Resource.Layout.ViewSignUpNew);
 
 			LoggedInUser = Global.GetUserFromCacheNoFetch(Global.LoggedInUserId);
-			SelectedSite = Global.GetSiteNoFetch(Global.SelectedSiteSlug);
+			SelectedSite = Global.GetSiteFromSlugNoFetch(Global.SelectedSiteSlug);
 			SelectedDate = Global.SelectedDate;
 			SelectedSignUp = Global.SelectedSignUp;
 			SelectedShift = Global.SelectedShift;
@@ -94,7 +94,7 @@ namespace a_vitavol
 				StartActivity(mapIntent);
 			};
 
-			B_SignMeUp.Click += async (sender, e) => 
+			B_SignMeUp.Click += (sender, e) => 
             {
 				// sign me up should only get enabled if the user is not already in the list
 				if (SignUpListHasOurUser)
@@ -103,85 +103,95 @@ namespace a_vitavol
                 AI_Busy.Show();
 				EnableUI(false);
 
-				bool success = await SelectedSignUp.AddSignUp(LoggedInUser.Token, LoggedInUser.id);
-
-				if (success)
-				{
-					Global.AddToSignUps(SelectedSignUp);
-					Global.AdjustSiteCacheForNewSignUp(SelectedSignUp, LoggedInUser, SelectedSite);
-					C_WorkShiftSignUpUser wsuser = new C_WorkShiftSignUpUser(LoggedInUser.id, LoggedInUser.Name, LoggedInUser.Certification, LoggedInUser.Phone);
-					C_WorkShiftSignUp wssu = new C_WorkShiftSignUp(wsuser);
-					SelectedShift.SignUps.Add(wssu);
-				}
-
-				AI_Busy.Cancel();
-				EnableUI(true);
-
-				if (!success)
-				{
-                    C_MessageBox mbox1 = new C_MessageBox(this,
-                                     "Error",
-                                     "Add SignUp failed", 
-                                     E_MessageBoxButtons.Ok);
-                    mbox1.Show();
-
-					return;
-				}
-
-                C_MessageBox mbox = new C_MessageBox(this, 
-                                                     "Add to Calendar?", 
-                                                     "Add this signup to your calendar?", 
-                                                     E_MessageBoxButtons.YesNo);
-                mbox.Dismissed += (sender1, args1) => 
+                Task.Run(async () => 
                 {
-                    if (args1.Result == E_MessageBoxResults.Yes)
+                    C_IOResult ior = await Global.AddSignUp(SelectedSignUp, LoggedInUser.Token, LoggedInUser.id);
+
+                    if (ior.Success)
                     {
-                        // first job is to find the calendar to add our item into; we choose to add to the primary calendar
-						var calendarsUri = CalendarContract.Calendars.ContentUri;
+                        Global.AddToSignUps(SelectedSignUp);
+                        Global.AdjustSiteCacheForNewSignUp(SelectedSignUp, LoggedInUser, SelectedSite);
+                        C_WorkShiftSignUpUser wsuser = new C_WorkShiftSignUpUser(LoggedInUser.id, LoggedInUser.Name, LoggedInUser.Certification, LoggedInUser.Phone);
+                        C_WorkShiftSignUp wssu = new C_WorkShiftSignUp(wsuser);
+                        SelectedShift.SignUps.Add(wssu);
+                    }
 
-						string[] calendarsProjection = {
-            			   CalendarContract.Calendars.InterfaceConsts.Id,
-                           CalendarContract.Calendars.InterfaceConsts.IsPrimary
-            			};
+                    RunOnUiThread(() => 
+                    {
+                        AI_Busy.Cancel();
+                        EnableUI(true);
 
-						var loader = new CursorLoader(this, calendarsUri, calendarsProjection, null, null, null);
-						var cursor = (ICursor)loader.LoadInBackground();
-
-						int _calId = -1;
-
-						int ccount = cursor.Count;
-                        cursor.MoveToFirst();
-                        for (int ix = 0; ix != ccount; ix++)
+                        if (!ior.Success)
                         {
-                            int id = cursor.GetInt(0);
-							int isPrimary = cursor.GetInt(1);
+                            C_MessageBox mbox1 = new C_MessageBox(this,
+                                             "Error",
+                                             "Add SignUp failed [" + ior.ErrorMessage + "]",
+                                             E_MessageBoxButtons.Ok);
+                            mbox1.Show();
 
-                            if (isPrimary != 0)
-                            {
-                                _calId = id;
-                                break;
-                            }
-
-                            cursor.MoveToNext();
+                            return;
                         }
 
-						ContentValues eventValues = new ContentValues();
+                        C_MessageBox mbox = new C_MessageBox(this,
+                                                             "Add to Calendar?",
+                                                             "Add this signup to your calendar?",
+                                                             E_MessageBoxButtons.YesNo);
+                        mbox.Dismissed += (sender1, args1) =>
+                        {
+                            if (args1.Result == E_MessageBoxResults.Yes)
+                            {
+                                // first job is to find the calendar to add our item into; we choose to add to the primary calendar
+                                var calendarsUri = CalendarContract.Calendars.ContentUri;
 
-						eventValues.Put(CalendarContract.Events.InterfaceConsts.CalendarId, _calId);
-						eventValues.Put(CalendarContract.Events.InterfaceConsts.Title, "VITA Sign-Up");
-                        eventValues.Put(CalendarContract.Events.InterfaceConsts.Description, SelectedSite.Street + ", " + SelectedSite.City + " " + SelectedSite.Zip);
-                        eventValues.Put(CalendarContract.Events.InterfaceConsts.Dtstart, GetDateTimeMS(Global.SelectedDate, SelectedShift.OpenTime));
-                        eventValues.Put(CalendarContract.Events.InterfaceConsts.Dtend, GetDateTimeMS(Global.SelectedDate, SelectedShift.CloseTime));
+                                string[] calendarsProjection = {
+                                    CalendarContract.Calendars.InterfaceConsts.Id,
+                                    CalendarContract.Calendars.InterfaceConsts.IsPrimary
+                                };
 
-						eventValues.Put(CalendarContract.Events.InterfaceConsts.EventTimezone, "CST");
-						eventValues.Put(CalendarContract.Events.InterfaceConsts.EventEndTimezone, "CST");
+                                var loader = new CursorLoader(this, calendarsUri, calendarsProjection, null, null, null);
+                                var cursor = (ICursor)loader.LoadInBackground();
 
-						var uri = ContentResolver.Insert(CalendarContract.Events.ContentUri, eventValues);
+                                int _calId = -1;
 
-						StartActivity(new Intent(this, typeof(A_VolunteerActivity)));
-					}
-				};
-				mbox.Show();
+                                int ccount = cursor.Count;
+                                cursor.MoveToFirst();
+                                for (int ix = 0; ix != ccount; ix++)
+                                {
+                                    int id = cursor.GetInt(0);
+                                    int isPrimary = cursor.GetInt(1);
+
+                                    if (isPrimary != 0)
+                                    {
+                                        _calId = id;
+                                        break;
+                                    }
+
+                                    cursor.MoveToNext();
+                                }
+
+                                ContentValues eventValues = new ContentValues();
+
+                                eventValues.Put(CalendarContract.Events.InterfaceConsts.CalendarId, _calId);
+                                eventValues.Put(CalendarContract.Events.InterfaceConsts.Title, "VITA Sign-Up");
+                                eventValues.Put(CalendarContract.Events.InterfaceConsts.Description, SelectedSite.Street + ", " + SelectedSite.City + " " + SelectedSite.Zip);
+                                eventValues.Put(CalendarContract.Events.InterfaceConsts.Dtstart, GetDateTimeMS(Global.SelectedDate, SelectedShift.OpenTime));
+                                eventValues.Put(CalendarContract.Events.InterfaceConsts.Dtend, GetDateTimeMS(Global.SelectedDate, SelectedShift.CloseTime));
+
+                                string tz = "CST";
+                                if (DateTime.Now.IsDaylightSavingTime())
+                                    tz = "CDT";
+
+                                eventValues.Put(CalendarContract.Events.InterfaceConsts.EventTimezone, tz);
+                                eventValues.Put(CalendarContract.Events.InterfaceConsts.EventEndTimezone, tz);
+
+                                var uri = ContentResolver.Insert(CalendarContract.Events.ContentUri, eventValues);
+
+                                StartActivity(new Intent(this, typeof(A_VolunteerActivity)));
+                            }
+                        };
+                        mbox.Show();
+                    });
+                });
 			};
 
             AI_Busy.Show();

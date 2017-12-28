@@ -68,6 +68,21 @@
 				<integer>9</integer>
 			</dict>
 		</array>
+		<key>46138</key>
+		<array>
+			<dict>
+				<key>affected-objects</key>
+				<array>
+					<string>46138</string>
+				</array>
+				<key>message</key>
+				<string>Prototype table cells must have reuse identifiers</string>
+				<key>type</key>
+				<string>IBUnsupportedConfiguration</string>
+				<key>type-value</key>
+				<integer>9</integer>
+			</dict>
+		</array>
 		<key>5297</key>
 		<array>
 			<dict>

@@ -54,16 +54,16 @@ namespace vitavol
                 AI_Busy.StartAnimating();
                 EnableUI(false);
 
-                bool success = await SaveSuggestion();
+                C_IOResult ior = await SaveSuggestion();
 
                 AI_Busy.StopAnimating();
                 EnableUI(true);
 
-                if (!success)
+                if (!ior.Success)
                 {
                     E_MessageBoxResults mbres1 = await MessageBox(this,
                           "Error",
-                          "Unable to add or update the suggestion",
+                          ior.ErrorMessage,
                           E_MessageBoxButtons.Ok);
                     return;
                 }
@@ -91,13 +91,13 @@ namespace vitavol
                 AI_Busy.StartAnimating();
                 EnableUI(false);
 
-                bool success = await Global.SelectedSuggestion.RemoveSuggestion(LoggedInUser.Token);
+                C_IOResult ior = await Global.RemoveSuggestion(Global.SelectedSuggestion, LoggedInUser.Token);
                 LoggedInUser.Suggestions.Remove(Global.SelectedSuggestion);
 
                 AI_Busy.StopAnimating();
                 EnableUI(true);
 
-                if (!success)
+                if (!ior.Success)
                 {
                     E_MessageBoxResults mbres = await MessageBox(this,
                                                                   "Error",
@@ -116,16 +116,16 @@ namespace vitavol
                 AI_Busy.StartAnimating();
                 EnableUI(false);
 
-				bool success = await SaveSuggestion();
+				C_IOResult ior = await SaveSuggestion();
 
 				AI_Busy.StopAnimating();
 				EnableUI(true);
 
-				if (!success)
+                if (!ior.Success)
                 {
                     E_MessageBoxResults mbres = await MessageBox(this, 
                          "Error", 
-                         "Unable to add or update the suggestion", 
+                         ior.ErrorMessage, 
                          E_MessageBoxButtons.Ok);
 					return;
                 }
@@ -179,28 +179,21 @@ namespace vitavol
             B_DeleteThisSuggestion.Enabled = en;
         }
 
-        private async Task<bool> SaveSuggestion()
+        private async Task<C_IOResult> SaveSuggestion()
         {
-			bool success = false;
-            try
-            {
-                if (Global.SelectedSuggestion.id == -1)
-                {
-                    success = await Global.SelectedSuggestion.AddSuggestion(LoggedInUser.Token);
-                    //success = await Global.LoggedInUser.AddSuggestion(Global.SelectedSuggestion);
-                    LoggedInUser.Suggestions.Add(Global.SelectedSuggestion);
-                }
-                else
-                    success = await Global.SelectedSuggestion.UpdateSuggestion(LoggedInUser.Token);
-                    //success = await Global.LoggedInUser.UpdateSuggestion(Global.SelectedSuggestion);
-                Dirty = false;
-            }
-            catch 
-            {
-                success = false;
-            }
+            C_IOResult ior = null;
 
-            return success;
+            if (Global.SelectedSuggestion.id == -1)
+            {
+                ior = await Global.AddSuggestion(Global.SelectedSuggestion, LoggedInUser.Token);
+                LoggedInUser.Suggestions.Add(Global.SelectedSuggestion);
+            }
+            else
+				ior = await Global.UpdateSuggestion(Global.SelectedSuggestion, LoggedInUser.Token);
+            
+            Dirty = false;
+
+            return ior;
 		}
  	}
 }

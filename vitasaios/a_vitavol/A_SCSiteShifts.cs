@@ -37,11 +37,8 @@ namespace a_vitavol
 		TextView L_Date;
 		TextView L_Site;
 		ListView LV_Shifts;
-        Button B_ViewOnMap;
 
 		ProgressDialog AI_Busy;
-
-        List<C_VitaSite> SitesThatNeedHelp;
 
 		protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -54,7 +51,7 @@ namespace a_vitavol
 
 			SelectedDate = Global.SelectedDate;
 			LoggedInUser = Global.GetUserFromCacheNoFetch(Global.LoggedInUserId);
-            SelectedSite = Global.GetSiteNoFetch(Global.SelectedSiteSlug);
+            SelectedSite = Global.GetSiteFromSlugNoFetch(Global.SelectedSiteSlug);
 			SelectedCalendarEntry = SelectedSite.GetCalendarEntryForDate(SelectedDate);
 #if DEBUG
 			if ((SelectedDate == null)
@@ -124,7 +121,7 @@ namespace a_vitavol
             readonly C_Global Global;
             readonly C_VitaUser User;
 
-            public ShiftsAdapter(Activity context, List<C_WorkShift> shifts, C_Global global, C_VitaUser user) : base()
+            public ShiftsAdapter(Activity context, List<C_WorkShift> shifts, C_Global global, C_VitaUser user)
 			{
 				this.context = context;
 				this.Shifts = shifts;

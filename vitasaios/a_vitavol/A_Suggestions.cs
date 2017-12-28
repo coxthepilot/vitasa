@@ -52,7 +52,7 @@ namespace a_vitavol
             readonly List<C_Suggestion> items;
             readonly Activity context;
 
-            public SuggestionsAdapter(Activity context, List<C_Suggestion> items) : base()
+            public SuggestionsAdapter(Activity context, List<C_Suggestion> items)
 			{
 				this.context = context;
 				this.items = items;

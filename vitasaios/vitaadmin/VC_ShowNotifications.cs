@@ -61,17 +61,18 @@ namespace vitaadmin
                 EnableNotificationUI(false);
 
                 SelectedNotification.Message = TV_Message.Text;
-                SelectedNotification.Audience = SC_Audience.SelectedSegment == 0 ? C_Notification.E_NotificationAudience.Volunteers : C_Notification.E_NotificationAudience.SiteCoordinators;
+                SelectedNotification.Audience = SC_Audience.SelectedSegment == 0 ? E_NotificationAudience.Volunteers : E_NotificationAudience.SiteCoordinators;
 
-                bool success = await SelectedNotification.Update(LoggedInUser.Token);
+                //bool success = await SelectedNotification.UpdateNotifications(LoggedInUser.Token);
+                C_IOResult ior = await Global.UpdateNotification(SelectedNotification, LoggedInUser.Token);
 
 				AI_Busy.StopAnimating();
 				EnableUI(true);
 				EnableNotificationUI(true);
 
-				if (!success)
+                if (!ior.Success)
                 {
-                    C_MessageBox.E_MessageBoxResults mbres = await C_MessageBox.MessageBox(this, "Error", "Unable to save the notification", C_MessageBox.E_MessageBoxButtons.Ok);
+                    C_MessageBox.E_MessageBoxResults mbres = await C_MessageBox.MessageBox(this, "Error", ior.ErrorMessage, C_MessageBox.E_MessageBoxButtons.Ok);
                 }
                 else
                 {
@@ -93,18 +94,18 @@ namespace vitaadmin
 				EnableNotificationUI(false);
 
 				SelectedNotification.Message = TV_Message.Text;
-				SelectedNotification.Audience = SC_Audience.SelectedSegment == 0 ? C_Notification.E_NotificationAudience.Volunteers : C_Notification.E_NotificationAudience.SiteCoordinators;
+				SelectedNotification.Audience = SC_Audience.SelectedSegment == 0 ? E_NotificationAudience.Volunteers : E_NotificationAudience.SiteCoordinators;
                 TV_Notifications.ReloadData();
 
-				bool success = await SelectedNotification.Send(LoggedInUser.Token);
+                C_IOResult ior = await Global.SendNotification(SelectedNotification, LoggedInUser.Token);
 
                 AI_Busy.StopAnimating();
                 EnableUI(true);
                 EnableNotificationUI(true);
 
-				if (!success)
+                if (!ior.Success)
 				{
-					C_MessageBox.E_MessageBoxResults mbres = await C_MessageBox.MessageBox(this, "Error", "Unable to send the notification", C_MessageBox.E_MessageBoxButtons.Ok);
+                    C_MessageBox.E_MessageBoxResults mbres = await C_MessageBox.MessageBox(this, "Error", ior.ErrorMessage, C_MessageBox.E_MessageBoxButtons.Ok);
 				}
 			};
 
@@ -122,7 +123,7 @@ namespace vitaadmin
 
 				TV_Message.Text = SelectedNotification.Message;
 
-				SC_Audience.SelectedSegment = SelectedNotification.Audience == C_Notification.E_NotificationAudience.Volunteers ? 0 : 1;
+				SC_Audience.SelectedSegment = SelectedNotification.Audience == E_NotificationAudience.Volunteers ? 0 : 1;
 
 				B_Save.Enabled = ValidMessage();
 				B_Send.Enabled = ValidMessage();
@@ -144,7 +145,7 @@ namespace vitaadmin
             
 			Task.Run(async () =>
 			{
-				_Notifications = await C_Notification.FetchAllNotifications(LoggedInUser.Token);
+                _Notifications = await Global.FetchAllNotifications(LoggedInUser.Token);
 
 				UIApplication.SharedApplication.InvokeOnMainThread(
 				new Action(() =>
@@ -193,7 +194,7 @@ namespace vitaadmin
 
             killChanges = true;
             TV_Message.Text = SelectedNotification.Message;
-            SC_Audience.SelectedSegment = SelectedNotification.Audience == C_Notification.E_NotificationAudience.Volunteers ? 0 : 1;
+            SC_Audience.SelectedSegment = SelectedNotification.Audience == E_NotificationAudience.Volunteers ? 0 : 1;
             killChanges = false;
 
             B_Save.Enabled = SelectedNotification.Dirty;
@@ -220,18 +221,18 @@ namespace vitaadmin
 					EnableNotificationUI(false);
 
 					selNote.Message = TV_Message.Text;
-					selNote.Audience = SC_Audience.SelectedSegment == 0 ? C_Notification.E_NotificationAudience.Volunteers : C_Notification.E_NotificationAudience.SiteCoordinators;
+					selNote.Audience = SC_Audience.SelectedSegment == 0 ? E_NotificationAudience.Volunteers : E_NotificationAudience.SiteCoordinators;
                     TV_Notifications.ReloadData();
 
-					bool success = await selNote.Update(LoggedInUser.Token);
+                    C_IOResult ior = await Global.UpdateNotification(selNote, LoggedInUser.Token);
 
 					AI_Busy.StopAnimating();
 					EnableUI(true);
 					EnableNotificationUI(true);
 
-					if (!success)
+                    if (!ior.Success)
 					{
-						C_MessageBox.E_MessageBoxResults mbresx = await C_MessageBox.MessageBox(this, "Error", "Unable to save the notification", C_MessageBox.E_MessageBoxButtons.Ok);
+                        C_MessageBox.E_MessageBoxResults mbresx = await C_MessageBox.MessageBox(this, "Error", ior.ErrorMessage, C_MessageBox.E_MessageBoxButtons.Ok);
 					}
 					else
 					{
@@ -260,7 +261,7 @@ namespace vitaadmin
                 B_Save.Enabled = false;
                 B_Send.Enabled = false;
 
-                bool success = await selNote.Delete(LoggedInUser.Token);
+                C_IOResult ior = await Global.DeleteNotification(selNote, LoggedInUser.Token);
 
                 AI_Busy.StopAnimating();;
                 EnableUI(true);
@@ -268,9 +269,9 @@ namespace vitaadmin
                 B_Save.Enabled = SelectedNotification.Dirty;
                 B_Send.Enabled = true;
 
-				if (!success)
+                if (!ior.Success)
 				{
-					C_MessageBox.E_MessageBoxResults mbresx = await C_MessageBox.MessageBox(this, "Error", "Unable to delete the notification", C_MessageBox.E_MessageBoxButtons.Ok);
+                    C_MessageBox.E_MessageBoxResults mbresx = await C_MessageBox.MessageBox(this, "Error", ior.ErrorMessage, C_MessageBox.E_MessageBoxButtons.Ok);
 				}
 				else
 				{

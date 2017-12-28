@@ -58,7 +58,7 @@ namespace a_vitavol
 
             LoggedInUser = Global.GetUserFromCacheNoFetch(Global.LoggedInUserId);
 
-			SelectedSite = Global.GetSiteNoFetch(Global.SelectedSiteSlug);
+			SelectedSite = Global.GetSiteFromSlugNoFetch(Global.SelectedSiteSlug);
 			SelectedDate = Global.SelectedDate;
 			SelectedSignUp = Global.SelectedSignUp;
 			SelectedShift = Global.SelectedShift;
@@ -99,76 +99,62 @@ namespace a_vitavol
 				StartActivity(mapIntent);            
             };
 
-            B_RemoveSignup.Click += async (sender, e) =>
+            B_RemoveSignup.Click += (sender, e) =>
             {
                 AI_Busy.Show();
                 EnableUI(false);
 
-                bool success = await SelectedSignUp.RemoveIntent(LoggedInUser.Token);
-
-				Global.RemoveFromSignUps(SelectedSignUp);
-                Global.AdjustSiteSchedueCacheForRemovedSignUp(SelectedSignUp, LoggedInUser, SelectedSite);
-				// remove from the calendar entry, shifts, signups
-				C_CalendarEntry calEntry = SelectedSite.GetCalendarEntryForDate(SelectedSignUp.Date);
-				foreach (C_WorkShift ws in calEntry.WorkShifts)
-				{
-					C_WorkShiftSignUp str = null;
-					foreach (C_WorkShiftSignUp wssu in ws.SignUps)
-					{
-						if (wssu.User.UserId == Global.LoggedInUserId)
-						{
-							str = wssu;
-							break;
-						}
-					}
-					if (str != null)
-					{
-						ws.SignUps.Remove(str);
-
-						break;
-					}
-				}
-
-				AI_Busy.Cancel();
-                EnableUI(true);
-
-                if (success)
+                Task.Run(async () => 
                 {
-                    Intent i = new Intent(this, typeof(A_MySignUps));
-                    StartActivity(i);
-                }
-                else
-                {
-                    C_MessageBox mbox = new C_MessageBox(this, "Error", "Unable to remove signup", E_MessageBoxButtons.Ok);
-                    mbox.Show();
+                    C_IOResult ior = await Global.RemoveIntent(SelectedSignUp, LoggedInUser.Token);
 
-                    return;
-                }
+                    Global.RemoveFromSignUps(SelectedSignUp);
+                    Global.AdjustSiteSchedueCacheForRemovedSignUp(SelectedSignUp, LoggedInUser, SelectedSite);
+                    // remove from the calendar entry, shifts, signups
+                    C_CalendarEntry calEntry = SelectedSite.GetCalendarEntryForDate(SelectedSignUp.Date);
+                    foreach (C_WorkShift ws in calEntry.WorkShifts)
+                    {
+                        C_WorkShiftSignUp str = null;
+                        foreach (C_WorkShiftSignUp wssu in ws.SignUps)
+                        {
+                            if (wssu.User.UserId == Global.LoggedInUserId)
+                            {
+                                str = wssu;
+                                break;
+                            }
+                        }
+                        if (str != null)
+                        {
+                            ws.SignUps.Remove(str);
+
+                            break;
+                        }
+                    }
+
+                    RunOnUiThread(() => 
+                    {
+                        AI_Busy.Cancel();
+                        EnableUI(true);
+
+                        if (ior.Success)
+                        {
+                            Intent i = new Intent(this, typeof(A_MySignUps));
+                            StartActivity(i);
+                        }
+                        else
+                        {
+                            C_MessageBox mbox = new C_MessageBox(this, "Error", "Unable to remove signup[" + ior.ErrorMessage + "]", E_MessageBoxButtons.Ok);
+                            mbox.Show();
+
+                            return;
+                        }
+                    });
+                });
+
             };
 
-            B_SaveHours.Click += async (sender, e) => 
-            {
-				try { Global.SelectedSignUp.Hours = Convert.ToSingle(TB_Hours.Text); }
-				catch { }
-
-                AI_Busy.Show();
-                EnableUI(false);
-
-                bool success = await SelectedSignUp.UpdateSignUp(LoggedInUser.Token);
-
-                AI_Busy.Cancel();
-                EnableUI(true);
-
-                if (!success)
-                {
-                    C_MessageBox mbox = new C_MessageBox(this, "Error", "Unable to update hours", E_MessageBoxButtons.Ok);
-                    mbox.Show();
-
-                    return;
-                }
-                else
-                    HoursAreDirty = false;
-			};
+            B_SaveHours.Click += (sender, e) => 
+                SaveHours();
 
             TB_Hours.TextChanged += (sender, e) => 
             {
@@ -225,10 +211,71 @@ namespace a_vitavol
             LV_OtherVolunteers.Enabled = en;
         }
 
+        private void SaveHours(Intent intent = null)
+        {
+            try { Global.SelectedSignUp.Hours = Convert.ToSingle(TB_Hours.Text); }
+            catch (Exception e1)
+            {
+#if DEBUG
+                Console.WriteLine(e1.Message);
+#endif
+            }
+
+            AI_Busy.Show();
+            EnableUI(false);
+
+            Task.Run(async () =>
+            {
+                C_IOResult ior = await Global.UpdateSignUp(SelectedSignUp, LoggedInUser.Token);
+
+                RunOnUiThread(() =>
+                {
+                    AI_Busy.Cancel();
+                    EnableUI(true);
+
+                    if (!ior.Success)
+                    {
+                        C_MessageBox mbox = new C_MessageBox(this, "Error", "Unable to update hours [" + ior.ErrorMessage + "]", 
+                                                             E_MessageBoxButtons.Ok);
+                        mbox.Show();
+
+                        return;
+                    }
+                    else
+                        HoursAreDirty = false;
+
+                    if (intent != null)
+                        StartActivity(intent);
+                });
+            });
+        }
+
 		public override void OnBackPressed()
 		{
-            Intent i = new Intent(this, typeof(A_MySignUps));
-			StartActivity(i);
+            if (HoursAreDirty)
+            {
+                C_MessageBox mbox = new C_MessageBox(this, "Changes made.", "Save the changes?", E_MessageBoxButtons.YesNoCancel);
+                mbox.Dismissed += (sender, args) => 
+                {
+                    switch (args.Result)
+                    {
+                        case E_MessageBoxResults.Cancel:
+                            return;
+                        case E_MessageBoxResults.No:
+                            StartActivity(new Intent(this, typeof(A_MySignUps)));
+                            break;
+                        case E_MessageBoxResults.Yes:
+                            SaveHours(new Intent(this, typeof(A_MySignUps)));
+                            break;
+                        default:
+                            StartActivity(new Intent(this, typeof(A_MySignUps)));
+                            break;
+                    }
+                };
+                mbox.Show();
+            }
+            else
+                StartActivity(new Intent(this, typeof(A_MySignUps)));
 		}
 	}
 }

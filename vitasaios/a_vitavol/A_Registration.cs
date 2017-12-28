@@ -27,6 +27,7 @@ namespace a_vitavol
 		EditText TB_Register_VerifyPassword;
 		EditText TB_Register_Phone;
 		Button B_Register_Submit;
+        Button B_PrivacyPolicy;
 		CheckBox CB_Register_Advanced;
 
 		protected override void OnCreate(Bundle savedInstanceState)
@@ -38,6 +39,8 @@ namespace a_vitavol
 				g.Global = new C_Global();
 			Global = g.Global;
 
+            C_VitaUser loggedInUser = Global.GetUserFromCacheNoFetch(Global.LoggedInUserId);
+
 			// Set our view from the "main" layout resource
 			SetContentView(Resource.Layout.Registration);
 
@@ -48,6 +51,7 @@ namespace a_vitavol
 			TB_Register_Phone = FindViewById<EditText>(Resource.Id.TB_Register_Phone);
 
 			B_Register_Submit = FindViewById<Button>(Resource.Id.B_Register_Submit);
+            B_PrivacyPolicy = FindViewById<Button>(Resource.Id.B_Register_PrivacyPolicy);
 
 			CB_Register_Advanced = FindViewById<CheckBox>(Resource.Id.CB_Register_Advanced);
 			CB_Register_Advanced.Visibility = Android.Views.ViewStates.Visible;
@@ -80,12 +84,12 @@ namespace a_vitavol
 					AI_Submitting.Show();
 					EnableUI_Register(false);
 
-					bool success = await C_Registration.SubmitRegistration(uname, uemail, upassword, uphone, loc);
+                    C_IOResult ior = await Global.SubmitRegistration(uname, uemail, upassword, uphone, loc);
 
 					AI_Submitting.Cancel();
 					EnableUI_Register(true);
 
-					if (success)
+                    if (ior.Success)
 					{
 						// tell the user that the staff will approve, check back later
 						C_MessageBox mbox = new C_MessageBox(this, "Registration Submitted",
@@ -105,7 +109,7 @@ namespace a_vitavol
 					{
 						C_MessageBox mbox = new C_MessageBox(this,
 									"Error",
-									"Unable to submit registration, possibly due to a duplicate registration.",
+                                    "Unable to submit registration, possibly due to a duplicate registration [" + ior.ErrorMessage + "]",
 									E_MessageBoxButtons.Ok);
 						mbox.Show();
 						return;
@@ -116,6 +120,13 @@ namespace a_vitavol
 					Console.WriteLine(e1.Message);
 				}
 			};
+
+            B_PrivacyPolicy.Click += (sender, e) => 
+            {
+                var uri = Android.Net.Uri.Parse("http://vitasa.org/en/privacy-policy.html");
+                var intent = new Intent(Intent.ActionView, uri);
+                StartActivity(intent);                
+            };
 		}
 
 		void CheckSubmitEnabled(object sender, Android.Text.TextChangedEventArgs e)

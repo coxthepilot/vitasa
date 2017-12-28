@@ -37,6 +37,8 @@ namespace a_vitavol
 
         ListView LV_Volunteers;
 
+        C_YMD Now;
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -46,8 +48,10 @@ namespace a_vitavol
                 g.Global = new C_Global();
             Global = g.Global;
 
+            Now = C_YMD.Now;
+
 			LoggedInUser = Global.GetUserFromCacheNoFetch(Global.LoggedInUserId);
-			SelectedSite = Global.GetSiteNoFetch(Global.SelectedSiteSlug);
+			SelectedSite = Global.GetSiteFromSlugNoFetch(Global.SelectedSiteSlug);
 			SelectedDate = Global.SelectedDate;
 			SelectedShift = Global.SelectedShift;
 #if DEBUG
@@ -89,7 +93,7 @@ namespace a_vitavol
                     AI_Busy.Show();
 					EnableUI(false);
 
-					bool success = await SaveChangedItems(true);
+					bool success = await SaveChangedItems();
 
                     AI_Busy.Cancel();
 					EnableUI(true);
@@ -123,7 +127,7 @@ namespace a_vitavol
 
 			Task.Run(async () =>
 			{
-				// get the list os signups for this shift
+				// get the list of signups for this shift
 				Global.WorkShiftSignUpsOnDate = SelectedShift.SignUps;
 
 				// compute the number needed vs have
@@ -146,8 +150,9 @@ namespace a_vitavol
 				{
 					if (wssu.TheSignUp == null)
 					{
-						C_SignUp su = await Global.FetchSignUpById(LoggedInUser.Token, wssu.User.UserId, wssu.id);
-						wssu.TheSignUp = su;
+                        C_IOResult ior = await Global.FetchSignUpBySignUpId(LoggedInUser.Token, wssu.SignUpId);
+
+                        wssu.TheSignUp = ior.SignUp;
 					}
 				}
 
@@ -162,7 +167,7 @@ namespace a_vitavol
                     L_SiteBasicVol.Text = "Basic Volunteers: " + numBasicHave.ToString() + " of " + numBasicNeeded.ToString();
                     L_SiteAdvVol.Text = "Advanced Volunteers: " + numAdvHave.ToString() + " of " + numAdvNeeded.ToString();
 
-                    B_ApproveHours.Enabled = (Global.WorkShiftSignUpsOnDate.Count != 0) && (SelectedDate <= C_YMD.Now);
+                    B_ApproveHours.Enabled = (Global.WorkShiftSignUpsOnDate.Count != 0) && (SelectedDate <= Now);
 
                     EnableUI(true);
                 });
@@ -171,7 +176,7 @@ namespace a_vitavol
 
 		private void EnableUI(bool en)
 		{
-            B_ApproveHours.Enabled = en && (Global.WorkShiftSignUpsOnDate.Count != 0) && (SelectedDate <= C_YMD.Now);
+            B_ApproveHours.Enabled = en && (Global.WorkShiftSignUpsOnDate.Count != 0) && (SelectedDate <= Now);
 		}
 
 		public override void OnBackPressed()
@@ -201,7 +206,7 @@ namespace a_vitavol
 				AI_Busy.Show();
 				EnableUI(false);
 
-				bool success = await SaveChangedItems(false);
+				bool success = await SaveChangedItems();
 
 				AI_Busy.Cancel();
 				EnableUI(true);
@@ -221,16 +226,16 @@ namespace a_vitavol
 			mbox.Show();
 		}
 
-		private async Task<bool> SaveChangedItems(bool approveHours)
+		private async Task<bool> SaveChangedItems()
 		{
 			bool res = true;
 			try
 			{
 				foreach (C_WorkShiftSignUp wi in Global.WorkShiftSignUpsOnDate)
 				{
-                    wi.TheSignUp.Approved |= approveHours;
-					bool success = await wi.TheSignUp.UpdateSignUp(LoggedInUser.Token);
-					res &= success;
+                    wi.TheSignUp.Approved = true;
+                    C_IOResult ior = await Global.UpdateSignUp(wi.TheSignUp, LoggedInUser.Token);
+                    res &= ior.Success;
 					wi.TheSignUp.Dirty = false;
 				}
 			}
@@ -245,7 +250,7 @@ namespace a_vitavol
             readonly Activity Context;
 			readonly C_Global Global;
 
-            public ShiftAdapter(Activity context, List<C_WorkShiftSignUp> signUps, C_Global global) : base()
+            public ShiftAdapter(Activity context, List<C_WorkShiftSignUp> signUps, C_Global global)
 			{
 				Context = context;
 				SignUps = signUps;

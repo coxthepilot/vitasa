@@ -14,6 +14,7 @@ namespace vitavol
 		// - VolunteerName
 
 		C_Global Global;
+        C_YMD Now;
 
 		public VC_SCVolunteerHours (IntPtr handle) : base (handle)
         {
@@ -27,6 +28,8 @@ namespace vitavol
 
 			AppDelegate myAppDelegate = (AppDelegate)UIApplication.SharedApplication.Delegate;
 			Global = myAppDelegate.Global;
+
+            Now = C_YMD.Now;
 
 			// set the standard background color
             View.BackgroundColor = C_Common.StandardBackground;
@@ -78,7 +81,7 @@ namespace vitavol
 
             TB_Hours.Text = Global.VolunteerWorkShiftSignUp.TheSignUp.Hours.ToString();
 
-            TB_Hours.Enabled = (Global.VolunteerWorkShiftSignUp.TheSignUp.Date <= C_YMD.Now);
+            TB_Hours.Enabled = (Global.VolunteerWorkShiftSignUp.TheSignUp.Date <= Now);
         }
     }
 }

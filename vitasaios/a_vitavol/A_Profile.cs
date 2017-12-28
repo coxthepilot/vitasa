@@ -68,14 +68,14 @@ namespace a_vitavol
                 AI_Busy.Show();
                 EnableUI(false);
 
-                bool success = await LoggedInUser.UpdateUserProfile();
+                C_IOResult ior = await Global.UpdateUserProfile(LoggedInUser);
 
                 AI_Busy.Cancel();
                 EnableUI(true);
 
-                if (!success)
+                if (!ior.Success)
                 {
-                    C_MessageBox mbox = new C_MessageBox(this, "Error", "Unable to update user profile.", E_MessageBoxButtons.Ok);
+                    C_MessageBox mbox = new C_MessageBox(this, "Error", "Unable to update user profile [" + ior.ErrorMessage + "]", E_MessageBoxButtons.Ok);
                     mbox.Dismissed += (sender1, args1) => 
                     {
 						Intent i = new Intent(this, typeof(A_VolunteerActivity));
@@ -85,8 +85,12 @@ namespace a_vitavol
                 }
                 else
                 {
-                    Intent i = new Intent(this, typeof(A_VolunteerActivity));
-                    StartActivity(i);
+                    if (Global.ViewCameFrom == E_ViewCameFrom.VolOptions)
+                        StartActivity(new Intent(this, typeof(A_VolunteerActivity)));
+                    else if (Global.ViewCameFrom == E_ViewCameFrom.SCSite)
+                        StartActivity(new Intent(this, typeof(A_SCMySite)));
+                    else
+                        throw new ApplicationException("unknown view came from");
                 }
 			};
 		}

@@ -20,6 +20,7 @@ namespace a_vitavol
     {
 		C_Global Global;
         C_VitaSite SelectedSite;
+        C_VitaUser LoggedInUser;
 
 		ProgressDialog AI_Busy;
 
@@ -48,7 +49,8 @@ namespace a_vitavol
 			if (Global.CalendarDate == null)
 				Global.CalendarDate = C_YMD.Now;
 
-            SelectedSite = Global.GetSiteNoFetch(Global.SelectedSiteSlug);
+            SelectedSite = Global.GetSiteFromSlugNoFetch(Global.SelectedSiteSlug);
+            LoggedInUser = Global.GetUserFromCacheNoFetch(Global.LoggedInUserId);
 
 			// Set our view from the "main" layout resource
             SetContentView(Resource.Layout.SCSiteVolCalendar);
@@ -83,6 +85,9 @@ namespace a_vitavol
                 {
 					Global.SitesSchedule = await Global.GetSitesScheduleForSiteCached(Global.CalendarDate.Year, Global.CalendarDate.Month, SelectedSite.Slug);
 
+                    // we don't need the results here but this causes the items to be pulled from the backend if needed, so they are in place
+                    List<C_SignUp> suList = await Global.GetSignUpsForSiteInDateRangeCached(LoggedInUser.Token, Global.CalendarDate.Year, Global.CalendarDate.Month, SelectedSite.Slug);
+
 					RunOnUiThread(() => 
                     {
                         AI_Busy.Cancel();
@@ -108,6 +113,9 @@ namespace a_vitavol
 				{
 					Global.SitesSchedule = await Global.GetSitesScheduleForSiteCached(Global.CalendarDate.Year, Global.CalendarDate.Month, SelectedSite.Slug);
 
+                    // we don't need the results here but this causes the items to be pulled from the backend if needed, so they are in place
+                    List<C_SignUp> suList = await Global.GetSignUpsForSiteInDateRangeCached(LoggedInUser.Token, Global.CalendarDate.Year, Global.CalendarDate.Month, SelectedSite.Slug);
+
 					RunOnUiThread(() =>
 					{
 						AI_Busy.Cancel();
@@ -124,6 +132,20 @@ namespace a_vitavol
             Task.Run(async () => 
             {
 				Global.SitesSchedule = await Global.GetSitesScheduleForSiteCached(Global.CalendarDate.Year, Global.CalendarDate.Month, SelectedSite.Slug);
+
+                // we don't need the results here but this causes the items to be pulled from the backend if needed, so they are in place
+                List<C_SignUp> suList = await Global.GetSignUpsForSiteInDateRangeCached(LoggedInUser.Token, Global.CalendarDate.Year, Global.CalendarDate.Month, SelectedSite.Slug);
+
+                //List<C_SignUp> suAll = await Global.FetchAllSignUps(LoggedInUser.Token);
+
+                //foreach (C_SignUp su1 in suAll)
+                    //Console.WriteLine(su1.id.ToString() 
+                                     // + ", " + su1.Date.ToString("yyyymmdd") 
+                                     // + ", " + su1.UserId.ToString() 
+                                     // + ", " + su1.ShiftId.ToString()
+                                     // + ", " + su1.Hours.ToString()
+                                     // + ", " + su1.Approved.ToString()
+                                     //);
 
                 RunOnUiThread(() => 
                 {
@@ -209,7 +231,7 @@ namespace a_vitavol
 					ourSiteSchedule = siteOnDateSchedule[0];
 
 				// get workitems for this date at this site
-				List<C_SignUp> wiList = Global.GetSignUpsForSiteOnDate(ourDate, SelectedSite.Slug); // <<<<<<<< this doesn't work; only current user!
+                List<C_SignUp> wiList = Global.GetSignUpsForSiteOnDate(ourDate, SelectedSite.Slug);
 
 				// find out how many we need today
 				C_CalendarEntry ce = SelectedSite.GetCalendarEntryForDate(ourDate);
@@ -221,14 +243,14 @@ namespace a_vitavol
 				else if (ourDate < now)
                 {
                     // if there are no signups on a date, then show as "no volunteers"
-                    if (wiList.Count == 0)
+                    if (!ce.SiteIsOpen)
                     {
                         dayState.SiteState = E_SiteState.Closed;
                         dayState.Boxed = false;
                     }
                     else
                     {
-                        // at least one person is signed up
+                        // the site is open
                         dayState.SiteState = E_SiteState.OpenNoNeeds;
 
                         // if there are any unapproved, then show as boxed

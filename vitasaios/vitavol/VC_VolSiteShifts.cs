@@ -31,7 +31,7 @@ namespace vitavol
 
 			LoggedInUser = Global.GetUserFromCacheNoFetch(Global.LoggedInUserId);
 			SelectedDate = Global.SelectedDate;
-            SelectedSite = Global.GetSiteNoFetch(Global.SelectedSiteSlug);
+            SelectedSite = Global.GetSiteFromSlugNoFetch(Global.SelectedSiteSlug);
 			SelectedCalendarEntry = SelectedSite.GetCalendarEntryForDate(SelectedDate);
 #if DEBUG
 			if ((SelectedDate == null)
@@ -158,7 +158,7 @@ namespace vitavol
 				Global.SelectedSignUp = new C_SignUp(shift.SiteSlug, Global.SelectedDate, Global.LoggedInUserId, 0)
 				{
 					id = -1,
-					SiteName = Global.GetSiteNoFetch(shift.SiteSlug).Name,
+					SiteName = Global.GetSiteFromSlugNoFetch(shift.SiteSlug).Name,
 					ShiftId = shift.id
 				};
                 Global.SelectedShift = shift;

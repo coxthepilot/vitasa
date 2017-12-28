@@ -72,68 +72,6 @@ namespace zsquared
                 SiteName = Tools.JsonProcessString(jv[N_SiteName], SiteName);
         }
 
-		/// <summary>
-		/// Adds an intent for the specified user
-		/// </summary>
-		/// <returns>The intent.</returns>
-		/// <param name="token">Token.</param>
-		public async Task<bool> AddSignUp(string token, int userId)
-        {
-			C_JsonBuilder jb = new C_JsonBuilder();
-			jb.Add(SiteSlug, N_SiteSlug);
-			jb.Add(Date, N_Date);
-			jb.Add(userId, N_UserId);
-			jb.Add(ShiftId, N_ShiftId);
-			string bodyjson = jb.ToString();
-
-			string submiturl = "/signups/";
-
-            string responseString = await Tools.Upload("POST", submiturl, bodyjson, token);
-
-            if (responseString != null)
-            {
-				JsonValue responseJson = JsonValue.Parse(responseString);
-				C_SignUp wix = new C_SignUp(responseJson);
-				id = wix.id;
-			}
-
-            return responseString != null;
-        }
-
-        /// <summary>
-        /// Updates an existing intent
-        /// </summary>
-        /// <returns>The intent.</returns>
-        /// <param name="token">Token.</param>
-        public async Task<bool> UpdateSignUp(string token)
-        {
-			C_JsonBuilder jb = new C_JsonBuilder();
-			jb.Add(Approved, N_Approved);
-			jb.Add(Hours, N_Hours);
-			jb.Add(UserId, N_UserId);
-			string bodyjson = jb.ToString();
-
-			string submiturl = "/signups/" + id.ToString();
-
-            string responseString = await Tools.Upload("PUT", submiturl, bodyjson, token);
-
-            return responseString != null;
-        }
-
-        /// <summary>
-        /// Removes the intent from the DB
-        /// </summary>
-        /// <returns>The intent.</returns>
-        /// <param name="token">Token.</param>
-		public async Task<bool> RemoveIntent(string token)
-        {
-			string submiturl = "/signups/" + id.ToString();
-
-            string responseString = await Tools.Upload("DELETE", submiturl, "", token);
-
-            return responseString != null;
-		}
-
         public static int CompareByDateAscending(C_SignUp wi1, C_SignUp wi2)
         {
             return wi1.Date.CompareTo(wi2.Date);

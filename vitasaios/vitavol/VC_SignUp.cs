@@ -47,7 +47,7 @@ namespace vitavol
             Global = myAppDelegate.Global;
 
             LoggedInUser = Global.GetUserFromCacheNoFetch(Global.LoggedInUserId);
-            SelectedSite = Global.GetSiteNoFetch(Global.SelectedSiteSlug);
+            SelectedSite = Global.GetSiteFromSlugNoFetch(Global.SelectedSiteSlug);
             SelectedDate = Global.SelectedDate;
             SelectedSignUp = Global.SelectedSignUp;
             SelectedShift = Global.SelectedShift;
@@ -82,9 +82,9 @@ namespace vitavol
                 AI_Busy.StartAnimating();
                 EnableUI(false);
 
-                bool success = await SelectedSignUp.AddSignUp(LoggedInUser.Token, LoggedInUser.id);
+                C_IOResult ior = await Global.AddSignUp(SelectedSignUp, LoggedInUser.Token, LoggedInUser.id);
 
-                if (success)
+                if (ior.Success)
                 {
                     Global.AddToSignUps(SelectedSignUp);
                     Global.AdjustSiteCacheForNewSignUp(SelectedSignUp, LoggedInUser, SelectedSite);
@@ -96,11 +96,11 @@ namespace vitavol
                 AI_Busy.StopAnimating();
                 EnableUI(true);
 
-                if (!success)
+                if (!ior.Success)
                 {
                     C_MessageBox.E_MessageBoxResults mbres = await C_MessageBox.MessageBox(this,
                                      "Error",
-                                     "Add SignUp failed",
+                                     ior.ErrorMessage,
                                      C_MessageBox.E_MessageBoxButtons.Ok);
                     return;
                 }
@@ -198,17 +198,17 @@ namespace vitavol
                 AI_Busy.StartAnimating();
                 EnableUI(false);
 
-                bool success = await SelectedSignUp.UpdateSignUp(LoggedInUser.Token);
+                C_IOResult ior = await Global.UpdateSignUp(SelectedSignUp, LoggedInUser.Token);
 
                 AI_Busy.StopAnimating();
                 EnableUI(true);
                 TB_Hours.ResignFirstResponder();
 
-                if (!success)
+                if (!ior.Success)
                 {
                     C_MessageBox.E_MessageBoxResults mbres = await C_MessageBox.MessageBox(this,
                                      "Error",
-                                     "Updating hours failed.",
+                                     ior.ErrorMessage,
                                      C_MessageBox.E_MessageBoxButtons.Ok);
                 }
             };

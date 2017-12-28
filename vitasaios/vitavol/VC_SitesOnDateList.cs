@@ -228,7 +228,7 @@ namespace vitavol
 				Global.SelectedSignUp = new C_SignUp(site.Slug, Global.SelectedDate, Global.LoggedInUserId, 0)
                 {
                     id = -1,
-                    SiteName = Global.GetSiteNoFetch(site.Slug).Name,
+                    SiteName = Global.GetSiteFromSlugNoFetch(site.Slug).Name,
                     ShiftId = site.id
                 };
                 Global.SelectedSiteSlug = site.Slug;

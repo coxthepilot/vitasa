@@ -101,7 +101,7 @@ namespace a_vitavol
 			readonly Activity context;
 			readonly C_Global Global;
 
-			public SignUpAdapter(Activity context, List<C_SignUp> items, C_Global global) : base()
+			public SignUpAdapter(Activity context, List<C_SignUp> items, C_Global global)
 			{
 				this.context = context;
 				this.items = items;

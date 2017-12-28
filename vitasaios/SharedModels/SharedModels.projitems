@@ -27,5 +27,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)C_Notifications.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)C_WorkShift.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)C_JsonBuilder.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)C_Config.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)C_IOResult.cs" />
   </ItemGroup>
 </Project>

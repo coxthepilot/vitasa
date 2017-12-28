@@ -94,14 +94,13 @@ namespace vitavol
 
                     C_Suggestion suggestionToRemove = Suggestions[indexPath.Row];
 
-                    bool success = await suggestionToRemove.RemoveSuggestion(LoggedInUser.Token);
+                    C_IOResult ior = await Global.RemoveSuggestion(suggestionToRemove, LoggedInUser.Token);
                     LoggedInUser.Suggestions.Remove(suggestionToRemove);
-                    //bool success = await Global.LoggedInUser.RemoveSuggestion(suggestionToRemove);
 
 					UIApplication.SharedApplication.InvokeOnMainThread(
                     new Action(() =>
                     {
-                        if (!success)
+                        if (!ior.Success)
                         {
                             C_MessageBox.MessageBox(OurVC, 
                                             "Error",

@@ -3,6 +3,7 @@ using Xamarin.Forms;
 using System;
 using UIKit;
 using System.IO;
+using MessageUI;
 
 using zsquared;
 
@@ -10,6 +11,8 @@ namespace vitavol
 {
     public partial class VC_About : UIViewController
     {
+		C_Global Global;
+		
         public VC_About (IntPtr handle) : base (handle)
         {
         }
@@ -18,9 +21,13 @@ namespace vitavol
         {
             base.ViewDidLoad();
 
-			// set the standard background color
-            View.BackgroundColor = C_Common.StandardBackground;
+			AppDelegate myAppDelegate = (AppDelegate)UIApplication.SharedApplication.Delegate;
+			Global = myAppDelegate.Global;
+			
+            // set the standard background color
+			View.BackgroundColor = C_Common.StandardBackground;
 
+            WV_About.Delegate = new C_WebViewDelegateAbout(this);
 			string fileName = "about.htm"; // remember case-sensitive
 			string localHtmlUrl = Path.Combine(NSBundle.MainBundle.BundlePath, fileName);
             WV_About.LoadRequest(new NSUrlRequest(new NSUrl(localHtmlUrl, false)));
@@ -30,24 +37,18 @@ namespace vitavol
 				PerformSegue("Segue_AboutToLogin", this);
 			};
 
-			AppDelegate myAppDelegate = (AppDelegate)UIApplication.SharedApplication.Delegate;
-            C_Global Global = myAppDelegate.Global;
-
-			I_Global iad = myAppDelegate as I_Global;
-            long br = iad.GetBytesReceived();
-
 			var verString = NSBundle.MainBundle.InfoDictionary["CFBundleShortVersionString"];
             L_Version.Text = verString.ToString();
 
-			B_BytesReceived.Text = br.ToString("N0");
+            B_BytesReceived.Text = Global.BytesReceived.ToString("N0");
 		}
     }
 
     public class C_WebViewDelegateAbout : UIWebViewDelegate
     {
-        ViewController viewController;
+        UIViewController viewController;
 
-        public C_WebViewDelegateAbout(ViewController vc)
+        public C_WebViewDelegateAbout(UIViewController vc)
         {
             viewController = vc;
         }
@@ -55,8 +56,40 @@ namespace vitavol
         public override bool ShouldStartLoad(UIWebView webView, NSUrlRequest request, UIWebViewNavigationType navigationType)
         {
             if (navigationType == UIWebViewNavigationType.LinkClicked)
-                // launch safari
-                UIApplication.SharedApplication.OpenUrl(request.Url);
+            {
+                if ((request.Url.Scheme == "http") || (request.Url.Scheme == "https"))
+                {
+                    UIApplicationOpenUrlOptions u = new UIApplicationOpenUrlOptions
+                    {
+                        OpenInPlace = false,
+                        SourceApplication = "VITA SA"
+                    };
+                    UIApplication.SharedApplication.OpenUrl(request.Url, u, null);
+
+                    return false;
+                }
+                else if (request.Url.Scheme == "mailto")
+                {
+                    if (MFMailComposeViewController.CanSendMail)
+                    {
+                        string toAddress = request.Url.AbsoluteString.Replace("mailto:", "");
+
+                        MFMailComposeViewController mailController = new MFMailComposeViewController();
+                        mailController.SetToRecipients(new string[] { toAddress });
+                        mailController.SetSubject("For VITA App Team");
+                        mailController.SetMessageBody("<message goes here>", false);
+
+                        mailController.Finished += (object s, MFComposeResultEventArgs args) => {
+                            Console.WriteLine(args.Result.ToString());
+                            args.Controller.DismissViewController(true, null);
+                        };
+
+                        viewController.PresentViewController(mailController, true, null);
+                    }
+
+                    return false;
+                }
+            }
 
             return true;
         }

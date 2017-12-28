@@ -35,7 +35,7 @@ namespace vitavol
             Global = myAppDelegate.Global;
 
             LoggedInUser = Global.GetUserFromCacheNoFetch(Global.LoggedInUserId);
-            SelectedSite = Global.GetSiteNoFetch(Global.SelectedSiteSlug);
+            SelectedSite = Global.GetSiteFromSlugNoFetch(Global.SelectedSiteSlug);
 
 #if DEBUG
             if ((LoggedInUser == null)
@@ -93,10 +93,11 @@ namespace vitavol
                 Dirty = true;
                 B_SaveDefaults.Enabled = true;
 
-                C_WorkShift newShift = new C_WorkShift();
-                newShift.CalendarId = calDefaults.id;
-                newShift.SiteSlug = SelectedSite.Slug;
-
+                C_WorkShift newShift = new C_WorkShift()
+                {
+                    CalendarId = calDefaults.id,
+                    SiteSlug = SelectedSite.Slug
+                };
                 calDefaults.WorkShifts.Add(newShift);
 
                 Global.SelectedShift = newShift;

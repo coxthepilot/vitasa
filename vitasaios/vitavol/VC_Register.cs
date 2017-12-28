@@ -9,6 +9,10 @@ namespace vitavol
 {
     public partial class VC_Register : UIViewController
     {
+		C_Global Global;
+
+		C_VitaUser LoggedInUser;
+		
         public VC_Register (IntPtr handle) : base (handle)
         {
         }
@@ -16,42 +20,64 @@ namespace vitavol
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
+			
+            AppDelegate myAppDelegate = (AppDelegate)UIApplication.SharedApplication.Delegate;
+			Global = myAppDelegate.Global;
+
+			LoggedInUser = Global.GetUserFromCacheNoFetch(Global.LoggedInUserId);
 
 			// set the standard background color
-            View.BackgroundColor = C_Common.StandardBackground;
+			View.BackgroundColor = C_Common.StandardBackground;
 
 			B_Back.TouchUpInside += (sender, e) => 
                 PerformSegue("Segue_RegisterToLogin", this);
 
+            C_TextFieldDelegate tfd = new C_TextFieldDelegate();
+
+            TB_Name.Delegate = tfd;
             TB_Name.AddTarget((sender, e) =>
 			{
                 B_Submit.Enabled = CheckReadyToSubmit();
 
 			}, UIControlEvent.EditingChanged);
 
+            TB_Email.Delegate = tfd;
             TB_Email.AddTarget((sender, e) =>
 			{
 				B_Submit.Enabled = CheckReadyToSubmit();
 
 			}, UIControlEvent.EditingChanged);
 
+            TB_Password.Delegate = tfd;
             TB_Password.AddTarget((sender, e) =>
 			{
 				B_Submit.Enabled = CheckReadyToSubmit();
 
 			}, UIControlEvent.EditingChanged);
 
+            TB_VerifyPassword.Delegate = tfd;
             TB_VerifyPassword.AddTarget((sender, e) =>
 			{
 				B_Submit.Enabled = CheckReadyToSubmit();
 
 			}, UIControlEvent.EditingChanged);
 
+            TB_Phone.Delegate = tfd;
             TB_Phone.AddTarget((sender, e) =>
 			{
 				B_Submit.Enabled = CheckReadyToSubmit();
 
 			}, UIControlEvent.EditingChanged);
+
+            B_ShowPrivacyPolicy.TouchUpInside += (sender, e) => 
+            {
+                UIApplicationOpenUrlOptions u = new UIApplicationOpenUrlOptions
+                {
+                    OpenInPlace = false,
+                    SourceApplication = "VITA SA"
+                };
+                UIApplication.SharedApplication.OpenUrl(new NSUrl("http://vitasa.org/en/privacy-policy.html"), u, null);
+            };
 
             B_Submit.TouchUpInside += async (sender, e) => 
             {
@@ -70,9 +96,9 @@ namespace vitavol
 
                 try
                 {
-                    bool success = await C_Registration.SubmitRegistration(uname, uemail, upassword, uphone, loc);
+                    C_IOResult ior = await Global.SubmitRegistration(uname, uemail, upassword, uphone, loc);
 
-                    if (success)
+                    if (ior.Success)
                     {
                         UIApplication.SharedApplication.InvokeOnMainThread(
                         new Action(async () =>
@@ -85,6 +111,7 @@ namespace vitavol
                                              "Registration Submitted",
                                              "Your registration has been submitted. Staff will respond shortly.",
                                              C_MessageBox.E_MessageBoxButtons.Ok);
+                            
                             PerformSegue("Segue_RegisterToLogin", this);
                         }));
                     }
@@ -99,8 +126,8 @@ namespace vitavol
 							// tell the user that the staff will approve, check back later
 							C_MessageBox.E_MessageBoxResults mbres = await C_MessageBox.MessageBox(this,
 											"Error",
-											"Unable to submit registration, possibly due to a duplicate registration.",
-											 C_MessageBox.E_MessageBoxButtons.Ok);
+                                            "Unable to submit registration.[" + ior.ErrorMessage + "]",
+										    C_MessageBox.E_MessageBoxButtons.Ok);
 						}));
                         return;
                     }
@@ -162,7 +189,7 @@ namespace vitavol
                     res = false;
                     break;
                 }
-                else if (c != '-')
+                else if (!((c == '-') || (c == '(') || (c == ')') || (c == ' ')))
                 {
                     res = false;
                     break;
@@ -170,6 +197,15 @@ namespace vitavol
             }
 
             return res && (numCount == 10);
+        }
+    }
+
+    public class C_TextFieldDelegate : UITextFieldDelegate
+    {
+        public override bool ShouldReturn(UITextField textField)
+        {
+            textField.ResignFirstResponder();
+            return true;
         }
     }
 }

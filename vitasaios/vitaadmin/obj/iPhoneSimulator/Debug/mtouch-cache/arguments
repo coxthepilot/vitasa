@@ -1,6 +1,6 @@
-# Version: 11.0.0.0 (xcode9: 152b654a)
+# Version: 11.6.1.2 (xcode9.2: 6857dfcc)
 # [first argument, ignore] # --cache
-/Library/Frameworks/Xamarin.iOS.framework/Versions/11.0.0.0/lib/mtouch/mtouch.exe \
+/Library/Frameworks/Xamarin.iOS.framework/Versions/11.6.1.2/lib/mtouch/mtouch.exe \
 	/Users/Billy/Documents/source/vitasa/vitasaios/vitaadmin/obj/iPhoneSimulator/Debug/mtouch-cache \
 	--sim \
 	/Users/Billy/Documents/source/vitasa/vitasaios/vitaadmin/bin/iPhoneSimulator/Debug/vitaadmin.app \
@@ -11,12 +11,12 @@
 	--sdkroot \
 	/Applications/Xcode.app/Contents/Developer \
 	--sdk \
-	11.1 \
+	11.2 \
 	--targetver \
 	10.3 \
 	--aot-options=-O=-float32 \
 	--http-message-handler=HttpClientHandler \
-	"--abi=i386,x86_64" \
+	'--abi=i386,x86_64' \
 	--symbollist \
 	/Users/Billy/Documents/source/vitasa/vitasaios/vitaadmin/obj/iPhoneSimulator/Debug/mtouch-symbols.list \
 	--dsym=no \
@@ -393,5 +393,5 @@
 	-r \
 	/Users/Billy/Documents/source/vitasa/vitasaios/packages/Xamarin.Forms.2.3.4.270/lib/Xamarin.iOS10/zh-Hant/Xamarin.Forms.Platform.iOS.resources.dll \
 	--target-framework \
-	"Xamarin.iOS,v1.0" \
+	'Xamarin.iOS,v1.0' \
 	/Users/Billy/Documents/source/vitasa/vitasaios/vitaadmin/bin/iPhoneSimulator/Debug/vitaadmin.exe \
