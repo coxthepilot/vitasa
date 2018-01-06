@@ -144,6 +144,8 @@ Site Coordinators use this to see signups and manage the site calendar.</Descrip
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vitasa 180.png" />
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vitasa 87.png" />
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vitasa 1024a.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vitasa 152.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vitasa 167.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
@@ -268,9 +270,26 @@ Site Coordinators use this to see signups and manage the site calendar.</Descrip
     <Compile Include="VC_VolSiteShifts.designer.cs">
       <DependentUpon>VC_VolSiteShifts.cs</DependentUpon>
     </Compile>
+    <Compile Include="VC_Login.cs" />
+    <Compile Include="VC_Login.designer.cs">
+      <DependentUpon>VC_Login.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VC_ClientSitesMap.cs" />
+    <Compile Include="VC_ClientSitesMap.designer.cs">
+      <DependentUpon>VC_ClientSitesMap.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VC_ClientBeforeYouGo.cs" />
+    <Compile Include="VC_ClientBeforeYouGo.designer.cs">
+      <DependentUpon>VC_ClientBeforeYouGo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VC_ClientSiteDetails.cs" />
+    <Compile Include="VC_ClientSiteDetails.designer.cs">
+      <DependentUpon>VC_ClientSiteDetails.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="about.htm" />
+    <BundleResource Include="beforeyougo.html" />
   </ItemGroup>
   <Import Project="..\iOSSharedModel\iOSSharedModels.projitems" Label="Shared" Condition="Exists('..\iOSSharedModel\iOSSharedModels.projitems')" />
   <Import Project="..\SharedModels\SharedModels.projitems" Label="Shared" Condition="Exists('..\SharedModels\SharedModels.projitems')" />

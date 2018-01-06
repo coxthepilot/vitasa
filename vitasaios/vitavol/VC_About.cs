@@ -24,9 +24,6 @@ namespace vitavol
 			AppDelegate myAppDelegate = (AppDelegate)UIApplication.SharedApplication.Delegate;
 			Global = myAppDelegate.Global;
 			
-            // set the standard background color
-			View.BackgroundColor = C_Common.StandardBackground;
-
             WV_About.Delegate = new C_WebViewDelegateAbout(this);
 			string fileName = "about.htm"; // remember case-sensitive
 			string localHtmlUrl = Path.Combine(NSBundle.MainBundle.BundlePath, fileName);
@@ -34,7 +31,10 @@ namespace vitavol
 
 			B_Back.TouchUpInside += (sender, e) =>
 			{
-				PerformSegue("Segue_AboutToLogin", this);
+                if (Global.ViewCameFrom == E_ViewCameFrom.Main)
+				    PerformSegue("Segue_AboutToMain", this);
+                else if (Global.ViewCameFrom == E_ViewCameFrom.Login)
+                    PerformSegue("Segue_AboutToLogin", this);
 			};
 
 			var verString = NSBundle.MainBundle.InfoDictionary["CFBundleShortVersionString"];
@@ -42,6 +42,12 @@ namespace vitavol
 
             B_BytesReceived.Text = Global.BytesReceived.ToString("N0");
 		}
+
+        public override void ViewDidAppear(bool animated)
+        {
+            // set the standard background color
+            View.BackgroundColor = C_Common.StandardBackground;
+        }
     }
 
     public class C_WebViewDelegateAbout : UIWebViewDelegate

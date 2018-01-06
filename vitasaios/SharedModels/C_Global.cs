@@ -526,16 +526,22 @@ namespace zsquared
             List<C_SignUp> history = site.WorkHistoryX;
             site.WorkHistoryX = null;
 
-            foreach (C_SignUp wi in intents)
+            if (intents != null)
             {
-                if (!SignUpsHasId(wi.id))
-                    SignUpsList.Add(wi);
+                foreach (C_SignUp wi in intents)
+                {
+                    if (!SignUpsHasId(wi.id))
+                        SignUpsList.Add(wi);
+                }
             }
 
-            foreach (C_SignUp wi in history)
+            if (history != null)
             {
-                if (!SignUpsHasId(wi.id))
-                    SignUpsList.Add(wi);
+                foreach (C_SignUp wi in history)
+                {
+                    if (!SignUpsHasId(wi.id))
+                        SignUpsList.Add(wi);
+                }
             }
         }
 
@@ -566,13 +572,6 @@ namespace zsquared
             {
                 List<C_VitaSite> allSites = await FetchAllSites();
                 AllSitesFetched = true;
-
-                foreach (C_VitaSite site in allSites)
-                {
-                    if (!SiteCacheContains(site.Slug))
-                        SiteCache.Add(site);
-                    CleanWorkItemsFromSite(site);
-                }
             }
 
             List<string> SiteSlugsForOpenSites = new List<string>();

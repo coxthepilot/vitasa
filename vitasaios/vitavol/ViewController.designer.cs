@@ -15,67 +15,49 @@ namespace vitavol
     {
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UIActivityIndicatorView AI_Spinner { get; set; }
-
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UIButton B_About { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UIButton B_Login { get; set; }
+        UIKit.UIButton B_BeforeYouGo { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UIButton B_Register { get; set; }
+        UIKit.UIButton B_FindASiteNearYou { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UIButton B_StaffLogin { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UIImageView I_BackgroundImage { get; set; }
 
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UITextField TB_Email { get; set; }
-
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UITextField TB_Password { get; set; }
-
         void ReleaseDesignerOutlets ()
         {
-            if (AI_Spinner != null) {
-                AI_Spinner.Dispose ();
-                AI_Spinner = null;
-            }
-
             if (B_About != null) {
                 B_About.Dispose ();
                 B_About = null;
             }
 
-            if (B_Login != null) {
-                B_Login.Dispose ();
-                B_Login = null;
+            if (B_BeforeYouGo != null) {
+                B_BeforeYouGo.Dispose ();
+                B_BeforeYouGo = null;
             }
 
-            if (B_Register != null) {
-                B_Register.Dispose ();
-                B_Register = null;
+            if (B_FindASiteNearYou != null) {
+                B_FindASiteNearYou.Dispose ();
+                B_FindASiteNearYou = null;
+            }
+
+            if (B_StaffLogin != null) {
+                B_StaffLogin.Dispose ();
+                B_StaffLogin = null;
             }
 
             if (I_BackgroundImage != null) {
                 I_BackgroundImage.Dispose ();
                 I_BackgroundImage = null;
-            }
-
-            if (TB_Email != null) {
-                TB_Email.Dispose ();
-                TB_Email = null;
-            }
-
-            if (TB_Password != null) {
-                TB_Password.Dispose ();
-                TB_Password = null;
             }
         }
     }

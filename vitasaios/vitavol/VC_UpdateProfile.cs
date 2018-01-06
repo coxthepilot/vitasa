@@ -37,6 +37,11 @@ namespace vitavol
             {
 				LoggedInUser.Name = TB_Name.Text;
 				LoggedInUser.Phone = TB_Phone.Text;
+                LoggedInUser.Email = TB_Email.Text;
+
+                string storedEmail = NSUserDefaults.StandardUserDefaults.StringForKey("email");
+                if ((storedEmail != null) && (storedEmail != TB_Email.Text))
+                    NSUserDefaults.StandardUserDefaults.SetString(TB_Email.Text, "email");
 
                 AI_Busy.StartAnimating();
 				EnableUI(false);
@@ -58,6 +63,8 @@ namespace vitavol
 				{
                     if (Global.ViewCameFrom == E_ViewCameFrom.VolOptions)
                         PerformSegue("Segue_UpdateProfileToVolunteerOptions", this);
+                    else if (Global.ViewCameFrom == E_ViewCameFrom.SCSite)
+                        PerformSegue("Segue_UpdateProfileToSCSite", this);
 				}
 			};
 
