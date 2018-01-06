@@ -114,6 +114,14 @@ namespace vitavol
             IMG_PastApprovals.Image = UIImage.FromBundle("opennoneedsboxed");
             IMG_FutureNoNeeds.Image = UIImage.FromBundle("openwithneeds");
             IMG_FutureNeeds.Image = UIImage.FromBundle("openwithneedsboxed");
+        }
+
+        public override void ViewDidAppear(bool animated)
+        {
+            // set the standard background color
+            View.BackgroundColor = C_Common.StandardBackground;
+            B_MonthNext.BackgroundColor = C_Common.StandardBackground;
+            B_MonthPrevious.BackgroundColor = C_Common.StandardBackground;
 
             AI_Busy.StartAnimating();
             EnableUI(false);
@@ -125,26 +133,25 @@ namespace vitavol
                 // we don't need the results here but this causes the items to be pulled from the backend if needed, so they are in place
                 List<C_SignUp> suList = await Global.GetSignUpsForSiteInDateRangeCached(LoggedInUser.Token, Global.CalendarDate.Year, Global.CalendarDate.Month, SelectedSite.Slug);
 
+                DateState = BuildDateStateArray(Global.CalendarDate);
 
-				DateState = BuildDateStateArray(Global.CalendarDate);
-
-				UIApplication.SharedApplication.InvokeOnMainThread(
+                UIApplication.SharedApplication.InvokeOnMainThread(
                 new Action(() =>
                 {
                     AI_Busy.StopAnimating();
                     EnableUI(true);
 
-					L_MonthYear.Text = Global.CalendarDate.ToString("mmm-yyyy");
+                    L_MonthYear.Text = Global.CalendarDate.ToString("mmm-yyyy");
 
-					CollectionViewHelper = new C_CVHelper(UIColor.FromRGB(240, 240, 240), CV_Grid, DateState, null, true);
-					CollectionViewHelper.DateTouched += (sender, e) =>
-					{
-						C_DateTouchedEventArgs ea = e;
-						Global.SelectedDate = ea.Date;
-						PerformSegue("Segue_SCSiteVolCalToSiteShifts", this);
-					};
-				}));
-			});
+                    CollectionViewHelper = new C_CVHelper(UIColor.FromRGB(240, 240, 240), CV_Grid, DateState, null, true);
+                    CollectionViewHelper.DateTouched += (sender, e) =>
+                    {
+                        C_DateTouchedEventArgs ea = e;
+                        Global.SelectedDate = ea.Date;
+                        PerformSegue("Segue_SCSiteVolCalToSiteShifts", this);
+                    };
+                }));
+            });
         }
 
         private void EnableUI(bool en)
@@ -154,14 +161,6 @@ namespace vitavol
             B_MonthNext.Enabled = en;
             B_MonthPrevious.Enabled = en;
         }
-
-		public override void ViewDidAppear(bool animated)
-		{
-			// set the standard background color
-			View.BackgroundColor = C_Common.StandardBackground;
-			B_MonthNext.BackgroundColor = C_Common.StandardBackground;
-			B_MonthPrevious.BackgroundColor = C_Common.StandardBackground;
-		}
 
 		public C_DateState[] BuildDateStateArray(C_YMD Date)
 		{

@@ -103,37 +103,6 @@ namespace vitavol
 			});
 		}
 
-        ///// <summary>
-        ///// Select from the sites, the shifts that need the certification of our user in one or more shifts
-        ///// </summary>
-        ///// <returns>The sites needing help.</returns>
-        ///// <param name="sites">Sites.</param>
-        //private async Task<List<C_VitaSite>> SitesNeedingHelp(List<C_VitaSite> sites)
-        //{
-        //    List<C_VitaSite> res = new List<C_VitaSite>();
-        //    foreach(C_VitaSite site in sites)
-        //    {
-        //        C_CalendarEntry ce = site.GetCalendarEntryForDate(SelectedDate);
-        //        if (!ce.HaveShifts)
-        //        {
-        //            List<C_WorkShift> wslist = await Global.FetchAllShiftsForCalendarEntry(LoggedInUser.Token, site.Slug, ce);
-        //        }
-
-        //        foreach(C_WorkShift ws in ce.WorkShifts)
-        //        {
-        //            int numNeeded = LoggedInUser.Certification == E_Certification.Basic ? ws.NumBasicEFilers : ws.NumAdvEFilers;
-        //            int numHave = Global.GetCountOfSignUpsByShiftId(ws.id);
-        //            if ((numNeeded > 0) && (numHave < numNeeded))
-        //            {
-        //                res.Add(site);
-        //                break;
-        //            }
-        //        }
-        //    }
-
-        //    return res;
-        //}
-
         public override void ViewDidAppear(bool animated)
         {
 			// set the standard background color

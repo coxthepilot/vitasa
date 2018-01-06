@@ -116,47 +116,40 @@ namespace vitavol
 			
             B_NextMonth.BackgroundColor = C_Common.StandardBackground;
             B_PreviousMonth.BackgroundColor = C_Common.StandardBackground;
-
-			AI_Loading.StartAnimating();
-            EnableUI(false);
-
-            Task.Run(async () => 
-            {
-                try
-                {
-                    if (Global.SitesSchedule == null)
-						Global.SitesSchedule = await Global.GetSitesScheduleCached(Global.CalendarDate.Year, Global.CalendarDate.Month);
-
-                    // get the actual screen size so we can adjust the cell sizes accordingly
-                    DateState = BuildDateStateArray(Global.CalendarDate);
-
-                    UIApplication.SharedApplication.InvokeOnMainThread(
-                    new Action(() =>
-                    {
-                        AI_Loading.StopAnimating();
-                        EnableUI(true);
-
-                        UIColor c = UIColor.FromRGB(240, 240, 240);
-                        CollectionViewHelper = new C_CVHelper(c, CV_Grid, DateState, null, false);
-                        CollectionViewHelper.DateTouched += (sender, e) =>
-                        {
-                            C_DateTouchedEventArgs ea = (C_DateTouchedEventArgs)e;
-                            Global.SelectedDate = ea.Date;
-                            PerformSegue("Segue_CalendarToSitesOnDateList", this);
-                        };
-                    }));
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.Message);
-                }
-			}); // end of task.run
 		}
 
         public override void ViewDidAppear(bool animated)
         {
 			// set the standard background color
             View.BackgroundColor = C_Common.StandardBackground;
+
+            AI_Loading.StartAnimating();
+            EnableUI(false);
+
+            Task.Run(async () =>
+            {
+                if (Global.SitesSchedule == null)
+                    Global.SitesSchedule = await Global.GetSitesScheduleCached(Global.CalendarDate.Year, Global.CalendarDate.Month);
+
+                // get the actual screen size so we can adjust the cell sizes accordingly
+                DateState = BuildDateStateArray(Global.CalendarDate);
+
+                UIApplication.SharedApplication.InvokeOnMainThread(
+                new Action(() =>
+                {
+                    AI_Loading.StopAnimating();
+                    EnableUI(true);
+
+                    UIColor c = UIColor.FromRGB(240, 240, 240);
+                    CollectionViewHelper = new C_CVHelper(c, CV_Grid, DateState, null, false);
+                    CollectionViewHelper.DateTouched += (sender, e) =>
+                    {
+                        C_DateTouchedEventArgs ea = (C_DateTouchedEventArgs)e;
+                        Global.SelectedDate = ea.Date;
+                        PerformSegue("Segue_CalendarToSitesOnDateList", this);
+                    };
+                }));
+            }); // end of task.run
 		}
 
         private void EnableUI(bool en)

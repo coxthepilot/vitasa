@@ -148,18 +148,15 @@ namespace vitavol
 				{
                     C_VitaSite ourSite = sou.First();
 
-					C_CalendarEntry ce = ourSite.GetCalendarEntryForDate(Global.SelectedDate);
 					int numNeeded = 0;
 					int numHave = 0;
-					foreach (C_WorkShift ws in ce.WorkShifts)
-					{
-						C_SiteSchedule ss = Global.GetSiteScheduleForDay(Global.SelectedDate, ourSite.Slug);
-                        foreach (C_SiteScheduleShift sss in ss.Shifts)
-                        {
-                            numNeeded += User.Certification == E_Certification.Basic ? sss.eFilersNeededBasic : sss.eFilersNeededAdvanced;
-							numHave += User.Certification == E_Certification.Basic ? sss.eFilersSignedUpBasic : sss.eFilersSignedUpAdvanced;
-                        }
-					}
+
+                    C_SiteSchedule ss = Global.GetSiteScheduleForDay(Global.SelectedDate, ourSite.Slug);
+                    foreach (C_SiteScheduleShift sss in ss.Shifts)
+                    {
+                        numNeeded += User.Certification == E_Certification.Basic ? sss.eFilersNeededBasic : sss.eFilersNeededAdvanced;
+                        numHave += User.Certification == E_Certification.Basic ? sss.eFilersSignedUpBasic : sss.eFilersSignedUpAdvanced;
+                    }
 					int numEF = numNeeded - numHave;
 
                     if (numEF == 0)

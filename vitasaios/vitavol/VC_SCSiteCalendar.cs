@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UIKit;
+using CoreGraphics;
 
 using zsquared;
 
@@ -72,21 +73,6 @@ namespace vitavol
 
 				CV_Grid.ReloadData();
 			};
-
-            IMG_SiteIsClosed.BackgroundColor = Color_ClosedDefault;
-            IMG_SiteIsOpen.BackgroundColor = Color_OpenDefault;
-
-            DateState = BuildDateStateArray(Global.CalendarDate, SelectedSite);
-
-			L_MonthYear.Text = Global.CalendarDate.ToString("mmm-yyyy");
-
-            CollectionViewHelper = new C_CVHelper(UIColor.FromRGB(240, 240, 240), CV_Grid, DateState, null, false);
-			CollectionViewHelper.DateTouched += (sender, e) =>
-			{
-				C_DateTouchedEventArgs ea = e;
-				Global.SelectedDate = ea.Date;
-				PerformSegue("Segue_SCSiteCalendarToSCSiteOnDate", this);
-			};
 		}
 
         public override void ViewDidAppear(bool animated)
@@ -95,6 +81,24 @@ namespace vitavol
             View.BackgroundColor = C_Common.StandardBackground;
             B_MonthNext.BackgroundColor = C_Common.StandardBackground;
             B_MonthPrevious.BackgroundColor = C_Common.StandardBackground;
+
+            IMG_SiteIsClosed.BackgroundColor = Color_ClosedDefault;
+            IMG_SiteIsOpen.BackgroundColor = Color_OpenDefault;
+
+            DateState = BuildDateStateArray(Global.CalendarDate, SelectedSite);
+
+            L_MonthYear.Text = Global.CalendarDate.ToString("mmm-yyyy");
+
+            CGRect vb = View.Bounds;
+            Console.WriteLine("W=" + vb.Width.ToString() + "  CV W=" + CV_Grid.Bounds.Width.ToString());
+
+            CollectionViewHelper = new C_CVHelper(UIColor.FromRGB(240, 240, 240), CV_Grid, DateState, null, false);
+            CollectionViewHelper.DateTouched += (sender, e) =>
+            {
+                C_DateTouchedEventArgs ea = e;
+                Global.SelectedDate = ea.Date;
+                PerformSegue("Segue_SCSiteCalendarToSCSiteOnDate", this);
+            };
 		}
 
         public C_DateState[] BuildDateStateArray(C_YMD Date, C_VitaSite site)
