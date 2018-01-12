@@ -205,6 +205,11 @@ namespace zsquared
             return res;
         }
 
+        public static int CompareByName(C_VitaUser u1, C_VitaUser u2)
+        {
+            return u1.Name.CompareTo(u2.Name);
+        }
+
 
 	}
 }

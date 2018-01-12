@@ -48,6 +48,10 @@ namespace vitaadmin
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UITextField TB_DateForCalendarEntry { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UITextField TB_DayOfWeek { get; set; }
 
         [Outlet]
@@ -118,6 +122,11 @@ namespace vitaadmin
             if (SW_ExcIsOpen != null) {
                 SW_ExcIsOpen.Dispose ();
                 SW_ExcIsOpen = null;
+            }
+
+            if (TB_DateForCalendarEntry != null) {
+                TB_DateForCalendarEntry.Dispose ();
+                TB_DateForCalendarEntry = null;
             }
 
             if (TB_DayOfWeek != null) {

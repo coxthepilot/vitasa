@@ -46,11 +46,11 @@
 /Users/Billy/Documents/source/vitasa/vitasaios/vitaadmin/bin/iPhone/Debug/zh-HK/Xamarin.Forms.Platform.iOS.resources.dll
 /Users/Billy/Documents/source/vitasa/vitasaios/vitaadmin/bin/iPhone/Debug/zh-Hans/Xamarin.Forms.Platform.iOS.resources.dll
 /Users/Billy/Documents/source/vitasa/vitasaios/vitaadmin/bin/iPhone/Debug/zh-Hant/Xamarin.Forms.Platform.iOS.resources.dll
-/Users/Billy/Documents/source/vitasa/vitasaios/vitaadmin/obj/iPhone/Debug/device-builds/ipad5.4-11.0.2/ibtool/_BundleResourceWithLogicalName.items
-/Users/Billy/Documents/source/vitasa/vitasaios/vitaadmin/obj/iPhone/Debug/device-builds/ipad5.4-11.0.2/actool/_PartialAppManifest.items
-/Users/Billy/Documents/source/vitasa/vitasaios/vitaadmin/obj/iPhone/Debug/device-builds/ipad5.4-11.0.2/actool/_BundleResourceWithLogicalName.items
-/Users/Billy/Documents/source/vitasa/vitasaios/vitaadmin/obj/iPhone/Debug/device-builds/ipad5.4-11.0.2/optimized/
 /Users/Billy/Documents/source/vitasa/vitasaios/vitaadmin/obj/iPhone/Debug/vitaadmin.csprojResolveAssemblyReference.cache
 /Users/Billy/Documents/source/vitasa/vitasaios/vitaadmin/obj/iPhone/Debug/vitaadmin.csproj.CoreCompileInputs.cache
 /Users/Billy/Documents/source/vitasa/vitasaios/vitaadmin/obj/iPhone/Debug/vitaadmin.exe
 /Users/Billy/Documents/source/vitasa/vitasaios/vitaadmin/obj/iPhone/Debug/vitaadmin.pdb
+/Users/Billy/Documents/source/vitasa/vitasaios/vitaadmin/obj/iPhone/Debug/device-builds/ipad5.4-11.2.1/ibtool/_BundleResourceWithLogicalName.items
+/Users/Billy/Documents/source/vitasa/vitasaios/vitaadmin/obj/iPhone/Debug/device-builds/ipad5.4-11.2.1/actool/_PartialAppManifest.items
+/Users/Billy/Documents/source/vitasa/vitasaios/vitaadmin/obj/iPhone/Debug/device-builds/ipad5.4-11.2.1/actool/_BundleResourceWithLogicalName.items
+/Users/Billy/Documents/source/vitasa/vitasaios/vitaadmin/obj/iPhone/Debug/device-builds/ipad5.4-11.2.1/optimized/

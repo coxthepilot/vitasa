@@ -118,6 +118,7 @@ namespace vitaadmin
             Task.Run(async () => 
             {
                 Users = await Global.FetchAllUsers(LoggedInUser.Token);
+                Users.Sort(C_VitaUser.CompareByName);
 
                 UIApplication.SharedApplication.InvokeOnMainThread(
                 new Action(() =>

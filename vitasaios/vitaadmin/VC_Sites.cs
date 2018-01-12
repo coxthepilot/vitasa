@@ -41,8 +41,6 @@ namespace vitaadmin
 
             LoggedInUser = Global.GetUserFromCacheNoFetch(Global.LoggedInUserId);
 
-            SiteEnable(false);
-
 			B_Back.TouchUpInside += (sender, e) => 
             {
                 PerformSegue("Segue_SitesToMain", this);
@@ -299,6 +297,19 @@ namespace vitaadmin
                 PerformSegue("Segue_SitesToSignUps", this);
             };
 
+            B_Refresh.TouchUpInside += async (sender, e) => 
+            {
+                SiteEnable(false);
+                AI_Busy.StartAnimating();
+
+                Sites = await Global.FetchAllSites();
+
+                AI_Busy.StopAnimating();
+                SiteEnable(true);
+                TV_Sites.ReloadData();
+
+            };
+
             SiteEnable(false);
 
 			AI_Busy.StartAnimating();
@@ -553,10 +564,6 @@ namespace vitaadmin
             TV_Sites.UserInteractionEnabled = en;
             B_CreateNewSite.Enabled = en;
             B_Back.Enabled = en;
-            B_Calendar.Enabled = en;
-            B_WorkItems.Enabled = en;
-            B_SaveChanges.Enabled = en;
-            B_InitCalendar.Enabled = en;
         }
 
         private void PopulateSite(C_VitaSite site)

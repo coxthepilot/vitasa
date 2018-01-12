@@ -23,6 +23,7 @@ namespace vitaadmin
         C_TimePicker OpenShift;
         C_TimePicker CloseShift;
         C_ItemPicker DOWPicker;
+        C_ItemPicker DateInSeasonPicker;
 
         C_WorkShift SelectedShift;
 
@@ -47,6 +48,8 @@ namespace vitaadmin
 
             LoggedInUser = Global.GetUserFromCacheNoFetch(Global.LoggedInUserId);
             SelectedSite = Global.GetSiteFromSlugNoFetch(Global.SelectedSiteSlug);
+
+            L_ExcSite.Text = SelectedSite.Name;
 
             EnableCalendarEntry(false);
 
@@ -76,10 +79,61 @@ namespace vitaadmin
                 DePopulateCalendarEntry(e.CalendarEntry);
                 SelectedCalendarEntry = null;
             };
-            CalendarEntriesTableManager.RowDelete += (sender, e) => 
+            CalendarEntriesTableManager.RowDelete += async (sender, e) => 
             {
-                // todo: delete the indicated object
-                // remove from the TableView
+                C_CalendarEntry ceToDel = e.CalendarEntry;
+                C_IOResult ior = await Global.RemoveCalendarEntry(SelectedSite, LoggedInUser.Token, ceToDel);
+                if (!ior.Success)
+                {
+                    var ok = await C_MessageBox.MessageBox(this, "Error", ior.ErrorMessage, E_MessageBoxButtons.Ok);
+                }
+                TV_Exceptions.ReloadData();
+            };
+
+            List<string> daysInSeason = new List<string>();
+            C_YMD date = SelectedSite.SeasonFirstDate;
+            do
+            {
+                daysInSeason.Add(date.ToString("yyyy-mm-dd"));
+
+                date = date.AddDays(1);
+
+            } while (date != SelectedSite.SeasonLastDate);
+            daysInSeason.Add(date.ToString("yyyy-mm-dd"));
+            DateInSeasonPicker = new C_ItemPicker(TB_DateForCalendarEntry, daysInSeason);
+
+            B_NewException.TouchUpInside += async (sender, e) => 
+            {
+                C_YMD newDate = null;
+                try
+                {
+                    newDate = new C_YMD(TB_DateForCalendarEntry.Text);
+                }
+                catch (Exception e2)
+                {
+#if DEBUG
+                    Console.WriteLine(e2.Message);
+#endif
+                }
+                if (newDate != null)
+                {
+                    C_CalendarEntry newCE = new C_CalendarEntry
+                    {
+                        Date = newDate,
+                        Dirty = false,
+                        SiteID = SelectedSite.id,
+                        SiteIsOpen = false
+                    };
+
+                    C_IOResult ior = await Global.CreateCalendarEntry(SelectedSite, LoggedInUser.Token, newCE);
+
+                    if (!ior.Success)
+                    {
+                        var ok = await C_MessageBox.MessageBox(this, "Error", ior.ErrorMessage, E_MessageBoxButtons.Ok);
+                    }
+
+                    TV_Exceptions.ReloadData();
+                }
             };
 
             List<string> dowList = new List<string>(C_YMD.DayOfWeekNames);
@@ -108,6 +162,7 @@ namespace vitaadmin
 
                 B_ExcSave.Enabled = false;
                 CalendarEntriesTableManager.ReloadData();
+                TV_ExcShifts.ReloadData();
 			};
 
             B_ExcNewShift.TouchUpInside += async (sender, e) => 
@@ -275,11 +330,6 @@ namespace vitaadmin
 
 		private void EnableCalendarEntry(bool en)
 		{
-			if (!en)
-			{
-				L_ExcSite.Text = "";
-			}
-
 			B_ExcSave.Enabled = en && DirtyExc;
 
 			SW_ExcIsOpen.Enabled = en;
@@ -303,8 +353,6 @@ namespace vitaadmin
         private void PopulateCalendarEntry(C_CalendarEntry ce)
 		{
 			EnableCalendarEntry(true);
-
-			L_ExcSite.Text = SelectedSite.Name;
 
 			SW_ExcIsOpen.On = ce.SiteIsOpen;
 

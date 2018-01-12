@@ -1,0 +1,73 @@
+body {
+    background-color: white;
+    margin:20px;
+    padding:20px;
+    font-family:verdana;
+}
+
+h1, h2, h3 {
+    font-family:verdana;
+}
+
+#top, #bottom, #left, #right {
+    background: #000000;
+    position: fixed;
+}
+#left, #right {
+    top: 0; bottom: 0;
+    width: 15px;
+}
+#left { left: 0; }
+#right { right: 0; }
+
+#top, #bottom {
+    left: 0; right: 0;
+    height: 15px;
+}
+#top { top: 0; }
+#bottom { bottom: 0; }
+
+.button-primary {
+    font-family:verdana;
+    background: #000000;
+    border: none;
+    padding: 5px 10px;
+    text-align: center;
+    color: white;
+    font-size: 14px;
+}
+
+.button-sitename {
+    font-family:verdana;
+    background: #FFFFFF;
+    border: none;
+    text-decoration: underline;
+    cursor: pointer;
+    padding: 0px 0px 0px 0px;
+    text-align: center;
+    color: black;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.sitename {
+    font-weight: bold;
+}
+
+.signuptext {
+
+}
+
+.button-primary:active {
+    background: #808080;
+}
+
+.signup-row {
+    clear:both;
+    padding: 10px 0px 20px 0px;
+}
+
+.signup-child {
+    float: left;
+    padding: 0px 10px 0px 10px;
+}

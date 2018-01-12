@@ -36,6 +36,10 @@ namespace vitaadmin
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UIButton B_Refresh { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UIButton B_SaveChanges { get; set; }
 
         [Outlet]
@@ -151,6 +155,11 @@ namespace vitaadmin
             if (B_InitCalendar != null) {
                 B_InitCalendar.Dispose ();
                 B_InitCalendar = null;
+            }
+
+            if (B_Refresh != null) {
+                B_Refresh.Dispose ();
+                B_Refresh = null;
             }
 
             if (B_SaveChanges != null) {

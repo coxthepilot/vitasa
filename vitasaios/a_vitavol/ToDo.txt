@@ -1,42 +1,48 @@
 ﻿----- Issues -----
 
+Future features:
+* allow more than 1 site coordinator and a backup
+* create a site feature for in-person tax prep
+* allow volunteer to select all shifts at a site
+* allow advanced to signup for basic slots
+* allow update email in profile
+* no way for a volunteer to view past signups?
+* need option to include work intents on user and site, or not; separate control for each past and future
+* use notifications as way to know content has changed rather than timeouts
+* sort sites based on distance to user
 
 Shared Models:
+* make sure models don't crash on bad data (such as nulls on date...)
 
 
 Android:
-* past dates do not show up correctly; need api to only get signups for a site in a date range [done]
-* accept certificates for abandoned factory and volunteer-savvy [done]
-* about needs reference to privacy polcy [done]
-* register needs refernece to privacy policy [done]
-* make sure I/O error handling is correct [done]
-* on notification, the graphic is a tiny slice from the middle [defer]
-* sort sites based on distance to user [defer]
+* on notification, the graphic is a tiny slice from the middle of the icon [defer]
 
 
 iOS: 
-* past dates do not show up correctly; need api to only get signups for a site in a date range [done]
 
 
 vitaadmin:
-* generate email to all volunteers and site coordinators [done]
 * check enabling of controls on sites; can select Calendar when no site selected
-* show values from config.json
 * hours summary (with export)
 * finish installing site calendar and shifts on sites
 * tool to set basic/adv number on shift
 
 
 Chris
-* migrate to DO backend over Christmas [done]
-
-Future
-* no way for a volunteer to view past signups?
-* need option to include work intents on user and site, or not; separate control for each past and future
-* use notifications as way to know content has changed rather than timeouts
+* get the schema on signups under site to match from /signups/ [urgent]
 
 
 Completed
+* [vitaadmin] show values from config.json [done]
+* [vitaadmin] generate email to all volunteers and site coordinators [done]
+* migrate to DO backend over Christmas [done]
+* past dates do not show up correctly; need api to only get signups for a site in a date range [done]
+* past dates do not show up correctly; need api to only get signups for a site in a date range [done]
+* accept certificates for abandoned factory and volunteer-savvy [done]
+* about needs reference to privacy polcy [done]
+* register needs refernece to privacy policy [done]
+* make sure I/O error handling is correct [done]
 * support for offline and user message [done]
 * support for out of date app version [done]
 * fix the certificate handling to accept other domains [done]
