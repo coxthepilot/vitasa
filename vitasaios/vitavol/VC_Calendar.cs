@@ -196,14 +196,34 @@ namespace vitavol
                         bool anyNeed = false;
                         foreach(C_SiteScheduleShift sss in ss.Shifts)
                         {
-                            if (
-                                ((sss.eFilersSignedUpBasic < sss.eFilersNeededBasic) && (LoggedInUser.Certification == E_Certification.Basic))
-                                || ((sss.eFilersSignedUpAdvanced < sss.eFilersNeededAdvanced) && (LoggedInUser.Certification == E_Certification.Advanced))
-                            )
+                            // 12-jan-2018: changed to allow advanced to fill either basic or advanced slots
+                            bool needBasic = sss.eFilersSignedUpBasic < sss.eFilersNeededBasic;
+
+                            int totalNeed = sss.eFilersNeededBasic + sss.eFilersNeededAdvanced;
+                            int totalHave = sss.eFilersSignedUpBasic + sss.eFilersSignedUpAdvanced;
+
+                            if (LoggedInUser.Certification == E_Certification.Basic)
                             {
-                                anyNeed = true;
-                                break;
+                                if (needBasic)
+                                {
+                                    anyNeed = true;
+                                    break;
+                                }
                             }
+                            else // user is advanced
+                            {
+                                if (totalHave < totalNeed)
+                                {
+                                    anyNeed = true;
+                                    break;
+                                }
+                            }
+
+                            //if (needBasic || (needAdvanced && (LoggedInUser.Certification == E_Certification.Advanced)))
+                            //{
+                            //    anyNeed = true;
+                            //    break;
+                            //}
                         }
                         if (anyNeed)
                             slist.Add(ss);

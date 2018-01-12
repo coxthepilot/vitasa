@@ -14,12 +14,12 @@
             android:id="@+id/textView1"
             android:text="Email"
             android:paddingLeft="10dp" />
-        <TextView
-            android:textAppearance="?android:attr/textAppearanceMedium"
+        <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/L_Profile_Email"
-            android:text="...email..." />
+            android:singleLine="true"
+            android:id="@+id/TB_Profile_Email"
+            android:hint="email" />
         <Space
             android:layout_width="match_parent"
             android:layout_height="10dp"
