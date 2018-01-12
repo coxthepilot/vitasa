@@ -129,6 +129,8 @@ namespace a_vitavol
 
 			L_Date.Text = Global.CalendarDate.ToString("mmm yyyy");
 
+            AI_Busy.Show();
+
             Task.Run(async () => 
             {
 				Global.SitesSchedule = await Global.GetSitesScheduleForSiteCached(Global.CalendarDate.Year, Global.CalendarDate.Month, SelectedSite.Slug);
@@ -149,6 +151,8 @@ namespace a_vitavol
 
                 RunOnUiThread(() => 
                 {
+                    AI_Busy.Cancel();
+
 					C_DateDetails[] details = BuildDateStateArray(Global.CalendarDate);
 					C_DateDetails[] dayDetails = BuildDayStateArray();
 					GVHelper = new C_GVHelper(this, GV_Calendar);

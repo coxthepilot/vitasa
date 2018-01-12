@@ -1,5 +1,7 @@
 ﻿----- Issues -----
 
+Fixes:
+
 Future features:
 * allow more than 1 site coordinator and a backup
 * create a site feature for in-person tax prep
@@ -16,6 +18,7 @@ Shared Models:
 
 
 Android:
+* need to make the adv/basic signup more robust; fixed it on iOS after I did the Android release
 * on notification, the graphic is a tiny slice from the middle of the icon [defer]
 
 
@@ -34,6 +37,9 @@ Chris
 
 
 Completed
+* ignore signups in site; only use get /signups/ [done android]
+* all advanced to use a basic slot [done android]
+* allow email update [done]
 * [vitaadmin] show values from config.json [done]
 * [vitaadmin] generate email to all volunteers and site coordinators [done]
 * migrate to DO backend over Christmas [done]

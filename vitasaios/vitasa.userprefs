@@ -1,18 +1,7 @@
-﻿<Properties StartupConfiguration="{54A26836-3009-4924-BE26-81B92FE271EC}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="vitaadmin/VC_Sites.cs">
-    <Files>
-      <File FileName="a_vitavol/ToDo.txt" Line="16" Column="1" />
-      <File FileName="vitaadmin/Main.storyboard" />
-      <File FileName="vitavol/ViewController.cs" Line="1" Column="1" />
-      <File FileName="vitaadmin/VC_Main.cs" Line="1" Column="1" />
-      <File FileName="vitaadmin/VC_Sites.cs" Line="309" Column="1" />
-      <File FileName="vitaadmin/VC_Calendar.cs" Line="52" Column="19" />
-      <File FileName="SharedModels/C_CalendarEntry.cs" Line="13" Column="18" />
-      <File FileName="SharedModels/C_Global.cs" Line="1547" Column="39" />
-    </Files>
-  </MonoDevelop.Ide.Workbench>
+﻿<Properties StartupConfiguration="{6A54BBFE-FE39-4316-BA0B-E74DA172F56E}|Default">
+  <MonoDevelop.Ide.Workbench />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|iPhoneSimulator" />
-  <MonoDevelop.Ide.ItemProperties.a__vitavol AndroidDesignerPreferredDevice="Nexus 4" PreferredExecutionTarget="Android.Android_Accelerated_x86" HideGettingStarted="True" />
+  <MonoDevelop.Ide.ItemProperties.a__vitavol AndroidDesignerPreferredDevice="Nexus 4" PreferredExecutionTarget="Android.021ceacba18dc745" HideGettingStarted="True" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
       <Breakpoint file="/Users/Billy/Documents/source/vitasa/vitasaios/vitasa/C_VitaUser.cs" relfile="vitasa/C_VitaUser.cs" line="42" column="1" />
@@ -54,9 +43,6 @@
       <Breakpoint file="/Users/Billy/Documents/source/vitasa/vitasaios/SharedModels/C_Global.cs" relfile="SharedModels/C_Global.cs" line="157" column="1" />
       <Breakpoint file="/Users/Billy/Documents/source/vitasa/vitasaios/SharedModels/C_Global.cs" relfile="SharedModels/C_Global.cs" line="1272" column="27" />
       <Breakpoint file="/Users/Billy/Documents/source/vitasa/vitasaios/SharedModels/C_Global.cs" relfile="SharedModels/C_Global.cs" line="1348" column="52" />
-      <Breakpoint file="/Users/Billy/Documents/source/vitasa/vitasaios/SharedModels/C_Global.cs" relfile="SharedModels/C_Global.cs" line="1246" column="1" />
-      <Breakpoint file="/Users/Billy/Documents/source/vitasa/vitasaios/SharedModels/C_Global.cs" relfile="SharedModels/C_Global.cs" line="1368" column="1" />
-      <Breakpoint file="/Users/Billy/Documents/source/vitasa/vitasaios/SharedModels/C_Global.cs" relfile="SharedModels/C_Global.cs" line="1374" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />

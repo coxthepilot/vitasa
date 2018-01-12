@@ -36,11 +36,8 @@ namespace a_vitavol
 		TextView L_Date;
 		TextView L_Site;
 		ListView LV_Shifts;
-        Button B_ViewOnMap;
 
 		ProgressDialog AI_Busy;
-
-        List<C_VitaSite> SitesThatNeedHelp;
 
 		protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -88,8 +85,18 @@ namespace a_vitavol
 				{
 					if ((sss.OpenTime == shift.OpenTime) && (sss.CloseTime == shift.CloseTime))
 					{
-                        numNeeded += LoggedInUser.Certification == E_Certification.Basic ? sss.eFilersNeededBasic : sss.eFilersNeededAdvanced;
-						numHave += LoggedInUser.Certification == E_Certification.Basic ? sss.eFilersSignedUpBasic : sss.eFilersSignedUpAdvanced;
+                        bool userIsAdvanced = LoggedInUser.Certification == E_Certification.Advanced;
+
+                        numNeeded += sss.eFilersNeededBasic;
+                        if (userIsAdvanced)
+                            numNeeded += sss.eFilersNeededAdvanced;
+
+                        numHave += sss.eFilersSignedUpBasic;
+                        if (userIsAdvanced)
+                            numHave += sss.eFilersSignedUpAdvanced;
+
+      //                  numNeeded += LoggedInUser.Certification == E_Certification.Basic ? sss.eFilersNeededBasic : sss.eFilersNeededAdvanced;
+						//numHave += LoggedInUser.Certification == E_Certification.Basic ? sss.eFilersSignedUpBasic : sss.eFilersSignedUpAdvanced;
 					}
 				}
 				int numEF = numNeeded - numHave;
@@ -146,7 +153,7 @@ namespace a_vitavol
             readonly C_Global Global;
             readonly C_VitaUser User;
 
-            public ShiftsAdapter(Activity context, List<C_WorkShift> shifts, C_Global global, C_VitaUser user) : base()
+            public ShiftsAdapter(Activity context, List<C_WorkShift> shifts, C_Global global, C_VitaUser user)
 			{
 				this.context = context;
 				this.Shifts = shifts;
@@ -189,8 +196,18 @@ namespace a_vitavol
 				{
 					if ((sss.OpenTime == shift.OpenTime) && (sss.CloseTime == shift.CloseTime))
 					{
-						numNeeded += User.Certification == E_Certification.Basic ? sss.eFilersNeededBasic : sss.eFilersNeededAdvanced;
-						numHave += User.Certification == E_Certification.Basic ? sss.eFilersSignedUpBasic : sss.eFilersSignedUpAdvanced;
+                        bool userIsAdvanced = User.Certification == E_Certification.Advanced;
+
+                        numNeeded += sss.eFilersNeededBasic;
+                        if (userIsAdvanced)
+                            numNeeded += sss.eFilersNeededAdvanced;
+
+                        numHave += sss.eFilersSignedUpBasic;
+                        if (userIsAdvanced)
+                            numHave += sss.eFilersSignedUpAdvanced;
+                        
+						//numNeeded += User.Certification == E_Certification.Basic ? sss.eFilersNeededBasic : sss.eFilersNeededAdvanced;
+						//numHave += User.Certification == E_Certification.Basic ? sss.eFilersSignedUpBasic : sss.eFilersSignedUpAdvanced;
 					}
 				}
 				int numEF = numNeeded - numHave;
