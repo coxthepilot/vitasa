@@ -8,12 +8,12 @@ namespace zsquared
 	{
 		public event EventHandler<PickerChangedEventArgs> PickerChanged;
 
-		/// <summary>
-		/// The list of items in the picker
-		/// </summary>
-		List<string> PickList;
+        /// <summary>
+        /// The list of items in the picker
+        /// </summary>
+        readonly List<string> PickList;
 
-		public C_PickerModel(List<string> pickList)
+        public C_PickerModel(List<string> pickList)
 		{
 			PickList = pickList;
 		}

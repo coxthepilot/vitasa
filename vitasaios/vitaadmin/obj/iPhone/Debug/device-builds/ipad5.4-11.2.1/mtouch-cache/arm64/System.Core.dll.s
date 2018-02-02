@@ -21,7 +21,7 @@ Ldebug_info_begin:
 	.short 2
 	.long 0
 	.byte 8,1
-	.asciz "Mono AOT Compiler 5.4.0 (tarball Mon Dec  4 20:59:09 EST 2017)"
+	.asciz "Mono AOT Compiler 5.4.0 (tarball Wed Jan 10 16:17:32 EST 2018)"
 	.asciz "System.Core.dll"
 	.asciz ""
 
@@ -121,7 +121,7 @@ jit_code_start:
 	.align 4
 	.no_dead_strip System_Linq_Error_ArgumentNull_string
 System_Linq_Error_ArgumentNull_string:
-.file 1 "/Library/Frameworks/Xamarin.iOS.framework/Versions/11.6.1.2/src/mono/external/corefx/src/System.Linq/src/System/Linq/Errors.cs"
+.file 1 "/Library/Frameworks/Xamarin.iOS.framework/Versions/11.6.1.4/src/mono/external/corefx/src/System.Linq/src/System/Linq/Errors.cs"
 .loc 1 9 0 prologue_end
 .word 0xa9bd7bfd
 .word 0x910003fd
@@ -145,7 +145,7 @@ Lme_0:
 	.align 4
 	.no_dead_strip System_Linq_Enumerable_Any_TSource_REF_System_Collections_Generic_IEnumerable_1_TSource_REF
 System_Linq_Enumerable_Any_TSource_REF_System_Collections_Generic_IEnumerable_1_TSource_REF:
-.file 2 "/Library/Frameworks/Xamarin.iOS.framework/Versions/11.6.1.2/src/mono/external/corefx/src/System.Linq/src/System/Linq/AnyAll.cs"
+.file 2 "/Library/Frameworks/Xamarin.iOS.framework/Versions/11.6.1.4/src/mono/external/corefx/src/System.Linq/src/System/Linq/AnyAll.cs"
 .loc 2 13 0 prologue_end
 .word 0xa9bc7bfd
 .word 0x910003fd
@@ -217,7 +217,7 @@ Lme_1:
 	.align 4
 	.no_dead_strip System_Linq_Enumerable_FirstOrDefault_TSource_REF_System_Collections_Generic_IEnumerable_1_TSource_REF
 System_Linq_Enumerable_FirstOrDefault_TSource_REF_System_Collections_Generic_IEnumerable_1_TSource_REF:
-.file 3 "/Library/Frameworks/Xamarin.iOS.framework/Versions/11.6.1.2/src/mono/external/corefx/src/System.Linq/src/System/Linq/First.cs"
+.file 3 "/Library/Frameworks/Xamarin.iOS.framework/Versions/11.6.1.4/src/mono/external/corefx/src/System.Linq/src/System/Linq/First.cs"
 .loc 3 40 0 prologue_end
 .word 0xa9bc7bfd
 .word 0x910003fd
@@ -403,7 +403,7 @@ Lme_3:
 	.align 4
 	.no_dead_strip System_Linq_Enumerable_SequenceEqual_TSource_REF_System_Collections_Generic_IEnumerable_1_TSource_REF_System_Collections_Generic_IEnumerable_1_TSource_REF
 System_Linq_Enumerable_SequenceEqual_TSource_REF_System_Collections_Generic_IEnumerable_1_TSource_REF_System_Collections_Generic_IEnumerable_1_TSource_REF:
-.file 4 "/Library/Frameworks/Xamarin.iOS.framework/Versions/11.6.1.2/src/mono/external/corefx/src/System.Linq/src/System/Linq/SequenceEqual.cs"
+.file 4 "/Library/Frameworks/Xamarin.iOS.framework/Versions/11.6.1.4/src/mono/external/corefx/src/System.Linq/src/System/Linq/SequenceEqual.cs"
 .loc 4 13 0 prologue_end
 .word 0xa9bd7bfd
 .word 0x910003fd
@@ -677,7 +677,7 @@ Lme_5:
 	.align 4
 	.no_dead_strip System_Linq_Enumerable_ToList_TSource_REF_System_Collections_Generic_IEnumerable_1_TSource_REF
 System_Linq_Enumerable_ToList_TSource_REF_System_Collections_Generic_IEnumerable_1_TSource_REF:
-.file 5 "/Library/Frameworks/Xamarin.iOS.framework/Versions/11.6.1.2/src/mono/external/corefx/src/System.Linq/src/System/Linq/ToCollection.cs"
+.file 5 "/Library/Frameworks/Xamarin.iOS.framework/Versions/11.6.1.4/src/mono/external/corefx/src/System.Linq/src/System/Linq/ToCollection.cs"
 .loc 5 24 0 prologue_end
 .word 0xa9bc7bfd
 .word 0x910003fd
@@ -739,7 +739,7 @@ Lme_6:
 	.align 4
 	.no_dead_strip System_Linq_Enumerable_Where_TSource_REF_System_Collections_Generic_IEnumerable_1_TSource_REF_System_Func_2_TSource_REF_bool
 System_Linq_Enumerable_Where_TSource_REF_System_Collections_Generic_IEnumerable_1_TSource_REF_System_Func_2_TSource_REF_bool:
-.file 6 "/Library/Frameworks/Xamarin.iOS.framework/Versions/11.6.1.2/src/mono/external/corefx/src/System.Linq/src/System/Linq/Where.cs"
+.file 6 "/Library/Frameworks/Xamarin.iOS.framework/Versions/11.6.1.4/src/mono/external/corefx/src/System.Linq/src/System/Linq/Where.cs"
 .loc 6 15 0 prologue_end
 .word 0xa9bb7bfd
 .word 0x910003fd
@@ -878,7 +878,7 @@ Lme_7:
 	.align 4
 	.no_dead_strip System_Linq_Enumerable_Iterator_1_TSource_REF__ctor
 System_Linq_Enumerable_Iterator_1_TSource_REF__ctor:
-.file 7 "/Library/Frameworks/Xamarin.iOS.framework/Versions/11.6.1.2/src/mono/external/corefx/src/System.Linq/src/System/Linq/Iterator.cs"
+.file 7 "/Library/Frameworks/Xamarin.iOS.framework/Versions/11.6.1.4/src/mono/external/corefx/src/System.Linq/src/System/Linq/Iterator.cs"
 .loc 7 43 0 prologue_end
 .word 0xa9bd7bfd
 .word 0x910003fd
@@ -2079,7 +2079,7 @@ Lme_20:
 	.align 4
 	.no_dead_strip System_Linq_EmptyPartition_1_TElement_REF__ctor
 System_Linq_EmptyPartition_1_TElement_REF__ctor:
-.file 8 "/Library/Frameworks/Xamarin.iOS.framework/Versions/11.6.1.2/src/mono/external/corefx/src/System.Linq/src/System/Linq/Partition.cs"
+.file 8 "/Library/Frameworks/Xamarin.iOS.framework/Versions/11.6.1.4/src/mono/external/corefx/src/System.Linq/src/System/Linq/Partition.cs"
 .loc 8 97 0 prologue_end
 .word 0xa9be7bfd
 .word 0x910003fd
@@ -2244,7 +2244,7 @@ Lme_2c:
 	.align 4
 	.no_dead_strip System_Linq_Utilities_CombinePredicates_TSource_REF_System_Func_2_TSource_REF_bool_System_Func_2_TSource_REF_bool
 System_Linq_Utilities_CombinePredicates_TSource_REF_System_Func_2_TSource_REF_bool_System_Func_2_TSource_REF_bool:
-.file 9 "/Library/Frameworks/Xamarin.iOS.framework/Versions/11.6.1.2/src/mono/external/corefx/src/System.Linq/src/System/Linq/Utilities.cs"
+.file 9 "/Library/Frameworks/Xamarin.iOS.framework/Versions/11.6.1.4/src/mono/external/corefx/src/System.Linq/src/System/Linq/Utilities.cs"
 .loc 9 0 0 prologue_end
 .word 0xa9ba7bfd
 .word 0x910003fd
@@ -5765,7 +5765,7 @@ Lme_5f:
 	.align 4
 	.no_dead_strip System_Collections_Generic_EqualityComparer_1_T_REF_get_Default
 System_Collections_Generic_EqualityComparer_1_T_REF_get_Default:
-.file 10 "/Library/Frameworks/Xamarin.iOS.framework/Versions/11.6.1.2/src/mono/mcs/class/referencesource/mscorlib/system/collections/generic/equalitycomparer.cs"
+.file 10 "/Library/Frameworks/Xamarin.iOS.framework/Versions/11.6.1.4/src/mono/mcs/class/referencesource/mscorlib/system/collections/generic/equalitycomparer.cs"
 .loc 10 32 0 prologue_end
 .word 0xa9bd7bfd
 .word 0x910003fd
@@ -5805,7 +5805,7 @@ Lme_60:
 	.align 4
 	.no_dead_strip System_Collections_Generic_List_1_T_REF__ctor_System_Collections_Generic_IEnumerable_1_T_REF
 System_Collections_Generic_List_1_T_REF__ctor_System_Collections_Generic_IEnumerable_1_T_REF:
-.file 11 "/Library/Frameworks/Xamarin.iOS.framework/Versions/11.6.1.2/src/mono/mcs/class/referencesource/mscorlib/system/collections/generic/list.cs"
+.file 11 "/Library/Frameworks/Xamarin.iOS.framework/Versions/11.6.1.4/src/mono/mcs/class/referencesource/mscorlib/system/collections/generic/list.cs"
 .loc 11 75 0 prologue_end
 .word 0xa9ba7bfd
 .word 0x910003fd
@@ -9556,7 +9556,7 @@ runtime_version:
 .section __TEXT, __const
 	.align 2
 assembly_guid:
-	.asciz "3CCACAFC-6C3A-4450-9D20-50A54B68CC48"
+	.asciz "98D8AE0B-A2C1-456C-9665-3359C4B1BE27"
 .section __TEXT, __const
 	.align 2
 assembly_name:
@@ -9639,7 +9639,7 @@ _mono_aot_file_info:
 	.long 192,0,0,0,0,0,0,0
 	.long 0,0,0,0,0,0,0,0
 	.long 0
-	.byte 45,152,66,208,205,98,29,51,229,7,134,200,138,250,242,228
+	.byte 101,139,7,207,74,250,66,183,37,104,117,102,214,72,115,12
 	.globl _mono_aot_module_System_Core_info
 	.align 3
 _mono_aot_module_System_Core_info:

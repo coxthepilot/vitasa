@@ -10,7 +10,7 @@ using System.Net.Http.Headers;
 
 namespace zsquared
 {
-    public enum E_ViewCameFrom { Unknown = 0, List, Map, MySignUps, SCSites, SCSite, Login, VolOptions, Suggestions, CalEntry, CalDefaults, Users, Main }
+    public enum E_ViewCameFrom { Unknown = 0, List, Map, MySignUps, SCSites, SCSite, Login, VolOptions, Suggestions, CalEntry, CalDefaults, Users, User, Main }
     public enum E_IOResultCode { NoError, NoConfig, OutDate, Offline, WebException, Exception, VerOutOfDate, RetryFailure, ParseError }
 
     public class C_Global
@@ -357,11 +357,18 @@ namespace zsquared
             return ior;
         }
 
-        public async Task<List<C_VitaSite>> FetchAllSites()
+        public async Task<List<C_VitaSite>> RefetchAllSites(string token = null)
+        {
+            SiteCache = new List<C_VitaSite>();
+
+            return await FetchAllSites(token);
+        }
+
+        public async Task<List<C_VitaSite>> FetchAllSites(string token = null)
         {
             List<C_VitaSite> siteslist = null;
 
-            C_IOResult ior = await Download("/sites");
+            C_IOResult ior = await Download("/sites", token);
 
             try
             {
@@ -744,17 +751,8 @@ namespace zsquared
         //    return ior;
         //}
 
-        public async Task<C_IOResult> UpdateUserProfile(C_VitaUser user, string token = null)
+        public async Task<C_IOResult> UpdateUserFields(C_JsonBuilder jb, C_VitaUser user, string token)
         {
-            C_JsonBuilder jb = new C_JsonBuilder();
-            jb.Add(user.Name, C_VitaUser.N_Name);
-            jb.Add(user.Phone, C_VitaUser.N_Phone);
-            jb.Add(user.Email, C_VitaUser.N_Email);
-            jb.Add(user.Certification.ToString(), C_VitaUser.N_Certification);
-            jb.StartArray(C_VitaUser.N_Roles);
-            foreach (E_VitaUserRoles role in user.Roles)
-                jb.AddArrayElement(role.ToString());
-            jb.EndArray();
             string bodyjson = jb.ToString();
 
             string submiturl = "/users/" + user.id.ToString();
@@ -800,6 +798,23 @@ namespace zsquared
                 }
             }
 #endif
+            return ior;
+        }
+
+        public async Task<C_IOResult> UpdateUserProfile(C_VitaUser user, string token = null)
+        {
+            C_JsonBuilder jb = new C_JsonBuilder();
+            jb.Add(user.Name, C_VitaUser.N_Name);
+            jb.Add(user.Phone, C_VitaUser.N_Phone);
+            jb.Add(user.Email, C_VitaUser.N_Email);
+            jb.Add(user.Certification.ToString(), C_VitaUser.N_Certification);
+            jb.StartArray(C_VitaUser.N_Roles);
+            foreach (E_VitaUserRoles role in user.Roles)
+                jb.AddArrayElement(role.ToString());
+            jb.EndArray();
+
+            C_IOResult ior = await UpdateUserFields(jb, user, token);
+
             return ior;
         }
 
@@ -2319,6 +2334,9 @@ namespace zsquared
 					wc.Headers.Add(HttpRequestHeader.Accept, "application/json");
 					if (acceptLanguage != null)
 						wc.Headers.Add(HttpRequestHeader.AcceptLanguage, acceptLanguage);
+
+                    if (!submiturl.EndsWith("/"))
+                        submiturl = submiturl + "/";
                     
 					res.ResponseString = await wc.DownloadStringTaskAsync(submiturl);
 

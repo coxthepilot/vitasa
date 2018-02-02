@@ -8,6 +8,21 @@
 	<dict/>
 	<key>com.apple.ibtool.document.warnings</key>
 	<dict>
+		<key>111844</key>
+		<array>
+			<dict>
+				<key>affected-objects</key>
+				<array>
+					<string>111844</string>
+				</array>
+				<key>message</key>
+				<string>Prototype table cells must have reuse identifiers</string>
+				<key>type</key>
+				<string>IBUnsupportedConfiguration</string>
+				<key>type-value</key>
+				<integer>9</integer>
+			</dict>
+		</array>
 		<key>11260</key>
 		<array>
 			<dict>
@@ -104,6 +119,51 @@
 				<key>affected-objects</key>
 				<array>
 					<string>6889</string>
+				</array>
+				<key>message</key>
+				<string>Prototype table cells must have reuse identifiers</string>
+				<key>type</key>
+				<string>IBUnsupportedConfiguration</string>
+				<key>type-value</key>
+				<integer>9</integer>
+			</dict>
+		</array>
+		<key>78199</key>
+		<array>
+			<dict>
+				<key>affected-objects</key>
+				<array>
+					<string>78199</string>
+				</array>
+				<key>message</key>
+				<string>Prototype table cells must have reuse identifiers</string>
+				<key>type</key>
+				<string>IBUnsupportedConfiguration</string>
+				<key>type-value</key>
+				<integer>9</integer>
+			</dict>
+		</array>
+		<key>78300</key>
+		<array>
+			<dict>
+				<key>affected-objects</key>
+				<array>
+					<string>78300</string>
+				</array>
+				<key>message</key>
+				<string>Segues initiated directly from view controllers must have an identifier</string>
+				<key>type</key>
+				<string>IBUnsupportedConfiguration</string>
+				<key>type-value</key>
+				<integer>9</integer>
+			</dict>
+		</array>
+		<key>99620</key>
+		<array>
+			<dict>
+				<key>affected-objects</key>
+				<array>
+					<string>99620</string>
 				</array>
 				<key>message</key>
 				<string>Prototype table cells must have reuse identifiers</string>

@@ -20,10 +20,6 @@ namespace vitaadmin
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UIButton B_ApplyPattern { get; set; }
-
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UIButton B_Back { get; set; }
 
         [Outlet]
@@ -40,7 +36,47 @@ namespace vitaadmin
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UILabel L_Advanced { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UILabel L_Basic { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UILabel L_CalendarEntryFor { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UILabel L_Close { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UILabel L_DeleteShift { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UILabel L_ExcSite { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UILabel L_Open { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UILabel L_ShiftDetails { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UILabel L_Shifts { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UILabel L_SiteIsOpen { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UILabel L_UsersOnShift { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
@@ -49,10 +85,6 @@ namespace vitaadmin
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UITextField TB_DateForCalendarEntry { get; set; }
-
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UITextField TB_DayOfWeek { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
@@ -89,11 +121,6 @@ namespace vitaadmin
                 AI_Busy = null;
             }
 
-            if (B_ApplyPattern != null) {
-                B_ApplyPattern.Dispose ();
-                B_ApplyPattern = null;
-            }
-
             if (B_Back != null) {
                 B_Back.Dispose ();
                 B_Back = null;
@@ -114,9 +141,59 @@ namespace vitaadmin
                 B_NewException = null;
             }
 
+            if (L_Advanced != null) {
+                L_Advanced.Dispose ();
+                L_Advanced = null;
+            }
+
+            if (L_Basic != null) {
+                L_Basic.Dispose ();
+                L_Basic = null;
+            }
+
+            if (L_CalendarEntryFor != null) {
+                L_CalendarEntryFor.Dispose ();
+                L_CalendarEntryFor = null;
+            }
+
+            if (L_Close != null) {
+                L_Close.Dispose ();
+                L_Close = null;
+            }
+
+            if (L_DeleteShift != null) {
+                L_DeleteShift.Dispose ();
+                L_DeleteShift = null;
+            }
+
             if (L_ExcSite != null) {
                 L_ExcSite.Dispose ();
                 L_ExcSite = null;
+            }
+
+            if (L_Open != null) {
+                L_Open.Dispose ();
+                L_Open = null;
+            }
+
+            if (L_ShiftDetails != null) {
+                L_ShiftDetails.Dispose ();
+                L_ShiftDetails = null;
+            }
+
+            if (L_Shifts != null) {
+                L_Shifts.Dispose ();
+                L_Shifts = null;
+            }
+
+            if (L_SiteIsOpen != null) {
+                L_SiteIsOpen.Dispose ();
+                L_SiteIsOpen = null;
+            }
+
+            if (L_UsersOnShift != null) {
+                L_UsersOnShift.Dispose ();
+                L_UsersOnShift = null;
             }
 
             if (SW_ExcIsOpen != null) {
@@ -127,11 +204,6 @@ namespace vitaadmin
             if (TB_DateForCalendarEntry != null) {
                 TB_DateForCalendarEntry.Dispose ();
                 TB_DateForCalendarEntry = null;
-            }
-
-            if (TB_DayOfWeek != null) {
-                TB_DayOfWeek.Dispose ();
-                TB_DayOfWeek = null;
             }
 
             if (TB_ExcAdvShift != null) {

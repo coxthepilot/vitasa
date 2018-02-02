@@ -22,7 +22,6 @@ namespace vitaadmin
 
         C_TimePicker OpenShift;
         C_TimePicker CloseShift;
-        C_ItemPicker DOWPicker;
         C_ItemPicker DateInSeasonPicker;
 
         C_WorkShift SelectedShift;
@@ -50,8 +49,6 @@ namespace vitaadmin
             SelectedSite = Global.GetSiteFromSlugNoFetch(Global.SelectedSiteSlug);
 
             L_ExcSite.Text = SelectedSite.Name;
-
-            EnableCalendarEntry(false);
 
             OpenShift = new C_TimePicker(TB_ExcOpenShift);
             OpenShift.TimePickerDone += (sender, e) => 
@@ -82,12 +79,20 @@ namespace vitaadmin
             CalendarEntriesTableManager.RowDelete += async (sender, e) => 
             {
                 C_CalendarEntry ceToDel = e.CalendarEntry;
-                C_IOResult ior = await Global.RemoveCalendarEntry(SelectedSite, LoggedInUser.Token, ceToDel);
-                if (!ior.Success)
+
+                if (ceToDel.WorkShifts.Count != 0)
                 {
-                    var ok = await C_MessageBox.MessageBox(this, "Error", ior.ErrorMessage, E_MessageBoxButtons.Ok);
+                    var ok = await C_MessageBox.MessageBox(this, "Work Shifts Remain", "Cannot delete a Calendar Entry that still has shifts.", E_MessageBoxButtons.Ok);
                 }
-                TV_Exceptions.ReloadData();
+                else
+                {
+                    C_IOResult ior = await Global.RemoveCalendarEntry(SelectedSite, LoggedInUser.Token, ceToDel);
+                    if (!ior.Success)
+                    {
+                        var ok = await C_MessageBox.MessageBox(this, "Error", ior.ErrorMessage, E_MessageBoxButtons.Ok);
+                    }
+                    TV_Exceptions.ReloadData();
+                }
             };
 
             List<string> daysInSeason = new List<string>();
@@ -136,12 +141,9 @@ namespace vitaadmin
                 }
             };
 
-            List<string> dowList = new List<string>(C_YMD.DayOfWeekNames);
-            DOWPicker = new C_ItemPicker(TB_DayOfWeek, dowList);
-
             B_Back.TouchUpInside += (sender, e) => 
             {
-                PerformSegue("Segue_CalendarToSites", this);
+                PerformSegue("Segue_CalendarToSite", this);
             };
 
             B_ExcSave.TouchUpInside += async (sender, e) => 
@@ -172,8 +174,8 @@ namespace vitaadmin
                     CalendarId = SelectedCalendarEntry.id,
                     CloseTime = new C_HMS(17, 00, 00),
                     OpenTime = new C_HMS(8, 0, 0),
-                    NumBasicEFilers = 0,
-                    NumAdvEFilers = 0,
+                    NumBasicEFilers = 5,
+                    NumAdvEFilers = 5,
                     SiteSlug = SelectedSite.Slug
                 };
 
@@ -208,146 +210,31 @@ namespace vitaadmin
                 CalendarEntriesTableManager.ReloadData();
 			};
 
-
-            B_ApplyPattern.TouchUpInside += async (sender, e) => 
-            {
-				bool successx = true;
-
-				E_MessageBoxResults mbres = await C_MessageBox.MessageBox(this, "Warning", "This function overwrites any existing shifts on selected dates.", E_MessageBoxButtons.OkCancel);
-                if (mbres != E_MessageBoxResults.Ok)
-                    return;
-
-                AI_Busy.StartAnimating();
-
-                // get the day of the week for our pattern
-                int selDow = -1;
-                for (int ix = 0; ix != C_YMD.DayOfWeekNames.Length; ix++)
-                {
-                    if (TB_DayOfWeek.Text.ToLower() == C_YMD.DayOfWeekNames[ix].ToLower())
-                    {
-                        selDow = ix;
-                        break;
-                    }
-                }
-
-                // capture the pattern to apply
-                bool pattern_IsOpen = SelectedCalendarEntry.SiteIsOpen;
-                List<C_WorkShift> pattern_shifts = new List<C_WorkShift>();
-                foreach(C_WorkShift ws in SelectedCalendarEntry.WorkShifts)
-                {
-                    C_WorkShift nws = new C_WorkShift(ws);
-                    pattern_shifts.Add(nws);
-                }
-
-                List<C_CalendarEntry> calList = SelectedSite.SiteCalendar;
-                foreach(C_CalendarEntry calEntry in calList)
-                {
-                    if (!successx) break;
-
-                    // see if the day of the week matches our pattern; skip if no match
-                    int dow_i = (int)calEntry.Date.DayOfWeek;
-                    if (dow_i != selDow)
-                        continue;
-
-                    // remove any existing shifts
-                    if (!calEntry.HaveShifts)
-                    {
-                        List<C_WorkShift> shifts = await Global.FetchAllShiftsForCalendarEntry(LoggedInUser.Token, SelectedSite.Slug, calEntry);
-                    }
-
-                    Queue<C_WorkShift> ShiftsQ = new Queue<C_WorkShift>();
-                    foreach (C_WorkShift ws in calEntry.WorkShifts)
-                        ShiftsQ.Enqueue(ws);
-
-                    while (ShiftsQ.Count != 0)
-                    {
-                        C_WorkShift ws = ShiftsQ.Dequeue();
-
-                        // remove any signups for this shift; since we've already loaded all users, these are in the cache
-                        List<C_SignUp> usignups = Global.GetSignUpsByShiftId(ws.id);
-                        foreach(C_SignUp su in usignups)
-                        {
-                            C_IOResult ior2 = await Global.RemoveIntent(su, LoggedInUser.Token);
-                            successx &= ior2.Success;
-                            if (!successx) 
-                                break;
-                        }
-						if (!successx) 
-                            break;
-
-                        // now that we know there is nothing linked to this shift, delete the shift
-                        C_IOResult ior1 = await Global.RemoveShift(LoggedInUser.Token, SelectedSite.Slug, ws, calEntry);
-                        successx &= ior1.Success;
-                        if (!successx) 
-                            break;
-                    }
-					if (!successx) 
-                        break;
-
-					// set the pattern for this calendar entry
-					calEntry.SiteIsOpen = pattern_IsOpen;
-                    C_IOResult ior = await Global.UpdateCalendarEntry(SelectedSite, LoggedInUser.Token, calEntry);
-                    calEntry.WorkShifts = new List<C_WorkShift>();
-                    foreach(C_WorkShift ws in pattern_shifts)
-                    {
-                        C_WorkShift nws = new C_WorkShift(ws)
-                        {
-                            CalendarId = calEntry.id
-                        };
-                        //calEntry.WorkShifts.Add(nws);
-                        C_IOResult ior3 = await Global.CreateShift(LoggedInUser.Token, SelectedSite.Slug, nws, calEntry);
-                        successx &= ior.Success;
-						if (!successx) break;
-					}
-					if (!successx) break;
-				}
-
-                AI_Busy.StopAnimating();
-
-                if (!successx)
-                {
-                    E_MessageBoxResults mbresx = await C_MessageBox.MessageBox(this, "Error", "One or more errors occured.", E_MessageBoxButtons.Ok);
-                }
-                else
-                {
-					E_MessageBoxResults mbresx = await C_MessageBox.MessageBox(this, "Success", "All updates completed normally.", E_MessageBoxButtons.Ok);
-				}
-
-                CalendarEntriesTableManager.ReloadData();
-                ShiftTableManager.ReloadData();
-            };
-
             TB_ExcBasicShift.AddTarget(TextField_ValueChanged, UIControlEvent.EditingChanged);
             TB_ExcAdvShift.AddTarget(TextField_ValueChanged, UIControlEvent.EditingChanged);
 
 			DirtyExc = false;
-		}
 
-		void TextField_ValueChanged(object sender, EventArgs e)
-		{
-            B_ExcSave.Enabled = true;
-		}
-
-		private void EnableCalendarEntry(bool en)
-		{
-			B_ExcSave.Enabled = en && DirtyExc;
-
-			SW_ExcIsOpen.Enabled = en;
-
+            EnableCalendarEntry(false);
             EnableShift(false);
-
-            B_ExcNewShift.Enabled = en;
 		}
 
-        private void EnableShift(bool en)
+        void TextField_ValueChanged(object sender, EventArgs e) => B_ExcSave.Enabled = true;
+
+        private void EnableCalendarEntry(bool en)
 		{
-			TB_ExcOpenShift.Enabled = en;
-			TB_ExcCloseShift.Enabled = en;
-
-			TB_ExcBasicShift.Enabled = en;
-			TB_ExcAdvShift.Enabled = en;
-
-			TV_ExcShifts.UserInteractionEnabled = en;
+            L_CalendarEntryFor.Hidden = !en;
+            TB_ExcDate.Hidden = !en;
+            TB_ExcDate.Enabled = en;
+            SW_ExcIsOpen.Hidden = !en;
+            SW_ExcIsOpen.Enabled = en;
+            L_SiteIsOpen.Hidden = !en;
+            L_Shifts.Hidden = !en;
+            TV_ExcShifts.Hidden = !en;
+            TV_ExcShifts.UserInteractionEnabled = en;
+            L_DeleteShift.Hidden = !en;
+            B_ExcNewShift.Hidden = !en;
+            B_ExcNewShift.Enabled = en;
 		}
 
         private void PopulateCalendarEntry(C_CalendarEntry ce)
@@ -372,14 +259,49 @@ namespace vitaadmin
 			ShiftTableManager.RowDelete += async (sender, e) =>
 			{
                 C_WorkShift shiftToDelete = e.Shift;
-                C_IOResult ior = await Global.RemoveShift(LoggedInUser.Token, SelectedSite.Slug, shiftToDelete, SelectedCalendarEntry);
-                if (ior.Success)
-                    SelectedCalendarEntry.WorkShifts.Remove(shiftToDelete);
-                ShiftTableManager.ReloadData();
+
+                List<C_SignUp> sus = Global.GetSignUpsByShiftId(shiftToDelete.id);
+                if (sus.Count == 0)
+                {
+                    C_IOResult ior = await Global.RemoveShift(LoggedInUser.Token, SelectedSite.Slug, shiftToDelete, SelectedCalendarEntry);
+                    if (ior.Success)
+                        SelectedCalendarEntry.WorkShifts.Remove(shiftToDelete);
+                    ShiftTableManager.ReloadData();
+                }
+                else
+                {
+                    C_MessageBox.E_MessageBoxResults mbresx = await C_MessageBox.MessageBox(this, "Users Signed Up", "We can't delete a shift with users signed up.", C_MessageBox.E_MessageBoxButtons.Ok);
+                }
 			};
 
-            EnableShift(true);
+            DePopulateShift(SelectedShift);
 		}
+
+        private void DePopulateCalendarEntry(C_CalendarEntry ce)
+        {
+            ce.SiteIsOpen = SW_ExcIsOpen.On;
+            DePopulateShift(SelectedShift);
+            EnableCalendarEntry(false);
+        }
+
+        private void EnableShift(bool en)
+        {
+            L_ShiftDetails.Hidden = !en;
+            L_Open.Hidden = !en;
+            L_Close.Hidden = !en;
+            L_Basic.Hidden = !en;
+            L_Advanced.Hidden = !en;
+            TB_ExcOpenShift.Hidden = !en;
+            TB_ExcOpenShift.Enabled = en;
+            TB_ExcCloseShift.Hidden = !en;
+            TB_ExcCloseShift.Enabled = en;
+            TB_ExcBasicShift.Hidden = !en;
+            TB_ExcBasicShift.Enabled = en;
+            TB_ExcAdvShift.Hidden = !en;
+            TB_ExcAdvShift.Enabled = en;
+            B_ExcSave.Hidden = !en;
+            B_ExcSave.Enabled = en && DirtyExc;
+        }
 
         private void PopulateShift(C_WorkShift s)
 		{
@@ -388,19 +310,17 @@ namespace vitaadmin
 			OpenShift.SetValue(s.OpenTime);
 			CloseShift.SetValue(s.CloseTime);
 
+            List<C_SignUp> sus = Global.GetSignUpsByShiftId(s.id);
+            L_UsersOnShift.Text = sus.Count.ToString() + " users signed up.";
+
 			TB_ExcBasicShift.Text = s.NumBasicEFilers.ToString();
 			TB_ExcAdvShift.Text = s.NumAdvEFilers.ToString();
 		}
 
-        private void DePopulateCalendarEntry(C_CalendarEntry ce)
-		{
-			ce.SiteIsOpen = SW_ExcIsOpen.On;
-			DePopulateShift(SelectedShift);
-			EnableCalendarEntry(false);
-		}
-
         private void DePopulateShift(C_WorkShift s)
 		{
+            EnableShift(false);
+
             if (s == null) 
                 return;
             
@@ -511,6 +431,8 @@ namespace vitaadmin
 				{
 					Global = global;
 					CalendarEntries = ce;
+
+                    CalendarEntries.Sort(C_CalendarEntry.CompareByDate);
 				}
 
 				public override nint RowsInSection(UITableView tableview, nint section)
@@ -536,11 +458,6 @@ namespace vitaadmin
 
 					return cell;
 				}
-
-                public override void RowSelected(UITableView tableView, NSIndexPath indexPath)
-                {
-                    base.RowSelected(tableView, indexPath);
-                }
 			}
 		}
 
@@ -555,11 +472,6 @@ namespace vitaadmin
 		}
 
 		public delegate void CalendarEntryEventHandler(object sender, C_CalendarEntryEventArgs e);
-
-
-
-
-
 
         public class C_ShiftTableManager
 		{

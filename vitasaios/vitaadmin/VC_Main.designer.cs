@@ -20,6 +20,10 @@ namespace vitaadmin
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UIButton B_CheckSignUps { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UIButton B_Config { get; set; }
 
         [Outlet]
@@ -33,6 +37,10 @@ namespace vitaadmin
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UIButton B_Notifications { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UIButton B_OpenSites { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
@@ -57,6 +65,11 @@ namespace vitaadmin
                 B_Back = null;
             }
 
+            if (B_CheckSignUps != null) {
+                B_CheckSignUps.Dispose ();
+                B_CheckSignUps = null;
+            }
+
             if (B_Config != null) {
                 B_Config.Dispose ();
                 B_Config = null;
@@ -75,6 +88,11 @@ namespace vitaadmin
             if (B_Notifications != null) {
                 B_Notifications.Dispose ();
                 B_Notifications = null;
+            }
+
+            if (B_OpenSites != null) {
+                B_OpenSites.Dispose ();
+                B_OpenSites = null;
             }
 
             if (B_Sites != null) {

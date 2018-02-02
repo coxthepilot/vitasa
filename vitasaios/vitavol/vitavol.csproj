@@ -10,7 +10,7 @@
     <RootNamespace>vitavol</RootNamespace>
     <AssemblyName>vitavol</AssemblyName>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
-    <ReleaseVersion>1.3</ReleaseVersion>
+    <ReleaseVersion>1.7</ReleaseVersion>
     <Description>This is the app for VITA SA Volunteers and Site Coordinators. 
 
 Volunteers us this app to sign up for shifts at sites.

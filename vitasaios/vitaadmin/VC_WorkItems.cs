@@ -42,6 +42,12 @@ namespace vitaadmin
                     case E_ViewCameFrom.SCSites:
                         PerformSegue("Segue_SignUpsToSites", this);
                         break;
+                    case E_ViewCameFrom.SCSite:
+                        PerformSegue("Segue_WorkItemsToSite", this);
+                        break;
+                    case E_ViewCameFrom.User:
+                        PerformSegue("Segue_SignUpsToUser", this);
+                        break;
                 }
             };
 

@@ -219,6 +219,14 @@ namespace zsquared
             return res;
         }
 
+        public C_CalendarEntry GetCalendarEntryById(int calendarId)
+        {
+            var ou = SiteCalendar.Where(ce => ce.id == calendarId);
+            C_CalendarEntry res = ou.FirstOrDefault();
+
+            return res;
+        }
+
         /// <summary>
         /// Returns true if the site is open on the specified date. If outside the season for the site,
         /// returns false.

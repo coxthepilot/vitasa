@@ -8,21 +8,22 @@
 #include <objc/message.h>
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import <QuartzCore/QuartzCore.h>
 #import <MessageUI/MessageUI.h>
 #import <CloudKit/CloudKit.h>
-#import <QuartzCore/QuartzCore.h>
 #import <Intents/Intents.h>
 #import <CoreGraphics/CoreGraphics.h>
 
 @protocol UIPickerViewModel;
-@class __MonoMac_NSActionDispatcher;
-@class __MonoMac_NSAsyncActionDispatcher;
 @class MessageUI_Mono_MFMailComposeViewControllerDelegate;
 @class UIKit_UIControlEventProxy;
+@class __MonoMac_NSActionDispatcher;
+@class __MonoMac_NSAsyncActionDispatcher;
 @class zsquared_C_PickerModel;
 @class zsquared_C_ShiftsTableSource;
 @class AppDelegate;
 @class zsquared_C_ItemPicker_C_PickerDataModel;
+@class zsquared_C_UserPicker_C_PickerDataModel;
 @class ViewController;
 @class VC_Main;
 @class vitaadmin_VC_Messages_MessagePickerViewModel;
@@ -30,7 +31,7 @@
 @class vitaadmin_VC_Suggestions_C_SuggestionsTableSource;
 @class VC_Suggestions;
 @class VC_WorkItems;
-@class vitaadmin_VC_Sites_SiteCoordinatorPickerModel;
+@class vitaadmin_VC_Sites_C_SiteCoordinatorPickerModel;
 @class vitaadmin_VC_Sites_C_SitesTableSource;
 @class VC_Sites;
 @class VC_Calendar;
@@ -40,6 +41,13 @@
 @class VC_Users;
 @class vitaadmin_VC_Config_C_VersionsTableSource;
 @class VC_Config;
+@class VC_Site;
+@class vitaadmin_VC_User_C_WorkItemsTableSource;
+@class vitaadmin_VC_User_C_SiteNamesTableSource;
+@class VC_User;
+@class VC_CheckSignUps;
+@class vitaadmin_VC_OpenSites_C_OpenSitesTableSource;
+@class VC_OpenSites;
 @class vitaadmin_VC_Suggestions_C_SuggestionsTableDelegate;
 @class vitaadmin_VC_WorkItems_C_WorkItemsTableDelegate;
 @class vitaadmin_VC_WorkItems_C_WorkItemsTableSource;
@@ -48,22 +56,23 @@
 @class vitaadmin_VC_Calendar_C_ShiftTableManager_C_ShiftTableSource;
 @class vitaadmin_VC_ShowNotifications_C_NotificationsTableDelegate;
 @class vitaadmin_VC_Users_C_UsersTableDelegate;
+@class vitaadmin_VC_CheckSignUps_C_WorkItemsTableSource;
 @class vitaadmin_VC_Calendar_C_CalendarEntryTableManager_C_CalendarEntryTableDelegate;
 @class vitaadmin_VC_Calendar_C_ShiftTableManager_C_ShiftTableDelegate;
 @class __UIGestureRecognizerToken;
 @class __UIGestureRecognizerParameterlessToken;
 @class __UIGestureRecognizerParametrizedToken;
-@class __NSObject_Disposer;
-@class __UILongPressGestureRecognizer;
-@class __UIPanGestureRecognizer;
-@class UIKit_UIBarButtonItem_Callback;
 @class __UIRotationGestureRecognizer;
+@class __UILongPressGestureRecognizer;
 @class __UITapGestureRecognizer;
+@class __UIPanGestureRecognizer;
 @class __UIPinchGestureRecognizer;
 @class __UISwipeGestureRecognizer;
 @class __UIScreenEdgePanGestureRecognizer;
+@class UIKit_UIBarButtonItem_Callback;
 @class UIKit_UIScrollView__UIScrollViewDelegate;
 @class UIKit_UITextView__UITextViewDelegate;
+@class __NSObject_Disposer;
 
 @protocol UIPickerViewModel<UIPickerViewDataSource, UIPickerViewDelegate>
 @end
@@ -123,6 +132,18 @@
 	-(BOOL) conformsToProtocol:(void *)p0;
 @end
 
+@interface zsquared_C_UserPicker_C_PickerDataModel : NSObject<UIPickerViewModel> {
+}
+	-(void) release;
+	-(id) retain;
+	-(int) xamarinGetGCHandle;
+	-(void) xamarinSetGCHandle: (int) gchandle;
+	-(NSInteger) pickerView:(UIPickerView *)p0 numberOfRowsInComponent:(NSInteger)p1;
+	-(NSInteger) numberOfComponentsInPickerView:(UIPickerView *)p0;
+	-(NSString *) pickerView:(UIPickerView *)p0 titleForRow:(NSInteger)p1 forComponent:(NSInteger)p2;
+	-(BOOL) conformsToProtocol:(void *)p0;
+@end
+
 @interface ViewController : UIViewController {
 }
 	@property (nonatomic, assign) UIActivityIndicatorView * AI_Spinner;
@@ -149,10 +170,12 @@
 @interface VC_Main : UIViewController {
 }
 	@property (nonatomic, assign) UIButton * B_Back;
+	@property (nonatomic, assign) UIButton * B_CheckSignUps;
 	@property (nonatomic, assign) UIButton * B_Config;
 	@property (nonatomic, assign) UIButton * B_EmailToUsers;
 	@property (nonatomic, assign) UIButton * B_Messages;
 	@property (nonatomic, assign) UIButton * B_Notifications;
+	@property (nonatomic, assign) UIButton * B_OpenSites;
 	@property (nonatomic, assign) UIButton * B_Sites;
 	@property (nonatomic, assign) UIButton * B_Suggestions;
 	@property (nonatomic, assign) UIButton * B_Users;
@@ -163,6 +186,8 @@
 	-(void) xamarinSetGCHandle: (int) gchandle;
 	-(UIButton *) B_Back;
 	-(void) setB_Back:(UIButton *)p0;
+	-(UIButton *) B_CheckSignUps;
+	-(void) setB_CheckSignUps:(UIButton *)p0;
 	-(UIButton *) B_Config;
 	-(void) setB_Config:(UIButton *)p0;
 	-(UIButton *) B_EmailToUsers;
@@ -171,6 +196,8 @@
 	-(void) setB_Messages:(UIButton *)p0;
 	-(UIButton *) B_Notifications;
 	-(void) setB_Notifications:(UIButton *)p0;
+	-(UIButton *) B_OpenSites;
+	-(void) setB_OpenSites:(UIButton *)p0;
 	-(UIButton *) B_Sites;
 	-(void) setB_Sites:(UIButton *)p0;
 	-(UIButton *) B_Suggestions;
@@ -320,7 +347,7 @@
 	-(BOOL) conformsToProtocol:(void *)p0;
 @end
 
-@interface vitaadmin_VC_Sites_SiteCoordinatorPickerModel : NSObject<UIPickerViewModel> {
+@interface vitaadmin_VC_Sites_C_SiteCoordinatorPickerModel : NSObject<UIPickerViewModel> {
 }
 	-(void) release;
 	-(id) retain;
@@ -347,32 +374,8 @@
 }
 	@property (nonatomic, assign) UIActivityIndicatorView * AI_Busy;
 	@property (nonatomic, assign) UIButton * B_Back;
-	@property (nonatomic, assign) UIButton * B_Calendar;
 	@property (nonatomic, assign) UIButton * B_CreateNewSite;
-	@property (nonatomic, assign) UIButton * B_InitCalendar;
 	@property (nonatomic, assign) UIButton * B_Refresh;
-	@property (nonatomic, assign) UIButton * B_SaveChanges;
-	@property (nonatomic, assign) UIButton * B_WorkItems;
-	@property (nonatomic, assign) UILabel * L_Slug;
-	@property (nonatomic, assign) UISwitch * SW_Accepting;
-	@property (nonatomic, assign) UISwitch * SW_AtLimit;
-	@property (nonatomic, assign) UISwitch * SW_Closed;
-	@property (nonatomic, assign) UISwitch * SW_DropOff;
-	@property (nonatomic, assign) UISwitch * SW_Express;
-	@property (nonatomic, assign) UISwitch * SW_MFT;
-	@property (nonatomic, assign) UISwitch * SW_NearLimit;
-	@property (nonatomic, assign) UITextField * TB_Backup;
-	@property (nonatomic, assign) UITextField * TB_City;
-	@property (nonatomic, assign) UITextField * TB_Latitude;
-	@property (nonatomic, assign) UITextField * TB_Longitude;
-	@property (nonatomic, assign) UITextField * TB_PlaceID;
-	@property (nonatomic, assign) UITextField * TB_Primary;
-	@property (nonatomic, assign) UITextField * TB_SeasonEnd;
-	@property (nonatomic, assign) UITextField * TB_SeasonStart;
-	@property (nonatomic, assign) UITextField * TB_SiteName;
-	@property (nonatomic, assign) UITextField * TB_State;
-	@property (nonatomic, assign) UITextField * TB_Street;
-	@property (nonatomic, assign) UITextField * TB_Zip;
 	@property (nonatomic, assign) UITableView * TV_Sites;
 	-(void) release;
 	-(id) retain;
@@ -382,58 +385,10 @@
 	-(void) setAI_Busy:(UIActivityIndicatorView *)p0;
 	-(UIButton *) B_Back;
 	-(void) setB_Back:(UIButton *)p0;
-	-(UIButton *) B_Calendar;
-	-(void) setB_Calendar:(UIButton *)p0;
 	-(UIButton *) B_CreateNewSite;
 	-(void) setB_CreateNewSite:(UIButton *)p0;
-	-(UIButton *) B_InitCalendar;
-	-(void) setB_InitCalendar:(UIButton *)p0;
 	-(UIButton *) B_Refresh;
 	-(void) setB_Refresh:(UIButton *)p0;
-	-(UIButton *) B_SaveChanges;
-	-(void) setB_SaveChanges:(UIButton *)p0;
-	-(UIButton *) B_WorkItems;
-	-(void) setB_WorkItems:(UIButton *)p0;
-	-(UILabel *) L_Slug;
-	-(void) setL_Slug:(UILabel *)p0;
-	-(UISwitch *) SW_Accepting;
-	-(void) setSW_Accepting:(UISwitch *)p0;
-	-(UISwitch *) SW_AtLimit;
-	-(void) setSW_AtLimit:(UISwitch *)p0;
-	-(UISwitch *) SW_Closed;
-	-(void) setSW_Closed:(UISwitch *)p0;
-	-(UISwitch *) SW_DropOff;
-	-(void) setSW_DropOff:(UISwitch *)p0;
-	-(UISwitch *) SW_Express;
-	-(void) setSW_Express:(UISwitch *)p0;
-	-(UISwitch *) SW_MFT;
-	-(void) setSW_MFT:(UISwitch *)p0;
-	-(UISwitch *) SW_NearLimit;
-	-(void) setSW_NearLimit:(UISwitch *)p0;
-	-(UITextField *) TB_Backup;
-	-(void) setTB_Backup:(UITextField *)p0;
-	-(UITextField *) TB_City;
-	-(void) setTB_City:(UITextField *)p0;
-	-(UITextField *) TB_Latitude;
-	-(void) setTB_Latitude:(UITextField *)p0;
-	-(UITextField *) TB_Longitude;
-	-(void) setTB_Longitude:(UITextField *)p0;
-	-(UITextField *) TB_PlaceID;
-	-(void) setTB_PlaceID:(UITextField *)p0;
-	-(UITextField *) TB_Primary;
-	-(void) setTB_Primary:(UITextField *)p0;
-	-(UITextField *) TB_SeasonEnd;
-	-(void) setTB_SeasonEnd:(UITextField *)p0;
-	-(UITextField *) TB_SeasonStart;
-	-(void) setTB_SeasonStart:(UITextField *)p0;
-	-(UITextField *) TB_SiteName;
-	-(void) setTB_SiteName:(UITextField *)p0;
-	-(UITextField *) TB_State;
-	-(void) setTB_State:(UITextField *)p0;
-	-(UITextField *) TB_Street;
-	-(void) setTB_Street:(UITextField *)p0;
-	-(UITextField *) TB_Zip;
-	-(void) setTB_Zip:(UITextField *)p0;
 	-(UITableView *) TV_Sites;
 	-(void) setTV_Sites:(UITableView *)p0;
 	-(void) viewDidLoad;
@@ -443,15 +398,23 @@
 @interface VC_Calendar : UIViewController {
 }
 	@property (nonatomic, assign) UIActivityIndicatorView * AI_Busy;
-	@property (nonatomic, assign) UIButton * B_ApplyPattern;
 	@property (nonatomic, assign) UIButton * B_Back;
 	@property (nonatomic, assign) UIButton * B_ExcNewShift;
 	@property (nonatomic, assign) UIButton * B_ExcSave;
 	@property (nonatomic, assign) UIButton * B_NewException;
+	@property (nonatomic, assign) UILabel * L_Advanced;
+	@property (nonatomic, assign) UILabel * L_Basic;
+	@property (nonatomic, assign) UILabel * L_CalendarEntryFor;
+	@property (nonatomic, assign) UILabel * L_Close;
+	@property (nonatomic, assign) UILabel * L_DeleteShift;
 	@property (nonatomic, assign) UILabel * L_ExcSite;
+	@property (nonatomic, assign) UILabel * L_Open;
+	@property (nonatomic, assign) UILabel * L_ShiftDetails;
+	@property (nonatomic, assign) UILabel * L_Shifts;
+	@property (nonatomic, assign) UILabel * L_SiteIsOpen;
+	@property (nonatomic, assign) UILabel * L_UsersOnShift;
 	@property (nonatomic, assign) UISwitch * SW_ExcIsOpen;
 	@property (nonatomic, assign) UITextField * TB_DateForCalendarEntry;
-	@property (nonatomic, assign) UITextField * TB_DayOfWeek;
 	@property (nonatomic, assign) UITextField * TB_ExcAdvShift;
 	@property (nonatomic, assign) UITextField * TB_ExcBasicShift;
 	@property (nonatomic, assign) UITextField * TB_ExcCloseShift;
@@ -465,8 +428,6 @@
 	-(void) xamarinSetGCHandle: (int) gchandle;
 	-(UIActivityIndicatorView *) AI_Busy;
 	-(void) setAI_Busy:(UIActivityIndicatorView *)p0;
-	-(UIButton *) B_ApplyPattern;
-	-(void) setB_ApplyPattern:(UIButton *)p0;
 	-(UIButton *) B_Back;
 	-(void) setB_Back:(UIButton *)p0;
 	-(UIButton *) B_ExcNewShift;
@@ -475,14 +436,32 @@
 	-(void) setB_ExcSave:(UIButton *)p0;
 	-(UIButton *) B_NewException;
 	-(void) setB_NewException:(UIButton *)p0;
+	-(UILabel *) L_Advanced;
+	-(void) setL_Advanced:(UILabel *)p0;
+	-(UILabel *) L_Basic;
+	-(void) setL_Basic:(UILabel *)p0;
+	-(UILabel *) L_CalendarEntryFor;
+	-(void) setL_CalendarEntryFor:(UILabel *)p0;
+	-(UILabel *) L_Close;
+	-(void) setL_Close:(UILabel *)p0;
+	-(UILabel *) L_DeleteShift;
+	-(void) setL_DeleteShift:(UILabel *)p0;
 	-(UILabel *) L_ExcSite;
 	-(void) setL_ExcSite:(UILabel *)p0;
+	-(UILabel *) L_Open;
+	-(void) setL_Open:(UILabel *)p0;
+	-(UILabel *) L_ShiftDetails;
+	-(void) setL_ShiftDetails:(UILabel *)p0;
+	-(UILabel *) L_Shifts;
+	-(void) setL_Shifts:(UILabel *)p0;
+	-(UILabel *) L_SiteIsOpen;
+	-(void) setL_SiteIsOpen:(UILabel *)p0;
+	-(UILabel *) L_UsersOnShift;
+	-(void) setL_UsersOnShift:(UILabel *)p0;
 	-(UISwitch *) SW_ExcIsOpen;
 	-(void) setSW_ExcIsOpen:(UISwitch *)p0;
 	-(UITextField *) TB_DateForCalendarEntry;
 	-(void) setTB_DateForCalendarEntry:(UITextField *)p0;
-	-(UITextField *) TB_DayOfWeek;
-	-(void) setTB_DayOfWeek:(UITextField *)p0;
 	-(UITextField *) TB_ExcAdvShift;
 	-(void) setTB_ExcAdvShift:(UITextField *)p0;
 	-(UITextField *) TB_ExcBasicShift;
@@ -570,19 +549,7 @@
 }
 	@property (nonatomic, assign) UIActivityIndicatorView * AI_Busy;
 	@property (nonatomic, assign) UIButton * B_Back;
-	@property (nonatomic, assign) UIButton * B_SaveUserDetails;
-	@property (nonatomic, assign) UIButton * B_UpdatePassword;
-	@property (nonatomic, assign) UIButton * B_ViewSignUps;
-	@property (nonatomic, assign) UISegmentedControl * SC_Certification;
-	@property (nonatomic, assign) UISwitch * SW_Administrator;
-	@property (nonatomic, assign) UISwitch * SW_NewUser;
-	@property (nonatomic, assign) UISwitch * SW_SiteCoordinator;
-	@property (nonatomic, assign) UISwitch * SW_Volunteer;
-	@property (nonatomic, assign) UITextField * TB_Email;
-	@property (nonatomic, assign) UITextField * TB_Name;
-	@property (nonatomic, assign) UITextField * TB_Password1;
-	@property (nonatomic, assign) UITextField * TB_Password2;
-	@property (nonatomic, assign) UITextField * TB_Phone;
+	@property (nonatomic, assign) UILabel * L_UsersData;
 	@property (nonatomic, assign) UITableView * TV_Users;
 	-(void) release;
 	-(id) retain;
@@ -592,32 +559,8 @@
 	-(void) setAI_Busy:(UIActivityIndicatorView *)p0;
 	-(UIButton *) B_Back;
 	-(void) setB_Back:(UIButton *)p0;
-	-(UIButton *) B_SaveUserDetails;
-	-(void) setB_SaveUserDetails:(UIButton *)p0;
-	-(UIButton *) B_UpdatePassword;
-	-(void) setB_UpdatePassword:(UIButton *)p0;
-	-(UIButton *) B_ViewSignUps;
-	-(void) setB_ViewSignUps:(UIButton *)p0;
-	-(UISegmentedControl *) SC_Certification;
-	-(void) setSC_Certification:(UISegmentedControl *)p0;
-	-(UISwitch *) SW_Administrator;
-	-(void) setSW_Administrator:(UISwitch *)p0;
-	-(UISwitch *) SW_NewUser;
-	-(void) setSW_NewUser:(UISwitch *)p0;
-	-(UISwitch *) SW_SiteCoordinator;
-	-(void) setSW_SiteCoordinator:(UISwitch *)p0;
-	-(UISwitch *) SW_Volunteer;
-	-(void) setSW_Volunteer:(UISwitch *)p0;
-	-(UITextField *) TB_Email;
-	-(void) setTB_Email:(UITextField *)p0;
-	-(UITextField *) TB_Name;
-	-(void) setTB_Name:(UITextField *)p0;
-	-(UITextField *) TB_Password1;
-	-(void) setTB_Password1:(UITextField *)p0;
-	-(UITextField *) TB_Password2;
-	-(void) setTB_Password2:(UITextField *)p0;
-	-(UITextField *) TB_Phone;
-	-(void) setTB_Phone:(UITextField *)p0;
+	-(UILabel *) L_UsersData;
+	-(void) setL_UsersData:(UILabel *)p0;
 	-(UITableView *) TV_Users;
 	-(void) setTV_Users:(UITableView *)p0;
 	-(void) viewDidLoad;
@@ -665,6 +608,244 @@
 	-(void) setL_SitesJsonURL:(UILabel *)p0;
 	-(UITableView *) TV_Versions;
 	-(void) setTV_Versions:(UITableView *)p0;
+	-(void) viewDidLoad;
+	-(BOOL) conformsToProtocol:(void *)p0;
+@end
+
+@interface VC_Site : UIViewController {
+}
+	@property (nonatomic, assign) UIActivityIndicatorView * AI_Busy;
+	@property (nonatomic, assign) UIButton * B_Back;
+	@property (nonatomic, assign) UIButton * B_Calendar;
+	@property (nonatomic, assign) UIButton * B_SaveChanges;
+	@property (nonatomic, assign) UIButton * B_WorkItems;
+	@property (nonatomic, assign) UILabel * L_Slug;
+	@property (nonatomic, assign) UISwitch * SW_Accepting;
+	@property (nonatomic, assign) UISwitch * SW_AtLimit;
+	@property (nonatomic, assign) UISwitch * SW_Closed;
+	@property (nonatomic, assign) UISwitch * SW_DropOff;
+	@property (nonatomic, assign) UISwitch * SW_Express;
+	@property (nonatomic, assign) UISwitch * SW_MFT;
+	@property (nonatomic, assign) UISwitch * SW_NearLimit;
+	@property (nonatomic, assign) UITextField * TB_Backup;
+	@property (nonatomic, assign) UITextField * TB_City;
+	@property (nonatomic, assign) UITextField * TB_Latitude;
+	@property (nonatomic, assign) UITextField * TB_Longitude;
+	@property (nonatomic, assign) UITextField * TB_PlaceID;
+	@property (nonatomic, assign) UITextField * TB_Primary;
+	@property (nonatomic, assign) UITextField * TB_SeasonEnd;
+	@property (nonatomic, assign) UITextField * TB_SeasonStart;
+	@property (nonatomic, assign) UITextField * TB_SiteName;
+	@property (nonatomic, assign) UITextField * TB_State;
+	@property (nonatomic, assign) UITextField * TB_Street;
+	@property (nonatomic, assign) UITextField * TB_Zip;
+	-(void) release;
+	-(id) retain;
+	-(int) xamarinGetGCHandle;
+	-(void) xamarinSetGCHandle: (int) gchandle;
+	-(UIActivityIndicatorView *) AI_Busy;
+	-(void) setAI_Busy:(UIActivityIndicatorView *)p0;
+	-(UIButton *) B_Back;
+	-(void) setB_Back:(UIButton *)p0;
+	-(UIButton *) B_Calendar;
+	-(void) setB_Calendar:(UIButton *)p0;
+	-(UIButton *) B_SaveChanges;
+	-(void) setB_SaveChanges:(UIButton *)p0;
+	-(UIButton *) B_WorkItems;
+	-(void) setB_WorkItems:(UIButton *)p0;
+	-(UILabel *) L_Slug;
+	-(void) setL_Slug:(UILabel *)p0;
+	-(UISwitch *) SW_Accepting;
+	-(void) setSW_Accepting:(UISwitch *)p0;
+	-(UISwitch *) SW_AtLimit;
+	-(void) setSW_AtLimit:(UISwitch *)p0;
+	-(UISwitch *) SW_Closed;
+	-(void) setSW_Closed:(UISwitch *)p0;
+	-(UISwitch *) SW_DropOff;
+	-(void) setSW_DropOff:(UISwitch *)p0;
+	-(UISwitch *) SW_Express;
+	-(void) setSW_Express:(UISwitch *)p0;
+	-(UISwitch *) SW_MFT;
+	-(void) setSW_MFT:(UISwitch *)p0;
+	-(UISwitch *) SW_NearLimit;
+	-(void) setSW_NearLimit:(UISwitch *)p0;
+	-(UITextField *) TB_Backup;
+	-(void) setTB_Backup:(UITextField *)p0;
+	-(UITextField *) TB_City;
+	-(void) setTB_City:(UITextField *)p0;
+	-(UITextField *) TB_Latitude;
+	-(void) setTB_Latitude:(UITextField *)p0;
+	-(UITextField *) TB_Longitude;
+	-(void) setTB_Longitude:(UITextField *)p0;
+	-(UITextField *) TB_PlaceID;
+	-(void) setTB_PlaceID:(UITextField *)p0;
+	-(UITextField *) TB_Primary;
+	-(void) setTB_Primary:(UITextField *)p0;
+	-(UITextField *) TB_SeasonEnd;
+	-(void) setTB_SeasonEnd:(UITextField *)p0;
+	-(UITextField *) TB_SeasonStart;
+	-(void) setTB_SeasonStart:(UITextField *)p0;
+	-(UITextField *) TB_SiteName;
+	-(void) setTB_SiteName:(UITextField *)p0;
+	-(UITextField *) TB_State;
+	-(void) setTB_State:(UITextField *)p0;
+	-(UITextField *) TB_Street;
+	-(void) setTB_Street:(UITextField *)p0;
+	-(UITextField *) TB_Zip;
+	-(void) setTB_Zip:(UITextField *)p0;
+	-(void) viewDidLoad;
+	-(void) viewDidAppear:(BOOL)p0;
+	-(BOOL) conformsToProtocol:(void *)p0;
+@end
+
+@interface vitaadmin_VC_User_C_WorkItemsTableSource : NSObject<UIScrollViewDelegate> {
+}
+	-(void) release;
+	-(id) retain;
+	-(int) xamarinGetGCHandle;
+	-(void) xamarinSetGCHandle: (int) gchandle;
+	-(NSInteger) tableView:(UITableView *)p0 numberOfRowsInSection:(NSInteger)p1;
+	-(UITableViewCell *) tableView:(UITableView *)p0 cellForRowAtIndexPath:(NSIndexPath *)p1;
+	-(BOOL) conformsToProtocol:(void *)p0;
+@end
+
+@interface vitaadmin_VC_User_C_SiteNamesTableSource : NSObject<UIScrollViewDelegate> {
+}
+	-(void) release;
+	-(id) retain;
+	-(int) xamarinGetGCHandle;
+	-(void) xamarinSetGCHandle: (int) gchandle;
+	-(NSInteger) tableView:(UITableView *)p0 numberOfRowsInSection:(NSInteger)p1;
+	-(UITableViewCell *) tableView:(UITableView *)p0 cellForRowAtIndexPath:(NSIndexPath *)p1;
+	-(BOOL) conformsToProtocol:(void *)p0;
+@end
+
+@interface VC_User : UIViewController {
+}
+	@property (nonatomic, assign) UIActivityIndicatorView * AI_Busy;
+	@property (nonatomic, assign) UIButton * B_Back;
+	@property (nonatomic, assign) UIButton * B_SaveUserDetails;
+	@property (nonatomic, assign) UIButton * B_ViewSignups;
+	@property (nonatomic, assign) UILabel * L_SignUps;
+	@property (nonatomic, assign) UISegmentedControl * SC_Certification;
+	@property (nonatomic, assign) UISwitch * SW_Administrator;
+	@property (nonatomic, assign) UISwitch * SW_CertificationChanged;
+	@property (nonatomic, assign) UISwitch * SW_EmailChanged;
+	@property (nonatomic, assign) UISwitch * SW_NameChanged;
+	@property (nonatomic, assign) UISwitch * SW_NewUser;
+	@property (nonatomic, assign) UISwitch * SW_PasswordChanged;
+	@property (nonatomic, assign) UISwitch * SW_PhoneChanged;
+	@property (nonatomic, assign) UISwitch * SW_RolesChanged;
+	@property (nonatomic, assign) UISwitch * SW_SiteCoordinator;
+	@property (nonatomic, assign) UISwitch * SW_Volunteer;
+	@property (nonatomic, assign) UITextField * TB_Email;
+	@property (nonatomic, assign) UITextField * TB_Name;
+	@property (nonatomic, assign) UITextField * TB_Password1;
+	@property (nonatomic, assign) UITextField * TB_Password2;
+	@property (nonatomic, assign) UITextField * TB_Phone;
+	@property (nonatomic, assign) UITableView * TV_SignUps;
+	-(void) release;
+	-(id) retain;
+	-(int) xamarinGetGCHandle;
+	-(void) xamarinSetGCHandle: (int) gchandle;
+	-(UIActivityIndicatorView *) AI_Busy;
+	-(void) setAI_Busy:(UIActivityIndicatorView *)p0;
+	-(UIButton *) B_Back;
+	-(void) setB_Back:(UIButton *)p0;
+	-(UIButton *) B_SaveUserDetails;
+	-(void) setB_SaveUserDetails:(UIButton *)p0;
+	-(UIButton *) B_ViewSignups;
+	-(void) setB_ViewSignups:(UIButton *)p0;
+	-(UILabel *) L_SignUps;
+	-(void) setL_SignUps:(UILabel *)p0;
+	-(UISegmentedControl *) SC_Certification;
+	-(void) setSC_Certification:(UISegmentedControl *)p0;
+	-(UISwitch *) SW_Administrator;
+	-(void) setSW_Administrator:(UISwitch *)p0;
+	-(UISwitch *) SW_CertificationChanged;
+	-(void) setSW_CertificationChanged:(UISwitch *)p0;
+	-(UISwitch *) SW_EmailChanged;
+	-(void) setSW_EmailChanged:(UISwitch *)p0;
+	-(UISwitch *) SW_NameChanged;
+	-(void) setSW_NameChanged:(UISwitch *)p0;
+	-(UISwitch *) SW_NewUser;
+	-(void) setSW_NewUser:(UISwitch *)p0;
+	-(UISwitch *) SW_PasswordChanged;
+	-(void) setSW_PasswordChanged:(UISwitch *)p0;
+	-(UISwitch *) SW_PhoneChanged;
+	-(void) setSW_PhoneChanged:(UISwitch *)p0;
+	-(UISwitch *) SW_RolesChanged;
+	-(void) setSW_RolesChanged:(UISwitch *)p0;
+	-(UISwitch *) SW_SiteCoordinator;
+	-(void) setSW_SiteCoordinator:(UISwitch *)p0;
+	-(UISwitch *) SW_Volunteer;
+	-(void) setSW_Volunteer:(UISwitch *)p0;
+	-(UITextField *) TB_Email;
+	-(void) setTB_Email:(UITextField *)p0;
+	-(UITextField *) TB_Name;
+	-(void) setTB_Name:(UITextField *)p0;
+	-(UITextField *) TB_Password1;
+	-(void) setTB_Password1:(UITextField *)p0;
+	-(UITextField *) TB_Password2;
+	-(void) setTB_Password2:(UITextField *)p0;
+	-(UITextField *) TB_Phone;
+	-(void) setTB_Phone:(UITextField *)p0;
+	-(UITableView *) TV_SignUps;
+	-(void) setTV_SignUps:(UITableView *)p0;
+	-(void) viewDidLoad;
+	-(BOOL) conformsToProtocol:(void *)p0;
+@end
+
+@interface VC_CheckSignUps : UIViewController {
+}
+	@property (nonatomic, assign) UIActivityIndicatorView * AI_Busy;
+	@property (nonatomic, assign) UIButton * B_Back;
+	@property (nonatomic, assign) UITableView * TV_SignUps;
+	-(void) release;
+	-(id) retain;
+	-(int) xamarinGetGCHandle;
+	-(void) xamarinSetGCHandle: (int) gchandle;
+	-(UIActivityIndicatorView *) AI_Busy;
+	-(void) setAI_Busy:(UIActivityIndicatorView *)p0;
+	-(UIButton *) B_Back;
+	-(void) setB_Back:(UIButton *)p0;
+	-(UITableView *) TV_SignUps;
+	-(void) setTV_SignUps:(UITableView *)p0;
+	-(void) viewDidLoad;
+	-(BOOL) conformsToProtocol:(void *)p0;
+@end
+
+@interface vitaadmin_VC_OpenSites_C_OpenSitesTableSource : NSObject<UIScrollViewDelegate> {
+}
+	-(void) release;
+	-(id) retain;
+	-(int) xamarinGetGCHandle;
+	-(void) xamarinSetGCHandle: (int) gchandle;
+	-(NSInteger) numberOfSectionsInTableView:(UITableView *)p0;
+	-(NSInteger) tableView:(UITableView *)p0 numberOfRowsInSection:(NSInteger)p1;
+	-(NSString *) tableView:(UITableView *)p0 titleForHeaderInSection:(NSInteger)p1;
+	-(UITableViewCell *) tableView:(UITableView *)p0 cellForRowAtIndexPath:(NSIndexPath *)p1;
+	-(BOOL) conformsToProtocol:(void *)p0;
+@end
+
+@interface VC_OpenSites : UIViewController {
+}
+	@property (nonatomic, assign) UIActivityIndicatorView * AI_Busy;
+	@property (nonatomic, assign) UIButton * B_Back;
+	@property (nonatomic, assign) UITextField * TB_Date;
+	@property (nonatomic, assign) UITableView * TV_Sites;
+	-(void) release;
+	-(id) retain;
+	-(int) xamarinGetGCHandle;
+	-(void) xamarinSetGCHandle: (int) gchandle;
+	-(UIActivityIndicatorView *) AI_Busy;
+	-(void) setAI_Busy:(UIActivityIndicatorView *)p0;
+	-(UIButton *) B_Back;
+	-(void) setB_Back:(UIButton *)p0;
+	-(UITextField *) TB_Date;
+	-(void) setTB_Date:(UITextField *)p0;
+	-(UITableView *) TV_Sites;
+	-(void) setTV_Sites:(UITableView *)p0;
 	-(void) viewDidLoad;
 	-(BOOL) conformsToProtocol:(void *)p0;
 @end
@@ -721,7 +902,6 @@
 	-(void) xamarinSetGCHandle: (int) gchandle;
 	-(NSInteger) tableView:(UITableView *)p0 numberOfRowsInSection:(NSInteger)p1;
 	-(UITableViewCell *) tableView:(UITableView *)p0 cellForRowAtIndexPath:(NSIndexPath *)p1;
-	-(void) tableView:(UITableView *)p0 didSelectRowAtIndexPath:(NSIndexPath *)p1;
 	-(BOOL) conformsToProtocol:(void *)p0;
 @end
 
@@ -757,6 +937,17 @@
 	-(NSArray *) tableView:(UITableView *)p0 editActionsForRowAtIndexPath:(NSIndexPath *)p1;
 	-(void) tableView:(UITableView *)p0 didDeselectRowAtIndexPath:(NSIndexPath *)p1;
 	-(void) tableView:(UITableView *)p0 didSelectRowAtIndexPath:(NSIndexPath *)p1;
+	-(BOOL) conformsToProtocol:(void *)p0;
+@end
+
+@interface vitaadmin_VC_CheckSignUps_C_WorkItemsTableSource : NSObject<UIScrollViewDelegate> {
+}
+	-(void) release;
+	-(id) retain;
+	-(int) xamarinGetGCHandle;
+	-(void) xamarinSetGCHandle: (int) gchandle;
+	-(NSInteger) tableView:(UITableView *)p0 numberOfRowsInSection:(NSInteger)p1;
+	-(UITableViewCell *) tableView:(UITableView *)p0 cellForRowAtIndexPath:(NSIndexPath *)p1;
 	-(BOOL) conformsToProtocol:(void *)p0;
 @end
 

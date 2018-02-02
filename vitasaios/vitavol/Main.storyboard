@@ -816,13 +816,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fully staffed." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="10901">
-                                <rect key="frame" x="68" y="484.5" width="98" height="21"/>
+                                <rect key="frame" x="68" y="484" width="197" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                                 <constraints>
-                                    <constraint id="726718" firstItem="10901" firstAttribute="width" constant="98"/>
                                     <constraint id="726719" firstItem="10901" firstAttribute="height" constant="21"/>
+                                    <constraint id="888188" firstItem="10901" firstAttribute="width" constant="197"/>
                                 </constraints>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select Date" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" translatesAutoresizingMaskIntoConstraints="NO" id="15585" minimumScaleFactor="0.5">
@@ -2367,7 +2367,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="317318">
-                                <rect key="frame" x="37" y="116" width="301" height="327"/>
+                                <rect key="frame" x="21" y="116" width="333" height="327"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="317361">
                                     <size key="itemSize" width="50" height="50"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -2782,8 +2782,6 @@
                             <constraint id="826717" firstItem="76496" firstAttribute="leading" secondItem="76521" secondAttribute="trailing" constant="13"/>
                             <constraint id="826718" firstItem="76495" firstAttribute="leading" secondItem="76496" secondAttribute="trailing" constant="13"/>
                             <constraint id="826719" firstItem="317318" firstAttribute="top" secondItem="76496" secondAttribute="bottom" constant="22"/>
-                            <constraint id="826720" firstItem="317318" firstAttribute="leading" secondItem="56311" secondAttribute="leadingMargin" constant="21"/>
-                            <constraint id="826721" firstItem="56311" firstAttribute="trailingMargin" secondItem="317318" secondAttribute="trailing" constant="21"/>
                             <constraint id="826722" firstItem="56308" firstAttribute="top" secondItem="317318" secondAttribute="bottom" constant="224"/>
                             <constraint id="826723" firstItem="329037" firstAttribute="top" secondItem="317318" secondAttribute="bottom" constant="22"/>
                             <constraint id="826724" firstItem="329037" firstAttribute="leading" secondItem="56311" secondAttribute="leadingMargin" constant="16"/>
@@ -2793,6 +2791,8 @@
                             <constraint id="826732" firstItem="329040" firstAttribute="leading" secondItem="329037" secondAttribute="trailing" constant="10"/>
                             <constraint id="826733" firstItem="329052" firstAttribute="top" secondItem="329049" secondAttribute="top" constant="4"/>
                             <constraint id="826734" firstItem="329052" firstAttribute="leading" secondItem="329049" secondAttribute="trailing" constant="10"/>
+                            <constraint id="890391" firstItem="317318" firstAttribute="leading" secondItem="56311" secondAttribute="leadingMargin" constant="5"/>
+                            <constraint id="890392" firstItem="56311" firstAttribute="trailingMargin" secondItem="317318" secondAttribute="trailing" constant="5"/>
                         </constraints>
                     </view>
                     <connections>
@@ -3256,7 +3256,7 @@
                                 </constraints>
                             </button>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="529738">
-                                <rect key="frame" x="37" y="117" width="301" height="327"/>
+                                <rect key="frame" x="21" y="117" width="333" height="327"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="529781">
                                     <size key="itemSize" width="50" height="50"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -3680,8 +3680,6 @@
                             <constraint id="807518" firstItem="529734" firstAttribute="leading" secondItem="529731" secondAttribute="trailing" constant="8"/>
                             <constraint id="807519" firstItem="529735" firstAttribute="leading" secondItem="529734" secondAttribute="trailing" constant="8"/>
                             <constraint id="808403" firstItem="529738" firstAttribute="top" secondItem="529731" secondAttribute="bottom" constant="14"/>
-                            <constraint id="808404" firstItem="529738" firstAttribute="leading" secondItem="529716" secondAttribute="leadingMargin" constant="21"/>
-                            <constraint id="808405" firstItem="529716" firstAttribute="trailingMargin" secondItem="529738" secondAttribute="trailing" constant="21"/>
                             <constraint id="808406" firstItem="529716" firstAttribute="bottom" secondItem="529738" secondAttribute="bottom" constant="223"/>
                             <constraint id="808407" firstItem="529785" firstAttribute="top" secondItem="529738" secondAttribute="bottom" constant="25"/>
                             <constraint id="808408" firstItem="529785" firstAttribute="leading" secondItem="529716" secondAttribute="leadingMargin" constant="5"/>
@@ -3699,6 +3697,8 @@
                             <constraint id="808430" firstItem="529791" firstAttribute="leading" secondItem="529793" secondAttribute="trailing" constant="8"/>
                             <constraint id="808431" firstItem="529795" firstAttribute="top" secondItem="529794" secondAttribute="top" constant="4"/>
                             <constraint id="808432" firstItem="529795" firstAttribute="leading" secondItem="529794" secondAttribute="trailing" constant="8"/>
+                            <constraint id="890389" firstItem="529738" firstAttribute="leading" secondItem="529716" secondAttribute="leadingMargin" constant="5"/>
+                            <constraint id="890390" firstItem="529716" firstAttribute="trailingMargin" secondItem="529738" secondAttribute="trailing" constant="5"/>
                         </constraints>
                     </view>
                     <connections>

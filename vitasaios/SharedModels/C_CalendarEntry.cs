@@ -88,5 +88,7 @@ namespace zsquared
             string res = jb.ToString();
             return res;
 		}
-	}
+
+        public static int CompareByDate(C_CalendarEntry ce1, C_CalendarEntry ce2) => ce1.Date.CompareTo(ce2.Date);
+    }
 }

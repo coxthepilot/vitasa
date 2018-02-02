@@ -21,6 +21,16 @@
       <Optimize>false</Optimize>
       <OriginalItemSpec>obj/iPhone/Debug/device-builds/ipad5.4-11.2.1/ibtool-link/Main.storyboardc</OriginalItemSpec>
     </_BundleResourceWithLogicalName>
+    <_BundleResourceWithLogicalName Include="obj/iPhone/Debug/device-builds/ipad5.4-11.2.1/ibtool-link/Main.storyboardc/110382-view-110383.nib/objects-11.0+.nib">
+      <LogicalName>Main.storyboardc/110382-view-110383.nib/objects-11.0+.nib</LogicalName>
+      <Optimize>false</Optimize>
+      <OriginalItemSpec>obj/iPhone/Debug/device-builds/ipad5.4-11.2.1/ibtool-link/Main.storyboardc</OriginalItemSpec>
+    </_BundleResourceWithLogicalName>
+    <_BundleResourceWithLogicalName Include="obj/iPhone/Debug/device-builds/ipad5.4-11.2.1/ibtool-link/Main.storyboardc/110382-view-110383.nib/runtime.nib">
+      <LogicalName>Main.storyboardc/110382-view-110383.nib/runtime.nib</LogicalName>
+      <Optimize>false</Optimize>
+      <OriginalItemSpec>obj/iPhone/Debug/device-builds/ipad5.4-11.2.1/ibtool-link/Main.storyboardc</OriginalItemSpec>
+    </_BundleResourceWithLogicalName>
     <_BundleResourceWithLogicalName Include="obj/iPhone/Debug/device-builds/ipad5.4-11.2.1/ibtool-link/Main.storyboardc/11145-view-11146.nib/objects-11.0+.nib">
       <LogicalName>Main.storyboardc/11145-view-11146.nib/objects-11.0+.nib</LogicalName>
       <Optimize>false</Optimize>
@@ -101,6 +111,16 @@
       <Optimize>false</Optimize>
       <OriginalItemSpec>obj/iPhone/Debug/device-builds/ipad5.4-11.2.1/ibtool-link/Main.storyboardc</OriginalItemSpec>
     </_BundleResourceWithLogicalName>
+    <_BundleResourceWithLogicalName Include="obj/iPhone/Debug/device-builds/ipad5.4-11.2.1/ibtool-link/Main.storyboardc/53472-view-53473.nib/objects-11.0+.nib">
+      <LogicalName>Main.storyboardc/53472-view-53473.nib/objects-11.0+.nib</LogicalName>
+      <Optimize>false</Optimize>
+      <OriginalItemSpec>obj/iPhone/Debug/device-builds/ipad5.4-11.2.1/ibtool-link/Main.storyboardc</OriginalItemSpec>
+    </_BundleResourceWithLogicalName>
+    <_BundleResourceWithLogicalName Include="obj/iPhone/Debug/device-builds/ipad5.4-11.2.1/ibtool-link/Main.storyboardc/53472-view-53473.nib/runtime.nib">
+      <LogicalName>Main.storyboardc/53472-view-53473.nib/runtime.nib</LogicalName>
+      <Optimize>false</Optimize>
+      <OriginalItemSpec>obj/iPhone/Debug/device-builds/ipad5.4-11.2.1/ibtool-link/Main.storyboardc</OriginalItemSpec>
+    </_BundleResourceWithLogicalName>
     <_BundleResourceWithLogicalName Include="obj/iPhone/Debug/device-builds/ipad5.4-11.2.1/ibtool-link/Main.storyboardc/6775-view-6776.nib/objects-11.0+.nib">
       <LogicalName>Main.storyboardc/6775-view-6776.nib/objects-11.0+.nib</LogicalName>
       <Optimize>false</Optimize>
@@ -111,6 +131,26 @@
       <Optimize>false</Optimize>
       <OriginalItemSpec>obj/iPhone/Debug/device-builds/ipad5.4-11.2.1/ibtool-link/Main.storyboardc</OriginalItemSpec>
     </_BundleResourceWithLogicalName>
+    <_BundleResourceWithLogicalName Include="obj/iPhone/Debug/device-builds/ipad5.4-11.2.1/ibtool-link/Main.storyboardc/77249-view-77250.nib/objects-11.0+.nib">
+      <LogicalName>Main.storyboardc/77249-view-77250.nib/objects-11.0+.nib</LogicalName>
+      <Optimize>false</Optimize>
+      <OriginalItemSpec>obj/iPhone/Debug/device-builds/ipad5.4-11.2.1/ibtool-link/Main.storyboardc</OriginalItemSpec>
+    </_BundleResourceWithLogicalName>
+    <_BundleResourceWithLogicalName Include="obj/iPhone/Debug/device-builds/ipad5.4-11.2.1/ibtool-link/Main.storyboardc/77249-view-77250.nib/runtime.nib">
+      <LogicalName>Main.storyboardc/77249-view-77250.nib/runtime.nib</LogicalName>
+      <Optimize>false</Optimize>
+      <OriginalItemSpec>obj/iPhone/Debug/device-builds/ipad5.4-11.2.1/ibtool-link/Main.storyboardc</OriginalItemSpec>
+    </_BundleResourceWithLogicalName>
+    <_BundleResourceWithLogicalName Include="obj/iPhone/Debug/device-builds/ipad5.4-11.2.1/ibtool-link/Main.storyboardc/99596-view-99597.nib/objects-11.0+.nib">
+      <LogicalName>Main.storyboardc/99596-view-99597.nib/objects-11.0+.nib</LogicalName>
+      <Optimize>false</Optimize>
+      <OriginalItemSpec>obj/iPhone/Debug/device-builds/ipad5.4-11.2.1/ibtool-link/Main.storyboardc</OriginalItemSpec>
+    </_BundleResourceWithLogicalName>
+    <_BundleResourceWithLogicalName Include="obj/iPhone/Debug/device-builds/ipad5.4-11.2.1/ibtool-link/Main.storyboardc/99596-view-99597.nib/runtime.nib">
+      <LogicalName>Main.storyboardc/99596-view-99597.nib/runtime.nib</LogicalName>
+      <Optimize>false</Optimize>
+      <OriginalItemSpec>obj/iPhone/Debug/device-builds/ipad5.4-11.2.1/ibtool-link/Main.storyboardc</OriginalItemSpec>
+    </_BundleResourceWithLogicalName>
     <_BundleResourceWithLogicalName Include="obj/iPhone/Debug/device-builds/ipad5.4-11.2.1/ibtool-link/Main.storyboardc/BYZ-38-t0r-view-8bC-Xf-vdC.nib/objects-11.0+.nib">
       <LogicalName>Main.storyboardc/BYZ-38-t0r-view-8bC-Xf-vdC.nib/objects-11.0+.nib</LogicalName>
       <Optimize>false</Optimize>
@@ -118,6 +158,16 @@
     </_BundleResourceWithLogicalName>
     <_BundleResourceWithLogicalName Include="obj/iPhone/Debug/device-builds/ipad5.4-11.2.1/ibtool-link/Main.storyboardc/BYZ-38-t0r-view-8bC-Xf-vdC.nib/runtime.nib">
       <LogicalName>Main.storyboardc/BYZ-38-t0r-view-8bC-Xf-vdC.nib/runtime.nib</LogicalName>
+      <Optimize>false</Optimize>
+      <OriginalItemSpec>obj/iPhone/Debug/device-builds/ipad5.4-11.2.1/ibtool-link/Main.storyboardc</OriginalItemSpec>
+    </_BundleResourceWithLogicalName>
+    <_BundleResourceWithLogicalName Include="obj/iPhone/Debug/device-builds/ipad5.4-11.2.1/ibtool-link/Main.storyboardc/UIViewController-110382.nib/objects-11.0+.nib">
+      <LogicalName>Main.storyboardc/UIViewController-110382.nib/objects-11.0+.nib</LogicalName>
+      <Optimize>false</Optimize>
+      <OriginalItemSpec>obj/iPhone/Debug/device-builds/ipad5.4-11.2.1/ibtool-link/Main.storyboardc</OriginalItemSpec>
+    </_BundleResourceWithLogicalName>
+    <_BundleResourceWithLogicalName Include="obj/iPhone/Debug/device-builds/ipad5.4-11.2.1/ibtool-link/Main.storyboardc/UIViewController-110382.nib/runtime.nib">
+      <LogicalName>Main.storyboardc/UIViewController-110382.nib/runtime.nib</LogicalName>
       <Optimize>false</Optimize>
       <OriginalItemSpec>obj/iPhone/Debug/device-builds/ipad5.4-11.2.1/ibtool-link/Main.storyboardc</OriginalItemSpec>
     </_BundleResourceWithLogicalName>
@@ -201,6 +251,16 @@
       <Optimize>false</Optimize>
       <OriginalItemSpec>obj/iPhone/Debug/device-builds/ipad5.4-11.2.1/ibtool-link/Main.storyboardc</OriginalItemSpec>
     </_BundleResourceWithLogicalName>
+    <_BundleResourceWithLogicalName Include="obj/iPhone/Debug/device-builds/ipad5.4-11.2.1/ibtool-link/Main.storyboardc/UIViewController-53472.nib/objects-11.0+.nib">
+      <LogicalName>Main.storyboardc/UIViewController-53472.nib/objects-11.0+.nib</LogicalName>
+      <Optimize>false</Optimize>
+      <OriginalItemSpec>obj/iPhone/Debug/device-builds/ipad5.4-11.2.1/ibtool-link/Main.storyboardc</OriginalItemSpec>
+    </_BundleResourceWithLogicalName>
+    <_BundleResourceWithLogicalName Include="obj/iPhone/Debug/device-builds/ipad5.4-11.2.1/ibtool-link/Main.storyboardc/UIViewController-53472.nib/runtime.nib">
+      <LogicalName>Main.storyboardc/UIViewController-53472.nib/runtime.nib</LogicalName>
+      <Optimize>false</Optimize>
+      <OriginalItemSpec>obj/iPhone/Debug/device-builds/ipad5.4-11.2.1/ibtool-link/Main.storyboardc</OriginalItemSpec>
+    </_BundleResourceWithLogicalName>
     <_BundleResourceWithLogicalName Include="obj/iPhone/Debug/device-builds/ipad5.4-11.2.1/ibtool-link/Main.storyboardc/UIViewController-6775.nib/objects-11.0+.nib">
       <LogicalName>Main.storyboardc/UIViewController-6775.nib/objects-11.0+.nib</LogicalName>
       <Optimize>false</Optimize>
@@ -208,6 +268,26 @@
     </_BundleResourceWithLogicalName>
     <_BundleResourceWithLogicalName Include="obj/iPhone/Debug/device-builds/ipad5.4-11.2.1/ibtool-link/Main.storyboardc/UIViewController-6775.nib/runtime.nib">
       <LogicalName>Main.storyboardc/UIViewController-6775.nib/runtime.nib</LogicalName>
+      <Optimize>false</Optimize>
+      <OriginalItemSpec>obj/iPhone/Debug/device-builds/ipad5.4-11.2.1/ibtool-link/Main.storyboardc</OriginalItemSpec>
+    </_BundleResourceWithLogicalName>
+    <_BundleResourceWithLogicalName Include="obj/iPhone/Debug/device-builds/ipad5.4-11.2.1/ibtool-link/Main.storyboardc/UIViewController-77249.nib/objects-11.0+.nib">
+      <LogicalName>Main.storyboardc/UIViewController-77249.nib/objects-11.0+.nib</LogicalName>
+      <Optimize>false</Optimize>
+      <OriginalItemSpec>obj/iPhone/Debug/device-builds/ipad5.4-11.2.1/ibtool-link/Main.storyboardc</OriginalItemSpec>
+    </_BundleResourceWithLogicalName>
+    <_BundleResourceWithLogicalName Include="obj/iPhone/Debug/device-builds/ipad5.4-11.2.1/ibtool-link/Main.storyboardc/UIViewController-77249.nib/runtime.nib">
+      <LogicalName>Main.storyboardc/UIViewController-77249.nib/runtime.nib</LogicalName>
+      <Optimize>false</Optimize>
+      <OriginalItemSpec>obj/iPhone/Debug/device-builds/ipad5.4-11.2.1/ibtool-link/Main.storyboardc</OriginalItemSpec>
+    </_BundleResourceWithLogicalName>
+    <_BundleResourceWithLogicalName Include="obj/iPhone/Debug/device-builds/ipad5.4-11.2.1/ibtool-link/Main.storyboardc/UIViewController-99596.nib/objects-11.0+.nib">
+      <LogicalName>Main.storyboardc/UIViewController-99596.nib/objects-11.0+.nib</LogicalName>
+      <Optimize>false</Optimize>
+      <OriginalItemSpec>obj/iPhone/Debug/device-builds/ipad5.4-11.2.1/ibtool-link/Main.storyboardc</OriginalItemSpec>
+    </_BundleResourceWithLogicalName>
+    <_BundleResourceWithLogicalName Include="obj/iPhone/Debug/device-builds/ipad5.4-11.2.1/ibtool-link/Main.storyboardc/UIViewController-99596.nib/runtime.nib">
+      <LogicalName>Main.storyboardc/UIViewController-99596.nib/runtime.nib</LogicalName>
       <Optimize>false</Optimize>
       <OriginalItemSpec>obj/iPhone/Debug/device-builds/ipad5.4-11.2.1/ibtool-link/Main.storyboardc</OriginalItemSpec>
     </_BundleResourceWithLogicalName>

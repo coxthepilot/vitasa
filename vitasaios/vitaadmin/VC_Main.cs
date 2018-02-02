@@ -41,6 +41,11 @@ namespace vitaadmin
                 PerformSegue("Segue_MainToSuggestions", this);
             };
 
+            B_CheckSignUps.TouchUpInside += (sender, e) =>
+            {
+                PerformSegue("Segue_MainToCheckSignUps", this);
+            };
+
             B_WorkItems.TouchUpInside += (sender, e) => 
             {
                 Global.SelectedUser = null;
@@ -52,6 +57,11 @@ namespace vitaadmin
             B_Sites.TouchUpInside += (sender, e) => 
             {
                 PerformSegue("Segue_MainToSites", this);
+            };
+
+            B_OpenSites.TouchUpInside += (sender, e) => 
+            {
+                PerformSegue("Segue_MainToOpenSites", this);
             };
 
             B_Notifications.TouchUpInside += (sender, e) => 

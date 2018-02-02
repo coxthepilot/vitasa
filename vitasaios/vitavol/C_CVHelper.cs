@@ -32,7 +32,7 @@ namespace vitavol
 			BackgroundColor = bgcolor;
 			DateState = dateState;
             AllowPastDates = allowPastDates;
-			try
+            try
             {
                 FirstDayInMonthOffset = (int)dateState[0].Date.DayOfWeek;
                 DayState = dayState;
@@ -48,6 +48,9 @@ namespace vitavol
                 collectionView.Delegate = this;
                 collectionView.BackgroundColor = BackgroundColor;
                 ViewSize = collectionView.Bounds;
+#if DEBUG
+                Console.WriteLine("[C_CVHelper] ViewSize.Width: " + ViewSize.Width.ToString());
+#endif
             }
             catch (Exception e)
             {

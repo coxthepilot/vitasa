@@ -178,6 +178,22 @@ namespace vitavol
             TB_Email.Text = NSUserDefaults.StandardUserDefaults.StringForKey("email");
             TB_Password.Text = NSUserDefaults.StandardUserDefaults.StringForKey("password");
             B_Login.Enabled = (TB_Email.Text.Length > 6) && (TB_Password.Text.Length > 6);
+
+            // calendarAccess == haveNotAsked, Approved, Refused
+            string haveAskedForCalendar = NSUserDefaults.StandardUserDefaults.StringForKey("calendarAccess");
+            if ((haveAskedForCalendar == null) || (haveAskedForCalendar == "haveNotAsked"))
+            {
+                EKEventStore evstore = myAppDelegate.EventStore;
+
+                evstore.RequestAccess(EKEntityType.Event, EventCompletionHandler);
+            }
+        }
+
+        private void EventCompletionHandler(bool granted, NSError e)
+        {
+            string calendar = granted ? "Approved" : "Refused";
+
+            NSUserDefaults.StandardUserDefaults.SetString(calendar, "calendarAccess");
         }
 
         private void EnableUI(bool enable)

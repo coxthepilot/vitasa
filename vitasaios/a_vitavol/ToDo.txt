@@ -1,6 +1,7 @@
 ﻿----- Issues -----
 
 Future features:
+* use new graphics for UI
 * allow more than 1 site coordinator and a backup
 * create a site feature for in-person tax prep
 * allow volunteer to select all shifts at a site
@@ -16,24 +17,45 @@ Shared Models:
 
 
 Android:
-* on notification, the graphic is a tiny slice from the middle of the icon [defer]
-
+* [android] allow user to change password on profile page
 
 iOS: 
+>> note: some changes made but not yet released through Apple
+* [ios] allow user to change password on profile page
 
+online:
+* allow user to change password on profile page
+* create admin UI similar to iPad
 
 vitaadmin:
-* check enabling of controls on sites; can select Calendar when no site selected
+* update to user email, phone, password? don't stick
+* show grid calendar for site calendar
 * hours summary (with export)
-* finish installing site calendar and shifts on sites
 * tool to set basic/adv number on shift
 
 
 Chris
-* get the schema on signups under site to match from /signups/ [urgent]
+
 
 
 Completed
+* add to calendar on new signup shows calendar not selected [cnd]
+* [ios] 5s is showing 8 days in a week [done]
+* [ios] get prompt to allow calendar before add to calendar [done]
+* vitaadmin: for user, site coordinator, show sites assigned [done]
+* vitaadmin: for site, show number of signups [done]
+* vitaadmin: only show site coordinators on sites page, sort by name [done]
+* vitaadmin: tool to check for signups for which the calendar event or shift has been deleted [done]
+* vitaadmin: on new shift, default to 5 ea for basic and advanced [done]
+* vitaadmin: on shift edit, select the numeric keyboard [done]
+* vitaadmin: sites refresh doesn't work or doesn't refresh the list [done]
+* vitaadmin: don't allow shift delete if signups are still connected [done]
+* vitaadmin: check enabling of controls on sites; can select Calendar when no site selected [done]
+* vitaadmin: need to be able to see activity across all sites for a given day [done]
+* vitaadmin: sort calendar entries by date (site -> calendar) [done]
+* vitaadmin: don't delete a calendar entry if shifts remain [done]
+
+* get the schema on signups under site to match from /signups/ [urgent, done]
 * [vitaadmin] show values from config.json [done]
 * [vitaadmin] generate email to all volunteers and site coordinators [done]
 * migrate to DO backend over Christmas [done]

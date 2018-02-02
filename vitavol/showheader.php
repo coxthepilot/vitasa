@@ -14,7 +14,7 @@ function showHeader() {
 	
 	    <link rel="shortcut icon" href="images/vitaiconv2.png" type="image/x-icon" />
 	
-		<link rel="stylesheet" type="text/css" href="css/vitasa.css?version=11" />
+		<link rel="stylesheet" type="text/css" href="vitasa.css?version=30" />
 	</head>
 	<body>
 		<div id="left"></div>
@@ -22,7 +22,7 @@ function showHeader() {
 		<div id="top"></div>
 		<div id="bottom"></div>
 		
-		<img src="images/vita.png" style="width:400px;height:150px;">
+		<img src="images/vita.png" style="width:300px;height:120px;">
 		
 		<h1>VITA SA</h1>
 		<hr/>
