@@ -121,8 +121,25 @@ namespace vitavol
                 {
                     if ((sss.OpenTime == shift.OpenTime) && (sss.CloseTime == shift.CloseTime))
                     {
-                        numNeeded += User.Certification == E_Certification.Basic ? sss.eFilersNeededBasic : sss.eFilersNeededAdvanced;
-                        numHave += User.Certification == E_Certification.Basic ? sss.eFilersSignedUpBasic : sss.eFilersSignedUpAdvanced;
+                        // 12-jan-2018: changed to allow advanced to fill either basic or advanced slots
+                        bool needBasic = sss.eFilersSignedUpBasic < sss.eFilersNeededBasic;
+
+                        int totalNeed = sss.eFilersNeededBasic + sss.eFilersNeededAdvanced;
+                        int totalHave = sss.eFilersSignedUpBasic + sss.eFilersSignedUpAdvanced;
+
+                        if (User.Certification == E_Certification.Basic)
+                        {
+                            numNeeded += sss.eFilersNeededBasic;
+                            numHave += sss.eFilersSignedUpBasic;
+                        }
+                        else // user is advanced
+                        {
+                            numNeeded += sss.eFilersNeededBasic + sss.eFilersNeededAdvanced;
+                            numHave += sss.eFilersSignedUpBasic + sss.eFilersSignedUpAdvanced;
+                        }
+
+                        //numNeeded += User.Certification == E_Certification.Basic ? sss.eFilersNeededBasic : sss.eFilersNeededAdvanced;
+                        //numHave += User.Certification == E_Certification.Basic ? sss.eFilersSignedUpBasic : sss.eFilersSignedUpAdvanced;
                     }
                 }
                 int numEF = numNeeded - numHave;
@@ -147,8 +164,25 @@ namespace vitavol
 				{
 					if ((sss.OpenTime == shift.OpenTime) && (sss.CloseTime == shift.CloseTime))
 					{
-						numNeeded += User.Certification == E_Certification.Basic ? sss.eFilersNeededBasic : sss.eFilersNeededAdvanced;
-						numHave += User.Certification == E_Certification.Basic ? sss.eFilersSignedUpBasic : sss.eFilersSignedUpAdvanced;
+                        // 12-jan-2018: changed to allow advanced to fill either basic or advanced slots
+                        bool needBasic = sss.eFilersSignedUpBasic < sss.eFilersNeededBasic;
+
+                        int totalNeed = sss.eFilersNeededBasic + sss.eFilersNeededAdvanced;
+                        int totalHave = sss.eFilersSignedUpBasic + sss.eFilersSignedUpAdvanced;
+
+                        if (User.Certification == E_Certification.Basic)
+                        {
+                            numNeeded += sss.eFilersNeededBasic;
+                            numHave += sss.eFilersSignedUpBasic;
+                        }
+                        else // user is advanced
+                        {
+                            numNeeded += sss.eFilersNeededBasic + sss.eFilersNeededAdvanced;
+                            numHave += sss.eFilersSignedUpBasic + sss.eFilersSignedUpAdvanced;
+                        }
+
+						//numNeeded += User.Certification == E_Certification.Basic ? sss.eFilersNeededBasic : sss.eFilersNeededAdvanced;
+						//numHave += User.Certification == E_Certification.Basic ? sss.eFilersSignedUpBasic : sss.eFilersSignedUpAdvanced;
 					}
 				}
 				int numEF = numNeeded - numHave;

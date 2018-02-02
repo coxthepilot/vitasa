@@ -481,9 +481,6 @@ namespace a_vitavol
 			// aapt resource value: 0x7f080055
 			public const int L_Phone = 2131230805;
 			
-			// aapt resource value: 0x7f080020
-			public const int L_Profile_Email = 2131230752;
-			
 			// aapt resource value: 0x7f080039
 			public const int L_SCMySite_ClientStatus = 2131230777;
 			
@@ -567,6 +564,9 @@ namespace a_vitavol
 			
 			// aapt resource value: 0x7f080016
 			public const int TB_Password = 2131230742;
+			
+			// aapt resource value: 0x7f080020
+			public const int TB_Profile_Email = 2131230752;
 			
 			// aapt resource value: 0x7f080021
 			public const int TB_Profile_Name = 2131230753;

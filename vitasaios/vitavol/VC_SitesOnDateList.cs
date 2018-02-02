@@ -67,9 +67,32 @@ namespace vitavol
 
                     foreach(C_SiteScheduleShift sss in ss.Shifts)
                     {
-                        int need = LoggedInUser.Certification == E_Certification.Basic ? sss.eFilersNeededBasic : sss.eFilersNeededAdvanced;
-                        int have = LoggedInUser.Certification == E_Certification.Basic ? sss.eFilersSignedUpBasic : sss.eFilersSignedUpAdvanced;
-                        needsHelp |= have < need;
+                        // 12-jan-2018: changed to allow advanced to fill either basic or advanced slots
+                        bool needBasic = sss.eFilersSignedUpBasic < sss.eFilersNeededBasic;
+
+                        int totalNeed = sss.eFilersNeededBasic + sss.eFilersNeededAdvanced;
+                        int totalHave = sss.eFilersSignedUpBasic + sss.eFilersSignedUpAdvanced;
+
+                        if (LoggedInUser.Certification == E_Certification.Basic)
+                        {
+                            if (needBasic)
+                            {
+                                needsHelp = true;
+                                break;
+                            }
+                        }
+                        else // user is advanced
+                        {
+                            if (totalHave < totalNeed)
+                            {
+                                needsHelp = true;
+                                break;
+                            }
+                        }
+
+                        //int need = LoggedInUser.Certification == E_Certification.Basic ? sss.eFilersNeededBasic : sss.eFilersNeededAdvanced;
+                        //int have = LoggedInUser.Certification == E_Certification.Basic ? sss.eFilersSignedUpBasic : sss.eFilersSignedUpAdvanced;
+                        //needsHelp |= have < need;
                     }
 
                     if (needsHelp)
@@ -149,8 +172,25 @@ namespace vitavol
 				C_SiteSchedule ss = Global.GetSiteScheduleForDay(Global.SelectedDate, site.Slug);
 				foreach (C_SiteScheduleShift sss in ss.Shifts)
 				{
-					numNeeded += User.Certification == E_Certification.Basic ? sss.eFilersNeededBasic : sss.eFilersNeededAdvanced;
-					numHave += User.Certification == E_Certification.Basic ? sss.eFilersSignedUpBasic : sss.eFilersSignedUpAdvanced;
+                    // 12-jan-2018: changed to allow advanced to fill either basic or advanced slots
+                    bool needBasic = sss.eFilersSignedUpBasic < sss.eFilersNeededBasic;
+
+                    int totalNeed = sss.eFilersNeededBasic + sss.eFilersNeededAdvanced;
+                    int totalHave = sss.eFilersSignedUpBasic + sss.eFilersSignedUpAdvanced;
+
+                    if (User.Certification == E_Certification.Basic)
+                    {
+                        numNeeded += sss.eFilersNeededBasic;
+                        numHave += sss.eFilersSignedUpBasic;
+                    }
+                    else // user is advanced
+                    {
+                        numNeeded += sss.eFilersNeededBasic + sss.eFilersNeededAdvanced;
+                        numHave += sss.eFilersSignedUpBasic + sss.eFilersSignedUpAdvanced;
+                    }
+
+					//numNeeded += User.Certification == E_Certification.Basic ? sss.eFilersNeededBasic : sss.eFilersNeededAdvanced;
+					//numHave += User.Certification == E_Certification.Basic ? sss.eFilersSignedUpBasic : sss.eFilersSignedUpAdvanced;
 				}
 				int numEF = numNeeded - numHave;
 
@@ -186,8 +226,25 @@ namespace vitavol
 				C_SiteSchedule ss = Global.GetSiteScheduleForDay(Global.SelectedDate, site.Slug);
 				foreach (C_SiteScheduleShift sss in ss.Shifts)
 				{
-					numNeeded += User.Certification == E_Certification.Basic ? sss.eFilersNeededBasic : sss.eFilersNeededAdvanced;
-					numHave += User.Certification == E_Certification.Basic ? sss.eFilersSignedUpBasic : sss.eFilersSignedUpAdvanced;
+                    // 12-jan-2018: changed to allow advanced to fill either basic or advanced slots
+                    bool needBasic = sss.eFilersSignedUpBasic < sss.eFilersNeededBasic;
+
+                    int totalNeed = sss.eFilersNeededBasic + sss.eFilersNeededAdvanced;
+                    int totalHave = sss.eFilersSignedUpBasic + sss.eFilersSignedUpAdvanced;
+
+                    if (User.Certification == E_Certification.Basic)
+                    {
+                        numNeeded += sss.eFilersNeededBasic;
+                        numHave += sss.eFilersSignedUpBasic;
+                    }
+                    else // user is advanced
+                    {
+                        numNeeded += sss.eFilersNeededBasic + sss.eFilersNeededAdvanced;
+                        numHave += sss.eFilersSignedUpBasic + sss.eFilersSignedUpAdvanced;
+                    }
+
+					//numNeeded += User.Certification == E_Certification.Basic ? sss.eFilersNeededBasic : sss.eFilersNeededAdvanced;
+					//numHave += User.Certification == E_Certification.Basic ? sss.eFilersSignedUpBasic : sss.eFilersSignedUpAdvanced;
 				}
 				int numEF = numNeeded - numHave;
 

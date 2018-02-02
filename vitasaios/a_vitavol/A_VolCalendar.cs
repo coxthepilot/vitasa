@@ -224,10 +224,10 @@ namespace a_vitavol
 							bool anyNeed = false;
 							foreach (C_SiteScheduleShift sss in ss.Shifts)
 							{
-								if (
-									((sss.eFilersSignedUpBasic < sss.eFilersNeededBasic) && (LoggedInUser.Certification == E_Certification.Basic))
-									|| ((sss.eFilersSignedUpAdvanced < sss.eFilersNeededAdvanced) && (LoggedInUser.Certification == E_Certification.Advanced))
-								)
+                                // 12-jan-2018: changed to allow advanced to fill either basic or advanced slots
+                                bool needBasic = sss.eFilersSignedUpBasic < sss.eFilersNeededBasic;
+                                bool needAdvanced = sss.eFilersSignedUpAdvanced < sss.eFilersNeededAdvanced;
+								if (needBasic || (needAdvanced && (LoggedInUser.Certification == E_Certification.Advanced)))
 								{
 									anyNeed = true;
 									break;

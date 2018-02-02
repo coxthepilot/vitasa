@@ -1,5 +1,7 @@
 ﻿----- Issues -----
 
+Fixes:
+
 Future features:
 * use new graphics for UI
 * allow more than 1 site coordinator and a backup
@@ -17,7 +19,13 @@ Shared Models:
 
 
 Android:
+<<<<<<< HEAD
 * [android] allow user to change password on profile page
+=======
+* need to make the adv/basic signup more robust; fixed it on iOS after I did the Android release
+* on notification, the graphic is a tiny slice from the middle of the icon [defer]
+
+>>>>>>> origin/master
 
 iOS: 
 >> note: some changes made but not yet released through Apple
@@ -39,6 +47,7 @@ Chris
 
 
 Completed
+<<<<<<< HEAD
 * add to calendar on new signup shows calendar not selected [cnd]
 * [ios] 5s is showing 8 days in a week [done]
 * [ios] get prompt to allow calendar before add to calendar [done]
@@ -56,6 +65,11 @@ Completed
 * vitaadmin: don't delete a calendar entry if shifts remain [done]
 
 * get the schema on signups under site to match from /signups/ [urgent, done]
+=======
+* ignore signups in site; only use get /signups/ [done android]
+* all advanced to use a basic slot [done android]
+* allow email update [done]
+>>>>>>> origin/master
 * [vitaadmin] show values from config.json [done]
 * [vitaadmin] generate email to all volunteers and site coordinators [done]
 * migrate to DO backend over Christmas [done]

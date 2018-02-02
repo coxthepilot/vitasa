@@ -22,8 +22,7 @@ namespace a_vitavol
 
         C_VitaUser LoggedInUser;
 
-        TextView L_Email;
-
+        EditText TB_Email;
         EditText TB_Name;
         EditText TB_Phone;
 
@@ -44,15 +43,14 @@ namespace a_vitavol
 
             SetContentView(Resource.Layout.Profile);
 
-			L_Email = FindViewById<TextView>(Resource.Id.L_Profile_Email);
-
+            TB_Email = FindViewById<EditText>(Resource.Id.TB_Profile_Email);
 			TB_Name = FindViewById<EditText>(Resource.Id.TB_Profile_Name);
             TB_Phone = FindViewById<EditText>(Resource.Id.TB_Profile_Phone);
 
             B_Submit = FindViewById<Button>(Resource.Id.B_Profile_Submit);
 
 			TB_Name.Text = LoggedInUser.Name;
-            L_Email.Text = LoggedInUser.Email;
+            TB_Email.Text = LoggedInUser.Email;
             TB_Phone.Text = LoggedInUser.Phone;
 
 			AI_Busy = new ProgressDialog(this);
@@ -64,6 +62,7 @@ namespace a_vitavol
             {
                 LoggedInUser.Name = TB_Name.Text;
                 LoggedInUser.Phone = TB_Phone.Text;
+                LoggedInUser.Email = TB_Email.Text;
 
                 AI_Busy.Show();
                 EnableUI(false);
@@ -107,6 +106,7 @@ namespace a_vitavol
 
 		private void EnableUI(bool en)
         {
+            TB_Email.Enabled = en;
             TB_Name.Enabled = en;
             TB_Phone.Enabled = en;
             B_Submit.Enabled = en;

@@ -152,33 +152,35 @@ namespace zsquared
 				}
 			}
 
-			if (j.ContainsKey(N_WorkHistory))
-			{
-				if (j[N_WorkHistory] is JsonArray)
-				{
-					WorkHistoryX = new List<C_SignUp>();
-					JsonArray ja = (JsonArray)j[N_WorkHistory];
-					foreach (JsonValue jav in ja)
-					{
-						C_SignUp wi = new C_SignUp(jav);
-						WorkHistoryX.Add(wi);
-					}
-				}
-			}
+            // 12-jan-2018: ignore these; the format is wrong and causing issues
+			//if (j.ContainsKey(N_WorkHistory))
+			//{
+			//	if (j[N_WorkHistory] is JsonArray)
+			//	{
+			//		WorkHistoryX = new List<C_SignUp>();
+			//		JsonArray ja = (JsonArray)j[N_WorkHistory];
+			//		foreach (JsonValue jav in ja)
+			//		{
+			//			C_SignUp wi = new C_SignUp(jav);
+			//			WorkHistoryX.Add(wi);
+			//		}
+			//	}
+			//}
 
-			if (j.ContainsKey(N_WorkIntents))
-			{
-				if (j[N_WorkIntents] is JsonArray)
-				{
-					WorkIntentsX = new List<C_SignUp>();
-					JsonArray ja = (JsonArray)j[N_WorkIntents];
-					foreach (JsonValue jav in ja)
-					{
-						C_SignUp wi = new C_SignUp(jav);
-						WorkIntentsX.Add(wi);
-					}
-				}
-			}
+            // 12-jan-2018: ignore these; the format is wrong and causing issues
+			//if (j.ContainsKey(N_WorkIntents))
+			//{
+			//	if (j[N_WorkIntents] is JsonArray)
+			//	{
+			//		WorkIntentsX = new List<C_SignUp>();
+			//		JsonArray ja = (JsonArray)j[N_WorkIntents];
+			//		foreach (JsonValue jav in ja)
+			//		{
+			//			C_SignUp wi = new C_SignUp(jav);
+			//			WorkIntentsX.Add(wi);
+			//		}
+			//	}
+			//}
 
 			if (j.ContainsKey(N_SeasonFirstDate))
 				SeasonFirstDate = Tools.JsonProcessDate(j[N_SeasonFirstDate], SeasonFirstDate);

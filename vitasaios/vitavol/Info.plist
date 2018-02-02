@@ -44,8 +44,14 @@
 		<true/>
 	</dict>
 	<key>CFBundleShortVersionString</key>
+<<<<<<< HEAD
 	<string>1.7</string>
 	<key>CFBundleVersion</key>
 	<string>1.7</string>
+=======
+	<string>1.6</string>
+	<key>CFBundleVersion</key>
+	<string>1.6</string>
+>>>>>>> origin/master
 </dict>
 </plist>
