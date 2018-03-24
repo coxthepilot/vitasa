@@ -50,7 +50,7 @@ namespace vitavol
                 var ou = OurSignUps.Where(wi => wi.Date >= today);
 				List<C_SignUp> OurWorkItems2 = ou.ToList();
 				// sort to make the list nicer
-				OurWorkItems2.Sort(C_SignUp.CompareByDateAscending);
+				OurWorkItems2.Sort(C_SignUp.CompareByDateThenSiteAscending);
 
 				bool succ1 = await Global.EnsureShiftsInCacheForSignUps(LoggedInUser.Token, OurSignUps);
 

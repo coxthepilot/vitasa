@@ -28,7 +28,7 @@ namespace vitasa
 			// If not required for your application you can safely delete this method
 
 			// only needed once when the app starts; this lets us handle the certificate from abandonedfactory.net
-			C_Vita.SetupCertificateHandling();
+			//C_Vita.SetupCertificateHandling();
 
 			Global = new C_Global();
 

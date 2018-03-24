@@ -48,6 +48,10 @@ namespace vitaadmin
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UISegmentedControl SC_SortType { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UITextField TB_Hours { get; set; }
 
         [Outlet]
@@ -94,6 +98,11 @@ namespace vitaadmin
             if (SC_Approval != null) {
                 SC_Approval.Dispose ();
                 SC_Approval = null;
+            }
+
+            if (SC_SortType != null) {
+                SC_SortType.Dispose ();
+                SC_SortType = null;
             }
 
             if (TB_Hours != null) {

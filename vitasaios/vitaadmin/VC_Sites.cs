@@ -52,9 +52,21 @@ namespace vitaadmin
                 AI_Busy.StartAnimating();
 
                 Sites = await Global.RefetchAllSites(LoggedInUser.Token);
+                Sites.Sort(CompareSitesBySiteName);
 
                 AI_Busy.StopAnimating();
                 EnableUI(true);
+
+                SitesTableSource = new C_SitesTableSource(Global, Sites);
+                SitesTableDelegate = new C_SitesTableDelegate(Global, this, SitesTableSource);
+                SitesTableDelegate.SitesTableRowSelect += (sender1, a) =>
+                {
+                    Global.SelectedSiteSlug = a.Site.Slug;
+                    PerformSegue("Segue_SitesToSite", this);
+                };
+
+                TV_Sites.Source = SitesTableSource;
+                TV_Sites.Delegate = SitesTableDelegate;
                 TV_Sites.ReloadData();
             };
 

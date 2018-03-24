@@ -106,6 +106,8 @@ namespace vitaadmin
             } while (date != SelectedSite.SeasonLastDate);
             daysInSeason.Add(date.ToString("yyyy-mm-dd"));
             DateInSeasonPicker = new C_ItemPicker(TB_DateForCalendarEntry, daysInSeason);
+            if ((C_YMD.Now >= SelectedSite.SeasonFirstDate) && (C_YMD.Now <= SelectedSite.SeasonLastDate))
+                DateInSeasonPicker.SetSelection(C_YMD.Now.ToString("yyyy-mm-dd"));
 
             B_NewException.TouchUpInside += async (sender, e) => 
             {

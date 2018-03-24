@@ -193,6 +193,7 @@ namespace vitaadmin
                 SelectedUser.Roles.Add(E_VitaUserRoles.Volunteer);
             if (SW_SiteCoordinator.On)
                 SelectedUser.Roles.Add(E_VitaUserRoles.SiteCoordinator);
+            SelectedUser.Password = TB_Password1.Text;
         }
 
         void TextField_ValueChanged(object sender, EventArgs e)
@@ -314,6 +315,8 @@ namespace vitaadmin
             else
             {
                 B_SaveUserDetails.Enabled = false;
+                TB_Password1.Text = "";
+                TB_Password2.Text = "";
             }
 
             return ior;

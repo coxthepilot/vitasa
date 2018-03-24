@@ -72,9 +72,21 @@ namespace zsquared
                 SiteName = Tools.JsonProcessString(jv[N_SiteName], SiteName);
         }
 
-        public static int CompareByDateAscending(C_SignUp wi1, C_SignUp wi2)
+        public static int CompareBySiteThenDateAscending(C_SignUp wi1, C_SignUp wi2)
         {
-            return wi1.Date.CompareTo(wi2.Date);
+            int res = string.Compare(wi1.SiteName, wi2.SiteName, StringComparison.Ordinal);
+            if (res == 0)
+                res = wi1.Date.CompareTo(wi2.Date);
+
+            return res;
+        }
+
+        public static int CompareByDateThenSiteAscending(C_SignUp wi1, C_SignUp wi2)
+        {
+            int res = wi1.Date.CompareTo(wi2.Date);
+            if (res == 0)
+                res = string.Compare(wi1.SiteName, wi2.SiteName, StringComparison.Ordinal);
+            return res;
         }
     }
 }

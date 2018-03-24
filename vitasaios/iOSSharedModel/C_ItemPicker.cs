@@ -54,6 +54,22 @@ namespace zsquared
 			TB_.InputAccessoryView = ToolBar_;
 		}
 
+        public void SetSelection(string v)
+        {
+            int selix = -1;
+            for (int ix = 0; ix != Items.Count; ix++)
+            {
+                if (Items[ix] == v)
+                {
+                    selix = ix;
+                    break;
+                }
+            }
+
+            if (selix != -1)
+                PV_.Select(selix, 0, true);
+        }
+
 		public string Value
 		{
 			get { return Selection; }

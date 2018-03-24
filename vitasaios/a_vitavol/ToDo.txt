@@ -36,7 +36,9 @@ online:
 * create admin UI similar to iPad
 
 vitaadmin:
-* update to user email, phone, password? don't stick
+* [vitaadmin] not able to change state of a suggestion
+* [vitaadmin] need view of signups on a date
+* [vitaadmin] need all pages to handle vert and horiz
 * show grid calendar for site calendar
 * hours summary (with export)
 * tool to set basic/adv number on shift
@@ -47,6 +49,9 @@ Chris
 
 
 Completed
+* [vitaadmin] refresh on sites doesn't update the list [done]
+* [vitaadmin] start date on site calendar at today [done]
+* [vitaadmin] update to user email, phone, password? don't stick [fixed]
 <<<<<<< HEAD
 * add to calendar on new signup shows calendar not selected [cnd]
 * [ios] 5s is showing 8 days in a week [done]

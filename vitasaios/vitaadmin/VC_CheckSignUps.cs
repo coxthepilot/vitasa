@@ -45,7 +45,7 @@ namespace vitaadmin
 
                     List<C_VitaUser> Users = await Global.FetchAllUsers(LoggedInUser.Token);
 
-                    // go through the users, for volunteers, look at their signups
+                    // go through the users, looking for volunteers (not site coordinator, or other), look at their signups
                     foreach (C_VitaUser user in Users)
                     {
                         if (!user.HasVolunteer)

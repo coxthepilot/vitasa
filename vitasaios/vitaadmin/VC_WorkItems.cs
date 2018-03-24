@@ -2,6 +2,7 @@ using Foundation;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Linq;
 
 using UIKit;
 using zsquared;
@@ -28,6 +29,18 @@ namespace vitaadmin
 			Global = myAppDelegate.Global;
 
 			LoggedInUser = Global.GetUserFromCacheNoFetch(Global.LoggedInUserId);
+
+            SC_SortType.ValueChanged += (sender, e) => 
+            {
+                int sortBy = (int)SC_SortType.SelectedSegment;
+
+                if (sortBy == 0)
+                    Global.SignUpsList.Sort(C_SignUp.CompareByDateThenSiteAscending);
+                else
+                    Global.SignUpsList.Sort(C_SignUp.CompareBySiteThenDateAscending);
+
+                BuildWorkItemsTableSource();
+            };
 
             B_Back.TouchUpInside += (sender, e) =>
             {
@@ -56,24 +69,13 @@ namespace vitaadmin
 
 			Task.Run(async () =>
 			{
-				int userid = Global.SelectedUser == null ? -1 : Global.SelectedUser.id;
-
 				// we make sure all sites have been read in, which gives us a complete list of all work items
-				List<C_VitaSite> sitesList = await Global.FetchAllSites();
+				//List<C_VitaSite> sitesList = await Global.FetchAllSites();
+                List<C_VitaUser> usersList = await Global.FetchAllUsers(LoggedInUser.Token);
 
-                Global.SignUpsList.Sort(C_SignUp.CompareByDateAscending);
+                Global.SignUpsList.Sort(C_SignUp.CompareByDateThenSiteAscending);
 
-                // get the workshifts for the items we care about
-                List<C_SignUp> sus = new List<C_SignUp>();
-                foreach(C_SignUp su in Global.SignUpsList)
-                {
-					if (((userid == -1) || (userid == su.UserId))
-	                    && ((Global.SelectedSiteSlug == null) || (su.SiteSlug == Global.SelectedSiteSlug)))
-                    {
-                        sus.Add(su);
-                    }
-				}
-                bool success = await Global.EnsureShiftsInCacheForSignUps(LoggedInUser.Token, sus);
+                bool success = await Global.EnsureShiftsInCacheForSignUps(LoggedInUser.Token, Global.SignUpsList);
 
 				UIApplication.SharedApplication.InvokeOnMainThread(
 				new Action(() =>
@@ -81,13 +83,103 @@ namespace vitaadmin
 					AI_Busy.StopAnimating();
 					EnableUI(true);
 
-                    C_WorkItemsTableSource ts = new C_WorkItemsTableSource(Global, Global.SignUpsList, userid, Global.SelectedSiteSlug);
-                    TV_WorkItems.Source = ts;
-					TV_WorkItems.Delegate = new C_WorkItemsTableDelegate(Global, this, ts);
-					TV_WorkItems.ReloadData();
+                    BuildWorkItemsTableSource();
 				}));
 			});
 		}
+
+        private void BuildWorkItemsTableSource()
+        {
+            int userid = Global.SelectedUser == null ? -1 : Global.SelectedUser.id;
+
+            List<C_SignUp> OurWorkItems = new List<C_SignUp>();
+            foreach (C_SignUp su in Global.SignUpsList)
+            {
+                if (((userid == -1) || (userid == su.UserId))
+                    && ((Global.SelectedSiteSlug == null) || (su.SiteSlug == Global.SelectedSiteSlug)))
+                    OurWorkItems.Add(su);
+            }
+
+            List<C_SectionInfo> Sections = new List<C_SectionInfo>();
+
+            int sortBy = (int)SC_SortType.SelectedSegment;
+            if (sortBy == 0)
+            {
+                List<C_YMD> uniqueDates = new List<C_YMD>();
+                foreach(C_SignUp su in OurWorkItems)
+                {
+                    C_YMD date = su.Date;
+                    if (!uniqueDates.Contains(date))
+                        uniqueDates.Add(date);
+                }
+                uniqueDates.Sort(C_YMD.CompareYMD);
+
+                foreach(C_YMD date in uniqueDates)
+                {
+                    var ou = OurWorkItems.Where(su => su.Date == date);
+                    List<C_SignUp> signupsOnDate = ou.ToList();
+                    signupsOnDate.Sort(C_SignUp.CompareByDateThenSiteAscending);
+
+                    C_SectionInfo sectionInfo = new C_SectionInfo
+                    {
+                        Name = date.ToString("yyyy-mm-dd"),
+                        SignUps = signupsOnDate,
+                        Elements = new List<string>()
+                    };
+
+                    foreach (C_SignUp su in signupsOnDate)
+                    {
+                        C_WorkShift ws = Global.GetWorkShiftById(su.ShiftId);
+                        C_VitaUser u = Global.GetUserFromCacheNoFetch(su.UserId);
+                        string name = u != null ? u.Name : su.UserId.ToString();
+                        string shifts = ws != null ? " [" + ws.OpenTime.ToString("hh:mm") + " : " + ws.CloseTime.ToString("hh:mm") + "]" : "";
+
+                        sectionInfo.Elements.Add(name + " - " + su.SiteName + shifts);
+                    }
+
+                    Sections.Add(sectionInfo);
+                }
+            }
+            else
+            {
+                List<string> uniqueSites = new List<string>();
+                foreach (C_SignUp su in OurWorkItems)
+                    if (!uniqueSites.Contains(su.SiteName))
+                        uniqueSites.Add(su.SiteName);
+                uniqueSites.Sort();
+
+                foreach(string site in uniqueSites)
+                {
+                    var ou = OurWorkItems.Where(su => su.SiteName == site);
+                    List<C_SignUp> signupsAtSite = ou.ToList();
+                    signupsAtSite.Sort(C_SignUp.CompareBySiteThenDateAscending);
+
+                    C_SectionInfo sectionInfo = new C_SectionInfo
+                    {
+                        Name = site,
+                        SignUps = signupsAtSite,
+                        Elements = new List<string>()
+                    };
+
+                    foreach (C_SignUp su in signupsAtSite)
+                    {
+                        C_WorkShift ws = Global.GetWorkShiftById(su.ShiftId);
+                        C_VitaUser u = Global.GetUserFromCacheNoFetch(su.UserId);
+                        string name = u != null ? u.Name : su.UserId.ToString();
+                        string shifts = ws != null ? " [" + ws.OpenTime.ToString("hh:mm") + " : " + ws.CloseTime.ToString("hh:mm") + "]" : "";
+
+                        sectionInfo.Elements.Add(name + " - " + su.SiteName + shifts);
+                    }
+
+                    Sections.Add(sectionInfo);
+                }
+            }
+
+            C_WorkItemsTableSource ts = new C_WorkItemsTableSource(Sections);
+            TV_WorkItems.Source = ts;
+            TV_WorkItems.Delegate = new C_WorkItemsTableDelegate(Global, this, ts);
+            TV_WorkItems.ReloadData();
+        }
 
         private void PopulateWorkItem()
         {
@@ -141,6 +233,13 @@ namespace vitaadmin
             TB_Hours.Enabled = en;
         }
 
+        public class C_SectionInfo
+        {
+            public string Name;
+            public List<string> Elements;
+            public List<C_SignUp> SignUps;
+        }
+
 		public class C_WorkItemsTableDelegate : UITableViewDelegate
 		{
 			readonly C_Global Global;
@@ -160,17 +259,23 @@ namespace vitaadmin
 
 			public override UITableViewRowAction[] EditActionsForRow(UITableView tableView, NSIndexPath indexPath)
 			{
+                int row = indexPath.Row;
+                int section = indexPath.Section;
+
 				UITableViewRowAction hiButton = UITableViewRowAction.Create(UITableViewRowActionStyle.Default, "Remove",
 				async delegate
 				{
-                    C_SignUp workitemToRemove = TableSource.OurWorkItems[indexPath.Row];
+                    C_SignUp workitemToRemove = TableSource.Sections[section].SignUps[row];
 
 					OurVC.AI_Busy.StartAnimating();
 					OurVC.EnableUI(false);
 
                     C_IOResult ior = await Global.RemoveIntent(workitemToRemove, Token);
                     if (ior.Success)
-    					TableSource.OurWorkItems.Remove(workitemToRemove);
+                    {
+                        TableSource.Sections[section].SignUps.RemoveAt(row);
+                        TableSource.Sections[section].Elements.RemoveAt(row);
+                    }
 
 					OurVC.EnableUI(true);
 					OurVC.AI_Busy.StopAnimating();
@@ -183,8 +288,8 @@ namespace vitaadmin
 
 			public override void RowSelected(UITableView tableView, NSIndexPath indexPath)
 			{
-				// identify the specific signup
-                Global.VolunteerSignUp = TableSource.OurWorkItems[indexPath.Row];
+                // identify the specific signup
+                Global.VolunteerSignUp = TableSource.Sections[indexPath.Section].SignUps[indexPath.Row];
 
 				OurVC.PopulateWorkItem();
 			}
@@ -193,34 +298,53 @@ namespace vitaadmin
 		public class C_WorkItemsTableSource : UITableViewSource
 		{
 			const string CellIdentifier = "TableCell_WorkItemsTableSource";
-            public List<C_SignUp> OurWorkItems;
-			readonly C_Global Global;
-            readonly int UserId;
-            readonly string SiteSlug;
 
-			public C_WorkItemsTableSource(C_Global global, List<C_SignUp> ourWorkitems, int userId, string siteSlug)
+            public readonly List<C_SectionInfo> Sections;
+
+            public C_WorkItemsTableSource(List<C_SectionInfo> sections)
 			{
-				Global = global;
-                //OurWorkItems = ourWorkitems;
-                UserId = userId;
-                SiteSlug = siteSlug;
-
-                OurWorkItems = new List<C_SignUp>();
-                foreach(C_SignUp su in ourWorkitems)
-                {
-                    if (((UserId == -1) || (UserId == su.UserId))
-                        && ((SiteSlug == null) || (su.SiteSlug == SiteSlug)))
-                        OurWorkItems.Add(su);
-                }
+                Sections = sections;
 			}
+
+            public override nint NumberOfSections(UITableView tableView)
+            {
+                return Sections.Count;
+            }
 
 			public override nint RowsInSection(UITableView tableview, nint section)
 			{
-				int count = 0;
-				if (OurWorkItems != null)
-					count = OurWorkItems.Count;
-				return count;
+                return Sections[(int)section].SignUps.Count;
 			}
+
+            public override string TitleForHeader(UITableView tableView, nint section)
+            {
+                return Sections[(int)section].Name;
+            }
+
+            //string[] IndexTitles;
+            //public override string[] SectionIndexTitles(UITableView tableView)
+            //{
+            //    List<string> indexTitles = new List<string>();
+            //    if (SortBy == 0) // date then site
+            //    {
+            //        foreach(C_YMD ymd in UniqueDates)
+            //            indexTitles.Add(ymd.ToString("yyyy-mm-dd"));
+            //    }
+            //    else // site then date
+            //    {
+            //        foreach (string s in UniqueSites)
+            //            indexTitles.Add(s);
+            //    }
+
+            //    IndexTitles = indexTitles.ToArray();
+
+            //    return IndexTitles;
+            //}
+
+            //public override string TitleForFooter(UITableView tableView, nint section)
+            //{
+            //    return " ";
+            //}
 
 			public override UITableViewCell GetCell(UITableView tableView, NSIndexPath indexPath)
 			{
@@ -230,30 +354,75 @@ namespace vitaadmin
 				if (cell == null)
 					cell = new UITableViewCell(UITableViewCellStyle.Subtitle, CellIdentifier);
 
-                C_SignUp workitem = OurWorkItems[indexPath.Row];
+                int row = indexPath.Row;
+                int section = indexPath.Section;
 
-                cell.DetailTextLabel.Text = workitem.Date.ToString("mmm dd, yyyy") + " at " + workitem.SiteName;
+                C_SectionInfo sectionInfo = Sections[section];
 
-                C_VitaUser user = Global.GetUserFromCacheNoFetch(workitem.UserId);
-                if (user == null)
-                    cell.TextLabel.Text = workitem.UserId.ToString();
-                else
-                    cell.TextLabel.Text = user.Name;
+                cell.TextLabel.Text = sectionInfo.Elements[row];
 
-                if (user == null)
-                {
-                    Task.Run(async () =>
-                    {
-                        C_VitaUser u = await Global.GetUserFromCache(workitem.UserId);
+                //if (SortBy == 0) // date then site
+                //{
+                //    if ((section >= 0) && (section < UniqueDates.Count))
+                //    {
+                //        C_YMD date = UniqueDates[section];
+                //        var ou = OurWorkItems.Where(su => su.Date == date);
+                //        List<C_SignUp> signupsOnDate = ou.ToList();
+                //        if ((row >= 0) && (row < signupsOnDate.Count))
+                //        {
+                //            C_SignUp ourSignUp = signupsOnDate[row];
 
-						UIApplication.SharedApplication.InvokeOnMainThread(
-                        new Action(() =>
-                        {
-                        	if (u != null)
-                        		cell.TextLabel.Text = u.Name;
-                        }));
-                    });
-                }
+                //            Task.Run(async () =>
+                //            {
+                //                C_VitaUser u = await Global.GetUserFromCache(ourSignUp.UserId);
+
+                //                C_WorkShift ws = Global.GetWorkShiftById(ourSignUp.ShiftId);
+
+                //                UIApplication.SharedApplication.InvokeOnMainThread(
+                //                new Action(() =>
+                //                {
+                //                    string name = u != null ? u.Name : ourSignUp.UserId.ToString();
+                //                    string shifts = ws != null ? " [" + ws.OpenTime.ToString("hh:mm") + " : " + ws.CloseTime.ToString("hh:mm") + "]" : "";
+
+                //                    cell.TextLabel.Text = name + " - " + ourSignUp.SiteName + shifts;
+                //                }));
+                //            });
+                //        }
+                //        else
+                //            Console.WriteLine("aaaa");
+                //    }
+                //    else
+                //        Console.WriteLine("hhh");
+                //}
+                //else // site then date
+                //{
+                //    if ((section >= 0) && (section < UniqueSites.Count))
+                //    {
+                //        string site = UniqueSites[section];
+                //        var ou = OurWorkItems.Where(su => su.SiteName == site);
+                //        List<C_SignUp> signupsAtSite = ou.ToList();
+                //        if ((row >= 0) && (row < signupsAtSite.Count))
+                //        {
+                //            C_SignUp ourSignUp = signupsAtSite[row];
+
+                //            Task.Run(async () =>
+                //            {
+                //                C_VitaUser u = await Global.GetUserFromCache(ourSignUp.UserId);
+
+                //                C_WorkShift ws = Global.GetWorkShiftById(ourSignUp.ShiftId);
+
+                //                UIApplication.SharedApplication.InvokeOnMainThread(
+                //                new Action(() =>
+                //                {
+                //                    string name = u != null ? u.Name : ourSignUp.UserId.ToString();
+                //                    string shifts = ws != null ? " [" + ws.OpenTime.ToString("hh:mm") + " : " + ws.CloseTime.ToString("hh:mm") + "]" : "";
+
+                //                    cell.TextLabel.Text = name + " - " + ourSignUp.SiteName + shifts;
+                //                }));
+                //            });
+                //        }
+                //    }
+                //}
 
 				return cell;
 			}

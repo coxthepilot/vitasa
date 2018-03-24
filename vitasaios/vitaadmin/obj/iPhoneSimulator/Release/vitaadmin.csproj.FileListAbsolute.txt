@@ -1,5 +1,4 @@
 /Users/Billy/Documents/source/vitasa/vitasaios/vitaadmin/bin/iPhoneSimulator/Release/vitaadmin.exe
-/Users/Billy/Documents/source/vitasa/vitasaios/vitaadmin/bin/iPhoneSimulator/Release/vitaadmin.pdb
 /Users/Billy/Documents/source/vitasa/vitasaios/vitaadmin/bin/iPhoneSimulator/Release/Xamarin.Forms.Core.dll
 /Users/Billy/Documents/source/vitasa/vitasaios/vitaadmin/bin/iPhoneSimulator/Release/Xamarin.Forms.Platform.dll
 /Users/Billy/Documents/source/vitasa/vitasaios/vitaadmin/bin/iPhoneSimulator/Release/Xamarin.Forms.Platform.iOS.dll
@@ -8,7 +7,6 @@
 /Users/Billy/Documents/source/vitasa/vitasaios/vitaadmin/bin/iPhoneSimulator/Release/Xamarin.Forms.Core.dll.mdb
 /Users/Billy/Documents/source/vitasa/vitasaios/vitaadmin/bin/iPhoneSimulator/Release/Xamarin.Forms.Core.xml
 /Users/Billy/Documents/source/vitasa/vitasaios/vitaadmin/bin/iPhoneSimulator/Release/Xamarin.Forms.Platform.iOS.pdb
-/Users/Billy/Documents/source/vitasa/vitasaios/vitaadmin/bin/iPhoneSimulator/Release/Xamarin.Forms.Platform.iOS.dll.mdb
 /Users/Billy/Documents/source/vitasa/vitasaios/vitaadmin/bin/iPhoneSimulator/Release/Xamarin.Forms.Xaml.pdb
 /Users/Billy/Documents/source/vitasa/vitasaios/vitaadmin/bin/iPhoneSimulator/Release/Xamarin.Forms.Xaml.dll.mdb
 /Users/Billy/Documents/source/vitasa/vitasaios/vitaadmin/bin/iPhoneSimulator/Release/Xamarin.Forms.Xaml.xml
@@ -52,4 +50,4 @@
 /Users/Billy/Documents/source/vitasa/vitasaios/vitaadmin/obj/iPhoneSimulator/Release/optimized/
 /Users/Billy/Documents/source/vitasa/vitasaios/vitaadmin/obj/iPhoneSimulator/Release/vitaadmin.csproj.CoreCompileInputs.cache
 /Users/Billy/Documents/source/vitasa/vitasaios/vitaadmin/obj/iPhoneSimulator/Release/vitaadmin.exe
-/Users/Billy/Documents/source/vitasa/vitasaios/vitaadmin/obj/iPhoneSimulator/Release/vitaadmin.pdb
+/Users/Billy/Documents/source/vitasa/vitasaios/vitaadmin/obj/iPhoneSimulator/Release/vitaadmin.csprojResolveAssemblyReference.cache
