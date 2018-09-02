@@ -21,7 +21,7 @@ Ldebug_info_begin:
 	.short 2
 	.long 0
 	.byte 8,1
-	.asciz "Mono AOT Compiler 5.4.0 (tarball Wed Jan 10 16:17:32 EST 2018)"
+	.asciz "Mono AOT Compiler 5.8.0 (tarball Thu Mar 29 18:51:02 EDT 2018)"
 	.asciz "Mono.Security.dll"
 	.asciz ""
 
@@ -121,7 +121,7 @@ jit_code_start:
 	.align 4
 	.no_dead_strip _Locale_GetText_string
 _Locale_GetText_string:
-.file 1 "/Library/Frameworks/Xamarin.iOS.framework/Versions/11.6.1.4/src/mono/mcs/build/common/Locale.cs"
+.file 1 "/Library/Frameworks/Xamarin.iOS.framework/Versions/11.9.1.24/src/Xamarin.iOS/mcs/build/common/Locale.cs"
 .loc 1 44 0 prologue_end
 .word 0xa9be7bfd
 .word 0x910003fd
@@ -136,7 +136,7 @@ Lme_0:
 	.align 4
 	.no_dead_strip Mono_Math_BigInteger__ctor_Mono_Math_BigInteger_Sign_uint
 Mono_Math_BigInteger__ctor_Mono_Math_BigInteger_Sign_uint:
-.file 2 "/Library/Frameworks/Xamarin.iOS.framework/Versions/11.6.1.4/src/mono/mcs/class/Mono.Security/Mono.Math/BigInteger.cs"
+.file 2 "/Library/Frameworks/Xamarin.iOS.framework/Versions/11.9.1.24/src/Xamarin.iOS/mcs/class/Mono.Security/Mono.Math/BigInteger.cs"
 .loc 2 57 0 prologue_end
 .word 0xa9bd7bfd
 .word 0x910003fd
@@ -150,7 +150,7 @@ Mono_Math_BigInteger__ctor_Mono_Math_BigInteger_Sign_uint:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #192]
+ldr x0, [x16, #200]
 .word 0xb94023a1
 bl _p_1
 .word 0xf9000b20
@@ -209,7 +209,7 @@ bl _p_2
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #200]
+ldr x1, [x16, #208]
 .word 0xeb01001f
 .word 0x10000011
 .word 0x54000301
@@ -239,7 +239,7 @@ ldr x1, [x16, #16]
 .word 0x910003bf
 .word 0xa8c37bfd
 .word 0xd65f03c0
-.word 0xd2801a80
+.word 0xd2801a60
 .word 0xaa1103e1
 bl _p_3
 
@@ -262,7 +262,7 @@ Mono_Math_BigInteger__ctor_Mono_Math_BigInteger_uint:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #192]
+ldr x0, [x16, #200]
 .word 0xaa1a03e1
 bl _p_1
 .word 0xf9000b00
@@ -316,7 +316,7 @@ ldr x2, [x16, #16]
 .word 0x910003bf
 .word 0xa8c37bfd
 .word 0xd65f03c0
-.word 0xd2801a00
+.word 0xd28019e0
 .word 0xaa1103e1
 bl _p_3
 
@@ -342,7 +342,7 @@ Mono_Math_BigInteger__ctor_byte__:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #208]
+ldr x0, [x16, #216]
 .word 0xd2800021
 bl _p_1
 .word 0xaa0003fa
@@ -365,7 +365,7 @@ bl _p_1
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #192]
+ldr x0, [x16, #200]
 bl _p_1
 .word 0xf9000b20
 .word 0x91004321
@@ -453,7 +453,7 @@ ldr x2, [x16, #16]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #216]
+ldr x0, [x16, #224]
 .word 0x8b010000
 .word 0xf9400000
 .word 0xd61f0000
@@ -547,7 +547,7 @@ bl _p_4
 .word 0x910003bf
 .word 0xa8c47bfd
 .word 0xd65f03c0
-.word 0xd2801a00
+.word 0xd28019e0
 .word 0xaa1103e1
 bl _p_3
 
@@ -568,7 +568,7 @@ Mono_Math_BigInteger__ctor_uint:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #192]
+ldr x0, [x16, #200]
 .word 0xd2800021
 bl _p_1
 .word 0xaa0003e1
@@ -597,7 +597,7 @@ ldr x2, [x16, #16]
 .word 0x910003bf
 .word 0xa8c27bfd
 .word 0xd65f03c0
-.word 0xd2801a00
+.word 0xd28019e0
 .word 0xaa1103e1
 bl _p_3
 
@@ -613,7 +613,7 @@ Mono_Math_BigInteger_op_Implicit_uint:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #224]
+ldr x0, [x16, #232]
 .word 0xd2800401
 bl _p_5
 .word 0xf90013a0
@@ -640,7 +640,7 @@ Mono_Math_BigInteger_op_Implicit_int:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #224]
+ldr x0, [x16, #232]
 .word 0xd2800401
 bl _p_5
 .word 0xf90013a0
@@ -658,7 +658,7 @@ ldr x0, [x16, #0]
 .word 0xd2800021
 bl _p_7
 .word 0xaa0003e1
-.word 0xd2801000
+.word 0xd2800fe0
 .word 0xf2a04000
 bl _mono_create_corlib_exception_1
 bl _p_8
@@ -683,7 +683,7 @@ bl _p_9
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #224]
+ldr x0, [x16, #232]
 .word 0xd2800401
 bl _p_5
 .word 0xf9001ba0
@@ -715,7 +715,7 @@ bl _p_11
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #232]
+ldr x0, [x16, #240]
 .word 0x8b010000
 .word 0xf9400000
 .word 0xd61f0000
@@ -736,13 +736,13 @@ ldr x0, [x16, #0]
 .word 0xd28001a1
 bl _p_7
 .word 0xaa0003e1
-.word 0xd2801020
+.word 0xd2801000
 .word 0xf2a04000
 bl _mono_create_corlib_exception_1
 bl _p_8
 .word 0x14000001
 .loc 2 375 0
-.word 0xd2801540
+.word 0xd2801520
 .word 0xf2a04000
 bl _mono_create_corlib_exception_0
 bl _p_8
@@ -758,7 +758,7 @@ ldr x0, [x16, #0]
 .word 0xd28001a1
 bl _p_7
 .word 0xaa0003e1
-.word 0xd2801020
+.word 0xd2801000
 .word 0xf2a04000
 bl _mono_create_corlib_exception_1
 bl _p_8
@@ -802,7 +802,7 @@ bl _p_15
 .word 0x910003bf
 .word 0xa8c27bfd
 .word 0xd65f03c0
-.word 0xd2801a00
+.word 0xd28019e0
 .word 0xaa1103e1
 bl _p_3
 
@@ -827,7 +827,7 @@ bl _p_15
 .word 0x910003bf
 .word 0xa8c27bfd
 .word 0xd65f03c0
-.word 0xd2801a00
+.word 0xd28019e0
 .word 0xaa1103e1
 bl _p_3
 
@@ -880,7 +880,7 @@ bl _p_12
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #224]
+ldr x0, [x16, #232]
 .word 0xd2800401
 bl _p_5
 .word 0xf9401fa2
@@ -918,7 +918,7 @@ ldr x0, [x16, #0]
 .word 0xd2800ba1
 bl _p_7
 .word 0xaa0003e1
-.word 0xd2801a00
+.word 0xd28019e0
 .word 0xf2a04000
 bl _mono_create_corlib_exception_1
 bl _p_8
@@ -930,7 +930,7 @@ ldr x0, [x16, #0]
 .word 0xd2800fe1
 bl _p_7
 .word 0xaa0003e1
-.word 0xd2801a00
+.word 0xd28019e0
 .word 0xf2a04000
 bl _mono_create_corlib_exception_1
 bl _p_8
@@ -980,26 +980,26 @@ Mono_Math_BigInteger_get_Rng:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #240]
+ldr x0, [x16, #248]
 .word 0xf9400000
 .word 0xb5000140
 .loc 2 511 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #248]
+ldr x0, [x16, #256]
 bl _p_20
 .word 0xaa0003e1
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #240]
+ldr x0, [x16, #248]
 .word 0xf9000001
 .loc 2 512 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #240]
+ldr x0, [x16, #248]
 .word 0xf9400000
 .word 0x910003bf
 .word 0xa8c17bfd
@@ -1033,7 +1033,7 @@ Mono_Math_BigInteger_GenerateRandom_int_System_Security_Cryptography_RandomNumbe
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #224]
+ldr x0, [x16, #232]
 .word 0xd2800401
 bl _p_5
 .word 0xf94027a2
@@ -1047,7 +1047,7 @@ bl _p_16
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #208]
+ldr x0, [x16, #216]
 bl _p_1
 .word 0xaa0003f6
 .loc 2 533 0
@@ -1137,7 +1137,7 @@ bl _p_4
 .word 0x910003bf
 .word 0xa8c57bfd
 .word 0xd65f03c0
-.word 0xd2801a00
+.word 0xd28019e0
 .word 0xaa1103e1
 bl _p_3
 
@@ -1211,7 +1211,7 @@ bl _p_4
 .word 0x910003bf
 .word 0xa8c37bfd
 .word 0xd65f03c0
-.word 0xd2801a00
+.word 0xd28019e0
 .word 0xaa1103e1
 bl _p_3
 
@@ -1278,11 +1278,11 @@ ldr x0, [x16, #0]
 .word 0xd2801421
 bl _p_7
 .word 0xaa0003e1
-.word 0xd2801a00
+.word 0xd28019e0
 .word 0xf2a04000
 bl _mono_create_corlib_exception_1
 bl _p_8
-.word 0xd2801a00
+.word 0xd28019e0
 .word 0xaa1103e1
 bl _p_3
 
@@ -1371,7 +1371,7 @@ Mono_Math_BigInteger_SetBit_uint_bool:
 .word 0x910003bf
 .word 0xa8c37bfd
 .word 0xd65f03c0
-.word 0xd2801a00
+.word 0xd28019e0
 .word 0xaa1103e1
 bl _p_3
 
@@ -1431,7 +1431,7 @@ bl _p_9
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #208]
+ldr x0, [x16, #216]
 .word 0xd2800021
 bl _p_1
 .word 0x1400003b
@@ -1453,7 +1453,7 @@ bl _p_26
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #208]
+ldr x0, [x16, #216]
 .word 0xaa1903e1
 bl _p_1
 .word 0xaa0003f8
@@ -1519,7 +1519,7 @@ bl _p_1
 .word 0x910003bf
 .word 0xa8c57bfd
 .word 0xd65f03c0
-.word 0xd2801a00
+.word 0xd28019e0
 .word 0xaa1103e1
 bl _p_3
 
@@ -1561,7 +1561,7 @@ bl _p_4
 .word 0x910003bf
 .word 0xa8c27bfd
 .word 0xd65f03c0
-.word 0xd2801a00
+.word 0xd28019e0
 .word 0xaa1103e1
 bl _p_3
 
@@ -1605,7 +1605,7 @@ bl _p_4
 .word 0x910003bf
 .word 0xa8c27bfd
 .word 0xd65f03c0
-.word 0xd2801a00
+.word 0xd28019e0
 .word 0xaa1103e1
 bl _p_3
 
@@ -1790,7 +1790,7 @@ Mono_Math_BigInteger_ToString_uint:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x2, [x16, #256]
+ldr x2, [x16, #264]
 .word 0xf9400ba0
 .word 0xb9401ba1
 bl _p_28
@@ -1816,11 +1816,11 @@ Mono_Math_BigInteger_ToString_uint_string:
 .word 0x93407c00
 .word 0x2a1903e1
 .word 0xeb01001f
-.word 0x54000a8b
+.word 0x54000aab
 .loc 2 805 0
 .word 0xd280003e
 .word 0x6b1e033f
-.word 0x54000800
+.word 0x54000820
 .loc 2 808 0
 .word 0xaa1803e0
 .word 0xd2800001
@@ -1830,8 +1830,8 @@ bl _p_9
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #264]
-.word 0x14000031
+ldr x0, [x16, #272]
+.word 0x14000032
 .loc 2 809 0
 .word 0xaa1803e0
 .word 0xd2800021
@@ -1841,18 +1841,18 @@ bl _p_9
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #272]
-.word 0x14000028
+ldr x0, [x16, #280]
+.word 0x14000029
 .loc 2 811 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x23, [x16, #280]
+ldr x23, [x16, #288]
 .loc 2 813 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #224]
+ldr x0, [x16, #232]
 .word 0xd2800401
 bl _p_5
 .word 0xf90023a0
@@ -1860,7 +1860,7 @@ bl _p_5
 bl _p_10
 .word 0xf94023a0
 .word 0xaa0003f8
-.word 0x14000014
+.word 0x14000015
 .loc 2 816 0
 .word 0xaa1803e0
 .word 0xaa1903e1
@@ -1871,10 +1871,11 @@ bl _p_29
 .word 0xb9801341
 .word 0xeb00003f
 .word 0x10000011
-.word 0x54000729
+.word 0x54000749
 .word 0xd37ff800
 .word 0x8b1a0000
-.word 0x79402816
+.word 0x79402800
+.word 0x53003c16
 .word 0xaa1603e1
 .word 0xd2800000
 .word 0xd2800022
@@ -1887,7 +1888,7 @@ bl _p_31
 .word 0xd2800001
 bl _p_32
 .word 0x53001c00
-.word 0x35fffd20
+.word 0x35fffd00
 .loc 2 820 0
 .word 0xaa1703e0
 .word 0xa9415fb6
@@ -1912,7 +1913,7 @@ ldr x0, [x16, #0]
 bl _p_7
 .word 0xaa0003e2
 .word 0xf94023a1
-.word 0xd2800fc0
+.word 0xd2800fa0
 .word 0xf2a04000
 bl _mono_create_corlib_exception_2
 bl _p_8
@@ -1932,11 +1933,11 @@ ldr x0, [x16, #0]
 bl _p_7
 .word 0xaa0003e2
 .word 0xf94023a1
-.word 0xd2800fc0
+.word 0xd2800fa0
 .word 0xf2a04000
 bl _mono_create_corlib_exception_2
 bl _p_8
-.word 0xd2801a00
+.word 0xd28019e0
 .word 0xaa1103e1
 bl _p_3
 
@@ -1983,7 +1984,7 @@ Mono_Math_BigInteger_Normalize:
 .word 0x910003bf
 .word 0xa8c27bfd
 .word 0xd65f03c0
-.word 0xd2801a00
+.word 0xd28019e0
 .word 0xaa1103e1
 bl _p_3
 
@@ -2022,7 +2023,7 @@ Mono_Math_BigInteger_Clear:
 .word 0x910003bf
 .word 0xa8c27bfd
 .word 0xd65f03c0
-.word 0xd2801a00
+.word 0xd28019e0
 .word 0xaa1103e1
 bl _p_3
 
@@ -2065,7 +2066,7 @@ Mono_Math_BigInteger_GetHashCode:
 .word 0x910003bf
 .word 0xa8c37bfd
 .word 0xd65f03c0
-.word 0xd2801a00
+.word 0xd28019e0
 .word 0xaa1103e1
 bl _p_3
 
@@ -2112,7 +2113,7 @@ Mono_Math_BigInteger_Equals_object:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #200]
+ldr x1, [x16, #208]
 .word 0xeb01001f
 .word 0x54000040
 .word 0xd2800018
@@ -2128,7 +2129,7 @@ ldr x1, [x16, #200]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #200]
+ldr x1, [x16, #208]
 .word 0xeb01001f
 .word 0x10000011
 .word 0x54000701
@@ -2145,7 +2146,7 @@ ldr x1, [x16, #200]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #288]
+ldr x1, [x16, #296]
 .word 0xeb01001f
 .word 0x10000011
 .word 0x54000501
@@ -2167,7 +2168,7 @@ bl _p_9
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #296]
+ldr x1, [x16, #304]
 .word 0xeb01001f
 .word 0x54000040
 .word 0xd2800018
@@ -2193,7 +2194,7 @@ bl _p_11
 .word 0x910003bf
 .word 0xa8c37bfd
 .word 0xd65f03c0
-.word 0xd2801a80
+.word 0xd2801a60
 .word 0xaa1103e1
 bl _p_3
 
@@ -2226,7 +2227,7 @@ Mono_Math_BigInteger_GeneratePseudoPrime_int:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #304]
+ldr x0, [x16, #312]
 .word 0xd2800201
 bl _p_5
 .word 0xaa0003e2
@@ -2332,7 +2333,7 @@ Mono_Math_BigInteger_Incr2:
 .word 0x910003bf
 .word 0xa8c27bfd
 .word 0xd65f03c0
-.word 0xd2801a00
+.word 0xd28019e0
 .word 0xaa1103e1
 bl _p_3
 
@@ -2347,7 +2348,7 @@ Mono_Math_BigInteger__cctor:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #192]
+ldr x0, [x16, #200]
 .word 0xd28061e1
 bl _p_1
 .word 0xf9000ba0
@@ -2355,14 +2356,14 @@ bl _p_1
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #312]
+ldr x1, [x16, #320]
 .word 0xd2818782
 bl _p_35
 .word 0xf9400ba1
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #320]
+ldr x0, [x16, #328]
 .word 0xf9000001
 .word 0x910003bf
 .word 0xa8c27bfd
@@ -2404,7 +2405,7 @@ ldr x2, [x16, #16]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #224]
+ldr x0, [x16, #232]
 .word 0xd2800401
 bl _p_5
 .word 0xf9401ba2
@@ -2461,7 +2462,7 @@ ldr x2, [x16, #16]
 .word 0x910003bf
 .word 0xa8c47bfd
 .word 0xd65f03c0
-.word 0xd2801a00
+.word 0xd28019e0
 .word 0xaa1103e1
 bl _p_3
 
@@ -2513,7 +2514,7 @@ Mono_Math_BigInteger_ModulusRing_BarrettReduction_Mono_Math_BigInteger:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #224]
+ldr x0, [x16, #232]
 .word 0xd2800401
 bl _p_5
 .word 0xf94027a2
@@ -2553,7 +2554,7 @@ bl _p_4
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #224]
+ldr x0, [x16, #232]
 .word 0xd2800401
 bl _p_5
 .word 0xf90023a0
@@ -2596,7 +2597,7 @@ bl _p_39
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #224]
+ldr x0, [x16, #232]
 .word 0xd2800401
 bl _p_5
 .word 0xf94027a2
@@ -2652,11 +2653,11 @@ ldr x0, [x16, #0]
 .word 0xd2803b61
 bl _p_7
 .word 0xaa0003e1
-.word 0xd2801a00
+.word 0xd28019e0
 .word 0xf2a04000
 bl _mono_create_corlib_exception_1
 bl _p_8
-.word 0xd2801a00
+.word 0xd28019e0
 .word 0xaa1103e1
 bl _p_3
 
@@ -2757,7 +2758,7 @@ bl _p_11
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #328]
+ldr x0, [x16, #336]
 .word 0x8b010000
 .word 0xf9400000
 .word 0xd61f0000
@@ -2778,7 +2779,7 @@ bl _p_46
 .word 0xaa0003fa
 .word 0x14000005
 .loc 2 1080 0
-.word 0xd2801540
+.word 0xd2801520
 .word 0xf2a04000
 bl _mono_create_corlib_exception_0
 bl _p_8
@@ -2841,7 +2842,7 @@ Mono_Math_BigInteger_ModulusRing_Pow_Mono_Math_BigInteger_Mono_Math_BigInteger:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #224]
+ldr x0, [x16, #232]
 .word 0xd2800401
 bl _p_5
 .word 0xf90023a0
@@ -2922,7 +2923,7 @@ Mono_Math_BigInteger_ModulusRing_Pow_uint_Mono_Math_BigInteger:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #224]
+ldr x0, [x16, #232]
 .word 0xd2800401
 bl _p_5
 .word 0xf9001ba0
@@ -2955,7 +2956,7 @@ Mono_Math_BigInteger_Kernel_Subtract_Mono_Math_BigInteger_Mono_Math_BigInteger:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #224]
+ldr x0, [x16, #232]
 .word 0xd2800401
 bl _p_5
 .word 0xf94037a2
@@ -3116,7 +3117,7 @@ bl _p_4
 .word 0x910003bf
 .word 0xa8c77bfd
 .word 0xd65f03c0
-.word 0xd2801a00
+.word 0xd28019e0
 .word 0xaa1103e1
 bl _p_3
 
@@ -3258,7 +3259,7 @@ Mono_Math_BigInteger_Kernel_MinusEq_Mono_Math_BigInteger_Mono_Math_BigInteger:
 .word 0x910003bf
 .word 0xa8c57bfd
 .word 0xd65f03c0
-.word 0xd2801a00
+.word 0xd28019e0
 .word 0xaa1103e1
 bl _p_3
 
@@ -3278,15 +3279,17 @@ Mono_Math_BigInteger_Kernel_PlusEq_Mono_Math_BigInteger_Mono_Math_BigInteger:
 .word 0xaa0103fa
 .word 0xd2800018
 .loc 2 1711 0
-.word 0xd2800017
+.word 0xd2800000
+.word 0x53001c17
 .loc 2 1714 0
 .word 0xf9402ba0
 .word 0xb9401800
 .word 0xb9401b41
 .word 0x6b01001f
-.word 0x54000102
+.word 0x54000122
 .loc 2 1715 0
-.word 0xd2800037
+.word 0xd2800020
+.word 0x53001c17
 .loc 2 1716 0
 .word 0xf9400b56
 .loc 2 1717 0
@@ -3317,7 +3320,7 @@ Mono_Math_BigInteger_Kernel_PlusEq_Mono_Math_BigInteger_Mono_Math_BigInteger:
 .word 0xb9801ac1
 .word 0xeb00003f
 .word 0x10000011
-.word 0x54001089
+.word 0x540010c9
 .word 0xd37ef400
 .word 0x8b0002c0
 .word 0x91008000
@@ -3327,7 +3330,7 @@ Mono_Math_BigInteger_Kernel_PlusEq_Mono_Math_BigInteger_Mono_Math_BigInteger:
 .word 0xb9801a82
 .word 0xeb01005f
 .word 0x10000011
-.word 0x54000f49
+.word 0x54000f89
 .word 0xd37ef421
 .word 0x8b010281
 .word 0x91008021
@@ -3343,7 +3346,7 @@ Mono_Math_BigInteger_Kernel_PlusEq_Mono_Math_BigInteger_Mono_Math_BigInteger:
 .word 0xb9801b42
 .word 0xeb00005f
 .word 0x10000011
-.word 0x54000d69
+.word 0x54000da9
 .word 0xd37ef400
 .word 0x8b000340
 .word 0x91008000
@@ -3361,19 +3364,20 @@ Mono_Math_BigInteger_Kernel_PlusEq_Mono_Math_BigInteger_Mono_Math_BigInteger:
 .loc 2 1739 0
 .word 0xf9402fa0
 .word 0xeb1f001f
-.word 0x9a9f97f9
+.word 0x9a9f97e0
+.word 0x53001c19
 .loc 2 1741 0
 .word 0xaa1903e0
-.word 0x34000640
+.word 0x34000660
 .loc 2 1743 0
 .word 0x6b15031f
-.word 0x540003e2
+.word 0x54000402
 .loc 2 1745 0
 .word 0x93407f00
 .word 0xb9801ac1
 .word 0xeb00003f
 .word 0x10000011
-.word 0x54000a69
+.word 0x54000a89
 .word 0xd37ef400
 .word 0x8b0002c0
 .word 0x91008000
@@ -3385,13 +3389,14 @@ Mono_Math_BigInteger_Kernel_PlusEq_Mono_Math_BigInteger_Mono_Math_BigInteger:
 .word 0xb9801b43
 .word 0xeb01007f
 .word 0x10000011
-.word 0x540008e9
+.word 0x54000909
 .word 0xd37ef421
 .word 0x8b010341
 .word 0x91008021
 .word 0xb9000022
 .word 0x6b1f001f
-.word 0x9a9f17f9
+.word 0x9a9f17e0
+.word 0x53001c19
 .loc 2 1746 0
 .word 0x11000701
 .word 0xaa0103e0
@@ -3399,7 +3404,7 @@ Mono_Math_BigInteger_Kernel_PlusEq_Mono_Math_BigInteger_Mono_Math_BigInteger:
 .word 0x6b15001f
 .word 0x9a9f27e0
 .word 0xa190000
-.word 0x35fffc60
+.word 0x35fffc40
 .loc 2 1749 0
 .word 0x34000239
 .loc 2 1750 0
@@ -3467,7 +3472,7 @@ bl _p_4
 .word 0x910003bf
 .word 0xa8c67bfd
 .word 0xd65f03c0
-.word 0xd2801a00
+.word 0xd28019e0
 .word 0xaa1103e1
 bl _p_3
 
@@ -3623,7 +3628,7 @@ Mono_Math_BigInteger_Kernel_Compare_Mono_Math_BigInteger_Mono_Math_BigInteger:
 .word 0x910003bf
 .word 0xa8c37bfd
 .word 0xd65f03c0
-.word 0xd2801a00
+.word 0xd28019e0
 .word 0xaa1103e1
 bl _p_3
 
@@ -3705,10 +3710,10 @@ bl _p_4
 .word 0x910003bf
 .word 0xa8c37bfd
 .word 0xd65f03c0
-.word 0xd2801400
+.word 0xd28013e0
 .word 0xaa1103e1
 bl _p_3
-.word 0xd2801a00
+.word 0xd28019e0
 .word 0xaa1103e1
 bl _p_3
 
@@ -3767,10 +3772,10 @@ Mono_Math_BigInteger_Kernel_DwordMod_Mono_Math_BigInteger_uint:
 .word 0x910003bf
 .word 0xa8c37bfd
 .word 0xd65f03c0
-.word 0xd2801400
+.word 0xd28013e0
 .word 0xaa1103e1
 bl _p_3
-.word 0xd2801a00
+.word 0xd28019e0
 .word 0xaa1103e1
 bl _p_3
 
@@ -3792,7 +3797,7 @@ Mono_Math_BigInteger_Kernel_DwordDivMod_Mono_Math_BigInteger_uint:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #224]
+ldr x0, [x16, #232]
 .word 0xd2800401
 bl _p_5
 .word 0xf94027a2
@@ -3869,7 +3874,7 @@ bl _p_49
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #336]
+ldr x0, [x16, #344]
 .word 0xd2800041
 bl _p_1
 .word 0xaa0003e3
@@ -3897,10 +3902,10 @@ bl _p_1
 .word 0x910003bf
 .word 0xa8c57bfd
 .word 0xd65f03c0
-.word 0xd2801400
+.word 0xd28013e0
 .word 0xaa1103e1
 bl _p_3
-.word 0xd2801a00
+.word 0xd28019e0
 .word 0xaa1103e1
 bl _p_3
 
@@ -3930,7 +3935,7 @@ bl _p_11
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #336]
+ldr x0, [x16, #344]
 .word 0xd2800041
 bl _p_1
 .word 0xf90063a0
@@ -3950,7 +3955,7 @@ bl _p_12
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #224]
+ldr x0, [x16, #232]
 .word 0xd2800401
 bl _p_5
 .word 0xf90057a0
@@ -4040,7 +4045,7 @@ bl _p_50
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #224]
+ldr x0, [x16, #232]
 .word 0xd2800401
 bl _p_5
 .word 0xf94057a2
@@ -4368,7 +4373,7 @@ bl _p_4
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #336]
+ldr x0, [x16, #344]
 .word 0xd2800041
 bl _p_1
 .word 0xaa0003e3
@@ -4400,7 +4405,7 @@ bl _p_1
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x2, [x16, #336]
+ldr x2, [x16, #344]
 .word 0xeb02003f
 .word 0x10000011
 .word 0x540004e1
@@ -4441,13 +4446,13 @@ ldr x2, [x16, #16]
 .word 0x910003bf
 .word 0xa8cd7bfd
 .word 0xd65f03c0
-.word 0xd2801a00
+.word 0xd28019e0
 .word 0xaa1103e1
 bl _p_3
-.word 0xd2801080
+.word 0xd2801060
 .word 0xaa1103e1
 bl _p_3
-.word 0xd2801400
+.word 0xd28013e0
 .word 0xaa1103e1
 bl _p_3
 
@@ -4472,7 +4477,7 @@ Mono_Math_BigInteger_Kernel_LeftShift_Mono_Math_BigInteger_int:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #224]
+ldr x0, [x16, #232]
 .word 0xd2800401
 bl _p_5
 .word 0xf9402fa2
@@ -4494,7 +4499,7 @@ bl _p_53
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #224]
+ldr x0, [x16, #232]
 .word 0xd2800401
 bl _p_5
 .word 0xf9402fa2
@@ -4609,7 +4614,7 @@ bl _p_4
 .word 0x910003bf
 .word 0xa8c67bfd
 .word 0xd65f03c0
-.word 0xd2801a00
+.word 0xd28019e0
 .word 0xaa1103e1
 bl _p_3
 
@@ -4631,7 +4636,7 @@ Mono_Math_BigInteger_Kernel_RightShift_Mono_Math_BigInteger_int:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #224]
+ldr x0, [x16, #232]
 .word 0xd2800401
 bl _p_5
 .word 0xf9002ba0
@@ -4653,7 +4658,7 @@ bl _p_10
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #224]
+ldr x0, [x16, #232]
 .word 0xd2800401
 bl _p_5
 .word 0xf94033a2
@@ -4756,7 +4761,7 @@ bl _p_4
 .word 0x910003bf
 .word 0xa8c77bfd
 .word 0xd65f03c0
-.word 0xd2801a00
+.word 0xd28019e0
 .word 0xaa1103e1
 bl _p_3
 
@@ -4913,7 +4918,7 @@ Mono_Math_BigInteger_Kernel_Multiply_uint___uint_uint_uint___uint_uint_uint___ui
 .word 0x910003bf
 .word 0xa8c67bfd
 .word 0xd65f03c0
-.word 0xd2801a00
+.word 0xd28019e0
 .word 0xaa1103e1
 bl _p_3
 
@@ -5094,7 +5099,7 @@ Mono_Math_BigInteger_Kernel_MultiplyMod2p32pmod_uint___int_int_uint___int_int_ui
 .word 0x910003bf
 .word 0xa8c87bfd
 .word 0xd65f03c0
-.word 0xd2801a00
+.word 0xd28019e0
 .word 0xaa1103e1
 bl _p_3
 
@@ -5184,7 +5189,7 @@ bl _p_54
 .word 0x910003bf
 .word 0xa8c47bfd
 .word 0xd65f03c0
-.word 0xd2801400
+.word 0xd28013e0
 .word 0xaa1103e1
 bl _p_3
 
@@ -5220,7 +5225,7 @@ bl _p_49
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #336]
+ldr x0, [x16, #344]
 .word 0xd2800041
 bl _p_1
 .word 0xf9004ba0
@@ -5252,7 +5257,7 @@ bl _p_12
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #336]
+ldr x0, [x16, #344]
 .word 0xd2800041
 bl _p_1
 .word 0xaa0003f7
@@ -5260,7 +5265,7 @@ bl _p_1
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #336]
+ldr x0, [x16, #344]
 .word 0xd2800041
 bl _p_1
 .word 0xf9003ba0
@@ -5298,7 +5303,7 @@ bl _p_12
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #344]
+ldr x0, [x16, #352]
 .word 0xd2800401
 bl _p_5
 .word 0xf9002ba0
@@ -5470,11 +5475,11 @@ ldr x0, [x16, #0]
 .word 0xd2803f21
 bl _p_7
 .word 0xaa0003e1
-.word 0xd2801020
+.word 0xd2801000
 .word 0xf2a04000
 bl _mono_create_corlib_exception_1
 bl _p_8
-.word 0xd2801a00
+.word 0xd28019e0
 .word 0xaa1103e1
 bl _p_3
 
@@ -5483,7 +5488,7 @@ Lme_3e:
 	.align 4
 	.no_dead_strip Mono_Math_Prime_PrimalityTests_GetSPPRounds_Mono_Math_BigInteger_Mono_Math_Prime_ConfidenceFactor
 Mono_Math_Prime_PrimalityTests_GetSPPRounds_Mono_Math_BigInteger_Mono_Math_Prime_ConfidenceFactor:
-.file 3 "/Library/Frameworks/Xamarin.iOS.framework/Versions/11.6.1.4/src/mono/mcs/class/Mono.Security/Mono.Math.Prime/PrimalityTests.cs"
+.file 3 "/Library/Frameworks/Xamarin.iOS.framework/Versions/11.9.1.24/src/Xamarin.iOS/mcs/class/Mono.Security/Mono.Math.Prime/PrimalityTests.cs"
 .loc 3 57 0 prologue_end
 .word 0xa9bd7bfd
 .word 0x910003fd
@@ -5577,7 +5582,7 @@ bl _p_26
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #352]
+ldr x0, [x16, #360]
 .word 0x8b010000
 .word 0xf9400000
 .word 0xd61f0000
@@ -5616,7 +5621,7 @@ ldr x0, [x16, #0]
 .word 0xd2804221
 bl _p_7
 .word 0xaa0003e1
-.word 0xd2801540
+.word 0xd2801520
 .word 0xf2a04000
 bl _mono_create_corlib_exception_1
 bl _p_8
@@ -5629,7 +5634,7 @@ ldr x0, [x16, #0]
 .word 0xd28057c1
 bl _p_7
 .word 0xaa0003e1
-.word 0xd2801000
+.word 0xd2800fe0
 .word 0xf2a04000
 bl _mono_create_corlib_exception_1
 bl _p_8
@@ -5687,7 +5692,7 @@ bl _p_52
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #344]
+ldr x0, [x16, #352]
 .word 0xd2800401
 bl _p_5
 .word 0xf90033a0
@@ -5816,7 +5821,7 @@ Lme_44:
 	.align 4
 	.no_dead_strip Mono_Math_Prime_Generator_PrimeGeneratorBase_get_Confidence
 Mono_Math_Prime_Generator_PrimeGeneratorBase_get_Confidence:
-.file 4 "/Library/Frameworks/Xamarin.iOS.framework/Versions/11.6.1.4/src/mono/mcs/class/Mono.Security/Mono.Math.Prime.Generator/PrimeGeneratorBase.cs"
+.file 4 "/Library/Frameworks/Xamarin.iOS.framework/Versions/11.9.1.24/src/Xamarin.iOS/mcs/class/Mono.Security/Mono.Math.Prime.Generator/PrimeGeneratorBase.cs"
 .loc 4 47 0 prologue_end
 .word 0xa9be7bfd
 .word 0x910003fd
@@ -5838,23 +5843,23 @@ Mono_Math_Prime_Generator_PrimeGeneratorBase_get_PrimalityTest:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #360]
+ldr x0, [x16, #368]
 .word 0xd2800e01
 bl _p_5
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #368]
+ldr x1, [x16, #376]
 .word 0xf9001401
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #376]
+ldr x1, [x16, #384]
 .word 0xf9002001
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #384]
+ldr x1, [x16, #392]
 .word 0xf9401422
 .word 0xf9000c02
 .word 0xf9401021
@@ -5895,7 +5900,7 @@ Lme_49:
 	.align 4
 	.no_dead_strip Mono_Math_Prime_Generator_SequentialSearchPrimeGeneratorBase_GenerateSearchBase_int_object
 Mono_Math_Prime_Generator_SequentialSearchPrimeGeneratorBase_GenerateSearchBase_int_object:
-.file 5 "/Library/Frameworks/Xamarin.iOS.framework/Versions/11.6.1.4/src/mono/mcs/class/Mono.Security/Mono.Math.Prime.Generator/SequentialSearchPrimeGeneratorBase.cs"
+.file 5 "/Library/Frameworks/Xamarin.iOS.framework/Versions/11.9.1.24/src/Xamarin.iOS/mcs/class/Mono.Security/Mono.Math.Prime.Generator/SequentialSearchPrimeGeneratorBase.cs"
 .loc 5 41 0 prologue_end
 .word 0xa9bc7bfd
 .word 0x910003fd
@@ -5978,7 +5983,7 @@ bl _p_54
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #320]
+ldr x0, [x16, #328]
 .word 0xf9400015
 .loc 5 74 0
 .word 0xd2800060
@@ -6144,10 +6149,10 @@ bl _p_64
 .word 0x910003bf
 .word 0xa8c67bfd
 .word 0xd65f03c0
-.word 0xd2801a00
+.word 0xd28019e0
 .word 0xaa1103e1
 bl _p_3
-.word 0xd2801400
+.word 0xd28013e0
 .word 0xaa1103e1
 bl _p_3
 
@@ -6184,7 +6189,7 @@ Lme_4e:
 	.align 4
 	.no_dead_strip Mono_Security_ASN1__ctor_byte
 Mono_Security_ASN1__ctor_byte:
-.file 6 "/Library/Frameworks/Xamarin.iOS.framework/Versions/11.6.1.4/src/mono/mcs/class/Mono.Security/Mono.Security/ASN1.cs"
+.file 6 "/Library/Frameworks/Xamarin.iOS.framework/Versions/11.9.1.24/src/Xamarin.iOS/mcs/class/Mono.Security/Mono.Security/ASN1.cs"
 .loc 6 56 0 prologue_end
 .word 0xa9be7bfd
 .word 0x910003fd
@@ -6300,7 +6305,7 @@ Mono_Security_ASN1__ctor_byte__:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #208]
+ldr x0, [x16, #216]
 .word 0xaa1703e1
 bl _p_1
 .word 0xf9000b20
@@ -6354,11 +6359,11 @@ ldr x0, [x16, #0]
 .word 0xd2805a81
 bl _p_7
 .word 0xaa0003e1
-.word 0xd2801c40
+.word 0xd2801c20
 .word 0xf2a04000
 bl _mono_create_corlib_exception_1
 bl _p_8
-.word 0xd2801a00
+.word 0xd28019e0
 .word 0xaa1103e1
 bl _p_3
 
@@ -6464,7 +6469,7 @@ bl _p_2
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #392]
+ldr x1, [x16, #400]
 .word 0xeb01001f
 .word 0x10000011
 .word 0x54000141
@@ -6477,7 +6482,7 @@ ldr x1, [x16, #392]
 .word 0x910003bf
 .word 0xa8c27bfd
 .word 0xd65f03c0
-.word 0xd2801a80
+.word 0xd2801a60
 .word 0xaa1103e1
 bl _p_3
 
@@ -6512,7 +6517,7 @@ bl _p_2
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #392]
+ldr x1, [x16, #400]
 .word 0xeb01001f
 .word 0x10000011
 .word 0x540002c1
@@ -6539,7 +6544,7 @@ ldr x1, [x16, #16]
 .word 0x910003bf
 .word 0xa8c27bfd
 .word 0xd65f03c0
-.word 0xd2801a80
+.word 0xd2801a60
 .word 0xaa1103e1
 bl _p_3
 
@@ -6559,7 +6564,8 @@ Mono_Security_ASN1_CompareArray_byte___byte__:
 .word 0xb9801b20
 .word 0xb9801b41
 .word 0x6b01001f
-.word 0x9a9f17f8
+.word 0x9a9f17e0
+.word 0x53001c18
 .loc 6 130 0
 .word 0xaa1803e0
 .word 0x34000360
@@ -6600,7 +6606,7 @@ Mono_Security_ASN1_CompareArray_byte___byte__:
 .word 0x910003bf
 .word 0xa8c47bfd
 .word 0xd65f03c0
-.word 0xd2801a00
+.word 0xd28019e0
 .word 0xaa1103e1
 bl _p_3
 
@@ -6643,13 +6649,13 @@ Mono_Security_ASN1_Add_Mono_Security_ASN1:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #400]
+ldr x0, [x16, #408]
 .word 0xd2800401
 bl _p_5
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #408]
+ldr x1, [x16, #416]
 .word 0xf9400021
 .word 0xf9000801
 .word 0x91004002
@@ -6713,20 +6719,20 @@ Mono_Security_ASN1_GetBytes:
 bl _p_68
 .word 0x93407c00
 .word 0x6b1f001f
-.word 0x5400174d
+.word 0x540017cd
 .loc 6 164 0
 .word 0xd2800019
 .loc 6 165 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #400]
+ldr x0, [x16, #408]
 .word 0xd2800401
 bl _p_5
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #408]
+ldr x1, [x16, #416]
 .word 0xf9400021
 .word 0xf9000801
 .word 0x91004002
@@ -6756,7 +6762,7 @@ ldr x3, [x16, #16]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x15, [x16, #416]
+ldr x15, [x16, #424]
 .word 0x928003f0
 .word 0xf2bffff0
 .word 0xf8706830
@@ -6770,10 +6776,10 @@ ldr x15, [x16, #416]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #424]
+ldr x1, [x16, #432]
 .word 0xeb01001f
 .word 0x10000011
-.word 0x540029a1
+.word 0x54002a21
 .loc 6 167 0
 .word 0xaa1703e0
 .word 0xf94002e1
@@ -6797,40 +6803,44 @@ ldr x1, [x16, #424]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x15, [x16, #432]
+ldr x15, [x16, #440]
 .word 0x92800ef0
 .word 0xf2bffff0
 .word 0xf8706830
 .word 0xd63f0200
 .word 0x53001c00
 .word 0x35fffa40
-.word 0x94000002
+.word 0xf9002fbf
+.word 0x94000005
+.word 0xf9402fa0
+.word 0xb4000040
+bl _p_69
 .word 0x14000034
-.word 0xf90043be
+.word 0xf90047be
 .word 0xf94027a0
-.word 0xf9002fa0
-.word 0xf9402fa0
 .word 0xf90033a0
-.word 0xf9402fa0
+.word 0xf94033a0
+.word 0xf90037a0
+.word 0xf94033a0
 .word 0xeb1f001f
 .word 0x54000380
-.word 0xf9402fa0
+.word 0xf94033a0
 .word 0xf9400000
-.word 0xf90037a0
-.word 0xf94037a0
+.word 0xf9003ba0
+.word 0xf9403ba0
 .word 0xb9402800
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #440]
+ldr x1, [x16, #448]
 .word 0xeb01001f
 .word 0x540001e3
-.word 0xf94037a0
+.word 0xf9403ba0
 .word 0xf9401000
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #440]
+ldr x1, [x16, #448]
 .word 0x9343fc22
 .word 0x8b020000
 .word 0x39400000
@@ -6841,9 +6851,9 @@ ldr x1, [x16, #440]
 .word 0xa010000
 .word 0xb5000080
 .word 0x14000001
-.word 0xf90033bf
+.word 0xf90037bf
 .word 0x14000001
-.word 0xf94033a0
+.word 0xf94037a0
 .word 0xf9002ba0
 .word 0xf9402ba0
 .word 0xb4000160
@@ -6853,18 +6863,18 @@ ldr x1, [x16, #440]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x15, [x16, #448]
+ldr x15, [x16, #456]
 .word 0x928004f0
 .word 0xf2bffff0
 .word 0xf8706830
 .word 0xd63f0200
-.word 0xf94043be
+.word 0xf94047be
 .word 0xd61f03c0
 .loc 6 171 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #208]
+ldr x0, [x16, #216]
 .word 0xaa1903e1
 bl _p_1
 .word 0xaa0003f9
@@ -6894,7 +6904,7 @@ bl _p_1
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #392]
+ldr x1, [x16, #400]
 .word 0xeb01001f
 .word 0x10000011
 .word 0x54001be1
@@ -6949,7 +6959,7 @@ bl _p_21
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #208]
+ldr x0, [x16, #216]
 bl _p_1
 .word 0xaa0003f7
 .loc 6 191 0
@@ -6979,7 +6989,7 @@ bl _p_21
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #208]
+ldr x0, [x16, #216]
 bl _p_1
 .word 0xaa0003f7
 .loc 6 197 0
@@ -7018,7 +7028,7 @@ bl _p_21
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #208]
+ldr x0, [x16, #216]
 bl _p_1
 .word 0xaa0003f7
 .loc 6 205 0
@@ -7060,7 +7070,7 @@ bl _p_21
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #208]
+ldr x0, [x16, #216]
 bl _p_1
 .word 0xaa0003f7
 .loc 6 214 0
@@ -7110,7 +7120,7 @@ bl _p_21
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #208]
+ldr x0, [x16, #216]
 bl _p_1
 .word 0xaa0003f7
 .loc 6 225 0
@@ -7145,7 +7155,7 @@ ldr x1, [x16, #16]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #208]
+ldr x0, [x16, #216]
 .word 0xd2800041
 bl _p_1
 .word 0xaa0003f7
@@ -7172,10 +7182,10 @@ bl _p_1
 .word 0x910003bf
 .word 0xa8c97bfd
 .word 0xd65f03c0
-.word 0xd2801a00
+.word 0xd28019e0
 .word 0xaa1103e1
 bl _p_3
-.word 0xd2801a80
+.word 0xd2801a60
 .word 0xaa1103e1
 bl _p_3
 
@@ -7206,7 +7216,7 @@ Mono_Security_ASN1_Decode_byte___int__int:
 .word 0xaa1703e0
 .word 0xaa1803e1
 .word 0xaa1903e2
-bl _p_69
+bl _p_70
 .loc 6 251 0
 .word 0x3940e3a0
 .word 0x340004c0
@@ -7218,7 +7228,7 @@ bl _p_69
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #456]
+ldr x0, [x16, #464]
 .word 0xd2800501
 bl _p_5
 .word 0xf94037a1
@@ -7227,7 +7237,7 @@ bl _p_5
 bl _p_65
 .word 0xf94033a1
 .word 0xaa1703e0
-bl _p_70
+bl _p_71
 .word 0xaa0003f6
 .loc 6 256 0
 .word 0x3940e3a0
@@ -7352,7 +7362,7 @@ Mono_Security_ASN1_DecodeTLV_byte___int__byte__int__byte___:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #208]
+ldr x0, [x16, #216]
 bl _p_1
 .word 0xaa0003e1
 .word 0xf94027a0
@@ -7382,7 +7392,7 @@ bl _p_21
 .word 0x910003bf
 .word 0xa8c57bfd
 .word 0xd65f03c0
-.word 0xd2801a00
+.word 0xd28019e0
 .word 0xaa1103e1
 bl _p_3
 
@@ -7430,7 +7440,7 @@ Mono_Security_ASN1_get_Item_int:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #424]
+ldr x1, [x16, #432]
 .word 0xeb01001f
 .word 0x10000011
 .word 0x54000241
@@ -7439,7 +7449,7 @@ ldr x1, [x16, #424]
 .word 0xf90017a0
 .loc 6 290 0
 .word 0xf90013bf
-bl _p_71
+bl _p_72
 .word 0xf90027a0
 .word 0xf94027a0
 .word 0xb4000060
@@ -7453,7 +7463,7 @@ bl _p_8
 .word 0x910003bf
 .word 0xa8c57bfd
 .word 0xd65f03c0
-.word 0xd2801a80
+.word 0xd2801a60
 .word 0xaa1103e1
 bl _p_3
 
@@ -7499,7 +7509,7 @@ Mono_Security_ASN1_Element_int_byte:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #424]
+ldr x1, [x16, #432]
 .word 0xeb01001f
 .word 0x10000011
 .word 0x54000341
@@ -7519,7 +7529,7 @@ ldr x1, [x16, #424]
 .word 0xf9001ba0
 .loc 6 308 0
 .word 0xf90017bf
-bl _p_71
+bl _p_72
 .word 0xf9002ba0
 .word 0xf9402ba0
 .word 0xb4000060
@@ -7533,7 +7543,7 @@ bl _p_8
 .word 0x910003bf
 .word 0xa8c67bfd
 .word 0xd65f03c0
-.word 0xd2801a80
+.word 0xd2801a60
 .word 0xaa1103e1
 bl _p_3
 
@@ -7551,11 +7561,11 @@ Mono_Security_ASN1_ToString:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #464]
+ldr x0, [x16, #472]
 .word 0xd2800601
 bl _p_5
 .word 0xf90063a0
-bl _p_72
+bl _p_73
 .word 0xf94063a0
 .word 0xaa0003f9
 .loc 6 317 0
@@ -7564,7 +7574,7 @@ bl _p_72
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #472]
+ldr x0, [x16, #480]
 .word 0xf90057a0
 .word 0xeb1f035f
 .word 0x10000011
@@ -7573,57 +7583,57 @@ ldr x0, [x16, #472]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #480]
-bl _p_73
-.word 0xf9005ba0
+ldr x1, [x16, #488]
 bl _p_74
+.word 0xf9005ba0
+bl _p_75
 .word 0xaa0003e3
 .word 0xf94057a1
 .word 0xf9405ba2
 .word 0xf9405fa4
 .word 0xaa0403e0
 .word 0xf940009e
-bl _p_75
+bl _p_76
 .loc 6 320 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #488]
+ldr x0, [x16, #496]
 .word 0xf9004ba0
 .word 0xaa1a03e0
-bl _p_76
+bl _p_77
 .word 0xb9801800
 .word 0xf90053a0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #496]
+ldr x0, [x16, #504]
 .word 0xd2800281
 bl _p_5
 .word 0xf94053a1
 .word 0xb9001001
 .word 0xf9004fa0
-bl _p_74
+bl _p_75
 .word 0xaa0003e3
 .word 0xf9404ba1
 .word 0xf9404fa2
 .word 0xaa1903e0
 .word 0xf940033e
-bl _p_75
+bl _p_76
 .loc 6 323 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #504]
+ldr x1, [x16, #512]
 .word 0xaa1903e0
 .word 0xf940033e
-bl _p_77
+bl _p_78
 .loc 6 324 0
-bl _p_74
+bl _p_75
 .word 0xaa0003e1
 .word 0xaa1903e0
 .word 0xf940033e
-bl _p_77
+bl _p_78
 .loc 6 325 0
 .word 0xd2800018
 .word 0x14000033
@@ -7631,10 +7641,10 @@ bl _p_77
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #512]
+ldr x0, [x16, #520]
 .word 0xf9004ba0
 .word 0xaa1a03e0
-bl _p_76
+bl _p_77
 .word 0x93407f01
 .word 0xb9801802
 .word 0xeb01005f
@@ -7645,13 +7655,13 @@ bl _p_76
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #480]
-bl _p_73
+ldr x1, [x16, #488]
+bl _p_74
 .word 0xaa0003e2
 .word 0xf9404ba1
 .word 0xaa1903e0
 .word 0xf940033e
-bl _p_78
+bl _p_79
 .loc 6 327 0
 .word 0x11000700
 .word 0x131f7c01
@@ -7662,32 +7672,32 @@ bl _p_78
 .word 0x4b010000
 .word 0x35000280
 .loc 6 328 0
-bl _p_74
+bl _p_75
 .word 0xf9004ba0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #520]
-
-adrp x16, mono_aot_Mono_Security_got@PAGE+0
-add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x0, [x16, #528]
-.word 0x3980b410
-.word 0xb5000050
-bl _p_79
-.word 0xf9404ba1
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x0, [x16, #536]
+.word 0x3980b410
+.word 0xb5000050
+bl _p_80
+.word 0xf9404ba1
+
+adrp x16, mono_aot_Mono_Security_got@PAGE+0
+add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
+ldr x0, [x16, #544]
 .word 0xf9400002
 .word 0xaa1903e0
 .word 0xf940033e
-bl _p_80
+bl _p_81
 .loc 6 325 0
 .word 0x11000718
 .word 0xaa1a03e0
-bl _p_76
+bl _p_77
 .word 0xb9801800
 .word 0x6b00031f
 .word 0x54fff94b
@@ -7701,10 +7711,10 @@ bl _p_76
 .word 0x910003bf
 .word 0xa8cd7bfd
 .word 0xd65f03c0
-.word 0xd2801a00
+.word 0xd28019e0
 .word 0xaa1103e1
 bl _p_3
-.word 0xd2801c60
+.word 0xd2801c40
 .word 0xaa1103e1
 bl _p_3
 
@@ -7713,7 +7723,7 @@ Lme_5f:
 	.align 4
 	.no_dead_strip Mono_Security_ASN1Convert_FromInt32_int
 Mono_Security_ASN1Convert_FromInt32_int:
-.file 7 "/Library/Frameworks/Xamarin.iOS.framework/Versions/11.6.1.4/src/mono/mcs/class/Mono.Security/Mono.Security/ASN1Convert.cs"
+.file 7 "/Library/Frameworks/Xamarin.iOS.framework/Versions/11.9.1.24/src/Xamarin.iOS/mcs/class/Mono.Security/Mono.Security/ASN1Convert.cs"
 .loc 7 75 0 prologue_end
 .word 0xa9bb7bfd
 .word 0x910003fd
@@ -7721,15 +7731,15 @@ Mono_Security_ASN1Convert_FromInt32_int:
 .word 0xa9026bb9
 .word 0xaa0003fa
 .word 0xaa1a03e0
-bl _p_81
+bl _p_82
 .word 0xaa0003fa
 .loc 7 76 0
 .word 0xaa1a03e0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x15, [x16, #544]
-bl _p_82
+ldr x15, [x16, #552]
+bl _p_83
 .loc 7 77 0
 .word 0xd2800019
 .word 0x14000002
@@ -7752,12 +7762,12 @@ bl _p_82
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #456]
+ldr x0, [x16, #464]
 .word 0xd2800501
 bl _p_5
 .word 0xf90023a0
 .word 0xd2800041
-bl _p_83
+bl _p_84
 .word 0xf94023a0
 .word 0xaa0003f8
 .loc 7 81 0
@@ -7770,20 +7780,20 @@ bl _p_83
 .word 0xaa1803e0
 .word 0xaa1a03e1
 .word 0xf940031e
-bl _p_84
+bl _p_85
 .loc 7 84 0
 .word 0x1400001c
 .loc 7 86 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #208]
+ldr x0, [x16, #216]
 .word 0xd2800021
 bl _p_1
 .word 0xaa0003e1
 .word 0xaa1803e0
 .word 0xf940031e
-bl _p_84
+bl _p_85
 .loc 7 87 0
 .word 0x14000012
 .loc 7 89 0
@@ -7792,7 +7802,7 @@ bl _p_84
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #208]
+ldr x0, [x16, #216]
 bl _p_1
 .word 0xaa0003f7
 .loc 7 90 0
@@ -7806,7 +7816,7 @@ bl _p_21
 .word 0xaa1803e0
 .word 0xaa1703e1
 .word 0xf940031e
-bl _p_84
+bl _p_85
 .loc 7 94 0
 .word 0xaa1803e0
 .word 0xa94163b7
@@ -7814,7 +7824,7 @@ bl _p_84
 .word 0x910003bf
 .word 0xa8c57bfd
 .word 0xd65f03c0
-.word 0xd2801a00
+.word 0xd28019e0
 .word 0xaa1103e1
 bl _p_3
 
@@ -7831,17 +7841,17 @@ Mono_Security_ASN1Convert_FromOid_string:
 .word 0xb4000200
 .loc 7 102 0
 .word 0xf9400ba0
-bl _p_85
+bl _p_86
 .word 0xf90017a0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #456]
+ldr x0, [x16, #464]
 .word 0xd2800501
 bl _p_5
 .word 0xf94017a1
 .word 0xf90013a0
-bl _p_86
+bl _p_87
 .word 0xf94013a0
 .word 0x910003bf
 .word 0xa8c37bfd
@@ -7854,7 +7864,7 @@ ldr x0, [x16, #0]
 .word 0xd2806c81
 bl _p_7
 .word 0xaa0003e1
-.word 0xd2800fe0
+.word 0xd2800fc0
 .word 0xf2a04000
 bl _mono_create_corlib_exception_1
 bl _p_8
@@ -7888,7 +7898,7 @@ Mono_Security_ASN1Convert_FromUnsignedBigInteger_byte__:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #208]
+ldr x0, [x16, #216]
 bl _p_1
 .word 0xaa0003f8
 .loc 7 117 0
@@ -7904,7 +7914,7 @@ bl _p_21
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #456]
+ldr x0, [x16, #464]
 .word 0xd2800501
 bl _p_5
 .word 0xf9001ba0
@@ -7925,11 +7935,11 @@ ldr x0, [x16, #0]
 .word 0xd2806d81
 bl _p_7
 .word 0xaa0003e1
-.word 0xd2800fe0
+.word 0xd2800fc0
 .word 0xf2a04000
 bl _mono_create_corlib_exception_1
 bl _p_8
-.word 0xd2801a00
+.word 0xd28019e0
 .word 0xaa1103e1
 bl _p_3
 
@@ -7961,7 +7971,7 @@ Mono_Security_ASN1Convert_ToInt32_Mono_Security_ASN1:
 .word 0xf9001ba0
 .word 0xaa1a03e0
 .word 0xf940035e
-bl _p_76
+bl _p_77
 .word 0xaa0003e1
 .word 0xf9401ba0
 .word 0x93407f02
@@ -7977,7 +7987,7 @@ bl _p_76
 .word 0x11000718
 .word 0xaa1a03e0
 .word 0xf940035e
-bl _p_76
+bl _p_77
 .word 0xb9801800
 .word 0x6b00031f
 .word 0x54fffd4b
@@ -7996,7 +8006,7 @@ ldr x0, [x16, #0]
 .word 0xd2806fc1
 bl _p_7
 .word 0xaa0003e1
-.word 0xd28015e0
+.word 0xd28015c0
 .word 0xf2a04000
 bl _mono_create_corlib_exception_1
 bl _p_8
@@ -8008,11 +8018,11 @@ ldr x0, [x16, #0]
 .word 0xd2806e81
 bl _p_7
 .word 0xaa0003e1
-.word 0xd2800fe0
+.word 0xd2800fc0
 .word 0xf2a04000
 bl _mono_create_corlib_exception_1
 bl _p_8
-.word 0xd2801a00
+.word 0xd28019e0
 .word 0xaa1103e1
 bl _p_3
 
@@ -8033,17 +8043,17 @@ Mono_Security_ASN1Convert_ToOid_Mono_Security_ASN1:
 .loc 7 143 0
 .word 0xaa1a03e0
 .word 0xf940035e
-bl _p_76
+bl _p_77
 .word 0xaa0003fa
 .loc 7 144 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #464]
+ldr x0, [x16, #472]
 .word 0xd2800601
 bl _p_5
 .word 0xf90023a0
-bl _p_72
+bl _p_73
 .word 0xf94023a0
 .word 0xaa0003f9
 .loc 7 146 0
@@ -8100,63 +8110,63 @@ bl _p_72
 .word 0xb010000
 .word 0x3900a3a0
 .loc 7 151 0
-.word 0xd280005e
-.word 0x390083be
+.word 0xd2800040
+.word 0x390083a0
 .loc 7 153 0
 .word 0x910083a0
 .word 0xf90027a0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #552]
+ldr x0, [x16, #560]
 .word 0x3980b410
 .word 0xb5000050
-bl _p_79
+bl _p_80
 .word 0xf94027a0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #560]
+ldr x1, [x16, #568]
 .word 0xf9400021
-bl _p_87
+bl _p_88
 .word 0xaa0003e1
 .word 0xaa1903e0
 .word 0xf940033e
-bl _p_77
+bl _p_78
 .loc 7 154 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #568]
+ldr x1, [x16, #576]
 .word 0xaa1903e0
 .word 0xf940033e
-bl _p_77
+bl _p_78
 .loc 7 155 0
 .word 0x9100a3a0
 .word 0xf90023a0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #552]
+ldr x0, [x16, #560]
 .word 0x3980b410
 .word 0xb5000050
-bl _p_79
+bl _p_80
 .word 0xf94023a0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #560]
+ldr x1, [x16, #568]
 .word 0xf9400021
-bl _p_87
+bl _p_88
 .word 0xaa0003e1
 .word 0xaa1903e0
 .word 0xf940033e
-bl _p_77
+bl _p_78
 .loc 7 156 0
 .word 0xf9001bbf
 .loc 7 157 0
-.word 0xd280003e
-.word 0x390083be
+.word 0xd2800020
+.word 0x390083a0
 .word 0x1400003c
 .loc 7 158 0
 .word 0xf9401ba0
@@ -8195,31 +8205,31 @@ bl _p_77
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #568]
+ldr x1, [x16, #576]
 .word 0xaa1903e0
 .word 0xf940033e
-bl _p_77
+bl _p_78
 .loc 7 161 0
 .word 0x9100c3a0
 .word 0xf90023a0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #552]
+ldr x0, [x16, #560]
 .word 0x3980b410
 .word 0xb5000050
-bl _p_79
+bl _p_80
 .word 0xf94023a0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #560]
+ldr x1, [x16, #568]
 .word 0xf9400021
-bl _p_88
+bl _p_89
 .word 0xaa0003e1
 .word 0xaa1903e0
 .word 0xf940033e
-bl _p_77
+bl _p_78
 .loc 7 162 0
 .word 0xf9001bbf
 .loc 7 157 0
@@ -8247,17 +8257,17 @@ ldr x0, [x16, #0]
 .word 0xd2806e81
 bl _p_7
 .word 0xaa0003e1
-.word 0xd2800fe0
+.word 0xd2800fc0
 .word 0xf2a04000
 bl _mono_create_corlib_exception_1
 bl _p_8
-.word 0xd2801a00
+.word 0xd28019e0
 .word 0xaa1103e1
 bl _p_3
-.word 0xd2801d20
+.word 0xd2801d00
 .word 0xaa1103e1
 bl _p_3
-.word 0xd2801400
+.word 0xd28013e0
 .word 0xaa1103e1
 bl _p_3
 
@@ -8272,13 +8282,13 @@ Mono_Security_ASN1Convert_ToDateTime_Mono_Security_ASN1:
 .word 0xa90167b8
 .word 0xf90013ba
 .word 0xaa0003fa
-.word 0xb40026ba
+.word 0xb40026da
 .loc 7 173 0
-bl _p_89
+bl _p_90
 .word 0xf9002ba0
 .word 0xaa1a03e0
 .word 0xf940035e
-bl _p_76
+bl _p_77
 .word 0xaa0003e1
 .word 0xf9402ba2
 .word 0xaa0203e0
@@ -8294,13 +8304,13 @@ bl _p_76
 .word 0x51002c18
 .word 0xd28000fe
 .word 0x6b1e031f
-.word 0x54002142
+.word 0x54002162
 .word 0xd37df300
 .word 0x2a0003e1
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #576]
+ldr x0, [x16, #584]
 .word 0x8b010000
 .word 0xf9400000
 .word 0xd61f0000
@@ -8308,30 +8318,30 @@ ldr x0, [x16, #576]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x25, [x16, #584]
+ldr x25, [x16, #592]
 .loc 7 181 0
-.word 0x140000fe
+.word 0x140000ff
 .loc 7 184 0
 .word 0xaa1a03e0
 .word 0xd2800001
 .word 0xd2800042
 .word 0xf940035e
-bl _p_90
+bl _p_91
 .word 0xf9002ba0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #552]
+ldr x0, [x16, #560]
 .word 0x3980b410
 .word 0xb5000050
-bl _p_79
+bl _p_80
 .word 0xf9402ba0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #560]
+ldr x1, [x16, #568]
 .word 0xf9400021
-bl _p_91
+bl _p_92
 .word 0x93403c00
 .loc 7 189 0
 .word 0xd280065e
@@ -8341,7 +8351,7 @@ bl _p_91
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #592]
+ldr x0, [x16, #600]
 .word 0xaa1a03e1
 bl _p_31
 .word 0xaa0003fa
@@ -8350,7 +8360,7 @@ bl _p_31
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #600]
+ldr x0, [x16, #608]
 .word 0xaa1a03e1
 bl _p_31
 .word 0xaa0003fa
@@ -8358,37 +8368,37 @@ bl _p_31
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x25, [x16, #608]
+ldr x25, [x16, #616]
 .loc 7 194 0
-.word 0x140000d7
+.word 0x140000d8
 .loc 7 196 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x25, [x16, #608]
+ldr x25, [x16, #616]
 .loc 7 197 0
-.word 0x140000d3
+.word 0x140000d4
 .loc 7 200 0
 .word 0xaa1a03e0
 .word 0xd2800001
 .word 0xd2800042
 .word 0xf940035e
-bl _p_90
+bl _p_91
 .word 0xf9002ba0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #552]
+ldr x0, [x16, #560]
 .word 0x3980b410
 .word 0xb5000050
-bl _p_79
+bl _p_80
 .word 0xf9402ba0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #560]
+ldr x1, [x16, #568]
 .word 0xf9400021
-bl _p_91
+bl _p_92
 .word 0x93403c00
 .loc 7 201 0
 .word 0xd280065e
@@ -8397,12 +8407,12 @@ bl _p_91
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x25, [x16, #600]
+ldr x25, [x16, #608]
 .word 0x14000004
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x25, [x16, #592]
+ldr x25, [x16, #600]
 .word 0xaa1903f8
 .loc 7 203 0
 .word 0xd2800180
@@ -8410,7 +8420,7 @@ ldr x25, [x16, #592]
 .word 0xb9801341
 .word 0xeb00003f
 .word 0x10000011
-.word 0x54001a29
+.word 0x54001a49
 .word 0xd37ff800
 .word 0x8b1a0000
 .word 0x79402800
@@ -8425,12 +8435,12 @@ ldr x25, [x16, #592]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #616]
+ldr x0, [x16, #624]
 .word 0xf9002ba0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #624]
+ldr x0, [x16, #632]
 .word 0xd28000e1
 bl _p_1
 .word 0xaa0003e3
@@ -8449,7 +8459,7 @@ bl _p_1
 .word 0xd2800001
 .word 0xd2800182
 .word 0xf940035e
-bl _p_90
+bl _p_91
 .word 0xaa0003e2
 .word 0xf9406ba3
 .word 0xaa0303e0
@@ -8463,12 +8473,13 @@ bl _p_90
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #632]
+ldr x0, [x16, #640]
 .word 0xd2800241
 bl _p_5
 .word 0xaa0003e2
 .word 0xf94063a3
-.word 0x79002059
+.word 0x794083a0
+.word 0x79002040
 .word 0xaa0303e0
 .word 0xd2800041
 .word 0xf9400063
@@ -8490,7 +8501,7 @@ bl _p_5
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #632]
+ldr x0, [x16, #640]
 .word 0xd2800241
 bl _p_5
 .word 0xaa0003e2
@@ -8518,7 +8529,7 @@ bl _p_5
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #632]
+ldr x0, [x16, #640]
 .word 0xd2800241
 bl _p_5
 .word 0xaa0003e2
@@ -8546,7 +8557,7 @@ bl _p_5
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #632]
+ldr x0, [x16, #640]
 .word 0xd2800241
 bl _p_5
 .word 0xaa0003e2
@@ -8574,7 +8585,7 @@ bl _p_5
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #632]
+ldr x0, [x16, #640]
 .word 0xd2800241
 bl _p_5
 .word 0xaa0003e2
@@ -8588,32 +8599,32 @@ bl _p_5
 .word 0xd63f0200
 .word 0xf9402ba0
 .word 0xf9402fa1
-bl _p_92
+bl _p_93
 .word 0xaa0003fa
 .loc 7 206 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x25, [x16, #640]
+ldr x25, [x16, #648]
 .loc 7 209 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #552]
+ldr x0, [x16, #560]
 .word 0x3980b410
 .word 0xb5000050
-bl _p_79
+bl _p_80
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #560]
+ldr x0, [x16, #568]
 .word 0xf9400002
 .word 0x9100a3a0
 .word 0xf9001fa0
 .word 0xaa1a03e0
 .word 0xaa1903e1
 .word 0xd2800203
-bl _p_93
+bl _p_94
 .word 0xf9401fbe
 .word 0xf90003c0
 .word 0xa94167b8
@@ -8630,11 +8641,11 @@ ldr x0, [x16, #0]
 .word 0xd28077c1
 bl _p_7
 .word 0xaa0003e1
-.word 0xd2800fe0
+.word 0xd2800fc0
 .word 0xf2a04000
 bl _mono_create_corlib_exception_1
 bl _p_8
-.word 0xd2801a00
+.word 0xd28019e0
 .word 0xaa1103e1
 bl _p_3
 
@@ -8643,7 +8654,7 @@ Lme_65:
 	.align 4
 	.no_dead_strip Mono_Security_BitConverterLE_GetUIntBytes_byte_
 Mono_Security_BitConverterLE_GetUIntBytes_byte_:
-.file 8 "/Library/Frameworks/Xamarin.iOS.framework/Versions/11.6.1.4/src/mono/mcs/class/Mono.Security/Mono.Security/BitConverterLE.cs"
+.file 8 "/Library/Frameworks/Xamarin.iOS.framework/Versions/11.9.1.24/src/Xamarin.iOS/mcs/class/Mono.Security/Mono.Security/BitConverterLE.cs"
 .loc 8 50 0 prologue_end
 .word 0xa9be7bfd
 .word 0x910003fd
@@ -8652,14 +8663,14 @@ Mono_Security_BitConverterLE_GetUIntBytes_byte_:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #648]
+ldr x0, [x16, #656]
 .word 0x39400000
 .word 0x34000480
 .loc 8 51 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #208]
+ldr x0, [x16, #216]
 .word 0xd2800081
 bl _p_1
 .word 0xaa0003e1
@@ -8696,7 +8707,7 @@ bl _p_1
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #208]
+ldr x0, [x16, #216]
 .word 0xd2800081
 bl _p_1
 .word 0xaa0003e1
@@ -8732,7 +8743,7 @@ bl _p_1
 .word 0x910003bf
 .word 0xa8c27bfd
 .word 0xd65f03c0
-.word 0xd2801a00
+.word 0xd28019e0
 .word 0xaa1103e1
 bl _p_3
 
@@ -8749,14 +8760,14 @@ Mono_Security_BitConverterLE_GetULongBytes_byte_:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #648]
+ldr x0, [x16, #656]
 .word 0x39400000
 .word 0x34000800
 .loc 8 59 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #208]
+ldr x0, [x16, #216]
 .word 0xd2800101
 bl _p_1
 .word 0xaa0003e1
@@ -8821,7 +8832,7 @@ bl _p_1
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #208]
+ldr x0, [x16, #216]
 .word 0xd2800101
 bl _p_1
 .word 0xaa0003e1
@@ -8885,7 +8896,7 @@ bl _p_1
 .word 0x910003bf
 .word 0xa8c27bfd
 .word 0xd65f03c0
-.word 0xd2801a00
+.word 0xd28019e0
 .word 0xaa1103e1
 bl _p_3
 
@@ -8899,7 +8910,7 @@ Mono_Security_BitConverterLE_GetBytes_int:
 .word 0x910003fd
 .word 0xf9000ba0
 .word 0x910043a0
-bl _p_94
+bl _p_95
 .word 0x910003bf
 .word 0xa8c27bfd
 .word 0xd65f03c0
@@ -8914,7 +8925,7 @@ Mono_Security_BitConverterLE_GetBytes_long:
 .word 0x910003fd
 .word 0xf9000ba0
 .word 0x910043a0
-bl _p_95
+bl _p_96
 .word 0x910003bf
 .word 0xa8c27bfd
 .word 0xd65f03c0
@@ -8935,7 +8946,7 @@ Mono_Security_BitConverterLE_UShortFromBytes_byte__byte___int:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #648]
+ldr x0, [x16, #656]
 .word 0x39400000
 .word 0x340002c0
 .loc 8 119 0
@@ -8990,7 +9001,7 @@ ldr x0, [x16, #648]
 .word 0x910003bf
 .word 0xa8c37bfd
 .word 0xd65f03c0
-.word 0xd2801a00
+.word 0xd28019e0
 .word 0xaa1103e1
 bl _p_3
 
@@ -9010,7 +9021,7 @@ Mono_Security_BitConverterLE_UIntFromBytes_byte__byte___int:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #648]
+ldr x0, [x16, #656]
 .word 0x39400000
 .word 0x34000580
 .loc 8 130 0
@@ -9113,7 +9124,7 @@ ldr x0, [x16, #648]
 .word 0x910003bf
 .word 0xa8c37bfd
 .word 0xd65f03c0
-.word 0xd2801a00
+.word 0xd28019e0
 .word 0xaa1103e1
 bl _p_3
 
@@ -9131,7 +9142,7 @@ Mono_Security_BitConverterLE_ToUInt16_byte___int:
 .word 0x910083a0
 .word 0xf9400ba1
 .word 0xb9801ba2
-bl _p_96
+bl _p_97
 .loc 8 200 0
 .word 0x794043a0
 .word 0x910003bf
@@ -9152,7 +9163,7 @@ Mono_Security_BitConverterLE_ToUInt32_byte___int:
 .word 0x910083a0
 .word 0xf9400ba1
 .word 0xb9801ba2
-bl _p_97
+bl _p_98
 .loc 8 209 0
 .word 0xb94023a0
 .word 0x910003bf
@@ -9164,7 +9175,7 @@ Lme_6d:
 	.align 4
 	.no_dead_strip Mono_Security_PKCS7_ContentInfo__ctor
 Mono_Security_PKCS7_ContentInfo__ctor:
-.file 9 "/Library/Frameworks/Xamarin.iOS.framework/Versions/11.6.1.4/src/mono/mcs/class/Mono.Security/Mono.Security/PKCS7.cs"
+.file 9 "/Library/Frameworks/Xamarin.iOS.framework/Versions/11.9.1.24/src/Xamarin.iOS/mcs/class/Mono.Security/Mono.Security/PKCS7.cs"
 .loc 9 142 0 prologue_end
 .word 0xa9bd7bfd
 .word 0x910003fd
@@ -9172,12 +9183,12 @@ Mono_Security_PKCS7_ContentInfo__ctor:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #456]
+ldr x0, [x16, #464]
 .word 0xd2800501
 bl _p_5
 .word 0xf90013a0
 .word 0xd2801401
-bl _p_83
+bl _p_84
 .word 0xf94013a0
 .word 0xf9400ba1
 .word 0xf9000c20
@@ -9209,7 +9220,7 @@ Mono_Security_PKCS7_ContentInfo__ctor_string:
 .word 0xf9000ba0
 .word 0xf9000fa1
 .word 0xf9400ba0
-bl _p_98
+bl _p_99
 .loc 9 147 0
 .word 0xf9400fa0
 .word 0xf9400ba1
@@ -9244,15 +9255,15 @@ Mono_Security_PKCS7_ContentInfo__ctor_byte__:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #456]
+ldr x0, [x16, #464]
 .word 0xd2800501
 bl _p_5
 .word 0xf90013a0
 .word 0xf9400fa1
-bl _p_86
+bl _p_87
 .word 0xf94013a1
 .word 0xf9400ba0
-bl _p_99
+bl _p_100
 .word 0x910003bf
 .word 0xa8c37bfd
 .word 0xd65f03c0
@@ -9291,7 +9302,7 @@ bl _p_68
 .word 0xaa1a03e0
 .word 0xd2800001
 .word 0xf940035e
-bl _p_100
+bl _p_101
 .word 0xaa0003e1
 .word 0xf940003e
 .word 0x39408000
@@ -9302,8 +9313,8 @@ bl _p_100
 .word 0xaa1a03e0
 .word 0xd2800001
 .word 0xf940035e
-bl _p_100
 bl _p_101
+bl _p_102
 .word 0xf9000b20
 .word 0x91004321
 .word 0xd349fc21
@@ -9329,7 +9340,7 @@ bl _p_68
 .word 0xaa1a03e0
 .word 0xd2800021
 .word 0xf940035e
-bl _p_100
+bl _p_101
 .word 0xaa0003e1
 .word 0xf940003e
 .word 0x39408000
@@ -9340,7 +9351,7 @@ bl _p_100
 .word 0xaa1a03e0
 .word 0xd2800021
 .word 0xf940035e
-bl _p_100
+bl _p_101
 .word 0xf9000f20
 .word 0x91006321
 .word 0xd349fc21
@@ -9367,7 +9378,7 @@ ldr x0, [x16, #0]
 .word 0xd2808bc1
 bl _p_7
 .word 0xaa0003e1
-.word 0xd2800fc0
+.word 0xd2800fa0
 .word 0xf2a04000
 bl _mono_create_corlib_exception_1
 bl _p_8
@@ -9379,7 +9390,7 @@ ldr x0, [x16, #0]
 .word 0xd2808f01
 bl _p_7
 .word 0xaa0003e1
-.word 0xd2800fc0
+.word 0xd2800fa0
 .word 0xf2a04000
 bl _mono_create_corlib_exception_1
 bl _p_8
@@ -9391,7 +9402,7 @@ ldr x0, [x16, #0]
 .word 0xd2809401
 bl _p_7
 .word 0xaa0003e1
-.word 0xd2800fc0
+.word 0xd2800fa0
 .word 0xf2a04000
 bl _mono_create_corlib_exception_1
 bl _p_8
@@ -9406,7 +9417,7 @@ Mono_Security_PKCS7_ContentInfo_get_ASN1:
 .word 0x910003fd
 .word 0xf9000ba0
 .word 0xf9400ba0
-bl _p_102
+bl _p_103
 .word 0x910003bf
 .word 0xa8c27bfd
 .word 0xd65f03c0
@@ -9512,24 +9523,24 @@ Mono_Security_PKCS7_ContentInfo_GetASN1:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #456]
+ldr x0, [x16, #464]
 .word 0xd2800501
 bl _p_5
 .word 0xf90017a0
 .word 0xd2800601
-bl _p_83
+bl _p_84
 .word 0xf94017a0
 .word 0xaa0003f9
 .loc 9 187 0
 .word 0xaa1903e0
 .word 0xf90013a0
 .word 0xf9400b40
-bl _p_103
+bl _p_104
 .word 0xaa0003e1
 .word 0xf94013a2
 .word 0xaa0203e0
 .word 0xf940005e
-bl _p_70
+bl _p_71
 .loc 9 189 0
 .word 0xf9400f40
 .word 0xb4000180
@@ -9544,7 +9555,7 @@ bl _p_68
 .word 0xf9400f41
 .word 0xaa1903e0
 .word 0xf940033e
-bl _p_70
+bl _p_71
 .loc 9 191 0
 .word 0xaa1903e0
 .word 0xa9416bb9
@@ -9598,7 +9609,7 @@ bl _p_68
 .word 0xaa1a03e0
 .word 0xd2800001
 .word 0xf940035e
-bl _p_100
+bl _p_101
 .word 0xaa0003e1
 .word 0xf940003e
 .word 0x39408000
@@ -9609,11 +9620,11 @@ bl _p_100
 .word 0xaa1a03e0
 .word 0xd2800001
 .word 0xf940035e
-bl _p_100
+bl _p_101
 .word 0xaa0003e1
 .word 0xaa0103e0
 .word 0xf940003e
-bl _p_76
+bl _p_77
 .word 0xb9801801
 .word 0xeb1f003f
 .word 0x10000011
@@ -9624,7 +9635,7 @@ bl _p_76
 .word 0xaa1a03e0
 .word 0xd2800021
 .word 0xf940035e
-bl _p_100
+bl _p_101
 .loc 9 232 0
 .word 0xaa0003e1
 .word 0xf940001e
@@ -9637,7 +9648,7 @@ bl _p_100
 .word 0xaa1a03e0
 .word 0xd2800001
 .word 0xf940035e
-bl _p_100
+bl _p_101
 .word 0xaa0003f8
 .loc 9 236 0
 .word 0xaa1803e0
@@ -9649,17 +9660,17 @@ bl _p_100
 .word 0x54001261
 .loc 9 238 0
 .word 0xaa1803e0
-bl _p_101
+bl _p_102
 .word 0xf9001fa0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #656]
+ldr x0, [x16, #664]
 .word 0xd2800401
 bl _p_5
 .word 0xf9401fa1
 .word 0xf9001ba0
-bl _p_104
+bl _p_105
 .word 0xf9401ba0
 .word 0xf9000b20
 .word 0x91004321
@@ -9678,7 +9689,7 @@ ldr x2, [x16, #16]
 .word 0xaa1a03e0
 .word 0xd2800021
 .word 0xf940035e
-bl _p_100
+bl _p_101
 .word 0xaa0003f8
 .loc 9 241 0
 .word 0xaa1803e0
@@ -9692,18 +9703,18 @@ bl _p_100
 .word 0xaa1803e0
 .word 0xd2800001
 .word 0xf940031e
-bl _p_100
 bl _p_101
+bl _p_102
 .word 0xf90023a0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #656]
+ldr x0, [x16, #664]
 .word 0xd2800401
 bl _p_5
 .word 0xf94023a1
 .word 0xf9001fa0
-bl _p_104
+bl _p_105
 .word 0xf9401fa0
 .word 0xf9000f20
 .word 0x91006321
@@ -9724,7 +9735,7 @@ ldr x2, [x16, #16]
 .word 0xaa1803e0
 .word 0xd2800021
 .word 0xf940031e
-bl _p_100
+bl _p_101
 .word 0xf9401ba2
 .word 0xaa0203e1
 .word 0xf940003e
@@ -9745,7 +9756,7 @@ ldr x2, [x16, #16]
 .word 0xaa1a03e0
 .word 0xd2800041
 .word 0xf940035e
-bl _p_100
+bl _p_101
 .word 0xaa0003fa
 .loc 9 247 0
 .word 0xaa1a03e0
@@ -9758,7 +9769,7 @@ bl _p_100
 .loc 9 249 0
 .word 0xaa1a03e0
 .word 0xf940035e
-bl _p_76
+bl _p_77
 .word 0xf9001320
 .word 0x91008321
 .word 0xd349fc21
@@ -9786,7 +9797,7 @@ ldr x0, [x16, #0]
 .word 0xd2809801
 bl _p_7
 .word 0xaa0003e1
-.word 0xd2800fc0
+.word 0xd2800fa0
 .word 0xf2a04000
 bl _mono_create_corlib_exception_1
 bl _p_8
@@ -9798,7 +9809,7 @@ ldr x0, [x16, #0]
 .word 0xd2809d81
 bl _p_7
 .word 0xaa0003e1
-.word 0xd2800fc0
+.word 0xd2800fa0
 .word 0xf2a04000
 bl _mono_create_corlib_exception_1
 bl _p_8
@@ -9810,7 +9821,7 @@ ldr x0, [x16, #0]
 .word 0xd280a181
 bl _p_7
 .word 0xaa0003e1
-.word 0xd2800fc0
+.word 0xd2800fa0
 .word 0xf2a04000
 bl _mono_create_corlib_exception_1
 bl _p_8
@@ -9822,7 +9833,7 @@ ldr x0, [x16, #0]
 .word 0xd280a8c1
 bl _p_7
 .word 0xaa0003e1
-.word 0xd2800fc0
+.word 0xd2800fa0
 .word 0xf2a04000
 bl _mono_create_corlib_exception_1
 bl _p_8
@@ -9834,7 +9845,7 @@ ldr x0, [x16, #0]
 .word 0xd280b301
 bl _p_7
 .word 0xaa0003e1
-.word 0xd2800fc0
+.word 0xd2800fa0
 .word 0xf2a04000
 bl _mono_create_corlib_exception_1
 bl _p_8
@@ -9846,11 +9857,11 @@ ldr x0, [x16, #0]
 .word 0xd280c3a1
 bl _p_7
 .word 0xaa0003e1
-.word 0xd2800fc0
+.word 0xd2800fa0
 .word 0xf2a04000
 bl _mono_create_corlib_exception_1
 bl _p_8
-.word 0xd2801a00
+.word 0xd28019e0
 .word 0xaa1103e1
 bl _p_3
 
@@ -9904,7 +9915,7 @@ bl _p_2
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #392]
+ldr x1, [x16, #400]
 .word 0xeb01001f
 .word 0x10000011
 .word 0x54000141
@@ -9917,7 +9928,7 @@ ldr x1, [x16, #392]
 .word 0x910003bf
 .word 0xa8c27bfd
 .word 0xd65f03c0
-.word 0xd2801a80
+.word 0xd2801a60
 .word 0xaa1103e1
 bl _p_3
 
@@ -9926,7 +9937,7 @@ Lme_7b:
 	.align 4
 	.no_dead_strip Mono_Security_X509_SafeBag__ctor_string_Mono_Security_ASN1
 Mono_Security_X509_SafeBag__ctor_string_Mono_Security_ASN1:
-.file 10 "/Library/Frameworks/Xamarin.iOS.framework/Versions/11.6.1.4/src/mono/mcs/class/Mono.Security/Mono.Security.X509/PKCS12.cs"
+.file 10 "/Library/Frameworks/Xamarin.iOS.framework/Versions/11.9.1.24/src/Xamarin.iOS/mcs/class/Mono.Security/Mono.Security.X509/PKCS12.cs"
 .loc 10 81 0 prologue_end
 .word 0xa9bd7bfd
 .word 0x910003fd
@@ -10015,13 +10026,13 @@ Mono_Security_X509_PKCS12__ctor:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #400]
+ldr x0, [x16, #408]
 .word 0xd2800401
 bl _p_5
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #408]
+ldr x1, [x16, #416]
 .word 0xf9400021
 .word 0xf9000801
 .word 0x91004002
@@ -10053,13 +10064,13 @@ ldr x2, [x16, #16]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #400]
+ldr x0, [x16, #408]
 .word 0xd2800401
 bl _p_5
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #408]
+ldr x1, [x16, #416]
 .word 0xf9400021
 .word 0xf9000801
 .word 0x91004002
@@ -10091,7 +10102,7 @@ ldr x2, [x16, #16]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #664]
+ldr x0, [x16, #672]
 .word 0xd2800301
 bl _p_5
 .word 0xf90013a0
@@ -10099,14 +10110,14 @@ bl _p_5
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #400]
+ldr x0, [x16, #408]
 .word 0x3980b410
 .word 0xb5000050
-bl _p_79
+bl _p_80
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #400]
+ldr x0, [x16, #408]
 .word 0xd2800401
 bl _p_5
 .word 0xaa0003e1
@@ -10115,7 +10126,7 @@ bl _p_5
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x3, [x16, #408]
+ldr x3, [x16, #416]
 .word 0xf9400063
 .word 0xf9000823
 .word 0x91004024
@@ -10166,13 +10177,13 @@ ldr x2, [x16, #16]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #400]
+ldr x0, [x16, #408]
 .word 0xd2800401
 bl _p_5
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #408]
+ldr x1, [x16, #416]
 .word 0xf9400021
 .word 0xf9000801
 .word 0x91004002
@@ -10217,15 +10228,15 @@ Mono_Security_X509_PKCS12__ctor_byte__:
 .word 0xf9000ba0
 .word 0xf9000fa1
 .word 0xf9400ba0
-bl _p_105
+bl _p_106
 .loc 10 300 0
 .word 0xf9400ba0
 .word 0xd2800001
-bl _p_106
+bl _p_107
 .loc 10 301 0
 .word 0xf9400ba0
 .word 0xf9400fa1
-bl _p_107
+bl _p_108
 .loc 10 302 0
 .word 0x910003bf
 .word 0xa8c27bfd
@@ -10243,15 +10254,15 @@ Mono_Security_X509_PKCS12__ctor_byte___string:
 .word 0xf9000fa1
 .word 0xf90013a2
 .word 0xf9400ba0
-bl _p_105
+bl _p_106
 .loc 10 330 0
 .word 0xf9400ba0
 .word 0xf94013a1
-bl _p_106
+bl _p_107
 .loc 10 331 0
 .word 0xf9400ba0
 .word 0xf9400fa1
-bl _p_107
+bl _p_108
 .loc 10 332 0
 .word 0x910003bf
 .word 0xa8c37bfd
@@ -10274,12 +10285,12 @@ Mono_Security_X509_PKCS12_Decode_byte__:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #456]
+ldr x0, [x16, #464]
 .word 0xd2800501
 bl _p_5
 .word 0xf9002ba0
 .word 0xaa1a03e1
-bl _p_86
+bl _p_87
 .word 0xf9402ba0
 .word 0xaa0003fa
 .loc 10 344 0
@@ -10294,7 +10305,7 @@ bl _p_86
 .word 0xaa1a03e0
 .word 0xd2800001
 .word 0xf940035e
-bl _p_100
+bl _p_101
 .word 0xaa0003e1
 .word 0xf940003e
 .word 0x39408000
@@ -10306,17 +10317,17 @@ bl _p_100
 .word 0xaa1a03e0
 .word 0xd2800021
 .word 0xf940035e
-bl _p_100
+bl _p_101
 .word 0xf9002fa0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #656]
+ldr x0, [x16, #664]
 .word 0xd2800401
 bl _p_5
 .word 0xf9402fa1
 .word 0xf9002ba0
-bl _p_99
+bl _p_100
 .word 0xf9402ba0
 .word 0xaa0003f8
 .loc 10 353 0
@@ -10327,8 +10338,8 @@ bl _p_99
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #672]
-bl _p_108
+ldr x1, [x16, #680]
+bl _p_109
 .word 0x53001c00
 .word 0x35002960
 .loc 10 358 0
@@ -10343,7 +10354,7 @@ bl _p_68
 .word 0xaa1a03e0
 .word 0xd2800041
 .word 0xf940035e
-bl _p_100
+bl _p_101
 .word 0xaa0003fa
 .loc 10 360 0
 .word 0xaa1a03e0
@@ -10357,7 +10368,7 @@ bl _p_100
 .word 0xaa1a03e0
 .word 0xd2800001
 .word 0xf940035e
-bl _p_100
+bl _p_101
 .loc 10 364 0
 .word 0xaa0003e1
 .word 0xf940001e
@@ -10370,37 +10381,37 @@ bl _p_100
 .word 0xaa1703e0
 .word 0xd2800001
 .word 0xf94002fe
-bl _p_100
+bl _p_101
 .word 0xaa0003e2
 .loc 10 367 0
 .word 0xaa0203e0
 .word 0xd2800001
 .word 0xf940005e
-bl _p_100
 bl _p_101
+bl _p_102
 .loc 10 368 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #680]
-bl _p_108
+ldr x1, [x16, #688]
+bl _p_109
 .word 0x53001c00
 .word 0x35002760
 .loc 10 370 0
 .word 0xaa1703e0
 .word 0xd2800021
 .word 0xf94002fe
-bl _p_100
+bl _p_101
 .word 0xaa0003e1
 .word 0xaa0103e0
 .word 0xf940003e
-bl _p_76
+bl _p_77
 .word 0xaa0003f7
 .loc 10 372 0
 .word 0xaa1a03e0
 .word 0xd2800021
 .word 0xf940035e
-bl _p_100
+bl _p_101
 .word 0xaa0003f6
 .loc 10 373 0
 .word 0xaa1603e0
@@ -10425,7 +10436,7 @@ bl _p_68
 .word 0xaa1a03e0
 .word 0xd2800041
 .word 0xf940035e
-bl _p_100
+bl _p_101
 .word 0xaa0003fa
 .loc 10 379 0
 .word 0xaa1a03e0
@@ -10437,7 +10448,7 @@ bl _p_100
 .word 0x540024a1
 .loc 10 381 0
 .word 0xaa1a03e0
-bl _p_109
+bl _p_110
 .word 0x93407c00
 .word 0xb9004720
 .loc 10 384 0
@@ -10446,56 +10457,56 @@ bl _p_109
 .word 0xaa0203e0
 .word 0xd2800001
 .word 0xf940005e
-bl _p_100
+bl _p_101
 .word 0xaa0003e1
 .word 0xaa0103e0
 .word 0xf940003e
-bl _p_76
+bl _p_77
 .word 0xaa0003fa
 .loc 10 385 0
 .word 0xf9400b20
 .word 0xf9002ba0
 .word 0xaa1603e0
 .word 0xf94002de
-bl _p_76
+bl _p_77
 .word 0xaa0003e2
 .word 0xf9402ba1
 .word 0xb9804723
 .word 0xaa1903e0
 .word 0xaa1a03e4
-bl _p_110
+bl _p_111
 .word 0xaa0003f5
 .loc 10 386 0
 .word 0xaa1903e0
 .word 0xaa1703e1
 .word 0xaa1503e2
-bl _p_111
+bl _p_112
 .word 0x53001c00
 .word 0x35000460
 .loc 10 387 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #208]
+ldr x0, [x16, #216]
 .word 0xd2800041
 bl _p_1
 .word 0xaa0003f4
 .loc 10 388 0
 .word 0xaa1603e0
 .word 0xf94002de
-bl _p_76
+bl _p_77
 .word 0xaa0003e2
 .word 0xb9804723
 .word 0xaa1903e0
 .word 0xaa1403e1
 .word 0xaa1a03e4
-bl _p_110
+bl _p_111
 .word 0xaa0003f5
 .loc 10 389 0
 .word 0xaa1903e0
 .word 0xaa1703e1
 .word 0xaa1503e2
-bl _p_111
+bl _p_112
 .word 0x53001c00
 .word 0x34001f00
 .loc 10 391 0
@@ -10518,21 +10529,21 @@ ldr x1, [x16, #16]
 .word 0xaa0203e0
 .word 0xd2800001
 .word 0xf940005e
-bl _p_100
+bl _p_101
 .word 0xaa0003e1
 .word 0xaa0103e0
 .word 0xf940003e
-bl _p_76
+bl _p_77
 .word 0xf9002fa0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #456]
+ldr x0, [x16, #464]
 .word 0xd2800501
 bl _p_5
 .word 0xf9402fa1
 .word 0xf9002ba0
-bl _p_86
+bl _p_87
 .word 0xf9402ba0
 .word 0xaa0003fa
 .loc 10 397 0
@@ -10542,17 +10553,17 @@ bl _p_86
 .word 0xaa1a03e0
 .word 0xaa1803e1
 .word 0xf940035e
-bl _p_100
+bl _p_101
 .word 0xf9002fa0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #656]
+ldr x0, [x16, #664]
 .word 0xd2800401
 bl _p_5
 .word 0xf9402fa1
 .word 0xf9002ba0
-bl _p_99
+bl _p_100
 .word 0xf9402ba0
 .word 0xaa0003f7
 .loc 10 399 0
@@ -10564,24 +10575,24 @@ bl _p_99
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #672]
-bl _p_112
+ldr x1, [x16, #680]
+bl _p_113
 .word 0x53001c00
 .word 0x35000200
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #688]
+ldr x1, [x16, #696]
 .word 0xaa1603e0
-bl _p_112
+bl _p_113
 .word 0x53001c00
 .word 0x35000600
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #696]
+ldr x1, [x16, #704]
 .word 0xaa1603e0
-bl _p_112
+bl _p_113
 .word 0x53001c00
 .word 0x35001960
 .word 0x140000c0
@@ -10591,21 +10602,21 @@ bl _p_112
 .word 0xaa0203e0
 .word 0xd2800001
 .word 0xf940005e
-bl _p_100
+bl _p_101
 .word 0xaa0003e1
 .word 0xaa0103e0
 .word 0xf940003e
-bl _p_76
+bl _p_77
 .word 0xf9002fa0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #456]
+ldr x0, [x16, #464]
 .word 0xd2800501
 bl _p_5
 .word 0xf9402fa1
 .word 0xf9002ba0
-bl _p_86
+bl _p_87
 .word 0xf9402ba0
 .word 0xaa0003f7
 .loc 10 403 0
@@ -10615,12 +10626,12 @@ bl _p_86
 .word 0xaa1703e0
 .word 0xaa1603e1
 .word 0xf94002fe
-bl _p_100
+bl _p_101
 .word 0xaa0003f5
 .loc 10 405 0
 .word 0xaa1903e0
 .word 0xaa1503e1
-bl _p_113
+bl _p_114
 .loc 10 403 0
 .word 0x110006d6
 .word 0xaa1703e0
@@ -10636,33 +10647,33 @@ bl _p_68
 .word 0xaa0203e0
 .word 0xd2800001
 .word 0xf940005e
-bl _p_100
+bl _p_101
 .word 0xf90037a0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #704]
+ldr x0, [x16, #712]
 .word 0xd2800601
 bl _p_5
 .word 0xf94037a1
 .word 0xf90033a0
-bl _p_114
+bl _p_115
 .word 0xf94033a0
 .word 0xaa0003f7
 .loc 10 411 0
 .word 0xaa1903e0
 .word 0xaa1703e1
-bl _p_115
+bl _p_116
 .word 0xf9002fa0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #456]
+ldr x0, [x16, #464]
 .word 0xd2800501
 bl _p_5
 .word 0xf9402fa1
 .word 0xf9002ba0
-bl _p_86
+bl _p_87
 .word 0xf9402ba0
 .word 0xaa0003f7
 .loc 10 412 0
@@ -10672,12 +10683,12 @@ bl _p_86
 .word 0xaa1703e0
 .word 0xaa1603e1
 .word 0xf94002fe
-bl _p_100
+bl _p_101
 .word 0xaa0003f5
 .loc 10 414 0
 .word 0xaa1903e0
 .word 0xaa1503e1
-bl _p_113
+bl _p_114
 .loc 10 412 0
 .word 0x110006d6
 .word 0xaa1703e0
@@ -10710,7 +10721,7 @@ ldr x0, [x16, #0]
 .word 0xd280d261
 bl _p_7
 .word 0xaa0003e1
-.word 0xd2800fc0
+.word 0xd2800fa0
 .word 0xf2a04000
 bl _mono_create_corlib_exception_1
 bl _p_8
@@ -10722,7 +10733,7 @@ ldr x0, [x16, #0]
 .word 0xd280dca1
 bl _p_7
 .word 0xaa0003e1
-.word 0xd2800fc0
+.word 0xd2800fa0
 .word 0xf2a04000
 bl _mono_create_corlib_exception_1
 bl _p_8
@@ -10734,7 +10745,7 @@ ldr x0, [x16, #0]
 .word 0xd280e361
 bl _p_7
 .word 0xaa0003e1
-.word 0xd2800fc0
+.word 0xd2800fa0
 .word 0xf2a04000
 bl _mono_create_corlib_exception_1
 bl _p_8
@@ -10746,7 +10757,7 @@ ldr x0, [x16, #0]
 .word 0xd280e361
 bl _p_7
 .word 0xaa0003e1
-.word 0xd2800fc0
+.word 0xd2800fa0
 .word 0xf2a04000
 bl _mono_create_corlib_exception_1
 bl _p_8
@@ -10758,7 +10769,7 @@ ldr x0, [x16, #0]
 .word 0xd280e9e1
 bl _p_7
 .word 0xaa0003e1
-.word 0xd2800fc0
+.word 0xd2800fa0
 .word 0xf2a04000
 bl _mono_create_corlib_exception_1
 bl _p_8
@@ -10770,7 +10781,7 @@ ldr x0, [x16, #0]
 .word 0xd280ee21
 bl _p_7
 .word 0xaa0003e1
-.word 0xd2800fc0
+.word 0xd2800fa0
 .word 0xf2a04000
 bl _mono_create_corlib_exception_1
 bl _p_8
@@ -10782,7 +10793,7 @@ ldr x0, [x16, #0]
 .word 0xd280f261
 bl _p_7
 .word 0xaa0003e1
-.word 0xd2800fc0
+.word 0xd2800fa0
 .word 0xf2a04000
 bl _mono_create_corlib_exception_1
 bl _p_8
@@ -10806,7 +10817,7 @@ ldr x0, [x16, #0]
 .word 0xd280cf21
 bl _p_7
 .word 0xaa0003e1
-.word 0xd2800fc0
+.word 0xd2800fa0
 .word 0xf2a04000
 bl _mono_create_corlib_exception_1
 bl _p_8
@@ -10815,10 +10826,10 @@ bl _p_8
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x0, [x16, #0]
-.word 0xd28112a1
+.word 0xd28113a1
 bl _p_7
 .word 0xaa0003e1
-.word 0xd2800fc0
+.word 0xd2800fa0
 .word 0xf2a04000
 bl _mono_create_corlib_exception_1
 bl _p_8
@@ -10827,10 +10838,10 @@ adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x0, [x16, #0]
 .loc 10 419 0
-.word 0xd2810d61
+.word 0xd2810e61
 bl _p_7
 .word 0xaa0003e1
-.word 0xd2801c20
+.word 0xd2801c00
 .word 0xf2a04000
 bl _mono_create_corlib_exception_1
 bl _p_8
@@ -10855,17 +10866,21 @@ Mono_Security_X509_PKCS12_Finalize:
 .word 0xf9400821
 .word 0xb9801822
 .word 0xd2800001
-bl _p_116
+bl _p_117
 .loc 10 431 0
 .word 0xf9400ba0
 .word 0xf900081f
-.word 0x94000002
+.word 0xf9000fbf
+.word 0x94000005
+.word 0xf9400fa0
+.word 0xb4000040
+bl _p_69
 .word 0x14000006
-.word 0xf9001bbe
+.word 0xf9001fbe
 .loc 10 432 0
 .word 0xf9400ba0
-.word 0xf9000fa0
-.word 0xf9401bbe
+.word 0xf90013a0
+.word 0xf9401fbe
 .word 0xd61f03c0
 .word 0x910003bf
 .word 0xa8c47bfd
@@ -10890,7 +10905,7 @@ Mono_Security_X509_PKCS12_set_Password_string:
 .word 0xf9400b21
 .word 0xb9801822
 .word 0xd2800001
-bl _p_116
+bl _p_117
 .loc 10 441 0
 .word 0xf9000b3f
 .loc 10 442 0
@@ -10907,14 +10922,14 @@ bl _p_116
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #712]
+ldr x0, [x16, #720]
 .word 0x3980b410
 .word 0xb5000050
-bl _p_79
+bl _p_80
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #720]
+ldr x0, [x16, #728]
 .word 0xb9800000
 .word 0x6b00031f
 .word 0x540001aa
@@ -10937,14 +10952,14 @@ ldr x0, [x16, #720]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #712]
+ldr x0, [x16, #720]
 .word 0x3980b410
 .word 0xb5000050
-bl _p_79
+bl _p_80
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #720]
+ldr x0, [x16, #728]
 .word 0xb9800018
 .loc 10 453 0
 .word 0xb170300
@@ -10952,7 +10967,7 @@ ldr x0, [x16, #720]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #208]
+ldr x0, [x16, #216]
 bl _p_1
 .word 0xf9000b20
 .word 0x91004321
@@ -10968,7 +10983,7 @@ ldr x2, [x16, #16]
 .word 0xd280003e
 .word 0x3900003e
 .loc 10 454 0
-bl _p_117
+bl _p_118
 .word 0xaa0003e6
 .word 0xf9400b24
 .word 0xaa0603e0
@@ -10986,7 +11001,7 @@ bl _p_117
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #208]
+ldr x0, [x16, #216]
 .word 0xd2800041
 bl _p_1
 .word 0xf9000b20
@@ -11008,7 +11023,7 @@ ldr x2, [x16, #16]
 .word 0x910003bf
 .word 0xa8c37bfd
 .word 0xd65f03c0
-.word 0xd2801a00
+.word 0xd28019e0
 .word 0xaa1103e1
 bl _p_3
 
@@ -11050,7 +11065,7 @@ Lme_86:
 	.no_dead_strip Mono_Security_X509_PKCS12_get_Keys
 Mono_Security_X509_PKCS12_get_Keys:
 .loc 10 470 0 prologue_end
-.word 0xa9a57bfd
+.word 0xa9a47bfd
 .word 0x910003fd
 .word 0xa90163b7
 .word 0xa9026bb9
@@ -11076,7 +11091,7 @@ Mono_Security_X509_PKCS12_get_Keys:
 .word 0xf90077a0
 .word 0xf9009fbf
 .word 0x39410340
-.word 0x34002aa0
+.word 0x34002b60
 .loc 10 471 0
 .word 0xf9400f41
 .word 0xaa0103e0
@@ -11090,14 +11105,14 @@ Mono_Security_X509_PKCS12_get_Keys:
 .word 0xf9405c30
 .word 0xd63f0200
 .word 0xf9009ba0
-.word 0x14000107
+.word 0x14000109
 .word 0xf9409ba1
 .word 0xaa0103e0
 .word 0xf9400021
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x15, [x16, #416]
+ldr x15, [x16, #424]
 .word 0x928003f0
 .word 0xf2bffff0
 .word 0xf8706830
@@ -11111,10 +11126,10 @@ ldr x15, [x16, #416]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #728]
+ldr x1, [x16, #736]
 .word 0xeb01001f
 .word 0x10000011
-.word 0x540027a1
+.word 0x54002861
 .word 0xaa1903f8
 .loc 10 473 0
 .word 0xf940033e
@@ -11122,12 +11137,12 @@ ldr x1, [x16, #728]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #736]
+ldr x1, [x16, #744]
 .word 0xaa0203e0
 .word 0xf940005e
-bl _p_118
+bl _p_119
 .word 0x53001c00
-.word 0x34000ba0
+.word 0x34000bc0
 .loc 10 474 0
 .word 0xf940031e
 .word 0xf9400f02
@@ -11135,35 +11150,36 @@ bl _p_118
 .word 0xaa0203e0
 .word 0xd2800021
 .word 0xf940005e
-bl _p_100
+bl _p_101
 .word 0xaa0003e1
 .loc 10 476 0
 .word 0xaa0103e0
 .word 0xf940003e
-bl _p_76
-.word 0xf900bfa0
+bl _p_77
+.word 0xf900c7a0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #744]
+ldr x0, [x16, #752]
 .word 0xd2800601
 bl _p_5
-.word 0xf940bfa1
-.word 0xf900bba0
-bl _p_119
-.word 0xf940bba1
+.word 0xf940c7a1
+.word 0xf900c3a0
+bl _p_120
+.word 0xf940c3a1
 .loc 10 477 0
 .word 0xaa0103e0
 .word 0xf940003e
-bl _p_120
+bl _p_121
 .word 0xaa0003f9
 .loc 10 478 0
 .word 0xaa1903e0
 .word 0xb9801801
 .word 0xeb1f003f
 .word 0x10000011
-.word 0x54002249
-.word 0x39408017
+.word 0x54002309
+.word 0x39408000
+.word 0x53001c17
 .word 0xaa1703e0
 .word 0xd280005e
 .word 0x6b1e001f
@@ -11184,7 +11200,7 @@ bl _p_120
 .word 0xf90097a0
 .loc 10 481 0
 .word 0xf9400f40
-.word 0xf900bba0
+.word 0xf900c3a0
 .word 0xaa1903e0
 .word 0x9101c3a1
 .word 0xf9407ba2
@@ -11203,9 +11219,9 @@ bl _p_120
 .word 0xf90053a2
 .word 0xf94097a2
 .word 0xf90057a2
-bl _p_121
+bl _p_122
 .word 0xaa0003e1
-.word 0xf940bba2
+.word 0xf940c3a2
 .word 0xaa0203e0
 .word 0xf9400042
 .word 0xf9407850
@@ -11215,11 +11231,11 @@ bl _p_121
 .word 0x1400000c
 .loc 10 484 0
 .word 0xf9400f40
-.word 0xf900bba0
+.word 0xf900c3a0
 .word 0xaa1903e0
-bl _p_122
+bl _p_123
 .word 0xaa0003e1
-.word 0xf940bba2
+.word 0xf940c3a2
 .word 0xaa0203e0
 .word 0xf9400042
 .word 0xf9407850
@@ -11229,20 +11245,20 @@ bl _p_122
 .word 0xb9801b22
 .word 0xaa1903e0
 .word 0xd2800001
-bl _p_116
+bl _p_117
 .loc 10 491 0
-.word 0x1400008a
+.word 0x1400008b
 .word 0xf940031e
 .word 0xf9400b02
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #752]
+ldr x1, [x16, #760]
 .word 0xaa0203e0
 .word 0xf940005e
-bl _p_118
+bl _p_119
 .word 0x53001c00
-.word 0x34001000
+.word 0x34001020
 .loc 10 492 0
 .word 0xf940031e
 .word 0xf9400f02
@@ -11250,70 +11266,71 @@ bl _p_118
 .word 0xaa0203e0
 .word 0xd2800021
 .word 0xf940005e
-bl _p_100
+bl _p_101
 .word 0xaa0003e1
 .loc 10 494 0
 .word 0xaa0103e0
 .word 0xf940003e
-bl _p_76
-.word 0xf900d3a0
+bl _p_77
+.word 0xf900dba0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #760]
+ldr x0, [x16, #768]
 .word 0xd2800601
 bl _p_5
-.word 0xf940d3a1
-.word 0xf900cfa0
-bl _p_123
-.word 0xf940cfa0
+.word 0xf940dba1
+.word 0xf900d7a0
+bl _p_124
+.word 0xf940d7a0
 .word 0xaa0003f9
 .loc 10 495 0
 .word 0xf940033e
 .word 0xf9400b20
-.word 0xf900c3a0
-.word 0xaa1903e0
-.word 0xf940033e
-bl _p_124
-.word 0xf900c7a0
-.word 0xf940033e
-.word 0xb9802b20
 .word 0xf900cba0
 .word 0xaa1903e0
 .word 0xf940033e
 bl _p_125
-.word 0xaa0003e4
-.word 0xf940c3a1
-.word 0xf940c7a2
-.word 0xf940cba3
-.word 0xaa1a03e0
+.word 0xf900cfa0
+.word 0xf940033e
+.word 0xb9802b20
+.word 0xf900d3a0
+.word 0xaa1903e0
+.word 0xf940033e
 bl _p_126
+.word 0xaa0003e4
+.word 0xf940cba1
+.word 0xf940cfa2
+.word 0xf940d3a3
+.word 0xaa1a03e0
+bl _p_127
 .word 0xaa0003f9
 .loc 10 496 0
 .word 0xaa1903e0
-.word 0xf900bfa0
+.word 0xf900c7a0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #744]
+ldr x0, [x16, #752]
 .word 0xd2800601
 bl _p_5
-.word 0xf940bfa1
-.word 0xf900bba0
-bl _p_119
-.word 0xf940bba1
+.word 0xf940c7a1
+.word 0xf900c3a0
+bl _p_120
+.word 0xf940c3a1
 .loc 10 497 0
 .word 0xaa0103e0
 .word 0xf940003e
-bl _p_120
+bl _p_121
 .word 0xaa0003f8
 .loc 10 498 0
 .word 0xaa1803e0
 .word 0xb9801801
 .word 0xeb1f003f
 .word 0x10000011
-.word 0x54001189
-.word 0x39408017
+.word 0x54001229
+.word 0x39408000
+.word 0x53001c17
 .word 0xaa1703e0
 .word 0xd280005e
 .word 0x6b1e001f
@@ -11334,7 +11351,7 @@ bl _p_120
 .word 0xf90077a0
 .loc 10 501 0
 .word 0xf9400f40
-.word 0xf900bba0
+.word 0xf900c3a0
 .word 0xaa1803e0
 .word 0x9100c3a1
 .word 0xf9405ba2
@@ -11353,9 +11370,9 @@ bl _p_120
 .word 0xf90033a2
 .word 0xf94077a2
 .word 0xf90037a2
-bl _p_121
+bl _p_122
 .word 0xaa0003e1
-.word 0xf940bba2
+.word 0xf940c3a2
 .word 0xaa0203e0
 .word 0xf9400042
 .word 0xf9407850
@@ -11365,11 +11382,11 @@ bl _p_121
 .word 0x1400000c
 .loc 10 504 0
 .word 0xf9400f40
-.word 0xf900bba0
+.word 0xf900c3a0
 .word 0xaa1803e0
-bl _p_122
+bl _p_123
 .word 0xaa0003e1
-.word 0xf940bba2
+.word 0xf940c3a2
 .word 0xaa0203e0
 .word 0xf9400042
 .word 0xf9407850
@@ -11379,12 +11396,12 @@ bl _p_122
 .word 0xb9801b02
 .word 0xaa1803e0
 .word 0xd2800001
-bl _p_116
+bl _p_117
 .loc 10 510 0
 .word 0xb9801b22
 .word 0xaa1903e0
 .word 0xd2800001
-bl _p_116
+bl _p_117
 .loc 10 472 0
 .word 0xf9409ba1
 .word 0xaa0103e0
@@ -11392,40 +11409,44 @@ bl _p_116
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x15, [x16, #432]
+ldr x15, [x16, #440]
 .word 0x92800ef0
 .word 0xf2bffff0
 .word 0xf8706830
 .word 0xd63f0200
 .word 0x53001c00
-.word 0x35ffdde0
-.word 0x94000002
+.word 0x35ffdda0
+.word 0xf900a3bf
+.word 0x94000005
+.word 0xf940a3a0
+.word 0xb4000040
+bl _p_69
 .word 0x14000034
-.word 0xf900b7be
+.word 0xf900bbbe
 .word 0xf9409ba0
-.word 0xf900a3a0
-.word 0xf940a3a0
 .word 0xf900a7a0
-.word 0xf940a3a0
+.word 0xf940a7a0
+.word 0xf900aba0
+.word 0xf940a7a0
 .word 0xeb1f001f
 .word 0x54000380
-.word 0xf940a3a0
+.word 0xf940a7a0
 .word 0xf9400000
-.word 0xf900aba0
-.word 0xf940aba0
+.word 0xf900afa0
+.word 0xf940afa0
 .word 0xb9402800
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #440]
+ldr x1, [x16, #448]
 .word 0xeb01001f
 .word 0x540001e3
-.word 0xf940aba0
+.word 0xf940afa0
 .word 0xf9401000
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #440]
+ldr x1, [x16, #448]
 .word 0x9343fc22
 .word 0x8b020000
 .word 0x39400000
@@ -11436,9 +11457,9 @@ ldr x1, [x16, #440]
 .word 0xa010000
 .word 0xb5000080
 .word 0x14000001
-.word 0xf900a7bf
+.word 0xf900abbf
 .word 0x14000001
-.word 0xf940a7a0
+.word 0xf940aba0
 .word 0xf9009fa0
 .word 0xf9409fa0
 .word 0xb4000160
@@ -11448,27 +11469,27 @@ ldr x1, [x16, #440]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x15, [x16, #448]
+ldr x15, [x16, #456]
 .word 0x928004f0
 .word 0xf2bffff0
 .word 0xf8706830
 .word 0xd63f0200
-.word 0xf940b7be
+.word 0xf940bbbe
 .word 0xd61f03c0
 .loc 10 513 0
 .word 0x3901035f
 .loc 10 515 0
 .word 0xf9400f40
-bl _p_127
+bl _p_128
 .word 0xa94163b7
 .word 0xa9426bb9
 .word 0x910003bf
-.word 0xa8db7bfd
+.word 0xa8dc7bfd
 .word 0xd65f03c0
-.word 0xd2801a00
+.word 0xd28019e0
 .word 0xaa1103e1
 bl _p_3
-.word 0xd2801a80
+.word 0xd2801a60
 .word 0xaa1103e1
 bl _p_3
 
@@ -11486,12 +11507,12 @@ Mono_Security_X509_PKCS12_get_Certificates:
 .word 0xf90017bf
 .word 0xf9001bbf
 .word 0x39410b40
-.word 0x340013e0
+.word 0x34001460
 .loc 10 540 0
 .word 0xf9401741
 .word 0xaa0103e0
 .word 0xf940003e
-bl _p_128
+bl _p_129
 .loc 10 541 0
 .word 0xf9401b41
 .word 0xaa0103e0
@@ -11506,7 +11527,7 @@ bl _p_128
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x15, [x16, #416]
+ldr x15, [x16, #424]
 .word 0x928003f0
 .word 0xf2bffff0
 .word 0xf8706830
@@ -11520,10 +11541,10 @@ ldr x15, [x16, #416]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #728]
+ldr x1, [x16, #736]
 .word 0xeb01001f
 .word 0x10000011
-.word 0x54001081
+.word 0x54001101
 .word 0xaa1903f8
 .loc 10 542 0
 .word 0xf940033e
@@ -11531,10 +11552,10 @@ ldr x1, [x16, #728]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #768]
+ldr x1, [x16, #776]
 .word 0xaa0203e0
 .word 0xf940005e
-bl _p_118
+bl _p_119
 .word 0x53001c00
 .word 0x34000620
 .loc 10 543 0
@@ -11544,22 +11565,22 @@ bl _p_118
 .word 0xaa0203e0
 .word 0xd2800021
 .word 0xf940005e
-bl _p_100
+bl _p_101
 .word 0xaa0003e1
 .loc 10 545 0
 .word 0xaa0103e0
 .word 0xf940003e
-bl _p_76
+bl _p_77
 .word 0xf9004ba0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #656]
+ldr x0, [x16, #664]
 .word 0xd2800401
 bl _p_5
 .word 0xf9404ba1
 .word 0xf90047a0
-bl _p_129
+bl _p_130
 .word 0xf94047a0
 .word 0xaa0003f9
 .loc 10 546 0
@@ -11570,26 +11591,26 @@ bl _p_129
 .word 0xaa0203e0
 .word 0xd2800001
 .word 0xf940005e
-bl _p_100
+bl _p_101
 .word 0xaa0003e1
 .word 0xaa0103e0
 .word 0xf940003e
-bl _p_76
+bl _p_77
 .word 0xf90043a0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #776]
+ldr x0, [x16, #784]
 .word 0xd2801701
 bl _p_5
 .word 0xf94043a1
 .word 0xf9003ba0
-bl _p_130
+bl _p_131
 .word 0xf9403ba1
 .word 0xf9403fa2
 .word 0xaa0203e0
 .word 0xf940005e
-bl _p_131
+bl _p_132
 .word 0x93407c00
 .loc 10 541 0
 .word 0xf94017a1
@@ -11598,40 +11619,44 @@ bl _p_131
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x15, [x16, #432]
+ldr x15, [x16, #440]
 .word 0x92800ef0
 .word 0xf2bffff0
 .word 0xf8706830
 .word 0xd63f0200
 .word 0x53001c00
 .word 0x35fff480
-.word 0x94000002
+.word 0xf9001fbf
+.word 0x94000005
+.word 0xf9401fa0
+.word 0xb4000040
+bl _p_69
 .word 0x14000034
-.word 0xf90033be
+.word 0xf90037be
 .word 0xf94017a0
-.word 0xf9001fa0
-.word 0xf9401fa0
 .word 0xf90023a0
-.word 0xf9401fa0
+.word 0xf94023a0
+.word 0xf90027a0
+.word 0xf94023a0
 .word 0xeb1f001f
 .word 0x54000380
-.word 0xf9401fa0
+.word 0xf94023a0
 .word 0xf9400000
-.word 0xf90027a0
-.word 0xf94027a0
+.word 0xf9002ba0
+.word 0xf9402ba0
 .word 0xb9402800
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #440]
+ldr x1, [x16, #448]
 .word 0xeb01001f
 .word 0x540001e3
-.word 0xf94027a0
+.word 0xf9402ba0
 .word 0xf9401000
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #440]
+ldr x1, [x16, #448]
 .word 0x9343fc22
 .word 0x8b020000
 .word 0x39400000
@@ -11642,9 +11667,9 @@ ldr x1, [x16, #440]
 .word 0xa010000
 .word 0xb5000080
 .word 0x14000001
-.word 0xf90023bf
+.word 0xf90027bf
 .word 0x14000001
-.word 0xf94023a0
+.word 0xf94027a0
 .word 0xf9001ba0
 .word 0xf9401ba0
 .word 0xb4000160
@@ -11654,12 +11679,12 @@ ldr x1, [x16, #440]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x15, [x16, #448]
+ldr x15, [x16, #456]
 .word 0x928004f0
 .word 0xf2bffff0
 .word 0xf8706830
 .word 0xd63f0200
-.word 0xf94033be
+.word 0xf94037be
 .word 0xd61f03c0
 .loc 10 549 0
 .word 0x39010b5f
@@ -11670,7 +11695,7 @@ ldr x15, [x16, #448]
 .word 0x910003bf
 .word 0xa8ca7bfd
 .word 0xd65f03c0
-.word 0xd2801a80
+.word 0xd2801a60
 .word 0xaa1103e1
 bl _p_3
 
@@ -11690,7 +11715,7 @@ Mono_Security_X509_PKCS12_get_RNG:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #248]
+ldr x0, [x16, #256]
 bl _p_20
 .word 0xf9001f40
 .word 0x9100e341
@@ -11725,12 +11750,13 @@ Mono_Security_X509_PKCS12_Compare_byte___byte__:
 .word 0xf90017a0
 .word 0xaa0103f9
 .word 0xaa0203fa
-.word 0xd2800018
+.word 0xd2800000
+.word 0x53001c18
 .loc 10 568 0
 .word 0xb9801b20
 .word 0xb9801b41
 .word 0x6b01001f
-.word 0x54000381
+.word 0x540003a1
 .loc 10 569 0
 .word 0xd2800018
 .word 0x14000016
@@ -11739,7 +11765,7 @@ Mono_Security_X509_PKCS12_Compare_byte___byte__:
 .word 0xb9801b21
 .word 0xeb00003f
 .word 0x10000011
-.word 0x54000369
+.word 0x54000389
 .word 0x8b000320
 .word 0x91008000
 .word 0x39400000
@@ -11747,7 +11773,7 @@ Mono_Security_X509_PKCS12_Compare_byte___byte__:
 .word 0xb9801b42
 .word 0xeb01005f
 .word 0x10000011
-.word 0x54000269
+.word 0x54000289
 .word 0x8b010341
 .word 0x91008021
 .word 0x39400021
@@ -11755,14 +11781,15 @@ Mono_Security_X509_PKCS12_Compare_byte___byte__:
 .word 0x54000060
 .loc 10 571 0
 .word 0xd2800000
-.word 0x14000007
+.word 0x14000008
 .loc 10 569 0
 .word 0x11000718
 .word 0xb9801b20
 .word 0x6b00031f
 .word 0x54fffd2b
 .loc 10 573 0
-.word 0xd2800038
+.word 0xd2800020
+.word 0x53001c18
 .loc 10 575 0
 .word 0xaa1803e0
 .word 0xa94167b8
@@ -11770,7 +11797,7 @@ Mono_Security_X509_PKCS12_Compare_byte___byte__:
 .word 0x910003bf
 .word 0xa8c37bfd
 .word 0xd65f03c0
-.word 0xd2801a00
+.word 0xd28019e0
 .word 0xaa1103e1
 bl _p_3
 
@@ -11799,7 +11826,7 @@ Mono_Security_X509_PKCS12_GetSymmetricAlgorithm_string_byte___int:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #784]
+ldr x0, [x16, #792]
 .word 0xd2800601
 bl _p_5
 .word 0xaa0003e2
@@ -11810,19 +11837,19 @@ bl _p_5
 .word 0xaa0203e0
 .word 0xf940005e
 .word 0xf9002ba2
-bl _p_132
+bl _p_133
 .loc 10 586 0
 .word 0xaa1303e0
 .word 0xf94027a1
 .word 0xf940027e
-bl _p_133
+bl _p_134
 .word 0xf9402ba0
 .loc 10 587 0
 .word 0xf940027e
 .word 0xb900281a
 .loc 10 589 0
 .word 0xaa1803e0
-bl _p_134
+bl _p_135
 .word 0xaa0003fa
 .word 0xaa1a03e0
 .word 0x9288e27e
@@ -11892,108 +11919,108 @@ bl _p_134
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #792]
+ldr x1, [x16, #800]
 .word 0xaa1803e0
-bl _p_112
+bl _p_113
 .word 0x53001c00
 .word 0x34002f60
 .word 0x14000059
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #800]
+ldr x1, [x16, #808]
 .word 0xaa1803e0
-bl _p_112
+bl _p_113
 .word 0x53001c00
 .word 0x34002e60
 .word 0x14000065
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #808]
+ldr x1, [x16, #816]
 .word 0xaa1803e0
-bl _p_112
+bl _p_113
 .word 0x53001c00
 .word 0x34002d60
 .word 0x14000071
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #816]
+ldr x1, [x16, #824]
 .word 0xaa1803e0
-bl _p_112
+bl _p_113
 .word 0x53001c00
 .word 0x34002c60
 .word 0x1400007e
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #824]
+ldr x1, [x16, #832]
 .word 0xaa1803e0
-bl _p_112
+bl _p_113
 .word 0x53001c00
 .word 0x34002b60
 .word 0x1400008b
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #832]
+ldr x1, [x16, #840]
 .word 0xaa1803e0
-bl _p_112
+bl _p_113
 .word 0x53001c00
 .word 0x34002a60
 .word 0x14000097
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #840]
+ldr x1, [x16, #848]
 .word 0xaa1803e0
-bl _p_112
+bl _p_113
 .word 0x53001c00
 .word 0x34002960
 .word 0x140000a4
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #848]
+ldr x1, [x16, #856]
 .word 0xaa1803e0
-bl _p_112
+bl _p_113
 .word 0x53001c00
 .word 0x34002860
 .word 0x140000b2
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #856]
+ldr x1, [x16, #864]
 .word 0xaa1803e0
-bl _p_112
+bl _p_113
 .word 0x53001c00
 .word 0x34002760
 .word 0x140000c0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #864]
+ldr x1, [x16, #872]
 .word 0xaa1803e0
-bl _p_112
+bl _p_113
 .word 0x53001c00
 .word 0x34002660
 .word 0x140000cd
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #872]
+ldr x1, [x16, #880]
 .word 0xaa1803e0
-bl _p_112
+bl _p_113
 .word 0x53001c00
 .word 0x34002560
 .word 0x140000da
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #880]
+ldr x1, [x16, #888]
 .word 0xaa1803e0
-bl _p_112
+bl _p_113
 .word 0x53001c00
 .word 0x34002460
 .word 0x140000e7
@@ -12001,7 +12028,7 @@ bl _p_112
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #888]
+ldr x0, [x16, #896]
 .word 0xf940027e
 .word 0xf9000a60
 .word 0x91004261
@@ -12020,14 +12047,14 @@ ldr x2, [x16, #16]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x22, [x16, #896]
+ldr x22, [x16, #904]
 .loc 10 593 0
 .word 0x140000e7
 .loc 10 595 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #904]
+ldr x0, [x16, #912]
 .word 0xf940027e
 .word 0xf9000a60
 .word 0x91004261
@@ -12046,14 +12073,14 @@ ldr x2, [x16, #16]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x22, [x16, #896]
+ldr x22, [x16, #904]
 .loc 10 597 0
 .word 0x140000d3
 .loc 10 601 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #888]
+ldr x0, [x16, #896]
 .word 0xf940027e
 .word 0xf9000a60
 .word 0x91004261
@@ -12072,7 +12099,7 @@ ldr x2, [x16, #16]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x22, [x16, #912]
+ldr x22, [x16, #920]
 .loc 10 603 0
 .word 0xd2800095
 .loc 10 604 0
@@ -12081,7 +12108,7 @@ ldr x22, [x16, #912]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #904]
+ldr x0, [x16, #912]
 .word 0xf940027e
 .word 0xf9000a60
 .word 0x91004261
@@ -12100,7 +12127,7 @@ ldr x2, [x16, #16]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x22, [x16, #912]
+ldr x22, [x16, #920]
 .loc 10 610 0
 .word 0xd2800095
 .loc 10 611 0
@@ -12109,7 +12136,7 @@ ldr x22, [x16, #912]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #920]
+ldr x0, [x16, #928]
 .word 0xf940027e
 .word 0xf9000a60
 .word 0x91004261
@@ -12128,14 +12155,14 @@ ldr x2, [x16, #16]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x22, [x16, #896]
+ldr x22, [x16, #904]
 .loc 10 615 0
 .word 0x14000095
 .loc 10 619 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #920]
+ldr x0, [x16, #928]
 .word 0xf940027e
 .word 0xf9000a60
 .word 0x91004261
@@ -12154,7 +12181,7 @@ ldr x2, [x16, #16]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x22, [x16, #912]
+ldr x22, [x16, #920]
 .loc 10 621 0
 .word 0xd2800095
 .loc 10 622 0
@@ -12163,7 +12190,7 @@ ldr x22, [x16, #912]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #920]
+ldr x0, [x16, #928]
 .word 0xf940027e
 .word 0xf9000a60
 .word 0x91004261
@@ -12182,7 +12209,7 @@ ldr x2, [x16, #16]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x22, [x16, #928]
+ldr x22, [x16, #936]
 .loc 10 626 0
 .word 0xd2800215
 .loc 10 627 0
@@ -12193,7 +12220,7 @@ ldr x22, [x16, #928]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #920]
+ldr x0, [x16, #928]
 .word 0xf940027e
 .word 0xf9000a60
 .word 0x91004261
@@ -12212,7 +12239,7 @@ ldr x2, [x16, #16]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x22, [x16, #928]
+ldr x22, [x16, #936]
 .loc 10 632 0
 .word 0xd28000b5
 .loc 10 633 0
@@ -12223,7 +12250,7 @@ ldr x22, [x16, #928]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #920]
+ldr x0, [x16, #928]
 .word 0xf940027e
 .word 0xf9000a60
 .word 0x91004261
@@ -12242,7 +12269,7 @@ ldr x2, [x16, #16]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x22, [x16, #936]
+ldr x22, [x16, #944]
 .loc 10 638 0
 .word 0xd2800315
 .loc 10 639 0
@@ -12251,7 +12278,7 @@ ldr x22, [x16, #936]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #920]
+ldr x0, [x16, #928]
 .word 0xf940027e
 .word 0xf9000a60
 .word 0x91004261
@@ -12270,7 +12297,7 @@ ldr x2, [x16, #16]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x22, [x16, #936]
+ldr x22, [x16, #944]
 .loc 10 643 0
 .word 0xd2800215
 .loc 10 644 0
@@ -12279,7 +12306,7 @@ ldr x22, [x16, #936]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #920]
+ldr x0, [x16, #928]
 .word 0xf940027e
 .word 0xf9000a60
 .word 0x91004261
@@ -12298,7 +12325,7 @@ ldr x2, [x16, #16]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x22, [x16, #912]
+ldr x22, [x16, #920]
 .loc 10 648 0
 .word 0xd2800215
 .loc 10 649 0
@@ -12307,7 +12334,7 @@ ldr x22, [x16, #912]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #920]
+ldr x0, [x16, #928]
 .word 0xf940027e
 .word 0xf9000a60
 .word 0x91004261
@@ -12326,12 +12353,12 @@ ldr x2, [x16, #16]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x22, [x16, #912]
+ldr x22, [x16, #920]
 .loc 10 653 0
 .word 0xd28000b5
 .loc 10 680 0
 .word 0xaa1603e0
-bl _p_135
+bl _p_136
 .word 0xaa0003fa
 .loc 10 682 0
 .word 0xaa1a03e0
@@ -12339,7 +12366,7 @@ bl _p_135
 .word 0xaa1303e0
 .word 0xaa1503e1
 .word 0xf940027e
-bl _p_136
+bl _p_137
 .word 0xaa0003e1
 .word 0xf9402ba2
 .word 0xaa0203e0
@@ -12353,7 +12380,7 @@ bl _p_136
 .word 0xaa1303e0
 .word 0xaa1403e1
 .word 0xf940027e
-bl _p_137
+bl _p_138
 .word 0xaa0003e1
 .word 0xaa1a03e0
 .word 0xf9400342
@@ -12379,12 +12406,12 @@ bl _p_137
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x0, [x16, #0]
-.word 0xd2817a21
+.word 0xd2817b21
 bl _p_7
 .word 0xaa1603e1
 bl _p_31
 .word 0xaa0003e1
-.word 0xd2801c40
+.word 0xd2801c20
 .word 0xf2a04000
 bl _mono_create_corlib_exception_1
 bl _p_8
@@ -12410,7 +12437,7 @@ Mono_Security_X509_PKCS12_Decrypt_string_byte___int_byte__:
 .word 0xf94013a1
 .word 0xf94017a2
 .word 0xb98033a3
-bl _p_138
+bl _p_139
 .word 0xf9001fa0
 .loc 10 697 0
 .word 0xf9401fa1
@@ -12428,16 +12455,20 @@ bl _p_138
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x15, [x16, #944]
+ldr x15, [x16, #952]
 .word 0x928003f0
 .word 0xf2bffff0
 .word 0xf8706890
 .word 0xd63f0200
 .word 0xaa0003fa
 .loc 10 699 0
-.word 0x94000002
+.word 0xf90023bf
+.word 0x94000005
+.word 0xf94023a0
+.word 0xb4000040
+bl _p_69
 .word 0x1400000a
-.word 0xf9002bbe
+.word 0xf9002fbe
 .loc 10 701 0
 .word 0xf9401fa0
 .word 0xb40000a0
@@ -12445,9 +12476,9 @@ ldr x15, [x16, #944]
 .word 0xf9401fa1
 .word 0xaa0103e0
 .word 0xf940003e
-bl _p_139
+bl _p_140
 .loc 10 703 0
-.word 0xf9402bbe
+.word 0xf9402fbe
 .word 0xd61f03c0
 .loc 10 704 0
 .word 0xaa1a03e0
@@ -12481,11 +12512,11 @@ Mono_Security_X509_PKCS12_Decrypt_Mono_Security_PKCS7_EncryptedData:
 .word 0xaa0203e0
 .word 0xd2800001
 .word 0xf940005e
-bl _p_100
+bl _p_101
 .word 0xaa0003e1
 .word 0xaa0103e0
 .word 0xf940003e
-bl _p_76
+bl _p_77
 .word 0xf90017a0
 .word 0xf940035e
 .word 0xf9400f40
@@ -12495,19 +12526,19 @@ bl _p_76
 .word 0xaa0203e0
 .word 0xd2800021
 .word 0xf940005e
-bl _p_100
-bl _p_109
+bl _p_101
+bl _p_110
 .word 0x93407c00
 .word 0xf9001ba0
 .word 0xaa1a03e0
 .word 0xf940035e
-bl _p_140
+bl _p_141
 .word 0xaa0003e4
 .word 0xf94013a1
 .word 0xf94017a2
 .word 0xf9401ba3
 .word 0xf9400fa0
-bl _p_126
+bl _p_127
 .word 0xf9400bba
 .word 0x910003bf
 .word 0xa8c47bfd
@@ -12532,7 +12563,7 @@ Mono_Security_X509_PKCS12_Encrypt_string_byte___int_byte__:
 .word 0xf94013a1
 .word 0xf94017a2
 .word 0xb98033a3
-bl _p_138
+bl _p_139
 .word 0xf9001fa0
 .loc 10 719 0
 .word 0xf9401fa1
@@ -12550,16 +12581,20 @@ bl _p_138
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x15, [x16, #944]
+ldr x15, [x16, #952]
 .word 0x928003f0
 .word 0xf2bffff0
 .word 0xf8706890
 .word 0xd63f0200
 .word 0xaa0003fa
 .loc 10 721 0
-.word 0x94000002
+.word 0xf90023bf
+.word 0x94000005
+.word 0xf94023a0
+.word 0xb4000040
+bl _p_69
 .word 0x14000010
-.word 0xf9002bbe
+.word 0xf9002fbe
 .word 0xf9401fa0
 .word 0xb4000160
 .word 0xf9401fa1
@@ -12568,12 +12603,12 @@ ldr x15, [x16, #944]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x15, [x16, #448]
+ldr x15, [x16, #456]
 .word 0x928004f0
 .word 0xf2bffff0
 .word 0xf8706830
 .word 0xd63f0200
-.word 0xf9402bbe
+.word 0xf9402fbe
 .word 0xd61f03c0
 .loc 10 722 0
 .word 0xaa1a03e0
@@ -12615,17 +12650,17 @@ Mono_Security_X509_PKCS12_GetExistingParameters_bool_:
 .word 0xf9004fa0
 .word 0xf90053a0
 .word 0xaa1903e0
-bl _p_141
+bl _p_142
 .word 0xaa0003e1
 .word 0xaa0103e0
 .word 0xf940003e
-bl _p_142
+bl _p_143
 .word 0xf90077a0
-.word 0x1400001d
+.word 0x14000021
 .word 0xf94077a1
 .word 0xaa0103e0
 .word 0xf940003e
-bl _p_143
+bl _p_144
 .word 0xaa0003f9
 .loc 10 729 0
 .word 0xaa1903e1
@@ -12633,15 +12668,15 @@ bl _p_143
 .word 0xf9400021
 .word 0xf9405c30
 .word 0xd63f0200
-.word 0xb4000240
+.word 0xb40002c0
 .loc 10 730 0
 .word 0xaa1903e0
 .word 0xf940033e
-bl _p_144
+bl _p_145
 .word 0xaa0003f9
 .loc 10 731 0
 .word 0xaa1903e0
-.word 0xb4000180
+.word 0xb4000200
 .loc 10 732 0
 .word 0xf94013a0
 .word 0xd280003e
@@ -12653,42 +12688,50 @@ bl _p_144
 .word 0xf9400322
 .word 0xf9404850
 .word 0xd63f0200
-.word 0x9400000a
-.word 0x1400005c
+.word 0xf9007fbf
+.word 0x94000011
+.word 0xf9407fa0
+.word 0xb4000040
+bl _p_69
+.word 0x14000060
 .loc 10 727 0
 .word 0xf94077a1
 .word 0xaa0103e0
 .word 0xf940003e
-bl _p_145
+bl _p_146
 .word 0x53001c00
-.word 0x35fffbe0
-.word 0x94000002
+.word 0x35fffb60
+.word 0xf9007fbf
+.word 0x94000005
+.word 0xf9407fa0
+.word 0xb4000040
+bl _p_69
 .word 0x14000034
-.word 0xf90093be
+.word 0xf90097be
 .word 0xf94077a0
-.word 0xf9007fa0
-.word 0xf9407fa0
 .word 0xf90083a0
-.word 0xf9407fa0
+.word 0xf94083a0
+.word 0xf90087a0
+.word 0xf94083a0
 .word 0xeb1f001f
 .word 0x54000380
-.word 0xf9407fa0
+.word 0xf94083a0
 .word 0xf9400000
-.word 0xf90087a0
-.word 0xf94087a0
+.word 0xf9008ba0
+.word 0xf9408ba0
 .word 0xb9402800
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #440]
+ldr x1, [x16, #448]
 .word 0xeb01001f
 .word 0x540001e3
-.word 0xf94087a0
+.word 0xf9408ba0
 .word 0xf9401000
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #440]
+ldr x1, [x16, #448]
 .word 0x9343fc22
 .word 0x8b020000
 .word 0x39400000
@@ -12699,9 +12742,9 @@ ldr x1, [x16, #440]
 .word 0xa010000
 .word 0xb5000080
 .word 0x14000001
-.word 0xf90083bf
+.word 0xf90087bf
 .word 0x14000001
-.word 0xf94083a0
+.word 0xf94087a0
 .word 0xf9007ba0
 .word 0xf9407ba0
 .word 0xb4000160
@@ -12711,12 +12754,12 @@ ldr x1, [x16, #440]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x15, [x16, #448]
+ldr x15, [x16, #456]
 .word 0x928004f0
 .word 0xf2bffff0
 .word 0xf8706830
 .word 0xd63f0200
-.word 0xf94093be
+.word 0xf94097be
 .word 0xd61f03c0
 .loc 10 737 0
 .word 0xf94013a0
@@ -12786,15 +12829,16 @@ Mono_Security_X509_PKCS12_AddPrivateKey_Mono_Security_Cryptography_PKCS8_Private
 .word 0xf90053a0
 .word 0xaa1a03e0
 .word 0xf940035e
-bl _p_120
+bl _p_121
 .word 0xaa0003fa
 .loc 10 744 0
 .word 0xaa1a03e0
 .word 0xb9801801
 .word 0xeb1f003f
 .word 0x10000011
-.word 0x54000a29
-.word 0x39408018
+.word 0x54000a49
+.word 0x39408000
+.word 0x53001c18
 .word 0xaa1803e0
 .word 0xd280005e
 .word 0x6b1e001f
@@ -12807,7 +12851,7 @@ bl _p_120
 .word 0x9102a3a1
 .word 0x9101a3a8
 .word 0xf94013a0
-bl _p_146
+bl _p_147
 .loc 10 748 0
 .word 0x3942a3a0
 .word 0x34000560
@@ -12833,7 +12877,7 @@ bl _p_146
 .word 0xf9002fa2
 .word 0xf94053a2
 .word 0xf90033a2
-bl _p_121
+bl _p_122
 .word 0xaa0003e1
 .word 0xf9405ba2
 .word 0xaa0203e0
@@ -12848,7 +12892,7 @@ bl _p_121
 .word 0xf9400c00
 .word 0xf9005ba0
 .word 0xaa1a03e0
-bl _p_122
+bl _p_123
 .word 0xaa0003e1
 .word 0xf9405ba2
 .word 0xaa0203e0
@@ -12860,7 +12904,7 @@ bl _p_122
 .word 0xb9801b42
 .word 0xaa1a03e0
 .word 0xd2800001
-bl _p_116
+bl _p_117
 .loc 10 760 0
 .word 0xf9400bb8
 .word 0xf9400fba
@@ -12871,20 +12915,20 @@ bl _p_116
 .word 0xb9801b42
 .word 0xaa1a03e0
 .word 0xd2800001
-bl _p_116
+bl _p_117
 .loc 10 757 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x0, [x16, #0]
-.word 0xd2817d61
+.word 0xd2817e61
 bl _p_7
 .word 0xaa0003e1
 .word 0xd28087e0
 .word 0xf2a04000
 bl _mono_create_corlib_exception_1
 bl _p_8
-.word 0xd2801a00
+.word 0xd28019e0
 .word 0xaa1103e1
 bl _p_3
 
@@ -12913,7 +12957,7 @@ Mono_Security_X509_PKCS12_ReadSafeBag_Mono_Security_ASN1:
 .word 0xd2800001
 .word 0xf9402ba2
 .word 0xf940005e
-bl _p_100
+bl _p_101
 .loc 10 768 0
 .word 0xaa0003e1
 .word 0xf940001e
@@ -12927,95 +12971,95 @@ bl _p_100
 .word 0xd2800021
 .word 0xf9402ba2
 .word 0xf940005e
-bl _p_100
+bl _p_101
 .word 0xaa0003f7
 .loc 10 772 0
 .word 0xaa1803e0
-bl _p_101
+bl _p_102
 .word 0xaa0003f6
 .loc 10 773 0
 .word 0xaa1603e0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #736]
-bl _p_112
+ldr x1, [x16, #744]
+bl _p_113
 .word 0x53001c00
 .word 0x350004a0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #752]
+ldr x1, [x16, #760]
 .word 0xaa1603e0
-bl _p_112
+bl _p_113
 .word 0x53001c00
 .word 0x350005c0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #768]
+ldr x1, [x16, #776]
 .word 0xaa1603e0
-bl _p_112
+bl _p_113
 .word 0x53001c00
 .word 0x35000b20
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #952]
+ldr x1, [x16, #960]
 .word 0xaa1603e0
-bl _p_112
+bl _p_113
 .word 0x53001c00
 .word 0x35001240
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #960]
+ldr x1, [x16, #968]
 .word 0xaa1603e0
-bl _p_112
+bl _p_113
 .word 0x53001c00
 .word 0x35001000
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #968]
+ldr x1, [x16, #976]
 .word 0xaa1603e0
-bl _p_112
+bl _p_113
 .word 0x53001c00
 .word 0x340022e0
 .word 0x14000083
 .loc 10 776 0
 .word 0xaa1703e0
 .word 0xf94002fe
-bl _p_76
+bl _p_77
 .word 0xf90037a0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #744]
+ldr x0, [x16, #752]
 .word 0xd2800601
 bl _p_5
 .word 0xf94037a1
 .word 0xf90033a0
-bl _p_119
+bl _p_120
 .word 0xf94033a1
 .word 0xaa1903e0
-bl _p_147
+bl _p_148
 .loc 10 777 0
 .word 0x14000073
 .loc 10 779 0
 .word 0xaa1703e0
 .word 0xf94002fe
-bl _p_76
+bl _p_77
 .word 0xf90047a0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #760]
+ldr x0, [x16, #768]
 .word 0xd2800601
 bl _p_5
 .word 0xf94047a1
 .word 0xf90043a0
-bl _p_123
+bl _p_124
 .word 0xf94043a0
 .word 0xaa0003fa
 .loc 10 780 0
@@ -13024,55 +13068,55 @@ bl _p_123
 .word 0xf90037a0
 .word 0xaa1a03e0
 .word 0xf940035e
-bl _p_124
+bl _p_125
 .word 0xf9003ba0
 .word 0xf940035e
 .word 0xb9802b40
 .word 0xf9003fa0
 .word 0xaa1a03e0
 .word 0xf940035e
-bl _p_125
+bl _p_126
 .word 0xaa0003e4
 .word 0xf94037a1
 .word 0xf9403ba2
 .word 0xf9403fa3
 .word 0xaa1903e0
-bl _p_126
+bl _p_127
 .word 0xaa0003fa
 .loc 10 781 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #744]
+ldr x0, [x16, #752]
 .word 0xd2800601
 bl _p_5
 .word 0xf90033a0
 .word 0xaa1a03e1
-bl _p_119
+bl _p_120
 .word 0xf94033a1
 .word 0xaa1903e0
-bl _p_147
+bl _p_148
 .loc 10 782 0
 .word 0xb9801b42
 .word 0xaa1a03e0
 .word 0xd2800001
-bl _p_116
+bl _p_117
 .loc 10 783 0
 .word 0x14000041
 .loc 10 785 0
 .word 0xaa1703e0
 .word 0xf94002fe
-bl _p_76
+bl _p_77
 .word 0xf9003ba0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #656]
+ldr x0, [x16, #664]
 .word 0xd2800401
 bl _p_5
 .word 0xf9403ba1
 .word 0xf90037a0
-bl _p_129
+bl _p_130
 .word 0xf94037a0
 .loc 10 786 0
 .word 0xaa0003e1
@@ -13082,8 +13126,8 @@ bl _p_129
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #976]
-bl _p_108
+ldr x1, [x16, #984]
+bl _p_109
 .word 0xf94033a1
 .word 0x53001c00
 .word 0xaa0103f8
@@ -13094,21 +13138,21 @@ bl _p_108
 .word 0xaa0203e0
 .word 0xd2800001
 .word 0xf940005e
-bl _p_100
+bl _p_101
 .word 0xaa0003e1
 .word 0xaa0103e0
 .word 0xf940003e
-bl _p_76
+bl _p_77
 .word 0xf90037a0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #776]
+ldr x0, [x16, #784]
 .word 0xd2801701
 bl _p_5
 .word 0xf94037a1
 .word 0xf90033a0
-bl _p_130
+bl _p_131
 .word 0xf94033a0
 .word 0xaa0003fa
 .loc 10 789 0
@@ -13116,14 +13160,14 @@ bl _p_130
 .word 0xaa0203e0
 .word 0xaa1a03e1
 .word 0xf940005e
-bl _p_131
+bl _p_132
 .word 0x93407c00
 .loc 10 790 0
 .word 0x1400000c
 .loc 10 795 0
 .word 0xaa1703e0
 .word 0xf94002fe
-bl _p_76
+bl _p_77
 .word 0xaa0003fa
 .loc 10 796 0
 .word 0xf9401322
@@ -13147,7 +13191,7 @@ bl _p_68
 .word 0xd2800041
 .word 0xf9402ba2
 .word 0xf940005e
-bl _p_100
+bl _p_101
 .word 0xaa0003f7
 .loc 10 807 0
 .word 0xaa1703e0
@@ -13164,7 +13208,7 @@ bl _p_100
 .word 0xaa1703e0
 .word 0xaa1503e1
 .word 0xf94002fe
-bl _p_100
+bl _p_101
 .loc 10 813 0
 .word 0xaa0003e1
 .word 0xf940001e
@@ -13177,7 +13221,7 @@ bl _p_100
 .word 0xaa1803e0
 .word 0xd2800001
 .word 0xf940031e
-bl _p_100
+bl _p_101
 .loc 10 817 0
 .word 0xaa0003e1
 .word 0xf940001e
@@ -13188,13 +13232,13 @@ bl _p_100
 .word 0x540011e1
 .loc 10 820 0
 .word 0xaa1403e0
-bl _p_101
+bl _p_102
 .word 0xaa0003f4
 .loc 10 822 0
 .word 0xaa1803e0
 .word 0xd2800021
 .word 0xf940031e
-bl _p_100
+bl _p_101
 .word 0xaa0003f8
 .loc 10 823 0
 .word 0xd2800013
@@ -13203,23 +13247,23 @@ bl _p_100
 .word 0xaa1803e0
 .word 0xaa1303e1
 .word 0xf940031e
-bl _p_100
+bl _p_101
 .word 0xf9002fa0
 .loc 10 826 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #984]
+ldr x1, [x16, #992]
 .word 0xaa1403e0
-bl _p_112
+bl _p_113
 .word 0x53001c00
 .word 0x35000120
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #992]
+ldr x1, [x16, #1000]
 .word 0xaa1403e0
-bl _p_112
+bl _p_113
 .word 0x53001c00
 .word 0x35000120
 .word 0x1400000e
@@ -13260,13 +13304,13 @@ bl _p_68
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1000]
+ldr x0, [x16, #1008]
 .word 0xd2800401
 bl _p_5
 .word 0xf90033a0
 .word 0xaa1603e1
 .word 0xf9402ba2
-bl _p_148
+bl _p_149
 .word 0xf94033a1
 .word 0xf94037a2
 .word 0xaa0203e0
@@ -13287,10 +13331,10 @@ bl _p_148
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x0, [x16, #0]
-.word 0xd2818821
+.word 0xd2818921
 bl _p_7
 .word 0xaa0003e1
-.word 0xd2800fc0
+.word 0xd2800fa0
 .word 0xf2a04000
 bl _mono_create_corlib_exception_1
 bl _p_8
@@ -13299,10 +13343,10 @@ adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x0, [x16, #0]
 .loc 10 765 0
-.word 0xd2818421
+.word 0xd2818521
 bl _p_7
 .word 0xaa0003e1
-.word 0xd2800fc0
+.word 0xd2800fa0
 .word 0xf2a04000
 bl _mono_create_corlib_exception_1
 bl _p_8
@@ -13311,10 +13355,10 @@ bl _p_8
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x0, [x16, #0]
-.word 0xd281ade1
+.word 0xd281aee1
 bl _p_7
 .word 0xaa0003e1
-.word 0xd2800fc0
+.word 0xd2800fa0
 .word 0xf2a04000
 bl _mono_create_corlib_exception_1
 bl _p_8
@@ -13323,10 +13367,10 @@ adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x0, [x16, #0]
 .loc 10 787 0
-.word 0xd281a721
+.word 0xd281a821
 bl _p_7
 .word 0xaa0003e1
-.word 0xd2801c40
+.word 0xd2801c20
 .word 0xf2a04000
 bl _mono_create_corlib_exception_1
 bl _p_8
@@ -13335,10 +13379,10 @@ bl _p_8
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x0, [x16, #0]
-.word 0xd281b2e1
+.word 0xd281b3e1
 bl _p_7
 .word 0xaa0003e1
-.word 0xd2800fc0
+.word 0xd2800fa0
 .word 0xf2a04000
 bl _mono_create_corlib_exception_1
 bl _p_8
@@ -13347,10 +13391,10 @@ bl _p_8
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x0, [x16, #0]
-.word 0xd281ba61
+.word 0xd281bb61
 bl _p_7
 .word 0xaa0003e1
-.word 0xd2800fc0
+.word 0xd2800fa0
 .word 0xf2a04000
 bl _mono_create_corlib_exception_1
 bl _p_8
@@ -13359,10 +13403,10 @@ bl _p_8
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x0, [x16, #0]
-.word 0xd281c1a1
+.word 0xd281c2a1
 bl _p_7
 .word 0xaa0003e1
-.word 0xd2800fc0
+.word 0xd2800fa0
 .word 0xf2a04000
 bl _mono_create_corlib_exception_1
 bl _p_8
@@ -13371,10 +13415,10 @@ bl _p_8
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x0, [x16, #0]
-.word 0xd281d1e1
+.word 0xd281d2e1
 bl _p_7
 .word 0xaa0003e1
-.word 0xd2800fc0
+.word 0xd2800fa0
 .word 0xf2a04000
 bl _mono_create_corlib_exception_1
 bl _p_8
@@ -13383,10 +13427,10 @@ bl _p_8
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x0, [x16, #0]
-.word 0xd281d1e1
+.word 0xd281d2e1
 bl _p_7
 .word 0xaa0003e1
-.word 0xd2800fc0
+.word 0xd2800fa0
 .word 0xf2a04000
 bl _mono_create_corlib_exception_1
 bl _p_8
@@ -13397,7 +13441,7 @@ Lme_91:
 	.no_dead_strip Mono_Security_X509_PKCS12_Pkcs8ShroudedKeyBagSafeBag_System_Security_Cryptography_AsymmetricAlgorithm_System_Collections_IDictionary
 Mono_Security_X509_PKCS12_Pkcs8ShroudedKeyBagSafeBag_System_Security_Cryptography_AsymmetricAlgorithm_System_Collections_IDictionary:
 .loc 10 848 0 prologue_end
-.word 0xa9b07bfd
+.word 0xa9af7bfd
 .word 0x910003fd
 .word 0xa90157b4
 .word 0xa9025fb6
@@ -13411,12 +13455,12 @@ Mono_Security_X509_PKCS12_Pkcs8ShroudedKeyBagSafeBag_System_Security_Cryptograph
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #744]
+ldr x0, [x16, #752]
 .word 0xd2800601
 bl _p_5
-.word 0xf9005ba0
-bl _p_149
-.word 0xf9405ba0
+.word 0xf90063a0
+bl _p_150
+.word 0xf94063a0
 .word 0xaa0003f7
 .loc 10 849 0
 .word 0xaa1903f6
@@ -13429,7 +13473,7 @@ bl _p_149
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #1008]
+ldr x1, [x16, #1016]
 .word 0xeb01001f
 .word 0x54000040
 .word 0xd2800016
@@ -13438,7 +13482,7 @@ ldr x1, [x16, #1008]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1016]
+ldr x0, [x16, #1024]
 .word 0xf94002fe
 .word 0xf9000ae0
 .word 0x910042e1
@@ -13462,16 +13506,16 @@ ldr x2, [x16, #16]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #1008]
+ldr x1, [x16, #1016]
 .word 0xeb01001f
 .word 0x10000011
-.word 0x540050a1
+.word 0x540051a1
 .word 0xaa1903e0
-bl _p_150
+bl _p_151
 .word 0xaa0003e1
 .word 0xaa1703e0
 .word 0xf94002fe
-bl _p_151
+bl _p_152
 .loc 10 852 0
 .word 0x1400003f
 .loc 10 853 0
@@ -13485,7 +13529,7 @@ bl _p_151
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #1024]
+ldr x1, [x16, #1032]
 .word 0xeb01001f
 .word 0x54000040
 .word 0xd2800016
@@ -13515,16 +13559,16 @@ ldr x2, [x16, #16]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #1024]
+ldr x1, [x16, #1032]
 .word 0xeb01001f
 .word 0x10000011
-.word 0x54004ae1
+.word 0x54004be1
 .word 0xaa1903e0
-bl _p_152
+bl _p_153
 .word 0xaa0003e1
 .word 0xaa1703e0
 .word 0xf94002fe
-bl _p_151
+bl _p_152
 .loc 10 856 0
 .word 0x14000011
 .loc 10 858 0
@@ -13532,15 +13576,15 @@ bl _p_151
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x0, [x16, #0]
-.word 0xd281dde1
+.word 0xd281dee1
 bl _p_7
-.word 0xf9005ba0
+.word 0xf90063a0
 .word 0xaa1903e0
 .word 0xf9400321
 .word 0xf9402030
 .word 0xd63f0200
 .word 0xaa0003e2
-.word 0xf9405ba1
+.word 0xf94063a1
 .word 0xd28087e0
 .word 0xf2a04000
 bl _mono_create_corlib_exception_2
@@ -13549,7 +13593,7 @@ bl _p_8
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #760]
+ldr x0, [x16, #768]
 .word 0xd2800601
 bl _p_5
 .word 0xaa0003e2
@@ -13558,7 +13602,7 @@ bl _p_5
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #856]
+ldr x0, [x16, #864]
 .word 0xf940005e
 .word 0xf9000840
 .word 0x91004041
@@ -13577,108 +13621,108 @@ ldr x3, [x16, #16]
 .word 0xb9804701
 .word 0xaa0203e0
 .word 0xf940005e
-bl _p_153
+bl _p_154
 .loc 10 863 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #856]
-.word 0xf90073a0
+ldr x0, [x16, #864]
+.word 0xf9007ba0
 .word 0xaa1903e0
 .word 0xf940033e
-bl _p_124
-.word 0xf90077a0
+bl _p_125
+.word 0xf9007fa0
 .word 0xb9804700
-.word 0xf9007ba0
+.word 0xf90083a0
 .word 0xaa1703e0
 .word 0xf94002fe
-bl _p_154
-.word 0xaa0003e4
-.word 0xf94073a1
-.word 0xf94077a2
-.word 0xf9407ba3
-.word 0xaa1803e0
 bl _p_155
+.word 0xaa0003e4
+.word 0xf9407ba1
+.word 0xf9407fa2
+.word 0xf94083a3
+.word 0xaa1803e0
+bl _p_156
 .word 0xaa0003e1
 .word 0xaa1903e0
 .word 0xf940033e
-bl _p_156
+bl _p_157
 .loc 10 865 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #456]
+ldr x0, [x16, #464]
 .word 0xd2800501
 bl _p_5
-.word 0xf9006fa0
+.word 0xf90077a0
 .word 0xd2800601
-bl _p_83
-.word 0xf9406fa0
+bl _p_84
+.word 0xf94077a0
 .word 0xaa0003f8
 .loc 10 866 0
 .word 0xaa1803e0
-.word 0xf9006ba0
+.word 0xf90073a0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #752]
-bl _p_103
+ldr x0, [x16, #760]
+bl _p_104
 .word 0xaa0003e1
-.word 0xf9406ba2
+.word 0xf94073a2
 .word 0xaa0203e0
 .word 0xf940005e
-bl _p_70
+bl _p_71
 .loc 10 867 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #456]
+ldr x0, [x16, #464]
 .word 0xd2800501
 bl _p_5
-.word 0xf90067a0
+.word 0xf9006fa0
 .word 0xd2801401
-bl _p_83
-.word 0xf94067a0
+bl _p_84
+.word 0xf9406fa0
 .word 0xaa0003f7
 .loc 10 868 0
 .word 0xaa1703e0
-.word 0xf9005fa0
+.word 0xf90067a0
 .word 0xaa1903e0
 .word 0xf940033e
-bl _p_157
-.word 0xf90063a0
+bl _p_158
+.word 0xf9006ba0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #456]
+ldr x0, [x16, #464]
 .word 0xd2800501
 bl _p_5
+.word 0xf9406ba1
+.word 0xf90063a0
+bl _p_87
 .word 0xf94063a1
-.word 0xf9005ba0
-bl _p_86
-.word 0xf9405ba1
-.word 0xf9405fa2
+.word 0xf94067a2
 .word 0xaa0203e0
 .word 0xf940005e
-bl _p_70
+bl _p_71
 .loc 10 869 0
 .word 0xaa1803e0
 .word 0xaa1703e1
 .word 0xf940031e
-bl _p_70
+bl _p_71
 .loc 10 871 0
-.word 0xb40039fa
+.word 0xb4003afa
 .loc 10 872 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #456]
+ldr x0, [x16, #464]
 .word 0xd2800501
 bl _p_5
-.word 0xf9005ba0
+.word 0xf90063a0
 .word 0xd2800621
-bl _p_83
-.word 0xf9405ba0
+bl _p_84
+.word 0xf94063a0
 .word 0xaa0003f9
 .loc 10 873 0
 .word 0xaa1a03e0
@@ -13686,20 +13730,20 @@ bl _p_83
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x15, [x16, #1032]
+ldr x15, [x16, #1040]
 .word 0x92800cf0
 .word 0xf2bffff0
 .word 0xf8706830
 .word 0xd63f0200
 .word 0xaa0003fa
-.word 0x140001a5
+.word 0x140001ad
 .loc 10 876 0
 .word 0xaa1a03e0
 .word 0xf9400341
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x15, [x16, #1040]
+ldr x15, [x16, #1048]
 .word 0x928007f0
 .word 0xf2bffff0
 .word 0xf8706830
@@ -13713,36 +13757,36 @@ ldr x15, [x16, #1040]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #1048]
+ldr x1, [x16, #1056]
 .word 0xeb01001f
 .word 0x10000011
-.word 0x540035a1
+.word 0x540036a1
 .word 0xaa1703f6
 .loc 10 877 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #984]
+ldr x1, [x16, #992]
 .word 0xaa1703e0
-bl _p_112
+bl _p_113
 .word 0x53001c00
 .word 0x35000120
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #992]
+ldr x1, [x16, #1000]
 .word 0xaa1603e0
-bl _p_112
+bl _p_113
 .word 0x53001c00
-.word 0x35001840
-.word 0x14000180
+.word 0x350018c0
+.word 0x14000188
 .loc 10 879 0
 .word 0xaa1a03e0
 .word 0xf9400341
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x15, [x16, #1056]
+ldr x15, [x16, #1064]
 .word 0x928007f0
 .word 0xf2bffff0
 .word 0xf8706830
@@ -13756,10 +13800,10 @@ ldr x15, [x16, #1056]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #1064]
+ldr x1, [x16, #1072]
 .word 0xeb01001f
 .word 0x10000011
-.word 0x54003101
+.word 0x54003201
 .word 0xaa1703f6
 .loc 10 880 0
 .word 0xaa1703e0
@@ -13768,43 +13812,43 @@ ldr x1, [x16, #1064]
 .word 0xd63f0200
 .word 0x93407c00
 .word 0x6b1f001f
-.word 0x54002c6d
+.word 0x54002d6d
 .loc 10 881 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #456]
+ldr x0, [x16, #464]
 .word 0xd2800501
 bl _p_5
-.word 0xf90063a0
+.word 0xf9006ba0
 .word 0xd2800601
-bl _p_83
-.word 0xf94063a0
+bl _p_84
+.word 0xf9406ba0
 .word 0xaa0003f7
 .loc 10 882 0
 .word 0xaa1703e0
-.word 0xf9005fa0
+.word 0xf90067a0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #984]
-bl _p_103
+ldr x0, [x16, #992]
+bl _p_104
 .word 0xaa0003e1
-.word 0xf9405fa2
+.word 0xf94067a2
 .word 0xaa0203e0
 .word 0xf940005e
-bl _p_70
+bl _p_71
 .loc 10 883 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #456]
+ldr x0, [x16, #464]
 .word 0xd2800501
 bl _p_5
-.word 0xf9005ba0
+.word 0xf90063a0
 .word 0xd2800621
-bl _p_83
-.word 0xf9405ba0
+bl _p_84
+.word 0xf94063a0
 .word 0xaa0003f5
 .loc 10 884 0
 .word 0xaa1603e0
@@ -13819,7 +13863,7 @@ bl _p_83
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x15, [x16, #416]
+ldr x15, [x16, #424]
 .word 0x928003f0
 .word 0xf2bffff0
 .word 0xf8706830
@@ -13832,45 +13876,45 @@ ldr x15, [x16, #416]
 .word 0xd280003e
 .word 0xeb1e003f
 .word 0x10000011
-.word 0x54002901
+.word 0x54002a01
 .word 0xf9400400
 .word 0xf9400800
 .word 0xf9400800
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #392]
+ldr x1, [x16, #400]
 .word 0xeb01001f
 .word 0x10000011
-.word 0x540027e1
+.word 0x540028e1
 .word 0xf9400ac0
 .word 0xeb1f001f
 .word 0x10000011
-.word 0x54002761
+.word 0x54002861
 .word 0xaa1603f4
 .loc 10 885 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #456]
+ldr x0, [x16, #464]
 .word 0xd2800501
 bl _p_5
-.word 0xf9005ba0
+.word 0xf90063a0
 .word 0xd28003c1
-bl _p_83
-.word 0xf9405ba0
+bl _p_84
+.word 0xf94063a0
 .word 0xaa0003f6
 .loc 10 886 0
 .word 0xaa1603e2
 .word 0xaa0203e0
 .word 0xaa1403e1
 .word 0xf940005e
-bl _p_84
+bl _p_85
 .loc 10 887 0
 .word 0xaa1503e0
 .word 0xaa1603e1
 .word 0xf94002be
-bl _p_70
+bl _p_71
 .loc 10 884 0
 .word 0xf94027a1
 .word 0xaa0103e0
@@ -13878,40 +13922,44 @@ bl _p_70
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x15, [x16, #432]
+ldr x15, [x16, #440]
 .word 0x92800ef0
 .word 0xf2bffff0
 .word 0xf8706830
 .word 0xd63f0200
 .word 0x53001c00
 .word 0x35fff820
-.word 0x94000002
+.word 0xf9002fbf
+.word 0x94000005
+.word 0xf9402fa0
+.word 0xb4000040
+bl _p_69
 .word 0x14000034
-.word 0xf9004fbe
+.word 0xf90057be
 .word 0xf94027a0
-.word 0xf9002fa0
-.word 0xf9402fa0
 .word 0xf90033a0
-.word 0xf9402fa0
+.word 0xf94033a0
+.word 0xf90037a0
+.word 0xf94033a0
 .word 0xeb1f001f
 .word 0x54000380
-.word 0xf9402fa0
+.word 0xf94033a0
 .word 0xf9400000
-.word 0xf90037a0
-.word 0xf94037a0
+.word 0xf9003ba0
+.word 0xf9403ba0
 .word 0xb9402800
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #440]
+ldr x1, [x16, #448]
 .word 0xeb01001f
 .word 0x540001e3
-.word 0xf94037a0
+.word 0xf9403ba0
 .word 0xf9401000
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #440]
+ldr x1, [x16, #448]
 .word 0x9343fc22
 .word 0x8b020000
 .word 0x39400000
@@ -13922,9 +13970,9 @@ ldr x1, [x16, #440]
 .word 0xa010000
 .word 0xb5000080
 .word 0x14000001
-.word 0xf90033bf
+.word 0xf90037bf
 .word 0x14000001
-.word 0xf94033a0
+.word 0xf94037a0
 .word 0xf9002ba0
 .word 0xf9402ba0
 .word 0xb4000160
@@ -13934,32 +13982,32 @@ ldr x1, [x16, #440]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x15, [x16, #448]
+ldr x15, [x16, #456]
 .word 0x928004f0
 .word 0xf2bffff0
 .word 0xf8706830
 .word 0xd63f0200
-.word 0xf9404fbe
+.word 0xf94057be
 .word 0xd61f03c0
 .loc 10 889 0
 .word 0xaa1703e0
 .word 0xaa1503e1
 .word 0xf94002fe
-bl _p_70
+bl _p_71
 .loc 10 890 0
 .word 0xaa1903e0
 .word 0xaa1703e1
 .word 0xf940033e
-bl _p_70
+bl _p_71
 .loc 10 892 0
-.word 0x140000c0
+.word 0x140000c4
 .loc 10 894 0
 .word 0xaa1a03e0
 .word 0xf9400341
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x15, [x16, #1056]
+ldr x15, [x16, #1064]
 .word 0x928007f0
 .word 0xf2bffff0
 .word 0xf8706830
@@ -13973,10 +14021,10 @@ ldr x15, [x16, #1056]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #1064]
+ldr x1, [x16, #1072]
 .word 0xeb01001f
 .word 0x10000011
-.word 0x54001901
+.word 0x54001981
 .word 0xaa1703f6
 .loc 10 895 0
 .word 0xaa1703e0
@@ -13985,43 +14033,43 @@ ldr x1, [x16, #1064]
 .word 0xd63f0200
 .word 0x93407c00
 .word 0x6b1f001f
-.word 0x5400146d
+.word 0x540014ed
 .loc 10 896 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #456]
+ldr x0, [x16, #464]
 .word 0xd2800501
 bl _p_5
-.word 0xf90063a0
+.word 0xf9006ba0
 .word 0xd2800601
-bl _p_83
-.word 0xf94063a0
+bl _p_84
+.word 0xf9406ba0
 .word 0xaa0003f7
 .loc 10 897 0
 .word 0xaa1703e0
-.word 0xf9005fa0
+.word 0xf90067a0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #992]
-bl _p_103
+ldr x0, [x16, #1000]
+bl _p_104
 .word 0xaa0003e1
-.word 0xf9405fa2
+.word 0xf94067a2
 .word 0xaa0203e0
 .word 0xf940005e
-bl _p_70
+bl _p_71
 .loc 10 898 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #456]
+ldr x0, [x16, #464]
 .word 0xd2800501
 bl _p_5
-.word 0xf9005ba0
+.word 0xf90063a0
 .word 0xd2800621
-bl _p_83
-.word 0xf9405ba0
+bl _p_84
+.word 0xf94063a0
 .word 0xaa0003f5
 .loc 10 899 0
 .word 0xaa1603e0
@@ -14036,7 +14084,7 @@ bl _p_83
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x15, [x16, #416]
+ldr x15, [x16, #424]
 .word 0x928003f0
 .word 0xf2bffff0
 .word 0xf8706830
@@ -14049,45 +14097,45 @@ ldr x15, [x16, #416]
 .word 0xd280003e
 .word 0xeb1e003f
 .word 0x10000011
-.word 0x54001101
+.word 0x54001181
 .word 0xf9400400
 .word 0xf9400800
 .word 0xf9400800
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #392]
+ldr x1, [x16, #400]
 .word 0xeb01001f
 .word 0x10000011
-.word 0x54000fe1
+.word 0x54001061
 .word 0xf9400ac0
 .word 0xeb1f001f
 .word 0x10000011
-.word 0x54000f61
+.word 0x54000fe1
 .word 0xaa1603f4
 .loc 10 900 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #456]
+ldr x0, [x16, #464]
 .word 0xd2800501
 bl _p_5
-.word 0xf9005ba0
+.word 0xf90063a0
 .word 0xd2800081
-bl _p_83
-.word 0xf9405ba0
+bl _p_84
+.word 0xf94063a0
 .word 0xaa0003f6
 .loc 10 901 0
 .word 0xaa1603e2
 .word 0xaa0203e0
 .word 0xaa1403e1
 .word 0xf940005e
-bl _p_84
+bl _p_85
 .loc 10 902 0
 .word 0xaa1503e0
 .word 0xaa1603e1
 .word 0xf94002be
-bl _p_70
+bl _p_71
 .loc 10 899 0
 .word 0xf94027a1
 .word 0xaa0103e0
@@ -14095,40 +14143,44 @@ bl _p_70
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x15, [x16, #432]
+ldr x15, [x16, #440]
 .word 0x92800ef0
 .word 0xf2bffff0
 .word 0xf8706830
 .word 0xd63f0200
 .word 0x53001c00
 .word 0x35fff820
-.word 0x94000002
+.word 0xf9003fbf
+.word 0x94000005
+.word 0xf9403fa0
+.word 0xb4000040
+bl _p_69
 .word 0x14000034
-.word 0xf90057be
+.word 0xf9005fbe
 .word 0xf94027a0
-.word 0xf9003ba0
-.word 0xf9403ba0
-.word 0xf9003fa0
-.word 0xf9403ba0
-.word 0xeb1f001f
-.word 0x54000380
-.word 0xf9403ba0
-.word 0xf9400000
 .word 0xf90043a0
 .word 0xf94043a0
+.word 0xf90047a0
+.word 0xf94043a0
+.word 0xeb1f001f
+.word 0x54000380
+.word 0xf94043a0
+.word 0xf9400000
+.word 0xf9004ba0
+.word 0xf9404ba0
 .word 0xb9402800
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #440]
+ldr x1, [x16, #448]
 .word 0xeb01001f
 .word 0x540001e3
-.word 0xf94043a0
+.word 0xf9404ba0
 .word 0xf9401000
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #440]
+ldr x1, [x16, #448]
 .word 0x9343fc22
 .word 0x8b020000
 .word 0x39400000
@@ -14139,9 +14191,9 @@ ldr x1, [x16, #440]
 .word 0xa010000
 .word 0xb5000080
 .word 0x14000001
-.word 0xf9003fbf
+.word 0xf90047bf
 .word 0x14000001
-.word 0xf9403fa0
+.word 0xf94047a0
 .word 0xf9002ba0
 .word 0xf9402ba0
 .word 0xb4000160
@@ -14151,36 +14203,36 @@ ldr x1, [x16, #440]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x15, [x16, #448]
+ldr x15, [x16, #456]
 .word 0x928004f0
 .word 0xf2bffff0
 .word 0xf8706830
 .word 0xd63f0200
-.word 0xf94057be
+.word 0xf9405fbe
 .word 0xd61f03c0
 .loc 10 904 0
 .word 0xaa1703e0
 .word 0xaa1503e1
 .word 0xf94002fe
-bl _p_70
+bl _p_71
 .loc 10 905 0
 .word 0xaa1903e0
 .word 0xaa1703e1
 .word 0xf940033e
-bl _p_70
+bl _p_71
 .loc 10 875 0
 .word 0xaa1a03e0
 .word 0xf9400341
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x15, [x16, #432]
+ldr x15, [x16, #440]
 .word 0x92800ef0
 .word 0xf2bffff0
 .word 0xf8706830
 .word 0xd63f0200
 .word 0x53001c00
-.word 0x35ffca40
+.word 0x35ffc940
 .loc 10 913 0
 .word 0xaa1903e0
 .word 0xf940033e
@@ -14192,7 +14244,7 @@ bl _p_68
 .word 0xaa1803e0
 .word 0xaa1903e1
 .word 0xf940031e
-bl _p_70
+bl _p_71
 .loc 10 918 0
 .word 0xaa1803e0
 .word 0xa94157b4
@@ -14200,9 +14252,9 @@ bl _p_70
 .word 0xa94367b8
 .word 0xf94023ba
 .word 0x910003bf
-.word 0xa8d07bfd
+.word 0xa8d17bfd
 .word 0xd65f03c0
-.word 0xd2801a80
+.word 0xd2801a60
 .word 0xaa1103e1
 bl _p_3
 
@@ -14212,7 +14264,7 @@ Lme_92:
 	.no_dead_strip Mono_Security_X509_PKCS12_CertificateSafeBag_Mono_Security_X509_X509Certificate_System_Collections_IDictionary
 Mono_Security_X509_PKCS12_CertificateSafeBag_Mono_Security_X509_X509Certificate_System_Collections_IDictionary:
 .loc 10 1050 0 prologue_end
-.word 0xa9af7bfd
+.word 0xa9ae7bfd
 .word 0x910003fd
 .word 0xa90157b4
 .word 0xa9025fb6
@@ -14227,36 +14279,36 @@ Mono_Security_X509_PKCS12_CertificateSafeBag_Mono_Security_X509_X509Certificate_
 .word 0xf9400321
 .word 0xf9404c30
 .word 0xd63f0200
-.word 0xf90087a0
+.word 0xf9008fa0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #456]
+ldr x0, [x16, #464]
 .word 0xd2800501
 bl _p_5
-.word 0xf94087a2
-.word 0xf90083a0
+.word 0xf9408fa2
+.word 0xf9008ba0
 .word 0xd2800081
 bl _p_65
-.word 0xf94083a0
-.word 0xf9007fa0
+.word 0xf9408ba0
+.word 0xf90087a0
 .loc 10 1052 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #656]
+ldr x0, [x16, #664]
 .word 0xd2800401
 bl _p_5
-.word 0xf9007ba0
-bl _p_98
-.word 0xf9407ba0
-.word 0xf9407fa1
+.word 0xf90083a0
+bl _p_99
+.word 0xf94083a0
+.word 0xf94087a1
 .loc 10 1053 0
 .word 0xaa0003e3
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x2, [x16, #976]
+ldr x2, [x16, #984]
 .word 0xf940007e
 .word 0xf9000802
 .word 0x91004063
@@ -14273,77 +14325,77 @@ ldr x4, [x16, #16]
 .word 0x3900007e
 .loc 10 1054 0
 .word 0xf940001e
-.word 0xf90077a0
+.word 0xf9007fa0
 .word 0xf9400c02
 .word 0xaa0203e0
 .word 0xf940005e
-bl _p_70
+bl _p_71
 .loc 10 1056 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #456]
+ldr x0, [x16, #464]
 .word 0xd2800501
 bl _p_5
-.word 0xf90073a0
+.word 0xf9007ba0
 .word 0xd2801401
-bl _p_83
-.word 0xf94073a0
-.word 0xf94077a1
+bl _p_84
+.word 0xf9407ba0
+.word 0xf9407fa1
 .loc 10 1057 0
-.word 0xf90063a0
-.word 0xf9006fa0
+.word 0xf9006ba0
+.word 0xf90077a0
 .word 0xaa0103e0
 .word 0xf940003e
-bl _p_158
+bl _p_159
 .word 0xaa0003e1
-.word 0xf9406fa2
+.word 0xf94077a2
 .word 0xaa0203e0
 .word 0xf940005e
-bl _p_70
+bl _p_71
 .loc 10 1059 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #456]
+ldr x0, [x16, #464]
 .word 0xd2800501
 bl _p_5
-.word 0xf9006ba0
+.word 0xf90073a0
 .word 0xd2800601
-bl _p_83
-.word 0xf9406ba0
+bl _p_84
+.word 0xf94073a0
 .word 0xaa0003f9
 .loc 10 1060 0
 .word 0xaa1903e0
-.word 0xf90067a0
+.word 0xf9006fa0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #768]
-bl _p_103
+ldr x0, [x16, #776]
+bl _p_104
 .word 0xaa0003e1
-.word 0xf94067a2
+.word 0xf9406fa2
 .word 0xaa0203e0
 .word 0xf940005e
-bl _p_70
-.word 0xf94063a1
+bl _p_71
+.word 0xf9406ba1
 .loc 10 1061 0
 .word 0xaa1903e0
 .word 0xf940033e
-bl _p_70
+bl _p_71
 .loc 10 1063 0
-.word 0xb40039fa
+.word 0xb4003afa
 .loc 10 1064 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #456]
+ldr x0, [x16, #464]
 .word 0xd2800501
 bl _p_5
-.word 0xf90063a0
+.word 0xf9006ba0
 .word 0xd2800621
-bl _p_83
-.word 0xf94063a0
+bl _p_84
+.word 0xf9406ba0
 .word 0xaa0003f8
 .loc 10 1065 0
 .word 0xaa1a03e0
@@ -14351,20 +14403,20 @@ bl _p_83
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x15, [x16, #1032]
+ldr x15, [x16, #1040]
 .word 0x92800cf0
 .word 0xf2bffff0
 .word 0xf8706830
 .word 0xd63f0200
 .word 0xaa0003fa
-.word 0x140001a5
+.word 0x140001ad
 .loc 10 1068 0
 .word 0xaa1a03e0
 .word 0xf9400341
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x15, [x16, #1040]
+ldr x15, [x16, #1048]
 .word 0x928007f0
 .word 0xf2bffff0
 .word 0xf8706830
@@ -14378,36 +14430,36 @@ ldr x15, [x16, #1040]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #1048]
+ldr x1, [x16, #1056]
 .word 0xeb01001f
 .word 0x10000011
-.word 0x540035a1
+.word 0x540036a1
 .word 0xaa1703f6
 .loc 10 1069 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #984]
+ldr x1, [x16, #992]
 .word 0xaa1703e0
-bl _p_112
+bl _p_113
 .word 0x53001c00
 .word 0x35000120
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #992]
+ldr x1, [x16, #1000]
 .word 0xaa1603e0
-bl _p_112
+bl _p_113
 .word 0x53001c00
-.word 0x35001840
-.word 0x14000180
+.word 0x350018c0
+.word 0x14000188
 .loc 10 1071 0
 .word 0xaa1a03e0
 .word 0xf9400341
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x15, [x16, #1056]
+ldr x15, [x16, #1064]
 .word 0x928007f0
 .word 0xf2bffff0
 .word 0xf8706830
@@ -14421,10 +14473,10 @@ ldr x15, [x16, #1056]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #1064]
+ldr x1, [x16, #1072]
 .word 0xeb01001f
 .word 0x10000011
-.word 0x54003101
+.word 0x54003201
 .word 0xaa1703f6
 .loc 10 1072 0
 .word 0xaa1703e0
@@ -14433,43 +14485,43 @@ ldr x1, [x16, #1064]
 .word 0xd63f0200
 .word 0x93407c00
 .word 0x6b1f001f
-.word 0x54002c6d
+.word 0x54002d6d
 .loc 10 1073 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #456]
+ldr x0, [x16, #464]
 .word 0xd2800501
 bl _p_5
-.word 0xf9006ba0
+.word 0xf90073a0
 .word 0xd2800601
-bl _p_83
-.word 0xf9406ba0
+bl _p_84
+.word 0xf94073a0
 .word 0xaa0003f7
 .loc 10 1074 0
 .word 0xaa1703e0
-.word 0xf90067a0
+.word 0xf9006fa0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #984]
-bl _p_103
+ldr x0, [x16, #992]
+bl _p_104
 .word 0xaa0003e1
-.word 0xf94067a2
+.word 0xf9406fa2
 .word 0xaa0203e0
 .word 0xf940005e
-bl _p_70
+bl _p_71
 .loc 10 1075 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #456]
+ldr x0, [x16, #464]
 .word 0xd2800501
 bl _p_5
-.word 0xf90063a0
+.word 0xf9006ba0
 .word 0xd2800621
-bl _p_83
-.word 0xf94063a0
+bl _p_84
+.word 0xf9406ba0
 .word 0xaa0003f5
 .loc 10 1076 0
 .word 0xaa1603e0
@@ -14484,7 +14536,7 @@ bl _p_83
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x15, [x16, #416]
+ldr x15, [x16, #424]
 .word 0x928003f0
 .word 0xf2bffff0
 .word 0xf8706830
@@ -14497,45 +14549,45 @@ ldr x15, [x16, #416]
 .word 0xd280003e
 .word 0xeb1e003f
 .word 0x10000011
-.word 0x54002901
+.word 0x54002a01
 .word 0xf9400400
 .word 0xf9400800
 .word 0xf9400800
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #392]
+ldr x1, [x16, #400]
 .word 0xeb01001f
 .word 0x10000011
-.word 0x540027e1
+.word 0x540028e1
 .word 0xf9400ac0
 .word 0xeb1f001f
 .word 0x10000011
-.word 0x54002761
+.word 0x54002861
 .word 0xaa1603f4
 .loc 10 1077 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #456]
+ldr x0, [x16, #464]
 .word 0xd2800501
 bl _p_5
-.word 0xf90063a0
+.word 0xf9006ba0
 .word 0xd28003c1
-bl _p_83
-.word 0xf94063a0
+bl _p_84
+.word 0xf9406ba0
 .word 0xaa0003f6
 .loc 10 1078 0
 .word 0xaa1603e2
 .word 0xaa0203e0
 .word 0xaa1403e1
 .word 0xf940005e
-bl _p_84
+bl _p_85
 .loc 10 1079 0
 .word 0xaa1503e0
 .word 0xaa1603e1
 .word 0xf94002be
-bl _p_70
+bl _p_71
 .loc 10 1076 0
 .word 0xf9402ba1
 .word 0xaa0103e0
@@ -14543,40 +14595,44 @@ bl _p_70
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x15, [x16, #432]
+ldr x15, [x16, #440]
 .word 0x92800ef0
 .word 0xf2bffff0
 .word 0xf8706830
 .word 0xd63f0200
 .word 0x53001c00
 .word 0x35fff820
-.word 0x94000002
+.word 0xf90033bf
+.word 0x94000005
+.word 0xf94033a0
+.word 0xb4000040
+bl _p_69
 .word 0x14000034
-.word 0xf90053be
+.word 0xf9005bbe
 .word 0xf9402ba0
-.word 0xf90033a0
-.word 0xf94033a0
 .word 0xf90037a0
-.word 0xf94033a0
+.word 0xf94037a0
+.word 0xf9003ba0
+.word 0xf94037a0
 .word 0xeb1f001f
 .word 0x54000380
-.word 0xf94033a0
+.word 0xf94037a0
 .word 0xf9400000
-.word 0xf9003ba0
-.word 0xf9403ba0
+.word 0xf9003fa0
+.word 0xf9403fa0
 .word 0xb9402800
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #440]
+ldr x1, [x16, #448]
 .word 0xeb01001f
 .word 0x540001e3
-.word 0xf9403ba0
+.word 0xf9403fa0
 .word 0xf9401000
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #440]
+ldr x1, [x16, #448]
 .word 0x9343fc22
 .word 0x8b020000
 .word 0x39400000
@@ -14587,9 +14643,9 @@ ldr x1, [x16, #440]
 .word 0xa010000
 .word 0xb5000080
 .word 0x14000001
-.word 0xf90037bf
+.word 0xf9003bbf
 .word 0x14000001
-.word 0xf94037a0
+.word 0xf9403ba0
 .word 0xf9002fa0
 .word 0xf9402fa0
 .word 0xb4000160
@@ -14599,32 +14655,32 @@ ldr x1, [x16, #440]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x15, [x16, #448]
+ldr x15, [x16, #456]
 .word 0x928004f0
 .word 0xf2bffff0
 .word 0xf8706830
 .word 0xd63f0200
-.word 0xf94053be
+.word 0xf9405bbe
 .word 0xd61f03c0
 .loc 10 1081 0
 .word 0xaa1703e0
 .word 0xaa1503e1
 .word 0xf94002fe
-bl _p_70
+bl _p_71
 .loc 10 1082 0
 .word 0xaa1803e0
 .word 0xaa1703e1
 .word 0xf940031e
-bl _p_70
+bl _p_71
 .loc 10 1084 0
-.word 0x140000c0
+.word 0x140000c4
 .loc 10 1086 0
 .word 0xaa1a03e0
 .word 0xf9400341
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x15, [x16, #1056]
+ldr x15, [x16, #1064]
 .word 0x928007f0
 .word 0xf2bffff0
 .word 0xf8706830
@@ -14638,10 +14694,10 @@ ldr x15, [x16, #1056]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #1064]
+ldr x1, [x16, #1072]
 .word 0xeb01001f
 .word 0x10000011
-.word 0x54001901
+.word 0x54001981
 .word 0xaa1703f6
 .loc 10 1087 0
 .word 0xaa1703e0
@@ -14650,43 +14706,43 @@ ldr x1, [x16, #1064]
 .word 0xd63f0200
 .word 0x93407c00
 .word 0x6b1f001f
-.word 0x5400146d
+.word 0x540014ed
 .loc 10 1088 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #456]
+ldr x0, [x16, #464]
 .word 0xd2800501
 bl _p_5
-.word 0xf9006ba0
+.word 0xf90073a0
 .word 0xd2800601
-bl _p_83
-.word 0xf9406ba0
+bl _p_84
+.word 0xf94073a0
 .word 0xaa0003f7
 .loc 10 1089 0
 .word 0xaa1703e0
-.word 0xf90067a0
+.word 0xf9006fa0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #992]
-bl _p_103
+ldr x0, [x16, #1000]
+bl _p_104
 .word 0xaa0003e1
-.word 0xf94067a2
+.word 0xf9406fa2
 .word 0xaa0203e0
 .word 0xf940005e
-bl _p_70
+bl _p_71
 .loc 10 1090 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #456]
+ldr x0, [x16, #464]
 .word 0xd2800501
 bl _p_5
-.word 0xf90063a0
+.word 0xf9006ba0
 .word 0xd2800621
-bl _p_83
-.word 0xf94063a0
+bl _p_84
+.word 0xf9406ba0
 .word 0xaa0003f5
 .loc 10 1091 0
 .word 0xaa1603e0
@@ -14701,7 +14757,7 @@ bl _p_83
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x15, [x16, #416]
+ldr x15, [x16, #424]
 .word 0x928003f0
 .word 0xf2bffff0
 .word 0xf8706830
@@ -14714,45 +14770,45 @@ ldr x15, [x16, #416]
 .word 0xd280003e
 .word 0xeb1e003f
 .word 0x10000011
-.word 0x54001101
+.word 0x54001181
 .word 0xf9400400
 .word 0xf9400800
 .word 0xf9400800
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #392]
+ldr x1, [x16, #400]
 .word 0xeb01001f
 .word 0x10000011
-.word 0x54000fe1
+.word 0x54001061
 .word 0xf9400ac0
 .word 0xeb1f001f
 .word 0x10000011
-.word 0x54000f61
+.word 0x54000fe1
 .word 0xaa1603f4
 .loc 10 1092 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #456]
+ldr x0, [x16, #464]
 .word 0xd2800501
 bl _p_5
-.word 0xf90063a0
+.word 0xf9006ba0
 .word 0xd2800081
-bl _p_83
-.word 0xf94063a0
+bl _p_84
+.word 0xf9406ba0
 .word 0xaa0003f6
 .loc 10 1093 0
 .word 0xaa1603e2
 .word 0xaa0203e0
 .word 0xaa1403e1
 .word 0xf940005e
-bl _p_84
+bl _p_85
 .loc 10 1094 0
 .word 0xaa1503e0
 .word 0xaa1603e1
 .word 0xf94002be
-bl _p_70
+bl _p_71
 .loc 10 1091 0
 .word 0xf9402ba1
 .word 0xaa0103e0
@@ -14760,40 +14816,44 @@ bl _p_70
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x15, [x16, #432]
+ldr x15, [x16, #440]
 .word 0x92800ef0
 .word 0xf2bffff0
 .word 0xf8706830
 .word 0xd63f0200
 .word 0x53001c00
 .word 0x35fff820
-.word 0x94000002
+.word 0xf90043bf
+.word 0x94000005
+.word 0xf94043a0
+.word 0xb4000040
+bl _p_69
 .word 0x14000034
-.word 0xf9005bbe
+.word 0xf90063be
 .word 0xf9402ba0
-.word 0xf9003fa0
-.word 0xf9403fa0
-.word 0xf90043a0
-.word 0xf9403fa0
-.word 0xeb1f001f
-.word 0x54000380
-.word 0xf9403fa0
-.word 0xf9400000
 .word 0xf90047a0
 .word 0xf94047a0
+.word 0xf9004ba0
+.word 0xf94047a0
+.word 0xeb1f001f
+.word 0x54000380
+.word 0xf94047a0
+.word 0xf9400000
+.word 0xf9004fa0
+.word 0xf9404fa0
 .word 0xb9402800
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #440]
+ldr x1, [x16, #448]
 .word 0xeb01001f
 .word 0x540001e3
-.word 0xf94047a0
+.word 0xf9404fa0
 .word 0xf9401000
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #440]
+ldr x1, [x16, #448]
 .word 0x9343fc22
 .word 0x8b020000
 .word 0x39400000
@@ -14804,9 +14864,9 @@ ldr x1, [x16, #440]
 .word 0xa010000
 .word 0xb5000080
 .word 0x14000001
-.word 0xf90043bf
+.word 0xf9004bbf
 .word 0x14000001
-.word 0xf94043a0
+.word 0xf9404ba0
 .word 0xf9002fa0
 .word 0xf9402fa0
 .word 0xb4000160
@@ -14816,36 +14876,36 @@ ldr x1, [x16, #440]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x15, [x16, #448]
+ldr x15, [x16, #456]
 .word 0x928004f0
 .word 0xf2bffff0
 .word 0xf8706830
 .word 0xd63f0200
-.word 0xf9405bbe
+.word 0xf94063be
 .word 0xd61f03c0
 .loc 10 1096 0
 .word 0xaa1703e0
 .word 0xaa1503e1
 .word 0xf94002fe
-bl _p_70
+bl _p_71
 .loc 10 1097 0
 .word 0xaa1803e0
 .word 0xaa1703e1
 .word 0xf940031e
-bl _p_70
+bl _p_71
 .loc 10 1067 0
 .word 0xaa1a03e0
 .word 0xf9400341
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x15, [x16, #432]
+ldr x15, [x16, #440]
 .word 0x92800ef0
 .word 0xf2bffff0
 .word 0xf8706830
 .word 0xd63f0200
 .word 0x53001c00
-.word 0x35ffca40
+.word 0x35ffc940
 .loc 10 1105 0
 .word 0xaa1803e0
 .word 0xf940031e
@@ -14857,7 +14917,7 @@ bl _p_68
 .word 0xaa1903e0
 .word 0xaa1803e1
 .word 0xf940033e
-bl _p_70
+bl _p_71
 .loc 10 1110 0
 .word 0xaa1903e0
 .word 0xa94157b4
@@ -14865,9 +14925,9 @@ bl _p_70
 .word 0xa94367b8
 .word 0xf94023ba
 .word 0x910003bf
-.word 0xa8d17bfd
+.word 0xa8d27bfd
 .word 0xd65f03c0
-.word 0xd2801a80
+.word 0xd2801a60
 .word 0xaa1103e1
 bl _p_3
 
@@ -14889,7 +14949,7 @@ Mono_Security_X509_PKCS12_MAC_byte___byte___int_byte__:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #784]
+ldr x0, [x16, #792]
 .word 0xd2800601
 bl _p_5
 .word 0xaa0003e2
@@ -14898,7 +14958,7 @@ bl _p_5
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #920]
+ldr x0, [x16, #928]
 .word 0xf940005e
 .word 0xf9000840
 .word 0x91004041
@@ -14918,18 +14978,18 @@ ldr x3, [x16, #16]
 .word 0xf94017a1
 .word 0xf940005e
 .word 0xf90023a2
-bl _p_132
+bl _p_133
 .loc 10 1118 0
 .word 0xaa1603e0
 .word 0xf9401ba1
 .word 0xf94002de
-bl _p_133
+bl _p_134
 .word 0xf94023a0
 .loc 10 1119 0
 .word 0xf94002de
 .word 0xb9002819
 .loc 10 1121 0
-bl _p_159
+bl _p_160
 .word 0xaa0003f9
 .word 0xb4000179
 .word 0xf9400320
@@ -14939,7 +14999,7 @@ bl _p_159
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #1072]
+ldr x1, [x16, #1080]
 .word 0xeb01001f
 .word 0x10000011
 .word 0x540002a1
@@ -14947,7 +15007,7 @@ ldr x1, [x16, #1072]
 .word 0xaa1603e0
 .word 0xd2800281
 .word 0xf94002de
-bl _p_160
+bl _p_161
 .word 0xaa0003e1
 .word 0xaa1903e0
 .word 0xf9400322
@@ -14959,13 +15019,13 @@ bl _p_160
 .word 0xaa1903e0
 .word 0xd2800002
 .word 0xf940033e
-bl _p_161
+bl _p_162
 .word 0xf9400bb6
 .word 0xf9400fb9
 .word 0x910003bf
 .word 0xa8c57bfd
 .word 0xd65f03c0
-.word 0xd2801a80
+.word 0xd2801a60
 .word 0xaa1103e1
 bl _p_3
 
@@ -14975,7 +15035,7 @@ Lme_94:
 	.no_dead_strip Mono_Security_X509_PKCS12_GetBytes
 Mono_Security_X509_PKCS12_GetBytes:
 .loc 10 1138 0 prologue_end
-.word 0xd2804a10
+.word 0xd2805410
 .word 0x910003f1
 .word 0xcb100231
 .word 0x9100023f
@@ -14992,25 +15052,25 @@ Mono_Security_X509_PKCS12_GetBytes:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #456]
+ldr x0, [x16, #464]
 .word 0xd2800501
 bl _p_5
-.word 0xf9010ba0
+.word 0xf90133a0
 .word 0xd2800601
-bl _p_83
-.word 0xf9410ba0
+bl _p_84
+.word 0xf94133a0
 .word 0xaa0003f9
 .loc 10 1141 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #400]
+ldr x0, [x16, #408]
 .word 0xd2800401
 bl _p_5
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #408]
+ldr x1, [x16, #416]
 .word 0xf9400021
 .word 0xf9000801
 .word 0x91004002
@@ -15040,7 +15100,7 @@ ldr x3, [x16, #16]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x15, [x16, #416]
+ldr x15, [x16, #424]
 .word 0x928003f0
 .word 0xf2bffff0
 .word 0xf8706830
@@ -15054,10 +15114,10 @@ ldr x15, [x16, #416]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #728]
+ldr x1, [x16, #736]
 .word 0xeb01001f
 .word 0x10000011
-.word 0x5400bd01
+.word 0x5400c281
 .word 0xaa1703f6
 .loc 10 1143 0
 .word 0xf94002fe
@@ -15065,10 +15125,10 @@ ldr x1, [x16, #728]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #768]
+ldr x1, [x16, #776]
 .word 0xaa0203e0
 .word 0xf940005e
-bl _p_118
+bl _p_119
 .word 0x53001c00
 .word 0x340005e0
 .loc 10 1144 0
@@ -15078,23 +15138,23 @@ bl _p_118
 .word 0xaa0203e0
 .word 0xd2800021
 .word 0xf940005e
-bl _p_100
+bl _p_101
 .word 0xaa0003e1
 .loc 10 1146 0
 .word 0xaa0103e0
 .word 0xf940003e
-bl _p_76
-.word 0xf90117a0
+bl _p_77
+.word 0xf9013fa0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #656]
+ldr x0, [x16, #664]
 .word 0xd2800401
 bl _p_5
-.word 0xf94117a1
-.word 0xf90113a0
-bl _p_129
-.word 0xf94113a0
+.word 0xf9413fa1
+.word 0xf9013ba0
+bl _p_130
+.word 0xf9413ba0
 .word 0xaa0003f7
 .loc 10 1147 0
 .word 0xf94002fe
@@ -15102,22 +15162,22 @@ bl _p_129
 .word 0xaa0203e0
 .word 0xd2800001
 .word 0xf940005e
-bl _p_100
+bl _p_101
 .word 0xaa0003e1
 .word 0xaa0103e0
 .word 0xf940003e
-bl _p_76
-.word 0xf9010fa0
+bl _p_77
+.word 0xf90137a0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #776]
+ldr x0, [x16, #784]
 .word 0xd2801701
 bl _p_5
-.word 0xf9410fa1
-.word 0xf9010ba0
-bl _p_130
-.word 0xf9410ba1
+.word 0xf94137a1
+.word 0xf90133a0
+bl _p_131
+.word 0xf94133a1
 .word 0xaa1803e0
 .word 0xf9400302
 .word 0xf9407850
@@ -15130,40 +15190,44 @@ bl _p_130
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x15, [x16, #432]
+ldr x15, [x16, #440]
 .word 0x92800ef0
 .word 0xf2bffff0
 .word 0xf8706830
 .word 0xd63f0200
 .word 0x53001c00
 .word 0x35fff4c0
-.word 0x94000002
+.word 0xf90037bf
+.word 0x94000005
+.word 0xf94037a0
+.word 0xb4000040
+bl _p_69
 .word 0x14000034
-.word 0xf900bbbe
+.word 0xf900e3be
 .word 0xf9402ba0
-.word 0xf90037a0
-.word 0xf94037a0
 .word 0xf9003ba0
-.word 0xf94037a0
+.word 0xf9403ba0
+.word 0xf9003fa0
+.word 0xf9403ba0
 .word 0xeb1f001f
 .word 0x54000380
-.word 0xf94037a0
+.word 0xf9403ba0
 .word 0xf9400000
-.word 0xf9003fa0
-.word 0xf9403fa0
+.word 0xf90043a0
+.word 0xf94043a0
 .word 0xb9402800
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #440]
+ldr x1, [x16, #448]
 .word 0xeb01001f
 .word 0x540001e3
-.word 0xf9403fa0
+.word 0xf94043a0
 .word 0xf9401000
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #440]
+ldr x1, [x16, #448]
 .word 0x9343fc22
 .word 0x8b020000
 .word 0x39400000
@@ -15174,9 +15238,9 @@ ldr x1, [x16, #440]
 .word 0xa010000
 .word 0xb5000080
 .word 0x14000001
-.word 0xf9003bbf
+.word 0xf9003fbf
 .word 0x14000001
-.word 0xf9403ba0
+.word 0xf9403fa0
 .word 0xf9002fa0
 .word 0xf9402fa0
 .word 0xb4000160
@@ -15186,24 +15250,24 @@ ldr x1, [x16, #440]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x15, [x16, #448]
+ldr x15, [x16, #456]
 .word 0x928004f0
 .word 0xf2bffff0
 .word 0xf8706830
 .word 0xd63f0200
-.word 0xf940bbbe
+.word 0xf940e3be
 .word 0xd61f03c0
 .loc 10 1151 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #400]
+ldr x0, [x16, #408]
 .word 0xd2800401
 bl _p_5
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #408]
+ldr x1, [x16, #416]
 .word 0xf9400021
 .word 0xf9000801
 .word 0x91004002
@@ -15223,13 +15287,13 @@ ldr x3, [x16, #16]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #400]
+ldr x0, [x16, #408]
 .word 0xd2800401
 bl _p_5
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #408]
+ldr x1, [x16, #416]
 .word 0xf9400021
 .word 0xf9000801
 .word 0x91004002
@@ -15247,34 +15311,35 @@ ldr x3, [x16, #16]
 .word 0xaa0003f6
 .loc 10 1154 0
 .word 0xaa1a03e0
-bl _p_141
+bl _p_142
 .word 0xaa0003e1
 .word 0xaa0103e0
 .word 0xf940003e
-bl _p_142
+bl _p_143
 .word 0xf90033a0
-.word 0x1400007d
+.word 0x14000083
 .word 0xf94033a1
 .word 0xaa0103e0
 .word 0xf940003e
-bl _p_143
+bl _p_144
 .word 0xaa0003f5
 .loc 10 1155 0
-.word 0xd2800014
+.word 0xd2800000
+.word 0x53001c14
 .loc 10 1157 0
 .word 0xaa1803e0
 .word 0xf9400301
 .word 0xf9405c30
 .word 0xd63f0200
 .word 0xf9002ba0
-.word 0x14000029
+.word 0x1400002a
 .word 0xf9402ba1
 .word 0xaa0103e0
 .word 0xf9400021
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x15, [x16, #416]
+ldr x15, [x16, #424]
 .word 0x928003f0
 .word 0xf2bffff0
 .word 0xf8706830
@@ -15288,30 +15353,31 @@ ldr x15, [x16, #416]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #1080]
+ldr x1, [x16, #1088]
 .word 0xeb01001f
 .word 0x10000011
-.word 0x5400a301
-.word 0xf90043b3
+.word 0x5400a7e1
+.word 0xf90047b3
 .loc 10 1158 0
 .word 0xaa1503e0
 .word 0xf94002a1
 .word 0xf9404c30
 .word 0xd63f0200
-.word 0xf9010ba0
-.word 0xf94043a0
-.word 0xf94043a1
+.word 0xf90133a0
+.word 0xf94047a0
+.word 0xf94047a1
 .word 0xf9400021
 .word 0xf9404c30
 .word 0xd63f0200
 .word 0xaa0003e2
-.word 0xf9410ba1
+.word 0xf94133a1
 .word 0xaa1a03e0
-bl _p_111
+bl _p_112
 .word 0x53001c00
-.word 0x34000040
+.word 0x34000060
 .loc 10 1159 0
-.word 0xd2800034
+.word 0xd2800020
+.word 0x53001c14
 .loc 10 1157 0
 .word 0xf9402ba1
 .word 0xaa0103e0
@@ -15319,40 +15385,44 @@ bl _p_111
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x15, [x16, #432]
+ldr x15, [x16, #440]
 .word 0x92800ef0
 .word 0xf2bffff0
 .word 0xf8706830
 .word 0xd63f0200
 .word 0x53001c00
-.word 0x35fff9a0
-.word 0x94000002
+.word 0x35fff980
+.word 0xf9004bbf
+.word 0x94000005
+.word 0xf9404ba0
+.word 0xb4000040
+bl _p_69
 .word 0x14000034
-.word 0xf900c7be
+.word 0xf900efbe
 .word 0xf9402ba0
-.word 0xf90047a0
-.word 0xf94047a0
-.word 0xf9004ba0
-.word 0xf94047a0
-.word 0xeb1f001f
-.word 0x54000380
-.word 0xf94047a0
-.word 0xf9400000
 .word 0xf9004fa0
 .word 0xf9404fa0
+.word 0xf90053a0
+.word 0xf9404fa0
+.word 0xeb1f001f
+.word 0x54000380
+.word 0xf9404fa0
+.word 0xf9400000
+.word 0xf90057a0
+.word 0xf94057a0
 .word 0xb9402800
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #440]
+ldr x1, [x16, #448]
 .word 0xeb01001f
 .word 0x540001e3
-.word 0xf9404fa0
+.word 0xf94057a0
 .word 0xf9401000
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #440]
+ldr x1, [x16, #448]
 .word 0x9343fc22
 .word 0x8b020000
 .word 0x39400000
@@ -15363,9 +15433,9 @@ ldr x1, [x16, #440]
 .word 0xa010000
 .word 0xb5000080
 .word 0x14000001
-.word 0xf9004bbf
+.word 0xf90053bf
 .word 0x14000001
-.word 0xf9404ba0
+.word 0xf94053a0
 .word 0xf9002fa0
 .word 0xf9402fa0
 .word 0xb4000160
@@ -15375,12 +15445,12 @@ ldr x1, [x16, #440]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x15, [x16, #448]
+ldr x15, [x16, #456]
 .word 0x928004f0
 .word 0xf2bffff0
 .word 0xf8706830
 .word 0xd63f0200
-.word 0xf940c7be
+.word 0xf940efbe
 .word 0xd61f03c0
 .loc 10 1163 0
 .word 0x350000f4
@@ -15395,141 +15465,16 @@ ldr x15, [x16, #448]
 .word 0xf94033a1
 .word 0xaa0103e0
 .word 0xf940003e
-bl _p_145
+bl _p_146
 .word 0x53001c00
-.word 0x35ffefe0
-.word 0x94000002
-.word 0x14000034
-.word 0xf900cbbe
-.word 0xf94033a0
-.word 0xf90053a0
-.word 0xf94053a0
-.word 0xf90057a0
-.word 0xf94053a0
-.word 0xeb1f001f
-.word 0x54000380
-.word 0xf94053a0
-.word 0xf9400000
-.word 0xf9005ba0
+.word 0x35ffef20
+.word 0xf9005bbf
+.word 0x94000005
 .word 0xf9405ba0
-.word 0xb9402800
-
-adrp x16, mono_aot_Mono_Security_got@PAGE+0
-add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #440]
-.word 0xeb01001f
-.word 0x540001e3
-.word 0xf9405ba0
-.word 0xf9401000
-
-adrp x16, mono_aot_Mono_Security_got@PAGE+0
-add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #440]
-.word 0x9343fc22
-.word 0x8b020000
-.word 0x39400000
-.word 0xd28000fe
-.word 0xa1e0022
-.word 0xd2800021
-.word 0x1ac22021
-.word 0xa010000
-.word 0xb5000080
-.word 0x14000001
-.word 0xf90057bf
-.word 0x14000001
-.word 0xf94057a0
-.word 0xf9002fa0
-.word 0xf9402fa0
-.word 0xb4000160
-.word 0xf9402fa1
-.word 0xaa0103e0
-.word 0xf9400021
-
-adrp x16, mono_aot_Mono_Security_got@PAGE+0
-add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x15, [x16, #448]
-.word 0x928004f0
-.word 0xf2bffff0
-.word 0xf8706830
-.word 0xd63f0200
-.word 0xf940cbbe
-.word 0xd61f03c0
-.loc 10 1167 0
-.word 0xaa1803e0
-.word 0xf9400301
-.word 0xf9405c30
-.word 0xd63f0200
-.word 0xf9002ba0
-.word 0x14000078
-.word 0xf9402ba1
-.word 0xaa0103e0
-.word 0xf9400021
-
-adrp x16, mono_aot_Mono_Security_got@PAGE+0
-add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x15, [x16, #416]
-.word 0x928003f0
-.word 0xf2bffff0
-.word 0xf8706830
-.word 0xd63f0200
-.word 0xaa0003f8
-.word 0xb4000178
-.word 0xf9400300
-.word 0xf9400000
-.word 0xf9400800
-.word 0xf9400400
-
-adrp x16, mono_aot_Mono_Security_got@PAGE+0
-add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #1080]
-.word 0xeb01001f
-.word 0x10000011
-.word 0x54008ce1
-.word 0xaa1803f5
-.loc 10 1168 0
-.word 0xd2800018
-.loc 10 1170 0
-.word 0xaa1a03e0
-bl _p_141
-.word 0xaa0003e1
-.word 0xaa0103e0
-.word 0xf940003e
-bl _p_142
-.word 0xf90033a0
-.word 0x14000016
-.word 0xf94033a1
-.word 0xaa0103e0
-.word 0xf940003e
-bl _p_143
-.word 0xaa0003f4
-.loc 10 1171 0
-.word 0xaa1503e0
-.word 0xf94002a1
-.word 0xf9404c30
-.word 0xd63f0200
-.word 0xf9010ba0
-.word 0xaa1403e0
-.word 0xf9400281
-.word 0xf9404c30
-.word 0xd63f0200
-.word 0xaa0003e2
-.word 0xf9410ba1
-.word 0xaa1a03e0
-bl _p_111
-.word 0x53001c00
-.word 0x34000040
-.loc 10 1172 0
-.word 0xd2800038
-.loc 10 1170 0
-.word 0xf94033a1
-.word 0xaa0103e0
-.word 0xf940003e
-bl _p_145
-.word 0x53001c00
-.word 0x35fffcc0
-.word 0x94000002
+.word 0xb4000040
+bl _p_69
 .word 0x14000034
-.word 0xf900d7be
+.word 0xf900f3be
 .word 0xf94033a0
 .word 0xf9005fa0
 .word 0xf9405fa0
@@ -15545,7 +15490,7 @@ bl _p_145
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #440]
+ldr x1, [x16, #448]
 .word 0xeb01001f
 .word 0x540001e3
 .word 0xf94067a0
@@ -15553,7 +15498,7 @@ ldr x1, [x16, #440]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #440]
+ldr x1, [x16, #448]
 .word 0x9343fc22
 .word 0x8b020000
 .word 0x39400000
@@ -15576,12 +15521,147 @@ ldr x1, [x16, #440]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x15, [x16, #448]
+ldr x15, [x16, #456]
 .word 0x928004f0
 .word 0xf2bffff0
 .word 0xf8706830
 .word 0xd63f0200
-.word 0xf940d7be
+.word 0xf940f3be
+.word 0xd61f03c0
+.loc 10 1167 0
+.word 0xaa1803e0
+.word 0xf9400301
+.word 0xf9405c30
+.word 0xd63f0200
+.word 0xf9002ba0
+.word 0x1400007e
+.word 0xf9402ba1
+.word 0xaa0103e0
+.word 0xf9400021
+
+adrp x16, mono_aot_Mono_Security_got@PAGE+0
+add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
+ldr x15, [x16, #424]
+.word 0x928003f0
+.word 0xf2bffff0
+.word 0xf8706830
+.word 0xd63f0200
+.word 0xaa0003f8
+.word 0xb4000178
+.word 0xf9400300
+.word 0xf9400000
+.word 0xf9400800
+.word 0xf9400400
+
+adrp x16, mono_aot_Mono_Security_got@PAGE+0
+add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
+ldr x1, [x16, #1088]
+.word 0xeb01001f
+.word 0x10000011
+.word 0x540090a1
+.word 0xaa1803f5
+.loc 10 1168 0
+.word 0xd2800000
+.word 0x53001c18
+.loc 10 1170 0
+.word 0xaa1a03e0
+bl _p_142
+.word 0xaa0003e1
+.word 0xaa0103e0
+.word 0xf940003e
+bl _p_143
+.word 0xf90033a0
+.word 0x14000017
+.word 0xf94033a1
+.word 0xaa0103e0
+.word 0xf940003e
+bl _p_144
+.word 0xaa0003f4
+.loc 10 1171 0
+.word 0xaa1503e0
+.word 0xf94002a1
+.word 0xf9404c30
+.word 0xd63f0200
+.word 0xf90133a0
+.word 0xaa1403e0
+.word 0xf9400281
+.word 0xf9404c30
+.word 0xd63f0200
+.word 0xaa0003e2
+.word 0xf94133a1
+.word 0xaa1a03e0
+bl _p_112
+.word 0x53001c00
+.word 0x34000060
+.loc 10 1172 0
+.word 0xd2800020
+.word 0x53001c18
+.loc 10 1170 0
+.word 0xf94033a1
+.word 0xaa0103e0
+.word 0xf940003e
+bl _p_146
+.word 0x53001c00
+.word 0x35fffca0
+.word 0xf9006bbf
+.word 0x94000005
+.word 0xf9406ba0
+.word 0xb4000040
+bl _p_69
+.word 0x14000034
+.word 0xf900ffbe
+.word 0xf94033a0
+.word 0xf9006fa0
+.word 0xf9406fa0
+.word 0xf90073a0
+.word 0xf9406fa0
+.word 0xeb1f001f
+.word 0x54000380
+.word 0xf9406fa0
+.word 0xf9400000
+.word 0xf90077a0
+.word 0xf94077a0
+.word 0xb9402800
+
+adrp x16, mono_aot_Mono_Security_got@PAGE+0
+add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
+ldr x1, [x16, #448]
+.word 0xeb01001f
+.word 0x540001e3
+.word 0xf94077a0
+.word 0xf9401000
+
+adrp x16, mono_aot_Mono_Security_got@PAGE+0
+add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
+ldr x1, [x16, #448]
+.word 0x9343fc22
+.word 0x8b020000
+.word 0x39400000
+.word 0xd28000fe
+.word 0xa1e0022
+.word 0xd2800021
+.word 0x1ac22021
+.word 0xa010000
+.word 0xb5000080
+.word 0x14000001
+.word 0xf90073bf
+.word 0x14000001
+.word 0xf94073a0
+.word 0xf9002fa0
+.word 0xf9402fa0
+.word 0xb4000160
+.word 0xf9402fa1
+.word 0xaa0103e0
+.word 0xf9400021
+
+adrp x16, mono_aot_Mono_Security_got@PAGE+0
+add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
+ldr x15, [x16, #456]
+.word 0x928004f0
+.word 0xf2bffff0
+.word 0xf8706830
+.word 0xd63f0200
+.word 0xf940ffbe
 .word 0xd61f03c0
 .loc 10 1176 0
 .word 0x350000f8
@@ -15599,40 +15679,44 @@ ldr x15, [x16, #448]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x15, [x16, #432]
+ldr x15, [x16, #440]
 .word 0x92800ef0
 .word 0xf2bffff0
 .word 0xf8706830
 .word 0xd63f0200
 .word 0x53001c00
-.word 0x35ffefc0
-.word 0x94000002
+.word 0x35ffef00
+.word 0xf9007bbf
+.word 0x94000005
+.word 0xf9407ba0
+.word 0xb4000040
+bl _p_69
 .word 0x14000034
-.word 0xf900dbbe
+.word 0xf90103be
 .word 0xf9402ba0
-.word 0xf9006ba0
-.word 0xf9406ba0
-.word 0xf9006fa0
-.word 0xf9406ba0
+.word 0xf9007fa0
+.word 0xf9407fa0
+.word 0xf90083a0
+.word 0xf9407fa0
 .word 0xeb1f001f
 .word 0x54000380
-.word 0xf9406ba0
+.word 0xf9407fa0
 .word 0xf9400000
-.word 0xf90073a0
-.word 0xf94073a0
+.word 0xf90087a0
+.word 0xf94087a0
 .word 0xb9402800
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #440]
+ldr x1, [x16, #448]
 .word 0xeb01001f
 .word 0x540001e3
-.word 0xf94073a0
+.word 0xf94087a0
 .word 0xf9401000
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #440]
+ldr x1, [x16, #448]
 .word 0x9343fc22
 .word 0x8b020000
 .word 0x39400000
@@ -15643,9 +15727,9 @@ ldr x1, [x16, #440]
 .word 0xa010000
 .word 0xb5000080
 .word 0x14000001
-.word 0xf9006fbf
+.word 0xf90083bf
 .word 0x14000001
-.word 0xf9406fa0
+.word 0xf94083a0
 .word 0xf9002fa0
 .word 0xf9402fa0
 .word 0xb4000160
@@ -15655,12 +15739,12 @@ ldr x1, [x16, #440]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x15, [x16, #448]
+ldr x15, [x16, #456]
 .word 0x928004f0
 .word 0xf2bffff0
 .word 0xf8706830
 .word 0xd63f0200
-.word 0xf940dbbe
+.word 0xf94103be
 .word 0xd61f03c0
 .loc 10 1181 0
 .word 0xaa1603e0
@@ -15675,7 +15759,7 @@ ldr x15, [x16, #448]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x15, [x16, #416]
+ldr x15, [x16, #424]
 .word 0x928003f0
 .word 0xf2bffff0
 .word 0xf8706830
@@ -15689,15 +15773,15 @@ ldr x15, [x16, #416]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #1080]
+ldr x1, [x16, #1088]
 .word 0xeb01001f
 .word 0x10000011
-.word 0x54007521
+.word 0x540077a1
 .word 0xaa1803f6
 .loc 10 1182 0
 .word 0xaa1a03e0
 .word 0xaa1803e1
-bl _p_162
+bl _p_163
 .loc 10 1181 0
 .word 0xf9402ba1
 .word 0xaa0103e0
@@ -15705,666 +15789,20 @@ bl _p_162
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x15, [x16, #432]
+ldr x15, [x16, #440]
 .word 0x92800ef0
 .word 0xf2bffff0
 .word 0xf8706830
 .word 0xd63f0200
 .word 0x53001c00
 .word 0x35fffb60
-.word 0x94000002
-.word 0x14000034
-.word 0xf900e3be
-.word 0xf9402ba0
-.word 0xf90077a0
-.word 0xf94077a0
-.word 0xf9007ba0
-.word 0xf94077a0
-.word 0xeb1f001f
-.word 0x54000380
-.word 0xf94077a0
-.word 0xf9400000
-.word 0xf9007fa0
-.word 0xf9407fa0
-.word 0xb9402800
-
-adrp x16, mono_aot_Mono_Security_got@PAGE+0
-add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #440]
-.word 0xeb01001f
-.word 0x540001e3
-.word 0xf9407fa0
-.word 0xf9401000
-
-adrp x16, mono_aot_Mono_Security_got@PAGE+0
-add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #440]
-.word 0x9343fc22
-.word 0x8b020000
-.word 0x39400000
-.word 0xd28000fe
-.word 0xa1e0022
-.word 0xd2800021
-.word 0x1ac22021
-.word 0xa010000
-.word 0xb5000080
-.word 0x14000001
-.word 0xf9007bbf
-.word 0x14000001
-.word 0xf9407ba0
-.word 0xf9002fa0
-.word 0xf9402fa0
-.word 0xb4000160
-.word 0xf9402fa1
-.word 0xaa0103e0
-.word 0xf9400021
-
-adrp x16, mono_aot_Mono_Security_got@PAGE+0
-add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x15, [x16, #448]
-.word 0x928004f0
-.word 0xf2bffff0
-.word 0xf8706830
-.word 0xd63f0200
-.word 0xf940e3be
-.word 0xd61f03c0
-.loc 10 1185 0
-.word 0xaa1703e0
-.word 0xf94002e1
-.word 0xf9405c30
-.word 0xd63f0200
-.word 0xf9002ba0
-.word 0x1400001b
-.word 0xf9402ba1
-.word 0xaa0103e0
-.word 0xf9400021
-
-adrp x16, mono_aot_Mono_Security_got@PAGE+0
-add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x15, [x16, #416]
-.word 0x928003f0
-.word 0xf2bffff0
-.word 0xf8706830
-.word 0xd63f0200
-.word 0xaa0003f8
-.word 0xb4000178
-.word 0xf9400300
-.word 0xf9400000
-.word 0xf9400800
-.word 0xf9400400
-
-adrp x16, mono_aot_Mono_Security_got@PAGE+0
-add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #1080]
-.word 0xeb01001f
-.word 0x10000011
-.word 0x54006901
-.word 0xaa1803f7
-.loc 10 1186 0
-.word 0xaa1a03e0
-.word 0xaa1803e1
-bl _p_163
-.loc 10 1185 0
-.word 0xf9402ba1
-.word 0xaa0103e0
-.word 0xf9400021
-
-adrp x16, mono_aot_Mono_Security_got@PAGE+0
-add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x15, [x16, #432]
-.word 0x92800ef0
-.word 0xf2bffff0
-.word 0xf8706830
-.word 0xd63f0200
-.word 0x53001c00
-.word 0x35fffb60
-.word 0x94000002
-.word 0x14000034
-.word 0xf900ebbe
-.word 0xf9402ba0
-.word 0xf90083a0
-.word 0xf94083a0
-.word 0xf90087a0
-.word 0xf94083a0
-.word 0xeb1f001f
-.word 0x54000380
-.word 0xf94083a0
-.word 0xf9400000
-.word 0xf9008ba0
+.word 0xf9008bbf
+.word 0x94000005
 .word 0xf9408ba0
-.word 0xb9402800
-
-adrp x16, mono_aot_Mono_Security_got@PAGE+0
-add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #440]
-.word 0xeb01001f
-.word 0x540001e3
-.word 0xf9408ba0
-.word 0xf9401000
-
-adrp x16, mono_aot_Mono_Security_got@PAGE+0
-add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #440]
-.word 0x9343fc22
-.word 0x8b020000
-.word 0x39400000
-.word 0xd28000fe
-.word 0xa1e0022
-.word 0xd2800021
-.word 0x1ac22021
-.word 0xa010000
-.word 0xb5000080
-.word 0x14000001
-.word 0xf90087bf
-.word 0x14000001
-.word 0xf94087a0
-.word 0xf9002fa0
-.word 0xf9402fa0
-.word 0xb4000160
-.word 0xf9402fa1
-.word 0xaa0103e0
-.word 0xf9400021
-
-adrp x16, mono_aot_Mono_Security_got@PAGE+0
-add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x15, [x16, #448]
-.word 0x928004f0
-.word 0xf2bffff0
-.word 0xf8706830
-.word 0xd63f0200
-.word 0xf940ebbe
-.word 0xd61f03c0
-.loc 10 1190 0
-.word 0xf9401b41
-.word 0xaa0103e0
-.word 0xf9400021
-.word 0xf9408430
-.word 0xd63f0200
-.word 0x93407c00
-.word 0x6b1f001f
-.word 0x540011ad
-.loc 10 1191 0
-
-adrp x16, mono_aot_Mono_Security_got@PAGE+0
-add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #456]
-.word 0xd2800501
-bl _p_5
-.word 0xf9010ba0
-.word 0xd2800601
-bl _p_83
-.word 0xf9410ba0
-.word 0xaa0003f8
-.loc 10 1192 0
-.word 0xf9401b41
-.word 0xaa0103e0
-.word 0xf9400021
-.word 0xf9405c30
-.word 0xd63f0200
-.word 0xf9002ba0
-.word 0x14000027
-.word 0xf9402ba1
-.word 0xaa0103e0
-.word 0xf9400021
-
-adrp x16, mono_aot_Mono_Security_got@PAGE+0
-add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x15, [x16, #416]
-.word 0x928003f0
-.word 0xf2bffff0
-.word 0xf8706830
-.word 0xd63f0200
-.word 0xaa0003f7
-.word 0xb4000177
-.word 0xf94002e0
-.word 0xf9400000
-.word 0xf9400800
-.word 0xf9400400
-
-adrp x16, mono_aot_Mono_Security_got@PAGE+0
-add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #728]
-.word 0xeb01001f
-.word 0x10000011
-.word 0x54005a81
-.word 0xaa1703f6
-.loc 10 1193 0
-.word 0xf94002fe
-.word 0xf9400ae2
-
-adrp x16, mono_aot_Mono_Security_got@PAGE+0
-add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #768]
-.word 0xaa0203e0
-.word 0xf940005e
-bl _p_118
-.word 0x53001c00
-.word 0x340000c0
-.loc 10 1194 0
-.word 0xf94002de
-.word 0xf9400ec1
-.word 0xaa1803e0
-.word 0xf940031e
-bl _p_70
-.loc 10 1192 0
-.word 0xf9402ba1
-.word 0xaa0103e0
-.word 0xf9400021
-
-adrp x16, mono_aot_Mono_Security_got@PAGE+0
-add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x15, [x16, #432]
-.word 0x92800ef0
-.word 0xf2bffff0
-.word 0xf8706830
-.word 0xd63f0200
-.word 0x53001c00
-.word 0x35fff9e0
-.word 0x94000002
+.word 0xb4000040
+bl _p_69
 .word 0x14000034
-.word 0xf900f3be
-.word 0xf9402ba0
-.word 0xf900a7a0
-.word 0xf940a7a0
-.word 0xf900aba0
-.word 0xf940a7a0
-.word 0xeb1f001f
-.word 0x54000380
-.word 0xf940a7a0
-.word 0xf9400000
-.word 0xf900afa0
-.word 0xf940afa0
-.word 0xb9402800
-
-adrp x16, mono_aot_Mono_Security_got@PAGE+0
-add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #440]
-.word 0xeb01001f
-.word 0x540001e3
-.word 0xf940afa0
-.word 0xf9401000
-
-adrp x16, mono_aot_Mono_Security_got@PAGE+0
-add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #440]
-.word 0x9343fc22
-.word 0x8b020000
-.word 0x39400000
-.word 0xd28000fe
-.word 0xa1e0022
-.word 0xd2800021
-.word 0x1ac22021
-.word 0xa010000
-.word 0xb5000080
-.word 0x14000001
-.word 0xf900abbf
-.word 0x14000001
-.word 0xf940aba0
-.word 0xf9002fa0
-.word 0xf9402fa0
-.word 0xb4000160
-.word 0xf9402fa1
-.word 0xaa0103e0
-.word 0xf9400021
-
-adrp x16, mono_aot_Mono_Security_got@PAGE+0
-add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x15, [x16, #448]
-.word 0x928004f0
-.word 0xf2bffff0
-.word 0xf8706830
-.word 0xd63f0200
-.word 0xf940f3be
-.word 0xd61f03c0
-.loc 10 1198 0
-.word 0xaa1803e0
-.word 0xf940031e
-bl _p_68
-.word 0x93407c00
-.word 0x6b1f001f
-.word 0x540001ed
-.loc 10 1199 0
-
-adrp x16, mono_aot_Mono_Security_got@PAGE+0
-add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x2, [x16, #856]
-.word 0xaa1a03e0
-.word 0xaa1803e1
-bl _p_164
-.word 0xaa0003f8
-.loc 10 1200 0
-.word 0xaa1803e0
-.word 0xf940031e
-bl _p_158
-.word 0xaa0003e1
-.word 0xaa1903e0
-.word 0xf940033e
-bl _p_70
-.loc 10 1204 0
-.word 0xf9401b41
-.word 0xaa0103e0
-.word 0xf9400021
-.word 0xf9408430
-.word 0xd63f0200
-.word 0x93407c00
-.word 0x6b1f001f
-.word 0x5400196d
-.loc 10 1205 0
-
-adrp x16, mono_aot_Mono_Security_got@PAGE+0
-add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #456]
-.word 0xd2800501
-bl _p_5
-.word 0xf9010ba0
-.word 0xd2800601
-bl _p_83
-.word 0xf9410ba0
-.word 0xaa0003f8
-.loc 10 1206 0
-.word 0xf9401b41
-.word 0xaa0103e0
-.word 0xf9400021
-.word 0xf9405c30
-.word 0xd63f0200
-.word 0xf9002ba0
-.word 0x14000031
-.word 0xf9402ba1
-.word 0xaa0103e0
-.word 0xf9400021
-
-adrp x16, mono_aot_Mono_Security_got@PAGE+0
-add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x15, [x16, #416]
-.word 0x928003f0
-.word 0xf2bffff0
-.word 0xf8706830
-.word 0xd63f0200
-.word 0xaa0003f7
-.word 0xb4000177
-.word 0xf94002e0
-.word 0xf9400000
-.word 0xf9400800
-.word 0xf9400400
-
-adrp x16, mono_aot_Mono_Security_got@PAGE+0
-add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #728]
-.word 0xeb01001f
-.word 0x10000011
-.word 0x54004801
-.word 0xaa1703f6
-.loc 10 1207 0
-.word 0xf94002fe
-.word 0xf9400ae2
-
-adrp x16, mono_aot_Mono_Security_got@PAGE+0
-add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #736]
-.word 0xaa0203e0
-.word 0xf940005e
-bl _p_118
-.word 0x53001c00
-.word 0x35000160
-.word 0xf94002de
-.word 0xf9400ac2
-
-adrp x16, mono_aot_Mono_Security_got@PAGE+0
-add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #752]
-.word 0xaa0203e0
-.word 0xf940005e
-bl _p_118
-.word 0x53001c00
-.word 0x340000c0
-.loc 10 1209 0
-.word 0xf94002de
-.word 0xf9400ec1
-.word 0xaa1803e0
-.word 0xf940031e
-bl _p_70
-.loc 10 1206 0
-.word 0xf9402ba1
-.word 0xaa0103e0
-.word 0xf9400021
-
-adrp x16, mono_aot_Mono_Security_got@PAGE+0
-add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x15, [x16, #432]
-.word 0x92800ef0
-.word 0xf2bffff0
-.word 0xf8706830
-.word 0xd63f0200
-.word 0x53001c00
-.word 0x35fff8a0
-.word 0x94000002
-.word 0x14000034
-.word 0xf900fbbe
-.word 0xf9402ba0
-.word 0xf9009ba0
-.word 0xf9409ba0
-.word 0xf9009fa0
-.word 0xf9409ba0
-.word 0xeb1f001f
-.word 0x54000380
-.word 0xf9409ba0
-.word 0xf9400000
-.word 0xf900a3a0
-.word 0xf940a3a0
-.word 0xb9402800
-
-adrp x16, mono_aot_Mono_Security_got@PAGE+0
-add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #440]
-.word 0xeb01001f
-.word 0x540001e3
-.word 0xf940a3a0
-.word 0xf9401000
-
-adrp x16, mono_aot_Mono_Security_got@PAGE+0
-add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #440]
-.word 0x9343fc22
-.word 0x8b020000
-.word 0x39400000
-.word 0xd28000fe
-.word 0xa1e0022
-.word 0xd2800021
-.word 0x1ac22021
-.word 0xa010000
-.word 0xb5000080
-.word 0x14000001
-.word 0xf9009fbf
-.word 0x14000001
-.word 0xf9409fa0
-.word 0xf9002fa0
-.word 0xf9402fa0
-.word 0xb4000160
-.word 0xf9402fa1
-.word 0xaa0103e0
-.word 0xf9400021
-
-adrp x16, mono_aot_Mono_Security_got@PAGE+0
-add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x15, [x16, #448]
-.word 0x928004f0
-.word 0xf2bffff0
-.word 0xf8706830
-.word 0xd63f0200
-.word 0xf940fbbe
-.word 0xd61f03c0
-.loc 10 1212 0
-.word 0xaa1803e0
-.word 0xf940031e
-bl _p_68
-.word 0x93407c00
-.word 0x6b1f001f
-.word 0x5400086d
-.loc 10 1213 0
-
-adrp x16, mono_aot_Mono_Security_got@PAGE+0
-add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #456]
-.word 0xd2800501
-bl _p_5
-.word 0xf9011fa0
-.word 0xd2801401
-bl _p_83
-.word 0xf9411fa0
-.word 0xaa0003f7
-.loc 10 1214 0
-.word 0xaa1703e0
-.word 0xf90117a0
-.word 0xaa1803e0
-.word 0xf9400301
-.word 0xf9403030
-.word 0xd63f0200
-.word 0xf9011ba0
-
-adrp x16, mono_aot_Mono_Security_got@PAGE+0
-add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #456]
-.word 0xd2800501
-bl _p_5
-.word 0xf9411ba2
-.word 0xf90113a0
-.word 0xd2800081
-bl _p_65
-.word 0xf94113a1
-.word 0xf94117a2
-.word 0xaa0203e0
-.word 0xf940005e
-bl _p_70
-.loc 10 1216 0
-
-adrp x16, mono_aot_Mono_Security_got@PAGE+0
-add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #672]
-.word 0xf9010fa0
-
-adrp x16, mono_aot_Mono_Security_got@PAGE+0
-add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #656]
-.word 0xd2800401
-bl _p_5
-.word 0xf9410fa1
-.word 0xf9010ba0
-bl _p_104
-.word 0xf9410ba0
-.word 0xaa0003f8
-.loc 10 1217 0
-.word 0xaa1803e0
-.word 0xf940001e
-.word 0xf9000f17
-.word 0x91006000
-.word 0xd349fc00
-.word 0xd29ffffe
-.word 0xf2a00ffe
-.word 0x8a1e0000
-
-adrp x16, mono_aot_Mono_Security_got@PAGE+0
-add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #16]
-.word 0x8b010000
-.word 0xd280003e
-.word 0x3900001e
-.loc 10 1218 0
-.word 0xaa1803e0
-.word 0xf940031e
-bl _p_158
-.word 0xaa0003e1
-.word 0xaa1903e0
-.word 0xf940033e
-bl _p_70
-.loc 10 1223 0
-.word 0xf9401b41
-.word 0xaa0103e0
-.word 0xf9400021
-.word 0xf9408430
-.word 0xd63f0200
-.word 0x93407c00
-.word 0x6b1f001f
-.word 0x540011ad
-.loc 10 1224 0
-
-adrp x16, mono_aot_Mono_Security_got@PAGE+0
-add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #456]
-.word 0xd2800501
-bl _p_5
-.word 0xf9010ba0
-.word 0xd2800601
-bl _p_83
-.word 0xf9410ba0
-.word 0xaa0003f8
-.loc 10 1225 0
-.word 0xf9401b41
-.word 0xaa0103e0
-.word 0xf9400021
-.word 0xf9405c30
-.word 0xd63f0200
-.word 0xf9002ba0
-.word 0x14000027
-.word 0xf9402ba1
-.word 0xaa0103e0
-.word 0xf9400021
-
-adrp x16, mono_aot_Mono_Security_got@PAGE+0
-add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x15, [x16, #416]
-.word 0x928003f0
-.word 0xf2bffff0
-.word 0xf8706830
-.word 0xd63f0200
-.word 0xaa0003f7
-.word 0xb4000177
-.word 0xf94002e0
-.word 0xf9400000
-.word 0xf9400800
-.word 0xf9400400
-
-adrp x16, mono_aot_Mono_Security_got@PAGE+0
-add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #728]
-.word 0xeb01001f
-.word 0x10000011
-.word 0x54002dc1
-.word 0xaa1703f6
-.loc 10 1226 0
-.word 0xf94002fe
-.word 0xf9400ae2
-
-adrp x16, mono_aot_Mono_Security_got@PAGE+0
-add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #960]
-.word 0xaa0203e0
-.word 0xf940005e
-bl _p_118
-.word 0x53001c00
-.word 0x340000c0
-.loc 10 1227 0
-.word 0xf94002de
-.word 0xf9400ec1
-.word 0xaa1803e0
-.word 0xf940031e
-bl _p_70
-.loc 10 1225 0
-.word 0xf9402ba1
-.word 0xaa0103e0
-.word 0xf9400021
-
-adrp x16, mono_aot_Mono_Security_got@PAGE+0
-add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x15, [x16, #432]
-.word 0x92800ef0
-.word 0xf2bffff0
-.word 0xf8706830
-.word 0xd63f0200
-.word 0x53001c00
-.word 0x35fff9e0
-.word 0x94000002
-.word 0x14000034
-.word 0xf90103be
+.word 0xf9010bbe
 .word 0xf9402ba0
 .word 0xf9008fa0
 .word 0xf9408fa0
@@ -16380,7 +15818,7 @@ ldr x15, [x16, #432]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #440]
+ldr x1, [x16, #448]
 .word 0xeb01001f
 .word 0x540001e3
 .word 0xf94097a0
@@ -16388,7 +15826,7 @@ ldr x1, [x16, #440]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #440]
+ldr x1, [x16, #448]
 .word 0x9343fc22
 .word 0x8b020000
 .word 0x39400000
@@ -16411,12 +15849,678 @@ ldr x1, [x16, #440]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x15, [x16, #448]
+ldr x15, [x16, #456]
 .word 0x928004f0
 .word 0xf2bffff0
 .word 0xf8706830
 .word 0xd63f0200
-.word 0xf94103be
+.word 0xf9410bbe
+.word 0xd61f03c0
+.loc 10 1185 0
+.word 0xaa1703e0
+.word 0xf94002e1
+.word 0xf9405c30
+.word 0xd63f0200
+.word 0xf9002ba0
+.word 0x1400001b
+.word 0xf9402ba1
+.word 0xaa0103e0
+.word 0xf9400021
+
+adrp x16, mono_aot_Mono_Security_got@PAGE+0
+add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
+ldr x15, [x16, #424]
+.word 0x928003f0
+.word 0xf2bffff0
+.word 0xf8706830
+.word 0xd63f0200
+.word 0xaa0003f8
+.word 0xb4000178
+.word 0xf9400300
+.word 0xf9400000
+.word 0xf9400800
+.word 0xf9400400
+
+adrp x16, mono_aot_Mono_Security_got@PAGE+0
+add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
+ldr x1, [x16, #1088]
+.word 0xeb01001f
+.word 0x10000011
+.word 0x54006b01
+.word 0xaa1803f7
+.loc 10 1186 0
+.word 0xaa1a03e0
+.word 0xaa1803e1
+bl _p_164
+.loc 10 1185 0
+.word 0xf9402ba1
+.word 0xaa0103e0
+.word 0xf9400021
+
+adrp x16, mono_aot_Mono_Security_got@PAGE+0
+add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
+ldr x15, [x16, #440]
+.word 0x92800ef0
+.word 0xf2bffff0
+.word 0xf8706830
+.word 0xd63f0200
+.word 0x53001c00
+.word 0x35fffb60
+.word 0xf9009bbf
+.word 0x94000005
+.word 0xf9409ba0
+.word 0xb4000040
+bl _p_69
+.word 0x14000034
+.word 0xf90113be
+.word 0xf9402ba0
+.word 0xf9009fa0
+.word 0xf9409fa0
+.word 0xf900a3a0
+.word 0xf9409fa0
+.word 0xeb1f001f
+.word 0x54000380
+.word 0xf9409fa0
+.word 0xf9400000
+.word 0xf900a7a0
+.word 0xf940a7a0
+.word 0xb9402800
+
+adrp x16, mono_aot_Mono_Security_got@PAGE+0
+add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
+ldr x1, [x16, #448]
+.word 0xeb01001f
+.word 0x540001e3
+.word 0xf940a7a0
+.word 0xf9401000
+
+adrp x16, mono_aot_Mono_Security_got@PAGE+0
+add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
+ldr x1, [x16, #448]
+.word 0x9343fc22
+.word 0x8b020000
+.word 0x39400000
+.word 0xd28000fe
+.word 0xa1e0022
+.word 0xd2800021
+.word 0x1ac22021
+.word 0xa010000
+.word 0xb5000080
+.word 0x14000001
+.word 0xf900a3bf
+.word 0x14000001
+.word 0xf940a3a0
+.word 0xf9002fa0
+.word 0xf9402fa0
+.word 0xb4000160
+.word 0xf9402fa1
+.word 0xaa0103e0
+.word 0xf9400021
+
+adrp x16, mono_aot_Mono_Security_got@PAGE+0
+add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
+ldr x15, [x16, #456]
+.word 0x928004f0
+.word 0xf2bffff0
+.word 0xf8706830
+.word 0xd63f0200
+.word 0xf94113be
+.word 0xd61f03c0
+.loc 10 1190 0
+.word 0xf9401b41
+.word 0xaa0103e0
+.word 0xf9400021
+.word 0xf9408430
+.word 0xd63f0200
+.word 0x93407c00
+.word 0x6b1f001f
+.word 0x5400122d
+.loc 10 1191 0
+
+adrp x16, mono_aot_Mono_Security_got@PAGE+0
+add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
+ldr x0, [x16, #464]
+.word 0xd2800501
+bl _p_5
+.word 0xf90133a0
+.word 0xd2800601
+bl _p_84
+.word 0xf94133a0
+.word 0xaa0003f8
+.loc 10 1192 0
+.word 0xf9401b41
+.word 0xaa0103e0
+.word 0xf9400021
+.word 0xf9405c30
+.word 0xd63f0200
+.word 0xf9002ba0
+.word 0x14000027
+.word 0xf9402ba1
+.word 0xaa0103e0
+.word 0xf9400021
+
+adrp x16, mono_aot_Mono_Security_got@PAGE+0
+add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
+ldr x15, [x16, #424]
+.word 0x928003f0
+.word 0xf2bffff0
+.word 0xf8706830
+.word 0xd63f0200
+.word 0xaa0003f7
+.word 0xb4000177
+.word 0xf94002e0
+.word 0xf9400000
+.word 0xf9400800
+.word 0xf9400400
+
+adrp x16, mono_aot_Mono_Security_got@PAGE+0
+add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
+ldr x1, [x16, #736]
+.word 0xeb01001f
+.word 0x10000011
+.word 0x54005c01
+.word 0xaa1703f6
+.loc 10 1193 0
+.word 0xf94002fe
+.word 0xf9400ae2
+
+adrp x16, mono_aot_Mono_Security_got@PAGE+0
+add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
+ldr x1, [x16, #776]
+.word 0xaa0203e0
+.word 0xf940005e
+bl _p_119
+.word 0x53001c00
+.word 0x340000c0
+.loc 10 1194 0
+.word 0xf94002de
+.word 0xf9400ec1
+.word 0xaa1803e0
+.word 0xf940031e
+bl _p_71
+.loc 10 1192 0
+.word 0xf9402ba1
+.word 0xaa0103e0
+.word 0xf9400021
+
+adrp x16, mono_aot_Mono_Security_got@PAGE+0
+add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
+ldr x15, [x16, #440]
+.word 0x92800ef0
+.word 0xf2bffff0
+.word 0xf8706830
+.word 0xd63f0200
+.word 0x53001c00
+.word 0x35fff9e0
+.word 0xf900cbbf
+.word 0x94000005
+.word 0xf940cba0
+.word 0xb4000040
+bl _p_69
+.word 0x14000034
+.word 0xf9011bbe
+.word 0xf9402ba0
+.word 0xf900cfa0
+.word 0xf940cfa0
+.word 0xf900d3a0
+.word 0xf940cfa0
+.word 0xeb1f001f
+.word 0x54000380
+.word 0xf940cfa0
+.word 0xf9400000
+.word 0xf900d7a0
+.word 0xf940d7a0
+.word 0xb9402800
+
+adrp x16, mono_aot_Mono_Security_got@PAGE+0
+add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
+ldr x1, [x16, #448]
+.word 0xeb01001f
+.word 0x540001e3
+.word 0xf940d7a0
+.word 0xf9401000
+
+adrp x16, mono_aot_Mono_Security_got@PAGE+0
+add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
+ldr x1, [x16, #448]
+.word 0x9343fc22
+.word 0x8b020000
+.word 0x39400000
+.word 0xd28000fe
+.word 0xa1e0022
+.word 0xd2800021
+.word 0x1ac22021
+.word 0xa010000
+.word 0xb5000080
+.word 0x14000001
+.word 0xf900d3bf
+.word 0x14000001
+.word 0xf940d3a0
+.word 0xf9002fa0
+.word 0xf9402fa0
+.word 0xb4000160
+.word 0xf9402fa1
+.word 0xaa0103e0
+.word 0xf9400021
+
+adrp x16, mono_aot_Mono_Security_got@PAGE+0
+add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
+ldr x15, [x16, #456]
+.word 0x928004f0
+.word 0xf2bffff0
+.word 0xf8706830
+.word 0xd63f0200
+.word 0xf9411bbe
+.word 0xd61f03c0
+.loc 10 1198 0
+.word 0xaa1803e0
+.word 0xf940031e
+bl _p_68
+.word 0x93407c00
+.word 0x6b1f001f
+.word 0x540001ed
+.loc 10 1199 0
+
+adrp x16, mono_aot_Mono_Security_got@PAGE+0
+add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
+ldr x2, [x16, #864]
+.word 0xaa1a03e0
+.word 0xaa1803e1
+bl _p_165
+.word 0xaa0003f8
+.loc 10 1200 0
+.word 0xaa1803e0
+.word 0xf940031e
+bl _p_159
+.word 0xaa0003e1
+.word 0xaa1903e0
+.word 0xf940033e
+bl _p_71
+.loc 10 1204 0
+.word 0xf9401b41
+.word 0xaa0103e0
+.word 0xf9400021
+.word 0xf9408430
+.word 0xd63f0200
+.word 0x93407c00
+.word 0x6b1f001f
+.word 0x540019ed
+.loc 10 1205 0
+
+adrp x16, mono_aot_Mono_Security_got@PAGE+0
+add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
+ldr x0, [x16, #464]
+.word 0xd2800501
+bl _p_5
+.word 0xf90133a0
+.word 0xd2800601
+bl _p_84
+.word 0xf94133a0
+.word 0xaa0003f8
+.loc 10 1206 0
+.word 0xf9401b41
+.word 0xaa0103e0
+.word 0xf9400021
+.word 0xf9405c30
+.word 0xd63f0200
+.word 0xf9002ba0
+.word 0x14000031
+.word 0xf9402ba1
+.word 0xaa0103e0
+.word 0xf9400021
+
+adrp x16, mono_aot_Mono_Security_got@PAGE+0
+add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
+ldr x15, [x16, #424]
+.word 0x928003f0
+.word 0xf2bffff0
+.word 0xf8706830
+.word 0xd63f0200
+.word 0xaa0003f7
+.word 0xb4000177
+.word 0xf94002e0
+.word 0xf9400000
+.word 0xf9400800
+.word 0xf9400400
+
+adrp x16, mono_aot_Mono_Security_got@PAGE+0
+add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
+ldr x1, [x16, #736]
+.word 0xeb01001f
+.word 0x10000011
+.word 0x54004901
+.word 0xaa1703f6
+.loc 10 1207 0
+.word 0xf94002fe
+.word 0xf9400ae2
+
+adrp x16, mono_aot_Mono_Security_got@PAGE+0
+add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
+ldr x1, [x16, #744]
+.word 0xaa0203e0
+.word 0xf940005e
+bl _p_119
+.word 0x53001c00
+.word 0x35000160
+.word 0xf94002de
+.word 0xf9400ac2
+
+adrp x16, mono_aot_Mono_Security_got@PAGE+0
+add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
+ldr x1, [x16, #760]
+.word 0xaa0203e0
+.word 0xf940005e
+bl _p_119
+.word 0x53001c00
+.word 0x340000c0
+.loc 10 1209 0
+.word 0xf94002de
+.word 0xf9400ec1
+.word 0xaa1803e0
+.word 0xf940031e
+bl _p_71
+.loc 10 1206 0
+.word 0xf9402ba1
+.word 0xaa0103e0
+.word 0xf9400021
+
+adrp x16, mono_aot_Mono_Security_got@PAGE+0
+add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
+ldr x15, [x16, #440]
+.word 0x92800ef0
+.word 0xf2bffff0
+.word 0xf8706830
+.word 0xd63f0200
+.word 0x53001c00
+.word 0x35fff8a0
+.word 0xf900bbbf
+.word 0x94000005
+.word 0xf940bba0
+.word 0xb4000040
+bl _p_69
+.word 0x14000034
+.word 0xf90123be
+.word 0xf9402ba0
+.word 0xf900bfa0
+.word 0xf940bfa0
+.word 0xf900c3a0
+.word 0xf940bfa0
+.word 0xeb1f001f
+.word 0x54000380
+.word 0xf940bfa0
+.word 0xf9400000
+.word 0xf900c7a0
+.word 0xf940c7a0
+.word 0xb9402800
+
+adrp x16, mono_aot_Mono_Security_got@PAGE+0
+add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
+ldr x1, [x16, #448]
+.word 0xeb01001f
+.word 0x540001e3
+.word 0xf940c7a0
+.word 0xf9401000
+
+adrp x16, mono_aot_Mono_Security_got@PAGE+0
+add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
+ldr x1, [x16, #448]
+.word 0x9343fc22
+.word 0x8b020000
+.word 0x39400000
+.word 0xd28000fe
+.word 0xa1e0022
+.word 0xd2800021
+.word 0x1ac22021
+.word 0xa010000
+.word 0xb5000080
+.word 0x14000001
+.word 0xf900c3bf
+.word 0x14000001
+.word 0xf940c3a0
+.word 0xf9002fa0
+.word 0xf9402fa0
+.word 0xb4000160
+.word 0xf9402fa1
+.word 0xaa0103e0
+.word 0xf9400021
+
+adrp x16, mono_aot_Mono_Security_got@PAGE+0
+add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
+ldr x15, [x16, #456]
+.word 0x928004f0
+.word 0xf2bffff0
+.word 0xf8706830
+.word 0xd63f0200
+.word 0xf94123be
+.word 0xd61f03c0
+.loc 10 1212 0
+.word 0xaa1803e0
+.word 0xf940031e
+bl _p_68
+.word 0x93407c00
+.word 0x6b1f001f
+.word 0x5400086d
+.loc 10 1213 0
+
+adrp x16, mono_aot_Mono_Security_got@PAGE+0
+add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
+ldr x0, [x16, #464]
+.word 0xd2800501
+bl _p_5
+.word 0xf90147a0
+.word 0xd2801401
+bl _p_84
+.word 0xf94147a0
+.word 0xaa0003f7
+.loc 10 1214 0
+.word 0xaa1703e0
+.word 0xf9013fa0
+.word 0xaa1803e0
+.word 0xf9400301
+.word 0xf9403030
+.word 0xd63f0200
+.word 0xf90143a0
+
+adrp x16, mono_aot_Mono_Security_got@PAGE+0
+add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
+ldr x0, [x16, #464]
+.word 0xd2800501
+bl _p_5
+.word 0xf94143a2
+.word 0xf9013ba0
+.word 0xd2800081
+bl _p_65
+.word 0xf9413ba1
+.word 0xf9413fa2
+.word 0xaa0203e0
+.word 0xf940005e
+bl _p_71
+.loc 10 1216 0
+
+adrp x16, mono_aot_Mono_Security_got@PAGE+0
+add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
+ldr x0, [x16, #680]
+.word 0xf90137a0
+
+adrp x16, mono_aot_Mono_Security_got@PAGE+0
+add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
+ldr x0, [x16, #664]
+.word 0xd2800401
+bl _p_5
+.word 0xf94137a1
+.word 0xf90133a0
+bl _p_105
+.word 0xf94133a0
+.word 0xaa0003f8
+.loc 10 1217 0
+.word 0xaa1803e0
+.word 0xf940001e
+.word 0xf9000f17
+.word 0x91006000
+.word 0xd349fc00
+.word 0xd29ffffe
+.word 0xf2a00ffe
+.word 0x8a1e0000
+
+adrp x16, mono_aot_Mono_Security_got@PAGE+0
+add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
+ldr x1, [x16, #16]
+.word 0x8b010000
+.word 0xd280003e
+.word 0x3900001e
+.loc 10 1218 0
+.word 0xaa1803e0
+.word 0xf940031e
+bl _p_159
+.word 0xaa0003e1
+.word 0xaa1903e0
+.word 0xf940033e
+bl _p_71
+.loc 10 1223 0
+.word 0xf9401b41
+.word 0xaa0103e0
+.word 0xf9400021
+.word 0xf9408430
+.word 0xd63f0200
+.word 0x93407c00
+.word 0x6b1f001f
+.word 0x5400122d
+.loc 10 1224 0
+
+adrp x16, mono_aot_Mono_Security_got@PAGE+0
+add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
+ldr x0, [x16, #464]
+.word 0xd2800501
+bl _p_5
+.word 0xf90133a0
+.word 0xd2800601
+bl _p_84
+.word 0xf94133a0
+.word 0xaa0003f8
+.loc 10 1225 0
+.word 0xf9401b41
+.word 0xaa0103e0
+.word 0xf9400021
+.word 0xf9405c30
+.word 0xd63f0200
+.word 0xf9002ba0
+.word 0x14000027
+.word 0xf9402ba1
+.word 0xaa0103e0
+.word 0xf9400021
+
+adrp x16, mono_aot_Mono_Security_got@PAGE+0
+add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
+ldr x15, [x16, #424]
+.word 0x928003f0
+.word 0xf2bffff0
+.word 0xf8706830
+.word 0xd63f0200
+.word 0xaa0003f7
+.word 0xb4000177
+.word 0xf94002e0
+.word 0xf9400000
+.word 0xf9400800
+.word 0xf9400400
+
+adrp x16, mono_aot_Mono_Security_got@PAGE+0
+add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
+ldr x1, [x16, #736]
+.word 0xeb01001f
+.word 0x10000011
+.word 0x54002e41
+.word 0xaa1703f6
+.loc 10 1226 0
+.word 0xf94002fe
+.word 0xf9400ae2
+
+adrp x16, mono_aot_Mono_Security_got@PAGE+0
+add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
+ldr x1, [x16, #968]
+.word 0xaa0203e0
+.word 0xf940005e
+bl _p_119
+.word 0x53001c00
+.word 0x340000c0
+.loc 10 1227 0
+.word 0xf94002de
+.word 0xf9400ec1
+.word 0xaa1803e0
+.word 0xf940031e
+bl _p_71
+.loc 10 1225 0
+.word 0xf9402ba1
+.word 0xaa0103e0
+.word 0xf9400021
+
+adrp x16, mono_aot_Mono_Security_got@PAGE+0
+add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
+ldr x15, [x16, #440]
+.word 0x92800ef0
+.word 0xf2bffff0
+.word 0xf8706830
+.word 0xd63f0200
+.word 0x53001c00
+.word 0x35fff9e0
+.word 0xf900abbf
+.word 0x94000005
+.word 0xf940aba0
+.word 0xb4000040
+bl _p_69
+.word 0x14000034
+.word 0xf9012bbe
+.word 0xf9402ba0
+.word 0xf900afa0
+.word 0xf940afa0
+.word 0xf900b3a0
+.word 0xf940afa0
+.word 0xeb1f001f
+.word 0x54000380
+.word 0xf940afa0
+.word 0xf9400000
+.word 0xf900b7a0
+.word 0xf940b7a0
+.word 0xb9402800
+
+adrp x16, mono_aot_Mono_Security_got@PAGE+0
+add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
+ldr x1, [x16, #448]
+.word 0xeb01001f
+.word 0x540001e3
+.word 0xf940b7a0
+.word 0xf9401000
+
+adrp x16, mono_aot_Mono_Security_got@PAGE+0
+add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
+ldr x1, [x16, #448]
+.word 0x9343fc22
+.word 0x8b020000
+.word 0x39400000
+.word 0xd28000fe
+.word 0xa1e0022
+.word 0xd2800021
+.word 0x1ac22021
+.word 0xa010000
+.word 0xb5000080
+.word 0x14000001
+.word 0xf900b3bf
+.word 0x14000001
+.word 0xf940b3a0
+.word 0xf9002fa0
+.word 0xf9402fa0
+.word 0xb4000160
+.word 0xf9402fa1
+.word 0xaa0103e0
+.word 0xf9400021
+
+adrp x16, mono_aot_Mono_Security_got@PAGE+0
+add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
+ldr x15, [x16, #456]
+.word 0x928004f0
+.word 0xf2bffff0
+.word 0xf8706830
+.word 0xd63f0200
+.word 0xf9412bbe
 .word 0xd61f03c0
 .loc 10 1231 0
 .word 0xaa1803e0
@@ -16429,71 +16533,71 @@ bl _p_68
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x2, [x16, #856]
+ldr x2, [x16, #864]
 .word 0xaa1a03e0
 .word 0xaa1803e1
-bl _p_164
+bl _p_165
 .word 0xaa0003f8
 .loc 10 1233 0
 .word 0xaa1803e0
 .word 0xf940031e
-bl _p_158
+bl _p_159
 .word 0xaa0003e1
 .word 0xaa1903e0
 .word 0xf940033e
-bl _p_70
+bl _p_71
 .loc 10 1238 0
 .word 0xaa1903e0
 .word 0xf9400321
 .word 0xf9403030
 .word 0xd63f0200
-.word 0xf9011fa0
+.word 0xf90147a0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #456]
+ldr x0, [x16, #464]
 .word 0xd2800501
 bl _p_5
-.word 0xf9411fa2
-.word 0xf9011ba0
+.word 0xf94147a2
+.word 0xf90143a0
 .word 0xd2800081
 bl _p_65
-.word 0xf9411ba0
+.word 0xf94143a0
 .word 0xaa0003f9
 .loc 10 1239 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #456]
+ldr x0, [x16, #464]
 .word 0xd2800501
 bl _p_5
-.word 0xf90117a0
+.word 0xf9013fa0
 .word 0xd2801401
-bl _p_83
-.word 0xf94117a0
+bl _p_84
+.word 0xf9413fa0
 .word 0xaa0003f8
 .loc 10 1240 0
 .word 0xaa1803e2
 .word 0xaa0203e0
 .word 0xaa1903e1
 .word 0xf940005e
-bl _p_70
+bl _p_71
 .loc 10 1241 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #672]
-.word 0xf90113a0
+ldr x0, [x16, #680]
+.word 0xf9013ba0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #656]
+ldr x0, [x16, #664]
 .word 0xd2800401
 bl _p_5
-.word 0xf94113a1
-.word 0xf9010fa0
-bl _p_104
-.word 0xf9410fa0
+.word 0xf9413ba1
+.word 0xf90137a0
+bl _p_105
+.word 0xf94137a0
 .word 0xaa0003f9
 .loc 10 1242 0
 .word 0xaa1903e0
@@ -16515,13 +16619,13 @@ ldr x1, [x16, #16]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #456]
+ldr x0, [x16, #464]
 .word 0xd2800501
 bl _p_5
-.word 0xf9010ba0
+.word 0xf90133a0
 .word 0xd2800601
-bl _p_83
-.word 0xf9410ba0
+bl _p_84
+.word 0xf94133a0
 .word 0xaa0003f8
 .loc 10 1245 0
 .word 0xf9400b40
@@ -16530,13 +16634,13 @@ bl _p_83
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #208]
+ldr x0, [x16, #216]
 .word 0xd2800281
 bl _p_1
 .word 0xaa0003f7
 .loc 10 1248 0
 .word 0xaa1a03e0
-bl _p_165
+bl _p_166
 .word 0xaa0003e2
 .word 0xaa0203e0
 .word 0xaa1703e1
@@ -16545,134 +16649,134 @@ bl _p_165
 .word 0xd63f0200
 .loc 10 1249 0
 .word 0xf9400b40
-.word 0xf90123a0
+.word 0xf9014ba0
 .word 0xb9804740
-.word 0xf90127a0
+.word 0xf9014fa0
 .word 0xf940033e
 .word 0xf9400f22
 .word 0xaa0203e0
 .word 0xd2800001
 .word 0xf940005e
-bl _p_100
+bl _p_101
 .word 0xaa0003e1
 .word 0xaa0103e0
 .word 0xf940003e
-bl _p_76
+bl _p_77
 .word 0xaa0003e4
-.word 0xf94123a1
-.word 0xf94127a3
+.word 0xf9414ba1
+.word 0xf9414fa3
 .word 0xaa1a03e0
 .word 0xaa1703e2
-bl _p_110
+bl _p_111
 .word 0xaa0003f6
 .loc 10 1250 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #456]
+ldr x0, [x16, #464]
 .word 0xd2800501
 bl _p_5
-.word 0xf9011fa0
+.word 0xf90147a0
 .word 0xd2800601
-bl _p_83
-.word 0xf9411fa0
+bl _p_84
+.word 0xf94147a0
 .word 0xaa0003f5
 .loc 10 1251 0
 .word 0xaa1503e0
-.word 0xf9011ba0
+.word 0xf90143a0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #680]
-bl _p_103
+ldr x0, [x16, #688]
+bl _p_104
 .word 0xaa0003e1
-.word 0xf9411ba2
+.word 0xf94143a2
 .word 0xaa0203e0
 .word 0xf940005e
-bl _p_70
+bl _p_71
 .loc 10 1252 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #456]
+ldr x0, [x16, #464]
 .word 0xd2800501
 bl _p_5
-.word 0xf90117a0
+.word 0xf9013fa0
 .word 0xd28000a1
-bl _p_83
-.word 0xf94117a1
+bl _p_84
+.word 0xf9413fa1
 .word 0xaa1503e0
 .word 0xf94002be
-bl _p_70
+bl _p_71
 .loc 10 1254 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #456]
+ldr x0, [x16, #464]
 .word 0xd2800501
 bl _p_5
-.word 0xf90113a0
+.word 0xf9013ba0
 .word 0xd2800601
-bl _p_83
-.word 0xf94113a0
+bl _p_84
+.word 0xf9413ba0
 .word 0xaa0003f4
 .loc 10 1255 0
 .word 0xaa1403e2
 .word 0xaa0203e0
 .word 0xaa1503e1
 .word 0xf940005e
-bl _p_70
+bl _p_71
 .loc 10 1256 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #456]
+ldr x0, [x16, #464]
 .word 0xd2800501
 bl _p_5
-.word 0xf9010fa0
+.word 0xf90137a0
 .word 0xd2800081
 .word 0xaa1603e2
 bl _p_65
-.word 0xf9410fa1
+.word 0xf94137a1
 .word 0xaa1403e0
 .word 0xf940029e
-bl _p_70
+bl _p_71
 .loc 10 1258 0
 .word 0xaa1803e0
 .word 0xaa1403e1
 .word 0xf940031e
-bl _p_70
+bl _p_71
 .loc 10 1259 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #456]
+ldr x0, [x16, #464]
 .word 0xd2800501
 bl _p_5
-.word 0xf9010ba0
+.word 0xf90133a0
 .word 0xd2800081
 .word 0xaa1703e2
 bl _p_65
-.word 0xf9410ba1
+.word 0xf94133a1
 .word 0xaa1803e0
 .word 0xf940031e
-bl _p_70
+bl _p_71
 .loc 10 1260 0
 .word 0xb9804740
-bl _p_166
+bl _p_167
 .word 0xaa0003e1
 .word 0xaa1803e0
 .word 0xf940031e
-bl _p_70
+bl _p_71
 .loc 10 1263 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #208]
+ldr x0, [x16, #216]
 .word 0xd2800021
 bl _p_1
 .word 0xaa0003e1
-.word 0xf90113a1
+.word 0xf9013ba1
 .word 0xb9801801
 .word 0xeb1f003f
 .word 0x10000011
@@ -16682,41 +16786,41 @@ bl _p_1
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #456]
+ldr x0, [x16, #464]
 .word 0xd2800501
 bl _p_5
-.word 0xf94113a2
-.word 0xf9010fa0
+.word 0xf9413ba2
+.word 0xf90137a0
 .word 0xd2800041
 bl _p_65
-.word 0xf9410fa0
+.word 0xf94137a0
 .word 0xaa0003fa
 .loc 10 1265 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #456]
+ldr x0, [x16, #464]
 .word 0xd2800501
 bl _p_5
-.word 0xf9010ba0
+.word 0xf90133a0
 .word 0xd2800601
-bl _p_83
-.word 0xf9410ba0
+bl _p_84
+.word 0xf94133a0
 .word 0xaa0003f7
 .loc 10 1266 0
 .word 0xaa1703e2
 .word 0xaa0203e0
 .word 0xaa1a03e1
 .word 0xf940005e
-bl _p_70
+bl _p_71
 .loc 10 1267 0
 .word 0xaa1903e0
 .word 0xf940033e
-bl _p_158
+bl _p_159
 .word 0xaa0003e1
 .word 0xaa1703e0
 .word 0xf94002fe
-bl _p_70
+bl _p_71
 .loc 10 1268 0
 .word 0xaa1803e0
 .word 0xf940031e
@@ -16728,7 +16832,7 @@ bl _p_68
 .word 0xaa1703e0
 .word 0xaa1803e1
 .word 0xf94002fe
-bl _p_70
+bl _p_71
 .loc 10 1273 0
 .word 0xaa1703e0
 .word 0xf94002e1
@@ -16740,15 +16844,15 @@ bl _p_70
 .word 0xa9446bb9
 .word 0x910003bf
 .word 0xa9407bfd
-.word 0xd2804a10
+.word 0xd2805410
 .word 0x910003f1
 .word 0x8b100231
 .word 0x9100023f
 .word 0xd65f03c0
-.word 0xd2801a00
+.word 0xd28019e0
 .word 0xaa1103e1
 bl _p_3
-.word 0xd2801a80
+.word 0xd2801a60
 .word 0xaa1103e1
 bl _p_3
 
@@ -16767,13 +16871,13 @@ Mono_Security_X509_PKCS12_EncryptedContentInfo_Mono_Security_ASN1_string:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #208]
+ldr x0, [x16, #216]
 .word 0xd2800101
 bl _p_1
 .word 0xf90093a0
 .loc 10 1280 0
 .word 0xaa1803e0
-bl _p_165
+bl _p_166
 .word 0xaa0003e2
 .word 0xf94093a1
 .word 0xaa0203e0
@@ -16785,12 +16889,12 @@ bl _p_165
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #456]
+ldr x0, [x16, #464]
 .word 0xd2800501
 bl _p_5
 .word 0xf9008fa0
 .word 0xd2800601
-bl _p_83
+bl _p_84
 .word 0xf9408fa0
 .loc 10 1283 0
 .word 0xf9007fa0
@@ -16798,7 +16902,7 @@ bl _p_83
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #456]
+ldr x0, [x16, #464]
 .word 0xd2800501
 bl _p_5
 .word 0xf9408ba2
@@ -16810,44 +16914,44 @@ bl _p_65
 .word 0xf94087a2
 .word 0xaa0203e0
 .word 0xf940005e
-bl _p_70
+bl _p_71
 .loc 10 1284 0
 .word 0xb9804700
-bl _p_166
+bl _p_167
 .word 0xaa0003e1
 .word 0xf9407fa2
 .word 0xaa0203e0
 .word 0xf940005e
 .word 0xf9006fa2
-bl _p_70
+bl _p_71
 .loc 10 1286 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #456]
+ldr x0, [x16, #464]
 .word 0xd2800501
 bl _p_5
 .word 0xf9007ba0
 .word 0xd2800601
-bl _p_83
+bl _p_84
 .word 0xf9407ba0
 .loc 10 1287 0
 .word 0xf90073a0
 .word 0xf90077a0
 .word 0xf94013a0
-bl _p_103
+bl _p_104
 .word 0xaa0003e1
 .word 0xf94077a2
 .word 0xaa0203e0
 .word 0xf940005e
-bl _p_70
+bl _p_71
 .word 0xf9406fa1
 .word 0xf94073a2
 .loc 10 1288 0
 .word 0xaa0203e0
 .word 0xf940005e
 .word 0xf9004fa2
-bl _p_70
+bl _p_71
 .loc 10 1290 0
 .word 0xb9804700
 .word 0xf9006ba0
@@ -16861,13 +16965,13 @@ bl _p_70
 .word 0xf9406ba3
 .word 0xaa1803e0
 .word 0xf94013a1
-bl _p_155
+bl _p_156
 .word 0xf90063a0
 .loc 10 1291 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #456]
+ldr x0, [x16, #464]
 .word 0xd2800501
 bl _p_5
 .word 0xf94063a2
@@ -16880,12 +16984,12 @@ bl _p_65
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #456]
+ldr x0, [x16, #464]
 .word 0xd2800501
 bl _p_5
 .word 0xf9005ba0
 .word 0xd2800601
-bl _p_83
+bl _p_84
 .word 0xf9405ba0
 .loc 10 1294 0
 .word 0xf90053a0
@@ -16893,39 +16997,39 @@ bl _p_83
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #672]
-bl _p_103
+ldr x0, [x16, #680]
+bl _p_104
 .word 0xaa0003e1
 .word 0xf94057a2
 .word 0xaa0203e0
 .word 0xf940005e
-bl _p_70
+bl _p_71
 .word 0xf9404fa1
 .word 0xf94053a2
 .loc 10 1295 0
 .word 0xaa0203e0
 .word 0xf940005e
 .word 0xf9004ba2
-bl _p_70
+bl _p_71
 .word 0xf94047a1
 .word 0xf9404ba2
 .loc 10 1296 0
 .word 0xaa0203e0
 .word 0xf940005e
 .word 0xf9002fa2
-bl _p_70
+bl _p_71
 .loc 10 1298 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #208]
+ldr x0, [x16, #216]
 .word 0xd2800021
 bl _p_1
 .word 0xf90043a0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #456]
+ldr x0, [x16, #464]
 .word 0xd2800501
 bl _p_5
 .word 0xf94043a2
@@ -16938,12 +17042,12 @@ bl _p_65
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #456]
+ldr x0, [x16, #464]
 .word 0xd2800501
 bl _p_5
 .word 0xf90037a0
 .word 0xd2800601
-bl _p_83
+bl _p_84
 .word 0xf94037a0
 .word 0xf9403ba1
 .loc 10 1300 0
@@ -16951,24 +17055,24 @@ bl _p_83
 .word 0xaa0003e2
 .word 0xaa0203e0
 .word 0xf940005e
-bl _p_70
+bl _p_71
 .word 0xf9402fa1
 .word 0xf94033a2
 .loc 10 1301 0
 .word 0xaa0203e0
 .word 0xf940005e
 .word 0xf9002ba2
-bl _p_70
+bl _p_71
 .loc 10 1303 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #456]
+ldr x0, [x16, #464]
 .word 0xd2800501
 bl _p_5
 .word 0xf90027a0
 .word 0xd2801401
-bl _p_83
+bl _p_84
 .word 0xf94027a0
 .word 0xf9402ba1
 .loc 10 1304 0
@@ -16976,22 +17080,22 @@ bl _p_83
 .word 0xaa0003e2
 .word 0xaa0203e0
 .word 0xf940005e
-bl _p_70
+bl _p_71
 .loc 10 1306 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #688]
+ldr x0, [x16, #696]
 .word 0xf90023a0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #656]
+ldr x0, [x16, #664]
 .word 0xd2800401
 bl _p_5
 .word 0xf94023a1
 .word 0xf9001fa0
-bl _p_104
+bl _p_105
 .word 0xf9401ba1
 .word 0xf9401fa3
 .loc 10 1307 0
@@ -17030,7 +17134,7 @@ Mono_Security_X509_PKCS12_AddCertificate_Mono_Security_X509_X509Certificate:
 .word 0xf9400ba0
 .word 0xf9400fa1
 .word 0xd2800002
-bl _p_167
+bl _p_168
 .loc 10 1314 0
 .word 0x910003bf
 .word 0xa8c27bfd
@@ -17050,10 +17154,11 @@ Mono_Security_X509_PKCS12_AddCertificate_Mono_Security_X509_X509Certificate_Syst
 .word 0xaa0003f8
 .word 0xaa0103f9
 .word 0xf90023a2
-.word 0xd2800017
+.word 0xd2800000
+.word 0x53001c17
 .loc 10 1320 0
 .word 0xd2800016
-.word 0x14000059
+.word 0x1400005a
 .loc 10 1321 0
 .word 0xf9401b02
 .word 0xaa0203e0
@@ -17070,10 +17175,10 @@ Mono_Security_X509_PKCS12_AddCertificate_Mono_Security_X509_X509Certificate_Syst
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #728]
+ldr x1, [x16, #736]
 .word 0xeb01001f
 .word 0x10000011
-.word 0x54000e81
+.word 0x54000ea1
 .word 0xaa1503f4
 .loc 10 1323 0
 .word 0xf94002be
@@ -17081,12 +17186,12 @@ ldr x1, [x16, #728]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #768]
+ldr x1, [x16, #776]
 .word 0xaa0203e0
 .word 0xf940005e
-bl _p_118
+bl _p_119
 .word 0x53001c00
-.word 0x34000760
+.word 0x34000780
 .loc 10 1324 0
 .word 0xf940029e
 .word 0xf9400e82
@@ -17094,22 +17199,22 @@ bl _p_118
 .word 0xaa0203e0
 .word 0xd2800021
 .word 0xf940005e
-bl _p_100
+bl _p_101
 .word 0xaa0003e1
 .loc 10 1326 0
 .word 0xaa0103e0
 .word 0xf940003e
-bl _p_76
+bl _p_77
 .word 0xf9003ba0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #656]
+ldr x0, [x16, #664]
 .word 0xd2800401
 bl _p_5
 .word 0xf9403ba1
 .word 0xf90037a0
-bl _p_129
+bl _p_130
 .word 0xf94037a0
 .word 0xaa0003e1
 .word 0xf940003e
@@ -17118,21 +17223,21 @@ bl _p_129
 .word 0xaa0203e0
 .word 0xd2800001
 .word 0xf940005e
-bl _p_100
+bl _p_101
 .word 0xaa0003e1
 .word 0xaa0103e0
 .word 0xf940003e
-bl _p_76
+bl _p_77
 .word 0xf90033a0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #776]
+ldr x0, [x16, #784]
 .word 0xd2801701
 bl _p_5
 .word 0xf94033a1
 .word 0xf9002fa0
-bl _p_130
+bl _p_131
 .word 0xf9402fa0
 .word 0xaa0003f5
 .loc 10 1328 0
@@ -17148,11 +17253,12 @@ bl _p_130
 .word 0xaa0003e2
 .word 0xf9402ba1
 .word 0xaa1803e0
-bl _p_111
+bl _p_112
 .word 0x53001c00
-.word 0x34000040
+.word 0x34000060
 .loc 10 1329 0
-.word 0xd2800037
+.word 0xd2800020
+.word 0x53001c17
 .loc 10 1320 0
 .word 0x110006d6
 .word 0x35000137
@@ -17163,7 +17269,7 @@ bl _p_111
 .word 0xd63f0200
 .word 0x93407c00
 .word 0x6b0002df
-.word 0x54fff40b
+.word 0x54fff3eb
 .loc 10 1334 0
 .word 0x350003d7
 .loc 10 1335 0
@@ -17172,23 +17278,23 @@ bl _p_111
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #768]
+ldr x0, [x16, #776]
 .word 0xf90033a0
 .word 0xaa1803e0
 .word 0xaa1903e1
 .word 0xf94023a2
-bl _p_168
+bl _p_169
 .word 0xf90037a0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1000]
+ldr x0, [x16, #1008]
 .word 0xd2800401
 bl _p_5
 .word 0xf94033a1
 .word 0xf94037a2
 .word 0xf9002ba0
-bl _p_148
+bl _p_149
 .word 0xf9402ba1
 .word 0xf9402fa2
 .word 0xaa0203e0
@@ -17206,7 +17312,7 @@ bl _p_148
 .word 0x910003bf
 .word 0xa8c87bfd
 .word 0xd65f03c0
-.word 0xd2801a80
+.word 0xd2801a60
 .word 0xaa1103e1
 bl _p_3
 
@@ -17223,7 +17329,7 @@ Mono_Security_X509_PKCS12_RemoveCertificate_Mono_Security_X509_X509Certificate:
 .word 0xf9400ba0
 .word 0xf9400fa1
 .word 0xd2800002
-bl _p_169
+bl _p_170
 .loc 10 1343 0
 .word 0x910003bf
 .word 0xa8c27bfd
@@ -17267,7 +17373,7 @@ Mono_Security_X509_PKCS12_RemoveCertificate_Mono_Security_X509_X509Certificate_S
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #728]
+ldr x1, [x16, #736]
 .word 0xeb01001f
 .word 0x10000011
 .word 0x54002161
@@ -17278,10 +17384,10 @@ ldr x1, [x16, #728]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #768]
+ldr x1, [x16, #776]
 .word 0xaa0203e0
 .word 0xf940005e
-bl _p_118
+bl _p_119
 .word 0x53001c00
 .word 0x34001b60
 .loc 10 1353 0
@@ -17292,22 +17398,22 @@ bl _p_118
 .word 0xaa0203e0
 .word 0xd2800021
 .word 0xf940005e
-bl _p_100
+bl _p_101
 .word 0xaa0003e1
 .loc 10 1355 0
 .word 0xaa0103e0
 .word 0xf940003e
-bl _p_76
+bl _p_77
 .word 0xf9005ba0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #656]
+ldr x0, [x16, #664]
 .word 0xd2800401
 bl _p_5
 .word 0xf9405ba1
 .word 0xf90057a0
-bl _p_129
+bl _p_130
 .word 0xf94057a0
 .word 0xaa0003e1
 .word 0xf940003e
@@ -17316,21 +17422,21 @@ bl _p_129
 .word 0xaa0203e0
 .word 0xd2800001
 .word 0xf940005e
-bl _p_100
+bl _p_101
 .word 0xaa0003e1
 .word 0xaa0103e0
 .word 0xf940003e
-bl _p_76
+bl _p_77
 .word 0xf90053a0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #776]
+ldr x0, [x16, #784]
 .word 0xd2801701
 bl _p_5
 .word 0xf94053a1
 .word 0xf9004fa0
-bl _p_130
+bl _p_131
 .word 0xf9404fa0
 .word 0xaa0003f4
 .loc 10 1357 0
@@ -17347,7 +17453,7 @@ bl _p_130
 .word 0xaa0003e2
 .word 0xf9404ba1
 .word 0xf9402ba0
-bl _p_111
+bl _p_112
 .word 0x53001c00
 .word 0x34001400
 .loc 10 1358 0
@@ -17365,7 +17471,7 @@ bl _p_68
 .word 0xaa1503e0
 .word 0xd2800041
 .word 0xf94002be
-bl _p_100
+bl _p_101
 .word 0xaa0003f5
 .loc 10 1361 0
 .word 0xd2800014
@@ -17376,16 +17482,16 @@ bl _p_100
 .word 0xaa1503e0
 .word 0xaa1303e1
 .word 0xf94002be
-bl _p_100
+bl _p_101
 .word 0xf9003ba0
 .loc 10 1364 0
 .word 0xf9403ba2
 .word 0xaa0203e0
 .word 0xd2800001
 .word 0xf940005e
-bl _p_100
-.loc 10 1365 0
 bl _p_101
+.loc 10 1365 0
+bl _p_102
 .word 0xaa0003fa
 .loc 10 1366 0
 .word 0xf94033a0
@@ -17395,7 +17501,7 @@ bl _p_101
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x15, [x16, #1088]
+ldr x15, [x16, #1096]
 .word 0x92800af0
 .word 0xf2bffff0
 .word 0xf8706850
@@ -17409,7 +17515,7 @@ ldr x15, [x16, #1088]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #1064]
+ldr x1, [x16, #1072]
 .word 0xeb01001f
 .word 0x10000011
 .word 0x54001221
@@ -17422,7 +17528,7 @@ ldr x1, [x16, #1064]
 .word 0xd2800021
 .word 0xf9403ba2
 .word 0xf940005e
-bl _p_100
+bl _p_101
 .word 0xaa0003fa
 .loc 10 1371 0
 .word 0xf9403fa0
@@ -17449,7 +17555,7 @@ bl _p_68
 .word 0xaa1a03e0
 .word 0xb98083a1
 .word 0xf940035e
-bl _p_100
+bl _p_101
 .word 0xaa0003f8
 .loc 10 1375 0
 .word 0xf9403fa0
@@ -17475,7 +17581,7 @@ bl _p_100
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x2, [x16, #392]
+ldr x2, [x16, #400]
 .word 0xeb02003f
 .word 0x10000011
 .word 0x54000ae1
@@ -17487,11 +17593,11 @@ ldr x2, [x16, #392]
 .loc 10 1377 0
 .word 0xaa1803e0
 .word 0xf940031e
-bl _p_76
+bl _p_77
 .word 0xaa0003e2
 .word 0xf9402ba0
 .word 0xaa1703e1
-bl _p_111
+bl _p_112
 .word 0x53001c00
 .word 0x34000040
 .loc 10 1378 0
@@ -17580,7 +17686,7 @@ bl _p_68
 .word 0x910003bf
 .word 0xa8cc7bfd
 .word 0xd65f03c0
-.word 0xd2801a80
+.word 0xd2801a60
 .word 0xaa1103e1
 bl _p_3
 
@@ -17628,7 +17734,7 @@ Mono_Security_X509_PKCS12_CompareAsymmetricAlgorithm_System_Security_Cryptograph
 .word 0xd63f0200
 .word 0xaa0003e1
 .word 0xf9401ba0
-bl _p_112
+bl _p_113
 .word 0x53001c00
 .word 0xa9416bb9
 .word 0x910003bf
@@ -17659,10 +17765,11 @@ Mono_Security_X509_PKCS12_AddPkcs8ShroudedKeyBag_System_Security_Cryptography_As
 .word 0xf9005fa0
 .word 0xf90063a0
 .word 0xf90067a0
-.word 0xd2800017
+.word 0xd2800000
+.word 0x53001c17
 .loc 10 1422 0
 .word 0xd2800016
-.word 0x14000094
+.word 0x14000096
 .loc 10 1423 0
 .word 0xf9401b02
 .word 0xaa0203e0
@@ -17679,10 +17786,10 @@ Mono_Security_X509_PKCS12_AddPkcs8ShroudedKeyBag_System_Security_Cryptography_As
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #728]
+ldr x1, [x16, #736]
 .word 0xeb01001f
 .word 0x10000011
-.word 0x540018a1
+.word 0x540018e1
 .word 0xaa1503f4
 .loc 10 1425 0
 .word 0xf94002be
@@ -17690,34 +17797,34 @@ ldr x1, [x16, #728]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #752]
+ldr x1, [x16, #760]
 .word 0xaa0203e0
 .word 0xf940005e
-bl _p_118
+bl _p_119
 .word 0x53001c00
-.word 0x34000ec0
+.word 0x34000f00
 .loc 10 1426 0
 .word 0xf940029e
 .word 0xf9400e82
 .word 0xaa0203e0
 .word 0xd2800021
 .word 0xf940005e
-bl _p_100
+bl _p_101
 .word 0xaa0003e1
 .loc 10 1427 0
 .word 0xaa0103e0
 .word 0xf940003e
-bl _p_76
+bl _p_77
 .word 0xf90083a0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #760]
+ldr x0, [x16, #768]
 .word 0xd2800601
 bl _p_5
 .word 0xf94083a1
 .word 0xf9007fa0
-bl _p_123
+bl _p_124
 .word 0xf9407fa0
 .word 0xaa0003f5
 .loc 10 1428 0
@@ -17726,20 +17833,20 @@ bl _p_123
 .word 0xf90073a0
 .word 0xaa1503e0
 .word 0xf94002be
-bl _p_124
+bl _p_125
 .word 0xf90077a0
 .word 0xf94002be
 .word 0xb9802aa0
 .word 0xf9007ba0
 .word 0xaa1503e0
 .word 0xf94002be
-bl _p_125
+bl _p_126
 .word 0xaa0003e4
 .word 0xf94073a1
 .word 0xf94077a2
 .word 0xf9407ba3
 .word 0xaa1803e0
-bl _p_126
+bl _p_127
 .word 0xaa0003f5
 .loc 10 1429 0
 .word 0xaa1503e0
@@ -17747,31 +17854,32 @@ bl _p_126
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #744]
+ldr x0, [x16, #752]
 .word 0xd2800601
 bl _p_5
 .word 0xf9406fa1
 .word 0xf9006ba0
-bl _p_119
+bl _p_120
 .word 0xf9406ba1
 .loc 10 1430 0
 .word 0xaa0103e0
 .word 0xf940003e
-bl _p_120
+bl _p_121
 .word 0xaa0003f4
 .loc 10 1433 0
 .word 0xb9801a80
 .word 0xeb1f001f
 .word 0x10000011
-.word 0x54000f69
-.word 0x39408293
+.word 0x54000fa9
+.word 0x39408280
+.word 0x53001c13
 .word 0xaa1303e0
 .word 0xd280005e
 .word 0x6b1e001f
 .word 0x540000a0
 .word 0xd280061e
 .word 0x6b1e027f
-.word 0x54000c21
+.word 0x54000c41
 .word 0x1400001f
 .loc 10 1435 0
 .word 0xd2800000
@@ -17802,33 +17910,34 @@ bl _p_120
 .word 0xf90043a2
 .word 0xf94067a2
 .word 0xf90047a2
-bl _p_121
+bl _p_122
 .word 0xaa0003f3
 .loc 10 1437 0
 .word 0x14000004
 .loc 10 1439 0
 .word 0xaa1403e0
-bl _p_122
+bl _p_123
 .word 0xaa0003f3
 .loc 10 1447 0
 .word 0xb9801aa2
 .word 0xaa1503e0
 .word 0xd2800001
-bl _p_116
+bl _p_117
 .loc 10 1448 0
 .word 0xb9801a82
 .word 0xaa1403e0
 .word 0xd2800001
-bl _p_116
+bl _p_117
 .loc 10 1450 0
 .word 0xaa1803e0
 .word 0xaa1903e1
 .word 0xaa1303e2
-bl _p_170
+bl _p_171
 .word 0x53001c00
-.word 0x34000040
+.word 0x34000060
 .loc 10 1451 0
-.word 0xd2800037
+.word 0xd2800020
+.word 0x53001c17
 .loc 10 1422 0
 .word 0x110006d6
 .word 0x35000137
@@ -17839,7 +17948,7 @@ bl _p_170
 .word 0xd63f0200
 .word 0x93407c00
 .word 0x6b0002df
-.word 0x54ffecab
+.word 0x54ffec6b
 .loc 10 1456 0
 .word 0x350003d7
 .loc 10 1457 0
@@ -17848,23 +17957,23 @@ bl _p_170
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #752]
+ldr x0, [x16, #760]
 .word 0xf90073a0
 .word 0xaa1803e0
 .word 0xaa1903e1
 .word 0xf94027a2
-bl _p_171
+bl _p_172
 .word 0xf90077a0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1000]
+ldr x0, [x16, #1008]
 .word 0xd2800401
 bl _p_5
 .word 0xf94073a1
 .word 0xf94077a2
 .word 0xf9006ba0
-bl _p_148
+bl _p_149
 .word 0xf9406ba1
 .word 0xf9406fa2
 .word 0xaa0203e0
@@ -17887,28 +17996,28 @@ bl _p_148
 .word 0xb9801aa2
 .word 0xaa1503e0
 .word 0xd2800001
-bl _p_116
+bl _p_117
 .loc 10 1443 0
 .word 0xb9801a82
 .word 0xaa1403e0
 .word 0xd2800001
-bl _p_116
+bl _p_117
 .loc 10 1444 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x0, [x16, #0]
-.word 0xd2817d61
+.word 0xd2817e61
 bl _p_7
 .word 0xaa0003e1
 .word 0xd28087e0
 .word 0xf2a04000
 bl _mono_create_corlib_exception_1
 bl _p_8
-.word 0xd2801a00
+.word 0xd28019e0
 .word 0xaa1103e1
 bl _p_3
-.word 0xd2801a80
+.word 0xd2801a60
 .word 0xaa1103e1
 bl _p_3
 
@@ -17926,9 +18035,9 @@ Mono_Security_X509_PKCS12_Clone:
 .word 0xb40002e0
 .loc 10 1940 0
 .word 0xaa1a03e0
-bl _p_172
+bl _p_173
 .word 0xf90017a0
-bl _p_117
+bl _p_118
 .word 0xaa0003e2
 .word 0xf9400b41
 .word 0xaa0203e0
@@ -17939,28 +18048,28 @@ bl _p_117
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #712]
+ldr x0, [x16, #720]
 bl _p_20
 .word 0xf94017a1
 .word 0xf9401ba2
 .word 0xf90013a0
-bl _p_173
+bl _p_174
 .word 0xf94013a0
 .word 0xaa0003f9
 .loc 10 1941 0
 .word 0x1400000d
 .loc 10 1942 0
 .word 0xaa1a03e0
-bl _p_172
+bl _p_173
 .word 0xf90017a0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #712]
+ldr x0, [x16, #720]
 bl _p_20
 .word 0xf94017a1
 .word 0xf90013a0
-bl _p_174
+bl _p_175
 .word 0xf94013a0
 .word 0xaa0003f9
 .loc 10 1944 0
@@ -17985,7 +18094,7 @@ Mono_Security_X509_PKCS12_get_MaximumPasswordLength:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #720]
+ldr x0, [x16, #728]
 .word 0xb9800000
 .word 0x910003bf
 .word 0xa8c17bfd
@@ -18002,7 +18111,7 @@ Mono_Security_X509_PKCS12__cctor:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #720]
+ldr x0, [x16, #728]
 .word 0xd29ffffe
 .word 0xf2affffe
 .word 0xb900001e
@@ -18085,7 +18194,7 @@ Mono_Security_X509_PKCS12_DeriveBytes_set_Password_byte__:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #208]
+ldr x0, [x16, #216]
 .word 0xd2800001
 bl _p_1
 .word 0xf9000f20
@@ -18121,7 +18230,7 @@ bl _p_2
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #392]
+ldr x1, [x16, #400]
 .word 0xeb01001f
 .word 0x10000011
 .word 0x540002a1
@@ -18147,7 +18256,7 @@ ldr x1, [x16, #16]
 .word 0x910003bf
 .word 0xa8c27bfd
 .word 0xd65f03c0
-.word 0xd2801a80
+.word 0xd2801a60
 .word 0xaa1103e1
 bl _p_3
 
@@ -18182,7 +18291,7 @@ bl _p_2
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #392]
+ldr x1, [x16, #400]
 .word 0xeb01001f
 .word 0x10000011
 .word 0x54000321
@@ -18213,7 +18322,7 @@ ldr x1, [x16, #16]
 .word 0x910003bf
 .word 0xa8c27bfd
 .word 0xd65f03c0
-.word 0xd2801a80
+.word 0xd2801a60
 .word 0xaa1103e1
 bl _p_3
 
@@ -18324,7 +18433,7 @@ Mono_Security_X509_PKCS12_DeriveBytes_Adjust_byte___int_byte__:
 .word 0x910003bf
 .word 0xa8c47bfd
 .word 0xd65f03c0
-.word 0xd2801a00
+.word 0xd28019e0
 .word 0xaa1103e1
 bl _p_3
 
@@ -18345,7 +18454,7 @@ Mono_Security_X509_PKCS12_DeriveBytes_Derive_byte___int:
 .word 0xf90033a2
 .word 0xf9402ba0
 .word 0xf9400800
-bl _p_175
+bl _p_176
 .word 0xaa0003f7
 .loc 10 189 0
 .word 0xaa1703e1
@@ -18361,7 +18470,7 @@ bl _p_175
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #208]
+ldr x0, [x16, #216]
 .word 0xb98063a1
 bl _p_1
 .word 0xaa0003f4
@@ -18415,7 +18524,7 @@ bl _p_1
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #208]
+ldr x0, [x16, #216]
 bl _p_1
 .word 0xaa0003f3
 .loc 10 197 0
@@ -18485,7 +18594,7 @@ bl _p_1
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #208]
+ldr x0, [x16, #216]
 .word 0xd2800001
 bl _p_1
 .word 0xaa0003f3
@@ -18539,7 +18648,7 @@ bl _p_1
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #208]
+ldr x0, [x16, #216]
 bl _p_1
 .word 0xf90037a0
 .loc 10 209 0
@@ -18611,7 +18720,7 @@ bl _p_1
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #208]
+ldr x0, [x16, #216]
 .word 0xd2800001
 bl _p_1
 .word 0xf90037a0
@@ -18623,7 +18732,7 @@ bl _p_1
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #208]
+ldr x0, [x16, #216]
 bl _p_1
 .word 0xaa0003fa
 .loc 10 219 0
@@ -18644,7 +18753,7 @@ bl _p_21
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #208]
+ldr x0, [x16, #216]
 .word 0xaa1503e1
 bl _p_1
 .word 0xaa0003f3
@@ -18697,7 +18806,7 @@ bl _p_1
 .word 0xd2800002
 .word 0xd2800005
 .word 0xf94002fe
-bl _p_176
+bl _p_177
 .word 0x93407c00
 .loc 10 227 0
 .word 0xb9801b43
@@ -18705,7 +18814,7 @@ bl _p_176
 .word 0xaa1a03e1
 .word 0xd2800002
 .word 0xf94002fe
-bl _p_177
+bl _p_178
 .loc 10 228 0
 .word 0xaa1703e0
 .word 0xf94002e1
@@ -18727,7 +18836,7 @@ bl _p_177
 .word 0xaa1903e1
 .word 0xd2800002
 .word 0xf94002fe
-bl _p_161
+bl _p_162
 .word 0xaa0003f9
 .loc 10 230 0
 .word 0xb98083a0
@@ -18809,7 +18918,7 @@ bl _p_161
 .word 0xf9402ba0
 .word 0xaa1a03e1
 .word 0xaa1303e3
-bl _p_178
+bl _p_179
 .loc 10 238 0
 .word 0x11000718
 .word 0xb9801b40
@@ -18892,13 +19001,13 @@ bl _p_21
 .word 0x910003bf
 .word 0xa8c97bfd
 .word 0xd65f03c0
-.word 0xd2801d20
+.word 0xd2801d00
 .word 0xaa1103e1
 bl _p_3
-.word 0xd2801400
+.word 0xd28013e0
 .word 0xaa1103e1
 bl _p_3
-.word 0xd2801a00
+.word 0xd28019e0
 .word 0xaa1103e1
 bl _p_3
 
@@ -18915,11 +19024,11 @@ Mono_Security_X509_PKCS12_DeriveBytes_DeriveKey_int:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1096]
+ldr x0, [x16, #1104]
 .word 0xf9400001
 .word 0xf9400ba0
 .word 0xb9801ba2
-bl _p_179
+bl _p_180
 .word 0x910003bf
 .word 0xa8c27bfd
 .word 0xd65f03c0
@@ -18937,11 +19046,11 @@ Mono_Security_X509_PKCS12_DeriveBytes_DeriveIV_int:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1104]
+ldr x0, [x16, #1112]
 .word 0xf9400001
 .word 0xf9400ba0
 .word 0xb9801ba2
-bl _p_179
+bl _p_180
 .word 0x910003bf
 .word 0xa8c27bfd
 .word 0xd65f03c0
@@ -18959,11 +19068,11 @@ Mono_Security_X509_PKCS12_DeriveBytes_DeriveMAC_int:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1112]
+ldr x0, [x16, #1120]
 .word 0xf9400001
 .word 0xf9400ba0
 .word 0xb9801ba2
-bl _p_179
+bl _p_180
 .word 0x910003bf
 .word 0xa8c27bfd
 .word 0xd65f03c0
@@ -18979,7 +19088,7 @@ Mono_Security_X509_PKCS12_DeriveBytes__cctor:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #208]
+ldr x0, [x16, #216]
 .word 0xd2800801
 bl _p_1
 .word 0xf90013a0
@@ -18987,20 +19096,20 @@ bl _p_1
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #1120]
+ldr x1, [x16, #1128]
 .word 0xd2800802
 bl _p_35
 .word 0xf94013a1
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1096]
+ldr x0, [x16, #1104]
 .word 0xf9000001
 .loc 10 132 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #208]
+ldr x0, [x16, #216]
 .word 0xd2800801
 bl _p_1
 .word 0xf9000fa0
@@ -19008,20 +19117,20 @@ bl _p_1
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #1128]
+ldr x1, [x16, #1136]
 .word 0xd2800802
 bl _p_35
 .word 0xf9400fa1
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1104]
+ldr x0, [x16, #1112]
 .word 0xf9000001
 .loc 10 133 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #208]
+ldr x0, [x16, #216]
 .word 0xd2800801
 bl _p_1
 .word 0xf9000ba0
@@ -19029,14 +19138,14 @@ bl _p_1
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #1136]
+ldr x1, [x16, #1144]
 .word 0xd2800802
 bl _p_35
 .word 0xf9400ba1
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1112]
+ldr x0, [x16, #1120]
 .word 0xf9000001
 .word 0x910003bf
 .word 0xa8c37bfd
@@ -19047,7 +19156,7 @@ Lme_aa:
 	.align 4
 	.no_dead_strip Mono_Security_X509_X501_ToString_Mono_Security_ASN1
 Mono_Security_X509_X501_ToString_Mono_Security_ASN1:
-.file 11 "/Library/Frameworks/Xamarin.iOS.framework/Versions/11.6.1.4/src/mono/mcs/class/Mono.Security/Mono.Security.X509/X501Name.cs"
+.file 11 "/Library/Frameworks/Xamarin.iOS.framework/Versions/11.9.1.24/src/Xamarin.iOS/mcs/class/Mono.Security/Mono.Security.X509/X501Name.cs"
 .loc 11 82 0 prologue_end
 .word 0xa9bc7bfd
 .word 0x910003fd
@@ -19057,11 +19166,11 @@ Mono_Security_X509_X501_ToString_Mono_Security_ASN1:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #464]
+ldr x0, [x16, #472]
 .word 0xd2800601
 bl _p_5
 .word 0xf9001ba0
-bl _p_72
+bl _p_73
 .word 0xf9401ba0
 .word 0xaa0003f9
 .loc 11 83 0
@@ -19071,13 +19180,13 @@ bl _p_72
 .word 0xaa1a03e0
 .word 0xaa1803e1
 .word 0xf940035e
-bl _p_100
+bl _p_101
 .word 0xaa0003f7
 .loc 11 85 0
 .word 0xaa1903e0
 .word 0xaa1703e1
 .word 0xd2800022
-bl _p_180
+bl _p_181
 .loc 11 88 0
 .word 0xaa1a03e0
 .word 0xf940035e
@@ -19090,10 +19199,10 @@ bl _p_68
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #1144]
+ldr x1, [x16, #1152]
 .word 0xaa1903e0
 .word 0xf940033e
-bl _p_77
+bl _p_78
 .loc 11 83 0
 .word 0x11000718
 .word 0xaa1a03e0
@@ -19131,11 +19240,11 @@ Mono_Security_X509_X501_ToString_Mono_Security_ASN1_bool_string_bool:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #464]
+ldr x0, [x16, #472]
 .word 0xd2800601
 bl _p_5
 .word 0xf90023a0
-bl _p_72
+bl _p_73
 .word 0xf94023a0
 .word 0xaa0003f6
 .loc 11 98 0
@@ -19151,13 +19260,13 @@ bl _p_68
 .word 0xaa1703e0
 .word 0xaa1803e1
 .word 0xf94002fe
-bl _p_100
+bl _p_101
 .word 0xaa0003f5
 .loc 11 101 0
 .word 0xaa1603e0
 .word 0xaa1503e1
 .word 0xaa1a03e2
-bl _p_180
+bl _p_181
 .loc 11 104 0
 .word 0x6b1f031f
 .word 0x540000ad
@@ -19165,7 +19274,7 @@ bl _p_180
 .word 0xaa1603e0
 .word 0xaa1903e1
 .word 0xf94002de
-bl _p_77
+bl _p_78
 .loc 11 99 0
 .word 0x51000718
 .word 0x6b1f031f
@@ -19178,13 +19287,13 @@ bl _p_77
 .word 0xaa1703e0
 .word 0xaa1803e1
 .word 0xf94002fe
-bl _p_100
+bl _p_101
 .word 0xaa0003f5
 .loc 11 110 0
 .word 0xaa1603e0
 .word 0xaa1503e1
 .word 0xaa1a03e2
-bl _p_180
+bl _p_181
 .loc 11 113 0
 .word 0xaa1703e0
 .word 0xf94002fe
@@ -19197,7 +19306,7 @@ bl _p_68
 .word 0xaa1603e0
 .word 0xaa1903e1
 .word 0xf94002de
-bl _p_77
+bl _p_78
 .loc 11 108 0
 .word 0x11000718
 .word 0xaa1703e0
@@ -19239,14 +19348,14 @@ Mono_Security_X509_X501_AppendEntry_System_Text_StringBuilder_Mono_Security_ASN1
 .word 0xaa1903e0
 .word 0xaa1703e1
 .word 0xf940033e
-bl _p_100
+bl _p_101
 .word 0xaa0003f6
 .loc 11 125 0
 .word 0xaa1603e2
 .word 0xaa0203e0
 .word 0xd2800021
 .word 0xf940005e
-bl _p_100
+bl _p_101
 .word 0xaa0003f5
 .loc 11 126 0
 .word 0xaa1503e0
@@ -19255,7 +19364,7 @@ bl _p_100
 .word 0xaa1603e0
 .word 0xd2800001
 .word 0xf94002de
-bl _p_100
+bl _p_101
 .word 0xaa0003f6
 .loc 11 130 0
 .word 0xaa1603e0
@@ -19264,325 +19373,325 @@ bl _p_100
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1152]
+ldr x0, [x16, #1160]
 .word 0xf9400001
 .word 0xaa1603e0
 .word 0xf94002de
-bl _p_181
+bl _p_182
 .word 0x53001c00
 .word 0x34000100
 .loc 11 134 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #1160]
+ldr x1, [x16, #1168]
 .word 0xaa1803e0
 .word 0xf940031e
-bl _p_77
+bl _p_78
 .word 0x140000f3
 .loc 11 135 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1168]
+ldr x0, [x16, #1176]
 .word 0xf9400001
 .word 0xaa1603e0
 .word 0xf94002de
-bl _p_181
+bl _p_182
 .word 0x53001c00
 .word 0x34000100
 .loc 11 136 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #1176]
+ldr x1, [x16, #1184]
 .word 0xaa1803e0
 .word 0xf940031e
-bl _p_77
+bl _p_78
 .word 0x140000e3
 .loc 11 137 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1184]
+ldr x0, [x16, #1192]
 .word 0xf9400001
 .word 0xaa1603e0
 .word 0xf94002de
-bl _p_181
+bl _p_182
 .word 0x53001c00
 .word 0x34000100
 .loc 11 138 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #1192]
+ldr x1, [x16, #1200]
 .word 0xaa1803e0
 .word 0xf940031e
-bl _p_77
+bl _p_78
 .word 0x140000d3
 .loc 11 139 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1200]
+ldr x0, [x16, #1208]
 .word 0xf9400001
 .word 0xaa1603e0
 .word 0xf94002de
-bl _p_181
+bl _p_182
 .word 0x53001c00
 .word 0x34000100
 .loc 11 140 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #1208]
+ldr x1, [x16, #1216]
 .word 0xaa1803e0
 .word 0xf940031e
-bl _p_77
+bl _p_78
 .word 0x140000c3
 .loc 11 141 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1216]
+ldr x0, [x16, #1224]
 .word 0xf9400001
 .word 0xaa1603e0
 .word 0xf94002de
-bl _p_181
+bl _p_182
 .word 0x53001c00
 .word 0x34000100
 .loc 11 142 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #1224]
+ldr x1, [x16, #1232]
 .word 0xaa1803e0
 .word 0xf940031e
-bl _p_77
+bl _p_78
 .word 0x140000b3
 .loc 11 143 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1232]
+ldr x0, [x16, #1240]
 .word 0xf9400001
 .word 0xaa1603e0
 .word 0xf94002de
-bl _p_181
+bl _p_182
 .word 0x53001c00
 .word 0x34000100
 .loc 11 144 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #1240]
+ldr x1, [x16, #1248]
 .word 0xaa1803e0
 .word 0xf940031e
-bl _p_77
+bl _p_78
 .word 0x140000a3
 .loc 11 145 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1248]
+ldr x0, [x16, #1256]
 .word 0xf9400001
 .word 0xaa1603e0
 .word 0xf94002de
-bl _p_181
+bl _p_182
 .word 0x53001c00
 .word 0x34000100
 .loc 11 146 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #1256]
+ldr x1, [x16, #1264]
 .word 0xaa1803e0
 .word 0xf940031e
-bl _p_77
+bl _p_78
 .word 0x14000093
 .loc 11 147 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1264]
+ldr x0, [x16, #1272]
 .word 0xf9400001
 .word 0xaa1603e0
 .word 0xf94002de
-bl _p_181
+bl _p_182
 .word 0x53001c00
 .word 0x34000100
 .loc 11 148 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #1272]
+ldr x1, [x16, #1280]
 .word 0xaa1803e0
 .word 0xf940031e
-bl _p_77
+bl _p_78
 .word 0x14000083
 .loc 11 149 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1280]
+ldr x0, [x16, #1288]
 .word 0xf9400001
 .word 0xaa1603e0
 .word 0xf94002de
-bl _p_181
+bl _p_182
 .word 0x53001c00
 .word 0x34000100
 .loc 11 150 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #1288]
+ldr x1, [x16, #1296]
 .word 0xaa1803e0
 .word 0xf940031e
-bl _p_77
+bl _p_78
 .word 0x14000073
 .loc 11 151 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1296]
+ldr x0, [x16, #1304]
 .word 0xf9400001
 .word 0xaa1603e0
 .word 0xf94002de
-bl _p_181
+bl _p_182
 .word 0x53001c00
 .word 0x34000100
 .loc 11 152 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #1304]
+ldr x1, [x16, #1312]
 .word 0xaa1803e0
 .word 0xf940031e
-bl _p_77
+bl _p_78
 .word 0x14000063
 .loc 11 153 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1312]
+ldr x0, [x16, #1320]
 .word 0xf9400001
 .word 0xaa1603e0
 .word 0xf94002de
-bl _p_181
+bl _p_182
 .word 0x53001c00
 .word 0x34000100
 .loc 11 154 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #1320]
+ldr x1, [x16, #1328]
 .word 0xaa1803e0
 .word 0xf940031e
-bl _p_77
+bl _p_78
 .word 0x14000053
 .loc 11 155 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1328]
+ldr x0, [x16, #1336]
 .word 0xf9400001
 .word 0xaa1603e0
 .word 0xf94002de
-bl _p_181
+bl _p_182
 .word 0x53001c00
 .word 0x34000100
 .loc 11 156 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #1336]
+ldr x1, [x16, #1344]
 .word 0xaa1803e0
 .word 0xf940031e
-bl _p_77
+bl _p_78
 .word 0x14000043
 .loc 11 157 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1344]
+ldr x0, [x16, #1352]
 .word 0xf9400001
 .word 0xaa1603e0
 .word 0xf94002de
-bl _p_181
+bl _p_182
 .word 0x53001c00
 .word 0x34000100
 .loc 11 158 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #1352]
+ldr x1, [x16, #1360]
 .word 0xaa1803e0
 .word 0xf940031e
-bl _p_77
+bl _p_78
 .word 0x14000033
 .loc 11 159 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1360]
+ldr x0, [x16, #1368]
 .word 0xf9400001
 .word 0xaa1603e0
 .word 0xf94002de
-bl _p_181
+bl _p_182
 .word 0x53001c00
 .word 0x34000100
 .loc 11 160 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #1368]
+ldr x1, [x16, #1376]
 .word 0xaa1803e0
 .word 0xf940031e
-bl _p_77
+bl _p_78
 .word 0x14000023
 .loc 11 161 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1376]
+ldr x0, [x16, #1384]
 .word 0xf9400001
 .word 0xaa1603e0
 .word 0xf94002de
-bl _p_181
+bl _p_182
 .word 0x53001c00
 .word 0x34000100
 .loc 11 162 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #1384]
-.word 0xaa1803e0
-.word 0xf940031e
-bl _p_77
-.word 0x14000013
-.loc 11 165 0
-
-adrp x16, mono_aot_Mono_Security_got@PAGE+0
-add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x1, [x16, #1392]
 .word 0xaa1803e0
 .word 0xf940031e
-bl _p_77
-.loc 11 166 0
-.word 0xaa1603e0
-bl _p_101
-.word 0xaa0003e1
-.word 0xaa1803e0
-.word 0xf940031e
-bl _p_77
-.loc 11 167 0
+bl _p_78
+.word 0x14000013
+.loc 11 165 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x1, [x16, #1400]
 .word 0xaa1803e0
 .word 0xf940031e
-bl _p_77
+bl _p_78
+.loc 11 166 0
+.word 0xaa1603e0
+bl _p_102
+.word 0xaa0003e1
+.word 0xaa1803e0
+.word 0xf940031e
+bl _p_78
+.loc 11 167 0
+
+adrp x16, mono_aot_Mono_Security_got@PAGE+0
+add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
+ldr x1, [x16, #1408]
+.word 0xaa1803e0
+.word 0xf940031e
+bl _p_78
 .loc 11 172 0
 .word 0xf94002be
 .word 0x394082a0
@@ -19593,11 +19702,11 @@ bl _p_77
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #464]
+ldr x0, [x16, #472]
 .word 0xd2800601
 bl _p_5
 .word 0xf9002ba0
-bl _p_72
+bl _p_73
 .word 0xf9402ba0
 .word 0xaa0003f6
 .loc 11 175 0
@@ -19606,7 +19715,7 @@ bl _p_72
 .loc 11 176 0
 .word 0xaa1503e0
 .word 0xf94002be
-bl _p_76
+bl _p_77
 .word 0x93407e81
 .word 0xb9801802
 .word 0xeb01005f
@@ -19617,12 +19726,12 @@ bl _p_76
 .word 0x39400001
 .word 0xaa1603e0
 .word 0xf94002de
-bl _p_182
+bl _p_183
 .loc 11 175 0
 .word 0x11000a94
 .word 0xaa1503e0
 .word 0xf94002be
-bl _p_76
+bl _p_77
 .word 0xb9801800
 .word 0x6b00029f
 .word 0x54fffd8b
@@ -19641,11 +19750,11 @@ bl _p_76
 .word 0x6b1e001f
 .word 0x540001c1
 .loc 11 180 0
-bl _p_183
+bl _p_184
 .word 0xf9002ba0
 .word 0xaa1503e0
 .word 0xf94002be
-bl _p_76
+bl _p_77
 .word 0xaa0003e1
 .word 0xf9402ba2
 .word 0xaa0203e0
@@ -19655,11 +19764,11 @@ bl _p_76
 .word 0xaa0003f6
 .word 0x1400000d
 .loc 11 182 0
-bl _p_184
+bl _p_185
 .word 0xf9002ba0
 .word 0xaa1503e0
 .word 0xf94002be
-bl _p_76
+bl _p_77
 .word 0xaa0003e1
 .word 0xf9402ba2
 .word 0xaa0203e0
@@ -19671,7 +19780,7 @@ bl _p_76
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1408]
+ldr x0, [x16, #1416]
 .word 0xd28000e1
 bl _p_1
 .word 0xf9002ba0
@@ -19679,7 +19788,7 @@ bl _p_1
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #1416]
+ldr x1, [x16, #1424]
 .word 0xd28001c2
 bl _p_35
 .word 0xf9402ba0
@@ -19692,45 +19801,45 @@ bl _p_35
 .word 0xaa1503e1
 .word 0xd2800002
 .word 0xf94002de
-bl _p_185
+bl _p_186
 .word 0x93407c00
 .word 0x6b1f001f
 .word 0x5400022c
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #1424]
+ldr x1, [x16, #1432]
 .word 0xaa1603e0
 .word 0xf94002de
-bl _p_186
+bl _p_187
 .word 0x53001c00
 .word 0x35000120
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #1424]
+ldr x1, [x16, #1432]
 .word 0xaa1603e0
 .word 0xf94002de
-bl _p_187
+bl _p_188
 .word 0x53001c00
 .word 0x34000140
 .loc 11 189 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1432]
+ldr x0, [x16, #1440]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x2, [x16, #1432]
+ldr x2, [x16, #1440]
 .word 0xaa1603e1
-bl _p_188
+bl _p_189
 .word 0xaa0003f6
 .loc 11 193 0
 .word 0xaa1803e0
 .word 0xaa1603e1
 .word 0xf940031e
-bl _p_77
+bl _p_78
 .loc 11 196 0
 .word 0xaa1903e0
 .word 0xf940033e
@@ -19743,10 +19852,10 @@ bl _p_68
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #1144]
+ldr x1, [x16, #1152]
 .word 0xaa1803e0
 .word 0xf940031e
-bl _p_77
+bl _p_78
 .loc 11 123 0
 .word 0x110006f7
 .word 0xaa1903e0
@@ -19763,7 +19872,7 @@ bl _p_68
 .word 0x910003bf
 .word 0xa8c67bfd
 .word 0xd65f03c0
-.word 0xd2801a00
+.word 0xd28019e0
 .word 0xaa1103e1
 bl _p_3
 
@@ -19778,7 +19887,7 @@ Mono_Security_X509_X501__cctor:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #208]
+ldr x0, [x16, #216]
 .word 0xd2800061
 bl _p_1
 .word 0xf90043a0
@@ -19786,20 +19895,20 @@ bl _p_1
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #1440]
+ldr x1, [x16, #1448]
 .word 0xd2800062
 bl _p_35
 .word 0xf94043a1
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1152]
+ldr x0, [x16, #1160]
 .word 0xf9000001
 .loc 11 60 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #208]
+ldr x0, [x16, #216]
 .word 0xd2800061
 bl _p_1
 .word 0xf9003fa0
@@ -19807,20 +19916,20 @@ bl _p_1
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #1448]
+ldr x1, [x16, #1456]
 .word 0xd2800062
 bl _p_35
 .word 0xf9403fa1
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1168]
+ldr x0, [x16, #1176]
 .word 0xf9000001
 .loc 11 61 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #208]
+ldr x0, [x16, #216]
 .word 0xd2800061
 bl _p_1
 .word 0xf9003ba0
@@ -19828,20 +19937,20 @@ bl _p_1
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #1456]
+ldr x1, [x16, #1464]
 .word 0xd2800062
 bl _p_35
 .word 0xf9403ba1
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1184]
+ldr x0, [x16, #1192]
 .word 0xf9000001
 .loc 11 62 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #208]
+ldr x0, [x16, #216]
 .word 0xd2800061
 bl _p_1
 .word 0xf90037a0
@@ -19849,20 +19958,20 @@ bl _p_1
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #1464]
+ldr x1, [x16, #1472]
 .word 0xd2800062
 bl _p_35
 .word 0xf94037a1
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1200]
+ldr x0, [x16, #1208]
 .word 0xf9000001
 .loc 11 63 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #208]
+ldr x0, [x16, #216]
 .word 0xd2800061
 bl _p_1
 .word 0xf90033a0
@@ -19870,20 +19979,20 @@ bl _p_1
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #1472]
+ldr x1, [x16, #1480]
 .word 0xd2800062
 bl _p_35
 .word 0xf94033a1
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1216]
+ldr x0, [x16, #1224]
 .word 0xf9000001
 .loc 11 64 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #208]
+ldr x0, [x16, #216]
 .word 0xd2800061
 bl _p_1
 .word 0xf9002fa0
@@ -19891,20 +20000,20 @@ bl _p_1
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #1480]
+ldr x1, [x16, #1488]
 .word 0xd2800062
 bl _p_35
 .word 0xf9402fa1
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1232]
+ldr x0, [x16, #1240]
 .word 0xf9000001
 .loc 11 65 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #208]
+ldr x0, [x16, #216]
 .word 0xd2800061
 bl _p_1
 .word 0xf9002ba0
@@ -19912,20 +20021,20 @@ bl _p_1
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #1488]
+ldr x1, [x16, #1496]
 .word 0xd2800062
 bl _p_35
 .word 0xf9402ba1
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1248]
+ldr x0, [x16, #1256]
 .word 0xf9000001
 .loc 11 67 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #208]
+ldr x0, [x16, #216]
 .word 0xd2800141
 bl _p_1
 .word 0xf90027a0
@@ -19933,20 +20042,20 @@ bl _p_1
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #1496]
+ldr x1, [x16, #1504]
 .word 0xd2800142
 bl _p_35
 .word 0xf94027a1
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1264]
+ldr x0, [x16, #1272]
 .word 0xf9000001
 .loc 11 68 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #208]
+ldr x0, [x16, #216]
 .word 0xd2800141
 bl _p_1
 .word 0xf90023a0
@@ -19954,20 +20063,20 @@ bl _p_1
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #1504]
+ldr x1, [x16, #1512]
 .word 0xd2800142
 bl _p_35
 .word 0xf94023a1
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1280]
+ldr x0, [x16, #1288]
 .word 0xf9000001
 .loc 11 69 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #208]
+ldr x0, [x16, #216]
 .word 0xd2800121
 bl _p_1
 .word 0xf9001fa0
@@ -19975,20 +20084,20 @@ bl _p_1
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #1512]
+ldr x1, [x16, #1520]
 .word 0xd2800122
 bl _p_35
 .word 0xf9401fa1
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1296]
+ldr x0, [x16, #1304]
 .word 0xf9000001
 .loc 11 70 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #208]
+ldr x0, [x16, #216]
 .word 0xd2800061
 bl _p_1
 .word 0xf9001ba0
@@ -19996,20 +20105,20 @@ bl _p_1
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #1520]
+ldr x1, [x16, #1528]
 .word 0xd2800062
 bl _p_35
 .word 0xf9401ba1
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1312]
+ldr x0, [x16, #1320]
 .word 0xf9000001
 .loc 11 71 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #208]
+ldr x0, [x16, #216]
 .word 0xd2800061
 bl _p_1
 .word 0xf90017a0
@@ -20017,20 +20126,20 @@ bl _p_1
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #1528]
+ldr x1, [x16, #1536]
 .word 0xd2800062
 bl _p_35
 .word 0xf94017a1
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1328]
+ldr x0, [x16, #1336]
 .word 0xf9000001
 .loc 11 72 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #208]
+ldr x0, [x16, #216]
 .word 0xd2800061
 bl _p_1
 .word 0xf90013a0
@@ -20038,20 +20147,20 @@ bl _p_1
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #1536]
+ldr x1, [x16, #1544]
 .word 0xd2800062
 bl _p_35
 .word 0xf94013a1
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1344]
+ldr x0, [x16, #1352]
 .word 0xf9000001
 .loc 11 73 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #208]
+ldr x0, [x16, #216]
 .word 0xd2800061
 bl _p_1
 .word 0xf9000fa0
@@ -20059,20 +20168,20 @@ bl _p_1
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #1544]
+ldr x1, [x16, #1552]
 .word 0xd2800062
 bl _p_35
 .word 0xf9400fa1
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1360]
+ldr x0, [x16, #1368]
 .word 0xf9000001
 .loc 11 74 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #208]
+ldr x0, [x16, #216]
 .word 0xd2800061
 bl _p_1
 .word 0xf9000ba0
@@ -20080,14 +20189,14 @@ bl _p_1
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #1552]
+ldr x1, [x16, #1560]
 .word 0xd2800062
 bl _p_35
 .word 0xf9400ba1
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1376]
+ldr x0, [x16, #1384]
 .word 0xf9000001
 .word 0x910003bf
 .word 0xa8c97bfd
@@ -20098,7 +20207,7 @@ Lme_ae:
 	.align 4
 	.no_dead_strip Mono_Security_X509_X509Certificate_Parse_byte__
 Mono_Security_X509_X509Certificate_Parse_byte__:
-.file 12 "/Library/Frameworks/Xamarin.iOS.framework/Versions/11.6.1.4/src/mono/mcs/class/Mono.Security/Mono.Security.X509/X509Certificate.cs"
+.file 12 "/Library/Frameworks/Xamarin.iOS.framework/Versions/11.9.1.24/src/Xamarin.iOS/mcs/class/Mono.Security/Mono.Security.X509/X509Certificate.cs"
 .loc 12 111 0 prologue_end
 .word 0xa9b57bfd
 .word 0x910003fd
@@ -20112,12 +20221,12 @@ Mono_Security_X509_X509Certificate_Parse_byte__:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #456]
+ldr x0, [x16, #464]
 .word 0xd2800501
 bl _p_5
 .word 0xf9004ba0
 .word 0xaa1a03e1
-bl _p_86
+bl _p_87
 .word 0xf9404ba0
 .word 0xf9000b20
 .word 0x91004321
@@ -20144,7 +20253,7 @@ ldr x2, [x16, #16]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1560]
+ldr x0, [x16, #1568]
 .word 0xf9400001
 .word 0xd28087e0
 .word 0xf2a04000
@@ -20155,7 +20264,7 @@ bl _p_8
 .word 0xaa0203e0
 .word 0xd2800001
 .word 0xf940005e
-bl _p_100
+bl _p_101
 .word 0xaa0003e1
 .word 0xf940003e
 .word 0x39408000
@@ -20166,7 +20275,7 @@ bl _p_100
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1560]
+ldr x0, [x16, #1568]
 .word 0xf9400001
 .word 0xd28087e0
 .word 0xf2a04000
@@ -20177,7 +20286,7 @@ bl _p_8
 .word 0xaa0203e0
 .word 0xd2800001
 .word 0xf940005e
-bl _p_100
+bl _p_101
 .word 0xaa0003f8
 .loc 12 121 0
 .word 0xd2800017
@@ -20186,12 +20295,12 @@ bl _p_100
 .word 0xaa0203e0
 .word 0xd2800001
 .word 0xf940005e
-bl _p_100
+bl _p_101
 .word 0xaa0003e2
 .word 0xaa0203e0
 .word 0xd2800001
 .word 0xf940005e
-bl _p_100
+bl _p_101
 .word 0xaa0003f6
 .loc 12 124 0
 .word 0xd280003e
@@ -20214,11 +20323,11 @@ bl _p_68
 .word 0xaa1603e0
 .word 0xd2800001
 .word 0xf94002de
-bl _p_100
+bl _p_101
 .word 0xaa0003e1
 .word 0xaa0103e0
 .word 0xf940003e
-bl _p_76
+bl _p_77
 .word 0xaa0003e1
 .word 0xf9404ba0
 .word 0xb9801822
@@ -20235,13 +20344,13 @@ bl _p_76
 .word 0xaa0203e0
 .word 0xd2800001
 .word 0xf940005e
-bl _p_100
+bl _p_101
 .word 0xaa0003e2
 .word 0xaa1703e1
 .word 0x110006f7
 .word 0xaa0203e0
 .word 0xf940005e
-bl _p_100
+bl _p_101
 .word 0xaa0003f6
 .loc 12 133 0
 .word 0xaa1603e0
@@ -20255,7 +20364,7 @@ bl _p_100
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1560]
+ldr x0, [x16, #1568]
 .word 0xf9400001
 .word 0xd28087e0
 .word 0xf2a04000
@@ -20264,7 +20373,7 @@ bl _p_8
 .loc 12 135 0
 .word 0xaa1603e0
 .word 0xf94002de
-bl _p_76
+bl _p_77
 .word 0xf9004320
 .word 0x91020321
 .word 0xd349fc21
@@ -20285,9 +20394,9 @@ ldr x2, [x16, #16]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x15, [x16, #1568]
+ldr x15, [x16, #1576]
 .word 0xd2800001
-bl _p_189
+bl _p_190
 .loc 12 139 0
 .word 0x110006f7
 .loc 12 142 0
@@ -20296,7 +20405,7 @@ bl _p_189
 .word 0xaa1803e0
 .word 0xd2800602
 .word 0xf940031e
-bl _p_190
+bl _p_191
 .word 0xf9001320
 .word 0x91008321
 .word 0xd349fc21
@@ -20312,7 +20421,7 @@ ldr x2, [x16, #16]
 .word 0x3900003e
 .loc 12 143 0
 .word 0xf9401320
-bl _p_191
+bl _p_192
 .word 0xf9001720
 .word 0x9100a321
 .word 0xd349fc21
@@ -20332,7 +20441,7 @@ ldr x2, [x16, #16]
 .word 0xaa1803e0
 .word 0xd2800602
 .word 0xf940031e
-bl _p_190
+bl _p_191
 .word 0xaa0003e2
 .loc 12 146 0
 .word 0xaa0203e0
@@ -20340,13 +20449,13 @@ bl _p_190
 .word 0xaa0203e0
 .word 0xd2800001
 .word 0xf940005e
-bl _p_100
+bl _p_101
 .word 0xaa0003f6
 .word 0x910143a0
 .word 0xf90033a0
 .loc 12 147 0
 .word 0xaa1603e0
-bl _p_192
+bl _p_193
 .word 0xf94033be
 .word 0xf90003c0
 .word 0xf9404fa2
@@ -20357,13 +20466,13 @@ bl _p_192
 .word 0xaa0203e0
 .word 0xd2800021
 .word 0xf940005e
-bl _p_100
+bl _p_101
 .word 0xaa0003f6
 .loc 12 149 0
 .word 0x910123a0
 .word 0xf90033a0
 .word 0xaa1603e0
-bl _p_192
+bl _p_193
 .word 0xf94033be
 .word 0xf90003c0
 .word 0x9102a320
@@ -20375,7 +20484,7 @@ bl _p_192
 .word 0xaa1803e0
 .word 0xd2800602
 .word 0xf940031e
-bl _p_190
+bl _p_191
 .word 0xf9002320
 .word 0x91010321
 .word 0xd349fc21
@@ -20391,7 +20500,7 @@ ldr x2, [x16, #16]
 .word 0x3900003e
 .loc 12 152 0
 .word 0xf9402320
-bl _p_191
+bl _p_192
 .word 0xf9002720
 .word 0x91012321
 .word 0xd349fc21
@@ -20411,7 +20520,7 @@ ldr x2, [x16, #16]
 .word 0xaa1803e0
 .word 0xd2800602
 .word 0xf940031e
-bl _p_190
+bl _p_191
 .word 0xaa0003e3
 .loc 12 156 0
 .word 0xaa0303e0
@@ -20420,7 +20529,7 @@ bl _p_190
 .word 0xd2800001
 .word 0xd2800602
 .word 0xf940007e
-bl _p_190
+bl _p_191
 .word 0xaa0003f6
 .loc 12 157 0
 .word 0xaa1603e3
@@ -20428,11 +20537,11 @@ bl _p_190
 .word 0xd2800001
 .word 0xd28000c2
 .word 0xf940007e
-bl _p_190
+bl _p_191
 .word 0xaa0003f5
 .loc 12 158 0
 .word 0xaa1503e0
-bl _p_101
+bl _p_102
 .word 0xf9001b20
 .word 0x9100c321
 .word 0xd349fc21
@@ -20450,7 +20559,7 @@ ldr x2, [x16, #16]
 .word 0xaa1603e0
 .word 0xd2800021
 .word 0xf94002de
-bl _p_100
+bl _p_101
 .word 0xaa0003f5
 .loc 12 162 0
 .word 0xaa1603e0
@@ -20488,7 +20597,7 @@ ldr x1, [x16, #16]
 .word 0xd2800021
 .word 0xd2800062
 .word 0xf94002de
-bl _p_190
+bl _p_191
 .loc 12 167 0
 .word 0xaa0003f6
 .word 0xaa0003f5
@@ -20504,7 +20613,7 @@ bl _p_190
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #208]
+ldr x0, [x16, #216]
 .word 0xaa1403e1
 bl _p_1
 .loc 12 168 0
@@ -20524,7 +20633,7 @@ ldr x2, [x16, #16]
 .loc 12 169 0
 .word 0xaa1603e0
 .word 0xf94002de
-bl _p_76
+bl _p_77
 .word 0xf9402b22
 .word 0xd2800021
 .word 0xd2800003
@@ -20535,11 +20644,11 @@ bl _p_21
 .word 0xaa0203e0
 .word 0xd2800041
 .word 0xf940005e
-bl _p_100
+bl _p_101
 .word 0xaa0003e1
 .word 0xaa0103e0
 .word 0xf940003e
-bl _p_76
+bl _p_77
 .word 0xaa0003f6
 .loc 12 174 0
 .word 0xb9801ac0
@@ -20547,7 +20656,7 @@ bl _p_76
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #208]
+ldr x0, [x16, #216]
 bl _p_1
 .word 0xf9002f20
 .word 0x91016321
@@ -20575,7 +20684,7 @@ bl _p_21
 .word 0xaa0203e0
 .word 0xd2800021
 .word 0xf940005e
-bl _p_100
+bl _p_101
 .word 0xaa0003f6
 .loc 12 178 0
 .word 0xaa1603e3
@@ -20583,11 +20692,11 @@ bl _p_100
 .word 0xd2800001
 .word 0xd28000c2
 .word 0xf940007e
-bl _p_190
+bl _p_191
 .word 0xaa0003f5
 .loc 12 179 0
 .word 0xaa1503e0
-bl _p_101
+bl _p_102
 .word 0xf9003320
 .word 0x91018321
 .word 0xd349fc21
@@ -20605,7 +20714,7 @@ ldr x2, [x16, #16]
 .word 0xaa1603e0
 .word 0xd2800021
 .word 0xf94002de
-bl _p_100
+bl _p_101
 .word 0xaa0003f5
 .loc 12 181 0
 .word 0xaa1503e0
@@ -20636,7 +20745,7 @@ ldr x2, [x16, #16]
 .word 0xaa1703e1
 .word 0xd2801022
 .word 0xf940031e
-bl _p_190
+bl _p_191
 .word 0xaa0003f6
 .loc 12 188 0
 .word 0xaa1603e0
@@ -20646,7 +20755,7 @@ bl _p_190
 .loc 12 190 0
 .word 0xaa1603e0
 .word 0xf94002de
-bl _p_76
+bl _p_77
 .word 0xf9004720
 .word 0x91022321
 .word 0xd349fc21
@@ -20665,7 +20774,7 @@ ldr x2, [x16, #16]
 .word 0xaa1703e1
 .word 0xd2801042
 .word 0xf940031e
-bl _p_190
+bl _p_191
 .word 0xaa0003f6
 .loc 12 195 0
 .word 0xaa1603e0
@@ -20675,7 +20784,7 @@ bl _p_190
 .loc 12 197 0
 .word 0xaa1603e0
 .word 0xf94002de
-bl _p_76
+bl _p_77
 .word 0xf9004b20
 .word 0x91024321
 .word 0xd349fc21
@@ -20694,7 +20803,7 @@ ldr x2, [x16, #16]
 .word 0xaa1703e1
 .word 0xd2801462
 .word 0xf940031e
-bl _p_190
+bl _p_191
 .word 0xaa0003f8
 .loc 12 202 0
 .word 0xaa1803e0
@@ -20710,17 +20819,17 @@ bl _p_68
 .word 0xaa1803e0
 .word 0xd2800001
 .word 0xf940031e
-bl _p_100
+bl _p_101
 .word 0xf9004fa0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1576]
+ldr x0, [x16, #1584]
 .word 0xd2800401
 bl _p_5
 .word 0xf9404fa1
 .word 0xf9004ba0
-bl _p_193
+bl _p_194
 .word 0xf9404ba0
 .word 0xf9004f20
 .word 0x91026321
@@ -20740,12 +20849,12 @@ ldr x2, [x16, #16]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1576]
+ldr x0, [x16, #1584]
 .word 0xd2800401
 bl _p_5
 .word 0xf9004ba0
 .word 0xd2800001
-bl _p_193
+bl _p_194
 .word 0xf9404ba0
 .word 0xf9004f20
 .word 0x91026321
@@ -20779,7 +20888,7 @@ bl _p_2
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #392]
+ldr x1, [x16, #400]
 .word 0xeb01001f
 .word 0x10000011
 .word 0x54000561
@@ -20810,17 +20919,17 @@ ldr x1, [x16, #16]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1560]
+ldr x0, [x16, #1568]
 .word 0xf9400000
 .word 0xf9004fa0
 .word 0xf9402fa0
 .word 0xf90053a0
 .word 0xd28087e0
-bl _p_194
+bl _p_195
 .word 0xf9404fa1
 .word 0xf94053a2
 .word 0xf9004ba0
-bl _p_195
+bl _p_196
 .word 0xf9404ba0
 bl _p_8
 .loc 12 213 0
@@ -20831,10 +20940,10 @@ bl _p_8
 .word 0x910003bf
 .word 0xa8cb7bfd
 .word 0xd65f03c0
-.word 0xd2801a80
+.word 0xd2801a60
 .word 0xaa1103e1
 bl _p_3
-.word 0xd2801a00
+.word 0xd28019e0
 .word 0xaa1103e1
 bl _p_3
 
@@ -20866,9 +20975,9 @@ Mono_Security_X509_X509Certificate__ctor_byte__:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1584]
+ldr x0, [x16, #1592]
 .word 0xaa1a03e1
-bl _p_196
+bl _p_197
 .word 0xaa0003fa
 .loc 12 224 0
 .word 0x14000013
@@ -20880,29 +20989,29 @@ bl _p_196
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1560]
+ldr x0, [x16, #1568]
 .word 0xf9400000
 .word 0xf9002fa0
 .word 0xf94013a0
 .word 0xf90033a0
 .word 0xd28087e0
-bl _p_194
+bl _p_195
 .word 0xf9402fa1
 .word 0xf94033a2
 .word 0xf9002ba0
-bl _p_195
+bl _p_196
 .word 0xf9402ba0
 bl _p_8
 .loc 12 229 0
 .word 0xf9400fa0
 .word 0xaa1a03e1
-bl _p_197
+bl _p_198
 .loc 12 231 0
 .word 0xf9400bba
 .word 0x910003bf
 .word 0xa8c77bfd
 .word 0xd65f03c0
-.word 0xd2801a00
+.word 0xd28019e0
 .word 0xaa1103e1
 bl _p_3
 
@@ -20932,7 +21041,7 @@ Mono_Security_X509_X509Certificate_GetUnsignedBigInteger_byte__:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #208]
+ldr x0, [x16, #216]
 bl _p_1
 .word 0xaa0003f8
 .loc 12 240 0
@@ -20952,7 +21061,7 @@ bl _p_21
 .word 0x910003bf
 .word 0xa8c37bfd
 .word 0xd65f03c0
-.word 0xd2801a00
+.word 0xd28019e0
 .word 0xaa1103e1
 bl _p_3
 
@@ -20984,8 +21093,8 @@ Mono_Security_X509_X509Certificate_get_DSA:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #1592]
-bl _p_112
+ldr x1, [x16, #1600]
+bl _p_113
 .word 0x53001c00
 .word 0x34002160
 .loc 12 255 0
@@ -21004,12 +21113,12 @@ bl _p_112
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #456]
+ldr x0, [x16, #464]
 .word 0xd2800501
 bl _p_5
 .word 0xf94097a1
 .word 0xf90093a0
-bl _p_86
+bl _p_87
 .word 0xf94093a0
 .word 0xaa0003f9
 .loc 12 258 0
@@ -21028,10 +21137,10 @@ bl _p_86
 .word 0xf9009ba0
 .word 0xaa1903e0
 .word 0xf940033e
-bl _p_76
+bl _p_77
 .word 0xaa0003e1
 .word 0xaa1a03e0
-bl _p_198
+bl _p_199
 .word 0xf9409ba1
 .word 0xf9007fa0
 .word 0x91006021
@@ -21052,12 +21161,12 @@ ldr x2, [x16, #16]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #456]
+ldr x0, [x16, #464]
 .word 0xd2800501
 bl _p_5
 .word 0xf94097a1
 .word 0xf90093a0
-bl _p_86
+bl _p_87
 .word 0xf94093a0
 .word 0xaa0003f9
 .loc 12 263 0
@@ -21082,7 +21191,7 @@ bl _p_68
 .word 0xaa1903e0
 .word 0xd2800001
 .word 0xf940033e
-bl _p_100
+bl _p_101
 .word 0xaa0003e1
 .word 0xf940003e
 .word 0x39408000
@@ -21092,7 +21201,7 @@ bl _p_100
 .word 0xaa1903e0
 .word 0xd2800021
 .word 0xf940033e
-bl _p_100
+bl _p_101
 .word 0xaa0003e1
 .word 0xf940003e
 .word 0x39408000
@@ -21102,7 +21211,7 @@ bl _p_100
 .word 0xaa1903e0
 .word 0xd2800041
 .word 0xf940033e
-bl _p_100
+bl _p_101
 .word 0xaa0003e1
 .word 0xf940003e
 .word 0x39408000
@@ -21118,14 +21227,14 @@ bl _p_100
 .word 0xaa1903e0
 .word 0xd2800001
 .word 0xf940033e
-bl _p_100
+bl _p_101
 .word 0xaa0003e1
 .word 0xaa0103e0
 .word 0xf940003e
-bl _p_76
+bl _p_77
 .word 0xaa0003e1
 .word 0xaa1a03e0
-bl _p_198
+bl _p_199
 .word 0xf940a3a1
 .word 0xf90073a0
 .word 0xd349fc21
@@ -21145,14 +21254,14 @@ ldr x2, [x16, #16]
 .word 0xaa1903e0
 .word 0xd2800021
 .word 0xf940033e
-bl _p_100
+bl _p_101
 .word 0xaa0003e1
 .word 0xaa0103e0
 .word 0xf940003e
-bl _p_76
+bl _p_77
 .word 0xaa0003e1
 .word 0xaa1a03e0
-bl _p_198
+bl _p_199
 .word 0xf9409fa1
 .word 0xf90077a0
 .word 0x91002021
@@ -21173,14 +21282,14 @@ ldr x2, [x16, #16]
 .word 0xaa1903e0
 .word 0xd2800041
 .word 0xf940033e
-bl _p_100
+bl _p_101
 .word 0xaa0003e1
 .word 0xaa0103e0
 .word 0xf940003e
-bl _p_76
+bl _p_77
 .word 0xaa0003e1
 .word 0xaa1a03e0
-bl _p_198
+bl _p_199
 .word 0xf9409ba1
 .word 0xf9007ba0
 .word 0x91004021
@@ -21219,11 +21328,11 @@ ldr x2, [x16, #16]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1600]
+ldr x0, [x16, #1608]
 bl _p_20
 .word 0xf94097a1
 .word 0xf90093a0
-bl _p_199
+bl _p_200
 .word 0xf94093a0
 .word 0xf9003f40
 .word 0x9101e341
@@ -21288,7 +21397,7 @@ ldr x2, [x16, #16]
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x0, [x16, #0]
-.word 0xd281fd21
+.word 0xd281fe21
 bl _p_7
 .word 0xaa0003e1
 .word 0xd28087e0
@@ -21396,7 +21505,7 @@ bl _p_2
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #392]
+ldr x1, [x16, #400]
 .word 0xeb01001f
 .word 0x10000011
 .word 0x54000141
@@ -21409,7 +21518,7 @@ ldr x1, [x16, #392]
 .word 0x910003bf
 .word 0xa8c27bfd
 .word 0xd65f03c0
-.word 0xd2801a80
+.word 0xd2801a60
 .word 0xaa1103e1
 bl _p_3
 
@@ -21448,7 +21557,7 @@ bl _p_2
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #392]
+ldr x1, [x16, #400]
 .word 0xeb01001f
 .word 0x10000011
 .word 0x54000141
@@ -21461,7 +21570,7 @@ ldr x1, [x16, #392]
 .word 0x910003bf
 .word 0xa8c27bfd
 .word 0xd65f03c0
-.word 0xd2801a80
+.word 0xd2801a60
 .word 0xaa1103e1
 bl _p_3
 
@@ -21491,8 +21600,8 @@ Mono_Security_X509_X509Certificate_get_RSA:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #1016]
-bl _p_112
+ldr x1, [x16, #1024]
+bl _p_113
 .word 0x53001c00
 .word 0x340014c0
 .loc 12 335 0
@@ -21511,12 +21620,12 @@ bl _p_112
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #456]
+ldr x0, [x16, #464]
 .word 0xd2800501
 bl _p_5
 .word 0xf9409fa1
 .word 0xf9009ba0
-bl _p_86
+bl _p_87
 .word 0xf9409ba0
 .word 0xaa0003f9
 .loc 12 339 0
@@ -21524,7 +21633,7 @@ bl _p_86
 .word 0xaa0203e0
 .word 0xd2800001
 .word 0xf940005e
-bl _p_100
+bl _p_101
 .word 0xaa0003f8
 .loc 12 340 0
 .word 0xaa1803e0
@@ -21541,7 +21650,7 @@ bl _p_100
 .word 0xaa1903e0
 .word 0xd2800021
 .word 0xf940033e
-bl _p_100
+bl _p_101
 .word 0xaa0003f9
 .loc 12 343 0
 .word 0xaa1903e0
@@ -21559,10 +21668,10 @@ bl _p_100
 .word 0xf900a3a0
 .word 0xaa1803e0
 .word 0xf940031e
-bl _p_76
+bl _p_77
 .word 0xaa0003e1
 .word 0xaa1a03e0
-bl _p_198
+bl _p_199
 .word 0xf940a3a1
 .word 0xf9007ba0
 .word 0x91002021
@@ -21582,7 +21691,7 @@ ldr x2, [x16, #16]
 .word 0xf9009fa0
 .word 0xaa1903e0
 .word 0xf940033e
-bl _p_76
+bl _p_77
 .word 0xf9409fa1
 .word 0xf90077a0
 .word 0xd349fc21
@@ -21620,11 +21729,11 @@ ldr x2, [x16, #16]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1608]
+ldr x0, [x16, #1616]
 bl _p_20
 .word 0xf9009ba0
 .word 0xaa1903e1
-bl _p_200
+bl _p_201
 .word 0xf9409ba0
 .word 0xf9003b40
 .word 0x9101c341
@@ -21757,7 +21866,7 @@ bl _p_2
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #392]
+ldr x1, [x16, #400]
 .word 0xeb01001f
 .word 0x10000011
 .word 0x54000141
@@ -21770,7 +21879,7 @@ ldr x1, [x16, #392]
 .word 0x910003bf
 .word 0xa8c27bfd
 .word 0xd65f03c0
-.word 0xd2801a80
+.word 0xd2801a60
 .word 0xaa1103e1
 bl _p_3
 
@@ -21809,7 +21918,7 @@ bl _p_2
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #392]
+ldr x1, [x16, #400]
 .word 0xeb01001f
 .word 0x10000011
 .word 0x54000141
@@ -21822,7 +21931,7 @@ ldr x1, [x16, #392]
 .word 0x910003bf
 .word 0xa8c27bfd
 .word 0xd65f03c0
-.word 0xd2801a80
+.word 0xd2801a60
 .word 0xaa1103e1
 bl _p_3
 
@@ -21952,13 +22061,13 @@ Mono_Security_X509_X509Certificate_GetObjectData_System_Runtime_Serialization_Se
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #1616]
+ldr x1, [x16, #1624]
 .word 0xf9400ba0
 .word 0xf9400c02
 .word 0xf9400fa0
 .word 0xf9400fa3
 .word 0xf940007e
-bl _p_201
+bl _p_202
 .loc 12 554 0
 .word 0x910003bf
 .word 0xa8c37bfd
@@ -21974,7 +22083,7 @@ Mono_Security_X509_X509Certificate_PEM_string_byte__:
 .word 0x910003fd
 .word 0xf9000ba0
 .word 0xf9000fa1
-bl _p_89
+bl _p_90
 .word 0xaa0003e2
 .word 0xaa0203e0
 .word 0xf9400fa1
@@ -21986,17 +22095,17 @@ bl _p_89
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1624]
+ldr x0, [x16, #1632]
 .word 0xf9400ba1
-bl _p_202
+bl _p_203
 .word 0xf90047a0
 .loc 12 560 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1632]
+ldr x0, [x16, #1640]
 .word 0xf9400ba1
-bl _p_202
+bl _p_203
 .word 0xf9003ba0
 .word 0xf94047a1
 .word 0xf9404ba2
@@ -22006,7 +22115,7 @@ bl _p_202
 .word 0xaa0203e0
 .word 0xf9003fa1
 .word 0xf940005e
-bl _p_203
+bl _p_204
 .word 0x93407c00
 .word 0xf9403ba1
 .word 0xf9403fa2
@@ -22019,7 +22128,7 @@ bl _p_203
 .word 0xaa0303e0
 .word 0xf90033a2
 .word 0xf940007e
-bl _p_204
+bl _p_205
 .word 0x93407c00
 .word 0xf94033a1
 .word 0xf94037a3
@@ -22027,9 +22136,9 @@ bl _p_204
 .word 0x4b010002
 .word 0xaa0303e0
 .word 0xf940007e
-bl _p_90
+bl _p_91
 .loc 12 564 0
-bl _p_205
+bl _p_206
 .word 0x910003bf
 .word 0xa8ca7bfd
 .word 0xd65f03c0
@@ -22045,11 +22154,11 @@ Mono_Security_X509_X509Certificate__cctor:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #1640]
+ldr x1, [x16, #1648]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1560]
+ldr x0, [x16, #1568]
 .word 0xf9000001
 .word 0x910003bf
 .word 0xa8c17bfd
@@ -22060,7 +22169,7 @@ Lme_c5:
 	.align 4
 	.no_dead_strip Mono_Security_X509_X509CertificateCollection__ctor
 Mono_Security_X509_X509CertificateCollection__ctor:
-.file 13 "/Library/Frameworks/Xamarin.iOS.framework/Versions/11.6.1.4/src/mono/mcs/class/Mono.Security/Mono.Security.X509/X509CertificateCollection.cs"
+.file 13 "/Library/Frameworks/Xamarin.iOS.framework/Versions/11.9.1.24/src/Xamarin.iOS/mcs/class/Mono.Security/Mono.Security.X509/X509CertificateCollection.cs"
 .loc 13 44 0 prologue_end
 .word 0xa9be7bfd
 .word 0x910003fd
@@ -22068,20 +22177,20 @@ Mono_Security_X509_X509CertificateCollection__ctor:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #400]
+ldr x0, [x16, #408]
 .word 0x3980b410
 .word 0xb5000050
-bl _p_79
+bl _p_80
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #400]
+ldr x0, [x16, #408]
 .word 0xd2800401
 bl _p_5
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #408]
+ldr x1, [x16, #416]
 .word 0xf9400021
 .word 0xf9000801
 .word 0x91004002
@@ -22127,7 +22236,7 @@ Mono_Security_X509_X509CertificateCollection_get_Item_int:
 .word 0xf9000fa0
 .word 0xaa0103fa
 .word 0xf9400fa0
-bl _p_206
+bl _p_207
 .word 0xaa0003e2
 .word 0xaa0203e0
 .word 0xaa1a03e1
@@ -22143,7 +22252,7 @@ bl _p_206
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #1080]
+ldr x1, [x16, #1088]
 .word 0xeb01001f
 .word 0x10000011
 .word 0x540000c1
@@ -22152,7 +22261,7 @@ ldr x1, [x16, #1080]
 .word 0x910003bf
 .word 0xa8c27bfd
 .word 0xd65f03c0
-.word 0xd2801a80
+.word 0xd2801a60
 .word 0xaa1103e1
 bl _p_3
 
@@ -22170,7 +22279,7 @@ Mono_Security_X509_X509CertificateCollection_Add_Mono_Security_X509_X509Certific
 .word 0xb40001a0
 .loc 13 72 0
 .word 0xf9400ba0
-bl _p_206
+bl _p_207
 .word 0xaa0003e2
 .word 0xaa0203e0
 .word 0xf9400fa1
@@ -22189,7 +22298,7 @@ ldr x0, [x16, #0]
 .word 0xd2800021
 bl _p_7
 .word 0xaa0003e1
-.word 0xd2800fe0
+.word 0xd2800fc0
 .word 0xf2a04000
 bl _mono_create_corlib_exception_1
 bl _p_8
@@ -22206,12 +22315,12 @@ Mono_Security_X509_X509CertificateCollection_GetEnumerator:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1648]
+ldr x0, [x16, #1656]
 .word 0xd2800301
 bl _p_5
 .word 0xf90013a0
 .word 0xf9400ba1
-bl _p_207
+bl _p_208
 .word 0xf94013a0
 .word 0x910003bf
 .word 0xa8c37bfd
@@ -22227,7 +22336,7 @@ Mono_Security_X509_X509CertificateCollection_System_Collections_IEnumerable_GetE
 .word 0x910003fd
 .word 0xf9000ba0
 .word 0xf9400ba0
-bl _p_206
+bl _p_207
 .word 0xaa0003e1
 .word 0xaa0103e0
 .word 0xf9400021
@@ -22247,7 +22356,7 @@ Mono_Security_X509_X509CertificateCollection_GetHashCode:
 .word 0x910003fd
 .word 0xf9000ba0
 .word 0xf9400ba0
-bl _p_206
+bl _p_207
 .word 0xaa0003e1
 .word 0xaa0103e0
 .word 0xf9400021
@@ -22274,7 +22383,7 @@ Mono_Security_X509_X509CertificateCollection_X509CertificateEnumerator__ctor_Mon
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x15, [x16, #1656]
+ldr x15, [x16, #1664]
 .word 0x92800ef0
 .word 0xf2bffff0
 .word 0xf8706830
@@ -22314,7 +22423,7 @@ Mono_Security_X509_X509CertificateCollection_X509CertificateEnumerator_get_Curre
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x15, [x16, #416]
+ldr x15, [x16, #424]
 .word 0x928003f0
 .word 0xf2bffff0
 .word 0xf8706830
@@ -22328,7 +22437,7 @@ ldr x15, [x16, #416]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #1080]
+ldr x1, [x16, #1088]
 .word 0xeb01001f
 .word 0x10000011
 .word 0x540000c1
@@ -22337,7 +22446,7 @@ ldr x1, [x16, #1080]
 .word 0x910003bf
 .word 0xa8c27bfd
 .word 0xd65f03c0
-.word 0xd2801a80
+.word 0xd2801a60
 .word 0xaa1103e1
 bl _p_3
 
@@ -22357,7 +22466,7 @@ Mono_Security_X509_X509CertificateCollection_X509CertificateEnumerator_System_Co
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x15, [x16, #416]
+ldr x15, [x16, #424]
 .word 0x928003f0
 .word 0xf2bffff0
 .word 0xf8706830
@@ -22382,7 +22491,7 @@ Mono_Security_X509_X509CertificateCollection_X509CertificateEnumerator_System_Co
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x15, [x16, #432]
+ldr x15, [x16, #440]
 .word 0x92800ef0
 .word 0xf2bffff0
 .word 0xf8706830
@@ -22408,7 +22517,7 @@ Mono_Security_X509_X509CertificateCollection_X509CertificateEnumerator_MoveNext:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x15, [x16, #432]
+ldr x15, [x16, #440]
 .word 0x92800ef0
 .word 0xf2bffff0
 .word 0xf8706830
@@ -22423,7 +22532,7 @@ Lme_d0:
 	.align 4
 	.no_dead_strip Mono_Security_X509_X509Extension__ctor_Mono_Security_ASN1
 Mono_Security_X509_X509Extension__ctor_Mono_Security_ASN1:
-.file 14 "/Library/Frameworks/Xamarin.iOS.framework/Versions/11.6.1.4/src/mono/mcs/class/Mono.Security/Mono.Security.X509/X509Extension.cs"
+.file 14 "/Library/Frameworks/Xamarin.iOS.framework/Versions/11.9.1.24/src/Xamarin.iOS/mcs/class/Mono.Security/Mono.Security.X509/X509Extension.cs"
 .loc 14 62 0 prologue_end
 .word 0xa9b97bfd
 .word 0x910003fd
@@ -22447,7 +22556,7 @@ bl _p_68
 .word 0xaa1a03e0
 .word 0xd2800001
 .word 0xf940035e
-bl _p_100
+bl _p_101
 .word 0xaa0003e1
 .word 0xf940003e
 .word 0x39408000
@@ -22460,8 +22569,8 @@ bl _p_100
 .word 0xaa1a03e0
 .word 0xd2800001
 .word 0xf940035e
-bl _p_100
 bl _p_101
+bl _p_102
 .word 0xf94037a1
 .word 0xf9000820
 .word 0x91004021
@@ -22482,7 +22591,7 @@ ldr x2, [x16, #16]
 .word 0xaa1a03e0
 .word 0xd2800021
 .word 0xf940035e
-bl _p_100
+bl _p_101
 .word 0xf94033a1
 .word 0xaa0003e2
 .word 0xf940005e
@@ -22494,11 +22603,11 @@ bl _p_100
 .word 0xaa1a03e0
 .word 0xd2800021
 .word 0xf940035e
-bl _p_100
+bl _p_101
 .word 0xaa0003e1
 .word 0xaa0103e0
 .word 0xf940003e
-bl _p_76
+bl _p_77
 .word 0xb9801801
 .word 0xeb1f003f
 .word 0x10000011
@@ -22521,7 +22630,7 @@ bl _p_68
 .word 0x51000401
 .word 0xaa1a03e0
 .word 0xf940035e
-bl _p_100
+bl _p_101
 .word 0xf94033a1
 .word 0xf9000c20
 .word 0x91006021
@@ -22569,17 +22678,17 @@ bl _p_68
 .word 0xf9400c01
 .word 0xaa0103e0
 .word 0xf940003e
-bl _p_76
+bl _p_77
 .word 0xf90037a0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #456]
+ldr x0, [x16, #464]
 .word 0xd2800501
 bl _p_5
 .word 0xf94037a1
 .word 0xf90033a0
-bl _p_86
+bl _p_87
 .word 0xf94033a0
 .word 0xaa0003fa
 .loc 14 74 0
@@ -22588,19 +22697,19 @@ bl _p_86
 .word 0xaa0203e0
 .word 0xd2800001
 .word 0xf940005e
-bl _p_84
+bl _p_85
 .loc 14 75 0
 .word 0xf94013a0
 .word 0xf9400c02
 .word 0xaa0203e0
 .word 0xaa1a03e1
 .word 0xf940005e
-bl _p_70
+bl _p_71
 .loc 14 76 0
 .word 0x14000009
 .word 0xf9001ba0
 .loc 14 79 0
-bl _p_71
+bl _p_72
 .word 0xf9002ba0
 .word 0xf9402ba0
 .word 0xb4000060
@@ -22624,10 +22733,10 @@ bl _p_8
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x0, [x16, #0]
-.word 0xd2822161
+.word 0xd2822261
 bl _p_7
 .word 0xaa0003e1
-.word 0xd2800fc0
+.word 0xd2800fa0
 .word 0xf2a04000
 bl _mono_create_corlib_exception_1
 bl _p_8
@@ -22636,14 +22745,14 @@ bl _p_8
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x0, [x16, #0]
-.word 0xd2822161
+.word 0xd2822261
 bl _p_7
 .word 0xaa0003e1
-.word 0xd2800fc0
+.word 0xd2800fa0
 .word 0xf2a04000
 bl _mono_create_corlib_exception_1
 bl _p_8
-.word 0xd2801a00
+.word 0xd28019e0
 .word 0xaa1103e1
 bl _p_3
 
@@ -22688,7 +22797,7 @@ Mono_Security_X509_X509Extension_Equals_object:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #1664]
+ldr x1, [x16, #1672]
 .word 0xeb01001f
 .word 0x54000040
 .word 0xd2800018
@@ -22709,7 +22818,7 @@ ldr x1, [x16, #1664]
 .loc 14 153 0
 .word 0xf9400b20
 .word 0xf9400b41
-bl _p_108
+bl _p_109
 .word 0x53001c00
 .word 0x34000060
 .loc 14 154 0
@@ -22748,13 +22857,13 @@ bl _p_108
 .word 0xaa0203e0
 .word 0xaa1803e1
 .word 0xf940005e
-bl _p_100
+bl _p_101
 .word 0xf90023a0
 .word 0xf9400f42
 .word 0xaa0203e0
 .word 0xaa1803e1
 .word 0xf940005e
-bl _p_100
+bl _p_101
 .word 0xaa0003e1
 .word 0xf94023a0
 .word 0xeb01001f
@@ -22823,7 +22932,7 @@ Mono_Security_X509_X509Extension_WriteLine_System_Text_StringBuilder_int_int:
 .word 0xf9400ee1
 .word 0xaa0103e0
 .word 0xf940003e
-bl _p_76
+bl _p_77
 .word 0xaa0003f7
 .loc 14 179 0
 .word 0xaa1a03f6
@@ -22840,52 +22949,52 @@ bl _p_76
 .word 0xb9801ae1
 .word 0xeb00003f
 .word 0x10000011
-.word 0x54000b49
+.word 0x54000b69
 .word 0x8b0002e0
 .word 0x91008000
 .word 0xf90023a0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #480]
+ldr x0, [x16, #488]
 .word 0xf90027a0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #552]
+ldr x0, [x16, #560]
 .word 0x3980b410
 .word 0xb5000050
-bl _p_79
+bl _p_80
 .word 0xf94023a0
 .word 0xf94027a1
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x2, [x16, #560]
+ldr x2, [x16, #568]
 .word 0xf9400042
-bl _p_208
+bl _p_209
 .word 0xaa0003e1
 .word 0xaa1803e0
 .word 0xf940031e
-bl _p_77
+bl _p_78
 .loc 14 183 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #1424]
+ldr x1, [x16, #1432]
 .word 0xaa1803e0
 .word 0xf940031e
-bl _p_77
+bl _p_78
 .loc 14 184 0
 .word 0x14000007
 .loc 14 186 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #1672]
+ldr x1, [x16, #1680]
 .word 0xaa1803e0
 .word 0xf940031e
-bl _p_77
+bl _p_78
 .loc 14 180 0
 .word 0x110006b5
 .word 0xd280011e
@@ -22895,15 +23004,15 @@ bl _p_77
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #1680]
+ldr x1, [x16, #1688]
 .word 0xaa1803e0
 .word 0xf940031e
-bl _p_77
+bl _p_78
 .loc 14 189 0
 .word 0xaa1a03f6
 .loc 14 190 0
 .word 0xd280001a
-.word 0x1400001b
+.word 0x1400001c
 .loc 14 191 0
 .word 0xaa1603e0
 .word 0x110006d6
@@ -22911,10 +23020,11 @@ bl _p_77
 .word 0xb9801ae1
 .word 0xeb00003f
 .word 0x10000011
-.word 0x54000429
+.word 0x54000449
 .word 0x8b0002e0
 .word 0x91008000
-.word 0x39400015
+.word 0x39400000
+.word 0x53001c15
 .loc 14 192 0
 .word 0xaa1503e0
 .word 0xd280041e
@@ -22924,26 +23034,26 @@ bl _p_77
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #568]
+ldr x1, [x16, #576]
 .word 0xaa1803e0
 .word 0xf940031e
-bl _p_77
+bl _p_78
 .word 0x14000005
 .loc 14 195 0
 .word 0xaa1803e0
 .word 0xaa1503e1
 .word 0xf940031e
-bl _p_182
+bl _p_183
 .loc 14 190 0
 .word 0x1100075a
 .word 0x6b19035f
-.word 0x54fffcab
+.word 0x54fffc8b
 .loc 14 197 0
-bl _p_74
+bl _p_75
 .word 0xaa0003e1
 .word 0xaa1803e0
 .word 0xf940031e
-bl _p_77
+bl _p_78
 .loc 14 198 0
 .word 0xa9415bb5
 .word 0xa94263b7
@@ -22951,7 +23061,7 @@ bl _p_77
 .word 0x910003bf
 .word 0xa8c57bfd
 .word 0xd65f03c0
-.word 0xd2801a00
+.word 0xd28019e0
 .word 0xaa1103e1
 bl _p_3
 
@@ -22970,11 +23080,11 @@ Mono_Security_X509_X509Extension_ToString:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #464]
+ldr x0, [x16, #472]
 .word 0xd2800601
 bl _p_5
 .word 0xf90023a0
-bl _p_72
+bl _p_73
 .word 0xf94023a0
 .word 0xaa0003f9
 .loc 14 203 0
@@ -23011,7 +23121,7 @@ bl _p_72
 .word 0xaa1903e1
 .word 0xd2800102
 .word 0xaa1803e3
-bl _p_209
+bl _p_210
 .loc 14 208 0
 .word 0x11002318
 .loc 14 206 0
@@ -23023,7 +23133,7 @@ bl _p_209
 .word 0xaa1903e1
 .word 0xb9803ba2
 .word 0xaa1803e3
-bl _p_209
+bl _p_210
 .loc 14 211 0
 .word 0xaa1903e0
 .word 0xf9400321
@@ -23041,7 +23151,7 @@ Lme_d6:
 	.align 4
 	.no_dead_strip Mono_Security_X509_X509ExtensionCollection__ctor
 Mono_Security_X509_X509ExtensionCollection__ctor:
-.file 15 "/Library/Frameworks/Xamarin.iOS.framework/Versions/11.6.1.4/src/mono/mcs/class/Mono.Security/Mono.Security.X509/X509Extensions.cs"
+.file 15 "/Library/Frameworks/Xamarin.iOS.framework/Versions/11.9.1.24/src/Xamarin.iOS/mcs/class/Mono.Security/Mono.Security.X509/X509Extensions.cs"
 .loc 15 52 0 prologue_end
 .word 0xa9be7bfd
 .word 0x910003fd
@@ -23049,20 +23159,20 @@ Mono_Security_X509_X509ExtensionCollection__ctor:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #400]
+ldr x0, [x16, #408]
 .word 0x3980b410
 .word 0xb5000050
-bl _p_79
+bl _p_80
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #400]
+ldr x0, [x16, #408]
 .word 0xd2800401
 bl _p_5
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #408]
+ldr x1, [x16, #416]
 .word 0xf9400021
 .word 0xf9000801
 .word 0x91004002
@@ -23111,20 +23221,20 @@ Mono_Security_X509_X509ExtensionCollection__ctor_Mono_Security_ASN1:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #400]
+ldr x0, [x16, #408]
 .word 0x3980b410
 .word 0xb5000050
-bl _p_79
+bl _p_80
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #400]
+ldr x0, [x16, #408]
 .word 0xd2800401
 bl _p_5
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #408]
+ldr x1, [x16, #416]
 .word 0xf9400021
 .word 0xf9000801
 .word 0x91004002
@@ -23170,22 +23280,22 @@ ldr x2, [x16, #16]
 .word 0xaa1a03e0
 .word 0xaa1803e1
 .word 0xf940035e
-bl _p_100
+bl _p_101
 .word 0xf9001fa0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1688]
+ldr x0, [x16, #1696]
 .word 0xd2800501
 bl _p_5
 .word 0xf9401fa1
 .word 0xf9001ba0
-bl _p_210
+bl _p_211
 .word 0xf9401ba0
 .word 0xaa0003f7
 .loc 15 65 0
 .word 0xaa1903e0
-bl _p_206
+bl _p_207
 .word 0xaa0003e2
 .word 0xaa0203e0
 .word 0xaa1703e1
@@ -23212,10 +23322,10 @@ bl _p_68
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x0, [x16, #0]
-.word 0xd2822961
+.word 0xd2822a61
 bl _p_7
 .word 0xaa0003e1
-.word 0xd2801540
+.word 0xd2801520
 .word 0xf2a04000
 bl _mono_create_corlib_exception_1
 bl _p_8
@@ -23230,7 +23340,7 @@ Mono_Security_X509_X509ExtensionCollection_System_Collections_IEnumerable_GetEnu
 .word 0x910003fd
 .word 0xf9000ba0
 .word 0xf9400ba0
-bl _p_206
+bl _p_207
 .word 0xaa0003e1
 .word 0xaa0103e0
 .word 0xf9400021
@@ -23245,7 +23355,7 @@ Lme_d9:
 	.align 4
 	.no_dead_strip Mono_Security_Protocol_Ntlm_ChallengeResponse__ctor
 Mono_Security_Protocol_Ntlm_ChallengeResponse__ctor:
-.file 16 "/Library/Frameworks/Xamarin.iOS.framework/Versions/11.6.1.4/src/mono/mcs/class/Mono.Security/Mono.Security.Protocol.Ntlm/ChallengeResponse.cs"
+.file 16 "/Library/Frameworks/Xamarin.iOS.framework/Versions/11.9.1.24/src/Xamarin.iOS/mcs/class/Mono.Security/Mono.Security.Protocol.Ntlm/ChallengeResponse.cs"
 .loc 16 66 0 prologue_end
 .word 0xa9be7bfd
 .word 0x910003fd
@@ -23256,7 +23366,7 @@ Mono_Security_Protocol_Ntlm_ChallengeResponse__ctor:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #208]
+ldr x0, [x16, #216]
 .word 0xd28002a1
 bl _p_1
 .word 0xf9000f40
@@ -23276,7 +23386,7 @@ ldr x2, [x16, #16]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #208]
+ldr x0, [x16, #216]
 .word 0xd28002a1
 bl _p_1
 .word 0xf9001340
@@ -23310,15 +23420,15 @@ Mono_Security_Protocol_Ntlm_ChallengeResponse__ctor_string_byte__:
 .word 0xf9000fa1
 .word 0xf90013a2
 .word 0xf9400ba0
-bl _p_211
+bl _p_212
 .loc 16 73 0
 .word 0xf9400ba0
 .word 0xf9400fa1
-bl _p_212
+bl _p_213
 .loc 16 74 0
 .word 0xf9400ba0
 .word 0xf94013a1
-bl _p_213
+bl _p_214
 .loc 16 75 0
 .word 0x910003bf
 .word 0xa8c37bfd
@@ -23338,14 +23448,18 @@ Mono_Security_Protocol_Ntlm_ChallengeResponse_Finalize:
 .word 0x35000060
 .loc 16 80 0
 .word 0xf9400ba0
-bl _p_214
-.word 0x94000002
+bl _p_215
+.word 0xf9000fbf
+.word 0x94000005
+.word 0xf9400fa0
+.word 0xb4000040
+bl _p_69
 .word 0x14000006
-.word 0xf9001bbe
+.word 0xf9001fbe
 .loc 16 81 0
 .word 0xf9400ba0
-.word 0xf9000fa0
-.word 0xf9401bbe
+.word 0xf90013a0
+.word 0xf9401fbe
 .word 0xd61f03c0
 .word 0x910003bf
 .word 0xa8c47bfd
@@ -23366,7 +23480,7 @@ Mono_Security_Protocol_Ntlm_ChallengeResponse_set_Password_string:
 .word 0x3940a320
 .word 0x350013e0
 .loc 16 92 0
-bl _p_215
+bl _p_216
 .word 0xaa0003f8
 .loc 16 93 0
 .word 0xaa1803e2
@@ -23385,7 +23499,7 @@ bl _p_215
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1696]
+ldr x0, [x16, #1704]
 .word 0xf9400000
 .word 0xf9400f22
 .word 0xd2800001
@@ -23398,7 +23512,7 @@ bl _p_21
 .word 0xaa1903e0
 .word 0xaa1a03e1
 .word 0xd2800002
-bl _p_216
+bl _p_217
 .word 0xaa0003e1
 .word 0xaa1803e0
 .word 0xf9400302
@@ -23414,7 +23528,7 @@ bl _p_216
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1704]
+ldr x0, [x16, #1712]
 .word 0xf9400001
 .word 0xf9400f24
 .word 0xaa0603e0
@@ -23425,7 +23539,7 @@ ldr x0, [x16, #1704]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x15, [x16, #1712]
+ldr x15, [x16, #1720]
 .word 0x928006f0
 .word 0xf2bffff0
 .word 0xf87068d0
@@ -23441,7 +23555,7 @@ ldr x15, [x16, #1712]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1696]
+ldr x0, [x16, #1704]
 .word 0xf9400000
 .word 0xf9400f22
 .word 0xd2800001
@@ -23454,7 +23568,7 @@ bl _p_21
 .word 0xaa1903e0
 .word 0xaa1a03e1
 .word 0xd28000e2
-bl _p_216
+bl _p_217
 .word 0xaa0003e1
 .word 0xaa1803e0
 .word 0xf9400302
@@ -23470,7 +23584,7 @@ bl _p_216
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1704]
+ldr x0, [x16, #1712]
 .word 0xf9400001
 .word 0xf9400f24
 .word 0xaa0603e0
@@ -23481,7 +23595,7 @@ ldr x0, [x16, #1704]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x15, [x16, #1712]
+ldr x15, [x16, #1720]
 .word 0x928006f0
 .word 0xf2bffff0
 .word 0xf87068d0
@@ -23491,20 +23605,20 @@ ldr x15, [x16, #1712]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1720]
+ldr x0, [x16, #1728]
 bl _p_20
 .word 0xd280101e
 .word 0xb900181e
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #1728]
+ldr x1, [x16, #1736]
 .word 0xf9400021
 .word 0xf9001401
 .word 0xaa0003f7
 .loc 16 119 0
 .word 0xb400015a
-bl _p_217
+bl _p_218
 .word 0xaa0003e2
 .word 0xaa0203e0
 .word 0xaa1a03e1
@@ -23516,7 +23630,7 @@ bl _p_217
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #208]
+ldr x0, [x16, #216]
 .word 0xd2800001
 bl _p_1
 .word 0xaa0003fa
@@ -23525,7 +23639,7 @@ bl _p_1
 .word 0xaa1703e0
 .word 0xaa1a03e1
 .word 0xf94002fe
-bl _p_218
+bl _p_219
 .word 0xaa0003f7
 .loc 16 121 0
 .word 0xaa1703e0
@@ -23538,16 +23652,16 @@ bl _p_21
 .word 0xb9801b42
 .word 0xaa1a03e0
 .word 0xd2800001
-bl _p_116
+bl _p_117
 .loc 16 125 0
 .word 0xb9801ae2
 .word 0xaa1703e0
 .word 0xd2800001
-bl _p_116
+bl _p_117
 .loc 16 126 0
 .word 0xaa1803e0
 .word 0xf940031e
-bl _p_139
+bl _p_140
 .loc 16 127 0
 .word 0xa94163b7
 .word 0xa9426bb9
@@ -23559,10 +23673,10 @@ bl _p_139
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x0, [x16, #0]
-.word 0xd2822fe1
+.word 0xd28230e1
 bl _p_7
 .word 0xaa0003e1
-.word 0xd2801cc0
+.word 0xd2801ca0
 .word 0xf2a04000
 bl _mono_create_corlib_exception_1
 bl _p_8
@@ -23602,7 +23716,7 @@ bl _p_2
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #392]
+ldr x1, [x16, #400]
 .word 0xeb01001f
 .word 0x10000011
 .word 0x54000541
@@ -23634,10 +23748,10 @@ ldr x1, [x16, #16]
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x0, [x16, #0]
-.word 0xd2823221
+.word 0xd2823321
 bl _p_7
 .word 0xaa0003e1
-.word 0xd2800fe0
+.word 0xd2800fc0
 .word 0xf2a04000
 bl _mono_create_corlib_exception_1
 bl _p_8
@@ -23646,14 +23760,14 @@ bl _p_8
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x0, [x16, #0]
-.word 0xd2822fe1
+.word 0xd28230e1
 bl _p_7
 .word 0xaa0003e1
-.word 0xd2801cc0
+.word 0xd2801ca0
 .word 0xf2a04000
 bl _mono_create_corlib_exception_1
 bl _p_8
-.word 0xd2801a80
+.word 0xd2801a60
 .word 0xaa1103e1
 bl _p_3
 
@@ -23672,7 +23786,7 @@ Mono_Security_Protocol_Ntlm_ChallengeResponse_get_LM:
 .loc 16 147 0
 .word 0xf9400ba0
 .word 0xf9400c01
-bl _p_219
+bl _p_220
 .word 0x910003bf
 .word 0xa8c27bfd
 .word 0xd65f03c0
@@ -23681,10 +23795,10 @@ bl _p_219
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x0, [x16, #0]
-.word 0xd2822fe1
+.word 0xd28230e1
 bl _p_7
 .word 0xaa0003e1
-.word 0xd2801cc0
+.word 0xd2801ca0
 .word 0xf2a04000
 bl _mono_create_corlib_exception_1
 bl _p_8
@@ -23704,7 +23818,7 @@ Mono_Security_Protocol_Ntlm_ChallengeResponse_get_NT:
 .loc 16 156 0
 .word 0xf9400ba0
 .word 0xf9401001
-bl _p_219
+bl _p_220
 .word 0x910003bf
 .word 0xa8c27bfd
 .word 0xd65f03c0
@@ -23713,10 +23827,10 @@ bl _p_219
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x0, [x16, #0]
-.word 0xd2822fe1
+.word 0xd28230e1
 bl _p_7
 .word 0xaa0003e1
-.word 0xd2801cc0
+.word 0xd2801ca0
 .word 0xf2a04000
 bl _mono_create_corlib_exception_1
 bl _p_8
@@ -23732,10 +23846,10 @@ Mono_Security_Protocol_Ntlm_ChallengeResponse_Dispose:
 .word 0xf9000ba0
 .word 0xf9400ba0
 .word 0xd2800021
-bl _p_220
+bl _p_221
 .loc 16 165 0
 .word 0xf9400ba0
-bl _p_221
+bl _p_222
 .loc 16 166 0
 .word 0x910003bf
 .word 0xa8c27bfd
@@ -23759,13 +23873,13 @@ Mono_Security_Protocol_Ntlm_ChallengeResponse_Dispose_bool:
 .word 0xf9400f41
 .word 0xb9801822
 .word 0xd2800001
-bl _p_116
+bl _p_117
 .loc 16 173 0
 .word 0xf9401340
 .word 0xf9401341
 .word 0xb9801822
 .word 0xd2800001
-bl _p_116
+bl _p_117
 .loc 16 174 0
 .word 0xf9400b40
 .word 0xb40000c0
@@ -23774,7 +23888,7 @@ bl _p_116
 .word 0xf9400b41
 .word 0xb9801822
 .word 0xd2800001
-bl _p_116
+bl _p_117
 .loc 16 176 0
 .word 0xd280003e
 .word 0x3900a35e
@@ -23798,12 +23912,12 @@ Mono_Security_Protocol_Ntlm_ChallengeResponse_GetResponse_byte__:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #208]
+ldr x0, [x16, #216]
 .word 0xd2800301
 bl _p_1
 .word 0xf90037a0
 .loc 16 185 0
-bl _p_215
+bl _p_216
 .word 0xaa0003e2
 .loc 16 186 0
 .word 0xaa0203e0
@@ -23820,7 +23934,7 @@ bl _p_215
 .word 0xaa1903e0
 .word 0xf9400fa1
 .word 0xd2800002
-bl _p_222
+bl _p_223
 .word 0xaa0003e1
 .word 0xf9403fa2
 .word 0xaa0203e0
@@ -23848,7 +23962,7 @@ bl _p_222
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x15, [x16, #1712]
+ldr x15, [x16, #1720]
 .word 0x928006f0
 .word 0xf2bffff0
 .word 0xf87068d0
@@ -23862,7 +23976,7 @@ ldr x15, [x16, #1712]
 .word 0xaa1903e0
 .word 0xf9400fa1
 .word 0xd28000e2
-bl _p_222
+bl _p_223
 .word 0xaa0003e1
 .word 0xf9402fa2
 .word 0xaa0203e0
@@ -23890,7 +24004,7 @@ bl _p_222
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x15, [x16, #1712]
+ldr x15, [x16, #1720]
 .word 0x928006f0
 .word 0xf2bffff0
 .word 0xf87068d0
@@ -23904,7 +24018,7 @@ ldr x15, [x16, #1712]
 .word 0xaa1903e0
 .word 0xf9400fa1
 .word 0xd28001c2
-bl _p_222
+bl _p_223
 .word 0xaa0003e1
 .word 0xf9401fa2
 .word 0xaa0203e0
@@ -23930,7 +24044,7 @@ bl _p_222
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x15, [x16, #1712]
+ldr x15, [x16, #1720]
 .word 0x928006f0
 .word 0xf2bffff0
 .word 0xf87068d0
@@ -23959,7 +24073,7 @@ Mono_Security_Protocol_Ntlm_ChallengeResponse_PrepareDESKey_byte___int:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #208]
+ldr x0, [x16, #216]
 .word 0xd2800101
 bl _p_1
 .word 0xaa0003e1
@@ -24167,7 +24281,7 @@ bl _p_1
 .word 0x910003bf
 .word 0xa8c37bfd
 .word 0xd65f03c0
-.word 0xd2801a00
+.word 0xd28019e0
 .word 0xaa1103e1
 bl _p_3
 
@@ -24188,7 +24302,7 @@ Mono_Security_Protocol_Ntlm_ChallengeResponse_PasswordToKey_string_int:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #208]
+ldr x0, [x16, #216]
 .word 0xd28000e1
 bl _p_1
 .word 0xaa0003f7
@@ -24204,13 +24318,13 @@ bl _p_1
 .word 0xaa1603f5
 .word 0xaa1503f6
 .loc 16 218 0
-bl _p_89
+bl _p_90
 .word 0xf90027a0
-bl _p_223
+bl _p_224
 .word 0xaa0003e1
 .word 0xaa1903e0
 .word 0xf940033e
-bl _p_224
+bl _p_225
 .word 0xaa0003e1
 .word 0xf94027a6
 .word 0xaa0603e0
@@ -24226,13 +24340,13 @@ bl _p_224
 .word 0xf9401ba0
 .word 0xaa1703e1
 .word 0xd2800002
-bl _p_222
+bl _p_223
 .word 0xf90023a0
 .word 0xb9801ae2
 .loc 16 221 0
 .word 0xaa1703e0
 .word 0xd2800001
-bl _p_116
+bl _p_117
 .word 0xf94023a0
 .loc 16 222 0
 .word 0xa9415bb5
@@ -24253,7 +24367,7 @@ Mono_Security_Protocol_Ntlm_ChallengeResponse__cctor:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #208]
+ldr x0, [x16, #216]
 .word 0xd2800101
 bl _p_1
 .word 0xf9000fa0
@@ -24261,20 +24375,20 @@ bl _p_1
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #1736]
+ldr x1, [x16, #1744]
 .word 0xd2800102
 bl _p_35
 .word 0xf9400fa1
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1704]
+ldr x0, [x16, #1712]
 .word 0xf9000001
 .loc 16 55 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #208]
+ldr x0, [x16, #216]
 .word 0xd2800101
 bl _p_1
 .word 0xf9000ba0
@@ -24282,14 +24396,14 @@ bl _p_1
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #1744]
+ldr x1, [x16, #1752]
 .word 0xd2800102
 bl _p_35
 .word 0xf9400ba1
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1696]
+ldr x0, [x16, #1704]
 .word 0xf9000001
 .word 0x910003bf
 .word 0xa8c27bfd
@@ -24300,7 +24414,7 @@ Lme_e6:
 	.align 4
 	.no_dead_strip Mono_Security_Protocol_Ntlm_ChallengeResponse2_Compute_LM_string_byte__
 Mono_Security_Protocol_Ntlm_ChallengeResponse2_Compute_LM_string_byte__:
-.file 17 "/Library/Frameworks/Xamarin.iOS.framework/Versions/11.6.1.4/src/mono/mcs/class/Mono.Security/Mono.Security.Protocol.Ntlm/ChallengeResponse2.cs"
+.file 17 "/Library/Frameworks/Xamarin.iOS.framework/Versions/11.9.1.24/src/Xamarin.iOS/mcs/class/Mono.Security/Mono.Security.Protocol.Ntlm/ChallengeResponse2.cs"
 .loc 17 62 0 prologue_end
 .word 0xa9bd7bfd
 .word 0x910003fd
@@ -24311,12 +24425,12 @@ Mono_Security_Protocol_Ntlm_ChallengeResponse2_Compute_LM_string_byte__:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #208]
+ldr x0, [x16, #216]
 .word 0xd28002a1
 bl _p_1
 .word 0xaa0003f8
 .loc 17 65 0
-bl _p_215
+bl _p_216
 .word 0xaa0003f7
 .loc 17 66 0
 .word 0xaa1703e2
@@ -24335,7 +24449,7 @@ bl _p_215
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1752]
+ldr x0, [x16, #1760]
 .word 0xf9400000
 .word 0xd2800001
 .word 0xaa1803e2
@@ -24347,7 +24461,7 @@ bl _p_21
 .loc 17 74 0
 .word 0xaa1903e0
 .word 0xd2800001
-bl _p_225
+bl _p_226
 .word 0xaa0003e1
 .word 0xaa1703e0
 .word 0xf94002e2
@@ -24363,7 +24477,7 @@ bl _p_225
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1760]
+ldr x0, [x16, #1768]
 .word 0xf9400001
 .word 0xaa0603e0
 .word 0xd2800002
@@ -24374,7 +24488,7 @@ ldr x0, [x16, #1760]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x15, [x16, #1712]
+ldr x15, [x16, #1720]
 .word 0x928006f0
 .word 0xf2bffff0
 .word 0xf87068d0
@@ -24390,7 +24504,7 @@ ldr x15, [x16, #1712]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1752]
+ldr x0, [x16, #1760]
 .word 0xf9400000
 .word 0xd2800001
 .word 0xaa1803e2
@@ -24402,7 +24516,7 @@ bl _p_21
 .loc 17 83 0
 .word 0xaa1903e0
 .word 0xd28000e1
-bl _p_225
+bl _p_226
 .word 0xaa0003e1
 .word 0xaa1703e0
 .word 0xf94002e2
@@ -24418,7 +24532,7 @@ bl _p_225
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1760]
+ldr x0, [x16, #1768]
 .word 0xf9400001
 .word 0xaa0603e0
 .word 0xd2800002
@@ -24429,7 +24543,7 @@ ldr x0, [x16, #1760]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x15, [x16, #1712]
+ldr x15, [x16, #1720]
 .word 0x928006f0
 .word 0xf2bffff0
 .word 0xf87068d0
@@ -24438,11 +24552,11 @@ ldr x15, [x16, #1712]
 .loc 17 88 0
 .word 0xaa1703e0
 .word 0xf94002fe
-bl _p_139
+bl _p_140
 .loc 17 90 0
 .word 0xf94017a0
 .word 0xaa1803e1
-bl _p_226
+bl _p_227
 .word 0xa94163b7
 .word 0xf94013b9
 .word 0x910003bf
@@ -24463,7 +24577,7 @@ Mono_Security_Protocol_Ntlm_ChallengeResponse2_Compute_NTLM_Password_string:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #208]
+ldr x0, [x16, #216]
 .word 0xd28002a1
 bl _p_1
 .word 0xaa0003f9
@@ -24471,20 +24585,20 @@ bl _p_1
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1720]
+ldr x0, [x16, #1728]
 bl _p_20
 .word 0xd280101e
 .word 0xb900181e
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #1728]
+ldr x1, [x16, #1736]
 .word 0xf9400021
 .word 0xf9001401
 .word 0xaa0003f8
 .loc 17 99 0
 .word 0xb400015a
-bl _p_217
+bl _p_218
 .word 0xaa0003e2
 .word 0xaa0203e0
 .word 0xaa1a03e1
@@ -24496,7 +24610,7 @@ bl _p_217
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #208]
+ldr x0, [x16, #216]
 .word 0xd2800001
 bl _p_1
 .word 0xaa0003fa
@@ -24505,7 +24619,7 @@ bl _p_1
 .word 0xaa1803e0
 .word 0xaa1a03e1
 .word 0xf940031e
-bl _p_218
+bl _p_219
 .word 0xaa0003f8
 .loc 17 101 0
 .word 0xaa1803e0
@@ -24518,12 +24632,12 @@ bl _p_21
 .word 0xb9801b42
 .word 0xaa1a03e0
 .word 0xd2800001
-bl _p_116
+bl _p_117
 .loc 17 105 0
 .word 0xb9801b02
 .word 0xaa1803e0
 .word 0xd2800001
-bl _p_116
+bl _p_117
 .loc 17 107 0
 .word 0xaa1903e0
 .word 0xa94167b8
@@ -24543,11 +24657,11 @@ Mono_Security_Protocol_Ntlm_ChallengeResponse2_Compute_NTLM_string_byte__:
 .word 0xf9000ba0
 .word 0xf9000fa1
 .word 0xf9400ba0
-bl _p_227
+bl _p_228
 .word 0xaa0003e1
 .loc 17 113 0
 .word 0xf9400fa0
-bl _p_226
+bl _p_227
 .word 0x910003bf
 .word 0xa8c27bfd
 .word 0xd65f03c0
@@ -24568,7 +24682,7 @@ Mono_Security_Protocol_Ntlm_ChallengeResponse2_Compute_NTLMv2_Session_string_byt
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #208]
+ldr x0, [x16, #216]
 .word 0xd2800101
 bl _p_1
 .word 0xf90043a0
@@ -24576,7 +24690,7 @@ bl _p_1
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #248]
+ldr x0, [x16, #256]
 bl _p_20
 .word 0xaa0003e2
 .word 0xf94043a1
@@ -24592,7 +24706,7 @@ bl _p_20
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #208]
+ldr x0, [x16, #216]
 bl _p_1
 .word 0xaa0003e1
 .loc 17 124 0
@@ -24600,7 +24714,7 @@ bl _p_1
 .word 0xf9003ba1
 .word 0xd2800002
 .word 0xf940031e
-bl _p_228
+bl _p_229
 .word 0xf9403ba1
 .word 0xf9403fa3
 .loc 17 125 0
@@ -24609,12 +24723,12 @@ bl _p_228
 .word 0xf90033a1
 .word 0xf940007e
 .word 0xf90037a3
-bl _p_228
+bl _p_229
 .loc 17 127 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #208]
+ldr x0, [x16, #216]
 .word 0xd2800301
 bl _p_1
 .word 0xaa0003e1
@@ -24638,12 +24752,12 @@ ldr x4, [x16, #16]
 .word 0xd2800002
 .word 0xf940007e
 .word 0xf90027a3
-bl _p_228
+bl _p_229
 .loc 17 130 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1768]
+ldr x0, [x16, #1776]
 bl _p_20
 .word 0xaa0003e2
 .word 0xf94033a1
@@ -24652,20 +24766,20 @@ bl _p_20
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1728]
+ldr x0, [x16, #1736]
 .word 0xf9400000
 .word 0xf9001440
 .loc 17 132 0
 .word 0xaa0203e0
 .word 0xf90023a1
 .word 0xf940005e
-bl _p_218
+bl _p_219
 .word 0xf9002fa0
 .loc 17 133 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #208]
+ldr x0, [x16, #216]
 .word 0xd2800101
 bl _p_1
 .word 0xaa0003e1
@@ -24674,12 +24788,12 @@ bl _p_1
 .word 0xf9001ba0
 .word 0xf9002ba1
 .word 0xd2800102
-bl _p_229
+bl _p_230
 .word 0xf9402ba1
 .loc 17 136 0
 .word 0xf9400fa0
 .word 0xf9001fa1
-bl _p_230
+bl _p_231
 .word 0xaa0003e1
 .word 0xf94027a0
 .word 0xf94017a2
@@ -24698,22 +24812,22 @@ ldr x3, [x16, #16]
 .loc 17 139 0
 .word 0xb9801802
 .word 0xd2800001
-bl _p_116
+bl _p_117
 .word 0xf94023a0
 .loc 17 140 0
 .word 0xb9801802
 .word 0xd2800001
-bl _p_116
+bl _p_117
 .word 0xf9401fa0
 .loc 17 141 0
 .word 0xb9801802
 .word 0xd2800001
-bl _p_116
+bl _p_117
 .word 0xf9401ba0
 .loc 17 142 0
 .word 0xb9801802
 .word 0xd2800001
-bl _p_116
+bl _p_117
 .loc 17 143 0
 .word 0xf9400bb8
 .word 0x910003bf
@@ -24735,15 +24849,15 @@ Mono_Security_Protocol_Ntlm_ChallengeResponse2_Compute_NTLMv2_Mono_Security_Prot
 .word 0xf90017a3
 .word 0xf9001bbf
 .word 0xf94013a0
-bl _p_227
+bl _p_228
 .word 0xf900a7a0
 .loc 17 149 0
-bl _p_217
+bl _p_218
 .word 0xf900bfa0
 .word 0xf9400fa0
 .word 0xf9400fa1
 .word 0xf940003e
-bl _p_231
+bl _p_232
 .word 0xaa0003e1
 .word 0xf940bfa2
 .word 0xaa0203e0
@@ -24752,7 +24866,7 @@ bl _p_231
 .word 0xd63f0200
 .word 0xf900bba0
 .loc 17 150 0
-bl _p_217
+bl _p_218
 .word 0xaa0003e2
 .word 0xaa0203e0
 .word 0xf94017a1
@@ -24770,7 +24884,7 @@ bl _p_217
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #208]
+ldr x0, [x16, #216]
 bl _p_1
 .word 0xaa0003e1
 .word 0xf940b7a3
@@ -24780,7 +24894,7 @@ bl _p_1
 .word 0xd2800002
 .word 0xf940007e
 .word 0xf900afa3
-bl _p_228
+bl _p_229
 .word 0xf940aba0
 .word 0xf940afa1
 .word 0xf940b3a2
@@ -24789,18 +24903,18 @@ bl _p_228
 .word 0xb9801804
 .word 0xd2800001
 .word 0xf9009fa2
-bl _p_232
+bl _p_233
 .loc 17 156 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1776]
+ldr x0, [x16, #1784]
 .word 0xd2800c01
 bl _p_5
 .word 0xf940a7a1
 .word 0xf900a3a0
 .word 0xf9009ba1
-bl _p_233
+bl _p_234
 .word 0xf9409fa1
 .word 0xf940a3a2
 .loc 17 157 0
@@ -24808,34 +24922,34 @@ bl _p_233
 .word 0xf90097a0
 .word 0xaa0203e0
 .word 0xf940005e
-bl _p_218
+bl _p_219
 .word 0xaa0003e1
 .word 0xf9409ba0
 .word 0xf90093a1
 .word 0xb9801802
 .loc 17 159 0
 .word 0xd2800001
-bl _p_116
+bl _p_117
 .word 0xf94097a1
 .loc 17 160 0
 .word 0xaa0103e0
 .word 0xf940003e
-bl _p_234
+bl _p_235
 .loc 17 162 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1776]
+ldr x0, [x16, #1784]
 .word 0xd2800c01
 bl _p_5
 .word 0xf94093a1
 .word 0xf9005fa0
 .word 0xf90043a1
-bl _p_233
+bl _p_234
 .word 0x9100c3a0
 .word 0xf9001fa0
 .loc 17 164 0
-bl _p_235
+bl _p_236
 .word 0xf9401fbe
 .word 0xf90003c0
 .word 0xf9401ba0
@@ -24854,14 +24968,14 @@ bl _p_235
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #208]
+ldr x0, [x16, #216]
 .word 0xd2800101
 bl _p_1
 .word 0xf9008fa0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #248]
+ldr x0, [x16, #256]
 bl _p_20
 .word 0xaa0003e2
 .word 0xf9408fa1
@@ -24874,13 +24988,13 @@ bl _p_20
 .loc 17 171 0
 .word 0xaa1703e0
 .word 0xf94002fe
-bl _p_236
+bl _p_237
 .word 0xb9801800
 .word 0x11007001
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #208]
+ldr x0, [x16, #216]
 bl _p_1
 .word 0xaa0003e1
 .word 0xf9408ba0
@@ -24902,7 +25016,7 @@ bl _p_1
 .word 0x3900843e
 .word 0xf90087a1
 .loc 17 175 0
-bl _p_237
+bl _p_238
 .word 0xf94087a2
 .word 0xd2800001
 .word 0xf90083a2
@@ -24921,11 +25035,11 @@ bl _p_21
 .loc 17 178 0
 .word 0xaa1703e0
 .word 0xf94002fe
-bl _p_236
+bl _p_237
 .word 0xf90077a0
 .word 0xaa1703e0
 .word 0xf94002fe
-bl _p_236
+bl _p_237
 .word 0xaa0003e1
 .word 0xf94077a0
 .word 0xf9407ba2
@@ -24937,7 +25051,7 @@ bl _p_21
 .loc 17 180 0
 .word 0xaa1703e0
 .word 0xf94002fe
-bl _p_238
+bl _p_239
 .word 0xf94073a1
 .word 0xf9006fa0
 .loc 17 182 0
@@ -24948,7 +25062,7 @@ bl _p_238
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #208]
+ldr x0, [x16, #216]
 bl _p_1
 .word 0xaa0003e1
 .word 0xf9406fa3
@@ -24958,7 +25072,7 @@ bl _p_1
 .word 0xd2800002
 .word 0xf940007e
 .word 0xf90063a3
-bl _p_228
+bl _p_229
 .word 0xf94063a0
 .word 0xf94067a1
 .word 0xf9406ba3
@@ -24968,7 +25082,7 @@ bl _p_228
 .word 0xf9005ba1
 .word 0xf940007e
 .word 0xf90057a3
-bl _p_228
+bl _p_229
 .word 0xf9405ba1
 .word 0xf9405fa2
 .loc 17 186 0
@@ -24977,7 +25091,7 @@ bl _p_228
 .word 0xaa0203e0
 .word 0xf90033a1
 .word 0xf940005e
-bl _p_218
+bl _p_219
 .word 0xaa0003e1
 .word 0xf94057a0
 .word 0xf9004fa0
@@ -24989,7 +25103,7 @@ bl _p_218
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #208]
+ldr x0, [x16, #216]
 bl _p_1
 .word 0xaa0003e1
 .word 0xf94053a3
@@ -24999,7 +25113,7 @@ bl _p_1
 .word 0xd2800002
 .word 0xf940007e
 .word 0xf90047a3
-bl _p_228
+bl _p_229
 .word 0xf94047a0
 .word 0xf9404ba1
 .word 0xf9404fa3
@@ -25010,44 +25124,44 @@ bl _p_228
 .word 0xf9002ba1
 .word 0xf940007e
 .word 0xf90037a3
-bl _p_228
+bl _p_229
 .word 0xf94043a0
 .word 0xb9801802
 .loc 17 192 0
 .word 0xd2800001
-bl _p_116
+bl _p_117
 .word 0xf9403fa1
 .loc 17 193 0
 .word 0xaa0103e0
 .word 0xf940003e
-bl _p_234
+bl _p_235
 .word 0xf9403ba0
 .loc 17 194 0
 .word 0xb9801802
 .word 0xd2800001
-bl _p_116
+bl _p_117
 .word 0xf94037a0
 .loc 17 195 0
 .word 0xb9801802
 .word 0xd2800001
-bl _p_116
+bl _p_117
 .word 0xf94033a0
 .loc 17 196 0
 .word 0xb9801802
 .word 0xd2800001
-bl _p_116
+bl _p_117
 .word 0xf9402fa0
 .loc 17 197 0
 .word 0xb9801802
 .word 0xd2800001
-bl _p_116
+bl _p_117
 .word 0xf9402ba0
 .loc 17 199 0
 .word 0xf9400bb7
 .word 0x910003bf
 .word 0xa8d87bfd
 .word 0xd65f03c0
-.word 0xd2801a00
+.word 0xd28019e0
 .word 0xaa1103e1
 bl _p_3
 
@@ -25083,17 +25197,17 @@ Mono_Security_Protocol_Ntlm_ChallengeResponse2_Compute_Mono_Security_Protocol_Nt
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1784]
+ldr x0, [x16, #1792]
 .word 0x8b010000
 .word 0xf9400000
 .word 0xd61f0000
 .loc 17 210 0
 .word 0xaa1403e0
 .word 0xf940029e
-bl _p_238
+bl _p_239
 .word 0xaa0003e1
 .word 0xaa1703e0
-bl _p_239
+bl _p_240
 .word 0xf9000320
 .word 0xd349ff21
 .word 0xd29ffffe
@@ -25109,10 +25223,10 @@ ldr x2, [x16, #16]
 .loc 17 211 0
 .word 0xaa1403e0
 .word 0xf940029e
-bl _p_238
+bl _p_239
 .word 0xaa0003e1
 .word 0xaa1703e0
-bl _p_230
+bl _p_231
 .word 0xf9000340
 .word 0xd349ff41
 .word 0xd29ffffe
@@ -25137,12 +25251,12 @@ ldr x2, [x16, #16]
 .loc 17 217 0
 .word 0xaa1403e0
 .word 0xf940029e
-bl _p_238
+bl _p_239
 .word 0xaa0003e1
 .word 0xaa1703e0
 .word 0xaa1903e2
 .word 0xaa1a03e3
-bl _p_240
+bl _p_241
 .loc 17 218 0
 .word 0x14000037
 .loc 17 221 0
@@ -25155,20 +25269,20 @@ bl _p_240
 .loc 17 222 0
 .word 0xaa1403e0
 .word 0xf940029e
-bl _p_238
+bl _p_239
 .word 0xaa0003e1
 .word 0xaa1703e0
 .word 0xaa1903e2
 .word 0xaa1a03e3
-bl _p_240
+bl _p_241
 .word 0x14000028
 .loc 17 224 0
 .word 0xaa1403e0
 .word 0xf940029e
-bl _p_238
+bl _p_239
 .word 0xaa0003e1
 .word 0xaa1703e0
-bl _p_230
+bl _p_231
 .word 0xf9000340
 .word 0xd349ff41
 .word 0xd29ffffe
@@ -25188,7 +25302,7 @@ ldr x2, [x16, #16]
 .word 0xf9401fa1
 .word 0xaa1703e2
 .word 0xf94023a3
-bl _p_241
+bl _p_242
 .word 0xf9000340
 .word 0xd349ff41
 .word 0xd29ffffe
@@ -25204,7 +25318,7 @@ ldr x2, [x16, #16]
 .loc 17 229 0
 .word 0x14000005
 .loc 17 232 0
-.word 0xd2801aa0
+.word 0xd2801a80
 .word 0xf2a04000
 bl _mono_create_corlib_exception_0
 bl _p_8
@@ -25228,12 +25342,12 @@ Mono_Security_Protocol_Ntlm_ChallengeResponse2_GetResponse_byte___byte__:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #208]
+ldr x0, [x16, #216]
 .word 0xd2800301
 bl _p_1
 .word 0xf90037a0
 .loc 17 239 0
-bl _p_215
+bl _p_216
 .word 0xaa0003e2
 .loc 17 240 0
 .word 0xaa0203e0
@@ -25249,7 +25363,7 @@ bl _p_215
 .word 0xf9003ba0
 .word 0xf9400fa0
 .word 0xd2800001
-bl _p_242
+bl _p_243
 .word 0xaa0003e1
 .word 0xf9403fa2
 .word 0xaa0203e0
@@ -25277,7 +25391,7 @@ bl _p_242
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x15, [x16, #1712]
+ldr x15, [x16, #1720]
 .word 0x928006f0
 .word 0xf2bffff0
 .word 0xf87068d0
@@ -25290,7 +25404,7 @@ ldr x15, [x16, #1712]
 .word 0xf9002ba0
 .word 0xf9400fa0
 .word 0xd28000e1
-bl _p_242
+bl _p_243
 .word 0xaa0003e1
 .word 0xf9402fa2
 .word 0xaa0203e0
@@ -25318,7 +25432,7 @@ bl _p_242
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x15, [x16, #1712]
+ldr x15, [x16, #1720]
 .word 0x928006f0
 .word 0xf2bffff0
 .word 0xf87068d0
@@ -25331,7 +25445,7 @@ ldr x15, [x16, #1712]
 .word 0xf9001ba0
 .word 0xf9400fa0
 .word 0xd28001c1
-bl _p_242
+bl _p_243
 .word 0xaa0003e1
 .word 0xf9401fa2
 .word 0xaa0203e0
@@ -25357,7 +25471,7 @@ bl _p_242
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x15, [x16, #1712]
+ldr x15, [x16, #1720]
 .word 0x928006f0
 .word 0xf2bffff0
 .word 0xf87068d0
@@ -25384,7 +25498,7 @@ Mono_Security_Protocol_Ntlm_ChallengeResponse2_PrepareDESKey_byte___int:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #208]
+ldr x0, [x16, #216]
 .word 0xd2800101
 bl _p_1
 .word 0xaa0003e1
@@ -25592,7 +25706,7 @@ bl _p_1
 .word 0x910003bf
 .word 0xa8c27bfd
 .word 0xd65f03c0
-.word 0xd2801a00
+.word 0xd28019e0
 .word 0xaa1103e1
 bl _p_3
 
@@ -25611,7 +25725,7 @@ Mono_Security_Protocol_Ntlm_ChallengeResponse2_PasswordToKey_string_int:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #208]
+ldr x0, [x16, #216]
 .word 0xd28000e1
 bl _p_1
 .word 0xaa0003f8
@@ -25627,13 +25741,13 @@ bl _p_1
 .word 0xaa1703f6
 .word 0xaa1603f7
 .loc 17 272 0
-bl _p_89
+bl _p_90
 .word 0xf90027a0
-bl _p_223
+bl _p_224
 .word 0xaa0003e1
 .word 0xaa1903e0
 .word 0xf940033e
-bl _p_224
+bl _p_225
 .word 0xaa0003e1
 .word 0xf94027a6
 .word 0xaa0603e0
@@ -25648,13 +25762,13 @@ bl _p_224
 .loc 17 273 0
 .word 0xaa1803e0
 .word 0xd2800001
-bl _p_242
+bl _p_243
 .word 0xf90023a0
 .word 0xb9801b02
 .loc 17 275 0
 .word 0xaa1803e0
 .word 0xd2800001
-bl _p_116
+bl _p_117
 .word 0xf94023a0
 .loc 17 276 0
 .word 0xa9415fb6
@@ -25674,7 +25788,7 @@ Mono_Security_Protocol_Ntlm_ChallengeResponse2__cctor:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #208]
+ldr x0, [x16, #216]
 .word 0xd2800101
 bl _p_1
 .word 0xf9000fa0
@@ -25682,20 +25796,20 @@ bl _p_1
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #1736]
+ldr x1, [x16, #1744]
 .word 0xd2800102
 bl _p_35
 .word 0xf9400fa1
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1760]
+ldr x0, [x16, #1768]
 .word 0xf9000001
 .loc 17 58 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #208]
+ldr x0, [x16, #216]
 .word 0xd2800101
 bl _p_1
 .word 0xf9000ba0
@@ -25703,14 +25817,14 @@ bl _p_1
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #1744]
+ldr x1, [x16, #1752]
 .word 0xd2800102
 bl _p_35
 .word 0xf9400ba1
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1752]
+ldr x0, [x16, #1760]
 .word 0xf9000001
 .word 0x910003bf
 .word 0xa8c27bfd
@@ -25721,7 +25835,7 @@ Lme_f0:
 	.align 4
 	.no_dead_strip Mono_Security_Protocol_Ntlm_MessageBase__ctor_int
 Mono_Security_Protocol_Ntlm_MessageBase__ctor_int:
-.file 18 "/Library/Frameworks/Xamarin.iOS.framework/Versions/11.6.1.4/src/mono/mcs/class/Mono.Security/Mono.Security.Protocol.Ntlm/MessageBase.cs"
+.file 18 "/Library/Frameworks/Xamarin.iOS.framework/Versions/11.9.1.24/src/Xamarin.iOS/mcs/class/Mono.Security/Mono.Security.Protocol.Ntlm/MessageBase.cs"
 .loc 18 51 0 prologue_end
 .word 0xa9be7bfd
 .word 0x910003fd
@@ -25796,7 +25910,7 @@ Mono_Security_Protocol_Ntlm_MessageBase_PrepareMessage_int:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #208]
+ldr x0, [x16, #216]
 .word 0xb9801ba1
 bl _p_1
 .word 0xaa0003e2
@@ -25804,7 +25918,7 @@ bl _p_1
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1792]
+ldr x0, [x16, #1800]
 .word 0xf9400000
 .word 0xd2800001
 .word 0xf90013a2
@@ -25852,7 +25966,7 @@ bl _p_21
 .word 0x910003bf
 .word 0xa8c37bfd
 .word 0xd65f03c0
-.word 0xd2801a00
+.word 0xd28019e0
 .word 0xaa1103e1
 bl _p_3
 
@@ -25876,7 +25990,7 @@ Mono_Security_Protocol_Ntlm_MessageBase_Decode_byte__:
 .loc 18 86 0
 .word 0xaa1903e0
 .word 0xaa1a03e1
-bl _p_243
+bl _p_244
 .word 0x53001c00
 .word 0x34000560
 .loc 18 90 0
@@ -25889,7 +26003,7 @@ bl _p_243
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x0, [x16, #0]
-.word 0xd28236a1
+.word 0xd28237a1
 bl _p_7
 .word 0xaa0003f9
 .loc 18 83 0
@@ -25897,23 +26011,23 @@ bl _p_7
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x0, [x16, #0]
-.word 0xd28234a1
+.word 0xd28235a1
 bl _p_7
 .word 0xf90027a0
 .word 0xb9801b40
 .word 0xf9002fa0
-.word 0xd2801a40
-bl _p_194
+.word 0xd2801a20
+bl _p_195
 .word 0xf9402fa1
 .word 0xb9001001
 .word 0xf9002ba0
-.word 0xd2801000
-bl _p_194
+.word 0xd2800fe0
+bl _p_195
 .word 0xf94027a1
 .word 0xf9402ba2
 .word 0xf90023a0
 .word 0xaa1903e3
-bl _p_244
+bl _p_245
 .word 0xf94023a0
 bl _p_8
 
@@ -25921,10 +26035,10 @@ adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x0, [x16, #0]
 .loc 18 79 0
-.word 0xd28234a1
+.word 0xd28235a1
 bl _p_7
 .word 0xaa0003e1
-.word 0xd2800fe0
+.word 0xd2800fc0
 .word 0xf2a04000
 bl _mono_create_corlib_exception_1
 bl _p_8
@@ -25933,29 +26047,29 @@ bl _p_8
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x0, [x16, #0]
-.word 0xd2823fa1
+.word 0xd28240a1
 bl _p_7
 .word 0xf90027a0
 .word 0xb9801320
 .word 0xf9002ba0
-.word 0xd2801a40
-bl _p_194
+.word 0xd2801a20
+bl _p_195
 .word 0xaa0003e1
 .word 0xf94027a0
 .word 0xf9402ba2
 .word 0xb9001022
-bl _p_202
+bl _p_203
 .word 0xf90023a0
 .loc 18 88 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x0, [x16, #0]
-.word 0xd28234a1
+.word 0xd28235a1
 bl _p_7
 .word 0xaa0003e2
 .word 0xf94023a1
-.word 0xd2800fc0
+.word 0xd2800fa0
 .word 0xf2a04000
 bl _mono_create_corlib_exception_2
 bl _p_8
@@ -25986,7 +26100,7 @@ Mono_Security_Protocol_Ntlm_MessageBase_CheckHeader_byte__:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #1792]
+ldr x1, [x16, #1800]
 .word 0xf9400021
 .word 0x93407f02
 .word 0xb9801823
@@ -26006,7 +26120,7 @@ ldr x1, [x16, #1792]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1792]
+ldr x0, [x16, #1800]
 .word 0xf9400000
 .word 0xb9801800
 .word 0x6b00031f
@@ -26014,7 +26128,7 @@ ldr x0, [x16, #1792]
 .loc 18 99 0
 .word 0xaa1a03e0
 .word 0xd2800101
-bl _p_245
+bl _p_246
 .word 0x2a0003e0
 .word 0xf94013a1
 .word 0xb9801021
@@ -26026,7 +26140,7 @@ bl _p_245
 .word 0x910003bf
 .word 0xa8c37bfd
 .word 0xd65f03c0
-.word 0xd2801a00
+.word 0xd28019e0
 .word 0xaa1103e1
 bl _p_3
 
@@ -26041,7 +26155,7 @@ Mono_Security_Protocol_Ntlm_MessageBase__cctor:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #208]
+ldr x0, [x16, #216]
 .word 0xd2800101
 bl _p_1
 .word 0xf9000ba0
@@ -26049,14 +26163,14 @@ bl _p_1
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #1800]
+ldr x1, [x16, #1808]
 .word 0xd2800102
 bl _p_35
 .word 0xf9400ba1
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1792]
+ldr x0, [x16, #1800]
 .word 0xf9000001
 .word 0x910003bf
 .word 0xa8c27bfd
@@ -26067,14 +26181,14 @@ Lme_f9:
 	.align 4
 	.no_dead_strip Mono_Security_Protocol_Ntlm_NtlmSettings_get_DefaultAuthLevel
 Mono_Security_Protocol_Ntlm_NtlmSettings_get_DefaultAuthLevel:
-.file 19 "/Library/Frameworks/Xamarin.iOS.framework/Versions/11.6.1.4/src/mono/mcs/class/Mono.Security/Mono.Security.Protocol.Ntlm/NtlmSettings.cs"
+.file 19 "/Library/Frameworks/Xamarin.iOS.framework/Versions/11.9.1.24/src/Xamarin.iOS/mcs/class/Mono.Security/Mono.Security.Protocol.Ntlm/NtlmSettings.cs"
 .loc 19 46 0 prologue_end
 .word 0xa9bf7bfd
 .word 0x910003fd
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1808]
+ldr x0, [x16, #1816]
 .word 0xb9800000
 .word 0x910003bf
 .word 0xa8c17bfd
@@ -26091,7 +26205,7 @@ Mono_Security_Protocol_Ntlm_NtlmSettings__cctor:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1808]
+ldr x0, [x16, #1816]
 .word 0xd280003e
 .word 0xb900001e
 .word 0x910003bf
@@ -26103,7 +26217,7 @@ Lme_fb:
 	.align 4
 	.no_dead_strip Mono_Security_Protocol_Ntlm_Type1Message__ctor
 Mono_Security_Protocol_Ntlm_Type1Message__ctor:
-.file 20 "/Library/Frameworks/Xamarin.iOS.framework/Versions/11.6.1.4/src/mono/mcs/class/Mono.Security/Mono.Security.Protocol.Ntlm/Type1Message.cs"
+.file 20 "/Library/Frameworks/Xamarin.iOS.framework/Versions/11.9.1.24/src/Xamarin.iOS/mcs/class/Mono.Security/Mono.Security.Protocol.Ntlm/Type1Message.cs"
 .loc 20 47 0 prologue_end
 .word 0xa9be7bfd
 .word 0x910003fd
@@ -26112,7 +26226,7 @@ Mono_Security_Protocol_Ntlm_Type1Message__ctor:
 .word 0xd280003e
 .word 0xb900135e
 .loc 20 50 0
-bl _p_246
+bl _p_247
 .word 0xf9001340
 .word 0x91008341
 .word 0xd349fc21
@@ -26127,7 +26241,7 @@ ldr x2, [x16, #16]
 .word 0xd280003e
 .word 0x3900003e
 .loc 20 51 0
-bl _p_247
+bl _p_248
 .word 0xf9000f40
 .word 0x91006341
 .word 0xd349fc21
@@ -26166,14 +26280,14 @@ Mono_Security_Protocol_Ntlm_Type1Message_set_Domain_string:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x26, [x16, #280]
+ldr x26, [x16, #288]
 .loc 20 67 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #280]
+ldr x1, [x16, #288]
 .word 0xaa1a03e0
-bl _p_112
+bl _p_113
 .word 0x53001c00
 .word 0x340000e0
 .loc 20 68 0
@@ -26224,14 +26338,14 @@ Mono_Security_Protocol_Ntlm_Type1Message_set_Host_string:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x26, [x16, #280]
+ldr x26, [x16, #288]
 .loc 20 81 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #280]
+ldr x1, [x16, #288]
 .word 0xaa1a03e0
-bl _p_112
+bl _p_113
 .word 0x53001c00
 .word 0x340000e0
 .loc 20 82 0
@@ -26279,26 +26393,26 @@ Mono_Security_Protocol_Ntlm_Type1Message_Decode_byte__:
 .word 0xaa0103fa
 .word 0xaa1903e0
 .word 0xaa1a03e1
-bl _p_248
+bl _p_249
 .loc 20 96 0
 .word 0xaa1a03e0
 .word 0xd2800181
-bl _p_245
+bl _p_246
 .word 0xb9001720
 .loc 20 98 0
 .word 0xaa1a03e0
 .word 0xd2800201
-bl _p_249
+bl _p_250
 .word 0x53003c00
 .word 0xf9002ba0
 .loc 20 99 0
 .word 0xaa1a03e0
 .word 0xd2800281
-bl _p_249
+bl _p_250
 .word 0x53003c00
 .word 0xf90027a0
 .loc 20 100 0
-bl _p_89
+bl _p_90
 .word 0xaa0003e4
 .word 0xf94027a2
 .word 0xf9402ba3
@@ -26323,11 +26437,11 @@ ldr x2, [x16, #16]
 .loc 20 102 0
 .word 0xaa1a03e0
 .word 0xd2800301
-bl _p_249
+bl _p_250
 .word 0x53003c00
 .word 0xf90023a0
 .loc 20 103 0
-bl _p_89
+bl _p_90
 .word 0xaa0003e4
 .word 0xf94023a3
 .word 0xaa0403e0
@@ -26378,7 +26492,7 @@ Mono_Security_Protocol_Ntlm_Type1Message_GetBytes:
 .word 0xf90033a1
 .word 0xb010001
 .word 0xaa1a03e0
-bl _p_250
+bl _p_251
 .word 0xf94033a1
 .word 0xf94037a3
 .loc 20 113 0
@@ -26535,26 +26649,26 @@ bl _p_250
 .word 0x3900f41f
 .word 0xf90027a0
 .loc 20 134 0
-bl _p_89
+bl _p_90
 .word 0xf9002ba0
 .word 0xf9400f40
 .word 0xf9002fa0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #552]
+ldr x0, [x16, #560]
 .word 0x3980b410
 .word 0xb5000050
-bl _p_79
+bl _p_80
 .word 0xf9402fa2
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #560]
+ldr x0, [x16, #568]
 .word 0xf9400001
 .word 0xaa0203e0
 .word 0xf940005e
-bl _p_224
+bl _p_225
 .word 0xaa0003e1
 .word 0xf9402ba2
 .word 0xaa0203e0
@@ -26571,26 +26685,26 @@ bl _p_224
 .word 0xd2800403
 bl _p_21
 .loc 20 137 0
-bl _p_89
+bl _p_90
 .word 0xf9001fa0
 .word 0xf9401340
 .word 0xf90023a0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #552]
+ldr x0, [x16, #560]
 .word 0x3980b410
 .word 0xb5000050
-bl _p_79
+bl _p_80
 .word 0xf94023a2
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #560]
+ldr x0, [x16, #568]
 .word 0xf9400001
 .word 0xaa0203e0
 .word 0xf940005e
-bl _p_224
+bl _p_225
 .word 0xaa0003e1
 .word 0xf9401fa2
 .word 0xaa0203e0
@@ -26612,7 +26726,7 @@ bl _p_21
 .word 0x910003bf
 .word 0xa8c77bfd
 .word 0xd65f03c0
-.word 0xd2801a00
+.word 0xd28019e0
 .word 0xaa1103e1
 bl _p_3
 
@@ -26621,7 +26735,7 @@ Lme_100:
 	.align 4
 	.no_dead_strip Mono_Security_Protocol_Ntlm_Type2Message__ctor_byte__
 Mono_Security_Protocol_Ntlm_Type2Message__ctor_byte__:
-.file 21 "/Library/Frameworks/Xamarin.iOS.framework/Versions/11.6.1.4/src/mono/mcs/class/Mono.Security/Mono.Security.Protocol.Ntlm/Type2Message.cs"
+.file 21 "/Library/Frameworks/Xamarin.iOS.framework/Versions/11.9.1.24/src/Xamarin.iOS/mcs/class/Mono.Security/Mono.Security.Protocol.Ntlm/Type2Message.cs"
 .loc 21 57 0 prologue_end
 .word 0xa9be7bfd
 .word 0x910003fd
@@ -26634,7 +26748,7 @@ Mono_Security_Protocol_Ntlm_Type2Message__ctor_byte__:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #208]
+ldr x0, [x16, #216]
 .word 0xd2800101
 bl _p_1
 .word 0xf9000f20
@@ -26681,14 +26795,18 @@ Mono_Security_Protocol_Ntlm_Type2Message_Finalize:
 .word 0xf9400c21
 .word 0xb9801822
 .word 0xd2800001
-bl _p_116
-.word 0x94000002
+bl _p_117
+.word 0xf9000fbf
+.word 0x94000005
+.word 0xf9400fa0
+.word 0xb4000040
+bl _p_69
 .word 0x14000006
-.word 0xf9001bbe
+.word 0xf9001fbe
 .loc 21 67 0
 .word 0xf9400ba0
-.word 0xf9000fa0
-.word 0xf9401bbe
+.word 0xf90013a0
+.word 0xf9401fbe
 .word 0xd61f03c0
 .word 0x910003bf
 .word 0xa8c47bfd
@@ -26723,7 +26841,7 @@ bl _p_2
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #392]
+ldr x1, [x16, #400]
 .word 0xeb01001f
 .word 0x10000011
 .word 0x54000141
@@ -26736,7 +26854,7 @@ ldr x1, [x16, #392]
 .word 0x910003bf
 .word 0xa8c27bfd
 .word 0xd65f03c0
-.word 0xd2801a80
+.word 0xd2801a60
 .word 0xaa1103e1
 bl _p_3
 
@@ -26784,7 +26902,7 @@ bl _p_2
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #392]
+ldr x1, [x16, #400]
 .word 0xeb01001f
 .word 0x10000011
 .word 0x54000141
@@ -26797,7 +26915,7 @@ ldr x1, [x16, #392]
 .word 0x910003bf
 .word 0xa8c27bfd
 .word 0xd65f03c0
-.word 0xd2801a80
+.word 0xd2801a60
 .word 0xaa1103e1
 bl _p_3
 
@@ -26815,11 +26933,11 @@ Mono_Security_Protocol_Ntlm_Type2Message_Decode_byte__:
 .word 0xaa0103fa
 .word 0xaa1903e0
 .word 0xaa1a03e1
-bl _p_248
+bl _p_249
 .loc 21 98 0
 .word 0xaa1a03e0
 .word 0xd2800281
-bl _p_245
+bl _p_246
 .word 0xb9001720
 .loc 21 100 0
 .word 0xf9400f22
@@ -26831,12 +26949,14 @@ bl _p_21
 .loc 21 102 0
 .word 0xaa1a03e0
 .word 0xd2800181
-bl _p_249
+bl _p_250
+.word 0x53003c00
 .word 0x53003c18
 .loc 21 103 0
 .word 0xaa1a03e0
 .word 0xd2800201
-bl _p_249
+bl _p_250
+.word 0x53003c00
 .word 0x53003c17
 .loc 21 104 0
 .word 0x6b1f031f
@@ -26847,7 +26967,7 @@ bl _p_249
 .word 0xa1e0000
 .word 0x340002e0
 .loc 21 106 0
-bl _p_89
+bl _p_90
 .word 0xaa0003e4
 .word 0xaa0403e0
 .word 0xaa1a03e1
@@ -26871,7 +26991,7 @@ ldr x2, [x16, #16]
 .word 0x3900003e
 .word 0x14000016
 .loc 21 108 0
-bl _p_217
+bl _p_218
 .word 0xaa0003e4
 .word 0xaa0403e0
 .word 0xaa1a03e1
@@ -26897,16 +27017,18 @@ ldr x2, [x16, #16]
 .word 0xb9801b40
 .word 0xd280061e
 .word 0x6b1e001f
-.word 0x5400044b
+.word 0x5400048b
 .loc 21 113 0
 .word 0xaa1a03e0
 .word 0xd2800501
-bl _p_249
+bl _p_250
+.word 0x53003c00
 .word 0x53003c18
 .loc 21 114 0
 .word 0xaa1a03e0
 .word 0xd2800581
-bl _p_249
+bl _p_250
+.word 0x53003c00
 .word 0x53003c17
 .loc 21 115 0
 .word 0x6b1f031f
@@ -26915,7 +27037,7 @@ bl _p_249
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #208]
+ldr x0, [x16, #216]
 .word 0xaa1803e1
 bl _p_1
 .word 0xf9001720
@@ -26957,7 +27079,7 @@ Mono_Security_Protocol_Ntlm_Type2Message_GetBytes:
 .word 0xaa0003fa
 .word 0xaa1a03e0
 .word 0xd2800501
-bl _p_250
+bl _p_251
 .word 0xaa0003e2
 .loc 21 127 0
 .word 0xaa0203e0
@@ -27027,7 +27149,7 @@ bl _p_21
 .word 0x910003bf
 .word 0xa8c37bfd
 .word 0xd65f03c0
-.word 0xd2801a00
+.word 0xd28019e0
 .word 0xaa1103e1
 bl _p_3
 
@@ -27036,7 +27158,7 @@ Lme_107:
 	.align 4
 	.no_dead_strip Mono_Security_Protocol_Ntlm_Type3Message__ctor_Mono_Security_Protocol_Ntlm_Type2Message
 Mono_Security_Protocol_Ntlm_Type3Message__ctor_Mono_Security_Protocol_Ntlm_Type2Message:
-.file 22 "/Library/Frameworks/Xamarin.iOS.framework/Versions/11.6.1.4/src/mono/mcs/class/Mono.Security/Mono.Security.Protocol.Ntlm/Type3Message.cs"
+.file 22 "/Library/Frameworks/Xamarin.iOS.framework/Versions/11.9.1.24/src/Xamarin.iOS/mcs/class/Mono.Security/Mono.Security.Protocol.Ntlm/Type3Message.cs"
 .loc 22 84 0 prologue_end
 .word 0xa9bd7bfd
 .word 0x910003fd
@@ -27064,20 +27186,20 @@ ldr x1, [x16, #16]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1816]
+ldr x0, [x16, #1824]
 .word 0x3980b410
 .word 0xb5000050
-bl _p_79
+bl _p_80
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1808]
+ldr x0, [x16, #1816]
 .word 0xb9800000
 .word 0xb9005b20
 .loc 22 88 0
 .word 0xaa1a03e0
 .word 0xf940035e
-bl _p_238
+bl _p_239
 .word 0xaa0003e1
 .word 0xaa0103e0
 .word 0xf940003e
@@ -27097,7 +27219,7 @@ bl _p_2
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #392]
+ldr x1, [x16, #400]
 .word 0xeb01001f
 .word 0x10000011
 .word 0x54000b21
@@ -27135,7 +27257,7 @@ ldr x2, [x16, #16]
 .word 0xd280003e
 .word 0x3900003e
 .loc 22 91 0
-bl _p_247
+bl _p_248
 .word 0xf9001320
 .word 0x91008321
 .word 0xd349fc21
@@ -27150,7 +27272,7 @@ ldr x2, [x16, #16]
 .word 0xd280003e
 .word 0x3900003e
 .loc 22 92 0
-bl _p_251
+bl _p_252
 .word 0xf9001b20
 .word 0x9100c321
 .word 0xd349fc21
@@ -27203,7 +27325,7 @@ ldr x2, [x16, #16]
 .word 0x910003bf
 .word 0xa8c37bfd
 .word 0xd65f03c0
-.word 0xd2801a80
+.word 0xd2801a60
 .word 0xaa1103e1
 bl _p_3
 
@@ -27226,7 +27348,7 @@ Mono_Security_Protocol_Ntlm_Type3Message_Finalize:
 .word 0xf9400c21
 .word 0xb9801822
 .word 0xd2800001
-bl _p_116
+bl _p_117
 .loc 22 108 0
 .word 0xf9400ba0
 .word 0xf9402400
@@ -27238,7 +27360,7 @@ bl _p_116
 .word 0xf9402421
 .word 0xb9801822
 .word 0xd2800001
-bl _p_116
+bl _p_117
 .loc 22 110 0
 .word 0xf9400ba0
 .word 0xf9402800
@@ -27250,14 +27372,18 @@ bl _p_116
 .word 0xf9402821
 .word 0xb9801822
 .word 0xd2800001
-bl _p_116
-.word 0x94000002
+bl _p_117
+.word 0xf9000fbf
+.word 0x94000005
+.word 0xf9400fa0
+.word 0xb4000040
+bl _p_69
 .word 0x14000006
-.word 0xf9001bbe
+.word 0xf9001fbe
 .loc 22 112 0
 .word 0xf9400ba0
-.word 0xf9000fa0
-.word 0xf9401bbe
+.word 0xf90013a0
+.word 0xf9401fbe
 .word 0xd61f03c0
 .word 0x910003bf
 .word 0xa8c47bfd
@@ -27279,14 +27405,14 @@ Mono_Security_Protocol_Ntlm_Type3Message_set_Domain_string:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x26, [x16, #280]
+ldr x26, [x16, #288]
 .loc 22 155 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #280]
+ldr x1, [x16, #288]
 .word 0xaa1a03e0
-bl _p_112
+bl _p_113
 .word 0x53001c00
 .word 0x340000e0
 .loc 22 156 0
@@ -27393,7 +27519,7 @@ Mono_Security_Protocol_Ntlm_Type3Message_Decode_byte__:
 .word 0xaa0103fa
 .word 0xaa1903e0
 .word 0xaa1a03e1
-bl _p_248
+bl _p_249
 .loc 22 203 0
 .word 0xf9001f3f
 .loc 22 205 0
@@ -27404,7 +27530,7 @@ bl _p_248
 .loc 22 206 0
 .word 0xaa1a03e0
 .word 0xd2800781
-bl _p_245
+bl _p_246
 .word 0xb9001720
 .word 0x14000003
 .loc 22 208 0
@@ -27413,18 +27539,18 @@ bl _p_245
 .loc 22 210 0
 .word 0xaa1a03e0
 .word 0xd2800181
-bl _p_249
+bl _p_250
 .word 0x53003c18
 .loc 22 211 0
 .word 0xaa1a03e0
 .word 0xd2800201
-bl _p_249
+bl _p_250
 .word 0x53003c17
 .loc 22 212 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #208]
+ldr x0, [x16, #216]
 .word 0xaa1803e1
 bl _p_1
 .word 0xf9002720
@@ -27450,18 +27576,18 @@ bl _p_21
 .loc 22 215 0
 .word 0xaa1a03e0
 .word 0xd2800281
-bl _p_249
+bl _p_250
 .word 0x53003c18
 .loc 22 216 0
 .word 0xaa1a03e0
 .word 0xd2800301
-bl _p_249
+bl _p_250
 .word 0x53003c17
 .loc 22 217 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #208]
+ldr x0, [x16, #216]
 .word 0xaa1803e1
 bl _p_1
 .word 0xf9002b20
@@ -27487,19 +27613,19 @@ bl _p_21
 .loc 22 220 0
 .word 0xaa1a03e0
 .word 0xd2800381
-bl _p_249
+bl _p_250
 .word 0x53003c18
 .loc 22 221 0
 .word 0xaa1a03e0
 .word 0xd2800401
-bl _p_249
+bl _p_250
 .word 0x53003c17
 .loc 22 222 0
 .word 0xaa1903e0
 .word 0xaa1a03e1
 .word 0xaa1703e2
 .word 0xaa1803e3
-bl _p_252
+bl _p_253
 .word 0xf9001720
 .word 0x9100a321
 .word 0xd349fc21
@@ -27516,19 +27642,19 @@ ldr x2, [x16, #16]
 .loc 22 224 0
 .word 0xaa1a03e0
 .word 0xd2800481
-bl _p_249
+bl _p_250
 .word 0x53003c18
 .loc 22 225 0
 .word 0xaa1a03e0
 .word 0xd2800501
-bl _p_249
+bl _p_250
 .word 0x53003c17
 .loc 22 226 0
 .word 0xaa1903e0
 .word 0xaa1a03e1
 .word 0xaa1703e2
 .word 0xaa1803e3
-bl _p_252
+bl _p_253
 .word 0xf9001b20
 .word 0x9100c321
 .word 0xd349fc21
@@ -27545,19 +27671,19 @@ ldr x2, [x16, #16]
 .loc 22 228 0
 .word 0xaa1a03e0
 .word 0xd2800581
-bl _p_249
+bl _p_250
 .word 0x53003c18
 .loc 22 229 0
 .word 0xaa1a03e0
 .word 0xd2800601
-bl _p_249
+bl _p_250
 .word 0x53003c17
 .loc 22 230 0
 .word 0xaa1903e0
 .word 0xaa1a03e1
 .word 0xaa1703e2
 .word 0xaa1803e3
-bl _p_252
+bl _p_253
 .word 0xf9001320
 .word 0x91008321
 .word 0xd349fc21
@@ -27596,7 +27722,7 @@ Mono_Security_Protocol_Ntlm_Type3Message_DecodeString_byte___int_int:
 .word 0xa1e0000
 .word 0x34000160
 .loc 22 240 0
-bl _p_217
+bl _p_218
 .word 0xaa0003e4
 .word 0xaa0403e0
 .word 0xf9400fa1
@@ -27607,7 +27733,7 @@ bl _p_217
 .word 0xd63f0200
 .word 0x1400000a
 .loc 22 242 0
-bl _p_89
+bl _p_90
 .word 0xaa0003e4
 .word 0xaa0403e0
 .word 0xf9400fa1
@@ -27636,7 +27762,7 @@ Mono_Security_Protocol_Ntlm_Type3Message_EncodeString_string:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #208]
+ldr x0, [x16, #216]
 .word 0xd2800001
 bl _p_1
 .word 0x14000015
@@ -27647,7 +27773,7 @@ bl _p_1
 .word 0xa1e0000
 .word 0x34000120
 .loc 22 250 0
-bl _p_217
+bl _p_218
 .word 0xaa0003e2
 .word 0xaa0203e0
 .word 0xf9400fa1
@@ -27656,7 +27782,7 @@ bl _p_217
 .word 0xd63f0200
 .word 0x14000008
 .loc 22 252 0
-bl _p_89
+bl _p_90
 .word 0xaa0003e2
 .word 0xaa0203e0
 .word 0xf9400fa1
@@ -27673,7 +27799,7 @@ Lme_10f:
 	.no_dead_strip Mono_Security_Protocol_Ntlm_Type3Message_GetBytes
 Mono_Security_Protocol_Ntlm_Type3Message_GetBytes:
 .loc 22 257 0 prologue_end
-.word 0xa9b47bfd
+.word 0xa9b37bfd
 .word 0x910003fd
 .word 0xa90153b3
 .word 0xa9025bb5
@@ -27685,56 +27811,60 @@ Mono_Security_Protocol_Ntlm_Type3Message_GetBytes:
 .word 0xf90033bf
 .word 0xf9401741
 .word 0xaa1a03e0
-bl _p_253
+bl _p_254
 .word 0xaa0003f9
 .loc 22 258 0
 .word 0xf9401b41
 .word 0xaa1a03e0
-bl _p_253
+bl _p_254
 .word 0xaa0003f8
 .loc 22 259 0
 .word 0xf9401341
 .word 0xaa1a03e0
-bl _p_253
+bl _p_254
 .word 0xaa0003f7
 .loc 22 262 0
 .word 0xf9402340
-.word 0xb5000580
+.word 0xb5000600
 .loc 22 263 0
 .word 0xb9805b40
-.word 0x35003480
+.word 0x35003540
 .loc 22 269 0
 .word 0xf9401f40
-.word 0xf90057a0
+.word 0xf9005fa0
 .word 0xf9400f40
-.word 0xf9005ba0
+.word 0xf90063a0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1824]
+ldr x0, [x16, #1832]
 bl _p_20
-.word 0xf94057a1
-.word 0xf9405ba2
-.word 0xf90053a0
-bl _p_254
-.word 0xf94053a0
+.word 0xf9405fa1
+.word 0xf94063a2
+.word 0xf9005ba0
+bl _p_255
+.word 0xf9405ba0
 .word 0xf90033a0
 .loc 22 270 0
 .word 0xf94033a1
 .word 0xaa0103e0
 .word 0xf940003e
-bl _p_255
+bl _p_256
 .word 0xf9002ba0
 .loc 22 271 0
 .word 0xf94033a1
 .word 0xaa0103e0
 .word 0xf940003e
-bl _p_256
+bl _p_257
 .word 0xf9002fa0
 .loc 22 272 0
-.word 0x94000002
+.word 0xf90047bf
+.word 0x94000005
+.word 0xf94047a0
+.word 0xb4000040
+bl _p_69
 .word 0x14000018
-.word 0xf9004bbe
+.word 0xf90053be
 .word 0xf94033a0
 .word 0xb4000160
 .word 0xf94033a1
@@ -27743,12 +27873,12 @@ bl _p_256
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x15, [x16, #448]
+ldr x15, [x16, #456]
 .word 0x928004f0
 .word 0xf2bffff0
 .word 0xf8706830
 .word 0xd63f0200
-.word 0xf9404bbe
+.word 0xf94053be
 .word 0xd61f03c0
 .loc 22 275 0
 .word 0xf9402340
@@ -27758,7 +27888,7 @@ ldr x15, [x16, #448]
 .word 0xf9401744
 .word 0x910143a5
 .word 0x910163a6
-bl _p_257
+bl _p_258
 .loc 22 278 0
 .word 0xf9402ba0
 .word 0xb5000060
@@ -27785,7 +27915,7 @@ bl _p_257
 .word 0xb150000
 .word 0xb160001
 .word 0xaa1a03e0
-bl _p_250
+bl _p_251
 .word 0xaa0003f4
 .loc 22 284 0
 .word 0xb9801b20
@@ -27800,35 +27930,35 @@ bl _p_250
 .word 0xd280019e
 .word 0xeb1e001f
 .word 0x10000011
-.word 0x54002b09
+.word 0x54002b49
 .word 0x3900b295
 .loc 22 286 0
 .word 0xb9801a80
 .word 0xd28001be
 .word 0xeb1e001f
 .word 0x10000011
-.word 0x54002a49
+.word 0x54002a89
 .word 0x3900b69f
 .loc 22 287 0
 .word 0xb9801a80
 .word 0xd28001de
 .word 0xeb1e001f
 .word 0x10000011
-.word 0x54002989
+.word 0x540029c9
 .word 0x3900ba95
 .loc 22 288 0
 .word 0xb9801a80
 .word 0xd28001fe
 .word 0xeb1e001f
 .word 0x10000011
-.word 0x540028c9
+.word 0x54002909
 .word 0x3900be9f
 .loc 22 289 0
 .word 0xb9801a80
 .word 0xd280021e
 .word 0xeb1e001f
 .word 0x10000011
-.word 0x54002809
+.word 0x54002849
 .word 0x3900c293
 .loc 22 290 0
 .word 0x13087e60
@@ -27836,7 +27966,7 @@ bl _p_250
 .word 0xd280023e
 .word 0xeb1e003f
 .word 0x10000011
-.word 0x54002729
+.word 0x54002769
 .word 0x3900c680
 .loc 22 293 0
 .word 0xb150260
@@ -27846,7 +27976,7 @@ bl _p_250
 .word 0xd280029e
 .word 0xeb1e001f
 .word 0x10000011
-.word 0x54002629
+.word 0x54002669
 .word 0x3900d296
 .loc 22 295 0
 .word 0x13087ec0
@@ -27854,14 +27984,14 @@ bl _p_250
 .word 0xd28002be
 .word 0xeb1e003f
 .word 0x10000011
-.word 0x54002549
+.word 0x54002589
 .word 0x3900d680
 .loc 22 296 0
 .word 0xb9801a80
 .word 0xd28002de
 .word 0xeb1e001f
 .word 0x10000011
-.word 0x54002489
+.word 0x540024c9
 .word 0x3900da96
 .loc 22 297 0
 .word 0x13087ec0
@@ -27869,14 +27999,14 @@ bl _p_250
 .word 0xd28002fe
 .word 0xeb1e003f
 .word 0x10000011
-.word 0x540023a9
+.word 0x540023e9
 .word 0x3900de80
 .loc 22 298 0
 .word 0xb9801a80
 .word 0xd280031e
 .word 0xeb1e001f
 .word 0x10000011
-.word 0x540022e9
+.word 0x54002329
 .word 0x3900e295
 .loc 22 299 0
 .word 0x13087ea0
@@ -27884,17 +28014,21 @@ bl _p_250
 .word 0xd280033e
 .word 0xeb1e003f
 .word 0x10000011
-.word 0x54002209
+.word 0x54002249
 .word 0x3900e680
 .loc 22 302 0
 .word 0xb9801b20
 .word 0x93403c16
+.loc 22 303 0
+.word 0xd2800800
+.word 0x93403c03
+.word 0x7900d3a0
 .loc 22 304 0
 .word 0xb9801a80
 .word 0xd280039e
 .word 0xeb1e001f
 .word 0x10000011
-.word 0x54002109
+.word 0x540020e9
 .word 0x3900f296
 .loc 22 305 0
 .word 0x13087ec0
@@ -27902,62 +28036,62 @@ bl _p_250
 .word 0xd28003be
 .word 0xeb1e003f
 .word 0x10000011
-.word 0x54002029
+.word 0x54002009
 .word 0x3900f680
 .loc 22 306 0
 .word 0xb9801a80
 .word 0xd280039e
 .word 0xeb1e001f
 .word 0x10000011
-.word 0x54001f69
+.word 0x54001f49
 .word 0x3940f280
 .word 0xb9801a81
 .word 0xd28003de
 .word 0xeb1e003f
 .word 0x10000011
-.word 0x54001ea9
+.word 0x54001e89
 .word 0x3900fa80
 .loc 22 307 0
 .word 0xb9801a80
 .word 0xd28003be
 .word 0xeb1e001f
 .word 0x10000011
-.word 0x54001de9
+.word 0x54001dc9
 .word 0x3940f680
 .word 0xb9801a81
 .word 0xd28003fe
 .word 0xeb1e003f
 .word 0x10000011
-.word 0x54001d29
+.word 0x54001d09
 .word 0x3900fe80
 .loc 22 308 0
 .word 0xb9801a80
 .word 0xd280041e
 .word 0xeb1e001f
 .word 0x10000011
-.word 0x54001c69
-.word 0xd280081e
-.word 0x3901029e
+.word 0x54001c49
+.word 0x39010283
 .loc 22 309 0
-.word 0xb9801a80
+.word 0x13087c60
+.word 0xb9801a81
 .word 0xd280043e
-.word 0xeb1e001f
+.word 0xeb1e003f
 .word 0x10000011
-.word 0x54001b89
-.word 0x3901069f
+.word 0x54001b69
+.word 0x39010680
 .loc 22 312 0
 .word 0xb9801b01
 .word 0x93403c20
-.word 0x7900d3a1
+.word 0x7900e3a1
 .loc 22 313 0
-.word 0x110102c1
+.word 0xb160061
 .word 0x93403c36
 .loc 22 314 0
 .word 0xb9801a81
 .word 0xd280049e
 .word 0xeb1e003f
 .word 0x10000011
-.word 0x54001a29
+.word 0x54001a09
 .word 0x39011280
 .loc 22 315 0
 .word 0x13087c01
@@ -27965,40 +28099,40 @@ bl _p_250
 .word 0xd28004be
 .word 0xeb1e005f
 .word 0x10000011
-.word 0x54001949
+.word 0x54001929
 .word 0x39011681
 .loc 22 316 0
 .word 0xb9801a81
 .word 0xd280049e
 .word 0xeb1e003f
 .word 0x10000011
-.word 0x54001889
+.word 0x54001869
 .word 0x39411281
 .word 0xb9801a82
 .word 0xd28004de
 .word 0xeb1e005f
 .word 0x10000011
-.word 0x540017c9
+.word 0x540017a9
 .word 0x39011a81
 .loc 22 317 0
 .word 0xb9801a81
 .word 0xd28004be
 .word 0xeb1e003f
 .word 0x10000011
-.word 0x54001709
+.word 0x540016e9
 .word 0x39411681
 .word 0xb9801a82
 .word 0xd28004fe
 .word 0xeb1e005f
 .word 0x10000011
-.word 0x54001649
+.word 0x54001629
 .word 0x39011e81
 .loc 22 318 0
 .word 0xb9801a81
 .word 0xd280051e
 .word 0xeb1e003f
 .word 0x10000011
-.word 0x54001589
+.word 0x54001569
 .word 0x39012296
 .loc 22 319 0
 .word 0x13087ec1
@@ -28006,22 +28140,22 @@ bl _p_250
 .word 0xd280053e
 .word 0xeb1e005f
 .word 0x10000011
-.word 0x540014a9
+.word 0x54001489
 .word 0x39012681
 .loc 22 322 0
 .word 0xb9801ae2
 .word 0x93403c41
-.word 0x7900e3a2
+.word 0x7900f3a2
 .loc 22 323 0
 .word 0xb0002c2
 .word 0x93403c40
-.word 0x7900d3a2
+.word 0x7900e3a2
 .loc 22 324 0
 .word 0xb9801a82
 .word 0xd280059e
 .word 0xeb1e005f
 .word 0x10000011
-.word 0x54001329
+.word 0x54001309
 .word 0x39013281
 .loc 22 325 0
 .word 0x13087c21
@@ -28029,40 +28163,40 @@ bl _p_250
 .word 0xd28005be
 .word 0xeb1e005f
 .word 0x10000011
-.word 0x54001249
+.word 0x54001229
 .word 0x39013681
 .loc 22 326 0
 .word 0xb9801a81
 .word 0xd280059e
 .word 0xeb1e003f
 .word 0x10000011
-.word 0x54001189
+.word 0x54001169
 .word 0x39413281
 .word 0xb9801a82
 .word 0xd28005de
 .word 0xeb1e005f
 .word 0x10000011
-.word 0x540010c9
+.word 0x540010a9
 .word 0x39013a81
 .loc 22 327 0
 .word 0xb9801a81
 .word 0xd28005be
 .word 0xeb1e003f
 .word 0x10000011
-.word 0x54001009
+.word 0x54000fe9
 .word 0x39413681
 .word 0xb9801a82
 .word 0xd28005fe
 .word 0xeb1e005f
 .word 0x10000011
-.word 0x54000f49
+.word 0x54000f29
 .word 0x39013e81
 .loc 22 328 0
 .word 0xb9801a81
 .word 0xd280061e
 .word 0xeb1e003f
 .word 0x10000011
-.word 0x54000e89
+.word 0x54000e69
 .word 0x39014280
 .loc 22 329 0
 .word 0x13087c00
@@ -28070,18 +28204,18 @@ bl _p_250
 .word 0xd280063e
 .word 0xeb1e003f
 .word 0x10000011
-.word 0x54000da9
+.word 0x54000d89
 .word 0x39014680
 .loc 22 332 0
 .word 0xb9801a81
 .word 0x93403c20
-.word 0x7900e3a1
+.word 0x7900f3a1
 .loc 22 333 0
 .word 0xb9801a81
 .word 0xd280071e
 .word 0xeb1e003f
 .word 0x10000011
-.word 0x54000c89
+.word 0x54000c69
 .word 0x39016280
 .loc 22 334 0
 .word 0x13087c00
@@ -28089,17 +28223,17 @@ bl _p_250
 .word 0xd280073e
 .word 0xeb1e003f
 .word 0x10000011
-.word 0x54000ba9
+.word 0x54000b89
 .word 0x39016680
 .loc 22 336 0
 .word 0xb9801740
-.word 0xb9007ba0
+.word 0xb90083a0
 .loc 22 339 0
 .word 0xb9801a81
 .word 0xd280079e
 .word 0xeb1e003f
 .word 0x10000011
-.word 0x54000aa9
+.word 0x54000a89
 .word 0x39017280
 .loc 22 340 0
 .word 0x53087c01
@@ -28107,7 +28241,7 @@ bl _p_250
 .word 0xd28007be
 .word 0xeb1e005f
 .word 0x10000011
-.word 0x540009c9
+.word 0x540009a9
 .word 0x39017681
 .loc 22 341 0
 .word 0x53107c01
@@ -28115,7 +28249,7 @@ bl _p_250
 .word 0xd28007de
 .word 0xeb1e005f
 .word 0x10000011
-.word 0x540008e9
+.word 0x540008c9
 .word 0x39017a81
 .loc 22 342 0
 .word 0x53187c00
@@ -28123,14 +28257,13 @@ bl _p_250
 .word 0xd28007fe
 .word 0xeb1e003f
 .word 0x10000011
-.word 0x54000809
+.word 0x540007e9
 .word 0x39017e80
 .loc 22 344 0
 .word 0xb9801b24
 .word 0xaa1903e0
 .word 0xd2800001
 .word 0xaa1403e2
-.word 0xd2800803
 bl _p_21
 .loc 22 345 0
 .word 0xb9801b04
@@ -28144,7 +28277,7 @@ bl _p_21
 .word 0xaa1703e0
 .word 0xd2800001
 .word 0xaa1403e2
-.word 0x7980d3a3
+.word 0x7980e3a3
 bl _p_21
 .loc 22 348 0
 .word 0xf9402ba0
@@ -28162,7 +28295,7 @@ bl _p_21
 .word 0xf9402ba1
 .word 0xb9801822
 .word 0xd2800001
-bl _p_116
+bl _p_117
 .loc 22 352 0
 .word 0xf9402fa0
 .word 0xf9402fa1
@@ -28176,7 +28309,7 @@ bl _p_21
 .word 0xf9402fa1
 .word 0xb9801822
 .word 0xd2800001
-bl _p_116
+bl _p_117
 .loc 22 355 0
 .word 0xaa1403e0
 .word 0xa94153b3
@@ -28184,21 +28317,21 @@ bl _p_116
 .word 0xa94363b7
 .word 0xa9446bb9
 .word 0x910003bf
-.word 0xa8cc7bfd
+.word 0xa8cd7bfd
 .word 0xd65f03c0
 .loc 22 264 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x0, [x16, #0]
-.word 0xd28245e1
+.word 0xd28246e1
 bl _p_7
 .word 0xaa0003e1
-.word 0xd2801aa0
+.word 0xd2801a80
 .word 0xf2a04000
 bl _mono_create_corlib_exception_1
 bl _p_8
-.word 0xd2801a00
+.word 0xd28019e0
 .word 0xaa1103e1
 bl _p_3
 
@@ -28207,7 +28340,7 @@ Lme_110:
 	.align 4
 	.no_dead_strip Mono_Security_Interface_Alert_get_Level
 Mono_Security_Interface_Alert_get_Level:
-.file 23 "/Library/Frameworks/Xamarin.iOS.framework/Versions/11.6.1.4/src/mono/mcs/class/Mono.Security/Mono.Security.Interface/Alert.cs"
+.file 23 "/Library/Frameworks/Xamarin.iOS.framework/Versions/11.9.1.24/src/Xamarin.iOS/mcs/class/Mono.Security/Mono.Security.Interface/Alert.cs"
 .loc 23 83 0 prologue_end
 .word 0xa9be7bfd
 .word 0x910003fd
@@ -28247,7 +28380,7 @@ Mono_Security_Interface_Alert__ctor_Mono_Security_Interface_AlertDescription:
 .word 0xf9400ba0
 .word 0x39004401
 .loc 23 129 0
-bl _p_258
+bl _p_259
 .loc 23 130 0
 .word 0x910003bf
 .word 0xa8c27bfd
@@ -28264,7 +28397,8 @@ Mono_Security_Interface_Alert_inferAlertLevel:
 .word 0xa90167b8
 .word 0xf90013a0
 .word 0xf94013a0
-.word 0x39404419
+.word 0x39404400
+.word 0x53001c19
 .word 0xaa1903e0
 .word 0xd280079e
 .word 0x6b1e001f
@@ -28289,7 +28423,7 @@ Mono_Security_Interface_Alert_inferAlertLevel:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1832]
+ldr x0, [x16, #1840]
 .word 0x8b010000
 .word 0xf9400000
 .word 0xd61f0000
@@ -28343,7 +28477,7 @@ Mono_Security_Interface_Alert_ToString:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1840]
+ldr x0, [x16, #1848]
 .word 0xf90023a0
 .word 0xf9400ba0
 .word 0x39404000
@@ -28351,7 +28485,7 @@ ldr x0, [x16, #1840]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1848]
+ldr x0, [x16, #1856]
 .word 0xd2800221
 bl _p_5
 .word 0xf9402fa1
@@ -28363,7 +28497,7 @@ bl _p_5
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1856]
+ldr x0, [x16, #1864]
 .word 0xd2800221
 bl _p_5
 .word 0xaa0003e2
@@ -28371,7 +28505,7 @@ bl _p_5
 .word 0xf94027a1
 .word 0xf9402ba3
 .word 0x39004043
-bl _p_259
+bl _p_260
 .word 0x910003bf
 .word 0xa8c67bfd
 .word 0xd65f03c0
@@ -28381,7 +28515,7 @@ Lme_115:
 	.align 4
 	.no_dead_strip Mono_Security_Interface_ValidationResult__ctor_bool_bool_int_System_Nullable_1_Mono_Security_Interface_MonoSslPolicyErrors
 Mono_Security_Interface_ValidationResult__ctor_bool_bool_int_System_Nullable_1_Mono_Security_Interface_MonoSslPolicyErrors:
-.file 24 "/Library/Frameworks/Xamarin.iOS.framework/Versions/11.6.1.4/src/mono/mcs/class/Mono.Security/Mono.Security.Interface/CertificateValidationHelper.cs"
+.file 24 "/Library/Frameworks/Xamarin.iOS.framework/Versions/11.9.1.24/src/Xamarin.iOS/mcs/class/Mono.Security/Mono.Security.Interface/CertificateValidationHelper.cs"
 .loc 24 48 0 prologue_end
 .word 0xa9bc7bfd
 .word 0x910003fd
@@ -28452,14 +28586,14 @@ Mono_Security_Interface_CertificateValidationHelper__cctor:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1864]
+ldr x0, [x16, #1872]
 .word 0xd280003e
 .word 0x3900001e
 .loc 24 118 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1872]
+ldr x0, [x16, #1880]
 .word 0xd280003e
 .word 0x3900001e
 .loc 24 131 0
@@ -28480,7 +28614,7 @@ Mono_Security_Interface_CertificateValidationHelper_GetInternalValidator_Mono_Se
 .word 0xaa0103fa
 .word 0xaa1a03e0
 .word 0xf9400fa1
-bl _p_260
+bl _p_261
 .word 0xaa0003fa
 .word 0xb400031a
 .word 0xf9400340
@@ -28488,7 +28622,7 @@ bl _p_260
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x2, [x16, #1880]
+ldr x2, [x16, #1888]
 .word 0xeb02003f
 .word 0x10000011
 .word 0x540002a3
@@ -28496,7 +28630,7 @@ ldr x2, [x16, #1880]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #1880]
+ldr x1, [x16, #1888]
 .word 0x9343fc22
 .word 0x8b020000
 .word 0x39400000
@@ -28513,7 +28647,7 @@ ldr x1, [x16, #1880]
 .word 0x910003bf
 .word 0xa8c27bfd
 .word 0xd65f03c0
-.word 0xd2801a80
+.word 0xd2801a60
 .word 0xaa1103e1
 bl _p_3
 
@@ -28522,7 +28656,7 @@ Lme_11d:
 	.align 4
 	.no_dead_strip Mono_Security_Interface_MonoTlsConnectionInfo_get_CipherSuiteCode
 Mono_Security_Interface_MonoTlsConnectionInfo_get_CipherSuiteCode:
-.file 25 "/Library/Frameworks/Xamarin.iOS.framework/Versions/11.6.1.4/src/mono/mcs/class/Mono.Security/Mono.Security.Interface/MonoTlsConnectionInfo.cs"
+.file 25 "/Library/Frameworks/Xamarin.iOS.framework/Versions/11.9.1.24/src/Xamarin.iOS/mcs/class/Mono.Security/Mono.Security.Interface/MonoTlsConnectionInfo.cs"
 .loc 25 34 0 prologue_end
 .word 0xa9be7bfd
 .word 0x910003fd
@@ -28533,7 +28667,7 @@ Mono_Security_Interface_MonoTlsConnectionInfo_get_CipherSuiteCode:
 .word 0xa8c27bfd
 .word 0xd65f03c0
 
-Lme_12f:
+Lme_12e:
 .text
 	.align 4
 	.no_dead_strip Mono_Security_Interface_MonoTlsConnectionInfo_set_CipherSuiteCode_Mono_Security_Interface_CipherSuiteCode
@@ -28550,7 +28684,7 @@ Mono_Security_Interface_MonoTlsConnectionInfo_set_CipherSuiteCode_Mono_Security_
 .word 0xa8c27bfd
 .word 0xd65f03c0
 
-Lme_130:
+Lme_12f:
 .text
 	.align 4
 	.no_dead_strip Mono_Security_Interface_MonoTlsConnectionInfo_get_ProtocolVersion
@@ -28565,7 +28699,7 @@ Mono_Security_Interface_MonoTlsConnectionInfo_get_ProtocolVersion:
 .word 0xa8c27bfd
 .word 0xd65f03c0
 
-Lme_131:
+Lme_130:
 .text
 	.align 4
 	.no_dead_strip Mono_Security_Interface_MonoTlsConnectionInfo_set_ProtocolVersion_Mono_Security_Interface_TlsProtocols
@@ -28582,7 +28716,7 @@ Mono_Security_Interface_MonoTlsConnectionInfo_set_ProtocolVersion_Mono_Security_
 .word 0xa8c27bfd
 .word 0xd65f03c0
 
-Lme_132:
+Lme_131:
 .text
 	.align 4
 	.no_dead_strip Mono_Security_Interface_MonoTlsConnectionInfo_set_PeerDomainName_string
@@ -28611,7 +28745,7 @@ ldr x2, [x16, #16]
 .word 0xa8c27bfd
 .word 0xd65f03c0
 
-Lme_133:
+Lme_132:
 .text
 	.align 4
 	.no_dead_strip Mono_Security_Interface_MonoTlsConnectionInfo_ToString
@@ -28623,7 +28757,7 @@ Mono_Security_Interface_MonoTlsConnectionInfo_ToString:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1888]
+ldr x0, [x16, #1896]
 .word 0xf90023a0
 .word 0xf9400ba0
 .word 0xb9801c00
@@ -28631,7 +28765,7 @@ ldr x0, [x16, #1888]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1896]
+ldr x0, [x16, #1904]
 .word 0xd2800281
 bl _p_5
 .word 0xf9402fa1
@@ -28643,7 +28777,7 @@ bl _p_5
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1904]
+ldr x0, [x16, #1912]
 .word 0xd2800241
 bl _p_5
 .word 0xaa0003e2
@@ -28651,12 +28785,12 @@ bl _p_5
 .word 0xf94027a1
 .word 0xf9402ba3
 .word 0x79002043
-bl _p_259
+bl _p_260
 .word 0x910003bf
 .word 0xa8c67bfd
 .word 0xd65f03c0
 
-Lme_134:
+Lme_133:
 .text
 	.align 4
 	.no_dead_strip Mono_Security_Interface_MonoTlsConnectionInfo__ctor
@@ -28668,12 +28802,12 @@ Mono_Security_Interface_MonoTlsConnectionInfo__ctor:
 .word 0xa8c27bfd
 .word 0xd65f03c0
 
-Lme_135:
+Lme_134:
 .text
 	.align 4
 	.no_dead_strip Mono_Security_Interface_MonoTlsProvider__ctor
 Mono_Security_Interface_MonoTlsProvider__ctor:
-.file 26 "/Library/Frameworks/Xamarin.iOS.framework/Versions/11.6.1.4/src/mono/mcs/class/Mono.Security/Mono.Security.Interface/MonoTlsProvider.cs"
+.file 26 "/Library/Frameworks/Xamarin.iOS.framework/Versions/11.9.1.24/src/Xamarin.iOS/mcs/class/Mono.Security/Mono.Security.Interface/MonoTlsProvider.cs"
 .loc 26 77 0 prologue_end
 .word 0xa9be7bfd
 .word 0x910003fd
@@ -28682,12 +28816,12 @@ Mono_Security_Interface_MonoTlsProvider__ctor:
 .word 0xa8c27bfd
 .word 0xd65f03c0
 
-Lme_13e:
+Lme_13d:
 .text
 	.align 4
 	.no_dead_strip Mono_Security_Interface_MonoTlsSettings_get_RemoteCertificateValidationCallback
 Mono_Security_Interface_MonoTlsSettings_get_RemoteCertificateValidationCallback:
-.file 27 "/Library/Frameworks/Xamarin.iOS.framework/Versions/11.6.1.4/src/mono/mcs/class/Mono.Security/Mono.Security.Interface/MonoTlsSettings.cs"
+.file 27 "/Library/Frameworks/Xamarin.iOS.framework/Versions/11.9.1.24/src/Xamarin.iOS/mcs/class/Mono.Security/Mono.Security.Interface/MonoTlsSettings.cs"
 .loc 27 35 0 prologue_end
 .word 0xa9be7bfd
 .word 0x910003fd
@@ -28698,7 +28832,7 @@ Mono_Security_Interface_MonoTlsSettings_get_RemoteCertificateValidationCallback:
 .word 0xa8c27bfd
 .word 0xd65f03c0
 
-Lme_143:
+Lme_142:
 .text
 	.align 4
 	.no_dead_strip Mono_Security_Interface_MonoTlsSettings_set_RemoteCertificateValidationCallback_Mono_Security_Interface_MonoRemoteCertificateValidationCallback
@@ -28727,7 +28861,7 @@ ldr x2, [x16, #16]
 .word 0xa8c27bfd
 .word 0xd65f03c0
 
-Lme_144:
+Lme_143:
 .text
 	.align 4
 	.no_dead_strip Mono_Security_Interface_MonoTlsSettings_get_ClientCertificateSelectionCallback
@@ -28742,7 +28876,7 @@ Mono_Security_Interface_MonoTlsSettings_get_ClientCertificateSelectionCallback:
 .word 0xa8c27bfd
 .word 0xd65f03c0
 
-Lme_145:
+Lme_144:
 .text
 	.align 4
 	.no_dead_strip Mono_Security_Interface_MonoTlsSettings_set_ClientCertificateSelectionCallback_Mono_Security_Interface_MonoLocalCertificateSelectionCallback
@@ -28771,7 +28905,7 @@ ldr x2, [x16, #16]
 .word 0xa8c27bfd
 .word 0xd65f03c0
 
-Lme_146:
+Lme_145:
 .text
 	.align 4
 	.no_dead_strip Mono_Security_Interface_MonoTlsSettings_get_UseServicePointManagerCallback
@@ -28781,7 +28915,7 @@ Mono_Security_Interface_MonoTlsSettings_get_UseServicePointManagerCallback:
 .word 0x910003fd
 .word 0xf90013a0
 .word 0xf94013a0
-.word 0x91018c00
+.word 0x91019c00
 .word 0x39800001
 .word 0x390043a1
 .word 0x39800400
@@ -28791,7 +28925,7 @@ Mono_Security_Interface_MonoTlsSettings_get_UseServicePointManagerCallback:
 .word 0xa8c37bfd
 .word 0xd65f03c0
 
-Lme_147:
+Lme_146:
 .text
 	.align 4
 	.no_dead_strip Mono_Security_Interface_MonoTlsSettings_set_UseServicePointManagerCallback_System_Nullable_1_bool
@@ -28802,7 +28936,7 @@ Mono_Security_Interface_MonoTlsSettings_set_UseServicePointManagerCallback_Syste
 .word 0xf9000ba0
 .word 0xf9000fa1
 .word 0xf9400ba0
-.word 0x91018c00
+.word 0x91019c00
 .word 0x398063a1
 .word 0x39000001
 .word 0x398067a1
@@ -28811,7 +28945,7 @@ Mono_Security_Interface_MonoTlsSettings_set_UseServicePointManagerCallback_Syste
 .word 0xa8c37bfd
 .word 0xd65f03c0
 
-Lme_148:
+Lme_147:
 .text
 	.align 4
 	.no_dead_strip Mono_Security_Interface_MonoTlsSettings_get_CallbackNeedsCertificateChain
@@ -28821,12 +28955,12 @@ Mono_Security_Interface_MonoTlsSettings_get_CallbackNeedsCertificateChain:
 .word 0x910003fd
 .word 0xf9000ba0
 .word 0xf9400ba0
-.word 0x39419800
+.word 0x3941a800
 .word 0x910003bf
 .word 0xa8c27bfd
 .word 0xd65f03c0
 
-Lme_149:
+Lme_148:
 .text
 	.align 4
 	.no_dead_strip Mono_Security_Interface_MonoTlsSettings_get_CertificateValidationTime
@@ -28847,7 +28981,7 @@ Mono_Security_Interface_MonoTlsSettings_get_CertificateValidationTime:
 .word 0xa8c37bfd
 .word 0xd65f03c0
 
-Lme_14a:
+Lme_149:
 .text
 	.align 4
 	.no_dead_strip Mono_Security_Interface_MonoTlsSettings_set_CertificateValidationTime_System_Nullable_1_System_DateTime
@@ -28868,7 +29002,7 @@ Mono_Security_Interface_MonoTlsSettings_set_CertificateValidationTime_System_Nul
 .word 0xa8c37bfd
 .word 0xd65f03c0
 
-Lme_14b:
+Lme_14a:
 .text
 	.align 4
 	.no_dead_strip Mono_Security_Interface_MonoTlsSettings_get_TrustAnchors
@@ -28883,7 +29017,7 @@ Mono_Security_Interface_MonoTlsSettings_get_TrustAnchors:
 .word 0xa8c27bfd
 .word 0xd65f03c0
 
-Lme_14c:
+Lme_14b:
 .text
 	.align 4
 	.no_dead_strip Mono_Security_Interface_MonoTlsSettings_set_TrustAnchors_System_Security_Cryptography_X509Certificates_X509CertificateCollection
@@ -28912,7 +29046,7 @@ ldr x2, [x16, #16]
 .word 0xa8c27bfd
 .word 0xd65f03c0
 
-Lme_14d:
+Lme_14c:
 .text
 	.align 4
 	.no_dead_strip Mono_Security_Interface_MonoTlsSettings_get_UserSettings
@@ -28927,7 +29061,7 @@ Mono_Security_Interface_MonoTlsSettings_get_UserSettings:
 .word 0xa8c27bfd
 .word 0xd65f03c0
 
-Lme_14e:
+Lme_14d:
 .text
 	.align 4
 	.no_dead_strip Mono_Security_Interface_MonoTlsSettings_set_UserSettings_object
@@ -28956,7 +29090,7 @@ ldr x2, [x16, #16]
 .word 0xa8c27bfd
 .word 0xd65f03c0
 
-Lme_14f:
+Lme_14e:
 .text
 	.align 4
 	.no_dead_strip Mono_Security_Interface_MonoTlsSettings_get_CertificateSearchPaths
@@ -28971,7 +29105,7 @@ Mono_Security_Interface_MonoTlsSettings_get_CertificateSearchPaths:
 .word 0xa8c27bfd
 .word 0xd65f03c0
 
-Lme_150:
+Lme_14f:
 .text
 	.align 4
 	.no_dead_strip Mono_Security_Interface_MonoTlsSettings_set_CertificateSearchPaths_string__
@@ -29000,17 +29134,49 @@ ldr x2, [x16, #16]
 .word 0xa8c27bfd
 .word 0xd65f03c0
 
+Lme_150:
+.text
+	.align 4
+	.no_dead_strip Mono_Security_Interface_MonoTlsSettings_get_SendCloseNotify
+Mono_Security_Interface_MonoTlsSettings_get_SendCloseNotify:
+.loc 27 93 0 prologue_end
+.word 0xa9be7bfd
+.word 0x910003fd
+.word 0xf9000ba0
+.word 0xf9400ba0
+.word 0x39416000
+.word 0x910003bf
+.word 0xa8c27bfd
+.word 0xd65f03c0
+
 Lme_151:
+.text
+	.align 4
+	.no_dead_strip Mono_Security_Interface_MonoTlsSettings_set_SendCloseNotify_bool
+Mono_Security_Interface_MonoTlsSettings_set_SendCloseNotify_bool:
+.loc 27 93 0 prologue_end
+.word 0xa9be7bfd
+.word 0x910003fd
+.word 0xf9000ba0
+.word 0xf9000fa1
+.word 0x394063a1
+.word 0xf9400ba0
+.word 0x39016001
+.word 0x910003bf
+.word 0xa8c27bfd
+.word 0xd65f03c0
+
+Lme_152:
 .text
 	.align 4
 	.no_dead_strip Mono_Security_Interface_MonoTlsSettings_get_EnabledProtocols
 Mono_Security_Interface_MonoTlsSettings_get_EnabledProtocols:
-.loc 27 93 0 prologue_end
+.loc 27 100 0 prologue_end
 .word 0xa9bd7bfd
 .word 0x910003fd
 .word 0xf90013a0
 .word 0xf94013a0
-.word 0x91016000
+.word 0x91017000
 .word 0xb9800001
 .word 0xb90013a1
 .word 0xb9800400
@@ -29020,18 +29186,18 @@ Mono_Security_Interface_MonoTlsSettings_get_EnabledProtocols:
 .word 0xa8c37bfd
 .word 0xd65f03c0
 
-Lme_152:
+Lme_153:
 .text
 	.align 4
 	.no_dead_strip Mono_Security_Interface_MonoTlsSettings_set_EnabledProtocols_System_Nullable_1_Mono_Security_Interface_TlsProtocols
 Mono_Security_Interface_MonoTlsSettings_set_EnabledProtocols_System_Nullable_1_Mono_Security_Interface_TlsProtocols:
-.loc 27 93 0 prologue_end
+.loc 27 100 0 prologue_end
 .word 0xa9bd7bfd
 .word 0x910003fd
 .word 0xf9000ba0
 .word 0xf9000fa1
 .word 0xf9400ba0
-.word 0x91016000
+.word 0x91017000
 .word 0xb9801ba1
 .word 0xb9000001
 .word 0xb9801fa1
@@ -29040,12 +29206,12 @@ Mono_Security_Interface_MonoTlsSettings_set_EnabledProtocols_System_Nullable_1_M
 .word 0xa8c37bfd
 .word 0xd65f03c0
 
-Lme_153:
+Lme_154:
 .text
 	.align 4
 	.no_dead_strip Mono_Security_Interface_MonoTlsSettings_get_EnabledCiphers
 Mono_Security_Interface_MonoTlsSettings_get_EnabledCiphers:
-.loc 27 98 0 prologue_end
+.loc 27 105 0 prologue_end
 .word 0xa9be7bfd
 .word 0x910003fd
 .word 0xf9000ba0
@@ -29055,12 +29221,12 @@ Mono_Security_Interface_MonoTlsSettings_get_EnabledCiphers:
 .word 0xa8c27bfd
 .word 0xd65f03c0
 
-Lme_154:
+Lme_155:
 .text
 	.align 4
 	.no_dead_strip Mono_Security_Interface_MonoTlsSettings_set_EnabledCiphers_Mono_Security_Interface_CipherSuiteCode__
 Mono_Security_Interface_MonoTlsSettings_set_EnabledCiphers_Mono_Security_Interface_CipherSuiteCode__:
-.loc 27 98 0 prologue_end
+.loc 27 105 0 prologue_end
 .word 0xa9be7bfd
 .word 0x910003fd
 .word 0xf9000ba0
@@ -29084,61 +29250,61 @@ ldr x2, [x16, #16]
 .word 0xa8c27bfd
 .word 0xd65f03c0
 
-Lme_155:
+Lme_156:
 .text
 	.align 4
 	.no_dead_strip Mono_Security_Interface_MonoTlsSettings__ctor
 Mono_Security_Interface_MonoTlsSettings__ctor:
-.loc 27 102 0 prologue_end
+.loc 27 109 0 prologue_end
 .word 0xa9be7bfd
 .word 0x910003fd
 .word 0xf9000ba0
 .word 0xf9400ba0
 .word 0xd280003e
-.word 0x3901841e
-.loc 27 106 0
+.word 0x3901941e
+.loc 27 113 0
 .word 0xd280003e
-.word 0x3901981e
-.loc 27 111 0
+.word 0x3901a81e
+.loc 27 118 0
 .word 0x910003bf
 .word 0xa8c27bfd
 .word 0xd65f03c0
 
-Lme_156:
+Lme_157:
 .text
 	.align 4
 	.no_dead_strip Mono_Security_Interface_MonoTlsSettings_get_DefaultSettings
 Mono_Security_Interface_MonoTlsSettings_get_DefaultSettings:
-.loc 27 117 0 prologue_end
+.loc 27 124 0 prologue_end
 .word 0xa9be7bfd
 .word 0x910003fd
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1912]
+ldr x0, [x16, #1920]
 .word 0xf9400000
 .word 0xb5000460
-.loc 27 118 0
-
-adrp x16, mono_aot_Mono_Security_got@PAGE+0
-add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1912]
-.word 0xf9000fa0
+.loc 27 125 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x0, [x16, #1920]
-.word 0xd2800d01
+.word 0xf9000fa0
+
+adrp x16, mono_aot_Mono_Security_got@PAGE+0
+add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
+ldr x0, [x16, #1928]
+.word 0xd2800e01
 bl _p_5
 .word 0xf9000ba0
-bl _p_261
+bl _p_262
 .word 0xf9400ba0
 .word 0xf9400fa1
 .word 0xd2800002
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x3, [x16, #1928]
+ldr x3, [x16, #1936]
 .word 0xc85f7c30
 .word 0xeb02021f
 .word 0x54000061
@@ -29157,39 +29323,39 @@ ldr x2, [x16, #16]
 .word 0x8b020021
 .word 0xd280003e
 .word 0x3900003e
-.loc 27 119 0
+.loc 27 126 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1912]
+ldr x0, [x16, #1920]
 .word 0xf9400000
 .word 0x910003bf
 .word 0xa8c27bfd
 .word 0xd65f03c0
 
-Lme_157:
+Lme_158:
 .text
 	.align 4
 	.no_dead_strip Mono_Security_Interface_MonoTlsSettings_CopyDefaultSettings
 Mono_Security_Interface_MonoTlsSettings_CopyDefaultSettings:
-.loc 27 128 0 prologue_end
+.loc 27 135 0 prologue_end
 .word 0xa9bf7bfd
 .word 0x910003fd
-bl _p_262
+bl _p_263
 .word 0xaa0003e1
 .word 0xaa0103e0
 .word 0xf940003e
-bl _p_263
+bl _p_264
 .word 0x910003bf
 .word 0xa8c17bfd
 .word 0xd65f03c0
 
-Lme_158:
+Lme_159:
 .text
 	.align 4
 	.no_dead_strip Mono_Security_Interface_MonoTlsSettings_get_CertificateValidator
 Mono_Security_Interface_MonoTlsSettings_get_CertificateValidator:
-.loc 27 142 0 prologue_end
+.loc 27 149 0 prologue_end
 .word 0xa9be7bfd
 .word 0x910003fd
 .word 0xf9000ba0
@@ -29199,20 +29365,20 @@ Mono_Security_Interface_MonoTlsSettings_get_CertificateValidator:
 .word 0xa8c27bfd
 .word 0xd65f03c0
 
-Lme_159:
+Lme_15a:
 .text
 	.align 4
 	.no_dead_strip Mono_Security_Interface_MonoTlsSettings_CloneWithValidator_Mono_Security_Interface_ICertificateValidator
 Mono_Security_Interface_MonoTlsSettings_CloneWithValidator_Mono_Security_Interface_ICertificateValidator:
-.loc 27 148 0 prologue_end
+.loc 27 155 0 prologue_end
 .word 0xa9bd7bfd
 .word 0x910003fd
 .word 0xa9016bb9
 .word 0xaa0003f9
 .word 0xaa0103fa
-.word 0x39418320
+.word 0x39419320
 .word 0x340001e0
-.loc 27 149 0
+.loc 27 156 0
 .word 0xf900233a
 .word 0x91010320
 .word 0xd349fc00
@@ -29226,21 +29392,21 @@ ldr x1, [x16, #16]
 .word 0x8b010000
 .word 0xd280003e
 .word 0x3900001e
-.loc 27 150 0
+.loc 27 157 0
 .word 0xaa1903e0
 .word 0x14000018
-.loc 27 153 0
+.loc 27 160 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1920]
-.word 0xd2800d01
+ldr x0, [x16, #1928]
+.word 0xd2800e01
 bl _p_5
 .word 0xf90013a0
 .word 0xaa1903e1
-bl _p_264
+bl _p_265
 .word 0xf94013a2
-.loc 27 154 0
+.loc 27 161 0
 .word 0xaa0203e1
 .word 0xaa0103e0
 .word 0xf900205a
@@ -29256,31 +29422,8 @@ ldr x2, [x16, #16]
 .word 0x8b020021
 .word 0xd280003e
 .word 0x3900003e
-.loc 27 155 0
+.loc 27 162 0
 .word 0xa9416bb9
-.word 0x910003bf
-.word 0xa8c37bfd
-.word 0xd65f03c0
-
-Lme_15a:
-.text
-	.align 4
-	.no_dead_strip Mono_Security_Interface_MonoTlsSettings_Clone
-Mono_Security_Interface_MonoTlsSettings_Clone:
-.loc 27 160 0 prologue_end
-.word 0xa9bd7bfd
-.word 0x910003fd
-.word 0xf9000ba0
-
-adrp x16, mono_aot_Mono_Security_got@PAGE+0
-add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1920]
-.word 0xd2800d01
-bl _p_5
-.word 0xf90013a0
-.word 0xf9400ba1
-bl _p_264
-.word 0xf94013a0
 .word 0x910003bf
 .word 0xa8c37bfd
 .word 0xd65f03c0
@@ -29288,20 +29431,43 @@ bl _p_264
 Lme_15b:
 .text
 	.align 4
+	.no_dead_strip Mono_Security_Interface_MonoTlsSettings_Clone
+Mono_Security_Interface_MonoTlsSettings_Clone:
+.loc 27 167 0 prologue_end
+.word 0xa9bd7bfd
+.word 0x910003fd
+.word 0xf9000ba0
+
+adrp x16, mono_aot_Mono_Security_got@PAGE+0
+add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
+ldr x0, [x16, #1928]
+.word 0xd2800e01
+bl _p_5
+.word 0xf90013a0
+.word 0xf9400ba1
+bl _p_265
+.word 0xf94013a0
+.word 0x910003bf
+.word 0xa8c37bfd
+.word 0xd65f03c0
+
+Lme_15c:
+.text
+	.align 4
 	.no_dead_strip Mono_Security_Interface_MonoTlsSettings__ctor_Mono_Security_Interface_MonoTlsSettings
 Mono_Security_Interface_MonoTlsSettings__ctor_Mono_Security_Interface_MonoTlsSettings:
-.loc 27 102 0 prologue_end
+.loc 27 109 0 prologue_end
 .word 0xa9bb7bfd
 .word 0x910003fd
 .word 0xa9016bb9
 .word 0xaa0003f9
 .word 0xaa0103fa
 .word 0xd280003e
-.word 0x3901873e
-.loc 27 106 0
+.word 0x3901973e
+.loc 27 113 0
 .word 0xd280003e
-.word 0x39019b3e
-.loc 27 165 0
+.word 0x3901ab3e
+.loc 27 172 0
 .word 0xf940035e
 .word 0xf9400b40
 .word 0xf9000b20
@@ -29317,7 +29483,7 @@ ldr x2, [x16, #16]
 .word 0x8b020021
 .word 0xd280003e
 .word 0x3900003e
-.loc 27 166 0
+.loc 27 173 0
 .word 0xf940035e
 .word 0xf9400f40
 .word 0xf9000f20
@@ -29333,30 +29499,30 @@ ldr x2, [x16, #16]
 .word 0x8b020021
 .word 0xd280003e
 .word 0x3900003e
-.loc 27 167 0
-.word 0x39418740
-.word 0x39018720
-.loc 27 168 0
-.word 0x39418b40
-.word 0x39018b20
-.loc 27 169 0
-.word 0x91018f40
+.loc 27 174 0
+.word 0x39419740
+.word 0x39019720
+.loc 27 175 0
+.word 0x39419b40
+.word 0x39019b20
+.loc 27 176 0
+.word 0x91019f40
 .word 0x39800001
 .word 0x3900e3a1
 .word 0x39800400
 .word 0x3900e7a0
-.word 0x91018f20
+.word 0x91019f20
 .word 0x3980e3a1
 .word 0x39000001
 .word 0x3980e7a1
 .word 0x39000401
-.loc 27 170 0
-.word 0x39419740
-.word 0x39019720
-.loc 27 171 0
-.word 0x39419b40
-.word 0x39019b20
-.loc 27 172 0
+.loc 27 177 0
+.word 0x3941a740
+.word 0x3901a720
+.loc 27 178 0
+.word 0x3941ab40
+.word 0x3901ab20
+.loc 27 179 0
 .word 0xf940035e
 .word 0xf9401740
 .word 0xf9001720
@@ -29372,19 +29538,19 @@ ldr x2, [x16, #16]
 .word 0x8b020021
 .word 0xd280003e
 .word 0x3900003e
-.loc 27 173 0
+.loc 27 180 0
 .word 0xf940035e
-.word 0x91016340
+.word 0x91017340
 .word 0xb9800001
 .word 0xb90033a1
 .word 0xb9800400
 .word 0xb90037a0
-.word 0x91016320
+.word 0x91017320
 .word 0xb98033a1
 .word 0xb9000001
 .word 0xb98037a1
 .word 0xb9000401
-.loc 27 174 0
+.loc 27 181 0
 .word 0xf940035e
 .word 0xf9401f40
 .word 0xf9001f20
@@ -29400,7 +29566,7 @@ ldr x2, [x16, #16]
 .word 0x8b020021
 .word 0xd280003e
 .word 0x3900003e
-.loc 27 175 0
+.loc 27 182 0
 .word 0xf940035e
 .word 0x91012340
 .word 0xf9400001
@@ -29412,23 +29578,27 @@ ldr x2, [x16, #16]
 .word 0xf9000001
 .word 0xf94017a1
 .word 0xf9000401
-.loc 27 176 0
+.loc 27 183 0
+.word 0xf940035e
+.word 0x39416340
+.word 0x39016320
+.loc 27 184 0
 .word 0xf940035e
 .word 0xf9401340
 .word 0xb4000320
-.loc 27 177 0
+.loc 27 185 0
 .word 0xf940035e
 .word 0xf9401340
 .word 0xf90027a0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1936]
+ldr x0, [x16, #1944]
 .word 0xd2800301
 bl _p_5
 .word 0xf94027a1
 .word 0xf90023a0
-bl _p_265
+bl _p_266
 .word 0xf94023a0
 .word 0xf9001320
 .word 0x91008321
@@ -29443,18 +29613,18 @@ ldr x2, [x16, #16]
 .word 0x8b020021
 .word 0xd280003e
 .word 0x3900003e
-.loc 27 178 0
+.loc 27 186 0
 .word 0xf940035e
 .word 0xf9401b40
 .word 0xb4000360
-.loc 27 179 0
+.loc 27 187 0
 .word 0xf940035e
 .word 0xf9401b40
 .word 0xb9801801
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1944]
+ldr x0, [x16, #1952]
 bl _p_1
 .word 0xf9001b20
 .word 0x9100c321
@@ -29469,29 +29639,29 @@ ldr x2, [x16, #16]
 .word 0x8b020021
 .word 0xd280003e
 .word 0x3900003e
-.loc 27 180 0
+.loc 27 188 0
 .word 0xf940035e
 .word 0xf9401b43
 .word 0xf9401b21
 .word 0xaa0303e0
 .word 0xd2800002
 .word 0xf940007e
-bl _p_228
-.loc 27 183 0
+bl _p_229
+.loc 27 191 0
 .word 0xd280003e
-.word 0x3901833e
-.loc 27 184 0
+.word 0x3901933e
+.loc 27 192 0
 .word 0xa9416bb9
 .word 0x910003bf
 .word 0xa8c57bfd
 .word 0xd65f03c0
 
-Lme_15c:
+Lme_15d:
 .text
 	.align 4
 	.no_dead_strip Mono_Security_Interface_TlsException__ctor_Mono_Security_Interface_Alert
 Mono_Security_Interface_TlsException__ctor_Mono_Security_Interface_Alert:
-.file 28 "/Library/Frameworks/Xamarin.iOS.framework/Versions/11.6.1.4/src/mono/mcs/class/Mono.Security/Mono.Security.Interface/TlsException.cs"
+.file 28 "/Library/Frameworks/Xamarin.iOS.framework/Versions/11.9.1.24/src/Xamarin.iOS/mcs/class/Mono.Security/Mono.Security.Interface/TlsException.cs"
 .loc 28 52 0 prologue_end
 .word 0xa9bd7bfd
 .word 0x910003fd
@@ -29504,7 +29674,7 @@ Mono_Security_Interface_TlsException__ctor_Mono_Security_Interface_Alert:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1856]
+ldr x0, [x16, #1864]
 .word 0xd2800221
 bl _p_5
 .word 0xaa0003e1
@@ -29517,14 +29687,14 @@ bl _p_5
 .word 0xaa0003e2
 .word 0xf9400fa0
 .word 0xaa1a03e1
-bl _p_266
+bl _p_267
 .loc 28 54 0
 .word 0xf9400bba
 .word 0x910003bf
 .word 0xa8c37bfd
 .word 0xd65f03c0
 
-Lme_15d:
+Lme_15e:
 .text
 	.align 4
 	.no_dead_strip Mono_Security_Interface_TlsException__ctor_Mono_Security_Interface_Alert_string
@@ -29537,7 +29707,7 @@ Mono_Security_Interface_TlsException__ctor_Mono_Security_Interface_Alert_string:
 .word 0xf90013a2
 .word 0xf9400ba0
 .word 0xf94013a1
-bl _p_267
+bl _p_268
 .loc 28 59 0
 .word 0xf9400fa0
 .word 0xf9400ba1
@@ -29559,7 +29729,7 @@ ldr x2, [x16, #16]
 .word 0xa8c37bfd
 .word 0xd65f03c0
 
-Lme_15e:
+Lme_15f:
 .text
 	.align 4
 	.no_dead_strip Mono_Security_Interface_TlsException__ctor_Mono_Security_Interface_AlertDescription
@@ -29572,21 +29742,21 @@ Mono_Security_Interface_TlsException__ctor_Mono_Security_Interface_AlertDescript
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1952]
+ldr x0, [x16, #1960]
 .word 0xd2800241
 bl _p_5
 .word 0xf90013a0
 .word 0x394063a1
-bl _p_268
+bl _p_269
 .word 0xf94013a1
 .word 0xf9400ba0
-bl _p_269
+bl _p_270
 .loc 28 70 0
 .word 0x910003bf
 .word 0xa8c37bfd
 .word 0xd65f03c0
 
-Lme_15f:
+Lme_160:
 .text
 	.align 4
 	.no_dead_strip Mono_Security_Interface_TlsException__ctor_Mono_Security_Interface_AlertDescription_string
@@ -29600,22 +29770,22 @@ Mono_Security_Interface_TlsException__ctor_Mono_Security_Interface_AlertDescript
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1952]
+ldr x0, [x16, #1960]
 .word 0xd2800241
 bl _p_5
 .word 0xf9001ba0
 .word 0x394063a1
-bl _p_268
+bl _p_269
 .word 0xf9401ba1
 .word 0xf9400ba0
 .word 0xf94013a2
-bl _p_266
+bl _p_267
 .loc 28 75 0
 .word 0x910003bf
 .word 0xa8c47bfd
 .word 0xd65f03c0
 
-Lme_160:
+Lme_161:
 .text
 	.align 4
 	.no_dead_strip Mono_Security_Interface_TlsException__ctor_Mono_Security_Interface_AlertDescription_string_object__
@@ -29630,30 +29800,30 @@ Mono_Security_Interface_TlsException__ctor_Mono_Security_Interface_AlertDescript
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1952]
+ldr x0, [x16, #1960]
 .word 0xd2800241
 bl _p_5
 .word 0xf9001ba0
 .word 0x394063a1
-bl _p_268
+bl _p_269
 .word 0xf94013a0
 .word 0xf94017a1
-bl _p_92
+bl _p_93
 .word 0xaa0003e2
 .word 0xf9401ba1
 .word 0xf9400ba0
-bl _p_266
+bl _p_267
 .loc 28 80 0
 .word 0x910003bf
 .word 0xa8c47bfd
 .word 0xd65f03c0
 
-Lme_161:
+Lme_162:
 .text
 	.align 4
 	.no_dead_strip Mono_Security_Cryptography_MD2Managed__ctor
 Mono_Security_Cryptography_MD2Managed__ctor:
-.file 29 "/Library/Frameworks/Xamarin.iOS.framework/Versions/11.6.1.4/src/mono/mcs/class/corlib/CommonCrypto/MD2Managed.g.cs"
+.file 29 "/Library/Frameworks/Xamarin.iOS.framework/Versions/11.9.1.24/src/Xamarin.iOS/mcs/class/corlib/CommonCrypto/MD2Managed.g.cs"
 .loc 29 32 0 prologue_end
 .word 0xa9be7bfd
 .word 0x910003fd
@@ -29665,7 +29835,7 @@ Mono_Security_Cryptography_MD2Managed__ctor:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #1728]
+ldr x1, [x16, #1736]
 .word 0xf9400021
 .word 0xf9001401
 .loc 29 35 0
@@ -29673,7 +29843,7 @@ ldr x1, [x16, #1728]
 .word 0xa8c27bfd
 .word 0xd65f03c0
 
-Lme_165:
+Lme_166:
 .text
 	.align 4
 	.no_dead_strip Mono_Security_Cryptography_MD2Managed_Finalize
@@ -29688,19 +29858,23 @@ Mono_Security_Cryptography_MD2Managed_Finalize:
 .word 0xf9400042
 .word 0xf9405450
 .word 0xd63f0200
-.word 0x94000002
+.word 0xf9000fbf
+.word 0x94000005
+.word 0xf9400fa0
+.word 0xb4000040
+bl _p_69
 .word 0x14000006
-.word 0xf9001bbe
+.word 0xf9001fbe
 .loc 29 40 0
 .word 0xf9400ba0
-.word 0xf9000fa0
-.word 0xf9401bbe
+.word 0xf90013a0
+.word 0xf9401fbe
 .word 0xd61f03c0
 .word 0x910003bf
 .word 0xa8c47bfd
 .word 0xd65f03c0
 
-Lme_166:
+Lme_167:
 .text
 	.align 4
 	.no_dead_strip Mono_Security_Cryptography_MD2Managed_Dispose_bool
@@ -29715,35 +29889,35 @@ Mono_Security_Cryptography_MD2Managed_Dispose_bool:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #1728]
+ldr x1, [x16, #1736]
 .word 0xf9400021
-bl _p_270
+bl _p_271
 .word 0x53001c00
 .word 0x34000100
 .loc 29 45 0
 .word 0xf9401720
-bl _p_271
+bl _p_272
 .loc 29 46 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1728]
+ldr x0, [x16, #1736]
 .word 0xf9400000
 .word 0xf9001720
 .loc 29 48 0
 .word 0xaa1903e0
 .word 0x394063a1
-bl _p_272
+bl _p_273
 .loc 29 49 0
 .word 0xaa1903e0
-bl _p_221
+bl _p_222
 .loc 29 50 0
 .word 0xf9400bb9
 .word 0x910003bf
 .word 0xa8c27bfd
 .word 0xd65f03c0
 
-Lme_167:
+Lme_168:
 .text
 	.align 4
 	.no_dead_strip Mono_Security_Cryptography_MD2Managed_Initialize
@@ -29757,18 +29931,18 @@ Mono_Security_Cryptography_MD2Managed_Initialize:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #1728]
+ldr x1, [x16, #1736]
 .word 0xf9400021
 .word 0xeb01001f
 .word 0x9a9f17e0
 .word 0x34000080
 .loc 29 55 0
 .word 0xd2807d00
-bl _p_273
+bl _p_274
 .word 0xf9001740
 .loc 29 57 0
 .word 0xf9401740
-bl _p_274
+bl _p_275
 .word 0x93407c00
 .word 0xaa0003fa
 .loc 29 58 0
@@ -29783,14 +29957,14 @@ bl _p_274
 .word 0xd65f03c0
 .loc 29 59 0
 .word 0xd28087e0
-bl _p_194
+bl _p_195
 .word 0xf90013a0
 .word 0xaa1a03e1
-bl _p_275
+bl _p_276
 .word 0xf94013a0
 bl _p_8
 
-Lme_168:
+Lme_169:
 .text
 	.align 4
 	.no_dead_strip Mono_Security_Cryptography_MD2Managed_HashCore_byte___int_int
@@ -29808,7 +29982,7 @@ Mono_Security_Cryptography_MD2Managed_HashCore_byte___int_int:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #1728]
+ldr x1, [x16, #1736]
 .word 0xf9400021
 .word 0xeb01001f
 .word 0x9a9f17e0
@@ -29836,7 +30010,7 @@ ldr x1, [x16, #1728]
 .word 0x93407c21
 .word 0x8b010301
 .word 0xaa1a03e2
-bl _p_276
+bl _p_277
 .word 0x93407c00
 .word 0xaa0003fa
 .loc 29 73 0
@@ -29855,17 +30029,17 @@ bl _p_276
 .word 0xd65f03c0
 .loc 29 74 0
 .word 0xd28087e0
-bl _p_194
+bl _p_195
 .word 0xf9001ba0
 .word 0xaa1a03e1
-bl _p_275
+bl _p_276
 .word 0xf9401ba0
 bl _p_8
-.word 0xd2801a00
+.word 0xd28019e0
 .word 0xaa1103e1
 bl _p_3
 
-Lme_169:
+Lme_16a:
 .text
 	.align 4
 	.no_dead_strip Mono_Security_Cryptography_MD2Managed_HashFinal
@@ -29879,7 +30053,7 @@ Mono_Security_Cryptography_MD2Managed_HashFinal:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #1728]
+ldr x1, [x16, #1736]
 .word 0xf9400021
 .word 0xeb01001f
 .word 0x9a9f17e0
@@ -29899,13 +30073,13 @@ ldr x1, [x16, #1728]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #208]
+ldr x0, [x16, #216]
 bl _p_1
 .loc 29 85 0
 .word 0xaa0003e1
 .word 0xf90013a1
 .word 0xf9401741
-bl _p_277
+bl _p_278
 .word 0x93407c00
 .word 0xaa0003fa
 .word 0xf94013a1
@@ -29925,19 +30099,19 @@ bl _p_277
 .word 0xd65f03c0
 .loc 29 87 0
 .word 0xd28087e0
-bl _p_194
+bl _p_195
 .word 0xf90013a0
 .word 0xaa1a03e1
-bl _p_275
+bl _p_276
 .word 0xf94013a0
 bl _p_8
 
-Lme_16a:
+Lme_16b:
 .text
 	.align 4
 	.no_dead_strip Mono_Security_Cryptography_MD4Managed__ctor
 Mono_Security_Cryptography_MD4Managed__ctor:
-.file 30 "/Library/Frameworks/Xamarin.iOS.framework/Versions/11.6.1.4/src/mono/mcs/class/corlib/CommonCrypto/MD4Managed.g.cs"
+.file 30 "/Library/Frameworks/Xamarin.iOS.framework/Versions/11.9.1.24/src/Xamarin.iOS/mcs/class/corlib/CommonCrypto/MD4Managed.g.cs"
 .loc 30 32 0 prologue_end
 .word 0xa9be7bfd
 .word 0x910003fd
@@ -29949,7 +30123,7 @@ Mono_Security_Cryptography_MD4Managed__ctor:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #1728]
+ldr x1, [x16, #1736]
 .word 0xf9400021
 .word 0xf9001401
 .loc 30 35 0
@@ -29957,7 +30131,7 @@ ldr x1, [x16, #1728]
 .word 0xa8c27bfd
 .word 0xd65f03c0
 
-Lme_16e:
+Lme_16f:
 .text
 	.align 4
 	.no_dead_strip Mono_Security_Cryptography_MD4Managed_Finalize
@@ -29972,19 +30146,23 @@ Mono_Security_Cryptography_MD4Managed_Finalize:
 .word 0xf9400042
 .word 0xf9405450
 .word 0xd63f0200
-.word 0x94000002
+.word 0xf9000fbf
+.word 0x94000005
+.word 0xf9400fa0
+.word 0xb4000040
+bl _p_69
 .word 0x14000006
-.word 0xf9001bbe
+.word 0xf9001fbe
 .loc 30 40 0
 .word 0xf9400ba0
-.word 0xf9000fa0
-.word 0xf9401bbe
+.word 0xf90013a0
+.word 0xf9401fbe
 .word 0xd61f03c0
 .word 0x910003bf
 .word 0xa8c47bfd
 .word 0xd65f03c0
 
-Lme_16f:
+Lme_170:
 .text
 	.align 4
 	.no_dead_strip Mono_Security_Cryptography_MD4Managed_Dispose_bool
@@ -29999,35 +30177,35 @@ Mono_Security_Cryptography_MD4Managed_Dispose_bool:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #1728]
+ldr x1, [x16, #1736]
 .word 0xf9400021
-bl _p_270
+bl _p_271
 .word 0x53001c00
 .word 0x34000100
 .loc 30 45 0
 .word 0xf9401720
-bl _p_271
+bl _p_272
 .loc 30 46 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1728]
+ldr x0, [x16, #1736]
 .word 0xf9400000
 .word 0xf9001720
 .loc 30 48 0
 .word 0xaa1903e0
 .word 0x394063a1
-bl _p_272
+bl _p_273
 .loc 30 49 0
 .word 0xaa1903e0
-bl _p_221
+bl _p_222
 .loc 30 50 0
 .word 0xf9400bb9
 .word 0x910003bf
 .word 0xa8c27bfd
 .word 0xd65f03c0
 
-Lme_170:
+Lme_171:
 .text
 	.align 4
 	.no_dead_strip Mono_Security_Cryptography_MD4Managed_Initialize
@@ -30041,18 +30219,18 @@ Mono_Security_Cryptography_MD4Managed_Initialize:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #1728]
+ldr x1, [x16, #1736]
 .word 0xf9400021
 .word 0xeb01001f
 .word 0x9a9f17e0
 .word 0x34000080
 .loc 30 55 0
 .word 0xd2807d00
-bl _p_273
+bl _p_274
 .word 0xf9001740
 .loc 30 57 0
 .word 0xf9401740
-bl _p_278
+bl _p_279
 .word 0x93407c00
 .word 0xaa0003fa
 .loc 30 58 0
@@ -30067,14 +30245,14 @@ bl _p_278
 .word 0xd65f03c0
 .loc 30 59 0
 .word 0xd28087e0
-bl _p_194
+bl _p_195
 .word 0xf90013a0
 .word 0xaa1a03e1
-bl _p_275
+bl _p_276
 .word 0xf94013a0
 bl _p_8
 
-Lme_171:
+Lme_172:
 .text
 	.align 4
 	.no_dead_strip Mono_Security_Cryptography_MD4Managed_HashCore_byte___int_int
@@ -30092,7 +30270,7 @@ Mono_Security_Cryptography_MD4Managed_HashCore_byte___int_int:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #1728]
+ldr x1, [x16, #1736]
 .word 0xf9400021
 .word 0xeb01001f
 .word 0x9a9f17e0
@@ -30120,7 +30298,7 @@ ldr x1, [x16, #1728]
 .word 0x93407c21
 .word 0x8b010301
 .word 0xaa1a03e2
-bl _p_279
+bl _p_280
 .word 0x93407c00
 .word 0xaa0003fa
 .loc 30 73 0
@@ -30139,17 +30317,17 @@ bl _p_279
 .word 0xd65f03c0
 .loc 30 74 0
 .word 0xd28087e0
-bl _p_194
+bl _p_195
 .word 0xf9001ba0
 .word 0xaa1a03e1
-bl _p_275
+bl _p_276
 .word 0xf9401ba0
 bl _p_8
-.word 0xd2801a00
+.word 0xd28019e0
 .word 0xaa1103e1
 bl _p_3
 
-Lme_172:
+Lme_173:
 .text
 	.align 4
 	.no_dead_strip Mono_Security_Cryptography_MD4Managed_HashFinal
@@ -30163,7 +30341,7 @@ Mono_Security_Cryptography_MD4Managed_HashFinal:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #1728]
+ldr x1, [x16, #1736]
 .word 0xf9400021
 .word 0xeb01001f
 .word 0x9a9f17e0
@@ -30183,13 +30361,13 @@ ldr x1, [x16, #1728]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #208]
+ldr x0, [x16, #216]
 bl _p_1
 .loc 30 85 0
 .word 0xaa0003e1
 .word 0xf90013a1
 .word 0xf9401741
-bl _p_280
+bl _p_281
 .word 0x93407c00
 .word 0xaa0003fa
 .word 0xf94013a1
@@ -30209,19 +30387,19 @@ bl _p_280
 .word 0xd65f03c0
 .loc 30 87 0
 .word 0xd28087e0
-bl _p_194
+bl _p_195
 .word 0xf90013a0
 .word 0xaa1a03e1
-bl _p_275
+bl _p_276
 .word 0xf94013a0
 bl _p_8
 
-Lme_173:
+Lme_174:
 .text
 	.align 4
 	.no_dead_strip Mono_Security_Cryptography_MD2__ctor
 Mono_Security_Cryptography_MD2__ctor:
-.file 31 "/Library/Frameworks/Xamarin.iOS.framework/Versions/11.6.1.4/src/mono/mcs/class/Mono.Security/Mono.Security.Cryptography/MD2.cs"
+.file 31 "/Library/Frameworks/Xamarin.iOS.framework/Versions/11.9.1.24/src/Xamarin.iOS/mcs/class/Mono.Security/Mono.Security.Cryptography/MD2.cs"
 .loc 31 44 0 prologue_end
 .word 0xa9be7bfd
 .word 0x910003fd
@@ -30234,7 +30412,7 @@ Mono_Security_Cryptography_MD2__ctor:
 .word 0xa8c27bfd
 .word 0xd65f03c0
 
-Lme_174:
+Lme_175:
 .text
 	.align 4
 	.no_dead_strip Mono_Security_Cryptography_MD2_Create
@@ -30245,26 +30423,26 @@ Mono_Security_Cryptography_MD2_Create:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1960]
+ldr x0, [x16, #1968]
 bl _p_20
 .word 0xd280101e
 .word 0xb900181e
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #1728]
+ldr x1, [x16, #1736]
 .word 0xf9400021
 .word 0xf9001401
 .word 0x910003bf
 .word 0xa8c17bfd
 .word 0xd65f03c0
 
-Lme_175:
+Lme_176:
 .text
 	.align 4
 	.no_dead_strip Mono_Security_Cryptography_MD4__ctor
 Mono_Security_Cryptography_MD4__ctor:
-.file 32 "/Library/Frameworks/Xamarin.iOS.framework/Versions/11.6.1.4/src/mono/mcs/class/Mono.Security/Mono.Security.Cryptography/MD4.cs"
+.file 32 "/Library/Frameworks/Xamarin.iOS.framework/Versions/11.9.1.24/src/Xamarin.iOS/mcs/class/Mono.Security/Mono.Security.Cryptography/MD4.cs"
 .loc 32 45 0 prologue_end
 .word 0xa9be7bfd
 .word 0x910003fd
@@ -30277,7 +30455,7 @@ Mono_Security_Cryptography_MD4__ctor:
 .word 0xa8c27bfd
 .word 0xd65f03c0
 
-Lme_176:
+Lme_177:
 .text
 	.align 4
 	.no_dead_strip Mono_Security_Cryptography_MD4_Create
@@ -30288,33 +30466,33 @@ Mono_Security_Cryptography_MD4_Create:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1720]
+ldr x0, [x16, #1728]
 bl _p_20
 .word 0xd280101e
 .word 0xb900181e
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #1728]
+ldr x1, [x16, #1736]
 .word 0xf9400021
 .word 0xf9001401
 .word 0x910003bf
 .word 0xa8c17bfd
 .word 0xd65f03c0
 
-Lme_177:
+Lme_178:
 .text
 	.align 4
 	.no_dead_strip Mono_Security_Cryptography_PKCS1_CreateFromName_string
 Mono_Security_Cryptography_PKCS1_CreateFromName_string:
-.file 33 "/Library/Frameworks/Xamarin.iOS.framework/Versions/11.6.1.4/src/mono/mcs/class/Mono.Security/Mono.Security.Cryptography/PKCS1.cs"
+.file 33 "/Library/Frameworks/Xamarin.iOS.framework/Versions/11.9.1.24/src/Xamarin.iOS/mcs/class/Mono.Security/Mono.Security.Cryptography/PKCS1.cs"
 .loc 33 465 0 prologue_end
 .word 0xa9bb7bfd
 .word 0x910003fd
 .word 0xf9000bba
 .word 0xf9000fa0
 .word 0xf9400fa0
-bl _p_134
+bl _p_135
 .word 0xaa0003fa
 .word 0xaa1a03e0
 .word 0xd29ae67e
@@ -30369,8 +30547,8 @@ bl _p_134
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #888]
-bl _p_112
+ldr x1, [x16, #896]
+bl _p_113
 .word 0x53001c00
 .word 0x35000740
 .word 0x1400008f
@@ -30378,8 +30556,8 @@ bl _p_112
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #1968]
-bl _p_112
+ldr x1, [x16, #1976]
+bl _p_113
 .word 0x53001c00
 .word 0x350007c0
 .word 0x14000087
@@ -30387,8 +30565,8 @@ bl _p_112
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #904]
-bl _p_112
+ldr x1, [x16, #912]
+bl _p_113
 .word 0x53001c00
 .word 0x35000840
 .word 0x1400007f
@@ -30396,8 +30574,8 @@ bl _p_112
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #920]
-bl _p_112
+ldr x1, [x16, #928]
+bl _p_113
 .word 0x53001c00
 .word 0x350008c0
 .word 0x14000077
@@ -30405,8 +30583,8 @@ bl _p_112
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #1976]
-bl _p_112
+ldr x1, [x16, #1984]
+bl _p_113
 .word 0x53001c00
 .word 0x35000940
 .word 0x1400006f
@@ -30414,8 +30592,8 @@ bl _p_112
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #1984]
-bl _p_112
+ldr x1, [x16, #1992]
+bl _p_113
 .word 0x53001c00
 .word 0x350009c0
 .word 0x14000067
@@ -30423,8 +30601,8 @@ bl _p_112
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #1992]
-bl _p_112
+ldr x1, [x16, #2000]
+bl _p_113
 .word 0x53001c00
 .word 0x35000a40
 .word 0x1400005f
@@ -30432,8 +30610,8 @@ bl _p_112
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #2000]
-bl _p_112
+ldr x1, [x16, #2008]
+bl _p_113
 .word 0x53001c00
 .word 0x35000ac0
 .word 0x14000057
@@ -30441,14 +30619,14 @@ bl _p_112
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1960]
+ldr x0, [x16, #1968]
 bl _p_20
 .word 0xd280101e
 .word 0xb900181e
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #1728]
+ldr x1, [x16, #1736]
 .word 0xf9400021
 .word 0xf9001401
 .word 0x1400006a
@@ -30456,14 +30634,14 @@ ldr x1, [x16, #1728]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1720]
+ldr x0, [x16, #1728]
 bl _p_20
 .word 0xd280101e
 .word 0xb900181e
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #1728]
+ldr x1, [x16, #1736]
 .word 0xf9400021
 .word 0xf9001401
 .word 0x1400005e
@@ -30471,14 +30649,14 @@ ldr x1, [x16, #1728]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1768]
+ldr x0, [x16, #1776]
 bl _p_20
 .word 0xd280101e
 .word 0xb900181e
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #1728]
+ldr x1, [x16, #1736]
 .word 0xf9400021
 .word 0xf9001401
 .word 0x14000052
@@ -30486,14 +30664,14 @@ ldr x1, [x16, #1728]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #2008]
+ldr x0, [x16, #2016]
 bl _p_20
 .word 0xd280141e
 .word 0xb900181e
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #1728]
+ldr x1, [x16, #1736]
 .word 0xf9400021
 .word 0xf9001401
 .word 0x14000046
@@ -30501,14 +30679,14 @@ ldr x1, [x16, #1728]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #2016]
+ldr x0, [x16, #2024]
 bl _p_20
 .word 0xd280201e
 .word 0xb900181e
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #1728]
+ldr x1, [x16, #1736]
 .word 0xf9400021
 .word 0xf9001401
 .word 0x1400003a
@@ -30516,14 +30694,14 @@ ldr x1, [x16, #1728]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #2024]
+ldr x0, [x16, #2032]
 bl _p_20
 .word 0xd280301e
 .word 0xb900181e
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #1728]
+ldr x1, [x16, #1736]
 .word 0xf9400021
 .word 0xf9001401
 .word 0x1400002e
@@ -30531,24 +30709,24 @@ ldr x1, [x16, #1728]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #2032]
+ldr x0, [x16, #2040]
 bl _p_20
 .word 0xd280401e
 .word 0xb900181e
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #1728]
+ldr x1, [x16, #1736]
 .word 0xf9400021
 .word 0xf9001401
 .word 0x14000022
 .loc 33 481 0
-bl _p_281
+bl _p_282
 .word 0x14000020
 .loc 33 484 0
 .word 0xf9400fa0
-bl _p_282
 bl _p_283
+bl _p_284
 .word 0xaa0003fa
 .word 0xb400017a
 .word 0xf9400340
@@ -30558,7 +30736,7 @@ bl _p_283
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #2040]
+ldr x1, [x16, #2048]
 .word 0xeb01001f
 .word 0x10000011
 .word 0x540002a1
@@ -30570,7 +30748,7 @@ ldr x1, [x16, #2040]
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x0, [x16, #0]
-.word 0xd2827481
+.word 0xd2827581
 bl _p_7
 .word 0xf9400fa1
 bl _p_31
@@ -30585,11 +30763,11 @@ bl _p_8
 .word 0x910003bf
 .word 0xa8c57bfd
 .word 0xd65f03c0
-.word 0xd2801a80
+.word 0xd2801a60
 .word 0xaa1103e1
 bl _p_3
 
-Lme_178:
+Lme_179:
 .text
 	.align 4
 	.no_dead_strip Mono_Security_Cryptography_PKCS1__cctor
@@ -30600,7 +30778,7 @@ Mono_Security_Cryptography_PKCS1__cctor:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #208]
+ldr x0, [x16, #216]
 .word 0xd2800281
 bl _p_1
 .word 0xf90017a0
@@ -30608,20 +30786,20 @@ bl _p_1
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #2048]
+ldr x1, [x16, #2056]
 .word 0xd2800282
 bl _p_35
 .word 0xf94017a1
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #2056]
+ldr x0, [x16, #2064]
 .word 0xf9000001
 .loc 33 71 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #208]
+ldr x0, [x16, #216]
 .word 0xd2800401
 bl _p_1
 .word 0xf90013a0
@@ -30629,20 +30807,20 @@ bl _p_1
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #2064]
+ldr x1, [x16, #2072]
 .word 0xd2800402
 bl _p_35
 .word 0xf94013a1
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #2072]
+ldr x0, [x16, #2080]
 .word 0xf9000001
 .loc 33 72 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #208]
+ldr x0, [x16, #216]
 .word 0xd2800601
 bl _p_1
 .word 0xf9000fa0
@@ -30650,20 +30828,20 @@ bl _p_1
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #2080]
+ldr x1, [x16, #2088]
 .word 0xd2800602
 bl _p_35
 .word 0xf9400fa1
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #2088]
+ldr x0, [x16, #2096]
 .word 0xf9000001
 .loc 33 73 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #208]
+ldr x0, [x16, #216]
 .word 0xd2800801
 bl _p_1
 .word 0xf9000ba0
@@ -30671,25 +30849,25 @@ bl _p_1
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #2096]
+ldr x1, [x16, #2104]
 .word 0xd2800802
 bl _p_35
 .word 0xf9400ba1
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #2104]
+ldr x0, [x16, #2112]
 .word 0xf9000001
 .word 0x910003bf
 .word 0xa8c37bfd
 .word 0xd65f03c0
 
-Lme_179:
+Lme_17a:
 .text
 	.align 4
 	.no_dead_strip Mono_Security_Cryptography_PKCS8_PrivateKeyInfo__ctor
 Mono_Security_Cryptography_PKCS8_PrivateKeyInfo__ctor:
-.file 34 "/Library/Frameworks/Xamarin.iOS.framework/Versions/11.6.1.4/src/mono/mcs/class/Mono.Security/Mono.Security.Cryptography/PKCS8.cs"
+.file 34 "/Library/Frameworks/Xamarin.iOS.framework/Versions/11.9.1.24/src/Xamarin.iOS/mcs/class/Mono.Security/Mono.Security.Cryptography/PKCS8.cs"
 .loc 34 106 0 prologue_end
 .word 0xa9be7bfd
 .word 0x910003fd
@@ -30700,13 +30878,13 @@ Mono_Security_Cryptography_PKCS8_PrivateKeyInfo__ctor:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #400]
+ldr x0, [x16, #408]
 .word 0xd2800401
 bl _p_5
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #408]
+ldr x1, [x16, #416]
 .word 0xf9400021
 .word 0xf9000801
 .word 0x91004002
@@ -30740,7 +30918,7 @@ ldr x2, [x16, #16]
 .word 0xa8c27bfd
 .word 0xd65f03c0
 
-Lme_17a:
+Lme_17b:
 .text
 	.align 4
 	.no_dead_strip Mono_Security_Cryptography_PKCS8_PrivateKeyInfo__ctor_byte__
@@ -30751,17 +30929,17 @@ Mono_Security_Cryptography_PKCS8_PrivateKeyInfo__ctor_byte__:
 .word 0xf9000ba0
 .word 0xf9000fa1
 .word 0xf9400ba0
-bl _p_149
+bl _p_150
 .loc 34 112 0
 .word 0xf9400ba0
 .word 0xf9400fa1
-bl _p_284
+bl _p_285
 .loc 34 113 0
 .word 0x910003bf
 .word 0xa8c27bfd
 .word 0xd65f03c0
 
-Lme_17b:
+Lme_17c:
 .text
 	.align 4
 	.no_dead_strip Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_set_Algorithm_string
@@ -30790,7 +30968,7 @@ ldr x2, [x16, #16]
 .word 0xa8c27bfd
 .word 0xd65f03c0
 
-Lme_17c:
+Lme_17d:
 .text
 	.align 4
 	.no_dead_strip Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_get_PrivateKey
@@ -30825,7 +31003,7 @@ bl _p_2
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #392]
+ldr x1, [x16, #400]
 .word 0xeb01001f
 .word 0x10000011
 .word 0x54000141
@@ -30838,11 +31016,11 @@ ldr x1, [x16, #392]
 .word 0x910003bf
 .word 0xa8c27bfd
 .word 0xd65f03c0
-.word 0xd2801a80
+.word 0xd2801a60
 .word 0xaa1103e1
 bl _p_3
 
-Lme_17d:
+Lme_17e:
 .text
 	.align 4
 	.no_dead_strip Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_set_PrivateKey_byte__
@@ -30873,7 +31051,7 @@ bl _p_2
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #392]
+ldr x1, [x16, #400]
 .word 0xeb01001f
 .word 0x10000011
 .word 0x54000401
@@ -30905,18 +31083,18 @@ ldr x1, [x16, #16]
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x0, [x16, #0]
-.word 0xd2827bc1
+.word 0xd2827cc1
 bl _p_7
 .word 0xaa0003e1
-.word 0xd2800fe0
+.word 0xd2800fc0
 .word 0xf2a04000
 bl _mono_create_corlib_exception_1
 bl _p_8
-.word 0xd2801a80
+.word 0xd2801a60
 .word 0xaa1103e1
 bl _p_3
 
-Lme_17e:
+Lme_17f:
 .text
 	.align 4
 	.no_dead_strip Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_Decode_byte__
@@ -30931,12 +31109,12 @@ Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_Decode_byte__:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #456]
+ldr x0, [x16, #464]
 .word 0xd2800501
 bl _p_5
 .word 0xf9001ba0
 .word 0xaa1a03e1
-bl _p_86
+bl _p_87
 .word 0xf9401ba0
 .word 0xaa0003fa
 .loc 34 153 0
@@ -30951,7 +31129,7 @@ bl _p_86
 .word 0xaa1a03e0
 .word 0xd2800001
 .word 0xf940035e
-bl _p_100
+bl _p_101
 .word 0xaa0003f8
 .loc 34 157 0
 .word 0xaa1803e0
@@ -30964,7 +31142,7 @@ bl _p_100
 .loc 34 159 0
 .word 0xaa1803e0
 .word 0xf940031e
-bl _p_76
+bl _p_77
 .word 0xb9801801
 .word 0xeb1f003f
 .word 0x10000011
@@ -30975,7 +31153,7 @@ bl _p_76
 .word 0xaa1a03e0
 .word 0xd2800021
 .word 0xf940035e
-bl _p_100
+bl _p_101
 .loc 34 162 0
 .word 0xaa0003e1
 .word 0xf940001e
@@ -30988,7 +31166,7 @@ bl _p_100
 .word 0xaa1803e0
 .word 0xd2800001
 .word 0xf940031e
-bl _p_100
+bl _p_101
 .word 0xaa0003f8
 .loc 34 166 0
 .word 0xaa1803e0
@@ -31000,7 +31178,7 @@ bl _p_100
 .word 0x54000bc1
 .loc 34 168 0
 .word 0xaa1803e0
-bl _p_101
+bl _p_102
 .word 0xf9000b20
 .word 0x91004321
 .word 0xd349fc21
@@ -31018,12 +31196,12 @@ ldr x2, [x16, #16]
 .word 0xaa1a03e0
 .word 0xd2800041
 .word 0xf940035e
-bl _p_100
+bl _p_101
 .word 0xaa0003f8
 .loc 34 171 0
 .word 0xaa1803e0
 .word 0xf940031e
-bl _p_76
+bl _p_77
 .word 0xf9000f20
 .word 0x91006321
 .word 0xd349fc21
@@ -31049,7 +31227,7 @@ bl _p_68
 .word 0xaa1a03e0
 .word 0xd2800061
 .word 0xf940035e
-bl _p_100
+bl _p_101
 .word 0xaa0003fa
 .loc 34 176 0
 .word 0xd2800018
@@ -31060,7 +31238,7 @@ bl _p_100
 .word 0xaa1a03e0
 .word 0xaa1803e1
 .word 0xf940035e
-bl _p_100
+bl _p_101
 .word 0xaa0003e1
 .word 0xf9401ba2
 .word 0xaa0203e0
@@ -31087,7 +31265,7 @@ bl _p_68
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x0, [x16, #0]
-.word 0xd2828441
+.word 0xd2828541
 bl _p_7
 .word 0xaa0003e1
 .word 0xd28087e0
@@ -31099,7 +31277,7 @@ bl _p_8
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x0, [x16, #0]
-.word 0xd2828841
+.word 0xd2828941
 bl _p_7
 .word 0xaa0003e1
 .word 0xd28087e0
@@ -31111,7 +31289,7 @@ bl _p_8
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x0, [x16, #0]
-.word 0xd2828cc1
+.word 0xd2828dc1
 bl _p_7
 .word 0xaa0003e1
 .word 0xd28087e0
@@ -31123,24 +31301,24 @@ adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x0, [x16, #0]
 .loc 34 154 0
-.word 0xd2827e81
+.word 0xd2827f81
 bl _p_7
 .word 0xaa0003e1
 .word 0xd28087e0
 .word 0xf2a04000
 bl _mono_create_corlib_exception_1
 bl _p_8
-.word 0xd2801a00
+.word 0xd28019e0
 .word 0xaa1103e1
 bl _p_3
 
-Lme_17f:
+Lme_180:
 .text
 	.align 4
 	.no_dead_strip Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_GetBytes
 Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_GetBytes:
 .loc 34 184 0 prologue_end
-.word 0xa9b37bfd
+.word 0xa9b27bfd
 .word 0x910003fd
 .word 0xa90163b7
 .word 0xa9026bb9
@@ -31150,105 +31328,105 @@ Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_GetBytes:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #456]
+ldr x0, [x16, #464]
 .word 0xd2800501
 bl _p_5
-.word 0xf90063a0
+.word 0xf9006ba0
 .word 0xd2800601
-bl _p_83
-.word 0xf94063a0
+bl _p_84
+.word 0xf9406ba0
 .loc 34 185 0
-.word 0xf9005ba0
-.word 0xf9005fa0
+.word 0xf90063a0
+.word 0xf90067a0
 .word 0xf9400b40
-bl _p_103
+bl _p_104
 .word 0xaa0003e1
-.word 0xf9405fa2
+.word 0xf94067a2
 .word 0xaa0203e0
 .word 0xf940005e
-bl _p_70
+bl _p_71
 .loc 34 186 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #456]
+ldr x0, [x16, #464]
 .word 0xd2800501
 bl _p_5
-.word 0xf90057a0
+.word 0xf9005fa0
 .word 0xd28000a1
-bl _p_83
-.word 0xf94057a1
-.word 0xf9405ba2
+bl _p_84
+.word 0xf9405fa1
+.word 0xf94063a2
 .word 0xaa0203e0
 .word 0xf940005e
-.word 0xf90043a2
-bl _p_70
+.word 0xf9004ba2
+bl _p_71
 .loc 34 188 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #456]
+ldr x0, [x16, #464]
 .word 0xd2800501
 bl _p_5
-.word 0xf90053a0
+.word 0xf9005ba0
 .word 0xd2800601
-bl _p_83
-.word 0xf94053a0
+bl _p_84
+.word 0xf9405ba0
 .word 0xaa0003f9
 .loc 34 189 0
 .word 0xaa1903e0
-.word 0xf9004ba0
+.word 0xf90053a0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #208]
+ldr x0, [x16, #216]
 .word 0xd2800021
 bl _p_1
 .word 0xaa0003e1
-.word 0xf9004fa1
+.word 0xf90057a1
 .word 0xb9802b41
 .word 0xb9801802
 .word 0xeb1f005f
 .word 0x10000011
-.word 0x54001509
+.word 0x54001589
 .word 0x39008001
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #456]
+ldr x0, [x16, #464]
 .word 0xd2800501
 bl _p_5
-.word 0xf9404fa2
-.word 0xf90047a0
+.word 0xf94057a2
+.word 0xf9004fa0
 .word 0xd2800041
 bl _p_65
-.word 0xf94047a1
-.word 0xf9404ba2
+.word 0xf9404fa1
+.word 0xf94053a2
 .word 0xaa0203e0
 .word 0xf940005e
-bl _p_70
-.word 0xf94043a1
+bl _p_71
+.word 0xf9404ba1
 .loc 34 190 0
 .word 0xaa1903e0
 .word 0xf940033e
-bl _p_70
+bl _p_71
 .loc 34 191 0
 .word 0xf9400f40
-.word 0xf9003fa0
+.word 0xf90047a0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #456]
+ldr x0, [x16, #464]
 .word 0xd2800501
 bl _p_5
-.word 0xf9403fa2
-.word 0xf9003ba0
+.word 0xf94047a2
+.word 0xf90043a0
 .word 0xd2800081
 bl _p_65
-.word 0xf9403ba1
+.word 0xf94043a1
 .word 0xaa1903e0
 .word 0xf940033e
-bl _p_70
+bl _p_71
 .loc 34 193 0
 .word 0xf9401341
 .word 0xaa0103e0
@@ -31257,18 +31435,18 @@ bl _p_70
 .word 0xd63f0200
 .word 0x93407c00
 .word 0x6b1f001f
-.word 0x54000e4d
+.word 0x54000ecd
 .loc 34 194 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #456]
+ldr x0, [x16, #464]
 .word 0xd2800501
 bl _p_5
-.word 0xf9003ba0
+.word 0xf90043a0
 .word 0xd2801401
-bl _p_83
-.word 0xf9403ba0
+bl _p_84
+.word 0xf94043a0
 .word 0xaa0003f8
 .loc 34 195 0
 .word 0xf9401341
@@ -31284,7 +31462,7 @@ bl _p_83
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x15, [x16, #416]
+ldr x15, [x16, #424]
 .word 0x928003f0
 .word 0xf2bffff0
 .word 0xf8706830
@@ -31298,16 +31476,16 @@ ldr x15, [x16, #416]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #424]
+ldr x1, [x16, #432]
 .word 0xeb01001f
 .word 0x10000011
-.word 0x54000a81
+.word 0x54000b01
 .word 0xaa1a03f7
 .loc 34 196 0
 .word 0xaa1803e0
 .word 0xaa1a03e1
 .word 0xf940031e
-bl _p_70
+bl _p_71
 .loc 34 195 0
 .word 0xf9401ba1
 .word 0xaa0103e0
@@ -31315,40 +31493,44 @@ bl _p_70
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x15, [x16, #432]
+ldr x15, [x16, #440]
 .word 0x92800ef0
 .word 0xf2bffff0
 .word 0xf8706830
 .word 0xd63f0200
 .word 0x53001c00
 .word 0x35fffb40
-.word 0x94000002
+.word 0xf90023bf
+.word 0x94000005
+.word 0xf94023a0
+.word 0xb4000040
+bl _p_69
 .word 0x14000034
-.word 0xf90037be
+.word 0xf9003bbe
 .word 0xf9401ba0
-.word 0xf90023a0
-.word 0xf94023a0
 .word 0xf90027a0
-.word 0xf94023a0
+.word 0xf94027a0
+.word 0xf9002ba0
+.word 0xf94027a0
 .word 0xeb1f001f
 .word 0x54000380
-.word 0xf94023a0
+.word 0xf94027a0
 .word 0xf9400000
-.word 0xf9002ba0
-.word 0xf9402ba0
+.word 0xf9002fa0
+.word 0xf9402fa0
 .word 0xb9402800
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #440]
+ldr x1, [x16, #448]
 .word 0xeb01001f
 .word 0x540001e3
-.word 0xf9402ba0
+.word 0xf9402fa0
 .word 0xf9401000
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #440]
+ldr x1, [x16, #448]
 .word 0x9343fc22
 .word 0x8b020000
 .word 0x39400000
@@ -31359,9 +31541,9 @@ ldr x1, [x16, #440]
 .word 0xa010000
 .word 0xb5000080
 .word 0x14000001
-.word 0xf90027bf
+.word 0xf9002bbf
 .word 0x14000001
-.word 0xf94027a0
+.word 0xf9402ba0
 .word 0xf9001fa0
 .word 0xf9401fa0
 .word 0xb4000160
@@ -31371,18 +31553,18 @@ ldr x1, [x16, #440]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x15, [x16, #448]
+ldr x15, [x16, #456]
 .word 0x928004f0
 .word 0xf2bffff0
 .word 0xf8706830
 .word 0xd63f0200
-.word 0xf94037be
+.word 0xf9403bbe
 .word 0xd61f03c0
 .loc 34 198 0
 .word 0xaa1903e0
 .word 0xaa1803e1
 .word 0xf940033e
-bl _p_70
+bl _p_71
 .loc 34 201 0
 .word 0xaa1903e0
 .word 0xf9400321
@@ -31391,16 +31573,16 @@ bl _p_70
 .word 0xa94163b7
 .word 0xa9426bb9
 .word 0x910003bf
-.word 0xa8cd7bfd
+.word 0xa8ce7bfd
 .word 0xd65f03c0
-.word 0xd2801a80
+.word 0xd2801a60
 .word 0xaa1103e1
 bl _p_3
-.word 0xd2801a00
+.word 0xd28019e0
 .word 0xaa1103e1
 bl _p_3
 
-Lme_180:
+Lme_181:
 .text
 	.align 4
 	.no_dead_strip Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_RemoveLeadingZero_byte__
@@ -31429,7 +31611,7 @@ Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_RemoveLeadingZero_byte__:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #208]
+ldr x0, [x16, #216]
 .word 0xaa1803e1
 bl _p_1
 .word 0xaa0003f7
@@ -31447,11 +31629,11 @@ bl _p_21
 .word 0x910003bf
 .word 0xa8c37bfd
 .word 0xd65f03c0
-.word 0xd2801a00
+.word 0xd28019e0
 .word 0xaa1103e1
 bl _p_3
 
-Lme_181:
+Lme_182:
 .text
 	.align 4
 	.no_dead_strip Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_Normalize_byte___int
@@ -31475,13 +31657,13 @@ Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_Normalize_byte___int:
 .word 0x5400008d
 .loc 34 224 0
 .word 0xaa1903e0
-bl _p_285
+bl _p_286
 .word 0x1400000f
 .loc 34 227 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #208]
+ldr x0, [x16, #216]
 .word 0xaa1a03e1
 bl _p_1
 .word 0xaa0003f8
@@ -31501,7 +31683,7 @@ bl _p_21
 .word 0xa8c37bfd
 .word 0xd65f03c0
 
-Lme_182:
+Lme_183:
 .text
 	.align 4
 	.no_dead_strip Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_DecodeRSA_byte__
@@ -31524,12 +31706,12 @@ Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_DecodeRSA_byte__:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #456]
+ldr x0, [x16, #464]
 .word 0xd2800501
 bl _p_5
 .word 0xf900aba0
 .word 0xaa1a03e1
-bl _p_86
+bl _p_87
 .word 0xf940aba0
 .word 0xaa0003fa
 .loc 34 250 0
@@ -31544,7 +31726,7 @@ bl _p_86
 .word 0xaa1a03e0
 .word 0xd2800001
 .word 0xf940035e
-bl _p_100
+bl _p_101
 .word 0xaa0003e1
 .word 0xf940003e
 .word 0x39408000
@@ -31576,12 +31758,12 @@ bl _p_68
 .word 0xaa1a03e0
 .word 0xd2800021
 .word 0xf940035e
-bl _p_100
+bl _p_101
 .word 0xaa0003e1
 .word 0xaa0103e0
 .word 0xf940003e
-bl _p_76
-bl _p_285
+bl _p_77
+bl _p_286
 .word 0xf940c7a1
 .word 0xf9007ba0
 .word 0x91002021
@@ -31624,13 +31806,13 @@ ldr x2, [x16, #16]
 .word 0xaa1a03e0
 .word 0xd2800061
 .word 0xf940035e
-bl _p_100
+bl _p_101
 .word 0xaa0003e1
 .word 0xaa0103e0
 .word 0xf940003e
-bl _p_76
+bl _p_77
 .word 0xaa1903e1
-bl _p_286
+bl _p_287
 .word 0xf940c3a1
 .word 0xf90093a0
 .word 0x9100e021
@@ -31651,13 +31833,13 @@ ldr x2, [x16, #16]
 .word 0xaa1a03e0
 .word 0xd28000c1
 .word 0xf940035e
-bl _p_100
+bl _p_101
 .word 0xaa0003e1
 .word 0xaa0103e0
 .word 0xf940003e
-bl _p_76
+bl _p_77
 .word 0xaa1803e1
-bl _p_286
+bl _p_287
 .word 0xf940bfa1
 .word 0xf90087a0
 .word 0x91008021
@@ -31678,13 +31860,13 @@ ldr x2, [x16, #16]
 .word 0xaa1a03e0
 .word 0xd28000e1
 .word 0xf940035e
-bl _p_100
+bl _p_101
 .word 0xaa0003e1
 .word 0xaa0103e0
 .word 0xf940003e
-bl _p_76
+bl _p_77
 .word 0xaa1803e1
-bl _p_286
+bl _p_287
 .word 0xf940bba1
 .word 0xf9008ba0
 .word 0x9100a021
@@ -31705,12 +31887,12 @@ ldr x2, [x16, #16]
 .word 0xaa1a03e0
 .word 0xd2800041
 .word 0xf940035e
-bl _p_100
+bl _p_101
 .word 0xaa0003e1
 .word 0xaa0103e0
 .word 0xf940003e
-bl _p_76
-bl _p_285
+bl _p_77
+bl _p_286
 .word 0xf940b7a1
 .word 0xf90077a0
 .word 0xd349fc21
@@ -31730,13 +31912,13 @@ ldr x2, [x16, #16]
 .word 0xaa1a03e0
 .word 0xd2800101
 .word 0xf940035e
-bl _p_100
+bl _p_101
 .word 0xaa0003e1
 .word 0xaa0103e0
 .word 0xf940003e
-bl _p_76
+bl _p_77
 .word 0xaa1803e1
-bl _p_286
+bl _p_287
 .word 0xf940b3a1
 .word 0xf9008fa0
 .word 0x9100c021
@@ -31757,13 +31939,13 @@ ldr x2, [x16, #16]
 .word 0xaa1a03e0
 .word 0xd2800081
 .word 0xf940035e
-bl _p_100
+bl _p_101
 .word 0xaa0003e1
 .word 0xaa0103e0
 .word 0xf940003e
-bl _p_76
+bl _p_77
 .word 0xaa1803e1
-bl _p_286
+bl _p_287
 .word 0xf940afa1
 .word 0xf9007fa0
 .word 0x91004021
@@ -31784,13 +31966,13 @@ ldr x2, [x16, #16]
 .word 0xaa1a03e0
 .word 0xd28000a1
 .word 0xf940035e
-bl _p_100
+bl _p_101
 .word 0xaa0003e1
 .word 0xaa0103e0
 .word 0xf940003e
-bl _p_76
+bl _p_77
 .word 0xaa1803e1
-bl _p_286
+bl _p_287
 .word 0xf940aba1
 .word 0xf90083a0
 .word 0x91006021
@@ -31806,7 +31988,7 @@ ldr x2, [x16, #16]
 .word 0xd280003e
 .word 0x3900003e
 .loc 34 276 0
-bl _p_287
+bl _p_288
 .word 0xaa0003fa
 .loc 34 277 0
 .word 0xaa1a03e2
@@ -31852,7 +32034,7 @@ bl _p_287
 .word 0xf90097a0
 .loc 34 283 0
 .word 0xf94097a0
-bl _p_288
+bl _p_289
 .loc 34 294 0
 .word 0xaa1a03e0
 .word 0xa94167b8
@@ -31865,7 +32047,7 @@ bl _p_288
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x0, [x16, #0]
-.word 0xd2829901
+.word 0xd2829a01
 bl _p_7
 .word 0xaa0003e1
 .word 0xd28087e0
@@ -31877,7 +32059,7 @@ bl _p_8
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x0, [x16, #0]
-.word 0xd2829d01
+.word 0xd2829e01
 bl _p_7
 .word 0xaa0003e1
 .word 0xd28087e0
@@ -31889,7 +32071,7 @@ adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x0, [x16, #0]
 .loc 34 251 0
-.word 0xd2829241
+.word 0xd2829341
 bl _p_7
 .word 0xaa0003e1
 .word 0xd28087e0
@@ -31897,7 +32079,7 @@ bl _p_7
 bl _mono_create_corlib_exception_1
 bl _p_8
 
-Lme_183:
+Lme_184:
 .text
 	.align 4
 	.no_dead_strip Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_Encode_System_Security_Cryptography_RSA
@@ -31921,12 +32103,12 @@ Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_Encode_System_Security_Cryptogra
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #456]
+ldr x0, [x16, #464]
 .word 0xd2800501
 bl _p_5
 .word 0xf90163a0
 .word 0xd2800601
-bl _p_83
+bl _p_84
 .word 0xf94163a0
 .loc 34 316 0
 .word 0xf90153a0
@@ -31934,14 +32116,14 @@ bl _p_83
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #208]
+ldr x0, [x16, #216]
 .word 0xd2800021
 bl _p_1
 .word 0xf9015fa0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #456]
+ldr x0, [x16, #464]
 .word 0xd2800501
 bl _p_5
 .word 0xf9415fa2
@@ -31952,7 +32134,7 @@ bl _p_65
 .word 0xf9415ba2
 .word 0xaa0203e0
 .word 0xf940005e
-bl _p_70
+bl _p_71
 .loc 34 317 0
 .word 0xf9400fa0
 .word 0xf9010fa0
@@ -31971,13 +32153,13 @@ bl _p_70
 .word 0xf9402ba0
 .word 0xf9012ba0
 .word 0xf94113a0
-bl _p_289
+bl _p_290
 .word 0xaa0003e1
 .word 0xf94153a2
 .word 0xaa0203e0
 .word 0xf940005e
 .word 0xf9014fa2
-bl _p_70
+bl _p_71
 .loc 34 318 0
 .word 0xf9400fa0
 .word 0xf900efa0
@@ -31996,13 +32178,13 @@ bl _p_70
 .word 0xf9402ba0
 .word 0xf9010ba0
 .word 0xf940efa0
-bl _p_289
+bl _p_290
 .word 0xaa0003e1
 .word 0xf9414fa2
 .word 0xaa0203e0
 .word 0xf940005e
 .word 0xf9014ba2
-bl _p_70
+bl _p_71
 .loc 34 319 0
 .word 0xf9400fa0
 .word 0xf900cfa0
@@ -32021,13 +32203,13 @@ bl _p_70
 .word 0xf9402ba0
 .word 0xf900eba0
 .word 0xf940eba0
-bl _p_289
+bl _p_290
 .word 0xaa0003e1
 .word 0xf9414ba2
 .word 0xaa0203e0
 .word 0xf940005e
 .word 0xf90147a2
-bl _p_70
+bl _p_71
 .loc 34 320 0
 .word 0xf9400fa0
 .word 0xf900afa0
@@ -32046,13 +32228,13 @@ bl _p_70
 .word 0xf9402ba0
 .word 0xf900cba0
 .word 0xf940b7a0
-bl _p_289
+bl _p_290
 .word 0xaa0003e1
 .word 0xf94147a2
 .word 0xaa0203e0
 .word 0xf940005e
 .word 0xf90143a2
-bl _p_70
+bl _p_71
 .loc 34 321 0
 .word 0xf9400fa0
 .word 0xf9008fa0
@@ -32071,13 +32253,13 @@ bl _p_70
 .word 0xf9402ba0
 .word 0xf900aba0
 .word 0xf9409ba0
-bl _p_289
+bl _p_290
 .word 0xaa0003e1
 .word 0xf94143a2
 .word 0xaa0203e0
 .word 0xf940005e
 .word 0xf9013fa2
-bl _p_70
+bl _p_71
 .loc 34 322 0
 .word 0xf9400fa0
 .word 0xf9006fa0
@@ -32096,13 +32278,13 @@ bl _p_70
 .word 0xf9402ba0
 .word 0xf9008ba0
 .word 0xf9407fa0
-bl _p_289
+bl _p_290
 .word 0xaa0003e1
 .word 0xf9413fa2
 .word 0xaa0203e0
 .word 0xf940005e
 .word 0xf9013ba2
-bl _p_70
+bl _p_71
 .loc 34 323 0
 .word 0xf9400fa0
 .word 0xf9004fa0
@@ -32121,13 +32303,13 @@ bl _p_70
 .word 0xf9402ba0
 .word 0xf9006ba0
 .word 0xf94063a0
-bl _p_289
+bl _p_290
 .word 0xaa0003e1
 .word 0xf9413ba2
 .word 0xaa0203e0
 .word 0xf940005e
 .word 0xf90137a2
-bl _p_70
+bl _p_71
 .loc 34 324 0
 .word 0xf9400fa0
 .word 0xf9002fa0
@@ -32146,13 +32328,13 @@ bl _p_70
 .word 0xf9402ba0
 .word 0xf9004ba0
 .word 0xf94047a0
-bl _p_289
+bl _p_290
 .word 0xaa0003e1
 .word 0xf94137a2
 .word 0xaa0203e0
 .word 0xf940005e
 .word 0xf90133a2
-bl _p_70
+bl _p_71
 .word 0xf94133a1
 .loc 34 326 0
 .word 0xaa0103e0
@@ -32167,7 +32349,7 @@ bl _p_70
 .word 0x9100023f
 .word 0xd65f03c0
 
-Lme_184:
+Lme_185:
 .text
 	.align 4
 	.no_dead_strip Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_DecodeDSA_byte___System_Security_Cryptography_DSAParameters
@@ -32181,12 +32363,12 @@ Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_DecodeDSA_byte___System_Security
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #456]
+ldr x0, [x16, #464]
 .word 0xd2800501
 bl _p_5
 .word 0xf90053a0
 .word 0xaa1a03e1
-bl _p_86
+bl _p_87
 .word 0xf94053a0
 .word 0xaa0003fa
 .loc 34 337 0
@@ -32202,9 +32384,9 @@ bl _p_86
 .word 0xf90057a0
 .word 0xaa1a03e0
 .word 0xf940035e
-bl _p_76
+bl _p_77
 .word 0xd2800281
-bl _p_286
+bl _p_287
 .word 0xf94057a1
 .word 0xf9001420
 .word 0x9100a021
@@ -32220,7 +32402,7 @@ ldr x2, [x16, #16]
 .word 0xd280003e
 .word 0x3900003e
 .loc 34 342 0
-bl _p_290
+bl _p_291
 .word 0xaa0003e2
 .loc 34 343 0
 .word 0xaa0203e0
@@ -32274,7 +32456,7 @@ bl _p_290
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x0, [x16, #0]
-.word 0xd2829241
+.word 0xd2829341
 bl _p_7
 .word 0xaa0003e1
 .word 0xd28087e0
@@ -32282,7 +32464,7 @@ bl _p_7
 bl _mono_create_corlib_exception_1
 bl _p_8
 
-Lme_185:
+Lme_186:
 .text
 	.align 4
 	.no_dead_strip Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_Encode_System_Security_Cryptography_DSA
@@ -32300,7 +32482,7 @@ Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_Encode_System_Security_Cryptogra
 .word 0xd63f0200
 .loc 34 350 0
 .word 0xf94023a0
-bl _p_289
+bl _p_290
 .word 0xaa0003e1
 .word 0xaa0103e0
 .word 0xf9400021
@@ -32310,7 +32492,7 @@ bl _p_289
 .word 0xa8c67bfd
 .word 0xd65f03c0
 
-Lme_186:
+Lme_187:
 .text
 	.align 4
 	.no_dead_strip Mono_Security_Cryptography_PKCS8_EncryptedPrivateKeyInfo__ctor
@@ -32323,7 +32505,7 @@ Mono_Security_Cryptography_PKCS8_EncryptedPrivateKeyInfo__ctor:
 .word 0xa8c27bfd
 .word 0xd65f03c0
 
-Lme_187:
+Lme_188:
 .text
 	.align 4
 	.no_dead_strip Mono_Security_Cryptography_PKCS8_EncryptedPrivateKeyInfo__ctor_byte__
@@ -32335,13 +32517,13 @@ Mono_Security_Cryptography_PKCS8_EncryptedPrivateKeyInfo__ctor_byte__:
 .word 0xf9000fa1
 .word 0xf9400ba0
 .word 0xf9400fa1
-bl _p_291
+bl _p_292
 .loc 34 398 0
 .word 0x910003bf
 .word 0xa8c27bfd
 .word 0xd65f03c0
 
-Lme_188:
+Lme_189:
 .text
 	.align 4
 	.no_dead_strip Mono_Security_Cryptography_PKCS8_EncryptedPrivateKeyInfo_get_Algorithm
@@ -32356,7 +32538,7 @@ Mono_Security_Cryptography_PKCS8_EncryptedPrivateKeyInfo_get_Algorithm:
 .word 0xa8c27bfd
 .word 0xd65f03c0
 
-Lme_189:
+Lme_18a:
 .text
 	.align 4
 	.no_dead_strip Mono_Security_Cryptography_PKCS8_EncryptedPrivateKeyInfo_set_Algorithm_string
@@ -32385,7 +32567,7 @@ ldr x2, [x16, #16]
 .word 0xa8c27bfd
 .word 0xd65f03c0
 
-Lme_18a:
+Lme_18b:
 .text
 	.align 4
 	.no_dead_strip Mono_Security_Cryptography_PKCS8_EncryptedPrivateKeyInfo_get_EncryptedData
@@ -32416,7 +32598,7 @@ bl _p_2
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #392]
+ldr x1, [x16, #400]
 .word 0xeb01001f
 .word 0x10000011
 .word 0x54000181
@@ -32431,11 +32613,11 @@ ldr x1, [x16, #392]
 .word 0x910003bf
 .word 0xa8c27bfd
 .word 0xd65f03c0
-.word 0xd2801a80
+.word 0xd2801a60
 .word 0xaa1103e1
 bl _p_3
 
-Lme_18b:
+Lme_18c:
 .text
 	.align 4
 	.no_dead_strip Mono_Security_Cryptography_PKCS8_EncryptedPrivateKeyInfo_set_EncryptedData_byte__
@@ -32467,7 +32649,7 @@ bl _p_2
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #392]
+ldr x1, [x16, #400]
 .word 0xeb01001f
 .word 0x10000011
 .word 0x54000301
@@ -32495,11 +32677,11 @@ ldr x1, [x16, #16]
 .word 0x910003bf
 .word 0xa8c37bfd
 .word 0xd65f03c0
-.word 0xd2801a80
+.word 0xd2801a60
 .word 0xaa1103e1
 bl _p_3
 
-Lme_18c:
+Lme_18d:
 .text
 	.align 4
 	.no_dead_strip Mono_Security_Cryptography_PKCS8_EncryptedPrivateKeyInfo_get_Salt
@@ -32515,13 +32697,13 @@ Mono_Security_Cryptography_PKCS8_EncryptedPrivateKeyInfo_get_Salt:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #248]
+ldr x0, [x16, #256]
 bl _p_20
 .word 0xf90013a0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #208]
+ldr x0, [x16, #216]
 .word 0xd2800101
 bl _p_1
 .word 0xf94013a2
@@ -32565,7 +32747,7 @@ bl _p_2
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #392]
+ldr x1, [x16, #400]
 .word 0xeb01001f
 .word 0x10000011
 .word 0x54000141
@@ -32578,11 +32760,11 @@ ldr x1, [x16, #392]
 .word 0x910003bf
 .word 0xa8c37bfd
 .word 0xd65f03c0
-.word 0xd2801a80
+.word 0xd2801a60
 .word 0xaa1103e1
 bl _p_3
 
-Lme_18d:
+Lme_18e:
 .text
 	.align 4
 	.no_dead_strip Mono_Security_Cryptography_PKCS8_EncryptedPrivateKeyInfo_get_IterationCount
@@ -32597,7 +32779,7 @@ Mono_Security_Cryptography_PKCS8_EncryptedPrivateKeyInfo_get_IterationCount:
 .word 0xa8c27bfd
 .word 0xd65f03c0
 
-Lme_18e:
+Lme_18f:
 .text
 	.align 4
 	.no_dead_strip Mono_Security_Cryptography_PKCS8_EncryptedPrivateKeyInfo_set_IterationCount_int
@@ -32623,23 +32805,23 @@ Mono_Security_Cryptography_PKCS8_EncryptedPrivateKeyInfo_set_IterationCount_int:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x0, [x16, #0]
-.word 0xd282a381
+.word 0xd282a481
 bl _p_7
 .word 0xf90013a0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x0, [x16, #0]
-.word 0xd282a741
+.word 0xd282a841
 bl _p_7
 .word 0xaa0003e2
 .word 0xf94013a1
-.word 0xd2801000
+.word 0xd2800fe0
 .word 0xf2a04000
 bl _mono_create_corlib_exception_2
 bl _p_8
 
-Lme_18f:
+Lme_190:
 .text
 	.align 4
 	.no_dead_strip Mono_Security_Cryptography_PKCS8_EncryptedPrivateKeyInfo_Decode_byte__
@@ -32654,12 +32836,12 @@ Mono_Security_Cryptography_PKCS8_EncryptedPrivateKeyInfo_Decode_byte__:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #456]
+ldr x0, [x16, #464]
 .word 0xd2800501
 bl _p_5
 .word 0xf9001ba0
 .word 0xaa1a03e1
-bl _p_86
+bl _p_87
 .word 0xf9401ba0
 .loc 34 438 0
 .word 0xaa0003e1
@@ -32673,7 +32855,7 @@ bl _p_86
 .word 0xaa1a03e0
 .word 0xd2800001
 .word 0xf940035e
-bl _p_100
+bl _p_101
 .word 0xaa0003f8
 .loc 34 442 0
 .word 0xaa1803e0
@@ -32687,7 +32869,7 @@ bl _p_100
 .word 0xaa1803e0
 .word 0xd2800001
 .word 0xf940031e
-bl _p_100
+bl _p_101
 .word 0xaa0003f7
 .loc 34 445 0
 .word 0xaa1703e0
@@ -32699,7 +32881,7 @@ bl _p_100
 .word 0x54000ec1
 .loc 34 447 0
 .word 0xaa1703e0
-bl _p_101
+bl _p_102
 .word 0xf9000b20
 .word 0x91004321
 .word 0xd349fc21
@@ -32725,7 +32907,7 @@ bl _p_68
 .word 0xaa1803e0
 .word 0xd2800021
 .word 0xf940031e
-bl _p_100
+bl _p_101
 .loc 34 451 0
 .word 0xaa0003e1
 .word 0xf940001e
@@ -32738,7 +32920,7 @@ bl _p_100
 .word 0xaa1803e0
 .word 0xd2800001
 .word 0xf940031e
-bl _p_100
+bl _p_101
 .word 0xaa0003f7
 .loc 34 455 0
 .word 0xaa1703e0
@@ -32751,7 +32933,7 @@ bl _p_100
 .loc 34 457 0
 .word 0xaa1703e0
 .word 0xf94002fe
-bl _p_76
+bl _p_77
 .word 0xf9000f20
 .word 0x91006321
 .word 0xd349fc21
@@ -32769,7 +32951,7 @@ ldr x2, [x16, #16]
 .word 0xaa1803e0
 .word 0xd2800021
 .word 0xf940031e
-bl _p_100
+bl _p_101
 .word 0xaa0003f8
 .loc 34 460 0
 .word 0xaa1803e0
@@ -32781,14 +32963,14 @@ bl _p_100
 .word 0x540009a1
 .loc 34 462 0
 .word 0xaa1803e0
-bl _p_109
+bl _p_110
 .word 0x93407c00
 .word 0xb9002b20
 .loc 34 465 0
 .word 0xaa1a03e0
 .word 0xd2800021
 .word 0xf940035e
-bl _p_100
+bl _p_101
 .word 0xaa0003fa
 .loc 34 466 0
 .word 0xaa1a03e0
@@ -32801,7 +32983,7 @@ bl _p_100
 .loc 34 468 0
 .word 0xaa1a03e0
 .word 0xf940035e
-bl _p_76
+bl _p_77
 .word 0xf9001320
 .word 0x91008321
 .word 0xd349fc21
@@ -32826,7 +33008,7 @@ ldr x2, [x16, #16]
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x0, [x16, #0]
-.word 0xd282b181
+.word 0xd282b281
 bl _p_7
 .word 0xaa0003e1
 .word 0xd28087e0
@@ -32838,7 +33020,7 @@ bl _p_8
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x0, [x16, #0]
-.word 0xd2828841
+.word 0xd2828941
 bl _p_7
 .word 0xaa0003e1
 .word 0xd28087e0
@@ -32850,7 +33032,7 @@ bl _p_8
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x0, [x16, #0]
-.word 0xd282b881
+.word 0xd282b981
 bl _p_7
 .word 0xaa0003e1
 .word 0xd28087e0
@@ -32862,7 +33044,7 @@ bl _p_8
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x0, [x16, #0]
-.word 0xd282bd41
+.word 0xd282be41
 bl _p_7
 .word 0xaa0003e1
 .word 0xd28087e0
@@ -32874,7 +33056,7 @@ bl _p_8
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x0, [x16, #0]
-.word 0xd282c081
+.word 0xd282c181
 bl _p_7
 .word 0xaa0003e1
 .word 0xd28087e0
@@ -32886,7 +33068,7 @@ bl _p_8
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x0, [x16, #0]
-.word 0xd282c641
+.word 0xd282c741
 bl _p_7
 .word 0xaa0003e1
 .word 0xd28087e0
@@ -32898,7 +33080,7 @@ adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x0, [x16, #0]
 .loc 34 439 0
-.word 0xd282a981
+.word 0xd282aa81
 bl _p_7
 .word 0xaa0003e1
 .word 0xd28087e0
@@ -32906,7 +33088,7 @@ bl _p_7
 bl _mono_create_corlib_exception_1
 bl _p_8
 
-Lme_190:
+Lme_191:
 .text
 	.align 4
 	.no_dead_strip Mono_Security_Cryptography_PKCS8_EncryptedPrivateKeyInfo_GetBytes
@@ -32923,24 +33105,24 @@ Mono_Security_Cryptography_PKCS8_EncryptedPrivateKeyInfo_GetBytes:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #456]
+ldr x0, [x16, #464]
 .word 0xd2800501
 bl _p_5
 .word 0xf90027a0
 .word 0xd2800601
-bl _p_83
+bl _p_84
 .word 0xf94027a0
 .word 0xaa0003f9
 .loc 34 481 0
 .word 0xaa1903e0
 .word 0xf90023a0
 .word 0xf9400b40
-bl _p_103
+bl _p_104
 .word 0xaa0003e1
 .word 0xf94023a2
 .word 0xaa0203e0
 .word 0xf940005e
-bl _p_70
+bl _p_71
 .loc 34 484 0
 .word 0xb9802b40
 .word 0x6b1f001f
@@ -32953,7 +33135,7 @@ bl _p_70
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #456]
+ldr x0, [x16, #464]
 .word 0xd2800501
 bl _p_5
 .word 0xf9402ba2
@@ -32964,18 +33146,18 @@ bl _p_65
 .word 0xf90017a0
 .loc 34 486 0
 .word 0xb9802b40
-bl _p_166
+bl _p_167
 .word 0xf9001ba0
 .loc 34 488 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #456]
+ldr x0, [x16, #464]
 .word 0xd2800501
 bl _p_5
 .word 0xf90023a0
 .word 0xd2800601
-bl _p_83
+bl _p_84
 .word 0xf94023a0
 .word 0xaa0003f6
 .loc 34 489 0
@@ -32983,24 +33165,24 @@ bl _p_83
 .word 0xaa0203e0
 .word 0xf94017a1
 .word 0xf940005e
-bl _p_70
+bl _p_71
 .loc 34 490 0
 .word 0xaa1603e0
 .word 0xf9401ba1
 .word 0xf94002de
-bl _p_70
+bl _p_71
 .loc 34 491 0
 .word 0xaa1903e0
 .word 0xaa1603e1
 .word 0xf940033e
-bl _p_70
+bl _p_71
 .loc 34 495 0
 .word 0xf9401340
 .word 0xf90033a0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #456]
+ldr x0, [x16, #464]
 .word 0xd2800501
 bl _p_5
 .word 0xf94033a2
@@ -33013,12 +33195,12 @@ bl _p_65
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #456]
+ldr x0, [x16, #464]
 .word 0xd2800501
 bl _p_5
 .word 0xf9002ba0
 .word 0xd2800601
-bl _p_83
+bl _p_84
 .word 0xf9402ba2
 .loc 34 498 0
 .word 0xaa0203e0
@@ -33026,7 +33208,7 @@ bl _p_83
 .word 0xaa0203e0
 .word 0xaa1903e1
 .word 0xf940005e
-bl _p_70
+bl _p_71
 .word 0xf94027a2
 .loc 34 499 0
 .word 0xaa0203e0
@@ -33034,7 +33216,7 @@ bl _p_70
 .word 0xaa0203e0
 .word 0xaa1a03e1
 .word 0xf940005e
-bl _p_70
+bl _p_71
 .word 0xf94023a1
 .loc 34 501 0
 .word 0xaa0103e0
@@ -33051,7 +33233,7 @@ bl _p_70
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x0, [x16, #0]
-.word 0xd282cbc1
+.word 0xd282ccc1
 bl _p_7
 .word 0xaa0003e1
 .word 0xd28087e0
@@ -33059,12 +33241,12 @@ bl _p_7
 bl _mono_create_corlib_exception_1
 bl _p_8
 
-Lme_191:
+Lme_192:
 .text
 	.align 4
 	.no_dead_strip Mono_Security_Cryptography_RSAManaged_Finalize
 Mono_Security_Cryptography_RSAManaged_Finalize:
-.file 35 "/Library/Frameworks/Xamarin.iOS.framework/Versions/11.6.1.4/src/mono/mcs/class/Mono.Security/Mono.Security.Cryptography/RSAManaged.cs"
+.file 35 "/Library/Frameworks/Xamarin.iOS.framework/Versions/11.9.1.24/src/Xamarin.iOS/mcs/class/Mono.Security/Mono.Security.Cryptography/RSAManaged.cs"
 .loc 35 88 0 prologue_end
 .word 0xa9bc7bfd
 .word 0x910003fd
@@ -33075,19 +33257,23 @@ Mono_Security_Cryptography_RSAManaged_Finalize:
 .word 0xf9400042
 .word 0xf9404050
 .word 0xd63f0200
-.word 0x94000002
+.word 0xf9000fbf
+.word 0x94000005
+.word 0xf9400fa0
+.word 0xb4000040
+bl _p_69
 .word 0x14000006
-.word 0xf9001bbe
+.word 0xf9001fbe
 .loc 35 89 0
 .word 0xf9400ba0
-.word 0xf9000fa0
-.word 0xf9401bbe
+.word 0xf90013a0
+.word 0xf9401fbe
 .word 0xd61f03c0
 .word 0x910003bf
 .word 0xa8c47bfd
 .word 0xd65f03c0
 
-Lme_192:
+Lme_193:
 .text
 	.align 4
 	.no_dead_strip Mono_Security_Cryptography_RSAManaged_GenerateKeyPair
@@ -33131,7 +33317,7 @@ ldr x2, [x16, #16]
 .word 0x3900003e
 .loc 35 101 0
 .word 0xaa1903e0
-bl _p_292
+bl _p_293
 .word 0xf9001740
 .word 0x9100a341
 .word 0xd349fc21
@@ -33155,7 +33341,7 @@ bl _p_54
 .word 0x54fffd80
 .loc 35 110 0
 .word 0xaa1803e0
-bl _p_292
+bl _p_293
 .word 0xf9001b40
 .word 0x9100c341
 .word 0xd349fc21
@@ -33218,7 +33404,7 @@ bl _p_26
 .loc 35 122 0
 .word 0xf9401740
 .word 0xf9401b41
-bl _p_293
+bl _p_294
 .word 0x53001c00
 .word 0x34fff880
 .loc 35 123 0
@@ -33265,7 +33451,7 @@ bl _p_44
 .word 0xaa0203e0
 .word 0xf94017a1
 .word 0xf940005e
-bl _p_294
+bl _p_295
 .word 0xf9001340
 .word 0x91008341
 .word 0xd349fc21
@@ -33318,7 +33504,7 @@ ldr x2, [x16, #16]
 .word 0xf9401741
 .word 0xaa0203e0
 .word 0xf940005e
-bl _p_294
+bl _p_295
 .word 0xf9002740
 .word 0x91012341
 .word 0xd349fc21
@@ -33357,7 +33543,7 @@ ldr x2, [x16, #16]
 .word 0xa8c47bfd
 .word 0xd65f03c0
 
-Lme_193:
+Lme_194:
 .text
 	.align 4
 	.no_dead_strip Mono_Security_Cryptography_RSAManaged_get_KeySize
@@ -33404,15 +33590,15 @@ bl _p_26
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x0, [x16, #0]
-.word 0xd282d281
+.word 0xd282d381
 bl _p_7
 .word 0xaa0003e1
-.word 0xd2801cc0
+.word 0xd2801ca0
 .word 0xf2a04000
 bl _mono_create_corlib_exception_1
 bl _p_8
 
-Lme_194:
+Lme_195:
 .text
 	.align 4
 	.no_dead_strip Mono_Security_Cryptography_RSAManaged_get_PublicOnly
@@ -33443,7 +33629,7 @@ bl _p_27
 .word 0xa8c27bfd
 .word 0xd65f03c0
 
-Lme_195:
+Lme_196:
 .text
 	.align 4
 	.no_dead_strip Mono_Security_Cryptography_RSAManaged_ExportParameters_bool
@@ -33475,7 +33661,7 @@ Mono_Security_Cryptography_RSAManaged_ExportParameters_bool:
 .word 0x35000060
 .loc 35 266 0
 .word 0xaa1903e0
-bl _p_295
+bl _p_296
 .loc 35 268 0
 .word 0xd2800000
 .word 0xf900f7a0
@@ -33492,7 +33678,7 @@ bl _p_295
 .word 0xf9402f21
 .word 0xaa0103e0
 .word 0xf940003e
-bl _p_296
+bl _p_297
 .word 0xf9411fa1
 .word 0xf900f7a0
 .word 0xd349fc21
@@ -33512,7 +33698,7 @@ ldr x2, [x16, #16]
 .word 0xf9402b21
 .word 0xaa0103e0
 .word 0xf940003e
-bl _p_296
+bl _p_297
 .word 0xf9411ba1
 .word 0xf900fba0
 .word 0x91002021
@@ -33541,7 +33727,7 @@ bl _p_27
 .word 0xf9401321
 .word 0xaa0103e0
 .word 0xf940003e
-bl _p_296
+bl _p_297
 .word 0xf9411ba1
 .word 0xf90113a0
 .word 0x9100e021
@@ -33617,7 +33803,7 @@ ldr x2, [x16, #16]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #208]
+ldr x0, [x16, #216]
 bl _p_1
 .word 0xaa0003fa
 .loc 35 279 0
@@ -33733,7 +33919,7 @@ bl _p_62
 .word 0xf9401721
 .word 0xaa1903e0
 .word 0xaa1a03e2
-bl _p_297
+bl _p_298
 .word 0xf9412ba1
 .word 0xf900ffa0
 .word 0x91004021
@@ -33754,7 +33940,7 @@ ldr x2, [x16, #16]
 .word 0xf9401b21
 .word 0xaa1903e0
 .word 0xaa1a03e2
-bl _p_297
+bl _p_298
 .word 0xf94127a1
 .word 0xf90103a0
 .word 0x91006021
@@ -33775,7 +33961,7 @@ ldr x2, [x16, #16]
 .word 0xf9401f21
 .word 0xaa1903e0
 .word 0xaa1a03e2
-bl _p_297
+bl _p_298
 .word 0xf94123a1
 .word 0xf90107a0
 .word 0x91008021
@@ -33796,7 +33982,7 @@ ldr x2, [x16, #16]
 .word 0xf9402321
 .word 0xaa1903e0
 .word 0xaa1a03e2
-bl _p_297
+bl _p_298
 .word 0xf9411fa1
 .word 0xf9010ba0
 .word 0x9100a021
@@ -33817,7 +34003,7 @@ ldr x2, [x16, #16]
 .word 0xf9402721
 .word 0xaa1903e0
 .word 0xaa1a03e2
-bl _p_297
+bl _p_298
 .word 0xf9411ba1
 .word 0xf9010fa0
 .word 0x9100c021
@@ -33866,7 +34052,7 @@ bl _mono_gc_wbarrier_range_copy
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x0, [x16, #0]
-.word 0xd282d7c1
+.word 0xd282d8c1
 bl _p_7
 .word 0xaa0003e1
 .word 0xd28087e0
@@ -33878,15 +34064,15 @@ adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x0, [x16, #0]
 .loc 35 263 0
-.word 0xd282d281
+.word 0xd282d381
 bl _p_7
 .word 0xaa0003e1
-.word 0xd2801cc0
+.word 0xd2801ca0
 .word 0xf2a04000
 bl _mono_create_corlib_exception_1
 bl _p_8
 
-Lme_196:
+Lme_197:
 .text
 	.align 4
 	.no_dead_strip Mono_Security_Cryptography_RSAManaged_ImportParameters_System_Security_Cryptography_RSAParameters
@@ -33904,7 +34090,7 @@ Mono_Security_Cryptography_RSAManaged_ImportParameters_System_Security_Cryptogra
 .word 0xaa0003fa
 .word 0xf9001fa1
 .word 0x3941ab40
-.word 0x350056c0
+.word 0x35005720
 .loc 35 302 0
 .word 0xf9401fa0
 .word 0xf9400001
@@ -33924,7 +34110,7 @@ Mono_Security_Cryptography_RSAManaged_ImportParameters_System_Security_Cryptogra
 .word 0xf9401c00
 .word 0xf9021fa0
 .word 0xf94203a0
-.word 0xb40051e0
+.word 0xb4005240
 .loc 35 304 0
 .word 0xf9401fa0
 .word 0xf9400001
@@ -33944,7 +34130,7 @@ Mono_Security_Cryptography_RSAManaged_ImportParameters_System_Security_Cryptogra
 .word 0xf9401c00
 .word 0xf901ffa0
 .word 0xf941e7a0
-.word 0xb40050c0
+.word 0xb4005120
 .loc 35 307 0
 .word 0xf9401fa0
 .word 0xf9400001
@@ -33968,12 +34154,12 @@ Mono_Security_Cryptography_RSAManaged_ImportParameters_System_Security_Cryptogra
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #224]
+ldr x0, [x16, #232]
 .word 0xd2800401
 bl _p_5
 .word 0xf9422fa1
 .word 0xf9022ba0
-bl _p_298
+bl _p_299
 .word 0xf9422ba0
 .word 0xf9002f40
 .word 0x91016341
@@ -34011,12 +34197,12 @@ ldr x2, [x16, #16]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #224]
+ldr x0, [x16, #232]
 .word 0xd2800401
 bl _p_5
 .word 0xf94227a1
 .word 0xf90223a0
-bl _p_298
+bl _p_299
 .word 0xf94223a0
 .word 0xf9002b40
 .word 0x91014341
@@ -34159,12 +34345,12 @@ ldr x2, [x16, #16]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #224]
+ldr x0, [x16, #232]
 .word 0xd2800401
 bl _p_5
 .word 0xf94227a1
 .word 0xf90223a0
-bl _p_298
+bl _p_299
 .word 0xf94223a0
 .word 0xf9001340
 .word 0x91008341
@@ -34222,12 +34408,12 @@ ldr x2, [x16, #16]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #224]
+ldr x0, [x16, #232]
 .word 0xd2800401
 bl _p_5
 .word 0xf94227a1
 .word 0xf90223a0
-bl _p_298
+bl _p_299
 .word 0xf94223a0
 .word 0xf9001f40
 .word 0x9100e341
@@ -34285,12 +34471,12 @@ ldr x2, [x16, #16]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #224]
+ldr x0, [x16, #232]
 .word 0xd2800401
 bl _p_5
 .word 0xf94227a1
 .word 0xf90223a0
-bl _p_298
+bl _p_299
 .word 0xf94223a0
 .word 0xf9002340
 .word 0x91010341
@@ -34348,12 +34534,12 @@ ldr x2, [x16, #16]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #224]
+ldr x0, [x16, #232]
 .word 0xd2800401
 bl _p_5
 .word 0xf94227a1
 .word 0xf90223a0
-bl _p_298
+bl _p_299
 .word 0xf94223a0
 .word 0xf9002740
 .word 0x91012341
@@ -34411,12 +34597,12 @@ ldr x2, [x16, #16]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #224]
+ldr x0, [x16, #232]
 .word 0xd2800401
 bl _p_5
 .word 0xf94227a1
 .word 0xf90223a0
-bl _p_298
+bl _p_299
 .word 0xf94223a0
 .word 0xf9001740
 .word 0x9100a341
@@ -34474,12 +34660,12 @@ ldr x2, [x16, #16]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #224]
+ldr x0, [x16, #232]
 .word 0xd2800401
 bl _p_5
 .word 0xf94227a1
 .word 0xf90223a0
-bl _p_298
+bl _p_299
 .word 0xf94223a0
 .word 0xf9001b40
 .word 0x9100c341
@@ -34514,10 +34700,10 @@ bl _p_62
 .word 0x53001c19
 .word 0x14000002
 .word 0xd2800019
-.word 0xaa1903f8
+.word 0x53001f38
 .loc 35 330 0
-.word 0xaa1a03f7
-.word 0x34000179
+.word 0xaa1a03f9
+.word 0x34000178
 .word 0xf9402340
 .word 0xd2800001
 bl _p_62
@@ -34526,12 +34712,12 @@ bl _p_62
 .word 0xf9402740
 .word 0xd2800001
 bl _p_62
-.word 0x53001c19
+.word 0x53001c17
 .word 0x14000002
-.word 0xd2800019
-.word 0x3901a2f9
+.word 0xd2800017
+.word 0x3901a337
 .loc 35 334 0
-.word 0x34000a18
+.word 0x34000a78
 .loc 35 338 0
 .word 0xf9402b40
 .word 0xf90223a0
@@ -34541,10 +34727,11 @@ bl _p_44
 .word 0xaa0003e1
 .word 0xf94223a0
 bl _p_27
+.word 0x53001c00
 .word 0x53001c19
 .loc 35 339 0
 .word 0xaa1903e0
-.word 0x34000880
+.word 0x340008c0
 .loc 35 341 0
 .word 0xf9401740
 .word 0xf90227a0
@@ -34573,18 +34760,19 @@ bl _p_44
 .word 0xaa0203e0
 .word 0xaa1903e1
 .word 0xf940005e
-bl _p_294
+bl _p_295
 .word 0xaa0003f6
 .loc 35 351 0
 .word 0xf9401340
 .word 0xaa1603e1
 bl _p_27
+.word 0x53001c00
 .word 0x53001c19
 .loc 35 354 0
 .word 0xaa1903e0
-.word 0x35000480
+.word 0x350004a0
 .word 0x3941a340
-.word 0x34000440
+.word 0x34000460
 .loc 35 357 0
 .word 0xf9401f40
 .word 0xf90223a0
@@ -34612,13 +34800,14 @@ bl _p_27
 .word 0xf9401741
 .word 0xaa0203e0
 .word 0xf940005e
-bl _p_294
+bl _p_295
 .word 0xaa0003e1
 .word 0xf94223a0
 bl _p_27
 .word 0x53001c19
 .word 0x14000002
 .word 0xd2800019
+.word 0x53001f39
 .loc 35 362 0
 .word 0x34000539
 .loc 35 364 0
@@ -34637,7 +34826,7 @@ bl _p_27
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x0, [x16, #0]
-.word 0xd282dcc1
+.word 0xd282ddc1
 bl _p_7
 .word 0xaa0003e1
 .word 0xd28087e0
@@ -34649,7 +34838,7 @@ bl _p_8
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x0, [x16, #0]
-.word 0xd282e101
+.word 0xd282e201
 bl _p_7
 .word 0xaa0003e1
 .word 0xd28087e0
@@ -34661,10 +34850,10 @@ adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x0, [x16, #0]
 .loc 35 299 0
-.word 0xd282d281
+.word 0xd282d381
 bl _p_7
 .word 0xaa0003e1
-.word 0xd2801cc0
+.word 0xd2801ca0
 .word 0xf2a04000
 bl _mono_create_corlib_exception_1
 bl _p_8
@@ -34673,7 +34862,7 @@ bl _p_8
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x0, [x16, #0]
-.word 0xd282e501
+.word 0xd282e601
 bl _p_7
 .word 0xaa0003e1
 .word 0xd28087e0
@@ -34681,7 +34870,7 @@ bl _p_7
 bl _mono_create_corlib_exception_1
 bl _p_8
 
-Lme_197:
+Lme_198:
 .text
 	.align 4
 	.no_dead_strip Mono_Security_Cryptography_RSAManaged_Dispose_bool
@@ -34704,7 +34893,7 @@ bl _p_62
 .word 0xf9401321
 .word 0xaa0103e0
 .word 0xf940003e
-bl _p_299
+bl _p_300
 .loc 35 372 0
 .word 0xf900133f
 .loc 35 374 0
@@ -34717,7 +34906,7 @@ bl _p_62
 .word 0xf9401721
 .word 0xaa0103e0
 .word 0xf940003e
-bl _p_299
+bl _p_300
 .loc 35 376 0
 .word 0xf900173f
 .loc 35 378 0
@@ -34730,7 +34919,7 @@ bl _p_62
 .word 0xf9401b21
 .word 0xaa0103e0
 .word 0xf940003e
-bl _p_299
+bl _p_300
 .loc 35 380 0
 .word 0xf9001b3f
 .loc 35 382 0
@@ -34743,7 +34932,7 @@ bl _p_62
 .word 0xf9401f21
 .word 0xaa0103e0
 .word 0xf940003e
-bl _p_299
+bl _p_300
 .loc 35 384 0
 .word 0xf9001f3f
 .loc 35 386 0
@@ -34756,7 +34945,7 @@ bl _p_62
 .word 0xf9402321
 .word 0xaa0103e0
 .word 0xf940003e
-bl _p_299
+bl _p_300
 .loc 35 388 0
 .word 0xf900233f
 .loc 35 390 0
@@ -34769,7 +34958,7 @@ bl _p_62
 .word 0xf9402721
 .word 0xaa0103e0
 .word 0xf940003e
-bl _p_299
+bl _p_300
 .loc 35 392 0
 .word 0xf900273f
 .loc 35 395 0
@@ -34785,7 +34974,7 @@ bl _p_62
 .word 0xf9402f21
 .word 0xaa0103e0
 .word 0xf940003e
-bl _p_299
+bl _p_300
 .loc 35 399 0
 .word 0xf9002f3f
 .loc 35 401 0
@@ -34798,7 +34987,7 @@ bl _p_62
 .word 0xf9402b21
 .word 0xaa0103e0
 .word 0xf940003e
-bl _p_299
+bl _p_300
 .loc 35 403 0
 .word 0xf9002b3f
 .loc 35 409 0
@@ -34810,7 +34999,7 @@ bl _p_299
 .word 0xa8c27bfd
 .word 0xd65f03c0
 
-Lme_198:
+Lme_199:
 .text
 	.align 4
 	.no_dead_strip Mono_Security_Cryptography_RSAManaged_ToXmlString_bool
@@ -34837,11 +35026,11 @@ Mono_Security_Cryptography_RSAManaged_ToXmlString_bool:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #464]
+ldr x0, [x16, #472]
 .word 0xd2800601
 bl _p_5
 .word 0xf9042ba0
-bl _p_72
+bl _p_73
 .word 0xf9442ba0
 .word 0xaa0003f8
 .loc 35 419 0
@@ -34856,18 +35045,18 @@ bl _p_72
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #2112]
+ldr x1, [x16, #2120]
 .word 0xaa1803e0
 .word 0xf940031e
-bl _p_77
+bl _p_78
 .loc 35 423 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #2120]
+ldr x1, [x16, #2128]
 .word 0xaa1803e0
 .word 0xf940031e
-bl _p_77
+bl _p_78
 .loc 35 424 0
 .word 0xf941b7a0
 .word 0xf90197a0
@@ -34886,27 +35075,27 @@ bl _p_77
 .word 0xf941d3a0
 .word 0xf901b3a0
 .word 0xf9419ba0
-bl _p_300
+bl _p_301
 .word 0xaa0003e1
 .word 0xaa1803e0
 .word 0xf940031e
-bl _p_77
+bl _p_78
 .loc 35 425 0
-
-adrp x16, mono_aot_Mono_Security_got@PAGE+0
-add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #2128]
-.word 0xaa1803e0
-.word 0xf940031e
-bl _p_77
-.loc 35 427 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x1, [x16, #2136]
 .word 0xaa1803e0
 .word 0xf940031e
-bl _p_77
+bl _p_78
+.loc 35 427 0
+
+adrp x16, mono_aot_Mono_Security_got@PAGE+0
+add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
+ldr x1, [x16, #2144]
+.word 0xaa1803e0
+.word 0xf940031e
+bl _p_78
 .loc 35 428 0
 .word 0xf941b7a0
 .word 0xf90177a0
@@ -34925,19 +35114,19 @@ bl _p_77
 .word 0xf941d3a0
 .word 0xf90193a0
 .word 0xf94177a0
-bl _p_300
+bl _p_301
 .word 0xaa0003e1
 .word 0xaa1803e0
 .word 0xf940031e
-bl _p_77
+bl _p_78
 .loc 35 429 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #2144]
+ldr x1, [x16, #2152]
 .word 0xaa1803e0
 .word 0xf940031e
-bl _p_77
+bl _p_78
 .loc 35 431 0
 .word 0x394083a0
 .word 0x340024e0
@@ -34964,10 +35153,10 @@ bl _p_77
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #2152]
+ldr x1, [x16, #2160]
 .word 0xaa1803e0
 .word 0xf940031e
-bl _p_77
+bl _p_78
 .loc 35 434 0
 .word 0xf941b7a0
 .word 0xf90137a0
@@ -34986,19 +35175,19 @@ bl _p_77
 .word 0xf941d3a0
 .word 0xf90153a0
 .word 0xf9413fa0
-bl _p_300
+bl _p_301
 .word 0xaa0003e1
 .word 0xaa1803e0
 .word 0xf940031e
-bl _p_77
+bl _p_78
 .loc 35 435 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #2160]
+ldr x1, [x16, #2168]
 .word 0xaa1803e0
 .word 0xf940031e
-bl _p_77
+bl _p_78
 .loc 35 437 0
 .word 0xf941b7a0
 .word 0xf90117a0
@@ -35022,10 +35211,10 @@ bl _p_77
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #2168]
+ldr x1, [x16, #2176]
 .word 0xaa1803e0
 .word 0xf940031e
-bl _p_77
+bl _p_78
 .loc 35 439 0
 .word 0xf941b7a0
 .word 0xf900f7a0
@@ -35044,19 +35233,19 @@ bl _p_77
 .word 0xf941d3a0
 .word 0xf90113a0
 .word 0xf94103a0
-bl _p_300
+bl _p_301
 .word 0xaa0003e1
 .word 0xaa1803e0
 .word 0xf940031e
-bl _p_77
+bl _p_78
 .loc 35 440 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #2176]
+ldr x1, [x16, #2184]
 .word 0xaa1803e0
 .word 0xf940031e
-bl _p_77
+bl _p_78
 .loc 35 442 0
 .word 0xf941b7a0
 .word 0xf900d7a0
@@ -35080,10 +35269,10 @@ bl _p_77
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #2184]
+ldr x1, [x16, #2192]
 .word 0xaa1803e0
 .word 0xf940031e
-bl _p_77
+bl _p_78
 .loc 35 444 0
 .word 0xf941b7a0
 .word 0xf900b7a0
@@ -35102,19 +35291,19 @@ bl _p_77
 .word 0xf941d3a0
 .word 0xf900d3a0
 .word 0xf940c7a0
-bl _p_300
+bl _p_301
 .word 0xaa0003e1
 .word 0xaa1803e0
 .word 0xf940031e
-bl _p_77
+bl _p_78
 .loc 35 445 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #2192]
+ldr x1, [x16, #2200]
 .word 0xaa1803e0
 .word 0xf940031e
-bl _p_77
+bl _p_78
 .loc 35 447 0
 .word 0xf941b7a0
 .word 0xf90097a0
@@ -35138,10 +35327,10 @@ bl _p_77
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #2200]
+ldr x1, [x16, #2208]
 .word 0xaa1803e0
 .word 0xf940031e
-bl _p_77
+bl _p_78
 .loc 35 449 0
 .word 0xf941b7a0
 .word 0xf90077a0
@@ -35160,19 +35349,19 @@ bl _p_77
 .word 0xf941d3a0
 .word 0xf90093a0
 .word 0xf9408ba0
-bl _p_300
+bl _p_301
 .word 0xaa0003e1
 .word 0xaa1803e0
 .word 0xf940031e
-bl _p_77
+bl _p_78
 .loc 35 450 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #2208]
+ldr x1, [x16, #2216]
 .word 0xaa1803e0
 .word 0xf940031e
-bl _p_77
+bl _p_78
 .loc 35 452 0
 .word 0xf941b7a0
 .word 0xf90057a0
@@ -35196,10 +35385,10 @@ bl _p_77
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #2216]
+ldr x1, [x16, #2224]
 .word 0xaa1803e0
 .word 0xf940031e
-bl _p_77
+bl _p_78
 .loc 35 454 0
 .word 0xf941b7a0
 .word 0xf90037a0
@@ -35218,27 +35407,27 @@ bl _p_77
 .word 0xf941d3a0
 .word 0xf90053a0
 .word 0xf9404fa0
-bl _p_300
+bl _p_301
 .word 0xaa0003e1
 .word 0xaa1803e0
 .word 0xf940031e
-bl _p_77
+bl _p_78
 .loc 35 455 0
-
-adrp x16, mono_aot_Mono_Security_got@PAGE+0
-add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #2224]
-.word 0xaa1803e0
-.word 0xf940031e
-bl _p_77
-.loc 35 457 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x1, [x16, #2232]
 .word 0xaa1803e0
 .word 0xf940031e
-bl _p_77
+bl _p_78
+.loc 35 457 0
+
+adrp x16, mono_aot_Mono_Security_got@PAGE+0
+add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
+ldr x1, [x16, #2240]
+.word 0xaa1803e0
+.word 0xf940031e
+bl _p_78
 .loc 35 458 0
 .word 0xf941b7a0
 .word 0xf90017a0
@@ -35257,27 +35446,27 @@ bl _p_77
 .word 0xf941d3a0
 .word 0xf90033a0
 .word 0xf94033a0
-bl _p_300
+bl _p_301
 .word 0xaa0003e1
 .word 0xaa1803e0
 .word 0xf940031e
-bl _p_77
+bl _p_78
 .loc 35 459 0
-
-adrp x16, mono_aot_Mono_Security_got@PAGE+0
-add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #2240]
-.word 0xaa1803e0
-.word 0xf940031e
-bl _p_77
-.loc 35 462 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x1, [x16, #2248]
 .word 0xaa1803e0
 .word 0xf940031e
-bl _p_77
+bl _p_78
+.loc 35 462 0
+
+adrp x16, mono_aot_Mono_Security_got@PAGE+0
+add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
+ldr x1, [x16, #2256]
+.word 0xaa1803e0
+.word 0xf940031e
+bl _p_78
 .loc 35 463 0
 .word 0x1400014e
 .word 0xf901d7a0
@@ -35337,7 +35526,7 @@ bl _p_77
 .word 0xf94223a1
 .word 0xb9801822
 .word 0xd2800001
-bl _p_116
+bl _p_117
 .loc 35 467 0
 .word 0xf941b7a0
 .word 0xf9023ba0
@@ -35394,7 +35583,7 @@ bl _p_116
 .word 0xf94287a1
 .word 0xb9801822
 .word 0xd2800001
-bl _p_116
+bl _p_117
 .loc 35 469 0
 .word 0xf941b7a0
 .word 0xf9029ba0
@@ -35451,7 +35640,7 @@ bl _p_116
 .word 0xf942eba1
 .word 0xb9801822
 .word 0xd2800001
-bl _p_116
+bl _p_117
 .loc 35 471 0
 .word 0xf941b7a0
 .word 0xf902fba0
@@ -35508,7 +35697,7 @@ bl _p_116
 .word 0xf9434fa1
 .word 0xb9801822
 .word 0xd2800001
-bl _p_116
+bl _p_117
 .loc 35 473 0
 .word 0xf941b7a0
 .word 0xf9035ba0
@@ -35565,7 +35754,7 @@ bl _p_116
 .word 0xf943b3a1
 .word 0xb9801822
 .word 0xd2800001
-bl _p_116
+bl _p_117
 .loc 35 475 0
 .word 0xf941b7a0
 .word 0xf903bba0
@@ -35622,10 +35811,10 @@ bl _p_116
 .word 0xf94417a1
 .word 0xb9801822
 .word 0xd2800001
-bl _p_116
+bl _p_117
 .loc 35 477 0
 .word 0xf941d7a0
-bl _p_288
+bl _p_289
 .loc 35 480 0
 .word 0xaa1803e0
 .word 0xf9400301
@@ -35640,7 +35829,7 @@ bl _p_288
 .word 0x9100023f
 .word 0xd65f03c0
 
-Lme_199:
+Lme_19a:
 .text
 	.align 4
 	.no_dead_strip Mono_Security_Cryptography_RSAManaged_GetPaddedValue_Mono_Math_BigInteger_int
@@ -35654,7 +35843,7 @@ Mono_Security_Cryptography_RSAManaged_GetPaddedValue_Mono_Math_BigInteger_int:
 .word 0xf90017a2
 .word 0xaa1903e0
 .word 0xf940033e
-bl _p_296
+bl _p_297
 .word 0xaa0003f9
 .loc 35 502 0
 .word 0xaa1903e0
@@ -35669,7 +35858,7 @@ bl _p_296
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #208]
+ldr x0, [x16, #216]
 .word 0xb9802ba1
 bl _p_1
 .word 0xaa0003f8
@@ -35686,7 +35875,7 @@ bl _p_21
 .word 0xb9801b22
 .word 0xaa1903e0
 .word 0xd2800001
-bl _p_116
+bl _p_117
 .loc 35 510 0
 .word 0xaa1803e0
 .word 0xa94167b8
@@ -35694,7 +35883,7 @@ bl _p_116
 .word 0xa8c37bfd
 .word 0xd65f03c0
 
-Lme_19a:
+Lme_19b:
 .text
 	.align 4
 	.no_dead_strip _PrivateImplementationDetails_ComputeStringHash_string
@@ -35732,13 +35921,13 @@ _PrivateImplementationDetails_ComputeStringHash_string:
 .word 0x910003bf
 .word 0xa8c37bfd
 .word 0xd65f03c0
-.word 0xd2801a00
+.word 0xd28019e0
 .word 0xaa1103e1
 bl _p_3
 
-Lme_19f:
+Lme_1a0:
 .text
-ut_417:
+ut_418:
 add x0, x0, 16
 b System_Nullable_1_Mono_Security_Interface_MonoSslPolicyErrors__ctor_Mono_Security_Interface_MonoSslPolicyErrors
 ut_end:
@@ -35746,13 +35935,13 @@ ut_end:
 _unbox_trampoline_p:
 
 	.long 0
-LDIFF_SYM3=ut_end - ut_417
+LDIFF_SYM3=ut_end - ut_418
 	.long LDIFF_SYM3
 .text
 	.align 4
 	.no_dead_strip System_Nullable_1_Mono_Security_Interface_MonoSslPolicyErrors__ctor_Mono_Security_Interface_MonoSslPolicyErrors
 System_Nullable_1_Mono_Security_Interface_MonoSslPolicyErrors__ctor_Mono_Security_Interface_MonoSslPolicyErrors:
-.file 36 "/Library/Frameworks/Xamarin.iOS.framework/Versions/11.6.1.4/src/mono/mcs/class/corlib/System/Nullable.cs"
+.file 36 "/Library/Frameworks/Xamarin.iOS.framework/Versions/11.9.1.24/src/Xamarin.iOS/mcs/class/corlib/System/Nullable.cs"
 .loc 36 94 0 prologue_end
 .word 0xa9be7bfd
 .word 0x910003fd
@@ -35769,9 +35958,9 @@ System_Nullable_1_Mono_Security_Interface_MonoSslPolicyErrors__ctor_Mono_Securit
 .word 0xa8c27bfd
 .word 0xd65f03c0
 
-Lme_1a1:
+Lme_1a2:
 .text
-ut_418:
+ut_419:
 add x0, x0, 16
 b System_Nullable_1_Mono_Security_Interface_MonoSslPolicyErrors_get_HasValue
 .text
@@ -35788,9 +35977,9 @@ System_Nullable_1_Mono_Security_Interface_MonoSslPolicyErrors_get_HasValue:
 .word 0xa8c27bfd
 .word 0xd65f03c0
 
-Lme_1a2:
+Lme_1a3:
 .text
-ut_419:
+ut_420:
 add x0, x0, 16
 b System_Nullable_1_Mono_Security_Interface_MonoSslPolicyErrors_get_Value
 .text
@@ -35811,17 +36000,17 @@ System_Nullable_1_Mono_Security_Interface_MonoSslPolicyErrors_get_Value:
 .word 0xa8c27bfd
 .word 0xd65f03c0
 .loc 36 105 0
-.word 0xd29385e0
-bl _p_301
+.word 0xd29386e0
+bl _p_302
 .word 0xaa0003e1
-.word 0xd2801aa0
+.word 0xd2801a80
 .word 0xf2a04000
 bl _mono_create_corlib_exception_1
 bl _p_8
 
-Lme_1a3:
+Lme_1a4:
 .text
-ut_420:
+ut_421:
 add x0, x0, 16
 b System_Nullable_1_Mono_Security_Interface_MonoSslPolicyErrors_Equals_object
 .text
@@ -35853,7 +36042,7 @@ System_Nullable_1_Mono_Security_Interface_MonoSslPolicyErrors_Equals_object:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #2256]
+ldr x1, [x16, #2264]
 .word 0xeb01001f
 .word 0x54000040
 .word 0xd2800018
@@ -35865,20 +36054,20 @@ ldr x1, [x16, #2256]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x15, [x16, #2264]
+ldr x15, [x16, #2272]
 .word 0x9100a3a0
 .word 0xf9001ba0
 .word 0xaa1a03e0
-bl _p_302
+bl _p_303
 .word 0xf9401bbe
 .word 0xf90003c0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x15, [x16, #2264]
+ldr x15, [x16, #2272]
 .word 0xf94013a0
 .word 0xf94017a1
-bl _p_303
+bl _p_304
 .word 0x53001c00
 .word 0xf9400bb8
 .word 0xf9400fba
@@ -35886,9 +36075,9 @@ bl _p_303
 .word 0xa8c47bfd
 .word 0xd65f03c0
 
-Lme_1a4:
+Lme_1a5:
 .text
-ut_421:
+ut_422:
 add x0, x0, 16
 b System_Nullable_1_Mono_Security_Interface_MonoSslPolicyErrors_Equals_System_Nullable_1_Mono_Security_Interface_MonoSslPolicyErrors
 .text
@@ -35926,7 +36115,7 @@ System_Nullable_1_Mono_Security_Interface_MonoSslPolicyErrors_Equals_System_Null
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #2272]
+ldr x0, [x16, #2280]
 .word 0xd2800281
 bl _p_5
 .word 0xf94023a1
@@ -35937,7 +36126,7 @@ bl _p_5
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #2272]
+ldr x0, [x16, #2280]
 .word 0xd2800281
 bl _p_5
 .word 0xaa0003e2
@@ -35953,9 +36142,9 @@ bl _p_5
 .word 0xa8c57bfd
 .word 0xd65f03c0
 
-Lme_1a5:
+Lme_1a6:
 .text
-ut_422:
+ut_423:
 add x0, x0, 16
 b System_Nullable_1_Mono_Security_Interface_MonoSslPolicyErrors_GetHashCode
 .text
@@ -35980,9 +36169,9 @@ System_Nullable_1_Mono_Security_Interface_MonoSslPolicyErrors_GetHashCode:
 .word 0xa8c27bfd
 .word 0xd65f03c0
 
-Lme_1a6:
+Lme_1a7:
 .text
-ut_423:
+ut_424:
 add x0, x0, 16
 b System_Nullable_1_Mono_Security_Interface_MonoSslPolicyErrors_GetValueOrDefault
 .text
@@ -35999,9 +36188,9 @@ System_Nullable_1_Mono_Security_Interface_MonoSslPolicyErrors_GetValueOrDefault:
 .word 0xa8c27bfd
 .word 0xd65f03c0
 
-Lme_1a7:
+Lme_1a8:
 .text
-ut_424:
+ut_425:
 add x0, x0, 16
 b System_Nullable_1_Mono_Security_Interface_MonoSslPolicyErrors_ToString
 .text
@@ -36022,7 +36211,7 @@ System_Nullable_1_Mono_Security_Interface_MonoSslPolicyErrors_ToString:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #2272]
+ldr x0, [x16, #2280]
 .word 0xd2800281
 bl _p_5
 .word 0xaa0003e1
@@ -36037,15 +36226,15 @@ bl _p_5
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #2280]
+ldr x0, [x16, #2288]
 .word 0xf9400000
 .word 0x910003bf
 .word 0xa8c37bfd
 .word 0xd65f03c0
 
-Lme_1a8:
+Lme_1a9:
 .text
-ut_425:
+ut_426:
 add x0, x0, 16
 b System_Nullable_1_Mono_Security_Interface_MonoSslPolicyErrors_Box_System_Nullable_1_Mono_Security_Interface_MonoSslPolicyErrors
 .text
@@ -36075,7 +36264,7 @@ System_Nullable_1_Mono_Security_Interface_MonoSslPolicyErrors_Box_System_Nullabl
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #2272]
+ldr x0, [x16, #2280]
 .word 0xd2800281
 bl _p_5
 .word 0xf9401ba1
@@ -36084,9 +36273,9 @@ bl _p_5
 .word 0xa8c47bfd
 .word 0xd65f03c0
 
-Lme_1a9:
+Lme_1aa:
 .text
-ut_426:
+ut_427:
 add x0, x0, 16
 b System_Nullable_1_Mono_Security_Interface_MonoSslPolicyErrors_Unbox_object
 .text
@@ -36121,7 +36310,7 @@ System_Nullable_1_Mono_Security_Interface_MonoSslPolicyErrors_Unbox_object:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x2, [x16, #200]
+ldr x2, [x16, #208]
 .word 0xeb02003f
 .word 0x10000011
 .word 0x54000221
@@ -36132,8 +36321,8 @@ ldr x2, [x16, #200]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x15, [x16, #2264]
-bl _p_304
+ldr x15, [x16, #2272]
+bl _p_305
 .word 0xb9802ba0
 .word 0xb90013a0
 .word 0xb9802fa0
@@ -36142,13 +36331,13 @@ bl _p_304
 .word 0x910003bf
 .word 0xa8c47bfd
 .word 0xd65f03c0
-.word 0xd2801a80
+.word 0xd2801a60
 .word 0xaa1103e1
 bl _p_3
 
-Lme_1aa:
+Lme_1ab:
 .text
-ut_427:
+ut_428:
 add x0, x0, 16
 b System_Nullable_1_bool__ctor_bool
 .text
@@ -36171,9 +36360,9 @@ System_Nullable_1_bool__ctor_bool:
 .word 0xa8c27bfd
 .word 0xd65f03c0
 
-Lme_1ab:
+Lme_1ac:
 .text
-ut_428:
+ut_429:
 add x0, x0, 16
 b System_Nullable_1_bool_get_HasValue
 .text
@@ -36190,9 +36379,9 @@ System_Nullable_1_bool_get_HasValue:
 .word 0xa8c27bfd
 .word 0xd65f03c0
 
-Lme_1ac:
+Lme_1ad:
 .text
-ut_429:
+ut_430:
 add x0, x0, 16
 b System_Nullable_1_bool_get_Value
 .text
@@ -36213,17 +36402,17 @@ System_Nullable_1_bool_get_Value:
 .word 0xa8c27bfd
 .word 0xd65f03c0
 .loc 36 105 0
-.word 0xd29385e0
-bl _p_301
+.word 0xd29386e0
+bl _p_302
 .word 0xaa0003e1
-.word 0xd2801aa0
+.word 0xd2801a80
 .word 0xf2a04000
 bl _mono_create_corlib_exception_1
 bl _p_8
 
-Lme_1ad:
+Lme_1ae:
 .text
-ut_430:
+ut_431:
 add x0, x0, 16
 b System_Nullable_1_bool_Equals_object
 .text
@@ -36255,7 +36444,7 @@ System_Nullable_1_bool_Equals_object:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #2288]
+ldr x1, [x16, #2296]
 .word 0xeb01001f
 .word 0x54000040
 .word 0xd2800018
@@ -36267,20 +36456,20 @@ ldr x1, [x16, #2288]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x15, [x16, #2296]
+ldr x15, [x16, #2304]
 .word 0x9100a3a0
 .word 0xf9001ba0
 .word 0xaa1a03e0
-bl _p_305
+bl _p_306
 .word 0xf9401bbe
 .word 0xf90003c0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x15, [x16, #2296]
+ldr x15, [x16, #2304]
 .word 0xf94013a0
 .word 0xf94017a1
-bl _p_306
+bl _p_307
 .word 0x53001c00
 .word 0xf9400bb8
 .word 0xf9400fba
@@ -36288,9 +36477,9 @@ bl _p_306
 .word 0xa8c47bfd
 .word 0xd65f03c0
 
-Lme_1ae:
+Lme_1af:
 .text
-ut_431:
+ut_432:
 add x0, x0, 16
 b System_Nullable_1_bool_Equals_System_Nullable_1_bool
 .text
@@ -36330,22 +36519,22 @@ System_Nullable_1_bool_Equals_System_Nullable_1_bool:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #2304]
+ldr x0, [x16, #2312]
 .word 0xd2800221
 bl _p_5
 .word 0xaa0003e1
 .word 0xf9401ba0
 .word 0xf9401fa2
 .word 0x39004022
-bl _p_307
+bl _p_308
 .word 0x53001c00
 .word 0x910003bf
 .word 0xa8c47bfd
 .word 0xd65f03c0
 
-Lme_1af:
+Lme_1b0:
 .text
-ut_432:
+ut_433:
 add x0, x0, 16
 b System_Nullable_1_bool_GetHashCode
 .text
@@ -36375,9 +36564,9 @@ System_Nullable_1_bool_GetHashCode:
 .word 0xa8c27bfd
 .word 0xd65f03c0
 
-Lme_1b0:
+Lme_1b1:
 .text
-ut_433:
+ut_434:
 add x0, x0, 16
 b System_Nullable_1_bool_GetValueOrDefault
 .text
@@ -36394,9 +36583,9 @@ System_Nullable_1_bool_GetValueOrDefault:
 .word 0xa8c27bfd
 .word 0xd65f03c0
 
-Lme_1b1:
+Lme_1b2:
 .text
-ut_434:
+ut_435:
 add x0, x0, 16
 b System_Nullable_1_bool_ToString
 .text
@@ -36417,28 +36606,28 @@ System_Nullable_1_bool_ToString:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x26, [x16, #2312]
+ldr x26, [x16, #2320]
 .word 0x14000004
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x26, [x16, #2320]
+ldr x26, [x16, #2328]
 .word 0xaa1a03e0
 .word 0x14000005
 .loc 36 155 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #2280]
+ldr x0, [x16, #2288]
 .word 0xf9400000
 .word 0xf9400bba
 .word 0x910003bf
 .word 0xa8c27bfd
 .word 0xd65f03c0
 
-Lme_1b2:
+Lme_1b3:
 .text
-ut_435:
+ut_436:
 add x0, x0, 16
 b System_Nullable_1_bool_Box_System_Nullable_1_bool
 .text
@@ -36468,7 +36657,7 @@ System_Nullable_1_bool_Box_System_Nullable_1_bool:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #2304]
+ldr x0, [x16, #2312]
 .word 0xd2800221
 bl _p_5
 .word 0xf9401ba1
@@ -36477,9 +36666,9 @@ bl _p_5
 .word 0xa8c47bfd
 .word 0xd65f03c0
 
-Lme_1b3:
+Lme_1b4:
 .text
-ut_436:
+ut_437:
 add x0, x0, 16
 b System_Nullable_1_bool_Unbox_object
 .text
@@ -36514,7 +36703,7 @@ System_Nullable_1_bool_Unbox_object:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x2, [x16, #2288]
+ldr x2, [x16, #2296]
 .word 0xeb02003f
 .word 0x10000011
 .word 0x54000221
@@ -36525,8 +36714,8 @@ ldr x2, [x16, #2288]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x15, [x16, #2296]
-bl _p_308
+ldr x15, [x16, #2304]
+bl _p_309
 .word 0x3980a3a0
 .word 0x390043a0
 .word 0x3980a7a0
@@ -36535,13 +36724,13 @@ bl _p_308
 .word 0x910003bf
 .word 0xa8c47bfd
 .word 0xd65f03c0
-.word 0xd2801a80
+.word 0xd2801a60
 .word 0xaa1103e1
 bl _p_3
 
-Lme_1b4:
+Lme_1b5:
 .text
-ut_437:
+ut_438:
 add x0, x0, 16
 b System_Nullable_1_System_DateTime__ctor_System_DateTime
 .text
@@ -36564,9 +36753,9 @@ System_Nullable_1_System_DateTime__ctor_System_DateTime:
 .word 0xa8c37bfd
 .word 0xd65f03c0
 
-Lme_1b5:
+Lme_1b6:
 .text
-ut_438:
+ut_439:
 add x0, x0, 16
 b System_Nullable_1_System_DateTime_get_HasValue
 .text
@@ -36583,9 +36772,9 @@ System_Nullable_1_System_DateTime_get_HasValue:
 .word 0xa8c27bfd
 .word 0xd65f03c0
 
-Lme_1b6:
+Lme_1b7:
 .text
-ut_439:
+ut_440:
 add x0, x0, 16
 b System_Nullable_1_System_DateTime_get_Value
 .text
@@ -36608,17 +36797,17 @@ System_Nullable_1_System_DateTime_get_Value:
 .word 0xa8c37bfd
 .word 0xd65f03c0
 .loc 36 105 0
-.word 0xd29385e0
-bl _p_301
+.word 0xd29386e0
+bl _p_302
 .word 0xaa0003e1
-.word 0xd2801aa0
+.word 0xd2801a80
 .word 0xf2a04000
 bl _mono_create_corlib_exception_1
 bl _p_8
 
-Lme_1b7:
+Lme_1b8:
 .text
-ut_440:
+ut_441:
 add x0, x0, 16
 b System_Nullable_1_System_DateTime_Equals_object
 .text
@@ -36650,7 +36839,7 @@ System_Nullable_1_System_DateTime_Equals_object:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #2328]
+ldr x1, [x16, #2336]
 .word 0xeb01001f
 .word 0x54000040
 .word 0xd2800018
@@ -36662,22 +36851,22 @@ ldr x1, [x16, #2328]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x15, [x16, #2336]
+ldr x15, [x16, #2344]
 .word 0x9100a3a0
 .word 0xf9001fa0
 .word 0xaa1a03e0
-bl _p_309
+bl _p_310
 .word 0xf9401fbe
 .word 0xf90003c0
 .word 0xf90007c1
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x15, [x16, #2336]
+ldr x15, [x16, #2344]
 .word 0xf94013a0
 .word 0xf94017a1
 .word 0xf9401ba2
-bl _p_310
+bl _p_311
 .word 0x53001c00
 .word 0xf9400bb8
 .word 0xf9400fba
@@ -36685,9 +36874,9 @@ bl _p_310
 .word 0xa8c47bfd
 .word 0xd65f03c0
 
-Lme_1b8:
+Lme_1b9:
 .text
-ut_441:
+ut_442:
 add x0, x0, 16
 b System_Nullable_1_System_DateTime_Equals_System_Nullable_1_System_DateTime
 .text
@@ -36728,7 +36917,7 @@ System_Nullable_1_System_DateTime_Equals_System_Nullable_1_System_DateTime:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #2344]
+ldr x0, [x16, #2352]
 .word 0xd2800301
 bl _p_5
 .word 0xaa0003e1
@@ -36736,15 +36925,15 @@ bl _p_5
 .word 0x91004022
 .word 0xf94017a3
 .word 0xf9000043
-bl _p_311
+bl _p_312
 .word 0x53001c00
 .word 0x910003bf
 .word 0xa8c57bfd
 .word 0xd65f03c0
 
-Lme_1b9:
+Lme_1ba:
 .text
-ut_442:
+ut_443:
 add x0, x0, 16
 b System_Nullable_1_System_DateTime_GetHashCode
 .text
@@ -36779,9 +36968,9 @@ System_Nullable_1_System_DateTime_GetHashCode:
 .word 0xa8c27bfd
 .word 0xd65f03c0
 
-Lme_1ba:
+Lme_1bb:
 .text
-ut_443:
+ut_444:
 add x0, x0, 16
 b System_Nullable_1_System_DateTime_GetValueOrDefault
 .text
@@ -36800,9 +36989,9 @@ System_Nullable_1_System_DateTime_GetValueOrDefault:
 .word 0xa8c37bfd
 .word 0xd65f03c0
 
-Lme_1bb:
+Lme_1bc:
 .text
-ut_444:
+ut_445:
 add x0, x0, 16
 b System_Nullable_1_System_DateTime_ToString
 .text
@@ -36818,21 +37007,21 @@ System_Nullable_1_System_DateTime_ToString:
 .word 0x34000080
 .loc 36 153 0
 .word 0xf9400ba0
-bl _p_312
+bl _p_313
 .word 0x14000005
 .loc 36 155 0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #2280]
+ldr x0, [x16, #2288]
 .word 0xf9400000
 .word 0x910003bf
 .word 0xa8c27bfd
 .word 0xd65f03c0
 
-Lme_1bc:
+Lme_1bd:
 .text
-ut_445:
+ut_446:
 add x0, x0, 16
 b System_Nullable_1_System_DateTime_Box_System_Nullable_1_System_DateTime
 .text
@@ -36864,7 +37053,7 @@ System_Nullable_1_System_DateTime_Box_System_Nullable_1_System_DateTime:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #2344]
+ldr x0, [x16, #2352]
 .word 0xd2800301
 bl _p_5
 .word 0x91004001
@@ -36874,9 +37063,9 @@ bl _p_5
 .word 0xa8c57bfd
 .word 0xd65f03c0
 
-Lme_1bd:
+Lme_1be:
 .text
-ut_446:
+ut_447:
 add x0, x0, 16
 b System_Nullable_1_System_DateTime_Unbox_object
 .text
@@ -36913,7 +37102,7 @@ System_Nullable_1_System_DateTime_Unbox_object:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x2, [x16, #2328]
+ldr x2, [x16, #2336]
 .word 0xeb02003f
 .word 0x10000011
 .word 0x540002c1
@@ -36927,9 +37116,9 @@ ldr x2, [x16, #2328]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x15, [x16, #2336]
+ldr x15, [x16, #2344]
 .word 0xf94017a1
-bl _p_313
+bl _p_314
 .word 0xf9401ba0
 .word 0xf9000ba0
 .word 0xf9401fa0
@@ -36939,13 +37128,13 @@ bl _p_313
 .word 0x910003bf
 .word 0xa8c57bfd
 .word 0xd65f03c0
-.word 0xd2801a80
+.word 0xd2801a60
 .word 0xaa1103e1
 bl _p_3
 
-Lme_1be:
+Lme_1bf:
 .text
-ut_447:
+ut_448:
 add x0, x0, 16
 b System_Nullable_1_Mono_Security_Interface_TlsProtocols__ctor_Mono_Security_Interface_TlsProtocols
 .text
@@ -36968,9 +37157,9 @@ System_Nullable_1_Mono_Security_Interface_TlsProtocols__ctor_Mono_Security_Inter
 .word 0xa8c27bfd
 .word 0xd65f03c0
 
-Lme_1bf:
+Lme_1c0:
 .text
-ut_448:
+ut_449:
 add x0, x0, 16
 b System_Nullable_1_Mono_Security_Interface_TlsProtocols_get_HasValue
 .text
@@ -36987,9 +37176,9 @@ System_Nullable_1_Mono_Security_Interface_TlsProtocols_get_HasValue:
 .word 0xa8c27bfd
 .word 0xd65f03c0
 
-Lme_1c0:
+Lme_1c1:
 .text
-ut_449:
+ut_450:
 add x0, x0, 16
 b System_Nullable_1_Mono_Security_Interface_TlsProtocols_get_Value
 .text
@@ -37010,17 +37199,17 @@ System_Nullable_1_Mono_Security_Interface_TlsProtocols_get_Value:
 .word 0xa8c27bfd
 .word 0xd65f03c0
 .loc 36 105 0
-.word 0xd29385e0
-bl _p_301
+.word 0xd29386e0
+bl _p_302
 .word 0xaa0003e1
-.word 0xd2801aa0
+.word 0xd2801a80
 .word 0xf2a04000
 bl _mono_create_corlib_exception_1
 bl _p_8
 
-Lme_1c1:
+Lme_1c2:
 .text
-ut_450:
+ut_451:
 add x0, x0, 16
 b System_Nullable_1_Mono_Security_Interface_TlsProtocols_Equals_object
 .text
@@ -37052,7 +37241,7 @@ System_Nullable_1_Mono_Security_Interface_TlsProtocols_Equals_object:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x1, [x16, #2352]
+ldr x1, [x16, #2360]
 .word 0xeb01001f
 .word 0x54000040
 .word 0xd2800018
@@ -37064,20 +37253,20 @@ ldr x1, [x16, #2352]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x15, [x16, #2360]
+ldr x15, [x16, #2368]
 .word 0x9100a3a0
 .word 0xf9001ba0
 .word 0xaa1a03e0
-bl _p_314
+bl _p_315
 .word 0xf9401bbe
 .word 0xf90003c0
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x15, [x16, #2360]
+ldr x15, [x16, #2368]
 .word 0xf94013a0
 .word 0xf94017a1
-bl _p_315
+bl _p_316
 .word 0x53001c00
 .word 0xf9400bb8
 .word 0xf9400fba
@@ -37085,9 +37274,9 @@ bl _p_315
 .word 0xa8c47bfd
 .word 0xd65f03c0
 
-Lme_1c2:
+Lme_1c3:
 .text
-ut_451:
+ut_452:
 add x0, x0, 16
 b System_Nullable_1_Mono_Security_Interface_TlsProtocols_Equals_System_Nullable_1_Mono_Security_Interface_TlsProtocols
 .text
@@ -37125,7 +37314,7 @@ System_Nullable_1_Mono_Security_Interface_TlsProtocols_Equals_System_Nullable_1_
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1896]
+ldr x0, [x16, #1904]
 .word 0xd2800281
 bl _p_5
 .word 0xf94023a1
@@ -37136,7 +37325,7 @@ bl _p_5
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1896]
+ldr x0, [x16, #1904]
 .word 0xd2800281
 bl _p_5
 .word 0xaa0003e2
@@ -37152,9 +37341,9 @@ bl _p_5
 .word 0xa8c57bfd
 .word 0xd65f03c0
 
-Lme_1c3:
+Lme_1c4:
 .text
-ut_452:
+ut_453:
 add x0, x0, 16
 b System_Nullable_1_Mono_Security_Interface_TlsProtocols_GetHashCode
 .text
@@ -37179,9 +37368,9 @@ System_Nullable_1_Mono_Security_Interface_TlsProtocols_GetHashCode:
 .word 0xa8c27bfd
 .word 0xd65f03c0
 
-Lme_1c4:
+Lme_1c5:
 .text
-ut_453:
+ut_454:
 add x0, x0, 16
 b System_Nullable_1_Mono_Security_Interface_TlsProtocols_GetValueOrDefault
 .text
@@ -37198,9 +37387,9 @@ System_Nullable_1_Mono_Security_Interface_TlsProtocols_GetValueOrDefault:
 .word 0xa8c27bfd
 .word 0xd65f03c0
 
-Lme_1c5:
+Lme_1c6:
 .text
-ut_454:
+ut_455:
 add x0, x0, 16
 b System_Nullable_1_Mono_Security_Interface_TlsProtocols_ToString
 .text
@@ -37221,7 +37410,7 @@ System_Nullable_1_Mono_Security_Interface_TlsProtocols_ToString:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1896]
+ldr x0, [x16, #1904]
 .word 0xd2800281
 bl _p_5
 .word 0xaa0003e1
@@ -37236,15 +37425,15 @@ bl _p_5
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #2280]
+ldr x0, [x16, #2288]
 .word 0xf9400000
 .word 0x910003bf
 .word 0xa8c37bfd
 .word 0xd65f03c0
 
-Lme_1c6:
+Lme_1c7:
 .text
-ut_455:
+ut_456:
 add x0, x0, 16
 b System_Nullable_1_Mono_Security_Interface_TlsProtocols_Box_System_Nullable_1_Mono_Security_Interface_TlsProtocols
 .text
@@ -37274,7 +37463,7 @@ System_Nullable_1_Mono_Security_Interface_TlsProtocols_Box_System_Nullable_1_Mon
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #1896]
+ldr x0, [x16, #1904]
 .word 0xd2800281
 bl _p_5
 .word 0xf9401ba1
@@ -37283,9 +37472,9 @@ bl _p_5
 .word 0xa8c47bfd
 .word 0xd65f03c0
 
-Lme_1c7:
+Lme_1c8:
 .text
-ut_456:
+ut_457:
 add x0, x0, 16
 b System_Nullable_1_Mono_Security_Interface_TlsProtocols_Unbox_object
 .text
@@ -37320,7 +37509,7 @@ System_Nullable_1_Mono_Security_Interface_TlsProtocols_Unbox_object:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x2, [x16, #200]
+ldr x2, [x16, #208]
 .word 0xeb02003f
 .word 0x10000011
 .word 0x54000221
@@ -37331,8 +37520,8 @@ ldr x2, [x16, #200]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x15, [x16, #2360]
-bl _p_316
+ldr x15, [x16, #2368]
+bl _p_317
 .word 0xb9802ba0
 .word 0xb90013a0
 .word 0xb9802fa0
@@ -37341,11 +37530,11 @@ bl _p_316
 .word 0x910003bf
 .word 0xa8c47bfd
 .word 0xd65f03c0
-.word 0xd2801a80
+.word 0xd2801a60
 .word 0xaa1103e1
 bl _p_3
 
-Lme_1c8:
+Lme_1c9:
 .text
 	.align 4
 	.no_dead_strip wrapper_runtime_invoke__Module_runtime_invoke_void__this___byte_byte_int_Nullable_1_MonoSslPolicyErrors_object_intptr_intptr_intptr
@@ -37365,10 +37554,10 @@ wrapper_runtime_invoke__Module_runtime_invoke_void__this___byte_byte_int_Nullabl
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #2368]
+ldr x0, [x16, #2376]
 .word 0xb9400000
 .word 0x340000c0
-bl _p_317
+bl _p_318
 .word 0xaa0003f7
 .word 0xb4000060
 .word 0xaa1703e0
@@ -37386,10 +37575,10 @@ bl _p_8
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x15, [x16, #2264]
+ldr x15, [x16, #2272]
 .word 0x910103a1
 .word 0xf9002fa1
-bl _p_302
+bl _p_303
 .word 0xf9402fbe
 .word 0xf90003c0
 .word 0xf94043a1
@@ -37423,7 +37612,7 @@ ldr x2, [x16, #16]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #2368]
+ldr x0, [x16, #2376]
 .word 0xb9400000
 .word 0x35000420
 .word 0x14000001
@@ -37440,10 +37629,10 @@ ldr x0, [x16, #2368]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x15, [x16, #2264]
+ldr x15, [x16, #2272]
 .word 0x9100e3a1
 .word 0xf9002fa1
-bl _p_302
+bl _p_303
 .word 0xf9402fbe
 .word 0xf90003c0
 .word 0xf94043a1
@@ -37459,13 +37648,13 @@ bl _p_302
 .word 0x910003bf
 .word 0xa8ca7bfd
 .word 0xd65f03c0
-bl _p_317
+bl _p_318
 .word 0xaa0003f7
 .word 0xb4fffbe0
 .word 0xaa1703e0
 bl _p_8
 
-Lme_1c9:
+Lme_1ca:
 .text
 	.align 4
 	.no_dead_strip wrapper_runtime_invoke__Module_runtime_invoke_void__this___Nullable_1_bool_object_intptr_intptr_intptr
@@ -37484,10 +37673,10 @@ wrapper_runtime_invoke__Module_runtime_invoke_void__this___Nullable_1_bool_objec
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #2368]
+ldr x0, [x16, #2376]
 .word 0xb9400000
 .word 0x340000c0
-bl _p_317
+bl _p_318
 .word 0xaa0003f7
 .word 0xb4000060
 .word 0xaa1703e0
@@ -37497,10 +37686,10 @@ bl _p_8
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x15, [x16, #2296]
+ldr x15, [x16, #2304]
 .word 0x910103a1
 .word 0xf9002fa1
-bl _p_305
+bl _p_306
 .word 0xf9402fbe
 .word 0xf90003c0
 .word 0xf9400fa0
@@ -37531,7 +37720,7 @@ ldr x2, [x16, #16]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #2368]
+ldr x0, [x16, #2376]
 .word 0xb9400000
 .word 0x350002a0
 .word 0x14000001
@@ -37540,10 +37729,10 @@ ldr x0, [x16, #2368]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x15, [x16, #2296]
+ldr x15, [x16, #2304]
 .word 0x9100e3a1
 .word 0xf9002fa1
-bl _p_305
+bl _p_306
 .word 0xf9402fbe
 .word 0xf90003c0
 .word 0xf9400fa0
@@ -37555,13 +37744,13 @@ bl _p_305
 .word 0x910003bf
 .word 0xa8c87bfd
 .word 0xd65f03c0
-bl _p_317
+bl _p_318
 .word 0xaa0003f7
 .word 0xb4fffd60
 .word 0xaa1703e0
 bl _p_8
 
-Lme_1ca:
+Lme_1cb:
 .text
 	.align 4
 	.no_dead_strip wrapper_runtime_invoke__Module_runtime_invoke_void__this___Nullable_1_DateTime_object_intptr_intptr_intptr
@@ -37580,10 +37769,10 @@ wrapper_runtime_invoke__Module_runtime_invoke_void__this___Nullable_1_DateTime_o
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #2368]
+ldr x0, [x16, #2376]
 .word 0xb9400000
 .word 0x340000c0
-bl _p_317
+bl _p_318
 .word 0xaa0003f7
 .word 0xb4000060
 .word 0xaa1703e0
@@ -37593,10 +37782,10 @@ bl _p_8
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x15, [x16, #2336]
+ldr x15, [x16, #2344]
 .word 0x910123a1
 .word 0xf90037a1
-bl _p_309
+bl _p_310
 .word 0xf94037be
 .word 0xf90003c0
 .word 0xf90007c1
@@ -37629,7 +37818,7 @@ ldr x2, [x16, #16]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #2368]
+ldr x0, [x16, #2376]
 .word 0xb9400000
 .word 0x350002e0
 .word 0x14000001
@@ -37638,10 +37827,10 @@ ldr x0, [x16, #2368]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x15, [x16, #2336]
+ldr x15, [x16, #2344]
 .word 0x9100e3a1
 .word 0xf90037a1
-bl _p_309
+bl _p_310
 .word 0xf94037be
 .word 0xf90003c0
 .word 0xf90007c1
@@ -37655,13 +37844,13 @@ bl _p_309
 .word 0x910003bf
 .word 0xa8c97bfd
 .word 0xd65f03c0
-bl _p_317
+bl _p_318
 .word 0xaa0003f7
 .word 0xb4fffd20
 .word 0xaa1703e0
 bl _p_8
 
-Lme_1cb:
+Lme_1cc:
 .text
 	.align 4
 	.no_dead_strip wrapper_runtime_invoke__Module_runtime_invoke_void__this___Nullable_1_TlsProtocols_object_intptr_intptr_intptr
@@ -37680,10 +37869,10 @@ wrapper_runtime_invoke__Module_runtime_invoke_void__this___Nullable_1_TlsProtoco
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #2368]
+ldr x0, [x16, #2376]
 .word 0xb9400000
 .word 0x340000c0
-bl _p_317
+bl _p_318
 .word 0xaa0003f7
 .word 0xb4000060
 .word 0xaa1703e0
@@ -37693,10 +37882,10 @@ bl _p_8
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x15, [x16, #2360]
+ldr x15, [x16, #2368]
 .word 0x910103a1
 .word 0xf9002fa1
-bl _p_314
+bl _p_315
 .word 0xf9402fbe
 .word 0xf90003c0
 .word 0xf9400fa0
@@ -37727,7 +37916,7 @@ ldr x2, [x16, #16]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #2368]
+ldr x0, [x16, #2376]
 .word 0xb9400000
 .word 0x350002a0
 .word 0x14000001
@@ -37736,10 +37925,10 @@ ldr x0, [x16, #2368]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x15, [x16, #2360]
+ldr x15, [x16, #2368]
 .word 0x9100e3a1
 .word 0xf9002fa1
-bl _p_314
+bl _p_315
 .word 0xf9402fbe
 .word 0xf90003c0
 .word 0xf9400fa0
@@ -37751,13 +37940,13 @@ bl _p_314
 .word 0x910003bf
 .word 0xa8c87bfd
 .word 0xd65f03c0
-bl _p_317
+bl _p_318
 .word 0xaa0003f7
 .word 0xb4fffd60
 .word 0xaa1703e0
 bl _p_8
 
-Lme_1cc:
+Lme_1cd:
 .text
 	.align 4
 	.no_dead_strip wrapper_delegate_invoke__Module_invoke_bool_BigInteger_ConfidenceFactor_Mono_Math_BigInteger_Mono_Math_Prime_ConfidenceFactor
@@ -37773,9 +37962,9 @@ wrapper_delegate_invoke__Module_invoke_bool_BigInteger_ConfidenceFactor_Mono_Mat
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #2368]
+ldr x0, [x16, #2376]
 .word 0xb9400000
-.word 0x35000700
+.word 0x35000720
 .word 0x14000001
 .word 0xf9403717
 .word 0xaa1703e0
@@ -37790,21 +37979,21 @@ ldr x0, [x16, #2368]
 .word 0xaa1a03e2
 .word 0xd63f0060
 .word 0x53001c00
-.word 0x14000021
+.word 0x14000022
 .word 0xf9401f00
 .word 0xf9400b02
 .word 0xaa1903e0
 .word 0xaa1a03e1
 .word 0xd63f0040
 .word 0x53001c00
-.word 0x1400001a
+.word 0x1400001b
 .word 0xb9801af8
 .word 0xd2800016
 .word 0x93407ec0
 .word 0xb9801ae1
 .word 0xeb00003f
 .word 0x10000011
-.word 0x540003e9
+.word 0x54000409
 .word 0xd37df000
 .word 0x8b0002e0
 .word 0x91008000
@@ -37817,11 +38006,12 @@ ldr x0, [x16, #2368]
 .word 0xf9400c70
 .word 0xd63f0200
 .word 0xf94023a1
+.word 0x53001c00
 .word 0x53001c15
 .word 0x110006d6
 .word 0xaa1603e0
 .word 0x6b18001f
-.word 0x54fffd6b
+.word 0x54fffd4b
 .word 0xaa1503e0
 .word 0xa9415bb5
 .word 0xa94263b7
@@ -37831,15 +38021,15 @@ ldr x0, [x16, #2368]
 .word 0xd65f03c0
 .word 0xaa1703e0
 bl _p_8
-bl _p_318
+bl _p_319
 .word 0xaa0003f7
 .word 0xb5ffff80
-.word 0x17ffffc7
-.word 0xd2801a00
+.word 0x17ffffc6
+.word 0xd28019e0
 .word 0xaa1103e1
 bl _p_3
 
-Lme_1cd:
+Lme_1ce:
 .text
 	.align 4
 	.no_dead_strip wrapper_delegate_begin_invoke__Module_begin_invoke_IAsyncResult__this___BigInteger_ConfidenceFactor_AsyncCallback_object_Mono_Math_BigInteger_Mono_Math_Prime_ConfidenceFactor_System_AsyncCallback_object
@@ -37884,13 +38074,13 @@ wrapper_delegate_begin_invoke__Module_begin_invoke_IAsyncResult__this___BigInteg
 .word 0xf9000320
 .word 0xf94013a0
 .word 0xaa1803e1
-bl _p_319
+bl _p_320
 .word 0xa94167b8
 .word 0x910003bf
 .word 0xa8c57bfd
 .word 0xd65f03c0
 
-Lme_1ce:
+Lme_1cf:
 .text
 	.align 4
 	.no_dead_strip wrapper_delegate_end_invoke__Module_end_invoke_bool__this___IAsyncResult_System_IAsyncResult
@@ -37924,7 +38114,7 @@ wrapper_delegate_end_invoke__Module_end_invoke_bool__this___IAsyncResult_System_
 .word 0xf9000300
 .word 0xf94013a0
 .word 0xaa1803e1
-bl _p_320
+bl _p_321
 .word 0xf9400001
 .word 0x3940b022
 .word 0xeb1f005f
@@ -37935,7 +38125,7 @@ bl _p_320
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x2, [x16, #2288]
+ldr x2, [x16, #2296]
 .word 0xeb02003f
 .word 0x10000011
 .word 0x540000c1
@@ -37944,11 +38134,11 @@ ldr x2, [x16, #2288]
 .word 0x910003bf
 .word 0xa8c47bfd
 .word 0xd65f03c0
-.word 0xd2801a80
+.word 0xd2801a60
 .word 0xaa1103e1
 bl _p_3
 
-Lme_1cf:
+Lme_1d0:
 .text
 	.align 4
 	.no_dead_strip wrapper_delegate_invoke__Module_invoke_bool_string_X509Certificate_X509Chain_MonoSslPolicyErrors_string_System_Security_Cryptography_X509Certificates_X509Certificate_System_Security_Cryptography_X509Certificates_X509Chain_Mono_Security_Interface_MonoSslPolicyErrors
@@ -37967,9 +38157,9 @@ wrapper_delegate_invoke__Module_invoke_bool_string_X509Certificate_X509Chain_Mon
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #2368]
+ldr x0, [x16, #2376]
 .word 0xb9400000
-.word 0x350007e0
+.word 0x35000800
 .word 0x14000001
 .word 0xf94036d5
 .word 0xaa1503e0
@@ -37986,7 +38176,7 @@ ldr x0, [x16, #2368]
 .word 0xaa1a03e4
 .word 0xd63f00a0
 .word 0x53001c00
-.word 0x14000025
+.word 0x14000026
 .word 0xf9401ec0
 .word 0xf9400ac4
 .word 0xaa1703e0
@@ -37995,14 +38185,14 @@ ldr x0, [x16, #2368]
 .word 0xaa1a03e3
 .word 0xd63f0080
 .word 0x53001c00
-.word 0x1400001c
+.word 0x1400001d
 .word 0xb9801ab6
 .word 0xd2800014
 .word 0x93407e80
 .word 0xb9801aa1
 .word 0xeb00003f
 .word 0x10000011
-.word 0x54000449
+.word 0x54000469
 .word 0xd37df000
 .word 0x8b0002a0
 .word 0x91008000
@@ -38017,11 +38207,12 @@ ldr x0, [x16, #2368]
 .word 0xf9400cb0
 .word 0xd63f0200
 .word 0xf9402ba1
+.word 0x53001c00
 .word 0x53001c13
 .word 0x11000694
 .word 0xaa1403e0
 .word 0x6b16001f
-.word 0x54fffd2b
+.word 0x54fffd0b
 .word 0xaa1303e0
 .word 0xa94153b3
 .word 0xa9425bb5
@@ -38032,15 +38223,15 @@ ldr x0, [x16, #2368]
 .word 0xd65f03c0
 .word 0xaa1503e0
 bl _p_8
-bl _p_318
+bl _p_319
 .word 0xaa0003f5
 .word 0xb5ffff80
-.word 0x17ffffc0
-.word 0xd2801a00
+.word 0x17ffffbf
+.word 0xd28019e0
 .word 0xaa1103e1
 bl _p_3
 
-Lme_1d0:
+Lme_1d1:
 .text
 	.align 4
 	.no_dead_strip wrapper_delegate_begin_invoke__Module_begin_invoke_IAsyncResult__this___string_X509Certificate_X509Chain_MonoSslPolicyErrors_AsyncCallback_object_string_System_Security_Cryptography_X509Certificates_X509Certificate_System_Security_Cryptography_X509Certificates_X509Chain_Mono_Security_Interface_MonoSslPolicyErrors_System_AsyncCallback_object
@@ -38093,13 +38284,13 @@ wrapper_delegate_begin_invoke__Module_begin_invoke_IAsyncResult__this___string_X
 .word 0xf9000320
 .word 0xf94013a0
 .word 0xaa1803e1
-bl _p_319
+bl _p_320
 .word 0xa94167b8
 .word 0x910003bf
 .word 0xa8c67bfd
 .word 0xd65f03c0
 
-Lme_1d1:
+Lme_1d2:
 .text
 	.align 4
 	.no_dead_strip wrapper_delegate_invoke__Module_invoke_X509Certificate_string_X509CertificateCollection_X509Certificate_string___string_System_Security_Cryptography_X509Certificates_X509CertificateCollection_System_Security_Cryptography_X509Certificates_X509Certificate_string__
@@ -38118,7 +38309,7 @@ wrapper_delegate_invoke__Module_invoke_X509Certificate_string_X509CertificateCol
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #2368]
+ldr x0, [x16, #2376]
 .word 0xb9400000
 .word 0x350007a0
 .word 0x14000001
@@ -38181,15 +38372,15 @@ ldr x0, [x16, #2368]
 .word 0xd65f03c0
 .word 0xaa1503e0
 bl _p_8
-bl _p_318
+bl _p_319
 .word 0xaa0003f5
 .word 0xb5ffff80
 .word 0x17ffffc2
-.word 0xd2801a00
+.word 0xd28019e0
 .word 0xaa1103e1
 bl _p_3
 
-Lme_1d2:
+Lme_1d3:
 .text
 	.align 4
 	.no_dead_strip wrapper_delegate_begin_invoke__Module_begin_invoke_IAsyncResult__this___string_X509CertificateCollection_X509Certificate_string___AsyncCallback_object_string_System_Security_Cryptography_X509Certificates_X509CertificateCollection_System_Security_Cryptography_X509Certificates_X509Certificate_string___System_AsyncCallback_object
@@ -38242,13 +38433,13 @@ wrapper_delegate_begin_invoke__Module_begin_invoke_IAsyncResult__this___string_X
 .word 0xf9000320
 .word 0xf94013a0
 .word 0xaa1803e1
-bl _p_319
+bl _p_320
 .word 0xa94167b8
 .word 0x910003bf
 .word 0xa8c67bfd
 .word 0xd65f03c0
 
-Lme_1d3:
+Lme_1d4:
 .text
 	.align 4
 	.no_dead_strip wrapper_delegate_end_invoke__Module_end_invoke_X509Certificate__this___IAsyncResult_System_IAsyncResult
@@ -38282,13 +38473,13 @@ wrapper_delegate_end_invoke__Module_end_invoke_X509Certificate__this___IAsyncRes
 .word 0xf9000300
 .word 0xf94013a0
 .word 0xaa1803e1
-bl _p_320
+bl _p_321
 .word 0xa94167b8
 .word 0x910003bf
 .word 0xa8c47bfd
 .word 0xd65f03c0
 
-Lme_1d4:
+Lme_1d5:
 .text
 	.align 4
 	.no_dead_strip wrapper_delegate_invoke__Module_invoke_void_object_EventArgs_object_System_EventArgs
@@ -38304,7 +38495,7 @@ wrapper_delegate_invoke__Module_invoke_void_object_EventArgs_object_System_Event
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #2368]
+ldr x0, [x16, #2376]
 .word 0xb9400000
 .word 0x35000680
 .word 0x14000001
@@ -38358,15 +38549,15 @@ ldr x0, [x16, #2368]
 .word 0xd65f03c0
 .word 0xaa1703e0
 bl _p_8
-bl _p_318
+bl _p_319
 .word 0xaa0003f7
 .word 0xb5ffff80
 .word 0x17ffffcb
-.word 0xd2801a00
+.word 0xd28019e0
 .word 0xaa1103e1
 bl _p_3
 
-Lme_1d5:
+Lme_1d6:
 .text
 	.align 4
 	.no_dead_strip wrapper_delegate_begin_invoke__Module_begin_invoke_IAsyncResult__this___object_EventArgs_AsyncCallback_object_object_System_EventArgs_System_AsyncCallback_object
@@ -38411,13 +38602,13 @@ wrapper_delegate_begin_invoke__Module_begin_invoke_IAsyncResult__this___object_E
 .word 0xf9000320
 .word 0xf94013a0
 .word 0xaa1803e1
-bl _p_319
+bl _p_320
 .word 0xa94167b8
 .word 0x910003bf
 .word 0xa8c57bfd
 .word 0xd65f03c0
 
-Lme_1d6:
+Lme_1d7:
 .text
 	.align 4
 	.no_dead_strip wrapper_delegate_end_invoke__Module_end_invoke_void__this___IAsyncResult_System_IAsyncResult
@@ -38451,13 +38642,13 @@ wrapper_delegate_end_invoke__Module_end_invoke_void__this___IAsyncResult_System_
 .word 0xf9000300
 .word 0xf94013a0
 .word 0xaa1803e1
-bl _p_320
+bl _p_321
 .word 0xa94167b8
 .word 0x910003bf
 .word 0xa8c47bfd
 .word 0xd65f03c0
 
-Lme_1d7:
+Lme_1d8:
 .text
 	.align 4
 	.no_dead_strip wrapper_unknown_uint___Get_int
@@ -38480,11 +38671,11 @@ wrapper_unknown_uint___Get_int:
 .word 0x910003bf
 .word 0xa8c27bfd
 .word 0xd65f03c0
-.word 0xd2801a00
+.word 0xd28019e0
 .word 0xaa1103e1
 bl _p_3
 
-Lme_1d8:
+Lme_1d9:
 .text
 	.align 4
 	.no_dead_strip wrapper_runtime_invoke__Module_runtime_invoke_uint__this___int_object_intptr_intptr_intptr
@@ -38503,10 +38694,10 @@ wrapper_runtime_invoke__Module_runtime_invoke_uint__this___int_object_intptr_int
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #2368]
+ldr x0, [x16, #2376]
 .word 0xb9400000
 .word 0x340000c0
-bl _p_317
+bl _p_318
 .word 0xaa0003f7
 .word 0xb4000060
 .word 0xaa1703e0
@@ -38521,7 +38712,7 @@ bl _p_8
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #2376]
+ldr x0, [x16, #2384]
 .word 0xd2800281
 bl _p_5
 .word 0xf9403ba1
@@ -38551,7 +38742,7 @@ ldr x2, [x16, #16]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #2368]
+ldr x0, [x16, #2376]
 .word 0xb9400000
 .word 0x350002c0
 .word 0x14000001
@@ -38565,7 +38756,7 @@ ldr x0, [x16, #2368]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #2376]
+ldr x0, [x16, #2384]
 .word 0xd2800281
 bl _p_5
 .word 0xf9403ba1
@@ -38576,13 +38767,13 @@ bl _p_5
 .word 0x910003bf
 .word 0xa8c87bfd
 .word 0xd65f03c0
-bl _p_317
+bl _p_318
 .word 0xaa0003f7
 .word 0xb4fffd40
 .word 0xaa1703e0
 bl _p_8
 
-Lme_1d9:
+Lme_1da:
 .text
 	.align 4
 	.no_dead_strip wrapper_unknown_uint___Set_int_uint
@@ -38607,11 +38798,11 @@ wrapper_unknown_uint___Set_int_uint:
 .word 0x910003bf
 .word 0xa8c37bfd
 .word 0xd65f03c0
-.word 0xd2801a00
+.word 0xd28019e0
 .word 0xaa1103e1
 bl _p_3
 
-Lme_1da:
+Lme_1db:
 .text
 	.align 4
 	.no_dead_strip wrapper_runtime_invoke__Module_runtime_invoke_void__this___int_uint_object_intptr_intptr_intptr
@@ -38631,10 +38822,10 @@ wrapper_runtime_invoke__Module_runtime_invoke_void__this___int_uint_object_intpt
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #2368]
+ldr x0, [x16, #2376]
 .word 0xb9400000
 .word 0x340000c0
-bl _p_317
+bl _p_318
 .word 0xaa0003f7
 .word 0xb4000060
 .word 0xaa1703e0
@@ -38670,7 +38861,7 @@ ldr x2, [x16, #16]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #2368]
+ldr x0, [x16, #2376]
 .word 0xb9400000
 .word 0x350001e0
 .word 0x14000001
@@ -38687,13 +38878,13 @@ ldr x0, [x16, #2368]
 .word 0x910003bf
 .word 0xa8c77bfd
 .word 0xd65f03c0
-bl _p_317
+bl _p_318
 .word 0xaa0003f7
 .word 0xb4fffe20
 .word 0xaa1703e0
 bl _p_8
 
-Lme_1db:
+Lme_1dc:
 .text
 	.align 4
 	.no_dead_strip wrapper_unknown_byte___Get_int
@@ -38715,11 +38906,11 @@ wrapper_unknown_byte___Get_int:
 .word 0x910003bf
 .word 0xa8c27bfd
 .word 0xd65f03c0
-.word 0xd2801a00
+.word 0xd28019e0
 .word 0xaa1103e1
 bl _p_3
 
-Lme_1dc:
+Lme_1dd:
 .text
 	.align 4
 	.no_dead_strip wrapper_runtime_invoke__Module_runtime_invoke_byte__this___int_object_intptr_intptr_intptr
@@ -38738,10 +38929,10 @@ wrapper_runtime_invoke__Module_runtime_invoke_byte__this___int_object_intptr_int
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #2368]
+ldr x0, [x16, #2376]
 .word 0xb9400000
 .word 0x340000c0
-bl _p_317
+bl _p_318
 .word 0xaa0003f7
 .word 0xb4000060
 .word 0xaa1703e0
@@ -38756,7 +38947,7 @@ bl _p_8
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #2384]
+ldr x0, [x16, #2392]
 .word 0xd2800221
 bl _p_5
 .word 0xf9403ba1
@@ -38786,7 +38977,7 @@ ldr x2, [x16, #16]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #2368]
+ldr x0, [x16, #2376]
 .word 0xb9400000
 .word 0x350002c0
 .word 0x14000001
@@ -38800,7 +38991,7 @@ ldr x0, [x16, #2368]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #2384]
+ldr x0, [x16, #2392]
 .word 0xd2800221
 bl _p_5
 .word 0xf9403ba1
@@ -38811,13 +39002,13 @@ bl _p_5
 .word 0x910003bf
 .word 0xa8c87bfd
 .word 0xd65f03c0
-bl _p_317
+bl _p_318
 .word 0xaa0003f7
 .word 0xb4fffd40
 .word 0xaa1703e0
 bl _p_8
 
-Lme_1dd:
+Lme_1de:
 .text
 	.align 4
 	.no_dead_strip wrapper_unknown_byte___Set_int_byte
@@ -38841,11 +39032,11 @@ wrapper_unknown_byte___Set_int_byte:
 .word 0x910003bf
 .word 0xa8c37bfd
 .word 0xd65f03c0
-.word 0xd2801a00
+.word 0xd28019e0
 .word 0xaa1103e1
 bl _p_3
 
-Lme_1de:
+Lme_1df:
 .text
 	.align 4
 	.no_dead_strip wrapper_runtime_invoke__Module_runtime_invoke_void__this___int_byte_object_intptr_intptr_intptr
@@ -38865,10 +39056,10 @@ wrapper_runtime_invoke__Module_runtime_invoke_void__this___int_byte_object_intpt
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #2368]
+ldr x0, [x16, #2376]
 .word 0xb9400000
 .word 0x340000c0
-bl _p_317
+bl _p_318
 .word 0xaa0003f7
 .word 0xb4000060
 .word 0xaa1703e0
@@ -38904,7 +39095,7 @@ ldr x2, [x16, #16]
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #2368]
+ldr x0, [x16, #2376]
 .word 0xb9400000
 .word 0x350001e0
 .word 0x14000001
@@ -38921,13 +39112,13 @@ ldr x0, [x16, #2368]
 .word 0x910003bf
 .word 0xa8c77bfd
 .word 0xd65f03c0
-bl _p_317
+bl _p_318
 .word 0xaa0003f7
 .word 0xb4fffe20
 .word 0xaa1703e0
 bl _p_8
 
-Lme_1df:
+Lme_1e0:
 .text
 	.align 4
 	.no_dead_strip wrapper_managed_to_native_Mono_Security_Cryptography_MD2Managed_Init_intptr
@@ -38962,7 +39153,7 @@ bl _CC_MD2_Init
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #2368]
+ldr x0, [x16, #2376]
 .word 0xb9400000
 .word 0x35000180
 .word 0x14000001
@@ -38976,12 +39167,12 @@ ldr x0, [x16, #2368]
 .word 0xd65f03c0
 .word 0xaa1803e0
 bl _p_8
-bl _p_318
+bl _p_319
 .word 0xaa0003f8
 .word 0xb5ffff80
 .word 0x17fffff3
 
-Lme_1e0:
+Lme_1e1:
 .text
 	.align 4
 	.no_dead_strip wrapper_managed_to_native_Mono_Security_Cryptography_MD2Managed_Update_intptr_intptr_uint
@@ -39020,7 +39211,7 @@ bl _CC_MD2_Update
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #2368]
+ldr x0, [x16, #2376]
 .word 0xb9400000
 .word 0x35000180
 .word 0x14000001
@@ -39034,12 +39225,12 @@ ldr x0, [x16, #2368]
 .word 0xd65f03c0
 .word 0xaa1903e0
 bl _p_8
-bl _p_318
+bl _p_319
 .word 0xaa0003f9
 .word 0xb5ffff80
 .word 0x17fffff3
 
-Lme_1e1:
+Lme_1e2:
 .text
 	.align 4
 	.no_dead_strip wrapper_managed_to_native_Mono_Security_Cryptography_MD2Managed_Final_byte___intptr
@@ -39069,7 +39260,7 @@ ldr x0, [x16, #112]
 .word 0xf9000fa1
 .word 0xf9000300
 .word 0xf9400ba0
-bl _p_321
+bl _p_322
 .word 0xaa0003f7
 .word 0xaa1703e0
 .word 0xaa1a03e1
@@ -39079,13 +39270,13 @@ bl _CC_MD2_Final
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #2368]
+ldr x0, [x16, #2376]
 .word 0xb9400000
 .word 0x35000200
 .word 0x14000001
 .word 0xf9400ba0
 .word 0xaa1703e1
-bl _p_322
+bl _p_323
 .word 0xf9400fa0
 .word 0xf9000300
 .word 0xaa1a03e0
@@ -39097,12 +39288,12 @@ bl _p_322
 .word 0xd65f03c0
 .word 0xaa1603e0
 bl _p_8
-bl _p_318
+bl _p_319
 .word 0xaa0003f6
 .word 0xb5ffff80
 .word 0x17ffffef
 
-Lme_1e2:
+Lme_1e3:
 .text
 	.align 4
 	.no_dead_strip wrapper_managed_to_native_Mono_Security_Cryptography_MD4Managed_Init_intptr
@@ -39137,7 +39328,7 @@ bl _CC_MD4_Init
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #2368]
+ldr x0, [x16, #2376]
 .word 0xb9400000
 .word 0x35000180
 .word 0x14000001
@@ -39151,12 +39342,12 @@ ldr x0, [x16, #2368]
 .word 0xd65f03c0
 .word 0xaa1803e0
 bl _p_8
-bl _p_318
+bl _p_319
 .word 0xaa0003f8
 .word 0xb5ffff80
 .word 0x17fffff3
 
-Lme_1e3:
+Lme_1e4:
 .text
 	.align 4
 	.no_dead_strip wrapper_managed_to_native_Mono_Security_Cryptography_MD4Managed_Update_intptr_intptr_uint
@@ -39195,7 +39386,7 @@ bl _CC_MD4_Update
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #2368]
+ldr x0, [x16, #2376]
 .word 0xb9400000
 .word 0x35000180
 .word 0x14000001
@@ -39209,12 +39400,12 @@ ldr x0, [x16, #2368]
 .word 0xd65f03c0
 .word 0xaa1903e0
 bl _p_8
-bl _p_318
+bl _p_319
 .word 0xaa0003f9
 .word 0xb5ffff80
 .word 0x17fffff3
 
-Lme_1e4:
+Lme_1e5:
 .text
 	.align 4
 	.no_dead_strip wrapper_managed_to_native_Mono_Security_Cryptography_MD4Managed_Final_byte___intptr
@@ -39244,7 +39435,7 @@ ldr x0, [x16, #112]
 .word 0xf9000fa1
 .word 0xf9000300
 .word 0xf9400ba0
-bl _p_321
+bl _p_322
 .word 0xaa0003f7
 .word 0xaa1703e0
 .word 0xaa1a03e1
@@ -39254,13 +39445,13 @@ bl _CC_MD4_Final
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x0, [x16, #2368]
+ldr x0, [x16, #2376]
 .word 0xb9400000
 .word 0x35000200
 .word 0x14000001
 .word 0xf9400ba0
 .word 0xaa1703e1
-bl _p_322
+bl _p_323
 .word 0xf9400fa0
 .word 0xf9000300
 .word 0xaa1a03e0
@@ -39272,17 +39463,17 @@ bl _p_322
 .word 0xd65f03c0
 .word 0xaa1603e0
 bl _p_8
-bl _p_318
+bl _p_319
 .word 0xaa0003f6
 .word 0xb5ffff80
 .word 0x17ffffef
 
-Lme_1e5:
+Lme_1e6:
 .text
 	.align 4
 	.no_dead_strip System_Array_Reverse_T_BYTE_T_BYTE__
 System_Array_Reverse_T_BYTE_T_BYTE__:
-.file 37 "/Library/Frameworks/Xamarin.iOS.framework/Versions/11.6.1.4/src/mono/external/corert/src/System.Private.CoreLib/src/System/Array.cs"
+.file 37 "/Library/Frameworks/Xamarin.iOS.framework/Versions/11.9.1.24/src/Xamarin.iOS/external/corert/src/System.Private.CoreLib/src/System/Array.cs"
 .loc 37 911 0 prologue_end
 .word 0xa9bd7bfd
 .word 0x910003fd
@@ -39295,10 +39486,10 @@ System_Array_Reverse_T_BYTE_T_BYTE__:
 .word 0xb9801800
 .word 0xf90013a0
 .word 0xf9400fa0
-bl _p_323
+bl _p_324
 .word 0xf90017a0
 .word 0xf9400fa0
-bl _p_324
+bl _p_325
 .word 0xaa0003e3
 .word 0xf94013a2
 .word 0xf94017af
@@ -39310,15 +39501,15 @@ bl _p_324
 .word 0xa8c37bfd
 .word 0xd65f03c0
 .loc 37 912 0
-.word 0xd2843460
-bl _p_301
+.word 0xd2843560
+bl _p_302
 .word 0xaa0003e1
-.word 0xd2800fe0
+.word 0xd2800fc0
 .word 0xf2a04000
 bl _mono_create_corlib_exception_1
 bl _p_8
 
-Lme_1e6:
+Lme_1e7:
 .text
 	.align 4
 	.no_dead_strip System_Array_Reverse_T_BYTE_T_BYTE___int_int
@@ -39332,7 +39523,7 @@ System_Array_Reverse_T_BYTE_T_BYTE___int_int:
 .word 0xaa0003f8
 .word 0xaa0103f9
 .word 0xaa0203fa
-.word 0xb40009f8
+.word 0xb4000a18
 .loc 37 921 0
 .word 0x6b1f033f
 .word 0x5400006b
@@ -39344,17 +39535,17 @@ System_Array_Reverse_T_BYTE_T_BYTE___int_int:
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x26, [x16, #2392]
+ldr x26, [x16, #2400]
 .word 0x14000005
 
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x26, [x16, #2400]
+ldr x26, [x16, #2408]
 .word 0x14000001
-.word 0xd28437e0
-bl _p_301
+.word 0xd28438e0
+bl _p_302
 .word 0xaa0003e2
-.word 0xd2801000
+.word 0xd2800fe0
 .word 0xf2a04000
 .word 0xaa1a03e1
 bl _mono_create_corlib_exception_2
@@ -39363,55 +39554,56 @@ bl _p_8
 .word 0xb9801b00
 .word 0x4b190000
 .word 0x6b1a001f
-.word 0x540005cb
+.word 0x540005eb
 .loc 37 926 0
 .word 0xaa1903f7
 .loc 37 927 0
 .word 0xb1a0320
 .word 0x5100041a
-.word 0x14000023
+.word 0x14000024
 .loc 37 930 0
 .word 0x93407ee0
 .word 0xb9801b01
 .word 0xeb00003f
 .word 0x10000011
-.word 0x54000669
+.word 0x54000689
 .word 0x8b000300
 .word 0x91008000
-.word 0x39400019
+.word 0x39400001
+.word 0x53001c39
 .loc 37 931 0
 .word 0x93407f40
-.word 0xb9801b01
-.word 0xeb00003f
+.word 0xb9801b02
+.word 0xeb00005f
 .word 0x10000011
 .word 0x54000569
 .word 0x8b000300
 .word 0x91008000
-.word 0x39400001
+.word 0x39400002
 .word 0x93407ee0
-.word 0xb9801b02
-.word 0xeb00005f
+.word 0xb9801b03
+.word 0xeb00007f
 .word 0x10000011
 .word 0x54000469
 .word 0x8b000300
 .word 0x91008000
-.word 0x39000001
+.word 0x39000002
 .loc 37 932 0
 .word 0x93407f40
-.word 0xb9801b01
-.word 0xeb00003f
+.word 0xb9801b02
+.word 0xeb00005f
 .word 0x10000011
 .word 0x54000369
 .word 0x8b000300
 .word 0x91008000
-.word 0x39000019
+.word 0x39000001
 .loc 37 933 0
 .word 0x110006f7
 .loc 37 934 0
 .word 0x5100075a
 .loc 37 928 0
 .word 0x6b1a02ff
-.word 0x54fffbab
+.word 0x54fffb8b
 .loc 37 936 0
 .word 0xa94163b7
 .word 0xa9426bb9
@@ -39419,26 +39611,26 @@ bl _p_8
 .word 0xa8c47bfd
 .word 0xd65f03c0
 .loc 37 924 0
-.word 0xd2846c60
-bl _p_301
+.word 0xd2846d60
+bl _p_302
+.word 0xaa0003e1
+.word 0xd2800fa0
+.word 0xf2a04000
+bl _mono_create_corlib_exception_1
+bl _p_8
+.word 0xd2843560
+.loc 37 920 0
+bl _p_302
 .word 0xaa0003e1
 .word 0xd2800fc0
 .word 0xf2a04000
 bl _mono_create_corlib_exception_1
 bl _p_8
-.word 0xd2843460
-.loc 37 920 0
-bl _p_301
-.word 0xaa0003e1
-.word 0xd2800fe0
-.word 0xf2a04000
-bl _mono_create_corlib_exception_1
-bl _p_8
-.word 0xd2801a00
+.word 0xd28019e0
 .word 0xaa1103e1
 bl _p_3
 
-Lme_1e7:
+Lme_1e8:
 .text
 	.align 3
 jit_code_end:
@@ -39750,7 +39942,6 @@ bl method_addresses
 bl method_addresses
 bl method_addresses
 bl method_addresses
-bl method_addresses
 bl Mono_Security_Interface_MonoTlsConnectionInfo_get_CipherSuiteCode
 bl Mono_Security_Interface_MonoTlsConnectionInfo_set_CipherSuiteCode_Mono_Security_Interface_CipherSuiteCode
 bl Mono_Security_Interface_MonoTlsConnectionInfo_get_ProtocolVersion
@@ -39786,6 +39977,8 @@ bl Mono_Security_Interface_MonoTlsSettings_get_UserSettings
 bl Mono_Security_Interface_MonoTlsSettings_set_UserSettings_object
 bl Mono_Security_Interface_MonoTlsSettings_get_CertificateSearchPaths
 bl Mono_Security_Interface_MonoTlsSettings_set_CertificateSearchPaths_string__
+bl Mono_Security_Interface_MonoTlsSettings_get_SendCloseNotify
+bl Mono_Security_Interface_MonoTlsSettings_set_SendCloseNotify_bool
 bl Mono_Security_Interface_MonoTlsSettings_get_EnabledProtocols
 bl Mono_Security_Interface_MonoTlsSettings_set_EnabledProtocols_System_Nullable_1_Mono_Security_Interface_TlsProtocols
 bl Mono_Security_Interface_MonoTlsSettings_get_EnabledCiphers
@@ -39942,18 +40135,17 @@ method_addresses_end:
 	.align 3
 unbox_trampolines:
 
-	.long 417,418,419,420,421,422,423,424
-	.long 425,426,427,428,429,430,431,432
-	.long 433,434,435,436,437,438,439,440
-	.long 441,442,443,444,445,446,447,448
-	.long 449,450,451,452,453,454,455,456
+	.long 418,419,420,421,422,423,424,425
+	.long 426,427,428,429,430,431,432,433
+	.long 434,435,436,437,438,439,440,441
+	.long 442,443,444,445,446,447,448,449
+	.long 450,451,452,453,454,455,456,457
 unbox_trampolines_end:
 
 	.long 0
 .text
 	.align 3
 unbox_trampoline_addresses:
-bl ut_417
 bl ut_418
 bl ut_419
 bl ut_420
@@ -39993,6 +40185,7 @@ bl ut_453
 bl ut_454
 bl ut_455
 bl ut_456
+bl ut_457
 
 	.long 0
 .section __TEXT, __const
@@ -40031,17 +40224,17 @@ unwind_info:
 	.byte 14,80,157,10,158,9,68,13,29,68,153,8,154,7,22,12,31,0,68,14,224,1,157,28,158,27,68,13,29,68,152,26
 	.byte 153,25,68,154,24,18,12,31,0,68,14,48,157,6,158,5,68,13,29,68,153,4,154,3,21,12,31,0,68,14,80,157
 	.byte 10,158,9,68,13,29,68,152,8,153,7,68,154,6,16,12,31,0,68,14,48,157,6,158,5,68,13,29,68,152,4,16
-	.byte 12,31,0,68,14,48,157,6,158,5,68,13,29,68,154,4,24,12,31,0,68,14,176,3,157,54,158,53,68,13,29,68
-	.byte 151,52,152,51,68,153,50,154,49,22,12,31,0,68,14,160,1,157,20,158,19,68,13,29,68,152,18,153,17,68,154,16
+	.byte 12,31,0,68,14,48,157,6,158,5,68,13,29,68,154,4,24,12,31,0,68,14,192,3,157,56,158,55,68,13,29,68
+	.byte 151,54,152,53,68,153,52,154,51,22,12,31,0,68,14,160,1,157,20,158,19,68,13,29,68,152,18,153,17,68,154,16
 	.byte 29,12,31,0,68,14,96,157,12,158,11,68,13,29,68,147,10,148,9,68,149,8,150,7,68,152,6,68,154,5,16,12
 	.byte 31,0,68,14,96,157,12,158,11,68,13,29,68,154,10,16,12,31,0,68,14,64,157,8,158,7,68,13,29,68,154,6
 	.byte 17,12,31,0,68,14,176,2,157,38,158,37,68,13,29,68,153,36,20,12,31,0,68,14,192,1,157,24,158,23,68,13
 	.byte 29,68,152,22,68,154,21,34,12,31,0,68,14,144,1,157,18,158,17,68,13,29,68,147,16,148,15,68,149,14,150,13
-	.byte 68,151,12,152,11,68,153,10,154,9,32,12,31,0,68,14,128,2,157,32,158,31,68,13,29,68,148,30,149,29,68,150
-	.byte 28,151,27,68,152,26,153,25,68,154,24,32,12,31,0,68,14,144,2,157,34,158,33,68,13,29,68,148,32,149,31,68
-	.byte 150,30,151,29,68,152,28,153,27,68,154,26,19,12,31,0,68,14,80,157,10,158,9,68,13,29,68,150,8,68,153,7
-	.byte 34,12,31,0,84,14,208,4,157,74,158,73,68,13,29,68,147,72,148,71,68,149,70,150,69,68,151,68,152,67,68,153
-	.byte 66,154,65,17,12,31,0,68,14,176,2,157,38,158,37,68,13,29,68,152,36,29,12,31,0,68,14,128,1,157,16,158
+	.byte 68,151,12,152,11,68,153,10,154,9,32,12,31,0,68,14,144,2,157,34,158,33,68,13,29,68,148,32,149,31,68,150
+	.byte 30,151,29,68,152,28,153,27,68,154,26,32,12,31,0,68,14,160,2,157,36,158,35,68,13,29,68,148,34,149,33,68
+	.byte 150,32,151,31,68,152,30,153,29,68,154,28,19,12,31,0,68,14,80,157,10,158,9,68,13,29,68,150,8,68,153,7
+	.byte 34,12,31,0,84,14,160,5,157,84,158,83,68,13,29,68,147,82,148,81,68,149,80,150,79,68,151,78,152,77,68,153
+	.byte 76,154,75,17,12,31,0,68,14,176,2,157,38,158,37,68,13,29,68,152,36,29,12,31,0,68,14,128,1,157,16,158
 	.byte 15,68,13,29,68,148,14,149,13,68,150,12,151,11,68,152,10,153,9,34,12,31,0,68,14,192,1,157,24,158,23,68
 	.byte 13,29,68,147,22,148,21,68,149,20,150,19,68,151,18,152,17,68,153,16,154,15,18,12,31,0,68,14,64,157,8,158
 	.byte 7,68,13,29,68,153,6,154,5,32,12,31,0,68,14,144,2,157,34,158,33,68,13,29,68,147,32,148,31,68,149,30
@@ -40060,7 +40253,7 @@ unwind_info:
 	.byte 96,157,12,158,11,68,13,29,68,151,10,152,9,68,153,8,154,7,24,12,31,0,68,14,144,1,157,18,158,17,68,13
 	.byte 29,68,151,16,152,15,68,153,14,154,13,13,12,31,0,68,14,96,157,12,158,11,68,13,29,16,12,31,0,68,14,64
 	.byte 157,8,158,7,68,13,29,68,151,6,21,12,31,0,68,14,64,157,8,158,7,68,13,29,68,151,6,152,5,68,154,4
-	.byte 24,12,31,0,68,14,208,1,157,26,158,25,68,13,29,68,151,24,152,23,68,153,22,154,21,22,12,31,0,68,14,144
+	.byte 24,12,31,0,68,14,224,1,157,28,158,27,68,13,29,68,151,26,152,25,68,153,24,154,23,22,12,31,0,68,14,144
 	.byte 3,157,50,158,49,68,13,29,68,152,48,153,47,68,154,46,14,12,31,0,84,14,208,5,157,90,158,89,68,13,29,17
 	.byte 12,31,0,68,14,176,1,157,22,158,21,68,13,29,68,154,20,21,12,31,0,68,14,112,157,14,158,13,68,13,29,68
 	.byte 150,12,68,153,11,154,10,19,12,31,0,84,14,224,4,157,76,158,75,68,13,29,68,153,74,154,73,34,12,31,0,84
@@ -40083,2597 +40276,2605 @@ plt_wrapper_alloc_object_AllocVector_intptr_intptr:
 _p_1:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x16, [x16, #2416]
+ldr x16, [x16, #2424]
 br x16
-.word 5429
+.word 5462
 	.no_dead_strip plt_System_Array_Clone
 plt_System_Array_Clone:
 _p_2:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x16, [x16, #2424]
+ldr x16, [x16, #2432]
 br x16
-.word 5437
+.word 5470
 	.no_dead_strip plt__jit_icall_mono_arch_throw_corlib_exception
 plt__jit_icall_mono_arch_throw_corlib_exception:
 _p_3:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x16, [x16, #2432]
+ldr x16, [x16, #2440]
 br x16
-.word 5442
+.word 5475
 	.no_dead_strip plt_Mono_Math_BigInteger_Normalize
 plt_Mono_Math_BigInteger_Normalize:
 _p_4:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x16, [x16, #2440]
+ldr x16, [x16, #2448]
 br x16
-.word 5477
+.word 5510
 	.no_dead_strip plt_wrapper_alloc_object_AllocSmall_intptr_intptr
 plt_wrapper_alloc_object_AllocSmall_intptr_intptr:
 _p_5:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x16, [x16, #2448]
+ldr x16, [x16, #2456]
 br x16
-.word 5479
+.word 5512
 	.no_dead_strip plt_Mono_Math_BigInteger__ctor_uint
 plt_Mono_Math_BigInteger__ctor_uint:
 _p_6:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x16, [x16, #2456]
+ldr x16, [x16, #2464]
 br x16
-.word 5487
+.word 5520
 	.no_dead_strip plt__jit_icall_mono_helper_ldstr
 plt__jit_icall_mono_helper_ldstr:
 _p_7:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x16, [x16, #2464]
+ldr x16, [x16, #2472]
 br x16
-.word 5489
+.word 5522
 	.no_dead_strip plt__jit_icall_mono_arch_throw_exception
 plt__jit_icall_mono_arch_throw_exception:
 _p_8:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x16, [x16, #2472]
+ldr x16, [x16, #2480]
 br x16
-.word 5509
+.word 5542
 	.no_dead_strip plt_Mono_Math_BigInteger_op_Equality_Mono_Math_BigInteger_uint
 plt_Mono_Math_BigInteger_op_Equality_Mono_Math_BigInteger_uint:
 _p_9:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x16, [x16, #2480]
+ldr x16, [x16, #2488]
 br x16
-.word 5537
+.word 5570
 	.no_dead_strip plt_Mono_Math_BigInteger__ctor_Mono_Math_BigInteger
 plt_Mono_Math_BigInteger__ctor_Mono_Math_BigInteger:
 _p_10:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x16, [x16, #2488]
+ldr x16, [x16, #2496]
 br x16
-.word 5539
+.word 5572
 	.no_dead_strip plt_Mono_Math_BigInteger_Kernel_Compare_Mono_Math_BigInteger_Mono_Math_BigInteger
 plt_Mono_Math_BigInteger_Kernel_Compare_Mono_Math_BigInteger_Mono_Math_BigInteger:
 _p_11:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x16, [x16, #2496]
+ldr x16, [x16, #2504]
 br x16
-.word 5541
+.word 5574
 	.no_dead_strip plt_Mono_Math_BigInteger_op_Implicit_int
 plt_Mono_Math_BigInteger_op_Implicit_int:
 _p_12:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x16, [x16, #2504]
+ldr x16, [x16, #2512]
 br x16
-.word 5543
+.word 5576
 	.no_dead_strip plt_Mono_Math_BigInteger_Kernel_Subtract_Mono_Math_BigInteger_Mono_Math_BigInteger
 plt_Mono_Math_BigInteger_Kernel_Subtract_Mono_Math_BigInteger_Mono_Math_BigInteger:
 _p_13:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x16, [x16, #2512]
+ldr x16, [x16, #2520]
 br x16
-.word 5545
+.word 5578
 	.no_dead_strip plt_Mono_Math_BigInteger_Kernel_DwordMod_Mono_Math_BigInteger_uint
 plt_Mono_Math_BigInteger_Kernel_DwordMod_Mono_Math_BigInteger_uint:
 _p_14:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x16, [x16, #2520]
+ldr x16, [x16, #2528]
 br x16
-.word 5547
+.word 5580
 	.no_dead_strip plt_Mono_Math_BigInteger_Kernel_multiByteDivide_Mono_Math_BigInteger_Mono_Math_BigInteger
 plt_Mono_Math_BigInteger_Kernel_multiByteDivide_Mono_Math_BigInteger_Mono_Math_BigInteger:
 _p_15:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x16, [x16, #2528]
+ldr x16, [x16, #2536]
 br x16
-.word 5549
+.word 5582
 	.no_dead_strip plt_Mono_Math_BigInteger__ctor_Mono_Math_BigInteger_Sign_uint
 plt_Mono_Math_BigInteger__ctor_Mono_Math_BigInteger_Sign_uint:
 _p_16:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x16, [x16, #2536]
+ldr x16, [x16, #2544]
 br x16
-.word 5551
+.word 5584
 	.no_dead_strip plt_Mono_Math_BigInteger_Kernel_Multiply_uint___uint_uint_uint___uint_uint_uint___uint
 plt_Mono_Math_BigInteger_Kernel_Multiply_uint___uint_uint_uint___uint_uint_uint___uint:
 _p_17:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x16, [x16, #2544]
+ldr x16, [x16, #2552]
 br x16
-.word 5553
+.word 5586
 	.no_dead_strip plt_Mono_Math_BigInteger_Kernel_LeftShift_Mono_Math_BigInteger_int
 plt_Mono_Math_BigInteger_Kernel_LeftShift_Mono_Math_BigInteger_int:
 _p_18:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x16, [x16, #2552]
+ldr x16, [x16, #2560]
 br x16
-.word 5555
+.word 5588
 	.no_dead_strip plt_Mono_Math_BigInteger_Kernel_RightShift_Mono_Math_BigInteger_int
 plt_Mono_Math_BigInteger_Kernel_RightShift_Mono_Math_BigInteger_int:
 _p_19:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x16, [x16, #2560]
+ldr x16, [x16, #2568]
 br x16
-.word 5557
+.word 5590
 	.no_dead_strip plt__jit_icall_ves_icall_object_new_specific
 plt__jit_icall_ves_icall_object_new_specific:
 _p_20:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x16, [x16, #2568]
+ldr x16, [x16, #2576]
 br x16
-.word 5559
+.word 5592
 	.no_dead_strip plt_System_Buffer_BlockCopy_System_Array_int_System_Array_int_int
 plt_System_Buffer_BlockCopy_System_Array_int_System_Array_int_int:
 _p_21:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x16, [x16, #2576]
+ldr x16, [x16, #2584]
 br x16
-.word 5591
+.word 5624
 	.no_dead_strip plt_Mono_Math_BigInteger_get_Rng
 plt_Mono_Math_BigInteger_get_Rng:
 _p_22:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x16, [x16, #2584]
+ldr x16, [x16, #2592]
 br x16
-.word 5596
+.word 5629
 	.no_dead_strip plt_Mono_Math_BigInteger_GenerateRandom_int_System_Security_Cryptography_RandomNumberGenerator
 plt_Mono_Math_BigInteger_GenerateRandom_int_System_Security_Cryptography_RandomNumberGenerator:
 _p_23:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x16, [x16, #2592]
+ldr x16, [x16, #2600]
 br x16
-.word 5598
+.word 5631
 	.no_dead_strip plt_Mono_Math_BigInteger_SetBit_uint_bool
 plt_Mono_Math_BigInteger_SetBit_uint_bool:
 _p_24:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x16, [x16, #2600]
+ldr x16, [x16, #2608]
 br x16
-.word 5600
+.word 5633
 	.no_dead_strip plt_Mono_Math_BigInteger_TestBit_int
 plt_Mono_Math_BigInteger_TestBit_int:
 _p_25:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x16, [x16, #2608]
+ldr x16, [x16, #2616]
 br x16
-.word 5602
+.word 5635
 	.no_dead_strip plt_Mono_Math_BigInteger_BitCount
 plt_Mono_Math_BigInteger_BitCount:
 _p_26:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x16, [x16, #2616]
+ldr x16, [x16, #2624]
 br x16
-.word 5604
+.word 5637
 	.no_dead_strip plt_Mono_Math_BigInteger_op_Equality_Mono_Math_BigInteger_Mono_Math_BigInteger
 plt_Mono_Math_BigInteger_op_Equality_Mono_Math_BigInteger_Mono_Math_BigInteger:
 _p_27:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x16, [x16, #2624]
+ldr x16, [x16, #2632]
 br x16
-.word 5606
+.word 5639
 	.no_dead_strip plt_Mono_Math_BigInteger_ToString_uint_string
 plt_Mono_Math_BigInteger_ToString_uint_string:
 _p_28:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x16, [x16, #2632]
+ldr x16, [x16, #2640]
 br x16
-.word 5608
+.word 5641
 	.no_dead_strip plt_Mono_Math_BigInteger_Kernel_SingleByteDivideInPlace_Mono_Math_BigInteger_uint
 plt_Mono_Math_BigInteger_Kernel_SingleByteDivideInPlace_Mono_Math_BigInteger_uint:
 _p_29:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x16, [x16, #2640]
+ldr x16, [x16, #2648]
 br x16
-.word 5610
+.word 5643
 	.no_dead_strip plt_string__ctor_char_int
 plt_string__ctor_char_int:
 _p_30:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x16, [x16, #2648]
+ldr x16, [x16, #2656]
 br x16
-.word 5612
+.word 5645
 	.no_dead_strip plt_string_Concat_string_string
 plt_string_Concat_string_string:
 _p_31:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x16, [x16, #2656]
+ldr x16, [x16, #2664]
 br x16
-.word 5617
+.word 5650
 	.no_dead_strip plt_Mono_Math_BigInteger_op_Inequality_Mono_Math_BigInteger_uint
 plt_Mono_Math_BigInteger_op_Inequality_Mono_Math_BigInteger_uint:
 _p_32:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x16, [x16, #2664]
+ldr x16, [x16, #2672]
 br x16
-.word 5622
+.word 5655
 	.no_dead_strip plt_Mono_Math_BigInteger_ToString_uint
 plt_Mono_Math_BigInteger_ToString_uint:
 _p_33:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x16, [x16, #2672]
+ldr x16, [x16, #2680]
 br x16
-.word 5624
+.word 5657
 	.no_dead_strip plt_Mono_Math_BigInteger_Kernel_modInverse_Mono_Math_BigInteger_Mono_Math_BigInteger
 plt_Mono_Math_BigInteger_Kernel_modInverse_Mono_Math_BigInteger_Mono_Math_BigInteger:
 _p_34:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x16, [x16, #2680]
+ldr x16, [x16, #2688]
 br x16
-.word 5626
+.word 5659
 	.no_dead_strip plt_string_memcpy_byte__byte__int
 plt_string_memcpy_byte__byte__int:
 _p_35:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x16, [x16, #2688]
+ldr x16, [x16, #2696]
 br x16
-.word 5628
+.word 5661
 	.no_dead_strip plt_Mono_Math_BigInteger_op_Division_Mono_Math_BigInteger_Mono_Math_BigInteger
 plt_Mono_Math_BigInteger_op_Division_Mono_Math_BigInteger_Mono_Math_BigInteger:
 _p_36:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x16, [x16, #2696]
+ldr x16, [x16, #2704]
 br x16
-.word 5633
+.word 5666
 	.no_dead_strip plt_Mono_Math_BigInteger_Kernel_MultiplyMod2p32pmod_uint___int_int_uint___int_int_uint___int_int
 plt_Mono_Math_BigInteger_Kernel_MultiplyMod2p32pmod_uint___int_int_uint___int_int_uint___int_int:
 _p_37:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x16, [x16, #2704]
+ldr x16, [x16, #2712]
 br x16
-.word 5635
+.word 5668
 	.no_dead_strip plt_Mono_Math_BigInteger_op_LessThanOrEqual_Mono_Math_BigInteger_Mono_Math_BigInteger
 plt_Mono_Math_BigInteger_op_LessThanOrEqual_Mono_Math_BigInteger_Mono_Math_BigInteger:
 _p_38:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x16, [x16, #2712]
+ldr x16, [x16, #2720]
 br x16
-.word 5637
+.word 5670
 	.no_dead_strip plt_Mono_Math_BigInteger_Kernel_MinusEq_Mono_Math_BigInteger_Mono_Math_BigInteger
 plt_Mono_Math_BigInteger_Kernel_MinusEq_Mono_Math_BigInteger_Mono_Math_BigInteger:
 _p_39:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x16, [x16, #2720]
+ldr x16, [x16, #2728]
 br x16
-.word 5639
+.word 5672
 	.no_dead_strip plt_Mono_Math_BigInteger_Kernel_PlusEq_Mono_Math_BigInteger_Mono_Math_BigInteger
 plt_Mono_Math_BigInteger_Kernel_PlusEq_Mono_Math_BigInteger_Mono_Math_BigInteger:
 _p_40:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x16, [x16, #2728]
+ldr x16, [x16, #2736]
 br x16
-.word 5641
+.word 5674
 	.no_dead_strip plt_Mono_Math_BigInteger_op_GreaterThanOrEqual_Mono_Math_BigInteger_Mono_Math_BigInteger
 plt_Mono_Math_BigInteger_op_GreaterThanOrEqual_Mono_Math_BigInteger_Mono_Math_BigInteger:
 _p_41:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x16, [x16, #2736]
+ldr x16, [x16, #2744]
 br x16
-.word 5643
+.word 5676
 	.no_dead_strip plt_Mono_Math_BigInteger_op_GreaterThan_Mono_Math_BigInteger_Mono_Math_BigInteger
 plt_Mono_Math_BigInteger_op_GreaterThan_Mono_Math_BigInteger_Mono_Math_BigInteger:
 _p_42:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x16, [x16, #2744]
+ldr x16, [x16, #2752]
 br x16
-.word 5645
+.word 5678
 	.no_dead_strip plt_Mono_Math_BigInteger_op_Modulus_Mono_Math_BigInteger_Mono_Math_BigInteger
 plt_Mono_Math_BigInteger_op_Modulus_Mono_Math_BigInteger_Mono_Math_BigInteger:
 _p_43:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x16, [x16, #2752]
+ldr x16, [x16, #2760]
 br x16
-.word 5647
+.word 5680
 	.no_dead_strip plt_Mono_Math_BigInteger_op_Multiply_Mono_Math_BigInteger_Mono_Math_BigInteger
 plt_Mono_Math_BigInteger_op_Multiply_Mono_Math_BigInteger_Mono_Math_BigInteger:
 _p_44:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x16, [x16, #2760]
+ldr x16, [x16, #2768]
 br x16
-.word 5649
+.word 5682
 	.no_dead_strip plt_Mono_Math_BigInteger_ModulusRing_BarrettReduction_Mono_Math_BigInteger
 plt_Mono_Math_BigInteger_ModulusRing_BarrettReduction_Mono_Math_BigInteger:
 _p_45:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x16, [x16, #2768]
+ldr x16, [x16, #2776]
 br x16
-.word 5651
+.word 5684
 	.no_dead_strip plt_Mono_Math_BigInteger_op_Subtraction_Mono_Math_BigInteger_Mono_Math_BigInteger
 plt_Mono_Math_BigInteger_op_Subtraction_Mono_Math_BigInteger_Mono_Math_BigInteger:
 _p_46:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x16, [x16, #2776]
+ldr x16, [x16, #2784]
 br x16
-.word 5653
+.word 5686
 	.no_dead_strip plt_Mono_Math_BigInteger_ModulusRing_Multiply_Mono_Math_BigInteger_Mono_Math_BigInteger
 plt_Mono_Math_BigInteger_ModulusRing_Multiply_Mono_Math_BigInteger_Mono_Math_BigInteger:
 _p_47:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x16, [x16, #2784]
+ldr x16, [x16, #2792]
 br x16
-.word 5655
+.word 5688
 	.no_dead_strip plt_Mono_Math_BigInteger_ModulusRing_Pow_Mono_Math_BigInteger_Mono_Math_BigInteger
 plt_Mono_Math_BigInteger_ModulusRing_Pow_Mono_Math_BigInteger_Mono_Math_BigInteger:
 _p_48:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x16, [x16, #2792]
+ldr x16, [x16, #2800]
 br x16
-.word 5657
+.word 5690
 	.no_dead_strip plt_Mono_Math_BigInteger_op_Implicit_uint
 plt_Mono_Math_BigInteger_op_Implicit_uint:
 _p_49:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x16, [x16, #2800]
+ldr x16, [x16, #2808]
 br x16
-.word 5659
+.word 5692
 	.no_dead_strip plt_Mono_Math_BigInteger_Kernel_DwordDivMod_Mono_Math_BigInteger_uint
 plt_Mono_Math_BigInteger_Kernel_DwordDivMod_Mono_Math_BigInteger_uint:
 _p_50:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x16, [x16, #2808]
+ldr x16, [x16, #2816]
 br x16
-.word 5661
+.word 5694
 	.no_dead_strip plt_Mono_Math_BigInteger_op_LeftShift_Mono_Math_BigInteger_int
 plt_Mono_Math_BigInteger_op_LeftShift_Mono_Math_BigInteger_int:
 _p_51:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x16, [x16, #2816]
+ldr x16, [x16, #2824]
 br x16
-.word 5663
+.word 5696
 	.no_dead_strip plt_Mono_Math_BigInteger_op_RightShift_Mono_Math_BigInteger_int
 plt_Mono_Math_BigInteger_op_RightShift_Mono_Math_BigInteger_int:
 _p_52:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x16, [x16, #2824]
+ldr x16, [x16, #2832]
 br x16
-.word 5665
+.word 5698
 	.no_dead_strip plt_Mono_Math_BigInteger__ctor_Mono_Math_BigInteger_uint
 plt_Mono_Math_BigInteger__ctor_Mono_Math_BigInteger_uint:
 _p_53:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x16, [x16, #2832]
+ldr x16, [x16, #2840]
 br x16
-.word 5667
+.word 5700
 	.no_dead_strip plt_Mono_Math_BigInteger_op_Modulus_Mono_Math_BigInteger_uint
 plt_Mono_Math_BigInteger_op_Modulus_Mono_Math_BigInteger_uint:
 _p_54:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x16, [x16, #2840]
+ldr x16, [x16, #2848]
 br x16
-.word 5669
+.word 5702
 	.no_dead_strip plt_Mono_Math_BigInteger_Kernel_modInverse_Mono_Math_BigInteger_uint
 plt_Mono_Math_BigInteger_Kernel_modInverse_Mono_Math_BigInteger_uint:
 _p_55:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x16, [x16, #2848]
+ldr x16, [x16, #2856]
 br x16
-.word 5671
+.word 5704
 	.no_dead_strip plt_Mono_Math_BigInteger_ModulusRing__ctor_Mono_Math_BigInteger
 plt_Mono_Math_BigInteger_ModulusRing__ctor_Mono_Math_BigInteger:
 _p_56:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x16, [x16, #2856]
+ldr x16, [x16, #2864]
 br x16
-.word 5673
+.word 5706
 	.no_dead_strip plt_Mono_Math_BigInteger_ModulusRing_Difference_Mono_Math_BigInteger_Mono_Math_BigInteger
 plt_Mono_Math_BigInteger_ModulusRing_Difference_Mono_Math_BigInteger_Mono_Math_BigInteger:
 _p_57:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x16, [x16, #2864]
+ldr x16, [x16, #2872]
 br x16
-.word 5675
+.word 5708
 	.no_dead_strip plt_Mono_Math_Prime_PrimalityTests_GetSPPRounds_Mono_Math_BigInteger_Mono_Math_Prime_ConfidenceFactor
 plt_Mono_Math_Prime_PrimalityTests_GetSPPRounds_Mono_Math_BigInteger_Mono_Math_Prime_ConfidenceFactor:
 _p_58:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x16, [x16, #2872]
+ldr x16, [x16, #2880]
 br x16
-.word 5677
+.word 5710
 	.no_dead_strip plt_Mono_Math_BigInteger_LowestSetBit
 plt_Mono_Math_BigInteger_LowestSetBit:
 _p_59:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x16, [x16, #2880]
+ldr x16, [x16, #2888]
 br x16
-.word 5679
+.word 5712
 	.no_dead_strip plt_Mono_Math_BigInteger_ModulusRing_Pow_uint_Mono_Math_BigInteger
 plt_Mono_Math_BigInteger_ModulusRing_Pow_uint_Mono_Math_BigInteger:
 _p_60:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x16, [x16, #2888]
+ldr x16, [x16, #2896]
 br x16
-.word 5681
+.word 5714
 	.no_dead_strip plt_Mono_Math_BigInteger_GenerateRandom_int
 plt_Mono_Math_BigInteger_GenerateRandom_int:
 _p_61:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x16, [x16, #2896]
+ldr x16, [x16, #2904]
 br x16
-.word 5683
+.word 5716
 	.no_dead_strip plt_Mono_Math_BigInteger_op_Inequality_Mono_Math_BigInteger_Mono_Math_BigInteger
 plt_Mono_Math_BigInteger_op_Inequality_Mono_Math_BigInteger_Mono_Math_BigInteger:
 _p_62:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x16, [x16, #2904]
+ldr x16, [x16, #2912]
 br x16
-.word 5685
+.word 5718
 	.no_dead_strip plt_Mono_Math_BigInteger_SetBit_uint
 plt_Mono_Math_BigInteger_SetBit_uint:
 _p_63:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x16, [x16, #2912]
+ldr x16, [x16, #2920]
 br x16
-.word 5687
+.word 5720
 	.no_dead_strip plt_Mono_Math_BigInteger_Incr2
 plt_Mono_Math_BigInteger_Incr2:
 _p_64:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x16, [x16, #2920]
+ldr x16, [x16, #2928]
 br x16
-.word 5689
+.word 5722
 	.no_dead_strip plt_Mono_Security_ASN1__ctor_byte_byte__
 plt_Mono_Security_ASN1__ctor_byte_byte__:
 _p_65:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x16, [x16, #2928]
+ldr x16, [x16, #2936]
 br x16
-.word 5691
+.word 5724
 	.no_dead_strip plt_Mono_Security_ASN1_Decode_byte___int__int
 plt_Mono_Security_ASN1_Decode_byte___int__int:
 _p_66:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x16, [x16, #2936]
+ldr x16, [x16, #2944]
 br x16
-.word 5693
+.word 5726
 	.no_dead_strip plt_Mono_Security_ASN1_CompareArray_byte___byte__
 plt_Mono_Security_ASN1_CompareArray_byte___byte__:
 _p_67:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x16, [x16, #2944]
+ldr x16, [x16, #2952]
 br x16
-.word 5695
+.word 5728
 	.no_dead_strip plt_Mono_Security_ASN1_get_Count
 plt_Mono_Security_ASN1_get_Count:
 _p_68:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
-ldr x16, [x16, #2952]
-br x16
-.word 5697
-	.no_dead_strip plt_Mono_Security_ASN1_DecodeTLV_byte___int__byte__int__byte___
-plt_Mono_Security_ASN1_DecodeTLV_byte___int__byte__int__byte___:
-_p_69:
-adrp x16, mono_aot_Mono_Security_got@PAGE+0
-add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #2960]
 br x16
-.word 5699
-	.no_dead_strip plt_Mono_Security_ASN1_Add_Mono_Security_ASN1
-plt_Mono_Security_ASN1_Add_Mono_Security_ASN1:
-_p_70:
+.word 5730
+	.no_dead_strip plt__jit_icall_mono_thread_self_abort
+plt__jit_icall_mono_thread_self_abort:
+_p_69:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #2968]
 br x16
-.word 5701
-	.no_dead_strip plt__jit_icall_mono_thread_get_undeniable_exception
-plt__jit_icall_mono_thread_get_undeniable_exception:
-_p_71:
+.word 5732
+	.no_dead_strip plt_Mono_Security_ASN1_DecodeTLV_byte___int__byte__int__byte___
+plt_Mono_Security_ASN1_DecodeTLV_byte___int__byte__int__byte___:
+_p_70:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #2976]
 br x16
-.word 5703
-	.no_dead_strip plt_System_Text_StringBuilder__ctor
-plt_System_Text_StringBuilder__ctor:
-_p_72:
+.word 5757
+	.no_dead_strip plt_Mono_Security_ASN1_Add_Mono_Security_ASN1
+plt_Mono_Security_ASN1_Add_Mono_Security_ASN1:
+_p_71:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #2984]
 br x16
-.word 5742
-	.no_dead_strip plt_byte_ToString_string
-plt_byte_ToString_string:
-_p_73:
+.word 5759
+	.no_dead_strip plt__jit_icall_mono_thread_get_undeniable_exception
+plt__jit_icall_mono_thread_get_undeniable_exception:
+_p_72:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #2992]
 br x16
-.word 5747
-	.no_dead_strip plt_System_Environment_get_NewLine
-plt_System_Environment_get_NewLine:
-_p_74:
+.word 5761
+	.no_dead_strip plt_System_Text_StringBuilder__ctor
+plt_System_Text_StringBuilder__ctor:
+_p_73:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3000]
 br x16
-.word 5752
-	.no_dead_strip plt_System_Text_StringBuilder_AppendFormat_string_object_object
-plt_System_Text_StringBuilder_AppendFormat_string_object_object:
-_p_75:
+.word 5800
+	.no_dead_strip plt_byte_ToString_string
+plt_byte_ToString_string:
+_p_74:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3008]
 br x16
-.word 5757
-	.no_dead_strip plt_Mono_Security_ASN1_get_Value
-plt_Mono_Security_ASN1_get_Value:
-_p_76:
+.word 5805
+	.no_dead_strip plt_System_Environment_get_NewLine
+plt_System_Environment_get_NewLine:
+_p_75:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3016]
 br x16
-.word 5762
-	.no_dead_strip plt_System_Text_StringBuilder_Append_string
-plt_System_Text_StringBuilder_Append_string:
-_p_77:
+.word 5810
+	.no_dead_strip plt_System_Text_StringBuilder_AppendFormat_string_object_object
+plt_System_Text_StringBuilder_AppendFormat_string_object_object:
+_p_76:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3024]
 br x16
-.word 5764
-	.no_dead_strip plt_System_Text_StringBuilder_AppendFormat_string_object
-plt_System_Text_StringBuilder_AppendFormat_string_object:
-_p_78:
+.word 5815
+	.no_dead_strip plt_Mono_Security_ASN1_get_Value
+plt_Mono_Security_ASN1_get_Value:
+_p_77:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3032]
 br x16
-.word 5769
-	.no_dead_strip plt__jit_icall_mono_generic_class_init
-plt__jit_icall_mono_generic_class_init:
-_p_79:
+.word 5820
+	.no_dead_strip plt_System_Text_StringBuilder_Append_string
+plt_System_Text_StringBuilder_Append_string:
+_p_78:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3040]
 br x16
-.word 5774
-	.no_dead_strip plt_System_Text_StringBuilder_AppendFormat_string_object__
-plt_System_Text_StringBuilder_AppendFormat_string_object__:
-_p_80:
+.word 5822
+	.no_dead_strip plt_System_Text_StringBuilder_AppendFormat_string_object
+plt_System_Text_StringBuilder_AppendFormat_string_object:
+_p_79:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3048]
 br x16
-.word 5800
-	.no_dead_strip plt_Mono_Security_BitConverterLE_GetBytes_int
-plt_Mono_Security_BitConverterLE_GetBytes_int:
-_p_81:
+.word 5827
+	.no_dead_strip plt__jit_icall_mono_generic_class_init
+plt__jit_icall_mono_generic_class_init:
+_p_80:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3056]
 br x16
-.word 5805
-	.no_dead_strip plt_System_Array_Reverse_byte_byte__
-plt_System_Array_Reverse_byte_byte__:
-_p_82:
+.word 5832
+	.no_dead_strip plt_System_Text_StringBuilder_AppendFormat_string_object__
+plt_System_Text_StringBuilder_AppendFormat_string_object__:
+_p_81:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3064]
 br x16
-.word 5807
-	.no_dead_strip plt_Mono_Security_ASN1__ctor_byte
-plt_Mono_Security_ASN1__ctor_byte:
-_p_83:
+.word 5858
+	.no_dead_strip plt_Mono_Security_BitConverterLE_GetBytes_int
+plt_Mono_Security_BitConverterLE_GetBytes_int:
+_p_82:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3072]
 br x16
-.word 5819
-	.no_dead_strip plt_Mono_Security_ASN1_set_Value_byte__
-plt_Mono_Security_ASN1_set_Value_byte__:
-_p_84:
+.word 5863
+	.no_dead_strip plt_System_Array_Reverse_byte_byte__
+plt_System_Array_Reverse_byte_byte__:
+_p_83:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3080]
 br x16
-.word 5821
-	.no_dead_strip plt_System_Security_Cryptography_CryptoConfig_EncodeOID_string
-plt_System_Security_Cryptography_CryptoConfig_EncodeOID_string:
-_p_85:
+.word 5865
+	.no_dead_strip plt_Mono_Security_ASN1__ctor_byte
+plt_Mono_Security_ASN1__ctor_byte:
+_p_84:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3088]
 br x16
-.word 5823
-	.no_dead_strip plt_Mono_Security_ASN1__ctor_byte__
-plt_Mono_Security_ASN1__ctor_byte__:
-_p_86:
+.word 5877
+	.no_dead_strip plt_Mono_Security_ASN1_set_Value_byte__
+plt_Mono_Security_ASN1_set_Value_byte__:
+_p_85:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3096]
 br x16
-.word 5828
-	.no_dead_strip plt_byte_ToString_System_IFormatProvider
-plt_byte_ToString_System_IFormatProvider:
-_p_87:
+.word 5879
+	.no_dead_strip plt_System_Security_Cryptography_CryptoConfig_EncodeOID_string
+plt_System_Security_Cryptography_CryptoConfig_EncodeOID_string:
+_p_86:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3104]
 br x16
-.word 5830
-	.no_dead_strip plt_ulong_ToString_System_IFormatProvider
-plt_ulong_ToString_System_IFormatProvider:
-_p_88:
+.word 5881
+	.no_dead_strip plt_Mono_Security_ASN1__ctor_byte__
+plt_Mono_Security_ASN1__ctor_byte__:
+_p_87:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3112]
 br x16
-.word 5835
-	.no_dead_strip plt_System_Text_Encoding_get_ASCII
-plt_System_Text_Encoding_get_ASCII:
-_p_89:
+.word 5886
+	.no_dead_strip plt_byte_ToString_System_IFormatProvider
+plt_byte_ToString_System_IFormatProvider:
+_p_88:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3120]
 br x16
-.word 5840
-	.no_dead_strip plt_string_Substring_int_int
-plt_string_Substring_int_int:
-_p_90:
+.word 5888
+	.no_dead_strip plt_ulong_ToString_System_IFormatProvider
+plt_ulong_ToString_System_IFormatProvider:
+_p_89:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3128]
 br x16
-.word 5845
-	.no_dead_strip plt_System_Convert_ToInt16_string_System_IFormatProvider
-plt_System_Convert_ToInt16_string_System_IFormatProvider:
-_p_91:
+.word 5893
+	.no_dead_strip plt_System_Text_Encoding_get_ASCII
+plt_System_Text_Encoding_get_ASCII:
+_p_90:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3136]
 br x16
-.word 5850
-	.no_dead_strip plt_string_Format_string_object__
-plt_string_Format_string_object__:
-_p_92:
+.word 5898
+	.no_dead_strip plt_string_Substring_int_int
+plt_string_Substring_int_int:
+_p_91:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3144]
 br x16
-.word 5855
-	.no_dead_strip plt_System_DateTime_ParseExact_string_string_System_IFormatProvider_System_Globalization_DateTimeStyles
-plt_System_DateTime_ParseExact_string_string_System_IFormatProvider_System_Globalization_DateTimeStyles:
-_p_93:
+.word 5903
+	.no_dead_strip plt_System_Convert_ToInt16_string_System_IFormatProvider
+plt_System_Convert_ToInt16_string_System_IFormatProvider:
+_p_92:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3152]
 br x16
-.word 5860
-	.no_dead_strip plt_Mono_Security_BitConverterLE_GetUIntBytes_byte_
-plt_Mono_Security_BitConverterLE_GetUIntBytes_byte_:
-_p_94:
+.word 5908
+	.no_dead_strip plt_string_Format_string_object__
+plt_string_Format_string_object__:
+_p_93:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3160]
 br x16
-.word 5865
-	.no_dead_strip plt_Mono_Security_BitConverterLE_GetULongBytes_byte_
-plt_Mono_Security_BitConverterLE_GetULongBytes_byte_:
-_p_95:
+.word 5913
+	.no_dead_strip plt_System_DateTime_ParseExact_string_string_System_IFormatProvider_System_Globalization_DateTimeStyles
+plt_System_DateTime_ParseExact_string_string_System_IFormatProvider_System_Globalization_DateTimeStyles:
+_p_94:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3168]
 br x16
-.word 5867
-	.no_dead_strip plt_Mono_Security_BitConverterLE_UShortFromBytes_byte__byte___int
-plt_Mono_Security_BitConverterLE_UShortFromBytes_byte__byte___int:
-_p_96:
+.word 5918
+	.no_dead_strip plt_Mono_Security_BitConverterLE_GetUIntBytes_byte_
+plt_Mono_Security_BitConverterLE_GetUIntBytes_byte_:
+_p_95:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3176]
 br x16
-.word 5869
-	.no_dead_strip plt_Mono_Security_BitConverterLE_UIntFromBytes_byte__byte___int
-plt_Mono_Security_BitConverterLE_UIntFromBytes_byte__byte___int:
-_p_97:
+.word 5923
+	.no_dead_strip plt_Mono_Security_BitConverterLE_GetULongBytes_byte_
+plt_Mono_Security_BitConverterLE_GetULongBytes_byte_:
+_p_96:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3184]
 br x16
-.word 5871
-	.no_dead_strip plt_Mono_Security_PKCS7_ContentInfo__ctor
-plt_Mono_Security_PKCS7_ContentInfo__ctor:
-_p_98:
+.word 5925
+	.no_dead_strip plt_Mono_Security_BitConverterLE_UShortFromBytes_byte__byte___int
+plt_Mono_Security_BitConverterLE_UShortFromBytes_byte__byte___int:
+_p_97:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3192]
 br x16
-.word 5873
-	.no_dead_strip plt_Mono_Security_PKCS7_ContentInfo__ctor_Mono_Security_ASN1
-plt_Mono_Security_PKCS7_ContentInfo__ctor_Mono_Security_ASN1:
-_p_99:
+.word 5927
+	.no_dead_strip plt_Mono_Security_BitConverterLE_UIntFromBytes_byte__byte___int
+plt_Mono_Security_BitConverterLE_UIntFromBytes_byte__byte___int:
+_p_98:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3200]
 br x16
-.word 5875
-	.no_dead_strip plt_Mono_Security_ASN1_get_Item_int
-plt_Mono_Security_ASN1_get_Item_int:
-_p_100:
+.word 5929
+	.no_dead_strip plt_Mono_Security_PKCS7_ContentInfo__ctor
+plt_Mono_Security_PKCS7_ContentInfo__ctor:
+_p_99:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3208]
 br x16
-.word 5877
-	.no_dead_strip plt_Mono_Security_ASN1Convert_ToOid_Mono_Security_ASN1
-plt_Mono_Security_ASN1Convert_ToOid_Mono_Security_ASN1:
-_p_101:
+.word 5931
+	.no_dead_strip plt_Mono_Security_PKCS7_ContentInfo__ctor_Mono_Security_ASN1
+plt_Mono_Security_PKCS7_ContentInfo__ctor_Mono_Security_ASN1:
+_p_100:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3216]
 br x16
-.word 5879
-	.no_dead_strip plt_Mono_Security_PKCS7_ContentInfo_GetASN1
-plt_Mono_Security_PKCS7_ContentInfo_GetASN1:
-_p_102:
+.word 5933
+	.no_dead_strip plt_Mono_Security_ASN1_get_Item_int
+plt_Mono_Security_ASN1_get_Item_int:
+_p_101:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3224]
 br x16
-.word 5881
-	.no_dead_strip plt_Mono_Security_ASN1Convert_FromOid_string
-plt_Mono_Security_ASN1Convert_FromOid_string:
-_p_103:
+.word 5935
+	.no_dead_strip plt_Mono_Security_ASN1Convert_ToOid_Mono_Security_ASN1
+plt_Mono_Security_ASN1Convert_ToOid_Mono_Security_ASN1:
+_p_102:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3232]
 br x16
-.word 5883
-	.no_dead_strip plt_Mono_Security_PKCS7_ContentInfo__ctor_string
-plt_Mono_Security_PKCS7_ContentInfo__ctor_string:
-_p_104:
+.word 5937
+	.no_dead_strip plt_Mono_Security_PKCS7_ContentInfo_GetASN1
+plt_Mono_Security_PKCS7_ContentInfo_GetASN1:
+_p_103:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3240]
 br x16
-.word 5885
-	.no_dead_strip plt_Mono_Security_X509_PKCS12__ctor
-plt_Mono_Security_X509_PKCS12__ctor:
-_p_105:
+.word 5939
+	.no_dead_strip plt_Mono_Security_ASN1Convert_FromOid_string
+plt_Mono_Security_ASN1Convert_FromOid_string:
+_p_104:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3248]
 br x16
-.word 5887
-	.no_dead_strip plt_Mono_Security_X509_PKCS12_set_Password_string
-plt_Mono_Security_X509_PKCS12_set_Password_string:
-_p_106:
+.word 5941
+	.no_dead_strip plt_Mono_Security_PKCS7_ContentInfo__ctor_string
+plt_Mono_Security_PKCS7_ContentInfo__ctor_string:
+_p_105:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3256]
 br x16
-.word 5890
-	.no_dead_strip plt_Mono_Security_X509_PKCS12_Decode_byte__
-plt_Mono_Security_X509_PKCS12_Decode_byte__:
-_p_107:
+.word 5943
+	.no_dead_strip plt_Mono_Security_X509_PKCS12__ctor
+plt_Mono_Security_X509_PKCS12__ctor:
+_p_106:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3264]
 br x16
-.word 5893
-	.no_dead_strip plt_string_op_Inequality_string_string
-plt_string_op_Inequality_string_string:
-_p_108:
+.word 5945
+	.no_dead_strip plt_Mono_Security_X509_PKCS12_set_Password_string
+plt_Mono_Security_X509_PKCS12_set_Password_string:
+_p_107:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3272]
 br x16
-.word 5896
-	.no_dead_strip plt_Mono_Security_ASN1Convert_ToInt32_Mono_Security_ASN1
-plt_Mono_Security_ASN1Convert_ToInt32_Mono_Security_ASN1:
-_p_109:
+.word 5948
+	.no_dead_strip plt_Mono_Security_X509_PKCS12_Decode_byte__
+plt_Mono_Security_X509_PKCS12_Decode_byte__:
+_p_108:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3280]
 br x16
-.word 5901
-	.no_dead_strip plt_Mono_Security_X509_PKCS12_MAC_byte___byte___int_byte__
-plt_Mono_Security_X509_PKCS12_MAC_byte___byte___int_byte__:
-_p_110:
+.word 5951
+	.no_dead_strip plt_string_op_Inequality_string_string
+plt_string_op_Inequality_string_string:
+_p_109:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3288]
 br x16
-.word 5903
-	.no_dead_strip plt_Mono_Security_X509_PKCS12_Compare_byte___byte__
-plt_Mono_Security_X509_PKCS12_Compare_byte___byte__:
-_p_111:
+.word 5954
+	.no_dead_strip plt_Mono_Security_ASN1Convert_ToInt32_Mono_Security_ASN1
+plt_Mono_Security_ASN1Convert_ToInt32_Mono_Security_ASN1:
+_p_110:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3296]
 br x16
-.word 5906
-	.no_dead_strip plt_string_op_Equality_string_string
-plt_string_op_Equality_string_string:
-_p_112:
+.word 5959
+	.no_dead_strip plt_Mono_Security_X509_PKCS12_MAC_byte___byte___int_byte__
+plt_Mono_Security_X509_PKCS12_MAC_byte___byte___int_byte__:
+_p_111:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3304]
 br x16
-.word 5909
-	.no_dead_strip plt_Mono_Security_X509_PKCS12_ReadSafeBag_Mono_Security_ASN1
-plt_Mono_Security_X509_PKCS12_ReadSafeBag_Mono_Security_ASN1:
-_p_113:
+.word 5961
+	.no_dead_strip plt_Mono_Security_X509_PKCS12_Compare_byte___byte__
+plt_Mono_Security_X509_PKCS12_Compare_byte___byte__:
+_p_112:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3312]
 br x16
-.word 5914
-	.no_dead_strip plt_Mono_Security_PKCS7_EncryptedData__ctor_Mono_Security_ASN1
-plt_Mono_Security_PKCS7_EncryptedData__ctor_Mono_Security_ASN1:
-_p_114:
+.word 5964
+	.no_dead_strip plt_string_op_Equality_string_string
+plt_string_op_Equality_string_string:
+_p_113:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3320]
 br x16
-.word 5917
-	.no_dead_strip plt_Mono_Security_X509_PKCS12_Decrypt_Mono_Security_PKCS7_EncryptedData
-plt_Mono_Security_X509_PKCS12_Decrypt_Mono_Security_PKCS7_EncryptedData:
-_p_115:
+.word 5967
+	.no_dead_strip plt_Mono_Security_X509_PKCS12_ReadSafeBag_Mono_Security_ASN1
+plt_Mono_Security_X509_PKCS12_ReadSafeBag_Mono_Security_ASN1:
+_p_114:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3328]
 br x16
-.word 5919
-	.no_dead_strip plt_System_Array_Clear_System_Array_int_int
-plt_System_Array_Clear_System_Array_int_int:
-_p_116:
+.word 5972
+	.no_dead_strip plt_Mono_Security_PKCS7_EncryptedData__ctor_Mono_Security_ASN1
+plt_Mono_Security_PKCS7_EncryptedData__ctor_Mono_Security_ASN1:
+_p_115:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3336]
 br x16
-.word 5922
-	.no_dead_strip plt_System_Text_Encoding_get_BigEndianUnicode
-plt_System_Text_Encoding_get_BigEndianUnicode:
-_p_117:
+.word 5975
+	.no_dead_strip plt_Mono_Security_X509_PKCS12_Decrypt_Mono_Security_PKCS7_EncryptedData
+plt_Mono_Security_X509_PKCS12_Decrypt_Mono_Security_PKCS7_EncryptedData:
+_p_116:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3344]
 br x16
-.word 5927
-	.no_dead_strip plt_string_Equals_string
-plt_string_Equals_string:
-_p_118:
+.word 5977
+	.no_dead_strip plt_System_Array_Clear_System_Array_int_int
+plt_System_Array_Clear_System_Array_int_int:
+_p_117:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3352]
 br x16
-.word 5932
-	.no_dead_strip plt_Mono_Security_Cryptography_PKCS8_PrivateKeyInfo__ctor_byte__
-plt_Mono_Security_Cryptography_PKCS8_PrivateKeyInfo__ctor_byte__:
-_p_119:
+.word 5980
+	.no_dead_strip plt_System_Text_Encoding_get_BigEndianUnicode
+plt_System_Text_Encoding_get_BigEndianUnicode:
+_p_118:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3360]
 br x16
-.word 5937
-	.no_dead_strip plt_Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_get_PrivateKey
-plt_Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_get_PrivateKey:
-_p_120:
+.word 5985
+	.no_dead_strip plt_string_Equals_string
+plt_string_Equals_string:
+_p_119:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3368]
 br x16
-.word 5940
-	.no_dead_strip plt_Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_DecodeDSA_byte___System_Security_Cryptography_DSAParameters
-plt_Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_DecodeDSA_byte___System_Security_Cryptography_DSAParameters:
-_p_121:
+.word 5990
+	.no_dead_strip plt_Mono_Security_Cryptography_PKCS8_PrivateKeyInfo__ctor_byte__
+plt_Mono_Security_Cryptography_PKCS8_PrivateKeyInfo__ctor_byte__:
+_p_120:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3376]
 br x16
-.word 5943
-	.no_dead_strip plt_Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_DecodeRSA_byte__
-plt_Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_DecodeRSA_byte__:
-_p_122:
+.word 5995
+	.no_dead_strip plt_Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_get_PrivateKey
+plt_Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_get_PrivateKey:
+_p_121:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3384]
 br x16
-.word 5946
-	.no_dead_strip plt_Mono_Security_Cryptography_PKCS8_EncryptedPrivateKeyInfo__ctor_byte__
-plt_Mono_Security_Cryptography_PKCS8_EncryptedPrivateKeyInfo__ctor_byte__:
-_p_123:
+.word 5998
+	.no_dead_strip plt_Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_DecodeDSA_byte___System_Security_Cryptography_DSAParameters
+plt_Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_DecodeDSA_byte___System_Security_Cryptography_DSAParameters:
+_p_122:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3392]
 br x16
-.word 5949
-	.no_dead_strip plt_Mono_Security_Cryptography_PKCS8_EncryptedPrivateKeyInfo_get_Salt
-plt_Mono_Security_Cryptography_PKCS8_EncryptedPrivateKeyInfo_get_Salt:
-_p_124:
+.word 6001
+	.no_dead_strip plt_Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_DecodeRSA_byte__
+plt_Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_DecodeRSA_byte__:
+_p_123:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3400]
 br x16
-.word 5952
-	.no_dead_strip plt_Mono_Security_Cryptography_PKCS8_EncryptedPrivateKeyInfo_get_EncryptedData
-plt_Mono_Security_Cryptography_PKCS8_EncryptedPrivateKeyInfo_get_EncryptedData:
-_p_125:
+.word 6004
+	.no_dead_strip plt_Mono_Security_Cryptography_PKCS8_EncryptedPrivateKeyInfo__ctor_byte__
+plt_Mono_Security_Cryptography_PKCS8_EncryptedPrivateKeyInfo__ctor_byte__:
+_p_124:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3408]
 br x16
-.word 5955
-	.no_dead_strip plt_Mono_Security_X509_PKCS12_Decrypt_string_byte___int_byte__
-plt_Mono_Security_X509_PKCS12_Decrypt_string_byte___int_byte__:
-_p_126:
+.word 6007
+	.no_dead_strip plt_Mono_Security_Cryptography_PKCS8_EncryptedPrivateKeyInfo_get_Salt
+plt_Mono_Security_Cryptography_PKCS8_EncryptedPrivateKeyInfo_get_Salt:
+_p_125:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3416]
 br x16
-.word 5958
-	.no_dead_strip plt_System_Collections_ArrayList_ReadOnly_System_Collections_ArrayList
-plt_System_Collections_ArrayList_ReadOnly_System_Collections_ArrayList:
-_p_127:
+.word 6010
+	.no_dead_strip plt_Mono_Security_Cryptography_PKCS8_EncryptedPrivateKeyInfo_get_EncryptedData
+plt_Mono_Security_Cryptography_PKCS8_EncryptedPrivateKeyInfo_get_EncryptedData:
+_p_126:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3424]
 br x16
-.word 5961
-	.no_dead_strip plt_System_Collections_CollectionBase_Clear
-plt_System_Collections_CollectionBase_Clear:
-_p_128:
+.word 6013
+	.no_dead_strip plt_Mono_Security_X509_PKCS12_Decrypt_string_byte___int_byte__
+plt_Mono_Security_X509_PKCS12_Decrypt_string_byte___int_byte__:
+_p_127:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3432]
 br x16
-.word 5966
-	.no_dead_strip plt_Mono_Security_PKCS7_ContentInfo__ctor_byte__
-plt_Mono_Security_PKCS7_ContentInfo__ctor_byte__:
-_p_129:
+.word 6016
+	.no_dead_strip plt_System_Collections_ArrayList_ReadOnly_System_Collections_ArrayList
+plt_System_Collections_ArrayList_ReadOnly_System_Collections_ArrayList:
+_p_128:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3440]
 br x16
-.word 5971
-	.no_dead_strip plt_Mono_Security_X509_X509Certificate__ctor_byte__
-plt_Mono_Security_X509_X509Certificate__ctor_byte__:
-_p_130:
+.word 6019
+	.no_dead_strip plt_System_Collections_CollectionBase_Clear
+plt_System_Collections_CollectionBase_Clear:
+_p_129:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3448]
 br x16
-.word 5973
-	.no_dead_strip plt_Mono_Security_X509_X509CertificateCollection_Add_Mono_Security_X509_X509Certificate
-plt_Mono_Security_X509_X509CertificateCollection_Add_Mono_Security_X509_X509Certificate:
-_p_131:
+.word 6024
+	.no_dead_strip plt_Mono_Security_PKCS7_ContentInfo__ctor_byte__
+plt_Mono_Security_PKCS7_ContentInfo__ctor_byte__:
+_p_130:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3456]
 br x16
-.word 5976
-	.no_dead_strip plt_Mono_Security_X509_PKCS12_DeriveBytes_set_Password_byte__
-plt_Mono_Security_X509_PKCS12_DeriveBytes_set_Password_byte__:
-_p_132:
+.word 6029
+	.no_dead_strip plt_Mono_Security_X509_X509Certificate__ctor_byte__
+plt_Mono_Security_X509_X509Certificate__ctor_byte__:
+_p_131:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3464]
 br x16
-.word 5979
-	.no_dead_strip plt_Mono_Security_X509_PKCS12_DeriveBytes_set_Salt_byte__
-plt_Mono_Security_X509_PKCS12_DeriveBytes_set_Salt_byte__:
-_p_133:
+.word 6031
+	.no_dead_strip plt_Mono_Security_X509_X509CertificateCollection_Add_Mono_Security_X509_X509Certificate
+plt_Mono_Security_X509_X509CertificateCollection_Add_Mono_Security_X509_X509Certificate:
+_p_132:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3472]
 br x16
-.word 5982
-	.no_dead_strip plt__PrivateImplementationDetails_ComputeStringHash_string
-plt__PrivateImplementationDetails_ComputeStringHash_string:
-_p_134:
+.word 6034
+	.no_dead_strip plt_Mono_Security_X509_PKCS12_DeriveBytes_set_Password_byte__
+plt_Mono_Security_X509_PKCS12_DeriveBytes_set_Password_byte__:
+_p_133:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3480]
 br x16
-.word 5985
-	.no_dead_strip plt_System_Security_Cryptography_SymmetricAlgorithm_Create_string
-plt_System_Security_Cryptography_SymmetricAlgorithm_Create_string:
-_p_135:
+.word 6037
+	.no_dead_strip plt_Mono_Security_X509_PKCS12_DeriveBytes_set_Salt_byte__
+plt_Mono_Security_X509_PKCS12_DeriveBytes_set_Salt_byte__:
+_p_134:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3488]
 br x16
-.word 5988
-	.no_dead_strip plt_Mono_Security_X509_PKCS12_DeriveBytes_DeriveKey_int
-plt_Mono_Security_X509_PKCS12_DeriveBytes_DeriveKey_int:
-_p_136:
+.word 6040
+	.no_dead_strip plt__PrivateImplementationDetails_ComputeStringHash_string
+plt__PrivateImplementationDetails_ComputeStringHash_string:
+_p_135:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3496]
 br x16
-.word 5993
-	.no_dead_strip plt_Mono_Security_X509_PKCS12_DeriveBytes_DeriveIV_int
-plt_Mono_Security_X509_PKCS12_DeriveBytes_DeriveIV_int:
-_p_137:
+.word 6043
+	.no_dead_strip plt_System_Security_Cryptography_SymmetricAlgorithm_Create_string
+plt_System_Security_Cryptography_SymmetricAlgorithm_Create_string:
+_p_136:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3504]
 br x16
-.word 5996
-	.no_dead_strip plt_Mono_Security_X509_PKCS12_GetSymmetricAlgorithm_string_byte___int
-plt_Mono_Security_X509_PKCS12_GetSymmetricAlgorithm_string_byte___int:
-_p_138:
+.word 6046
+	.no_dead_strip plt_Mono_Security_X509_PKCS12_DeriveBytes_DeriveKey_int
+plt_Mono_Security_X509_PKCS12_DeriveBytes_DeriveKey_int:
+_p_137:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3512]
 br x16
-.word 5999
-	.no_dead_strip plt_System_Security_Cryptography_SymmetricAlgorithm_Clear
-plt_System_Security_Cryptography_SymmetricAlgorithm_Clear:
-_p_139:
+.word 6051
+	.no_dead_strip plt_Mono_Security_X509_PKCS12_DeriveBytes_DeriveIV_int
+plt_Mono_Security_X509_PKCS12_DeriveBytes_DeriveIV_int:
+_p_138:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3520]
 br x16
-.word 6002
-	.no_dead_strip plt_Mono_Security_PKCS7_EncryptedData_get_EncryptedContent
-plt_Mono_Security_PKCS7_EncryptedData_get_EncryptedContent:
-_p_140:
+.word 6054
+	.no_dead_strip plt_Mono_Security_X509_PKCS12_GetSymmetricAlgorithm_string_byte___int
+plt_Mono_Security_X509_PKCS12_GetSymmetricAlgorithm_string_byte___int:
+_p_139:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3528]
 br x16
-.word 6007
-	.no_dead_strip plt_Mono_Security_X509_PKCS12_get_Certificates
-plt_Mono_Security_X509_PKCS12_get_Certificates:
-_p_141:
+.word 6057
+	.no_dead_strip plt_System_Security_Cryptography_SymmetricAlgorithm_Clear
+plt_System_Security_Cryptography_SymmetricAlgorithm_Clear:
+_p_140:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3536]
 br x16
-.word 6009
-	.no_dead_strip plt_Mono_Security_X509_X509CertificateCollection_GetEnumerator
-plt_Mono_Security_X509_X509CertificateCollection_GetEnumerator:
-_p_142:
+.word 6060
+	.no_dead_strip plt_Mono_Security_PKCS7_EncryptedData_get_EncryptedContent
+plt_Mono_Security_PKCS7_EncryptedData_get_EncryptedContent:
+_p_141:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3544]
 br x16
-.word 6012
-	.no_dead_strip plt_Mono_Security_X509_X509CertificateCollection_X509CertificateEnumerator_get_Current
-plt_Mono_Security_X509_X509CertificateCollection_X509CertificateEnumerator_get_Current:
-_p_143:
+.word 6065
+	.no_dead_strip plt_Mono_Security_X509_PKCS12_get_Certificates
+plt_Mono_Security_X509_PKCS12_get_Certificates:
+_p_142:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3552]
 br x16
-.word 6015
-	.no_dead_strip plt_Mono_Security_X509_X509Certificate_get_DSA
-plt_Mono_Security_X509_X509Certificate_get_DSA:
-_p_144:
+.word 6067
+	.no_dead_strip plt_Mono_Security_X509_X509CertificateCollection_GetEnumerator
+plt_Mono_Security_X509_X509CertificateCollection_GetEnumerator:
+_p_143:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3560]
 br x16
-.word 6018
-	.no_dead_strip plt_Mono_Security_X509_X509CertificateCollection_X509CertificateEnumerator_MoveNext
-plt_Mono_Security_X509_X509CertificateCollection_X509CertificateEnumerator_MoveNext:
-_p_145:
+.word 6070
+	.no_dead_strip plt_Mono_Security_X509_X509CertificateCollection_X509CertificateEnumerator_get_Current
+plt_Mono_Security_X509_X509CertificateCollection_X509CertificateEnumerator_get_Current:
+_p_144:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3568]
 br x16
-.word 6021
-	.no_dead_strip plt_Mono_Security_X509_PKCS12_GetExistingParameters_bool_
-plt_Mono_Security_X509_PKCS12_GetExistingParameters_bool_:
-_p_146:
+.word 6073
+	.no_dead_strip plt_Mono_Security_X509_X509Certificate_get_DSA
+plt_Mono_Security_X509_X509Certificate_get_DSA:
+_p_145:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3576]
 br x16
-.word 6024
-	.no_dead_strip plt_Mono_Security_X509_PKCS12_AddPrivateKey_Mono_Security_Cryptography_PKCS8_PrivateKeyInfo
-plt_Mono_Security_X509_PKCS12_AddPrivateKey_Mono_Security_Cryptography_PKCS8_PrivateKeyInfo:
-_p_147:
+.word 6076
+	.no_dead_strip plt_Mono_Security_X509_X509CertificateCollection_X509CertificateEnumerator_MoveNext
+plt_Mono_Security_X509_X509CertificateCollection_X509CertificateEnumerator_MoveNext:
+_p_146:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3584]
 br x16
-.word 6027
-	.no_dead_strip plt_Mono_Security_X509_SafeBag__ctor_string_Mono_Security_ASN1
-plt_Mono_Security_X509_SafeBag__ctor_string_Mono_Security_ASN1:
-_p_148:
+.word 6079
+	.no_dead_strip plt_Mono_Security_X509_PKCS12_GetExistingParameters_bool_
+plt_Mono_Security_X509_PKCS12_GetExistingParameters_bool_:
+_p_147:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3592]
 br x16
-.word 6030
-	.no_dead_strip plt_Mono_Security_Cryptography_PKCS8_PrivateKeyInfo__ctor
-plt_Mono_Security_Cryptography_PKCS8_PrivateKeyInfo__ctor:
-_p_149:
+.word 6082
+	.no_dead_strip plt_Mono_Security_X509_PKCS12_AddPrivateKey_Mono_Security_Cryptography_PKCS8_PrivateKeyInfo
+plt_Mono_Security_X509_PKCS12_AddPrivateKey_Mono_Security_Cryptography_PKCS8_PrivateKeyInfo:
+_p_148:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3600]
 br x16
-.word 6032
-	.no_dead_strip plt_Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_Encode_System_Security_Cryptography_RSA
-plt_Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_Encode_System_Security_Cryptography_RSA:
-_p_150:
+.word 6085
+	.no_dead_strip plt_Mono_Security_X509_SafeBag__ctor_string_Mono_Security_ASN1
+plt_Mono_Security_X509_SafeBag__ctor_string_Mono_Security_ASN1:
+_p_149:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3608]
 br x16
-.word 6035
-	.no_dead_strip plt_Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_set_PrivateKey_byte__
-plt_Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_set_PrivateKey_byte__:
-_p_151:
+.word 6088
+	.no_dead_strip plt_Mono_Security_Cryptography_PKCS8_PrivateKeyInfo__ctor
+plt_Mono_Security_Cryptography_PKCS8_PrivateKeyInfo__ctor:
+_p_150:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3616]
 br x16
-.word 6038
-	.no_dead_strip plt_Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_Encode_System_Security_Cryptography_DSA
-plt_Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_Encode_System_Security_Cryptography_DSA:
-_p_152:
+.word 6090
+	.no_dead_strip plt_Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_Encode_System_Security_Cryptography_RSA
+plt_Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_Encode_System_Security_Cryptography_RSA:
+_p_151:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3624]
 br x16
-.word 6041
-	.no_dead_strip plt_Mono_Security_Cryptography_PKCS8_EncryptedPrivateKeyInfo_set_IterationCount_int
-plt_Mono_Security_Cryptography_PKCS8_EncryptedPrivateKeyInfo_set_IterationCount_int:
-_p_153:
+.word 6093
+	.no_dead_strip plt_Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_set_PrivateKey_byte__
+plt_Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_set_PrivateKey_byte__:
+_p_152:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3632]
 br x16
-.word 6044
-	.no_dead_strip plt_Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_GetBytes
-plt_Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_GetBytes:
-_p_154:
+.word 6096
+	.no_dead_strip plt_Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_Encode_System_Security_Cryptography_DSA
+plt_Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_Encode_System_Security_Cryptography_DSA:
+_p_153:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3640]
 br x16
-.word 6047
-	.no_dead_strip plt_Mono_Security_X509_PKCS12_Encrypt_string_byte___int_byte__
-plt_Mono_Security_X509_PKCS12_Encrypt_string_byte___int_byte__:
-_p_155:
+.word 6099
+	.no_dead_strip plt_Mono_Security_Cryptography_PKCS8_EncryptedPrivateKeyInfo_set_IterationCount_int
+plt_Mono_Security_Cryptography_PKCS8_EncryptedPrivateKeyInfo_set_IterationCount_int:
+_p_154:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3648]
 br x16
-.word 6050
-	.no_dead_strip plt_Mono_Security_Cryptography_PKCS8_EncryptedPrivateKeyInfo_set_EncryptedData_byte__
-plt_Mono_Security_Cryptography_PKCS8_EncryptedPrivateKeyInfo_set_EncryptedData_byte__:
-_p_156:
+.word 6102
+	.no_dead_strip plt_Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_GetBytes
+plt_Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_GetBytes:
+_p_155:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3656]
 br x16
-.word 6053
-	.no_dead_strip plt_Mono_Security_Cryptography_PKCS8_EncryptedPrivateKeyInfo_GetBytes
-plt_Mono_Security_Cryptography_PKCS8_EncryptedPrivateKeyInfo_GetBytes:
-_p_157:
+.word 6105
+	.no_dead_strip plt_Mono_Security_X509_PKCS12_Encrypt_string_byte___int_byte__
+plt_Mono_Security_X509_PKCS12_Encrypt_string_byte___int_byte__:
+_p_156:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3664]
 br x16
-.word 6056
-	.no_dead_strip plt_Mono_Security_PKCS7_ContentInfo_get_ASN1
-plt_Mono_Security_PKCS7_ContentInfo_get_ASN1:
-_p_158:
+.word 6108
+	.no_dead_strip plt_Mono_Security_Cryptography_PKCS8_EncryptedPrivateKeyInfo_set_EncryptedData_byte__
+plt_Mono_Security_Cryptography_PKCS8_EncryptedPrivateKeyInfo_set_EncryptedData_byte__:
+_p_157:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3672]
 br x16
-.word 6059
-	.no_dead_strip plt_System_Security_Cryptography_HMAC_Create
-plt_System_Security_Cryptography_HMAC_Create:
-_p_159:
+.word 6111
+	.no_dead_strip plt_Mono_Security_Cryptography_PKCS8_EncryptedPrivateKeyInfo_GetBytes
+plt_Mono_Security_Cryptography_PKCS8_EncryptedPrivateKeyInfo_GetBytes:
+_p_158:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3680]
 br x16
-.word 6061
-	.no_dead_strip plt_Mono_Security_X509_PKCS12_DeriveBytes_DeriveMAC_int
-plt_Mono_Security_X509_PKCS12_DeriveBytes_DeriveMAC_int:
-_p_160:
+.word 6114
+	.no_dead_strip plt_Mono_Security_PKCS7_ContentInfo_get_ASN1
+plt_Mono_Security_PKCS7_ContentInfo_get_ASN1:
+_p_159:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3688]
 br x16
-.word 6066
-	.no_dead_strip plt_System_Security_Cryptography_HashAlgorithm_ComputeHash_byte___int_int
-plt_System_Security_Cryptography_HashAlgorithm_ComputeHash_byte___int_int:
-_p_161:
+.word 6117
+	.no_dead_strip plt_System_Security_Cryptography_HMAC_Create
+plt_System_Security_Cryptography_HMAC_Create:
+_p_160:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3696]
 br x16
-.word 6069
-	.no_dead_strip plt_Mono_Security_X509_PKCS12_RemoveCertificate_Mono_Security_X509_X509Certificate
-plt_Mono_Security_X509_PKCS12_RemoveCertificate_Mono_Security_X509_X509Certificate:
-_p_162:
+.word 6119
+	.no_dead_strip plt_Mono_Security_X509_PKCS12_DeriveBytes_DeriveMAC_int
+plt_Mono_Security_X509_PKCS12_DeriveBytes_DeriveMAC_int:
+_p_161:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3704]
 br x16
-.word 6074
-	.no_dead_strip plt_Mono_Security_X509_PKCS12_AddCertificate_Mono_Security_X509_X509Certificate
-plt_Mono_Security_X509_PKCS12_AddCertificate_Mono_Security_X509_X509Certificate:
-_p_163:
+.word 6124
+	.no_dead_strip plt_System_Security_Cryptography_HashAlgorithm_ComputeHash_byte___int_int
+plt_System_Security_Cryptography_HashAlgorithm_ComputeHash_byte___int_int:
+_p_162:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3712]
 br x16
-.word 6077
-	.no_dead_strip plt_Mono_Security_X509_PKCS12_EncryptedContentInfo_Mono_Security_ASN1_string
-plt_Mono_Security_X509_PKCS12_EncryptedContentInfo_Mono_Security_ASN1_string:
-_p_164:
+.word 6127
+	.no_dead_strip plt_Mono_Security_X509_PKCS12_RemoveCertificate_Mono_Security_X509_X509Certificate
+plt_Mono_Security_X509_PKCS12_RemoveCertificate_Mono_Security_X509_X509Certificate:
+_p_163:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3720]
 br x16
-.word 6080
-	.no_dead_strip plt_Mono_Security_X509_PKCS12_get_RNG
-plt_Mono_Security_X509_PKCS12_get_RNG:
-_p_165:
+.word 6132
+	.no_dead_strip plt_Mono_Security_X509_PKCS12_AddCertificate_Mono_Security_X509_X509Certificate
+plt_Mono_Security_X509_PKCS12_AddCertificate_Mono_Security_X509_X509Certificate:
+_p_164:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3728]
 br x16
-.word 6083
-	.no_dead_strip plt_Mono_Security_ASN1Convert_FromInt32_int
-plt_Mono_Security_ASN1Convert_FromInt32_int:
-_p_166:
+.word 6135
+	.no_dead_strip plt_Mono_Security_X509_PKCS12_EncryptedContentInfo_Mono_Security_ASN1_string
+plt_Mono_Security_X509_PKCS12_EncryptedContentInfo_Mono_Security_ASN1_string:
+_p_165:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3736]
 br x16
-.word 6086
-	.no_dead_strip plt_Mono_Security_X509_PKCS12_AddCertificate_Mono_Security_X509_X509Certificate_System_Collections_IDictionary
-plt_Mono_Security_X509_PKCS12_AddCertificate_Mono_Security_X509_X509Certificate_System_Collections_IDictionary:
-_p_167:
+.word 6138
+	.no_dead_strip plt_Mono_Security_X509_PKCS12_get_RNG
+plt_Mono_Security_X509_PKCS12_get_RNG:
+_p_166:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3744]
 br x16
-.word 6088
-	.no_dead_strip plt_Mono_Security_X509_PKCS12_CertificateSafeBag_Mono_Security_X509_X509Certificate_System_Collections_IDictionary
-plt_Mono_Security_X509_PKCS12_CertificateSafeBag_Mono_Security_X509_X509Certificate_System_Collections_IDictionary:
-_p_168:
+.word 6141
+	.no_dead_strip plt_Mono_Security_ASN1Convert_FromInt32_int
+plt_Mono_Security_ASN1Convert_FromInt32_int:
+_p_167:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3752]
 br x16
-.word 6091
-	.no_dead_strip plt_Mono_Security_X509_PKCS12_RemoveCertificate_Mono_Security_X509_X509Certificate_System_Collections_IDictionary
-plt_Mono_Security_X509_PKCS12_RemoveCertificate_Mono_Security_X509_X509Certificate_System_Collections_IDictionary:
-_p_169:
+.word 6144
+	.no_dead_strip plt_Mono_Security_X509_PKCS12_AddCertificate_Mono_Security_X509_X509Certificate_System_Collections_IDictionary
+plt_Mono_Security_X509_PKCS12_AddCertificate_Mono_Security_X509_X509Certificate_System_Collections_IDictionary:
+_p_168:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3760]
 br x16
-.word 6094
-	.no_dead_strip plt_Mono_Security_X509_PKCS12_CompareAsymmetricAlgorithm_System_Security_Cryptography_AsymmetricAlgorithm_System_Security_Cryptography_AsymmetricAlgorithm
-plt_Mono_Security_X509_PKCS12_CompareAsymmetricAlgorithm_System_Security_Cryptography_AsymmetricAlgorithm_System_Security_Cryptography_AsymmetricAlgorithm:
-_p_170:
+.word 6146
+	.no_dead_strip plt_Mono_Security_X509_PKCS12_CertificateSafeBag_Mono_Security_X509_X509Certificate_System_Collections_IDictionary
+plt_Mono_Security_X509_PKCS12_CertificateSafeBag_Mono_Security_X509_X509Certificate_System_Collections_IDictionary:
+_p_169:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3768]
 br x16
-.word 6097
-	.no_dead_strip plt_Mono_Security_X509_PKCS12_Pkcs8ShroudedKeyBagSafeBag_System_Security_Cryptography_AsymmetricAlgorithm_System_Collections_IDictionary
-plt_Mono_Security_X509_PKCS12_Pkcs8ShroudedKeyBagSafeBag_System_Security_Cryptography_AsymmetricAlgorithm_System_Collections_IDictionary:
-_p_171:
+.word 6149
+	.no_dead_strip plt_Mono_Security_X509_PKCS12_RemoveCertificate_Mono_Security_X509_X509Certificate_System_Collections_IDictionary
+plt_Mono_Security_X509_PKCS12_RemoveCertificate_Mono_Security_X509_X509Certificate_System_Collections_IDictionary:
+_p_170:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3776]
 br x16
-.word 6100
-	.no_dead_strip plt_Mono_Security_X509_PKCS12_GetBytes
-plt_Mono_Security_X509_PKCS12_GetBytes:
-_p_172:
+.word 6152
+	.no_dead_strip plt_Mono_Security_X509_PKCS12_CompareAsymmetricAlgorithm_System_Security_Cryptography_AsymmetricAlgorithm_System_Security_Cryptography_AsymmetricAlgorithm
+plt_Mono_Security_X509_PKCS12_CompareAsymmetricAlgorithm_System_Security_Cryptography_AsymmetricAlgorithm_System_Security_Cryptography_AsymmetricAlgorithm:
+_p_171:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3784]
 br x16
-.word 6103
-	.no_dead_strip plt_Mono_Security_X509_PKCS12__ctor_byte___string
-plt_Mono_Security_X509_PKCS12__ctor_byte___string:
-_p_173:
+.word 6155
+	.no_dead_strip plt_Mono_Security_X509_PKCS12_Pkcs8ShroudedKeyBagSafeBag_System_Security_Cryptography_AsymmetricAlgorithm_System_Collections_IDictionary
+plt_Mono_Security_X509_PKCS12_Pkcs8ShroudedKeyBagSafeBag_System_Security_Cryptography_AsymmetricAlgorithm_System_Collections_IDictionary:
+_p_172:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3792]
 br x16
-.word 6106
-	.no_dead_strip plt_Mono_Security_X509_PKCS12__ctor_byte__
-plt_Mono_Security_X509_PKCS12__ctor_byte__:
-_p_174:
+.word 6158
+	.no_dead_strip plt_Mono_Security_X509_PKCS12_GetBytes
+plt_Mono_Security_X509_PKCS12_GetBytes:
+_p_173:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3800]
 br x16
-.word 6109
-	.no_dead_strip plt_Mono_Security_Cryptography_PKCS1_CreateFromName_string
-plt_Mono_Security_Cryptography_PKCS1_CreateFromName_string:
-_p_175:
+.word 6161
+	.no_dead_strip plt_Mono_Security_X509_PKCS12__ctor_byte___string
+plt_Mono_Security_X509_PKCS12__ctor_byte___string:
+_p_174:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3808]
 br x16
-.word 6112
-	.no_dead_strip plt_System_Security_Cryptography_HashAlgorithm_TransformBlock_byte___int_int_byte___int
-plt_System_Security_Cryptography_HashAlgorithm_TransformBlock_byte___int_int_byte___int:
-_p_176:
+.word 6164
+	.no_dead_strip plt_Mono_Security_X509_PKCS12__ctor_byte__
+plt_Mono_Security_X509_PKCS12__ctor_byte__:
+_p_175:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3816]
 br x16
-.word 6115
-	.no_dead_strip plt_System_Security_Cryptography_HashAlgorithm_TransformFinalBlock_byte___int_int
-plt_System_Security_Cryptography_HashAlgorithm_TransformFinalBlock_byte___int_int:
-_p_177:
+.word 6167
+	.no_dead_strip plt_Mono_Security_Cryptography_PKCS1_CreateFromName_string
+plt_Mono_Security_Cryptography_PKCS1_CreateFromName_string:
+_p_176:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3824]
 br x16
-.word 6120
-	.no_dead_strip plt_Mono_Security_X509_PKCS12_DeriveBytes_Adjust_byte___int_byte__
-plt_Mono_Security_X509_PKCS12_DeriveBytes_Adjust_byte___int_byte__:
-_p_178:
+.word 6170
+	.no_dead_strip plt_System_Security_Cryptography_HashAlgorithm_TransformBlock_byte___int_int_byte___int
+plt_System_Security_Cryptography_HashAlgorithm_TransformBlock_byte___int_int_byte___int:
+_p_177:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3832]
 br x16
-.word 6125
-	.no_dead_strip plt_Mono_Security_X509_PKCS12_DeriveBytes_Derive_byte___int
-plt_Mono_Security_X509_PKCS12_DeriveBytes_Derive_byte___int:
-_p_179:
+.word 6173
+	.no_dead_strip plt_System_Security_Cryptography_HashAlgorithm_TransformFinalBlock_byte___int_int
+plt_System_Security_Cryptography_HashAlgorithm_TransformFinalBlock_byte___int_int:
+_p_178:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3840]
 br x16
-.word 6128
-	.no_dead_strip plt_Mono_Security_X509_X501_AppendEntry_System_Text_StringBuilder_Mono_Security_ASN1_bool
-plt_Mono_Security_X509_X501_AppendEntry_System_Text_StringBuilder_Mono_Security_ASN1_bool:
-_p_180:
+.word 6178
+	.no_dead_strip plt_Mono_Security_X509_PKCS12_DeriveBytes_Adjust_byte___int_byte__
+plt_Mono_Security_X509_PKCS12_DeriveBytes_Adjust_byte___int_byte__:
+_p_179:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3848]
 br x16
-.word 6131
-	.no_dead_strip plt_Mono_Security_ASN1_CompareValue_byte__
-plt_Mono_Security_ASN1_CompareValue_byte__:
-_p_181:
+.word 6183
+	.no_dead_strip plt_Mono_Security_X509_PKCS12_DeriveBytes_Derive_byte___int
+plt_Mono_Security_X509_PKCS12_DeriveBytes_Derive_byte___int:
+_p_180:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3856]
 br x16
-.word 6134
-	.no_dead_strip plt_System_Text_StringBuilder_Append_char
-plt_System_Text_StringBuilder_Append_char:
-_p_182:
+.word 6186
+	.no_dead_strip plt_Mono_Security_X509_X501_AppendEntry_System_Text_StringBuilder_Mono_Security_ASN1_bool
+plt_Mono_Security_X509_X501_AppendEntry_System_Text_StringBuilder_Mono_Security_ASN1_bool:
+_p_181:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3864]
 br x16
-.word 6136
-	.no_dead_strip plt_System_Text_Encoding_get_UTF7
-plt_System_Text_Encoding_get_UTF7:
-_p_183:
+.word 6189
+	.no_dead_strip plt_Mono_Security_ASN1_CompareValue_byte__
+plt_Mono_Security_ASN1_CompareValue_byte__:
+_p_182:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3872]
 br x16
-.word 6141
-	.no_dead_strip plt_System_Text_Encoding_get_UTF8
-plt_System_Text_Encoding_get_UTF8:
-_p_184:
+.word 6192
+	.no_dead_strip plt_System_Text_StringBuilder_Append_char
+plt_System_Text_StringBuilder_Append_char:
+_p_183:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3880]
 br x16
-.word 6146
-	.no_dead_strip plt_string_IndexOfAny_char___int_int
-plt_string_IndexOfAny_char___int_int:
-_p_185:
+.word 6194
+	.no_dead_strip plt_System_Text_Encoding_get_UTF7
+plt_System_Text_Encoding_get_UTF7:
+_p_184:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3888]
 br x16
-.word 6151
-	.no_dead_strip plt_string_StartsWith_string
-plt_string_StartsWith_string:
-_p_186:
+.word 6199
+	.no_dead_strip plt_System_Text_Encoding_get_UTF8
+plt_System_Text_Encoding_get_UTF8:
+_p_185:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3896]
 br x16
-.word 6156
-	.no_dead_strip plt_string_EndsWith_string
-plt_string_EndsWith_string:
-_p_187:
+.word 6204
+	.no_dead_strip plt_string_IndexOfAny_char___int_int
+plt_string_IndexOfAny_char___int_int:
+_p_186:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3904]
 br x16
-.word 6161
-	.no_dead_strip plt_string_Concat_string_string_string
-plt_string_Concat_string_string_string:
-_p_188:
+.word 6209
+	.no_dead_strip plt_string_StartsWith_string
+plt_string_StartsWith_string:
+_p_187:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3912]
 br x16
-.word 6166
-	.no_dead_strip plt_System_Array_Reverse_byte_byte___int_int
-plt_System_Array_Reverse_byte_byte___int_int:
-_p_189:
+.word 6214
+	.no_dead_strip plt_string_EndsWith_string
+plt_string_EndsWith_string:
+_p_188:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3920]
 br x16
-.word 6171
-	.no_dead_strip plt_Mono_Security_ASN1_Element_int_byte
-plt_Mono_Security_ASN1_Element_int_byte:
-_p_190:
+.word 6219
+	.no_dead_strip plt_string_Concat_string_string_string
+plt_string_Concat_string_string_string:
+_p_189:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3928]
 br x16
-.word 6183
-	.no_dead_strip plt_Mono_Security_X509_X501_ToString_Mono_Security_ASN1
-plt_Mono_Security_X509_X501_ToString_Mono_Security_ASN1:
-_p_191:
+.word 6224
+	.no_dead_strip plt_System_Array_Reverse_byte_byte___int_int
+plt_System_Array_Reverse_byte_byte___int_int:
+_p_190:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3936]
 br x16
-.word 6185
-	.no_dead_strip plt_Mono_Security_ASN1Convert_ToDateTime_Mono_Security_ASN1
-plt_Mono_Security_ASN1Convert_ToDateTime_Mono_Security_ASN1:
-_p_192:
+.word 6229
+	.no_dead_strip plt_Mono_Security_ASN1_Element_int_byte
+plt_Mono_Security_ASN1_Element_int_byte:
+_p_191:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3944]
 br x16
-.word 6188
-	.no_dead_strip plt_Mono_Security_X509_X509ExtensionCollection__ctor_Mono_Security_ASN1
-plt_Mono_Security_X509_X509ExtensionCollection__ctor_Mono_Security_ASN1:
-_p_193:
+.word 6241
+	.no_dead_strip plt_Mono_Security_X509_X501_ToString_Mono_Security_ASN1
+plt_Mono_Security_X509_X501_ToString_Mono_Security_ASN1:
+_p_192:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3952]
 br x16
-.word 6190
-	.no_dead_strip plt__jit_icall_mono_helper_newobj_mscorlib
-plt__jit_icall_mono_helper_newobj_mscorlib:
-_p_194:
+.word 6243
+	.no_dead_strip plt_Mono_Security_ASN1Convert_ToDateTime_Mono_Security_ASN1
+plt_Mono_Security_ASN1Convert_ToDateTime_Mono_Security_ASN1:
+_p_193:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3960]
 br x16
-.word 6193
-	.no_dead_strip plt_System_Security_Cryptography_CryptographicException__ctor_string_System_Exception
-plt_System_Security_Cryptography_CryptographicException__ctor_string_System_Exception:
-_p_195:
+.word 6246
+	.no_dead_strip plt_Mono_Security_X509_X509ExtensionCollection__ctor_Mono_Security_ASN1
+plt_Mono_Security_X509_X509ExtensionCollection__ctor_Mono_Security_ASN1:
+_p_194:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3968]
 br x16
-.word 6223
-	.no_dead_strip plt_Mono_Security_X509_X509Certificate_PEM_string_byte__
-plt_Mono_Security_X509_X509Certificate_PEM_string_byte__:
-_p_196:
+.word 6248
+	.no_dead_strip plt__jit_icall_mono_helper_newobj_mscorlib
+plt__jit_icall_mono_helper_newobj_mscorlib:
+_p_195:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3976]
 br x16
-.word 6228
-	.no_dead_strip plt_Mono_Security_X509_X509Certificate_Parse_byte__
-plt_Mono_Security_X509_X509Certificate_Parse_byte__:
-_p_197:
+.word 6251
+	.no_dead_strip plt_System_Security_Cryptography_CryptographicException__ctor_string_System_Exception
+plt_System_Security_Cryptography_CryptographicException__ctor_string_System_Exception:
+_p_196:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3984]
 br x16
-.word 6231
-	.no_dead_strip plt_Mono_Security_X509_X509Certificate_GetUnsignedBigInteger_byte__
-plt_Mono_Security_X509_X509Certificate_GetUnsignedBigInteger_byte__:
-_p_198:
+.word 6281
+	.no_dead_strip plt_Mono_Security_X509_X509Certificate_PEM_string_byte__
+plt_Mono_Security_X509_X509Certificate_PEM_string_byte__:
+_p_197:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #3992]
 br x16
-.word 6234
-	.no_dead_strip plt_System_Security_Cryptography_DSACryptoServiceProvider__ctor_int
-plt_System_Security_Cryptography_DSACryptoServiceProvider__ctor_int:
-_p_199:
+.word 6286
+	.no_dead_strip plt_Mono_Security_X509_X509Certificate_Parse_byte__
+plt_Mono_Security_X509_X509Certificate_Parse_byte__:
+_p_198:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #4000]
 br x16
-.word 6237
-	.no_dead_strip plt_System_Security_Cryptography_RSACryptoServiceProvider__ctor_int
-plt_System_Security_Cryptography_RSACryptoServiceProvider__ctor_int:
-_p_200:
+.word 6289
+	.no_dead_strip plt_Mono_Security_X509_X509Certificate_GetUnsignedBigInteger_byte__
+plt_Mono_Security_X509_X509Certificate_GetUnsignedBigInteger_byte__:
+_p_199:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #4008]
 br x16
-.word 6242
-	.no_dead_strip plt_System_Runtime_Serialization_SerializationInfo_AddValue_string_object
-plt_System_Runtime_Serialization_SerializationInfo_AddValue_string_object:
-_p_201:
+.word 6292
+	.no_dead_strip plt_System_Security_Cryptography_DSACryptoServiceProvider__ctor_int
+plt_System_Security_Cryptography_DSACryptoServiceProvider__ctor_int:
+_p_200:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #4016]
 br x16
-.word 6247
-	.no_dead_strip plt_string_Format_string_object
-plt_string_Format_string_object:
-_p_202:
+.word 6295
+	.no_dead_strip plt_System_Security_Cryptography_RSACryptoServiceProvider__ctor_int
+plt_System_Security_Cryptography_RSACryptoServiceProvider__ctor_int:
+_p_201:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #4024]
 br x16
-.word 6252
-	.no_dead_strip plt_string_IndexOf_string
-plt_string_IndexOf_string:
-_p_203:
+.word 6300
+	.no_dead_strip plt_System_Runtime_Serialization_SerializationInfo_AddValue_string_object
+plt_System_Runtime_Serialization_SerializationInfo_AddValue_string_object:
+_p_202:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #4032]
 br x16
-.word 6257
-	.no_dead_strip plt_string_IndexOf_string_int
-plt_string_IndexOf_string_int:
-_p_204:
+.word 6305
+	.no_dead_strip plt_string_Format_string_object
+plt_string_Format_string_object:
+_p_203:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #4040]
 br x16
-.word 6262
-	.no_dead_strip plt_System_Convert_FromBase64String_string
-plt_System_Convert_FromBase64String_string:
-_p_205:
+.word 6310
+	.no_dead_strip plt_string_IndexOf_string
+plt_string_IndexOf_string:
+_p_204:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #4048]
 br x16
-.word 6267
-	.no_dead_strip plt_System_Collections_CollectionBase_get_InnerList
-plt_System_Collections_CollectionBase_get_InnerList:
-_p_206:
+.word 6315
+	.no_dead_strip plt_string_IndexOf_string_int
+plt_string_IndexOf_string_int:
+_p_205:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #4056]
 br x16
-.word 6272
-	.no_dead_strip plt_Mono_Security_X509_X509CertificateCollection_X509CertificateEnumerator__ctor_Mono_Security_X509_X509CertificateCollection
-plt_Mono_Security_X509_X509CertificateCollection_X509CertificateEnumerator__ctor_Mono_Security_X509_X509CertificateCollection:
-_p_207:
+.word 6320
+	.no_dead_strip plt_System_Convert_FromBase64String_string
+plt_System_Convert_FromBase64String_string:
+_p_206:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #4064]
 br x16
-.word 6277
-	.no_dead_strip plt_byte_ToString_string_System_IFormatProvider
-plt_byte_ToString_string_System_IFormatProvider:
-_p_208:
+.word 6325
+	.no_dead_strip plt_System_Collections_CollectionBase_get_InnerList
+plt_System_Collections_CollectionBase_get_InnerList:
+_p_207:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #4072]
 br x16
-.word 6280
-	.no_dead_strip plt_Mono_Security_X509_X509Extension_WriteLine_System_Text_StringBuilder_int_int
-plt_Mono_Security_X509_X509Extension_WriteLine_System_Text_StringBuilder_int_int:
-_p_209:
+.word 6330
+	.no_dead_strip plt_Mono_Security_X509_X509CertificateCollection_X509CertificateEnumerator__ctor_Mono_Security_X509_X509CertificateCollection
+plt_Mono_Security_X509_X509CertificateCollection_X509CertificateEnumerator__ctor_Mono_Security_X509_X509CertificateCollection:
+_p_208:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #4080]
 br x16
-.word 6285
-	.no_dead_strip plt_Mono_Security_X509_X509Extension__ctor_Mono_Security_ASN1
-plt_Mono_Security_X509_X509Extension__ctor_Mono_Security_ASN1:
-_p_210:
+.word 6335
+	.no_dead_strip plt_byte_ToString_string_System_IFormatProvider
+plt_byte_ToString_string_System_IFormatProvider:
+_p_209:
 adrp x16, mono_aot_Mono_Security_got@PAGE+0
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #4088]
 br x16
-.word 6288
-	.no_dead_strip plt_Mono_Security_Protocol_Ntlm_ChallengeResponse__ctor
-plt_Mono_Security_Protocol_Ntlm_ChallengeResponse__ctor:
-_p_211:
+.word 6338
+	.no_dead_strip plt_Mono_Security_X509_X509Extension_WriteLine_System_Text_StringBuilder_int_int
+plt_Mono_Security_X509_X509Extension_WriteLine_System_Text_StringBuilder_int_int:
+_p_210:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #0]
 br x16
-.word 6291
-	.no_dead_strip plt_Mono_Security_Protocol_Ntlm_ChallengeResponse_set_Password_string
-plt_Mono_Security_Protocol_Ntlm_ChallengeResponse_set_Password_string:
-_p_212:
+.word 6343
+	.no_dead_strip plt_Mono_Security_X509_X509Extension__ctor_Mono_Security_ASN1
+plt_Mono_Security_X509_X509Extension__ctor_Mono_Security_ASN1:
+_p_211:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #8]
 br x16
-.word 6294
-	.no_dead_strip plt_Mono_Security_Protocol_Ntlm_ChallengeResponse_set_Challenge_byte__
-plt_Mono_Security_Protocol_Ntlm_ChallengeResponse_set_Challenge_byte__:
-_p_213:
+.word 6346
+	.no_dead_strip plt_Mono_Security_Protocol_Ntlm_ChallengeResponse__ctor
+plt_Mono_Security_Protocol_Ntlm_ChallengeResponse__ctor:
+_p_212:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #16]
 br x16
-.word 6297
-	.no_dead_strip plt_Mono_Security_Protocol_Ntlm_ChallengeResponse_Dispose
-plt_Mono_Security_Protocol_Ntlm_ChallengeResponse_Dispose:
-_p_214:
+.word 6349
+	.no_dead_strip plt_Mono_Security_Protocol_Ntlm_ChallengeResponse_set_Password_string
+plt_Mono_Security_Protocol_Ntlm_ChallengeResponse_set_Password_string:
+_p_213:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #24]
 br x16
-.word 6300
-	.no_dead_strip plt_System_Security_Cryptography_DES_Create
-plt_System_Security_Cryptography_DES_Create:
-_p_215:
+.word 6352
+	.no_dead_strip plt_Mono_Security_Protocol_Ntlm_ChallengeResponse_set_Challenge_byte__
+plt_Mono_Security_Protocol_Ntlm_ChallengeResponse_set_Challenge_byte__:
+_p_214:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #32]
 br x16
-.word 6303
-	.no_dead_strip plt_Mono_Security_Protocol_Ntlm_ChallengeResponse_PasswordToKey_string_int
-plt_Mono_Security_Protocol_Ntlm_ChallengeResponse_PasswordToKey_string_int:
-_p_216:
+.word 6355
+	.no_dead_strip plt_Mono_Security_Protocol_Ntlm_ChallengeResponse_Dispose
+plt_Mono_Security_Protocol_Ntlm_ChallengeResponse_Dispose:
+_p_215:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #40]
 br x16
-.word 6308
-	.no_dead_strip plt_System_Text_Encoding_get_Unicode
-plt_System_Text_Encoding_get_Unicode:
-_p_217:
+.word 6358
+	.no_dead_strip plt_System_Security_Cryptography_DES_Create
+plt_System_Security_Cryptography_DES_Create:
+_p_216:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #48]
 br x16
-.word 6311
-	.no_dead_strip plt_System_Security_Cryptography_HashAlgorithm_ComputeHash_byte__
-plt_System_Security_Cryptography_HashAlgorithm_ComputeHash_byte__:
-_p_218:
+.word 6361
+	.no_dead_strip plt_Mono_Security_Protocol_Ntlm_ChallengeResponse_PasswordToKey_string_int
+plt_Mono_Security_Protocol_Ntlm_ChallengeResponse_PasswordToKey_string_int:
+_p_217:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #56]
 br x16
-.word 6316
-	.no_dead_strip plt_Mono_Security_Protocol_Ntlm_ChallengeResponse_GetResponse_byte__
-plt_Mono_Security_Protocol_Ntlm_ChallengeResponse_GetResponse_byte__:
-_p_219:
+.word 6366
+	.no_dead_strip plt_System_Text_Encoding_get_Unicode
+plt_System_Text_Encoding_get_Unicode:
+_p_218:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #64]
 br x16
-.word 6321
-	.no_dead_strip plt_Mono_Security_Protocol_Ntlm_ChallengeResponse_Dispose_bool
-plt_Mono_Security_Protocol_Ntlm_ChallengeResponse_Dispose_bool:
-_p_220:
+.word 6369
+	.no_dead_strip plt_System_Security_Cryptography_HashAlgorithm_ComputeHash_byte__
+plt_System_Security_Cryptography_HashAlgorithm_ComputeHash_byte__:
+_p_219:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #72]
 br x16
-.word 6324
-	.no_dead_strip plt_System_GC_SuppressFinalize_object
-plt_System_GC_SuppressFinalize_object:
-_p_221:
+.word 6374
+	.no_dead_strip plt_Mono_Security_Protocol_Ntlm_ChallengeResponse_GetResponse_byte__
+plt_Mono_Security_Protocol_Ntlm_ChallengeResponse_GetResponse_byte__:
+_p_220:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #80]
 br x16
-.word 6327
-	.no_dead_strip plt_Mono_Security_Protocol_Ntlm_ChallengeResponse_PrepareDESKey_byte___int
-plt_Mono_Security_Protocol_Ntlm_ChallengeResponse_PrepareDESKey_byte___int:
-_p_222:
+.word 6379
+	.no_dead_strip plt_Mono_Security_Protocol_Ntlm_ChallengeResponse_Dispose_bool
+plt_Mono_Security_Protocol_Ntlm_ChallengeResponse_Dispose_bool:
+_p_221:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #88]
 br x16
-.word 6332
-	.no_dead_strip plt_System_Globalization_CultureInfo_get_CurrentCulture
-plt_System_Globalization_CultureInfo_get_CurrentCulture:
-_p_223:
+.word 6382
+	.no_dead_strip plt_System_GC_SuppressFinalize_object
+plt_System_GC_SuppressFinalize_object:
+_p_222:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #96]
 br x16
-.word 6335
-	.no_dead_strip plt_string_ToUpper_System_Globalization_CultureInfo
-plt_string_ToUpper_System_Globalization_CultureInfo:
-_p_224:
+.word 6385
+	.no_dead_strip plt_Mono_Security_Protocol_Ntlm_ChallengeResponse_PrepareDESKey_byte___int
+plt_Mono_Security_Protocol_Ntlm_ChallengeResponse_PrepareDESKey_byte___int:
+_p_223:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #104]
 br x16
-.word 6340
-	.no_dead_strip plt_Mono_Security_Protocol_Ntlm_ChallengeResponse2_PasswordToKey_string_int
-plt_Mono_Security_Protocol_Ntlm_ChallengeResponse2_PasswordToKey_string_int:
-_p_225:
+.word 6390
+	.no_dead_strip plt_System_Globalization_CultureInfo_get_CurrentCulture
+plt_System_Globalization_CultureInfo_get_CurrentCulture:
+_p_224:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #112]
 br x16
-.word 6345
-	.no_dead_strip plt_Mono_Security_Protocol_Ntlm_ChallengeResponse2_GetResponse_byte___byte__
-plt_Mono_Security_Protocol_Ntlm_ChallengeResponse2_GetResponse_byte___byte__:
-_p_226:
+.word 6393
+	.no_dead_strip plt_string_ToUpper_System_Globalization_CultureInfo
+plt_string_ToUpper_System_Globalization_CultureInfo:
+_p_225:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #120]
 br x16
-.word 6348
-	.no_dead_strip plt_Mono_Security_Protocol_Ntlm_ChallengeResponse2_Compute_NTLM_Password_string
-plt_Mono_Security_Protocol_Ntlm_ChallengeResponse2_Compute_NTLM_Password_string:
-_p_227:
+.word 6398
+	.no_dead_strip plt_Mono_Security_Protocol_Ntlm_ChallengeResponse2_PasswordToKey_string_int
+plt_Mono_Security_Protocol_Ntlm_ChallengeResponse2_PasswordToKey_string_int:
+_p_226:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #128]
 br x16
-.word 6351
-	.no_dead_strip plt_System_Array_CopyTo_System_Array_int
-plt_System_Array_CopyTo_System_Array_int:
-_p_228:
+.word 6403
+	.no_dead_strip plt_Mono_Security_Protocol_Ntlm_ChallengeResponse2_GetResponse_byte___byte__
+plt_Mono_Security_Protocol_Ntlm_ChallengeResponse2_GetResponse_byte___byte__:
+_p_227:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #136]
 br x16
-.word 6354
-	.no_dead_strip plt_System_Array_Copy_System_Array_System_Array_int
-plt_System_Array_Copy_System_Array_System_Array_int:
-_p_229:
+.word 6406
+	.no_dead_strip plt_Mono_Security_Protocol_Ntlm_ChallengeResponse2_Compute_NTLM_Password_string
+plt_Mono_Security_Protocol_Ntlm_ChallengeResponse2_Compute_NTLM_Password_string:
+_p_228:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #144]
 br x16
-.word 6359
-	.no_dead_strip plt_Mono_Security_Protocol_Ntlm_ChallengeResponse2_Compute_NTLM_string_byte__
-plt_Mono_Security_Protocol_Ntlm_ChallengeResponse2_Compute_NTLM_string_byte__:
-_p_230:
+.word 6409
+	.no_dead_strip plt_System_Array_CopyTo_System_Array_int
+plt_System_Array_CopyTo_System_Array_int:
+_p_229:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #152]
 br x16
-.word 6364
-	.no_dead_strip plt_string_ToUpperInvariant
-plt_string_ToUpperInvariant:
-_p_231:
+.word 6412
+	.no_dead_strip plt_System_Array_Copy_System_Array_System_Array_int
+plt_System_Array_Copy_System_Array_System_Array_int:
+_p_230:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #160]
 br x16
-.word 6367
-	.no_dead_strip plt_System_Array_Copy_System_Array_int_System_Array_int_int
-plt_System_Array_Copy_System_Array_int_System_Array_int_int:
-_p_232:
+.word 6417
+	.no_dead_strip plt_Mono_Security_Protocol_Ntlm_ChallengeResponse2_Compute_NTLM_string_byte__
+plt_Mono_Security_Protocol_Ntlm_ChallengeResponse2_Compute_NTLM_string_byte__:
+_p_231:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #168]
 br x16
-.word 6372
-	.no_dead_strip plt_System_Security_Cryptography_HMACMD5__ctor_byte__
-plt_System_Security_Cryptography_HMACMD5__ctor_byte__:
-_p_233:
+.word 6422
+	.no_dead_strip plt_string_ToUpperInvariant
+plt_string_ToUpperInvariant:
+_p_232:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #176]
 br x16
-.word 6377
-	.no_dead_strip plt_System_Security_Cryptography_HashAlgorithm_Clear
-plt_System_Security_Cryptography_HashAlgorithm_Clear:
-_p_234:
+.word 6425
+	.no_dead_strip plt_System_Array_Copy_System_Array_int_System_Array_int_int
+plt_System_Array_Copy_System_Array_int_System_Array_int_int:
+_p_233:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #184]
 br x16
-.word 6382
-	.no_dead_strip plt_System_DateTime_get_Now
-plt_System_DateTime_get_Now:
-_p_235:
+.word 6430
+	.no_dead_strip plt_System_Security_Cryptography_HMACMD5__ctor_byte__
+plt_System_Security_Cryptography_HMACMD5__ctor_byte__:
+_p_234:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #192]
 br x16
-.word 6387
-	.no_dead_strip plt_Mono_Security_Protocol_Ntlm_Type2Message_get_TargetInfo
-plt_Mono_Security_Protocol_Ntlm_Type2Message_get_TargetInfo:
-_p_236:
+.word 6435
+	.no_dead_strip plt_System_Security_Cryptography_HashAlgorithm_Clear
+plt_System_Security_Cryptography_HashAlgorithm_Clear:
+_p_235:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #200]
 br x16
-.word 6392
-	.no_dead_strip plt_Mono_Security_BitConverterLE_GetBytes_long
-plt_Mono_Security_BitConverterLE_GetBytes_long:
-_p_237:
+.word 6440
+	.no_dead_strip plt_System_DateTime_get_Now
+plt_System_DateTime_get_Now:
+_p_236:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #208]
 br x16
-.word 6395
-	.no_dead_strip plt_Mono_Security_Protocol_Ntlm_Type2Message_get_Nonce
-plt_Mono_Security_Protocol_Ntlm_Type2Message_get_Nonce:
-_p_238:
+.word 6445
+	.no_dead_strip plt_Mono_Security_Protocol_Ntlm_Type2Message_get_TargetInfo
+plt_Mono_Security_Protocol_Ntlm_Type2Message_get_TargetInfo:
+_p_237:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #216]
 br x16
-.word 6397
-	.no_dead_strip plt_Mono_Security_Protocol_Ntlm_ChallengeResponse2_Compute_LM_string_byte__
-plt_Mono_Security_Protocol_Ntlm_ChallengeResponse2_Compute_LM_string_byte__:
-_p_239:
+.word 6450
+	.no_dead_strip plt_Mono_Security_BitConverterLE_GetBytes_long
+plt_Mono_Security_BitConverterLE_GetBytes_long:
+_p_238:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #224]
 br x16
-.word 6400
-	.no_dead_strip plt_Mono_Security_Protocol_Ntlm_ChallengeResponse2_Compute_NTLMv2_Session_string_byte___byte____byte___
-plt_Mono_Security_Protocol_Ntlm_ChallengeResponse2_Compute_NTLMv2_Session_string_byte___byte____byte___:
-_p_240:
+.word 6453
+	.no_dead_strip plt_Mono_Security_Protocol_Ntlm_Type2Message_get_Nonce
+plt_Mono_Security_Protocol_Ntlm_Type2Message_get_Nonce:
+_p_239:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #232]
 br x16
-.word 6403
-	.no_dead_strip plt_Mono_Security_Protocol_Ntlm_ChallengeResponse2_Compute_NTLMv2_Mono_Security_Protocol_Ntlm_Type2Message_string_string_string
-plt_Mono_Security_Protocol_Ntlm_ChallengeResponse2_Compute_NTLMv2_Mono_Security_Protocol_Ntlm_Type2Message_string_string_string:
-_p_241:
+.word 6455
+	.no_dead_strip plt_Mono_Security_Protocol_Ntlm_ChallengeResponse2_Compute_LM_string_byte__
+plt_Mono_Security_Protocol_Ntlm_ChallengeResponse2_Compute_LM_string_byte__:
+_p_240:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #240]
 br x16
-.word 6406
-	.no_dead_strip plt_Mono_Security_Protocol_Ntlm_ChallengeResponse2_PrepareDESKey_byte___int
-plt_Mono_Security_Protocol_Ntlm_ChallengeResponse2_PrepareDESKey_byte___int:
-_p_242:
+.word 6458
+	.no_dead_strip plt_Mono_Security_Protocol_Ntlm_ChallengeResponse2_Compute_NTLMv2_Session_string_byte___byte____byte___
+plt_Mono_Security_Protocol_Ntlm_ChallengeResponse2_Compute_NTLMv2_Session_string_byte___byte____byte___:
+_p_241:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #248]
 br x16
-.word 6409
-	.no_dead_strip plt_Mono_Security_Protocol_Ntlm_MessageBase_CheckHeader_byte__
-plt_Mono_Security_Protocol_Ntlm_MessageBase_CheckHeader_byte__:
-_p_243:
+.word 6461
+	.no_dead_strip plt_Mono_Security_Protocol_Ntlm_ChallengeResponse2_Compute_NTLMv2_Mono_Security_Protocol_Ntlm_Type2Message_string_string_string
+plt_Mono_Security_Protocol_Ntlm_ChallengeResponse2_Compute_NTLMv2_Mono_Security_Protocol_Ntlm_Type2Message_string_string_string:
+_p_242:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #256]
 br x16
-.word 6412
-	.no_dead_strip plt_System_ArgumentOutOfRangeException__ctor_string_object_string
-plt_System_ArgumentOutOfRangeException__ctor_string_object_string:
-_p_244:
+.word 6464
+	.no_dead_strip plt_Mono_Security_Protocol_Ntlm_ChallengeResponse2_PrepareDESKey_byte___int
+plt_Mono_Security_Protocol_Ntlm_ChallengeResponse2_PrepareDESKey_byte___int:
+_p_243:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #264]
 br x16
-.word 6415
-	.no_dead_strip plt_Mono_Security_BitConverterLE_ToUInt32_byte___int
-plt_Mono_Security_BitConverterLE_ToUInt32_byte___int:
-_p_245:
+.word 6467
+	.no_dead_strip plt_Mono_Security_Protocol_Ntlm_MessageBase_CheckHeader_byte__
+plt_Mono_Security_Protocol_Ntlm_MessageBase_CheckHeader_byte__:
+_p_244:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #272]
 br x16
-.word 6420
-	.no_dead_strip plt_System_Environment_get_UserDomainName
-plt_System_Environment_get_UserDomainName:
-_p_246:
+.word 6470
+	.no_dead_strip plt_System_ArgumentOutOfRangeException__ctor_string_object_string
+plt_System_ArgumentOutOfRangeException__ctor_string_object_string:
+_p_245:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #280]
 br x16
-.word 6422
-	.no_dead_strip plt_System_Environment_get_MachineName
-plt_System_Environment_get_MachineName:
-_p_247:
+.word 6473
+	.no_dead_strip plt_Mono_Security_BitConverterLE_ToUInt32_byte___int
+plt_Mono_Security_BitConverterLE_ToUInt32_byte___int:
+_p_246:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #288]
 br x16
-.word 6427
-	.no_dead_strip plt_Mono_Security_Protocol_Ntlm_MessageBase_Decode_byte__
-plt_Mono_Security_Protocol_Ntlm_MessageBase_Decode_byte__:
-_p_248:
+.word 6478
+	.no_dead_strip plt_System_Environment_get_UserDomainName
+plt_System_Environment_get_UserDomainName:
+_p_247:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #296]
 br x16
-.word 6432
-	.no_dead_strip plt_Mono_Security_BitConverterLE_ToUInt16_byte___int
-plt_Mono_Security_BitConverterLE_ToUInt16_byte___int:
-_p_249:
+.word 6480
+	.no_dead_strip plt_System_Environment_get_MachineName
+plt_System_Environment_get_MachineName:
+_p_248:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #304]
 br x16
-.word 6435
-	.no_dead_strip plt_Mono_Security_Protocol_Ntlm_MessageBase_PrepareMessage_int
-plt_Mono_Security_Protocol_Ntlm_MessageBase_PrepareMessage_int:
-_p_250:
+.word 6485
+	.no_dead_strip plt_Mono_Security_Protocol_Ntlm_MessageBase_Decode_byte__
+plt_Mono_Security_Protocol_Ntlm_MessageBase_Decode_byte__:
+_p_249:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #312]
 br x16
-.word 6437
-	.no_dead_strip plt_System_Environment_get_UserName
-plt_System_Environment_get_UserName:
-_p_251:
+.word 6490
+	.no_dead_strip plt_Mono_Security_BitConverterLE_ToUInt16_byte___int
+plt_Mono_Security_BitConverterLE_ToUInt16_byte___int:
+_p_250:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #320]
 br x16
-.word 6440
-	.no_dead_strip plt_Mono_Security_Protocol_Ntlm_Type3Message_DecodeString_byte___int_int
-plt_Mono_Security_Protocol_Ntlm_Type3Message_DecodeString_byte___int_int:
-_p_252:
+.word 6493
+	.no_dead_strip plt_Mono_Security_Protocol_Ntlm_MessageBase_PrepareMessage_int
+plt_Mono_Security_Protocol_Ntlm_MessageBase_PrepareMessage_int:
+_p_251:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #328]
 br x16
-.word 6445
-	.no_dead_strip plt_Mono_Security_Protocol_Ntlm_Type3Message_EncodeString_string
-plt_Mono_Security_Protocol_Ntlm_Type3Message_EncodeString_string:
-_p_253:
+.word 6495
+	.no_dead_strip plt_System_Environment_get_UserName
+plt_System_Environment_get_UserName:
+_p_252:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #336]
 br x16
-.word 6448
-	.no_dead_strip plt_Mono_Security_Protocol_Ntlm_ChallengeResponse__ctor_string_byte__
-plt_Mono_Security_Protocol_Ntlm_ChallengeResponse__ctor_string_byte__:
-_p_254:
+.word 6498
+	.no_dead_strip plt_Mono_Security_Protocol_Ntlm_Type3Message_DecodeString_byte___int_int
+plt_Mono_Security_Protocol_Ntlm_Type3Message_DecodeString_byte___int_int:
+_p_253:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #344]
 br x16
-.word 6451
-	.no_dead_strip plt_Mono_Security_Protocol_Ntlm_ChallengeResponse_get_LM
-plt_Mono_Security_Protocol_Ntlm_ChallengeResponse_get_LM:
-_p_255:
+.word 6503
+	.no_dead_strip plt_Mono_Security_Protocol_Ntlm_Type3Message_EncodeString_string
+plt_Mono_Security_Protocol_Ntlm_Type3Message_EncodeString_string:
+_p_254:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #352]
 br x16
-.word 6454
-	.no_dead_strip plt_Mono_Security_Protocol_Ntlm_ChallengeResponse_get_NT
-plt_Mono_Security_Protocol_Ntlm_ChallengeResponse_get_NT:
-_p_256:
+.word 6506
+	.no_dead_strip plt_Mono_Security_Protocol_Ntlm_ChallengeResponse__ctor_string_byte__
+plt_Mono_Security_Protocol_Ntlm_ChallengeResponse__ctor_string_byte__:
+_p_255:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #360]
 br x16
-.word 6457
-	.no_dead_strip plt_Mono_Security_Protocol_Ntlm_ChallengeResponse2_Compute_Mono_Security_Protocol_Ntlm_Type2Message_Mono_Security_Protocol_Ntlm_NtlmAuthLevel_string_string_string_byte____byte___
-plt_Mono_Security_Protocol_Ntlm_ChallengeResponse2_Compute_Mono_Security_Protocol_Ntlm_Type2Message_Mono_Security_Protocol_Ntlm_NtlmAuthLevel_string_string_string_byte____byte___:
-_p_257:
+.word 6509
+	.no_dead_strip plt_Mono_Security_Protocol_Ntlm_ChallengeResponse_get_LM
+plt_Mono_Security_Protocol_Ntlm_ChallengeResponse_get_LM:
+_p_256:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #368]
 br x16
-.word 6460
-	.no_dead_strip plt_Mono_Security_Interface_Alert_inferAlertLevel
-plt_Mono_Security_Interface_Alert_inferAlertLevel:
-_p_258:
+.word 6512
+	.no_dead_strip plt_Mono_Security_Protocol_Ntlm_ChallengeResponse_get_NT
+plt_Mono_Security_Protocol_Ntlm_ChallengeResponse_get_NT:
+_p_257:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #376]
 br x16
-.word 6463
-	.no_dead_strip plt_string_Format_string_object_object
-plt_string_Format_string_object_object:
-_p_259:
+.word 6515
+	.no_dead_strip plt_Mono_Security_Protocol_Ntlm_ChallengeResponse2_Compute_Mono_Security_Protocol_Ntlm_Type2Message_Mono_Security_Protocol_Ntlm_NtlmAuthLevel_string_string_string_byte____byte___
+plt_Mono_Security_Protocol_Ntlm_ChallengeResponse2_Compute_Mono_Security_Protocol_Ntlm_Type2Message_Mono_Security_Protocol_Ntlm_NtlmAuthLevel_string_string_string_byte____byte___:
+_p_258:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #384]
 br x16
-.word 6466
-	.no_dead_strip plt_Mono_Net_Security_NoReflectionHelper_GetInternalValidator_object_object
-plt_Mono_Net_Security_NoReflectionHelper_GetInternalValidator_object_object:
-_p_260:
+.word 6518
+	.no_dead_strip plt_Mono_Security_Interface_Alert_inferAlertLevel
+plt_Mono_Security_Interface_Alert_inferAlertLevel:
+_p_259:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #392]
 br x16
-.word 6471
-	.no_dead_strip plt_Mono_Security_Interface_MonoTlsSettings__ctor
-plt_Mono_Security_Interface_MonoTlsSettings__ctor:
-_p_261:
+.word 6521
+	.no_dead_strip plt_string_Format_string_object_object
+plt_string_Format_string_object_object:
+_p_260:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #400]
 br x16
-.word 6476
-	.no_dead_strip plt_Mono_Security_Interface_MonoTlsSettings_get_DefaultSettings
-plt_Mono_Security_Interface_MonoTlsSettings_get_DefaultSettings:
-_p_262:
+.word 6524
+	.no_dead_strip plt_Mono_Net_Security_NoReflectionHelper_GetInternalValidator_object_object
+plt_Mono_Net_Security_NoReflectionHelper_GetInternalValidator_object_object:
+_p_261:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #408]
 br x16
-.word 6479
-	.no_dead_strip plt_Mono_Security_Interface_MonoTlsSettings_Clone
-plt_Mono_Security_Interface_MonoTlsSettings_Clone:
-_p_263:
+.word 6529
+	.no_dead_strip plt_Mono_Security_Interface_MonoTlsSettings__ctor
+plt_Mono_Security_Interface_MonoTlsSettings__ctor:
+_p_262:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #416]
 br x16
-.word 6482
-	.no_dead_strip plt_Mono_Security_Interface_MonoTlsSettings__ctor_Mono_Security_Interface_MonoTlsSettings
-plt_Mono_Security_Interface_MonoTlsSettings__ctor_Mono_Security_Interface_MonoTlsSettings:
-_p_264:
+.word 6534
+	.no_dead_strip plt_Mono_Security_Interface_MonoTlsSettings_get_DefaultSettings
+plt_Mono_Security_Interface_MonoTlsSettings_get_DefaultSettings:
+_p_263:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #424]
 br x16
-.word 6485
-	.no_dead_strip plt_System_Security_Cryptography_X509Certificates_X509CertificateCollection__ctor_System_Security_Cryptography_X509Certificates_X509CertificateCollection
-plt_System_Security_Cryptography_X509Certificates_X509CertificateCollection__ctor_System_Security_Cryptography_X509Certificates_X509CertificateCollection:
-_p_265:
+.word 6537
+	.no_dead_strip plt_Mono_Security_Interface_MonoTlsSettings_Clone
+plt_Mono_Security_Interface_MonoTlsSettings_Clone:
+_p_264:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #432]
 br x16
-.word 6488
-	.no_dead_strip plt_Mono_Security_Interface_TlsException__ctor_Mono_Security_Interface_Alert_string
-plt_Mono_Security_Interface_TlsException__ctor_Mono_Security_Interface_Alert_string:
-_p_266:
+.word 6540
+	.no_dead_strip plt_Mono_Security_Interface_MonoTlsSettings__ctor_Mono_Security_Interface_MonoTlsSettings
+plt_Mono_Security_Interface_MonoTlsSettings__ctor_Mono_Security_Interface_MonoTlsSettings:
+_p_265:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #440]
 br x16
-.word 6493
-	.no_dead_strip plt_System_Exception__ctor_string
-plt_System_Exception__ctor_string:
-_p_267:
+.word 6543
+	.no_dead_strip plt_System_Security_Cryptography_X509Certificates_X509CertificateCollection__ctor_System_Security_Cryptography_X509Certificates_X509CertificateCollection
+plt_System_Security_Cryptography_X509Certificates_X509CertificateCollection__ctor_System_Security_Cryptography_X509Certificates_X509CertificateCollection:
+_p_266:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #448]
 br x16
-.word 6496
-	.no_dead_strip plt_Mono_Security_Interface_Alert__ctor_Mono_Security_Interface_AlertDescription
-plt_Mono_Security_Interface_Alert__ctor_Mono_Security_Interface_AlertDescription:
-_p_268:
+.word 6546
+	.no_dead_strip plt_Mono_Security_Interface_TlsException__ctor_Mono_Security_Interface_Alert_string
+plt_Mono_Security_Interface_TlsException__ctor_Mono_Security_Interface_Alert_string:
+_p_267:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #456]
 br x16
-.word 6501
-	.no_dead_strip plt_Mono_Security_Interface_TlsException__ctor_Mono_Security_Interface_Alert
-plt_Mono_Security_Interface_TlsException__ctor_Mono_Security_Interface_Alert:
-_p_269:
+.word 6551
+	.no_dead_strip plt_System_Exception__ctor_string
+plt_System_Exception__ctor_string:
+_p_268:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #464]
 br x16
-.word 6504
-	.no_dead_strip plt_intptr_op_Inequality_intptr_intptr
-plt_intptr_op_Inequality_intptr_intptr:
-_p_270:
+.word 6554
+	.no_dead_strip plt_Mono_Security_Interface_Alert__ctor_Mono_Security_Interface_AlertDescription
+plt_Mono_Security_Interface_Alert__ctor_Mono_Security_Interface_AlertDescription:
+_p_269:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #472]
 br x16
-.word 6507
-	.no_dead_strip plt_System_Runtime_InteropServices_Marshal_FreeHGlobal_intptr
-plt_System_Runtime_InteropServices_Marshal_FreeHGlobal_intptr:
-_p_271:
+.word 6559
+	.no_dead_strip plt_Mono_Security_Interface_TlsException__ctor_Mono_Security_Interface_Alert
+plt_Mono_Security_Interface_TlsException__ctor_Mono_Security_Interface_Alert:
+_p_270:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #480]
 br x16
-.word 6512
-	.no_dead_strip plt_System_Security_Cryptography_HashAlgorithm_Dispose_bool
-plt_System_Security_Cryptography_HashAlgorithm_Dispose_bool:
-_p_272:
+.word 6562
+	.no_dead_strip plt_intptr_op_Inequality_intptr_intptr
+plt_intptr_op_Inequality_intptr_intptr:
+_p_271:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #488]
 br x16
-.word 6517
-	.no_dead_strip plt_System_Runtime_InteropServices_Marshal_AllocHGlobal_int
-plt_System_Runtime_InteropServices_Marshal_AllocHGlobal_int:
-_p_273:
+.word 6565
+	.no_dead_strip plt_System_Runtime_InteropServices_Marshal_FreeHGlobal_intptr
+plt_System_Runtime_InteropServices_Marshal_FreeHGlobal_intptr:
+_p_272:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #496]
 br x16
-.word 6522
-	.no_dead_strip plt_Mono_Security_Cryptography_MD2Managed_Init_intptr
-plt_Mono_Security_Cryptography_MD2Managed_Init_intptr:
-_p_274:
+.word 6570
+	.no_dead_strip plt_System_Security_Cryptography_HashAlgorithm_Dispose_bool
+plt_System_Security_Cryptography_HashAlgorithm_Dispose_bool:
+_p_273:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #504]
 br x16
-.word 6527
-	.no_dead_strip plt_System_Security_Cryptography_CryptographicException__ctor_int
-plt_System_Security_Cryptography_CryptographicException__ctor_int:
-_p_275:
+.word 6575
+	.no_dead_strip plt_System_Runtime_InteropServices_Marshal_AllocHGlobal_int
+plt_System_Runtime_InteropServices_Marshal_AllocHGlobal_int:
+_p_274:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #512]
 br x16
-.word 6530
-	.no_dead_strip plt_Mono_Security_Cryptography_MD2Managed_Update_intptr_intptr_uint
-plt_Mono_Security_Cryptography_MD2Managed_Update_intptr_intptr_uint:
-_p_276:
+.word 6580
+	.no_dead_strip plt_Mono_Security_Cryptography_MD2Managed_Init_intptr
+plt_Mono_Security_Cryptography_MD2Managed_Init_intptr:
+_p_275:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #520]
 br x16
-.word 6535
-	.no_dead_strip plt_Mono_Security_Cryptography_MD2Managed_Final_byte___intptr
-plt_Mono_Security_Cryptography_MD2Managed_Final_byte___intptr:
-_p_277:
+.word 6585
+	.no_dead_strip plt_System_Security_Cryptography_CryptographicException__ctor_int
+plt_System_Security_Cryptography_CryptographicException__ctor_int:
+_p_276:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #528]
 br x16
-.word 6538
-	.no_dead_strip plt_Mono_Security_Cryptography_MD4Managed_Init_intptr
-plt_Mono_Security_Cryptography_MD4Managed_Init_intptr:
-_p_278:
+.word 6588
+	.no_dead_strip plt_Mono_Security_Cryptography_MD2Managed_Update_intptr_intptr_uint
+plt_Mono_Security_Cryptography_MD2Managed_Update_intptr_intptr_uint:
+_p_277:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #536]
 br x16
-.word 6541
-	.no_dead_strip plt_Mono_Security_Cryptography_MD4Managed_Update_intptr_intptr_uint
-plt_Mono_Security_Cryptography_MD4Managed_Update_intptr_intptr_uint:
-_p_279:
+.word 6593
+	.no_dead_strip plt_Mono_Security_Cryptography_MD2Managed_Final_byte___intptr
+plt_Mono_Security_Cryptography_MD2Managed_Final_byte___intptr:
+_p_278:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #544]
 br x16
-.word 6544
-	.no_dead_strip plt_Mono_Security_Cryptography_MD4Managed_Final_byte___intptr
-plt_Mono_Security_Cryptography_MD4Managed_Final_byte___intptr:
-_p_280:
+.word 6596
+	.no_dead_strip plt_Mono_Security_Cryptography_MD4Managed_Init_intptr
+plt_Mono_Security_Cryptography_MD4Managed_Init_intptr:
+_p_279:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #552]
 br x16
-.word 6547
-	.no_dead_strip plt_System_Security_Cryptography_RIPEMD160_Create
-plt_System_Security_Cryptography_RIPEMD160_Create:
-_p_281:
+.word 6599
+	.no_dead_strip plt_Mono_Security_Cryptography_MD4Managed_Update_intptr_intptr_uint
+plt_Mono_Security_Cryptography_MD4Managed_Update_intptr_intptr_uint:
+_p_280:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #560]
 br x16
-.word 6550
-	.no_dead_strip plt_System_Type_GetType_string
-plt_System_Type_GetType_string:
-_p_282:
+.word 6602
+	.no_dead_strip plt_Mono_Security_Cryptography_MD4Managed_Final_byte___intptr
+plt_Mono_Security_Cryptography_MD4Managed_Final_byte___intptr:
+_p_281:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #568]
 br x16
-.word 6555
-	.no_dead_strip plt_System_Activator_CreateInstance_System_Type
-plt_System_Activator_CreateInstance_System_Type:
-_p_283:
+.word 6605
+	.no_dead_strip plt_System_Security_Cryptography_RIPEMD160_Create
+plt_System_Security_Cryptography_RIPEMD160_Create:
+_p_282:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #576]
 br x16
-.word 6560
-	.no_dead_strip plt_Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_Decode_byte__
-plt_Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_Decode_byte__:
-_p_284:
+.word 6608
+	.no_dead_strip plt_System_Type_GetType_string
+plt_System_Type_GetType_string:
+_p_283:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #584]
 br x16
-.word 6565
-	.no_dead_strip plt_Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_RemoveLeadingZero_byte__
-plt_Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_RemoveLeadingZero_byte__:
-_p_285:
+.word 6613
+	.no_dead_strip plt_System_Activator_CreateInstance_System_Type
+plt_System_Activator_CreateInstance_System_Type:
+_p_284:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #592]
 br x16
-.word 6568
-	.no_dead_strip plt_Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_Normalize_byte___int
-plt_Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_Normalize_byte___int:
-_p_286:
+.word 6618
+	.no_dead_strip plt_Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_Decode_byte__
+plt_Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_Decode_byte__:
+_p_285:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #600]
 br x16
-.word 6571
-	.no_dead_strip plt_System_Security_Cryptography_RSA_Create
-plt_System_Security_Cryptography_RSA_Create:
-_p_287:
+.word 6623
+	.no_dead_strip plt_Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_RemoveLeadingZero_byte__
+plt_Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_RemoveLeadingZero_byte__:
+_p_286:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #608]
 br x16
-.word 6574
-	.no_dead_strip plt__jit_icall_mono_arch_rethrow_exception
-plt__jit_icall_mono_arch_rethrow_exception:
-_p_288:
+.word 6626
+	.no_dead_strip plt_Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_Normalize_byte___int
+plt_Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_Normalize_byte___int:
+_p_287:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #616]
 br x16
-.word 6579
-	.no_dead_strip plt_Mono_Security_ASN1Convert_FromUnsignedBigInteger_byte__
-plt_Mono_Security_ASN1Convert_FromUnsignedBigInteger_byte__:
-_p_289:
+.word 6629
+	.no_dead_strip plt_System_Security_Cryptography_RSA_Create
+plt_System_Security_Cryptography_RSA_Create:
+_p_288:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #624]
 br x16
-.word 6609
-	.no_dead_strip plt_System_Security_Cryptography_DSA_Create
-plt_System_Security_Cryptography_DSA_Create:
-_p_290:
+.word 6632
+	.no_dead_strip plt__jit_icall_mono_arch_rethrow_exception
+plt__jit_icall_mono_arch_rethrow_exception:
+_p_289:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #632]
 br x16
-.word 6611
-	.no_dead_strip plt_Mono_Security_Cryptography_PKCS8_EncryptedPrivateKeyInfo_Decode_byte__
-plt_Mono_Security_Cryptography_PKCS8_EncryptedPrivateKeyInfo_Decode_byte__:
-_p_291:
+.word 6637
+	.no_dead_strip plt_Mono_Security_ASN1Convert_FromUnsignedBigInteger_byte__
+plt_Mono_Security_ASN1Convert_FromUnsignedBigInteger_byte__:
+_p_290:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #640]
 br x16
-.word 6616
-	.no_dead_strip plt_Mono_Math_BigInteger_GeneratePseudoPrime_int
-plt_Mono_Math_BigInteger_GeneratePseudoPrime_int:
-_p_292:
+.word 6667
+	.no_dead_strip plt_System_Security_Cryptography_DSA_Create
+plt_System_Security_Cryptography_DSA_Create:
+_p_291:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #648]
 br x16
-.word 6619
-	.no_dead_strip plt_Mono_Math_BigInteger_op_LessThan_Mono_Math_BigInteger_Mono_Math_BigInteger
-plt_Mono_Math_BigInteger_op_LessThan_Mono_Math_BigInteger_Mono_Math_BigInteger:
-_p_293:
+.word 6669
+	.no_dead_strip plt_Mono_Security_Cryptography_PKCS8_EncryptedPrivateKeyInfo_Decode_byte__
+plt_Mono_Security_Cryptography_PKCS8_EncryptedPrivateKeyInfo_Decode_byte__:
+_p_292:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #656]
 br x16
-.word 6621
-	.no_dead_strip plt_Mono_Math_BigInteger_ModInverse_Mono_Math_BigInteger
-plt_Mono_Math_BigInteger_ModInverse_Mono_Math_BigInteger:
-_p_294:
+.word 6674
+	.no_dead_strip plt_Mono_Math_BigInteger_GeneratePseudoPrime_int
+plt_Mono_Math_BigInteger_GeneratePseudoPrime_int:
+_p_293:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #664]
 br x16
-.word 6623
-	.no_dead_strip plt_Mono_Security_Cryptography_RSAManaged_GenerateKeyPair
-plt_Mono_Security_Cryptography_RSAManaged_GenerateKeyPair:
-_p_295:
+.word 6677
+	.no_dead_strip plt_Mono_Math_BigInteger_op_LessThan_Mono_Math_BigInteger_Mono_Math_BigInteger
+plt_Mono_Math_BigInteger_op_LessThan_Mono_Math_BigInteger_Mono_Math_BigInteger:
+_p_294:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #672]
 br x16
-.word 6625
-	.no_dead_strip plt_Mono_Math_BigInteger_GetBytes
-plt_Mono_Math_BigInteger_GetBytes:
-_p_296:
+.word 6679
+	.no_dead_strip plt_Mono_Math_BigInteger_ModInverse_Mono_Math_BigInteger
+plt_Mono_Math_BigInteger_ModInverse_Mono_Math_BigInteger:
+_p_295:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #680]
 br x16
-.word 6628
-	.no_dead_strip plt_Mono_Security_Cryptography_RSAManaged_GetPaddedValue_Mono_Math_BigInteger_int
-plt_Mono_Security_Cryptography_RSAManaged_GetPaddedValue_Mono_Math_BigInteger_int:
-_p_297:
+.word 6681
+	.no_dead_strip plt_Mono_Security_Cryptography_RSAManaged_GenerateKeyPair
+plt_Mono_Security_Cryptography_RSAManaged_GenerateKeyPair:
+_p_296:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #688]
 br x16
-.word 6630
-	.no_dead_strip plt_Mono_Math_BigInteger__ctor_byte__
-plt_Mono_Math_BigInteger__ctor_byte__:
-_p_298:
+.word 6683
+	.no_dead_strip plt_Mono_Math_BigInteger_GetBytes
+plt_Mono_Math_BigInteger_GetBytes:
+_p_297:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #696]
 br x16
-.word 6633
-	.no_dead_strip plt_Mono_Math_BigInteger_Clear
-plt_Mono_Math_BigInteger_Clear:
-_p_299:
+.word 6686
+	.no_dead_strip plt_Mono_Security_Cryptography_RSAManaged_GetPaddedValue_Mono_Math_BigInteger_int
+plt_Mono_Security_Cryptography_RSAManaged_GetPaddedValue_Mono_Math_BigInteger_int:
+_p_298:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #704]
 br x16
-.word 6635
-	.no_dead_strip plt_System_Convert_ToBase64String_byte__
-plt_System_Convert_ToBase64String_byte__:
-_p_300:
+.word 6688
+	.no_dead_strip plt_Mono_Math_BigInteger__ctor_byte__
+plt_Mono_Math_BigInteger__ctor_byte__:
+_p_299:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #712]
 br x16
-.word 6637
-	.no_dead_strip plt__jit_icall_mono_helper_ldstr_mscorlib
-plt__jit_icall_mono_helper_ldstr_mscorlib:
-_p_301:
+.word 6691
+	.no_dead_strip plt_Mono_Math_BigInteger_Clear
+plt_Mono_Math_BigInteger_Clear:
+_p_300:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #720]
 br x16
-.word 6642
-	.no_dead_strip plt_System_Nullable_1_Mono_Security_Interface_MonoSslPolicyErrors_Unbox_object
-plt_System_Nullable_1_Mono_Security_Interface_MonoSslPolicyErrors_Unbox_object:
-_p_302:
+.word 6693
+	.no_dead_strip plt_System_Convert_ToBase64String_byte__
+plt_System_Convert_ToBase64String_byte__:
+_p_301:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #728]
 br x16
-.word 6671
-	.no_dead_strip plt_System_Nullable_1_Mono_Security_Interface_MonoSslPolicyErrors_Equals_System_Nullable_1_Mono_Security_Interface_MonoSslPolicyErrors
-plt_System_Nullable_1_Mono_Security_Interface_MonoSslPolicyErrors_Equals_System_Nullable_1_Mono_Security_Interface_MonoSslPolicyErrors:
-_p_303:
+.word 6695
+	.no_dead_strip plt__jit_icall_mono_helper_ldstr_mscorlib
+plt__jit_icall_mono_helper_ldstr_mscorlib:
+_p_302:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #736]
 br x16
-.word 6689
-	.no_dead_strip plt_System_Nullable_1_Mono_Security_Interface_MonoSslPolicyErrors__ctor_Mono_Security_Interface_MonoSslPolicyErrors
-plt_System_Nullable_1_Mono_Security_Interface_MonoSslPolicyErrors__ctor_Mono_Security_Interface_MonoSslPolicyErrors:
-_p_304:
+.word 6700
+	.no_dead_strip plt_System_Nullable_1_Mono_Security_Interface_MonoSslPolicyErrors_Unbox_object
+plt_System_Nullable_1_Mono_Security_Interface_MonoSslPolicyErrors_Unbox_object:
+_p_303:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #744]
 br x16
-.word 6707
-	.no_dead_strip plt_System_Nullable_1_bool_Unbox_object
-plt_System_Nullable_1_bool_Unbox_object:
-_p_305:
+.word 6729
+	.no_dead_strip plt_System_Nullable_1_Mono_Security_Interface_MonoSslPolicyErrors_Equals_System_Nullable_1_Mono_Security_Interface_MonoSslPolicyErrors
+plt_System_Nullable_1_Mono_Security_Interface_MonoSslPolicyErrors_Equals_System_Nullable_1_Mono_Security_Interface_MonoSslPolicyErrors:
+_p_304:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #752]
 br x16
-.word 6725
-	.no_dead_strip plt_System_Nullable_1_bool_Equals_System_Nullable_1_bool
-plt_System_Nullable_1_bool_Equals_System_Nullable_1_bool:
-_p_306:
+.word 6747
+	.no_dead_strip plt_System_Nullable_1_Mono_Security_Interface_MonoSslPolicyErrors__ctor_Mono_Security_Interface_MonoSslPolicyErrors
+plt_System_Nullable_1_Mono_Security_Interface_MonoSslPolicyErrors__ctor_Mono_Security_Interface_MonoSslPolicyErrors:
+_p_305:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #760]
 br x16
-.word 6745
-	.no_dead_strip plt_bool_Equals_object
-plt_bool_Equals_object:
-_p_307:
+.word 6765
+	.no_dead_strip plt_System_Nullable_1_bool_Unbox_object
+plt_System_Nullable_1_bool_Unbox_object:
+_p_306:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #768]
 br x16
-.word 6765
-	.no_dead_strip plt_System_Nullable_1_bool__ctor_bool
-plt_System_Nullable_1_bool__ctor_bool:
-_p_308:
+.word 6783
+	.no_dead_strip plt_System_Nullable_1_bool_Equals_System_Nullable_1_bool
+plt_System_Nullable_1_bool_Equals_System_Nullable_1_bool:
+_p_307:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #776]
 br x16
-.word 6770
-	.no_dead_strip plt_System_Nullable_1_System_DateTime_Unbox_object
-plt_System_Nullable_1_System_DateTime_Unbox_object:
-_p_309:
+.word 6803
+	.no_dead_strip plt_bool_Equals_object
+plt_bool_Equals_object:
+_p_308:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #784]
 br x16
-.word 6790
-	.no_dead_strip plt_System_Nullable_1_System_DateTime_Equals_System_Nullable_1_System_DateTime
-plt_System_Nullable_1_System_DateTime_Equals_System_Nullable_1_System_DateTime:
-_p_310:
+.word 6823
+	.no_dead_strip plt_System_Nullable_1_bool__ctor_bool
+plt_System_Nullable_1_bool__ctor_bool:
+_p_309:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #792]
 br x16
-.word 6810
-	.no_dead_strip plt_System_DateTime_Equals_object
-plt_System_DateTime_Equals_object:
-_p_311:
+.word 6828
+	.no_dead_strip plt_System_Nullable_1_System_DateTime_Unbox_object
+plt_System_Nullable_1_System_DateTime_Unbox_object:
+_p_310:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #800]
 br x16
-.word 6830
-	.no_dead_strip plt_System_DateTime_ToString
-plt_System_DateTime_ToString:
-_p_312:
+.word 6848
+	.no_dead_strip plt_System_Nullable_1_System_DateTime_Equals_System_Nullable_1_System_DateTime
+plt_System_Nullable_1_System_DateTime_Equals_System_Nullable_1_System_DateTime:
+_p_311:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #808]
 br x16
-.word 6835
-	.no_dead_strip plt_System_Nullable_1_System_DateTime__ctor_System_DateTime
-plt_System_Nullable_1_System_DateTime__ctor_System_DateTime:
-_p_313:
+.word 6868
+	.no_dead_strip plt_System_DateTime_Equals_object
+plt_System_DateTime_Equals_object:
+_p_312:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #816]
 br x16
-.word 6840
-	.no_dead_strip plt_System_Nullable_1_Mono_Security_Interface_TlsProtocols_Unbox_object
-plt_System_Nullable_1_Mono_Security_Interface_TlsProtocols_Unbox_object:
-_p_314:
+.word 6888
+	.no_dead_strip plt_System_DateTime_ToString
+plt_System_DateTime_ToString:
+_p_313:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #824]
 br x16
-.word 6860
-	.no_dead_strip plt_System_Nullable_1_Mono_Security_Interface_TlsProtocols_Equals_System_Nullable_1_Mono_Security_Interface_TlsProtocols
-plt_System_Nullable_1_Mono_Security_Interface_TlsProtocols_Equals_System_Nullable_1_Mono_Security_Interface_TlsProtocols:
-_p_315:
+.word 6893
+	.no_dead_strip plt_System_Nullable_1_System_DateTime__ctor_System_DateTime
+plt_System_Nullable_1_System_DateTime__ctor_System_DateTime:
+_p_314:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #832]
 br x16
-.word 6878
-	.no_dead_strip plt_System_Nullable_1_Mono_Security_Interface_TlsProtocols__ctor_Mono_Security_Interface_TlsProtocols
-plt_System_Nullable_1_Mono_Security_Interface_TlsProtocols__ctor_Mono_Security_Interface_TlsProtocols:
-_p_316:
+.word 6898
+	.no_dead_strip plt_System_Nullable_1_Mono_Security_Interface_TlsProtocols_Unbox_object
+plt_System_Nullable_1_Mono_Security_Interface_TlsProtocols_Unbox_object:
+_p_315:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #840]
 br x16
-.word 6896
-	.no_dead_strip plt__jit_icall_mono_thread_force_interruption_checkpoint_noraise
-plt__jit_icall_mono_thread_force_interruption_checkpoint_noraise:
-_p_317:
+.word 6918
+	.no_dead_strip plt_System_Nullable_1_Mono_Security_Interface_TlsProtocols_Equals_System_Nullable_1_Mono_Security_Interface_TlsProtocols
+plt_System_Nullable_1_Mono_Security_Interface_TlsProtocols_Equals_System_Nullable_1_Mono_Security_Interface_TlsProtocols:
+_p_316:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #848]
 br x16
-.word 6914
-	.no_dead_strip plt__jit_icall_mono_thread_interruption_checkpoint
-plt__jit_icall_mono_thread_interruption_checkpoint:
-_p_318:
+.word 6936
+	.no_dead_strip plt_System_Nullable_1_Mono_Security_Interface_TlsProtocols__ctor_Mono_Security_Interface_TlsProtocols
+plt_System_Nullable_1_Mono_Security_Interface_TlsProtocols__ctor_Mono_Security_Interface_TlsProtocols:
+_p_317:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #856]
 br x16
-.word 6966
-	.no_dead_strip plt__jit_icall_mono_delegate_begin_invoke
-plt__jit_icall_mono_delegate_begin_invoke:
-_p_319:
+.word 6954
+	.no_dead_strip plt__jit_icall_mono_thread_force_interruption_checkpoint_noraise
+plt__jit_icall_mono_thread_force_interruption_checkpoint_noraise:
+_p_318:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #864]
 br x16
-.word 7004
-	.no_dead_strip plt__jit_icall_mono_delegate_end_invoke
-plt__jit_icall_mono_delegate_end_invoke:
-_p_320:
+.word 6972
+	.no_dead_strip plt__jit_icall_mono_thread_interruption_checkpoint
+plt__jit_icall_mono_thread_interruption_checkpoint:
+_p_319:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #872]
 br x16
-.word 7033
-	.no_dead_strip plt__jit_icall_mono_array_to_lparray
-plt__jit_icall_mono_array_to_lparray:
-_p_321:
+.word 7024
+	.no_dead_strip plt__jit_icall_mono_delegate_begin_invoke
+plt__jit_icall_mono_delegate_begin_invoke:
+_p_320:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #880]
 br x16
-.word 7060
-	.no_dead_strip plt__jit_icall_mono_free_lparray
-plt__jit_icall_mono_free_lparray:
-_p_322:
+.word 7062
+	.no_dead_strip plt__jit_icall_mono_delegate_end_invoke
+plt__jit_icall_mono_delegate_end_invoke:
+_p_321:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #888]
 br x16
-.word 7084
-	.no_dead_strip plt__rgctx_fetch_0
-plt__rgctx_fetch_0:
-_p_323:
+.word 7091
+	.no_dead_strip plt__jit_icall_mono_array_to_lparray
+plt__jit_icall_mono_array_to_lparray:
+_p_322:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #896]
 br x16
-.word 7122
-	.no_dead_strip plt__rgctx_fetch_1
-plt__rgctx_fetch_1:
-_p_324:
+.word 7118
+	.no_dead_strip plt__jit_icall_mono_free_lparray
+plt__jit_icall_mono_free_lparray:
+_p_323:
 adrp x16, mono_aot_Mono_Security_got@PAGE+4096
 add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
 ldr x16, [x16, #904]
 br x16
-.word 7145
+.word 7142
+	.no_dead_strip plt__rgctx_fetch_0
+plt__rgctx_fetch_0:
+_p_324:
+adrp x16, mono_aot_Mono_Security_got@PAGE+4096
+add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
+ldr x16, [x16, #912]
+br x16
+.word 7180
+	.no_dead_strip plt__rgctx_fetch_1
+plt__rgctx_fetch_1:
+_p_325:
+adrp x16, mono_aot_Mono_Security_got@PAGE+4096
+add x16, x16, mono_aot_Mono_Security_got@PAGEOFF
+ldr x16, [x16, #920]
+br x16
+.word 7203
 plt_end:
 .section __DATA, __bss
 	.align 3
-.lcomm mono_aot_Mono_Security_got, 5008
+.lcomm mono_aot_Mono_Security_got, 5024
 got_end:
 .section __TEXT, __const
 	.align 3
@@ -42704,7 +42905,7 @@ runtime_version:
 .section __TEXT, __const
 	.align 2
 assembly_guid:
-	.asciz "B2B75158-00DB-46CA-90AE-C2EE2B3E4258"
+	.asciz "FAD0EAC1-465B-4C41-AE5B-5F7DFF1C3B5C"
 .section __TEXT, __const
 	.align 2
 assembly_name:
@@ -42713,7 +42914,7 @@ assembly_name:
 	.align 3
 _mono_aot_file_info:
 
-	.long 140,0
+	.long 141,0
 	.align 3
 	.quad mono_aot_Mono_Security_got
 	.align 3
@@ -42781,13 +42982,13 @@ _mono_aot_file_info:
 	.align 3
 	.quad unbox_trampoline_addresses
 
-	.long 301,5008,325,488,66,391195135,0,75476
-	.long 128,8,8,10,0,24,80624,5136
-	.long 4856,2864,0,3808,4720,3392,0,2288
-	.long 696,0,0,0,0,0,0,0
+	.long 302,5024,326,489,66,391195135,0,76172
+	.long 128,8,8,9,0,25,81336,5152
+	.long 4872,2872,0,3816,4736,3400,0,2296
+	.long 704,0,0,0,0,0,0,0
 	.long 0,0,0,0,0,0,0,0
 	.long 0
-	.byte 2,18,67,215,189,147,155,2,118,101,175,151,89,15,117,111
+	.byte 129,122,158,53,63,246,11,221,183,219,40,152,105,104,236,226
 	.globl _mono_aot_module_Mono_Security_info
 	.align 3
 _mono_aot_module_Mono_Security_info:
@@ -50049,7 +50250,7 @@ Lfde130_start:
 LDIFF_SYM936=Lme_87 - Mono_Security_X509_PKCS12_get_Keys
 	.long LDIFF_SYM936
 	.long 0
-	.byte 12,31,0,68,14,176,3,157,54,158,53,68,13,29,68,151,52,152,51,68,153,50,154,49
+	.byte 12,31,0,68,14,192,3,157,56,158,55,68,13,29,68,151,54,152,53,68,153,52,154,51
 	.align 3
 Lfde130_end:
 
@@ -51333,7 +51534,7 @@ Lfde141_start:
 LDIFF_SYM1137=Lme_92 - Mono_Security_X509_PKCS12_Pkcs8ShroudedKeyBagSafeBag_System_Security_Cryptography_AsymmetricAlgorithm_System_Collections_IDictionary
 	.long LDIFF_SYM1137
 	.long 0
-	.byte 12,31,0,68,14,128,2,157,32,158,31,68,13,29,68,148,30,149,29,68,150,28,151,27,68,152,26,153,25,68,154,24
+	.byte 12,31,0,68,14,144,2,157,34,158,33,68,13,29,68,148,32,149,31,68,150,30,151,29,68,152,28,153,27,68,154,26
 	.align 3
 Lfde141_end:
 
@@ -51472,7 +51673,7 @@ Lfde142_start:
 LDIFF_SYM1161=Lme_93 - Mono_Security_X509_PKCS12_CertificateSafeBag_Mono_Security_X509_X509Certificate_System_Collections_IDictionary
 	.long LDIFF_SYM1161
 	.long 0
-	.byte 12,31,0,68,14,144,2,157,34,158,33,68,13,29,68,148,32,149,31,68,150,30,151,29,68,152,28,153,27,68,154,26
+	.byte 12,31,0,68,14,160,2,157,36,158,35,68,13,29,68,148,34,149,33,68,150,32,151,31,68,152,30,153,29,68,154,28
 	.align 3
 Lfde142_end:
 
@@ -51640,7 +51841,7 @@ LDIFF_SYM1187=LDIE_BOOLEAN - Ldebug_info_start
 
 LDIFF_SYM1188=LTDIE_34_REFERENCE - Ldebug_info_start
 	.long LDIFF_SYM1188
-	.byte 3,141,128,1,11
+	.byte 3,141,136,1,11
 	.asciz "c"
 
 LDIFF_SYM1189=LTDIE_34_REFERENCE - Ldebug_info_start
@@ -51750,8 +51951,8 @@ Lfde144_start:
 LDIFF_SYM1209=Lme_95 - Mono_Security_X509_PKCS12_GetBytes
 	.long LDIFF_SYM1209
 	.long 0
-	.byte 12,31,0,84,14,208,4,157,74,158,73,68,13,29,68,147,72,148,71,68,149,70,150,69,68,151,68,152,67,68,153,66
-	.byte 154,65
+	.byte 12,31,0,84,14,160,5,157,84,158,83,68,13,29,68,147,82,148,81,68,149,80,150,79,68,151,78,152,77,68,153,76
+	.byte 154,75
 	.align 3
 Lfde144_end:
 
@@ -58519,14 +58720,14 @@ LDIFF_SYM2071=LDIE_I2 - Ldebug_info_start
 	.byte 1,102,11
 	.asciz "dom_off"
 
-LDIFF_SYM2072=LDIE_I4 - Ldebug_info_start
+LDIFF_SYM2072=LDIE_I2 - Ldebug_info_start
 	.long LDIFF_SYM2072
-	.byte 0,11
+	.byte 3,141,232,0,11
 	.asciz "uname_len"
 
 LDIFF_SYM2073=LDIE_I2 - Ldebug_info_start
 	.long LDIFF_SYM2073
-	.byte 3,141,232,0,11
+	.byte 3,141,240,0,11
 	.asciz "uname_off"
 
 LDIFF_SYM2074=LDIE_I2 - Ldebug_info_start
@@ -58536,22 +58737,22 @@ LDIFF_SYM2074=LDIE_I2 - Ldebug_info_start
 
 LDIFF_SYM2075=LDIE_I2 - Ldebug_info_start
 	.long LDIFF_SYM2075
-	.byte 3,141,240,0,11
+	.byte 3,141,248,0,11
 	.asciz "host_off"
 
 LDIFF_SYM2076=LDIE_I2 - Ldebug_info_start
 	.long LDIFF_SYM2076
-	.byte 3,141,232,0,11
+	.byte 3,141,240,0,11
 	.asciz "msg_len"
 
 LDIFF_SYM2077=LDIE_I2 - Ldebug_info_start
 	.long LDIFF_SYM2077
-	.byte 3,141,240,0,11
+	.byte 3,141,248,0,11
 	.asciz "flags"
 
 LDIFF_SYM2078=LDIE_I4 - Ldebug_info_start
 	.long LDIFF_SYM2078
-	.byte 3,141,248,0,11
+	.byte 3,141,128,1,11
 	.asciz "legacy"
 
 LDIFF_SYM2079=LTDIE_67_REFERENCE - Ldebug_info_start
@@ -58571,8 +58772,8 @@ Lfde266_start:
 LDIFF_SYM2081=Lme_110 - Mono_Security_Protocol_Ntlm_Type3Message_GetBytes
 	.long LDIFF_SYM2081
 	.long 0
-	.byte 12,31,0,68,14,192,1,157,24,158,23,68,13,29,68,147,22,148,21,68,149,20,150,19,68,151,18,152,17,68,153,16
-	.byte 154,15
+	.byte 12,31,0,68,14,208,1,157,26,158,25,68,13,29,68,147,24,148,23,68,149,22,150,21,68,151,20,152,19,68,153,18
+	.byte 154,17
 	.align 3
 Lfde266_end:
 
@@ -59203,7 +59404,7 @@ LTDIE_80:
 	.byte 5
 	.asciz "Mono_Security_Interface_MonoTlsSettings"
 
-	.byte 104,16
+	.byte 112,16
 LDIFF_SYM2151=LTDIE_1 - Ldebug_info_start
 	.long LDIFF_SYM2151
 	.byte 2,35,0,6
@@ -59237,88 +59438,93 @@ LDIFF_SYM2156=LDIE_OBJECT - Ldebug_info_start
 LDIFF_SYM2157=LDIE_SZARRAY - Ldebug_info_start
 	.long LDIFF_SYM2157
 	.byte 2,35,48,6
-	.asciz "<EnabledProtocols>k__BackingField"
+	.asciz "<SendCloseNotify>k__BackingField"
 
-LDIFF_SYM2158=LDIE_I4 - Ldebug_info_start
+LDIFF_SYM2158=LDIE_BOOLEAN - Ldebug_info_start
 	.long LDIFF_SYM2158
 	.byte 2,35,88,6
+	.asciz "<EnabledProtocols>k__BackingField"
+
+LDIFF_SYM2159=LDIE_I4 - Ldebug_info_start
+	.long LDIFF_SYM2159
+	.byte 2,35,92,6
 	.asciz "<EnabledCiphers>k__BackingField"
 
-LDIFF_SYM2159=LDIE_SZARRAY - Ldebug_info_start
-	.long LDIFF_SYM2159
+LDIFF_SYM2160=LDIE_SZARRAY - Ldebug_info_start
+	.long LDIFF_SYM2160
 	.byte 2,35,56,6
 	.asciz "cloned"
 
-LDIFF_SYM2160=LDIE_BOOLEAN - Ldebug_info_start
-	.long LDIFF_SYM2160
-	.byte 2,35,96,6
-	.asciz "checkCertName"
-
 LDIFF_SYM2161=LDIE_BOOLEAN - Ldebug_info_start
 	.long LDIFF_SYM2161
-	.byte 2,35,97,6
-	.asciz "checkCertRevocationStatus"
+	.byte 2,35,100,6
+	.asciz "checkCertName"
 
 LDIFF_SYM2162=LDIE_BOOLEAN - Ldebug_info_start
 	.long LDIFF_SYM2162
-	.byte 2,35,98,6
+	.byte 2,35,101,6
+	.asciz "checkCertRevocationStatus"
+
+LDIFF_SYM2163=LDIE_BOOLEAN - Ldebug_info_start
+	.long LDIFF_SYM2163
+	.byte 2,35,102,6
 	.asciz "useServicePointManagerCallback"
 
-LDIFF_SYM2163=LDIE_I4 - Ldebug_info_start
-	.long LDIFF_SYM2163
-	.byte 2,35,99,6
-	.asciz "skipSystemValidators"
-
-LDIFF_SYM2164=LDIE_BOOLEAN - Ldebug_info_start
+LDIFF_SYM2164=LDIE_I4 - Ldebug_info_start
 	.long LDIFF_SYM2164
-	.byte 2,35,101,6
-	.asciz "callbackNeedsChain"
+	.byte 2,35,103,6
+	.asciz "skipSystemValidators"
 
 LDIFF_SYM2165=LDIE_BOOLEAN - Ldebug_info_start
 	.long LDIFF_SYM2165
-	.byte 2,35,102,6
+	.byte 2,35,105,6
+	.asciz "callbackNeedsChain"
+
+LDIFF_SYM2166=LDIE_BOOLEAN - Ldebug_info_start
+	.long LDIFF_SYM2166
+	.byte 2,35,106,6
 	.asciz "certificateValidator"
 
-LDIFF_SYM2166=LTDIE_84_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2166
+LDIFF_SYM2167=LTDIE_84_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2167
 	.byte 2,35,64,0,7
 	.asciz "Mono_Security_Interface_MonoTlsSettings"
 
-LDIFF_SYM2167=LTDIE_80 - Ldebug_info_start
-	.long LDIFF_SYM2167
+LDIFF_SYM2168=LTDIE_80 - Ldebug_info_start
+	.long LDIFF_SYM2168
 LTDIE_80_POINTER:
 
 	.byte 13
-LDIFF_SYM2168=LTDIE_80 - Ldebug_info_start
-	.long LDIFF_SYM2168
+LDIFF_SYM2169=LTDIE_80 - Ldebug_info_start
+	.long LDIFF_SYM2169
 LTDIE_80_REFERENCE:
 
 	.byte 14
-LDIFF_SYM2169=LTDIE_80 - Ldebug_info_start
-	.long LDIFF_SYM2169
+LDIFF_SYM2170=LTDIE_80 - Ldebug_info_start
+	.long LDIFF_SYM2170
 LTDIE_85:
 
 	.byte 5
 	.asciz "Mono_Security_Interface_MonoTlsProvider"
 
 	.byte 16,16
-LDIFF_SYM2170=LTDIE_1 - Ldebug_info_start
-	.long LDIFF_SYM2170
+LDIFF_SYM2171=LTDIE_1 - Ldebug_info_start
+	.long LDIFF_SYM2171
 	.byte 2,35,0,0,7
 	.asciz "Mono_Security_Interface_MonoTlsProvider"
 
-LDIFF_SYM2171=LTDIE_85 - Ldebug_info_start
-	.long LDIFF_SYM2171
+LDIFF_SYM2172=LTDIE_85 - Ldebug_info_start
+	.long LDIFF_SYM2172
 LTDIE_85_POINTER:
 
 	.byte 13
-LDIFF_SYM2172=LTDIE_85 - Ldebug_info_start
-	.long LDIFF_SYM2172
+LDIFF_SYM2173=LTDIE_85 - Ldebug_info_start
+	.long LDIFF_SYM2173
 LTDIE_85_REFERENCE:
 
 	.byte 14
-LDIFF_SYM2173=LTDIE_85 - Ldebug_info_start
-	.long LDIFF_SYM2173
+LDIFF_SYM2174=LTDIE_85 - Ldebug_info_start
+	.long LDIFF_SYM2174
 	.byte 2
 	.asciz "Mono.Security.Interface.CertificateValidationHelper:GetInternalValidator"
 	.asciz "Mono_Security_Interface_CertificateValidationHelper_GetInternalValidator_Mono_Security_Interface_MonoTlsSettings_Mono_Security_Interface_MonoTlsProvider"
@@ -59330,27 +59536,27 @@ LDIFF_SYM2173=LTDIE_85 - Ldebug_info_start
 	.byte 2,118,16,3
 	.asciz "settings"
 
-LDIFF_SYM2174=LTDIE_80_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2174
+LDIFF_SYM2175=LTDIE_80_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2175
 	.byte 2,141,24,3
 	.asciz "provider"
 
-LDIFF_SYM2175=LTDIE_85_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2175
+LDIFF_SYM2176=LTDIE_85_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2176
 	.byte 1,106,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2176=Lfde276_end - Lfde276_start
-	.long LDIFF_SYM2176
+LDIFF_SYM2177=Lfde276_end - Lfde276_start
+	.long LDIFF_SYM2177
 Lfde276_start:
 
 	.long 0
 	.align 3
 	.quad Mono_Security_Interface_CertificateValidationHelper_GetInternalValidator_Mono_Security_Interface_MonoTlsSettings_Mono_Security_Interface_MonoTlsProvider
 
-LDIFF_SYM2177=Lme_11d - Mono_Security_Interface_CertificateValidationHelper_GetInternalValidator_Mono_Security_Interface_MonoTlsSettings_Mono_Security_Interface_MonoTlsProvider
-	.long LDIFF_SYM2177
+LDIFF_SYM2178=Lme_11d - Mono_Security_Interface_CertificateValidationHelper_GetInternalValidator_Mono_Security_Interface_MonoTlsSettings_Mono_Security_Interface_MonoTlsProvider
+	.long LDIFF_SYM2178
 	.long 0
 	.byte 12,31,0,68,14,32,157,4,158,3,68,13,29,68,154,2
 	.align 3
@@ -59363,8 +59569,8 @@ LTDIE_87:
 	.asciz "Mono_Security_Interface_CipherSuiteCode"
 
 	.byte 2
-LDIFF_SYM2178=LDIE_U2 - Ldebug_info_start
-	.long LDIFF_SYM2178
+LDIFF_SYM2179=LDIE_U2 - Ldebug_info_start
+	.long LDIFF_SYM2179
 	.byte 9
 	.asciz "TLS_NULL_WITH_NULL_NULL"
 
@@ -60166,26 +60372,26 @@ LDIFF_SYM2178=LDIE_U2 - Ldebug_info_start
 	.byte 128,172,1,0,7
 	.asciz "Mono_Security_Interface_CipherSuiteCode"
 
-LDIFF_SYM2179=LTDIE_87 - Ldebug_info_start
-	.long LDIFF_SYM2179
+LDIFF_SYM2180=LTDIE_87 - Ldebug_info_start
+	.long LDIFF_SYM2180
 LTDIE_87_POINTER:
 
 	.byte 13
-LDIFF_SYM2180=LTDIE_87 - Ldebug_info_start
-	.long LDIFF_SYM2180
+LDIFF_SYM2181=LTDIE_87 - Ldebug_info_start
+	.long LDIFF_SYM2181
 LTDIE_87_REFERENCE:
 
 	.byte 14
-LDIFF_SYM2181=LTDIE_87 - Ldebug_info_start
-	.long LDIFF_SYM2181
+LDIFF_SYM2182=LTDIE_87 - Ldebug_info_start
+	.long LDIFF_SYM2182
 LTDIE_88:
 
 	.byte 8
 	.asciz "Mono_Security_Interface_TlsProtocols"
 
 	.byte 4
-LDIFF_SYM2182=LDIE_I4 - Ldebug_info_start
-	.long LDIFF_SYM2182
+LDIFF_SYM2183=LDIE_I4 - Ldebug_info_start
+	.long LDIFF_SYM2183
 	.byte 9
 	.asciz "Zero"
 
@@ -60225,83 +60431,83 @@ LDIFF_SYM2182=LDIE_I4 - Ldebug_info_start
 	.byte 192,10,0,7
 	.asciz "Mono_Security_Interface_TlsProtocols"
 
-LDIFF_SYM2183=LTDIE_88 - Ldebug_info_start
-	.long LDIFF_SYM2183
+LDIFF_SYM2184=LTDIE_88 - Ldebug_info_start
+	.long LDIFF_SYM2184
 LTDIE_88_POINTER:
 
 	.byte 13
-LDIFF_SYM2184=LTDIE_88 - Ldebug_info_start
-	.long LDIFF_SYM2184
+LDIFF_SYM2185=LTDIE_88 - Ldebug_info_start
+	.long LDIFF_SYM2185
 LTDIE_88_REFERENCE:
 
 	.byte 14
-LDIFF_SYM2185=LTDIE_88 - Ldebug_info_start
-	.long LDIFF_SYM2185
+LDIFF_SYM2186=LTDIE_88 - Ldebug_info_start
+	.long LDIFF_SYM2186
 LTDIE_86:
 
 	.byte 5
 	.asciz "Mono_Security_Interface_MonoTlsConnectionInfo"
 
 	.byte 32,16
-LDIFF_SYM2186=LTDIE_1 - Ldebug_info_start
-	.long LDIFF_SYM2186
+LDIFF_SYM2187=LTDIE_1 - Ldebug_info_start
+	.long LDIFF_SYM2187
 	.byte 2,35,0,6
 	.asciz "<CipherSuiteCode>k__BackingField"
 
-LDIFF_SYM2187=LTDIE_87 - Ldebug_info_start
-	.long LDIFF_SYM2187
+LDIFF_SYM2188=LTDIE_87 - Ldebug_info_start
+	.long LDIFF_SYM2188
 	.byte 2,35,24,6
 	.asciz "<ProtocolVersion>k__BackingField"
 
-LDIFF_SYM2188=LTDIE_88 - Ldebug_info_start
-	.long LDIFF_SYM2188
+LDIFF_SYM2189=LTDIE_88 - Ldebug_info_start
+	.long LDIFF_SYM2189
 	.byte 2,35,28,6
 	.asciz "<PeerDomainName>k__BackingField"
 
-LDIFF_SYM2189=LDIE_STRING - Ldebug_info_start
-	.long LDIFF_SYM2189
+LDIFF_SYM2190=LDIE_STRING - Ldebug_info_start
+	.long LDIFF_SYM2190
 	.byte 2,35,16,0,7
 	.asciz "Mono_Security_Interface_MonoTlsConnectionInfo"
 
-LDIFF_SYM2190=LTDIE_86 - Ldebug_info_start
-	.long LDIFF_SYM2190
+LDIFF_SYM2191=LTDIE_86 - Ldebug_info_start
+	.long LDIFF_SYM2191
 LTDIE_86_POINTER:
 
 	.byte 13
-LDIFF_SYM2191=LTDIE_86 - Ldebug_info_start
-	.long LDIFF_SYM2191
+LDIFF_SYM2192=LTDIE_86 - Ldebug_info_start
+	.long LDIFF_SYM2192
 LTDIE_86_REFERENCE:
 
 	.byte 14
-LDIFF_SYM2192=LTDIE_86 - Ldebug_info_start
-	.long LDIFF_SYM2192
+LDIFF_SYM2193=LTDIE_86 - Ldebug_info_start
+	.long LDIFF_SYM2193
 	.byte 2
 	.asciz "Mono.Security.Interface.MonoTlsConnectionInfo:get_CipherSuiteCode"
 	.asciz "Mono_Security_Interface_MonoTlsConnectionInfo_get_CipherSuiteCode"
 
 	.byte 25,34
 	.quad Mono_Security_Interface_MonoTlsConnectionInfo_get_CipherSuiteCode
-	.quad Lme_12f
+	.quad Lme_12e
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2193=LTDIE_86_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2193
+LDIFF_SYM2194=LTDIE_86_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2194
 	.byte 2,141,16,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2194=Lfde277_end - Lfde277_start
-	.long LDIFF_SYM2194
+LDIFF_SYM2195=Lfde277_end - Lfde277_start
+	.long LDIFF_SYM2195
 Lfde277_start:
 
 	.long 0
 	.align 3
 	.quad Mono_Security_Interface_MonoTlsConnectionInfo_get_CipherSuiteCode
 
-LDIFF_SYM2195=Lme_12f - Mono_Security_Interface_MonoTlsConnectionInfo_get_CipherSuiteCode
-	.long LDIFF_SYM2195
+LDIFF_SYM2196=Lme_12e - Mono_Security_Interface_MonoTlsConnectionInfo_get_CipherSuiteCode
+	.long LDIFF_SYM2196
 	.long 0
 	.byte 12,31,0,68,14,32,157,4,158,3,68,13,29
 	.align 3
@@ -60315,32 +60521,32 @@ Lfde277_end:
 
 	.byte 25,34
 	.quad Mono_Security_Interface_MonoTlsConnectionInfo_set_CipherSuiteCode_Mono_Security_Interface_CipherSuiteCode
-	.quad Lme_130
+	.quad Lme_12f
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2196=LTDIE_86_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2196
+LDIFF_SYM2197=LTDIE_86_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2197
 	.byte 2,141,16,3
 	.asciz "value"
 
-LDIFF_SYM2197=LTDIE_87 - Ldebug_info_start
-	.long LDIFF_SYM2197
+LDIFF_SYM2198=LTDIE_87 - Ldebug_info_start
+	.long LDIFF_SYM2198
 	.byte 2,141,24,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2198=Lfde278_end - Lfde278_start
-	.long LDIFF_SYM2198
+LDIFF_SYM2199=Lfde278_end - Lfde278_start
+	.long LDIFF_SYM2199
 Lfde278_start:
 
 	.long 0
 	.align 3
 	.quad Mono_Security_Interface_MonoTlsConnectionInfo_set_CipherSuiteCode_Mono_Security_Interface_CipherSuiteCode
 
-LDIFF_SYM2199=Lme_130 - Mono_Security_Interface_MonoTlsConnectionInfo_set_CipherSuiteCode_Mono_Security_Interface_CipherSuiteCode
-	.long LDIFF_SYM2199
+LDIFF_SYM2200=Lme_12f - Mono_Security_Interface_MonoTlsConnectionInfo_set_CipherSuiteCode_Mono_Security_Interface_CipherSuiteCode
+	.long LDIFF_SYM2200
 	.long 0
 	.byte 12,31,0,68,14,32,157,4,158,3,68,13,29
 	.align 3
@@ -60354,27 +60560,27 @@ Lfde278_end:
 
 	.byte 25,38
 	.quad Mono_Security_Interface_MonoTlsConnectionInfo_get_ProtocolVersion
-	.quad Lme_131
+	.quad Lme_130
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2200=LTDIE_86_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2200
+LDIFF_SYM2201=LTDIE_86_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2201
 	.byte 2,141,16,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2201=Lfde279_end - Lfde279_start
-	.long LDIFF_SYM2201
+LDIFF_SYM2202=Lfde279_end - Lfde279_start
+	.long LDIFF_SYM2202
 Lfde279_start:
 
 	.long 0
 	.align 3
 	.quad Mono_Security_Interface_MonoTlsConnectionInfo_get_ProtocolVersion
 
-LDIFF_SYM2202=Lme_131 - Mono_Security_Interface_MonoTlsConnectionInfo_get_ProtocolVersion
-	.long LDIFF_SYM2202
+LDIFF_SYM2203=Lme_130 - Mono_Security_Interface_MonoTlsConnectionInfo_get_ProtocolVersion
+	.long LDIFF_SYM2203
 	.long 0
 	.byte 12,31,0,68,14,32,157,4,158,3,68,13,29
 	.align 3
@@ -60388,32 +60594,32 @@ Lfde279_end:
 
 	.byte 25,38
 	.quad Mono_Security_Interface_MonoTlsConnectionInfo_set_ProtocolVersion_Mono_Security_Interface_TlsProtocols
-	.quad Lme_132
+	.quad Lme_131
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2203=LTDIE_86_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2203
+LDIFF_SYM2204=LTDIE_86_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2204
 	.byte 2,141,16,3
 	.asciz "value"
 
-LDIFF_SYM2204=LTDIE_88 - Ldebug_info_start
-	.long LDIFF_SYM2204
+LDIFF_SYM2205=LTDIE_88 - Ldebug_info_start
+	.long LDIFF_SYM2205
 	.byte 2,141,24,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2205=Lfde280_end - Lfde280_start
-	.long LDIFF_SYM2205
+LDIFF_SYM2206=Lfde280_end - Lfde280_start
+	.long LDIFF_SYM2206
 Lfde280_start:
 
 	.long 0
 	.align 3
 	.quad Mono_Security_Interface_MonoTlsConnectionInfo_set_ProtocolVersion_Mono_Security_Interface_TlsProtocols
 
-LDIFF_SYM2206=Lme_132 - Mono_Security_Interface_MonoTlsConnectionInfo_set_ProtocolVersion_Mono_Security_Interface_TlsProtocols
-	.long LDIFF_SYM2206
+LDIFF_SYM2207=Lme_131 - Mono_Security_Interface_MonoTlsConnectionInfo_set_ProtocolVersion_Mono_Security_Interface_TlsProtocols
+	.long LDIFF_SYM2207
 	.long 0
 	.byte 12,31,0,68,14,32,157,4,158,3,68,13,29
 	.align 3
@@ -60427,32 +60633,32 @@ Lfde280_end:
 
 	.byte 25,54
 	.quad Mono_Security_Interface_MonoTlsConnectionInfo_set_PeerDomainName_string
-	.quad Lme_133
+	.quad Lme_132
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2207=LTDIE_86_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2207
+LDIFF_SYM2208=LTDIE_86_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2208
 	.byte 2,141,16,3
 	.asciz "value"
 
-LDIFF_SYM2208=LDIE_STRING - Ldebug_info_start
-	.long LDIFF_SYM2208
+LDIFF_SYM2209=LDIE_STRING - Ldebug_info_start
+	.long LDIFF_SYM2209
 	.byte 2,141,24,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2209=Lfde281_end - Lfde281_start
-	.long LDIFF_SYM2209
+LDIFF_SYM2210=Lfde281_end - Lfde281_start
+	.long LDIFF_SYM2210
 Lfde281_start:
 
 	.long 0
 	.align 3
 	.quad Mono_Security_Interface_MonoTlsConnectionInfo_set_PeerDomainName_string
 
-LDIFF_SYM2210=Lme_133 - Mono_Security_Interface_MonoTlsConnectionInfo_set_PeerDomainName_string
-	.long LDIFF_SYM2210
+LDIFF_SYM2211=Lme_132 - Mono_Security_Interface_MonoTlsConnectionInfo_set_PeerDomainName_string
+	.long LDIFF_SYM2211
 	.long 0
 	.byte 12,31,0,68,14,32,157,4,158,3,68,13,29
 	.align 3
@@ -60466,27 +60672,27 @@ Lfde281_end:
 
 	.byte 25,59
 	.quad Mono_Security_Interface_MonoTlsConnectionInfo_ToString
-	.quad Lme_134
+	.quad Lme_133
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2211=LTDIE_86_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2211
+LDIFF_SYM2212=LTDIE_86_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2212
 	.byte 2,141,16,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2212=Lfde282_end - Lfde282_start
-	.long LDIFF_SYM2212
+LDIFF_SYM2213=Lfde282_end - Lfde282_start
+	.long LDIFF_SYM2213
 Lfde282_start:
 
 	.long 0
 	.align 3
 	.quad Mono_Security_Interface_MonoTlsConnectionInfo_ToString
 
-LDIFF_SYM2213=Lme_134 - Mono_Security_Interface_MonoTlsConnectionInfo_ToString
-	.long LDIFF_SYM2213
+LDIFF_SYM2214=Lme_133 - Mono_Security_Interface_MonoTlsConnectionInfo_ToString
+	.long LDIFF_SYM2214
 	.long 0
 	.byte 12,31,0,68,14,96,157,12,158,11,68,13,29
 	.align 3
@@ -60500,27 +60706,27 @@ Lfde282_end:
 
 	.byte 0,0
 	.quad Mono_Security_Interface_MonoTlsConnectionInfo__ctor
-	.quad Lme_135
+	.quad Lme_134
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2214=LDIE_I4 - Ldebug_info_start
-	.long LDIFF_SYM2214
+LDIFF_SYM2215=LDIE_I4 - Ldebug_info_start
+	.long LDIFF_SYM2215
 	.byte 0,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2215=Lfde283_end - Lfde283_start
-	.long LDIFF_SYM2215
+LDIFF_SYM2216=Lfde283_end - Lfde283_start
+	.long LDIFF_SYM2216
 Lfde283_start:
 
 	.long 0
 	.align 3
 	.quad Mono_Security_Interface_MonoTlsConnectionInfo__ctor
 
-LDIFF_SYM2216=Lme_135 - Mono_Security_Interface_MonoTlsConnectionInfo__ctor
-	.long LDIFF_SYM2216
+LDIFF_SYM2217=Lme_134 - Mono_Security_Interface_MonoTlsConnectionInfo__ctor
+	.long LDIFF_SYM2217
 	.long 0
 	.byte 12,31,0,68,14,32,157,4,158,3,68,13,29
 	.align 3
@@ -60534,27 +60740,27 @@ Lfde283_end:
 
 	.byte 26,75
 	.quad Mono_Security_Interface_MonoTlsProvider__ctor
-	.quad Lme_13e
+	.quad Lme_13d
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2217=LDIE_I4 - Ldebug_info_start
-	.long LDIFF_SYM2217
+LDIFF_SYM2218=LDIE_I4 - Ldebug_info_start
+	.long LDIFF_SYM2218
 	.byte 0,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2218=Lfde284_end - Lfde284_start
-	.long LDIFF_SYM2218
+LDIFF_SYM2219=Lfde284_end - Lfde284_start
+	.long LDIFF_SYM2219
 Lfde284_start:
 
 	.long 0
 	.align 3
 	.quad Mono_Security_Interface_MonoTlsProvider__ctor
 
-LDIFF_SYM2219=Lme_13e - Mono_Security_Interface_MonoTlsProvider__ctor
-	.long LDIFF_SYM2219
+LDIFF_SYM2220=Lme_13d - Mono_Security_Interface_MonoTlsProvider__ctor
+	.long LDIFF_SYM2220
 	.long 0
 	.byte 12,31,0,68,14,32,157,4,158,3,68,13,29
 	.align 3
@@ -60568,27 +60774,27 @@ Lfde284_end:
 
 	.byte 27,35
 	.quad Mono_Security_Interface_MonoTlsSettings_get_RemoteCertificateValidationCallback
-	.quad Lme_143
+	.quad Lme_142
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2220=LTDIE_80_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2220
+LDIFF_SYM2221=LTDIE_80_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2221
 	.byte 2,141,16,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2221=Lfde285_end - Lfde285_start
-	.long LDIFF_SYM2221
+LDIFF_SYM2222=Lfde285_end - Lfde285_start
+	.long LDIFF_SYM2222
 Lfde285_start:
 
 	.long 0
 	.align 3
 	.quad Mono_Security_Interface_MonoTlsSettings_get_RemoteCertificateValidationCallback
 
-LDIFF_SYM2222=Lme_143 - Mono_Security_Interface_MonoTlsSettings_get_RemoteCertificateValidationCallback
-	.long LDIFF_SYM2222
+LDIFF_SYM2223=Lme_142 - Mono_Security_Interface_MonoTlsSettings_get_RemoteCertificateValidationCallback
+	.long LDIFF_SYM2223
 	.long 0
 	.byte 12,31,0,68,14,32,157,4,158,3,68,13,29
 	.align 3
@@ -60602,32 +60808,32 @@ Lfde285_end:
 
 	.byte 27,35
 	.quad Mono_Security_Interface_MonoTlsSettings_set_RemoteCertificateValidationCallback_Mono_Security_Interface_MonoRemoteCertificateValidationCallback
-	.quad Lme_144
+	.quad Lme_143
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2223=LTDIE_80_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2223
+LDIFF_SYM2224=LTDIE_80_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2224
 	.byte 2,141,16,3
 	.asciz "value"
 
-LDIFF_SYM2224=LTDIE_81_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2224
+LDIFF_SYM2225=LTDIE_81_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2225
 	.byte 2,141,24,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2225=Lfde286_end - Lfde286_start
-	.long LDIFF_SYM2225
+LDIFF_SYM2226=Lfde286_end - Lfde286_start
+	.long LDIFF_SYM2226
 Lfde286_start:
 
 	.long 0
 	.align 3
 	.quad Mono_Security_Interface_MonoTlsSettings_set_RemoteCertificateValidationCallback_Mono_Security_Interface_MonoRemoteCertificateValidationCallback
 
-LDIFF_SYM2226=Lme_144 - Mono_Security_Interface_MonoTlsSettings_set_RemoteCertificateValidationCallback_Mono_Security_Interface_MonoRemoteCertificateValidationCallback
-	.long LDIFF_SYM2226
+LDIFF_SYM2227=Lme_143 - Mono_Security_Interface_MonoTlsSettings_set_RemoteCertificateValidationCallback_Mono_Security_Interface_MonoRemoteCertificateValidationCallback
+	.long LDIFF_SYM2227
 	.long 0
 	.byte 12,31,0,68,14,32,157,4,158,3,68,13,29
 	.align 3
@@ -60641,27 +60847,27 @@ Lfde286_end:
 
 	.byte 27,39
 	.quad Mono_Security_Interface_MonoTlsSettings_get_ClientCertificateSelectionCallback
-	.quad Lme_145
+	.quad Lme_144
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2227=LTDIE_80_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2227
+LDIFF_SYM2228=LTDIE_80_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2228
 	.byte 2,141,16,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2228=Lfde287_end - Lfde287_start
-	.long LDIFF_SYM2228
+LDIFF_SYM2229=Lfde287_end - Lfde287_start
+	.long LDIFF_SYM2229
 Lfde287_start:
 
 	.long 0
 	.align 3
 	.quad Mono_Security_Interface_MonoTlsSettings_get_ClientCertificateSelectionCallback
 
-LDIFF_SYM2229=Lme_145 - Mono_Security_Interface_MonoTlsSettings_get_ClientCertificateSelectionCallback
-	.long LDIFF_SYM2229
+LDIFF_SYM2230=Lme_144 - Mono_Security_Interface_MonoTlsSettings_get_ClientCertificateSelectionCallback
+	.long LDIFF_SYM2230
 	.long 0
 	.byte 12,31,0,68,14,32,157,4,158,3,68,13,29
 	.align 3
@@ -60675,32 +60881,32 @@ Lfde287_end:
 
 	.byte 27,39
 	.quad Mono_Security_Interface_MonoTlsSettings_set_ClientCertificateSelectionCallback_Mono_Security_Interface_MonoLocalCertificateSelectionCallback
-	.quad Lme_146
+	.quad Lme_145
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2230=LTDIE_80_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2230
+LDIFF_SYM2231=LTDIE_80_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2231
 	.byte 2,141,16,3
 	.asciz "value"
 
-LDIFF_SYM2231=LTDIE_82_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2231
+LDIFF_SYM2232=LTDIE_82_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2232
 	.byte 2,141,24,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2232=Lfde288_end - Lfde288_start
-	.long LDIFF_SYM2232
+LDIFF_SYM2233=Lfde288_end - Lfde288_start
+	.long LDIFF_SYM2233
 Lfde288_start:
 
 	.long 0
 	.align 3
 	.quad Mono_Security_Interface_MonoTlsSettings_set_ClientCertificateSelectionCallback_Mono_Security_Interface_MonoLocalCertificateSelectionCallback
 
-LDIFF_SYM2233=Lme_146 - Mono_Security_Interface_MonoTlsSettings_set_ClientCertificateSelectionCallback_Mono_Security_Interface_MonoLocalCertificateSelectionCallback
-	.long LDIFF_SYM2233
+LDIFF_SYM2234=Lme_145 - Mono_Security_Interface_MonoTlsSettings_set_ClientCertificateSelectionCallback_Mono_Security_Interface_MonoLocalCertificateSelectionCallback
+	.long LDIFF_SYM2234
 	.long 0
 	.byte 12,31,0,68,14,32,157,4,158,3,68,13,29
 	.align 3
@@ -60714,27 +60920,27 @@ Lfde288_end:
 
 	.byte 27,53
 	.quad Mono_Security_Interface_MonoTlsSettings_get_UseServicePointManagerCallback
-	.quad Lme_147
+	.quad Lme_146
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2234=LTDIE_80_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2234
+LDIFF_SYM2235=LTDIE_80_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2235
 	.byte 2,141,32,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2235=Lfde289_end - Lfde289_start
-	.long LDIFF_SYM2235
+LDIFF_SYM2236=Lfde289_end - Lfde289_start
+	.long LDIFF_SYM2236
 Lfde289_start:
 
 	.long 0
 	.align 3
 	.quad Mono_Security_Interface_MonoTlsSettings_get_UseServicePointManagerCallback
 
-LDIFF_SYM2236=Lme_147 - Mono_Security_Interface_MonoTlsSettings_get_UseServicePointManagerCallback
-	.long LDIFF_SYM2236
+LDIFF_SYM2237=Lme_146 - Mono_Security_Interface_MonoTlsSettings_get_UseServicePointManagerCallback
+	.long LDIFF_SYM2237
 	.long 0
 	.byte 12,31,0,68,14,48,157,6,158,5,68,13,29
 	.align 3
@@ -60748,32 +60954,32 @@ Lfde289_end:
 
 	.byte 27,54
 	.quad Mono_Security_Interface_MonoTlsSettings_set_UseServicePointManagerCallback_System_Nullable_1_bool
-	.quad Lme_148
+	.quad Lme_147
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2237=LTDIE_80_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2237
+LDIFF_SYM2238=LTDIE_80_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2238
 	.byte 2,141,16,3
 	.asciz "value"
 
-LDIFF_SYM2238=LDIE_I4 - Ldebug_info_start
-	.long LDIFF_SYM2238
+LDIFF_SYM2239=LDIE_I4 - Ldebug_info_start
+	.long LDIFF_SYM2239
 	.byte 2,141,24,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2239=Lfde290_end - Lfde290_start
-	.long LDIFF_SYM2239
+LDIFF_SYM2240=Lfde290_end - Lfde290_start
+	.long LDIFF_SYM2240
 Lfde290_start:
 
 	.long 0
 	.align 3
 	.quad Mono_Security_Interface_MonoTlsSettings_set_UseServicePointManagerCallback_System_Nullable_1_bool
 
-LDIFF_SYM2240=Lme_148 - Mono_Security_Interface_MonoTlsSettings_set_UseServicePointManagerCallback_System_Nullable_1_bool
-	.long LDIFF_SYM2240
+LDIFF_SYM2241=Lme_147 - Mono_Security_Interface_MonoTlsSettings_set_UseServicePointManagerCallback_System_Nullable_1_bool
+	.long LDIFF_SYM2241
 	.long 0
 	.byte 12,31,0,68,14,48,157,6,158,5,68,13,29
 	.align 3
@@ -60787,27 +60993,27 @@ Lfde290_end:
 
 	.byte 27,63
 	.quad Mono_Security_Interface_MonoTlsSettings_get_CallbackNeedsCertificateChain
-	.quad Lme_149
+	.quad Lme_148
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2241=LTDIE_80_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2241
+LDIFF_SYM2242=LTDIE_80_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2242
 	.byte 2,141,16,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2242=Lfde291_end - Lfde291_start
-	.long LDIFF_SYM2242
+LDIFF_SYM2243=Lfde291_end - Lfde291_start
+	.long LDIFF_SYM2243
 Lfde291_start:
 
 	.long 0
 	.align 3
 	.quad Mono_Security_Interface_MonoTlsSettings_get_CallbackNeedsCertificateChain
 
-LDIFF_SYM2243=Lme_149 - Mono_Security_Interface_MonoTlsSettings_get_CallbackNeedsCertificateChain
-	.long LDIFF_SYM2243
+LDIFF_SYM2244=Lme_148 - Mono_Security_Interface_MonoTlsSettings_get_CallbackNeedsCertificateChain
+	.long LDIFF_SYM2244
 	.long 0
 	.byte 12,31,0,68,14,32,157,4,158,3,68,13,29
 	.align 3
@@ -60821,27 +61027,27 @@ Lfde291_end:
 
 	.byte 27,71
 	.quad Mono_Security_Interface_MonoTlsSettings_get_CertificateValidationTime
-	.quad Lme_14a
+	.quad Lme_149
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2244=LTDIE_80_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2244
+LDIFF_SYM2245=LTDIE_80_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2245
 	.byte 2,141,32,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2245=Lfde292_end - Lfde292_start
-	.long LDIFF_SYM2245
+LDIFF_SYM2246=Lfde292_end - Lfde292_start
+	.long LDIFF_SYM2246
 Lfde292_start:
 
 	.long 0
 	.align 3
 	.quad Mono_Security_Interface_MonoTlsSettings_get_CertificateValidationTime
 
-LDIFF_SYM2246=Lme_14a - Mono_Security_Interface_MonoTlsSettings_get_CertificateValidationTime
-	.long LDIFF_SYM2246
+LDIFF_SYM2247=Lme_149 - Mono_Security_Interface_MonoTlsSettings_get_CertificateValidationTime
+	.long LDIFF_SYM2247
 	.long 0
 	.byte 12,31,0,68,14,48,157,6,158,5,68,13,29
 	.align 3
@@ -60855,32 +61061,32 @@ Lfde292_end:
 
 	.byte 27,71
 	.quad Mono_Security_Interface_MonoTlsSettings_set_CertificateValidationTime_System_Nullable_1_System_DateTime
-	.quad Lme_14b
+	.quad Lme_14a
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2247=LTDIE_80_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2247
+LDIFF_SYM2248=LTDIE_80_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2248
 	.byte 2,141,16,3
 	.asciz "value"
 
-LDIFF_SYM2248=LDIE_I4 - Ldebug_info_start
-	.long LDIFF_SYM2248
+LDIFF_SYM2249=LDIE_I4 - Ldebug_info_start
+	.long LDIFF_SYM2249
 	.byte 2,141,24,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2249=Lfde293_end - Lfde293_start
-	.long LDIFF_SYM2249
+LDIFF_SYM2250=Lfde293_end - Lfde293_start
+	.long LDIFF_SYM2250
 Lfde293_start:
 
 	.long 0
 	.align 3
 	.quad Mono_Security_Interface_MonoTlsSettings_set_CertificateValidationTime_System_Nullable_1_System_DateTime
 
-LDIFF_SYM2250=Lme_14b - Mono_Security_Interface_MonoTlsSettings_set_CertificateValidationTime_System_Nullable_1_System_DateTime
-	.long LDIFF_SYM2250
+LDIFF_SYM2251=Lme_14a - Mono_Security_Interface_MonoTlsSettings_set_CertificateValidationTime_System_Nullable_1_System_DateTime
+	.long LDIFF_SYM2251
 	.long 0
 	.byte 12,31,0,68,14,48,157,6,158,5,68,13,29
 	.align 3
@@ -60894,27 +61100,27 @@ Lfde293_end:
 
 	.byte 27,78
 	.quad Mono_Security_Interface_MonoTlsSettings_get_TrustAnchors
-	.quad Lme_14c
+	.quad Lme_14b
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2251=LTDIE_80_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2251
+LDIFF_SYM2252=LTDIE_80_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2252
 	.byte 2,141,16,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2252=Lfde294_end - Lfde294_start
-	.long LDIFF_SYM2252
+LDIFF_SYM2253=Lfde294_end - Lfde294_start
+	.long LDIFF_SYM2253
 Lfde294_start:
 
 	.long 0
 	.align 3
 	.quad Mono_Security_Interface_MonoTlsSettings_get_TrustAnchors
 
-LDIFF_SYM2253=Lme_14c - Mono_Security_Interface_MonoTlsSettings_get_TrustAnchors
-	.long LDIFF_SYM2253
+LDIFF_SYM2254=Lme_14b - Mono_Security_Interface_MonoTlsSettings_get_TrustAnchors
+	.long LDIFF_SYM2254
 	.long 0
 	.byte 12,31,0,68,14,32,157,4,158,3,68,13,29
 	.align 3
@@ -60928,32 +61134,32 @@ Lfde294_end:
 
 	.byte 27,78
 	.quad Mono_Security_Interface_MonoTlsSettings_set_TrustAnchors_System_Security_Cryptography_X509Certificates_X509CertificateCollection
-	.quad Lme_14d
+	.quad Lme_14c
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2254=LTDIE_80_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2254
+LDIFF_SYM2255=LTDIE_80_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2255
 	.byte 2,141,16,3
 	.asciz "value"
 
-LDIFF_SYM2255=LTDIE_83_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2255
+LDIFF_SYM2256=LTDIE_83_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2256
 	.byte 2,141,24,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2256=Lfde295_end - Lfde295_start
-	.long LDIFF_SYM2256
+LDIFF_SYM2257=Lfde295_end - Lfde295_start
+	.long LDIFF_SYM2257
 Lfde295_start:
 
 	.long 0
 	.align 3
 	.quad Mono_Security_Interface_MonoTlsSettings_set_TrustAnchors_System_Security_Cryptography_X509Certificates_X509CertificateCollection
 
-LDIFF_SYM2257=Lme_14d - Mono_Security_Interface_MonoTlsSettings_set_TrustAnchors_System_Security_Cryptography_X509Certificates_X509CertificateCollection
-	.long LDIFF_SYM2257
+LDIFF_SYM2258=Lme_14c - Mono_Security_Interface_MonoTlsSettings_set_TrustAnchors_System_Security_Cryptography_X509Certificates_X509CertificateCollection
+	.long LDIFF_SYM2258
 	.long 0
 	.byte 12,31,0,68,14,32,157,4,158,3,68,13,29
 	.align 3
@@ -60967,27 +61173,27 @@ Lfde295_end:
 
 	.byte 27,82
 	.quad Mono_Security_Interface_MonoTlsSettings_get_UserSettings
-	.quad Lme_14e
+	.quad Lme_14d
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2258=LTDIE_80_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2258
+LDIFF_SYM2259=LTDIE_80_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2259
 	.byte 2,141,16,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2259=Lfde296_end - Lfde296_start
-	.long LDIFF_SYM2259
+LDIFF_SYM2260=Lfde296_end - Lfde296_start
+	.long LDIFF_SYM2260
 Lfde296_start:
 
 	.long 0
 	.align 3
 	.quad Mono_Security_Interface_MonoTlsSettings_get_UserSettings
 
-LDIFF_SYM2260=Lme_14e - Mono_Security_Interface_MonoTlsSettings_get_UserSettings
-	.long LDIFF_SYM2260
+LDIFF_SYM2261=Lme_14d - Mono_Security_Interface_MonoTlsSettings_get_UserSettings
+	.long LDIFF_SYM2261
 	.long 0
 	.byte 12,31,0,68,14,32,157,4,158,3,68,13,29
 	.align 3
@@ -61001,32 +61207,32 @@ Lfde296_end:
 
 	.byte 27,82
 	.quad Mono_Security_Interface_MonoTlsSettings_set_UserSettings_object
-	.quad Lme_14f
+	.quad Lme_14e
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2261=LTDIE_80_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2261
+LDIFF_SYM2262=LTDIE_80_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2262
 	.byte 2,141,16,3
 	.asciz "value"
 
-LDIFF_SYM2262=LDIE_OBJECT - Ldebug_info_start
-	.long LDIFF_SYM2262
+LDIFF_SYM2263=LDIE_OBJECT - Ldebug_info_start
+	.long LDIFF_SYM2263
 	.byte 2,141,24,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2263=Lfde297_end - Lfde297_start
-	.long LDIFF_SYM2263
+LDIFF_SYM2264=Lfde297_end - Lfde297_start
+	.long LDIFF_SYM2264
 Lfde297_start:
 
 	.long 0
 	.align 3
 	.quad Mono_Security_Interface_MonoTlsSettings_set_UserSettings_object
 
-LDIFF_SYM2264=Lme_14f - Mono_Security_Interface_MonoTlsSettings_set_UserSettings_object
-	.long LDIFF_SYM2264
+LDIFF_SYM2265=Lme_14e - Mono_Security_Interface_MonoTlsSettings_set_UserSettings_object
+	.long LDIFF_SYM2265
 	.long 0
 	.byte 12,31,0,68,14,32,157,4,158,3,68,13,29
 	.align 3
@@ -61040,27 +61246,27 @@ Lfde297_end:
 
 	.byte 27,86
 	.quad Mono_Security_Interface_MonoTlsSettings_get_CertificateSearchPaths
-	.quad Lme_150
+	.quad Lme_14f
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2265=LTDIE_80_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2265
+LDIFF_SYM2266=LTDIE_80_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2266
 	.byte 2,141,16,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2266=Lfde298_end - Lfde298_start
-	.long LDIFF_SYM2266
+LDIFF_SYM2267=Lfde298_end - Lfde298_start
+	.long LDIFF_SYM2267
 Lfde298_start:
 
 	.long 0
 	.align 3
 	.quad Mono_Security_Interface_MonoTlsSettings_get_CertificateSearchPaths
 
-LDIFF_SYM2267=Lme_150 - Mono_Security_Interface_MonoTlsSettings_get_CertificateSearchPaths
-	.long LDIFF_SYM2267
+LDIFF_SYM2268=Lme_14f - Mono_Security_Interface_MonoTlsSettings_get_CertificateSearchPaths
+	.long LDIFF_SYM2268
 	.long 0
 	.byte 12,31,0,68,14,32,157,4,158,3,68,13,29
 	.align 3
@@ -61074,32 +61280,32 @@ Lfde298_end:
 
 	.byte 27,86
 	.quad Mono_Security_Interface_MonoTlsSettings_set_CertificateSearchPaths_string__
-	.quad Lme_151
+	.quad Lme_150
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2268=LTDIE_80_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2268
+LDIFF_SYM2269=LTDIE_80_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2269
 	.byte 2,141,16,3
 	.asciz "value"
 
-LDIFF_SYM2269=LDIE_SZARRAY - Ldebug_info_start
-	.long LDIFF_SYM2269
+LDIFF_SYM2270=LDIE_SZARRAY - Ldebug_info_start
+	.long LDIFF_SYM2270
 	.byte 2,141,24,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2270=Lfde299_end - Lfde299_start
-	.long LDIFF_SYM2270
+LDIFF_SYM2271=Lfde299_end - Lfde299_start
+	.long LDIFF_SYM2271
 Lfde299_start:
 
 	.long 0
 	.align 3
 	.quad Mono_Security_Interface_MonoTlsSettings_set_CertificateSearchPaths_string__
 
-LDIFF_SYM2271=Lme_151 - Mono_Security_Interface_MonoTlsSettings_set_CertificateSearchPaths_string__
-	.long LDIFF_SYM2271
+LDIFF_SYM2272=Lme_150 - Mono_Security_Interface_MonoTlsSettings_set_CertificateSearchPaths_string__
+	.long LDIFF_SYM2272
 	.long 0
 	.byte 12,31,0,68,14,32,157,4,158,3,68,13,29
 	.align 3
@@ -61108,36 +61314,109 @@ Lfde299_end:
 .section __DWARF, __debug_info,regular,debug
 
 	.byte 2
-	.asciz "Mono.Security.Interface.MonoTlsSettings:get_EnabledProtocols"
-	.asciz "Mono_Security_Interface_MonoTlsSettings_get_EnabledProtocols"
+	.asciz "Mono.Security.Interface.MonoTlsSettings:get_SendCloseNotify"
+	.asciz "Mono_Security_Interface_MonoTlsSettings_get_SendCloseNotify"
 
 	.byte 27,93
-	.quad Mono_Security_Interface_MonoTlsSettings_get_EnabledProtocols
+	.quad Mono_Security_Interface_MonoTlsSettings_get_SendCloseNotify
+	.quad Lme_151
+
+	.byte 2,118,16,3
+	.asciz "this"
+
+LDIFF_SYM2273=LTDIE_80_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2273
+	.byte 2,141,16,0
+
+.section __DWARF, __debug_frame,regular,debug
+
+LDIFF_SYM2274=Lfde300_end - Lfde300_start
+	.long LDIFF_SYM2274
+Lfde300_start:
+
+	.long 0
+	.align 3
+	.quad Mono_Security_Interface_MonoTlsSettings_get_SendCloseNotify
+
+LDIFF_SYM2275=Lme_151 - Mono_Security_Interface_MonoTlsSettings_get_SendCloseNotify
+	.long LDIFF_SYM2275
+	.long 0
+	.byte 12,31,0,68,14,32,157,4,158,3,68,13,29
+	.align 3
+Lfde300_end:
+
+.section __DWARF, __debug_info,regular,debug
+
+	.byte 2
+	.asciz "Mono.Security.Interface.MonoTlsSettings:set_SendCloseNotify"
+	.asciz "Mono_Security_Interface_MonoTlsSettings_set_SendCloseNotify_bool"
+
+	.byte 27,93
+	.quad Mono_Security_Interface_MonoTlsSettings_set_SendCloseNotify_bool
 	.quad Lme_152
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2272=LTDIE_80_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2272
+LDIFF_SYM2276=LTDIE_80_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2276
+	.byte 2,141,16,3
+	.asciz "value"
+
+LDIFF_SYM2277=LDIE_BOOLEAN - Ldebug_info_start
+	.long LDIFF_SYM2277
+	.byte 2,141,24,0
+
+.section __DWARF, __debug_frame,regular,debug
+
+LDIFF_SYM2278=Lfde301_end - Lfde301_start
+	.long LDIFF_SYM2278
+Lfde301_start:
+
+	.long 0
+	.align 3
+	.quad Mono_Security_Interface_MonoTlsSettings_set_SendCloseNotify_bool
+
+LDIFF_SYM2279=Lme_152 - Mono_Security_Interface_MonoTlsSettings_set_SendCloseNotify_bool
+	.long LDIFF_SYM2279
+	.long 0
+	.byte 12,31,0,68,14,32,157,4,158,3,68,13,29
+	.align 3
+Lfde301_end:
+
+.section __DWARF, __debug_info,regular,debug
+
+	.byte 2
+	.asciz "Mono.Security.Interface.MonoTlsSettings:get_EnabledProtocols"
+	.asciz "Mono_Security_Interface_MonoTlsSettings_get_EnabledProtocols"
+
+	.byte 27,100
+	.quad Mono_Security_Interface_MonoTlsSettings_get_EnabledProtocols
+	.quad Lme_153
+
+	.byte 2,118,16,3
+	.asciz "this"
+
+LDIFF_SYM2280=LTDIE_80_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2280
 	.byte 2,141,32,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2273=Lfde300_end - Lfde300_start
-	.long LDIFF_SYM2273
-Lfde300_start:
+LDIFF_SYM2281=Lfde302_end - Lfde302_start
+	.long LDIFF_SYM2281
+Lfde302_start:
 
 	.long 0
 	.align 3
 	.quad Mono_Security_Interface_MonoTlsSettings_get_EnabledProtocols
 
-LDIFF_SYM2274=Lme_152 - Mono_Security_Interface_MonoTlsSettings_get_EnabledProtocols
-	.long LDIFF_SYM2274
+LDIFF_SYM2282=Lme_153 - Mono_Security_Interface_MonoTlsSettings_get_EnabledProtocols
+	.long LDIFF_SYM2282
 	.long 0
 	.byte 12,31,0,68,14,48,157,6,158,5,68,13,29
 	.align 3
-Lfde300_end:
+Lfde302_end:
 
 .section __DWARF, __debug_info,regular,debug
 
@@ -61145,38 +61424,38 @@ Lfde300_end:
 	.asciz "Mono.Security.Interface.MonoTlsSettings:set_EnabledProtocols"
 	.asciz "Mono_Security_Interface_MonoTlsSettings_set_EnabledProtocols_System_Nullable_1_Mono_Security_Interface_TlsProtocols"
 
-	.byte 27,93
+	.byte 27,100
 	.quad Mono_Security_Interface_MonoTlsSettings_set_EnabledProtocols_System_Nullable_1_Mono_Security_Interface_TlsProtocols
-	.quad Lme_153
+	.quad Lme_154
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2275=LTDIE_80_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2275
+LDIFF_SYM2283=LTDIE_80_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2283
 	.byte 2,141,16,3
 	.asciz "value"
 
-LDIFF_SYM2276=LDIE_I4 - Ldebug_info_start
-	.long LDIFF_SYM2276
+LDIFF_SYM2284=LDIE_I4 - Ldebug_info_start
+	.long LDIFF_SYM2284
 	.byte 2,141,24,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2277=Lfde301_end - Lfde301_start
-	.long LDIFF_SYM2277
-Lfde301_start:
+LDIFF_SYM2285=Lfde303_end - Lfde303_start
+	.long LDIFF_SYM2285
+Lfde303_start:
 
 	.long 0
 	.align 3
 	.quad Mono_Security_Interface_MonoTlsSettings_set_EnabledProtocols_System_Nullable_1_Mono_Security_Interface_TlsProtocols
 
-LDIFF_SYM2278=Lme_153 - Mono_Security_Interface_MonoTlsSettings_set_EnabledProtocols_System_Nullable_1_Mono_Security_Interface_TlsProtocols
-	.long LDIFF_SYM2278
+LDIFF_SYM2286=Lme_154 - Mono_Security_Interface_MonoTlsSettings_set_EnabledProtocols_System_Nullable_1_Mono_Security_Interface_TlsProtocols
+	.long LDIFF_SYM2286
 	.long 0
 	.byte 12,31,0,68,14,48,157,6,158,5,68,13,29
 	.align 3
-Lfde301_end:
+Lfde303_end:
 
 .section __DWARF, __debug_info,regular,debug
 
@@ -61184,102 +61463,29 @@ Lfde301_end:
 	.asciz "Mono.Security.Interface.MonoTlsSettings:get_EnabledCiphers"
 	.asciz "Mono_Security_Interface_MonoTlsSettings_get_EnabledCiphers"
 
-	.byte 27,98
+	.byte 27,105
 	.quad Mono_Security_Interface_MonoTlsSettings_get_EnabledCiphers
-	.quad Lme_154
-
-	.byte 2,118,16,3
-	.asciz "this"
-
-LDIFF_SYM2279=LTDIE_80_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2279
-	.byte 2,141,16,0
-
-.section __DWARF, __debug_frame,regular,debug
-
-LDIFF_SYM2280=Lfde302_end - Lfde302_start
-	.long LDIFF_SYM2280
-Lfde302_start:
-
-	.long 0
-	.align 3
-	.quad Mono_Security_Interface_MonoTlsSettings_get_EnabledCiphers
-
-LDIFF_SYM2281=Lme_154 - Mono_Security_Interface_MonoTlsSettings_get_EnabledCiphers
-	.long LDIFF_SYM2281
-	.long 0
-	.byte 12,31,0,68,14,32,157,4,158,3,68,13,29
-	.align 3
-Lfde302_end:
-
-.section __DWARF, __debug_info,regular,debug
-
-	.byte 2
-	.asciz "Mono.Security.Interface.MonoTlsSettings:set_EnabledCiphers"
-	.asciz "Mono_Security_Interface_MonoTlsSettings_set_EnabledCiphers_Mono_Security_Interface_CipherSuiteCode__"
-
-	.byte 27,98
-	.quad Mono_Security_Interface_MonoTlsSettings_set_EnabledCiphers_Mono_Security_Interface_CipherSuiteCode__
 	.quad Lme_155
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2282=LTDIE_80_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2282
-	.byte 2,141,16,3
-	.asciz "value"
-
-LDIFF_SYM2283=LDIE_SZARRAY - Ldebug_info_start
-	.long LDIFF_SYM2283
-	.byte 2,141,24,0
-
-.section __DWARF, __debug_frame,regular,debug
-
-LDIFF_SYM2284=Lfde303_end - Lfde303_start
-	.long LDIFF_SYM2284
-Lfde303_start:
-
-	.long 0
-	.align 3
-	.quad Mono_Security_Interface_MonoTlsSettings_set_EnabledCiphers_Mono_Security_Interface_CipherSuiteCode__
-
-LDIFF_SYM2285=Lme_155 - Mono_Security_Interface_MonoTlsSettings_set_EnabledCiphers_Mono_Security_Interface_CipherSuiteCode__
-	.long LDIFF_SYM2285
-	.long 0
-	.byte 12,31,0,68,14,32,157,4,158,3,68,13,29
-	.align 3
-Lfde303_end:
-
-.section __DWARF, __debug_info,regular,debug
-
-	.byte 2
-	.asciz "Mono.Security.Interface.MonoTlsSettings:.ctor"
-	.asciz "Mono_Security_Interface_MonoTlsSettings__ctor"
-
-	.byte 27,102
-	.quad Mono_Security_Interface_MonoTlsSettings__ctor
-	.quad Lme_156
-
-	.byte 2,118,16,3
-	.asciz "this"
-
-LDIFF_SYM2286=LTDIE_80_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2286
+LDIFF_SYM2287=LTDIE_80_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2287
 	.byte 2,141,16,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2287=Lfde304_end - Lfde304_start
-	.long LDIFF_SYM2287
+LDIFF_SYM2288=Lfde304_end - Lfde304_start
+	.long LDIFF_SYM2288
 Lfde304_start:
 
 	.long 0
 	.align 3
-	.quad Mono_Security_Interface_MonoTlsSettings__ctor
+	.quad Mono_Security_Interface_MonoTlsSettings_get_EnabledCiphers
 
-LDIFF_SYM2288=Lme_156 - Mono_Security_Interface_MonoTlsSettings__ctor
-	.long LDIFF_SYM2288
+LDIFF_SYM2289=Lme_155 - Mono_Security_Interface_MonoTlsSettings_get_EnabledCiphers
+	.long LDIFF_SYM2289
 	.long 0
 	.byte 12,31,0,68,14,32,157,4,158,3,68,13,29
 	.align 3
@@ -61288,27 +61494,37 @@ Lfde304_end:
 .section __DWARF, __debug_info,regular,debug
 
 	.byte 2
-	.asciz "Mono.Security.Interface.MonoTlsSettings:get_DefaultSettings"
-	.asciz "Mono_Security_Interface_MonoTlsSettings_get_DefaultSettings"
+	.asciz "Mono.Security.Interface.MonoTlsSettings:set_EnabledCiphers"
+	.asciz "Mono_Security_Interface_MonoTlsSettings_set_EnabledCiphers_Mono_Security_Interface_CipherSuiteCode__"
 
-	.byte 27,117
-	.quad Mono_Security_Interface_MonoTlsSettings_get_DefaultSettings
-	.quad Lme_157
+	.byte 27,105
+	.quad Mono_Security_Interface_MonoTlsSettings_set_EnabledCiphers_Mono_Security_Interface_CipherSuiteCode__
+	.quad Lme_156
 
-	.byte 2,118,16,0
+	.byte 2,118,16,3
+	.asciz "this"
+
+LDIFF_SYM2290=LTDIE_80_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2290
+	.byte 2,141,16,3
+	.asciz "value"
+
+LDIFF_SYM2291=LDIE_SZARRAY - Ldebug_info_start
+	.long LDIFF_SYM2291
+	.byte 2,141,24,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2289=Lfde305_end - Lfde305_start
-	.long LDIFF_SYM2289
+LDIFF_SYM2292=Lfde305_end - Lfde305_start
+	.long LDIFF_SYM2292
 Lfde305_start:
 
 	.long 0
 	.align 3
-	.quad Mono_Security_Interface_MonoTlsSettings_get_DefaultSettings
+	.quad Mono_Security_Interface_MonoTlsSettings_set_EnabledCiphers_Mono_Security_Interface_CipherSuiteCode__
 
-LDIFF_SYM2290=Lme_157 - Mono_Security_Interface_MonoTlsSettings_get_DefaultSettings
-	.long LDIFF_SYM2290
+LDIFF_SYM2293=Lme_156 - Mono_Security_Interface_MonoTlsSettings_set_EnabledCiphers_Mono_Security_Interface_CipherSuiteCode__
+	.long LDIFF_SYM2293
 	.long 0
 	.byte 12,31,0,68,14,32,157,4,158,3,68,13,29
 	.align 3
@@ -61317,61 +61533,61 @@ Lfde305_end:
 .section __DWARF, __debug_info,regular,debug
 
 	.byte 2
-	.asciz "Mono.Security.Interface.MonoTlsSettings:CopyDefaultSettings"
-	.asciz "Mono_Security_Interface_MonoTlsSettings_CopyDefaultSettings"
+	.asciz "Mono.Security.Interface.MonoTlsSettings:.ctor"
+	.asciz "Mono_Security_Interface_MonoTlsSettings__ctor"
 
-	.byte 27,128,1
-	.quad Mono_Security_Interface_MonoTlsSettings_CopyDefaultSettings
-	.quad Lme_158
+	.byte 27,109
+	.quad Mono_Security_Interface_MonoTlsSettings__ctor
+	.quad Lme_157
 
-	.byte 2,118,16,0
+	.byte 2,118,16,3
+	.asciz "this"
+
+LDIFF_SYM2294=LTDIE_80_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2294
+	.byte 2,141,16,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2291=Lfde306_end - Lfde306_start
-	.long LDIFF_SYM2291
+LDIFF_SYM2295=Lfde306_end - Lfde306_start
+	.long LDIFF_SYM2295
 Lfde306_start:
 
 	.long 0
 	.align 3
-	.quad Mono_Security_Interface_MonoTlsSettings_CopyDefaultSettings
+	.quad Mono_Security_Interface_MonoTlsSettings__ctor
 
-LDIFF_SYM2292=Lme_158 - Mono_Security_Interface_MonoTlsSettings_CopyDefaultSettings
-	.long LDIFF_SYM2292
+LDIFF_SYM2296=Lme_157 - Mono_Security_Interface_MonoTlsSettings__ctor
+	.long LDIFF_SYM2296
 	.long 0
-	.byte 12,31,0,68,14,16,157,2,158,1,68,13,29
+	.byte 12,31,0,68,14,32,157,4,158,3,68,13,29
 	.align 3
 Lfde306_end:
 
 .section __DWARF, __debug_info,regular,debug
 
 	.byte 2
-	.asciz "Mono.Security.Interface.MonoTlsSettings:get_CertificateValidator"
-	.asciz "Mono_Security_Interface_MonoTlsSettings_get_CertificateValidator"
+	.asciz "Mono.Security.Interface.MonoTlsSettings:get_DefaultSettings"
+	.asciz "Mono_Security_Interface_MonoTlsSettings_get_DefaultSettings"
 
-	.byte 27,142,1
-	.quad Mono_Security_Interface_MonoTlsSettings_get_CertificateValidator
-	.quad Lme_159
+	.byte 27,124
+	.quad Mono_Security_Interface_MonoTlsSettings_get_DefaultSettings
+	.quad Lme_158
 
-	.byte 2,118,16,3
-	.asciz "this"
-
-LDIFF_SYM2293=LTDIE_80_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2293
-	.byte 2,141,16,0
+	.byte 2,118,16,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2294=Lfde307_end - Lfde307_start
-	.long LDIFF_SYM2294
+LDIFF_SYM2297=Lfde307_end - Lfde307_start
+	.long LDIFF_SYM2297
 Lfde307_start:
 
 	.long 0
 	.align 3
-	.quad Mono_Security_Interface_MonoTlsSettings_get_CertificateValidator
+	.quad Mono_Security_Interface_MonoTlsSettings_get_DefaultSettings
 
-LDIFF_SYM2295=Lme_159 - Mono_Security_Interface_MonoTlsSettings_get_CertificateValidator
-	.long LDIFF_SYM2295
+LDIFF_SYM2298=Lme_158 - Mono_Security_Interface_MonoTlsSettings_get_DefaultSettings
+	.long LDIFF_SYM2298
 	.long 0
 	.byte 12,31,0,68,14,32,157,4,158,3,68,13,29
 	.align 3
@@ -61380,41 +61596,104 @@ Lfde307_end:
 .section __DWARF, __debug_info,regular,debug
 
 	.byte 2
-	.asciz "Mono.Security.Interface.MonoTlsSettings:CloneWithValidator"
-	.asciz "Mono_Security_Interface_MonoTlsSettings_CloneWithValidator_Mono_Security_Interface_ICertificateValidator"
+	.asciz "Mono.Security.Interface.MonoTlsSettings:CopyDefaultSettings"
+	.asciz "Mono_Security_Interface_MonoTlsSettings_CopyDefaultSettings"
 
-	.byte 27,148,1
-	.quad Mono_Security_Interface_MonoTlsSettings_CloneWithValidator_Mono_Security_Interface_ICertificateValidator
+	.byte 27,135,1
+	.quad Mono_Security_Interface_MonoTlsSettings_CopyDefaultSettings
+	.quad Lme_159
+
+	.byte 2,118,16,0
+
+.section __DWARF, __debug_frame,regular,debug
+
+LDIFF_SYM2299=Lfde308_end - Lfde308_start
+	.long LDIFF_SYM2299
+Lfde308_start:
+
+	.long 0
+	.align 3
+	.quad Mono_Security_Interface_MonoTlsSettings_CopyDefaultSettings
+
+LDIFF_SYM2300=Lme_159 - Mono_Security_Interface_MonoTlsSettings_CopyDefaultSettings
+	.long LDIFF_SYM2300
+	.long 0
+	.byte 12,31,0,68,14,16,157,2,158,1,68,13,29
+	.align 3
+Lfde308_end:
+
+.section __DWARF, __debug_info,regular,debug
+
+	.byte 2
+	.asciz "Mono.Security.Interface.MonoTlsSettings:get_CertificateValidator"
+	.asciz "Mono_Security_Interface_MonoTlsSettings_get_CertificateValidator"
+
+	.byte 27,149,1
+	.quad Mono_Security_Interface_MonoTlsSettings_get_CertificateValidator
 	.quad Lme_15a
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2296=LTDIE_80_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2296
+LDIFF_SYM2301=LTDIE_80_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2301
+	.byte 2,141,16,0
+
+.section __DWARF, __debug_frame,regular,debug
+
+LDIFF_SYM2302=Lfde309_end - Lfde309_start
+	.long LDIFF_SYM2302
+Lfde309_start:
+
+	.long 0
+	.align 3
+	.quad Mono_Security_Interface_MonoTlsSettings_get_CertificateValidator
+
+LDIFF_SYM2303=Lme_15a - Mono_Security_Interface_MonoTlsSettings_get_CertificateValidator
+	.long LDIFF_SYM2303
+	.long 0
+	.byte 12,31,0,68,14,32,157,4,158,3,68,13,29
+	.align 3
+Lfde309_end:
+
+.section __DWARF, __debug_info,regular,debug
+
+	.byte 2
+	.asciz "Mono.Security.Interface.MonoTlsSettings:CloneWithValidator"
+	.asciz "Mono_Security_Interface_MonoTlsSettings_CloneWithValidator_Mono_Security_Interface_ICertificateValidator"
+
+	.byte 27,155,1
+	.quad Mono_Security_Interface_MonoTlsSettings_CloneWithValidator_Mono_Security_Interface_ICertificateValidator
+	.quad Lme_15b
+
+	.byte 2,118,16,3
+	.asciz "this"
+
+LDIFF_SYM2304=LTDIE_80_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2304
 	.byte 1,105,3
 	.asciz "validator"
 
-LDIFF_SYM2297=LTDIE_84_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2297
+LDIFF_SYM2305=LTDIE_84_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2305
 	.byte 1,106,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2298=Lfde308_end - Lfde308_start
-	.long LDIFF_SYM2298
-Lfde308_start:
+LDIFF_SYM2306=Lfde310_end - Lfde310_start
+	.long LDIFF_SYM2306
+Lfde310_start:
 
 	.long 0
 	.align 3
 	.quad Mono_Security_Interface_MonoTlsSettings_CloneWithValidator_Mono_Security_Interface_ICertificateValidator
 
-LDIFF_SYM2299=Lme_15a - Mono_Security_Interface_MonoTlsSettings_CloneWithValidator_Mono_Security_Interface_ICertificateValidator
-	.long LDIFF_SYM2299
+LDIFF_SYM2307=Lme_15b - Mono_Security_Interface_MonoTlsSettings_CloneWithValidator_Mono_Security_Interface_ICertificateValidator
+	.long LDIFF_SYM2307
 	.long 0
 	.byte 12,31,0,68,14,48,157,6,158,5,68,13,29,68,153,4,154,3
 	.align 3
-Lfde308_end:
+Lfde310_end:
 
 .section __DWARF, __debug_info,regular,debug
 
@@ -61422,33 +61701,33 @@ Lfde308_end:
 	.asciz "Mono.Security.Interface.MonoTlsSettings:Clone"
 	.asciz "Mono_Security_Interface_MonoTlsSettings_Clone"
 
-	.byte 27,160,1
+	.byte 27,167,1
 	.quad Mono_Security_Interface_MonoTlsSettings_Clone
-	.quad Lme_15b
+	.quad Lme_15c
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2300=LTDIE_80_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2300
+LDIFF_SYM2308=LTDIE_80_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2308
 	.byte 2,141,16,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2301=Lfde309_end - Lfde309_start
-	.long LDIFF_SYM2301
-Lfde309_start:
+LDIFF_SYM2309=Lfde311_end - Lfde311_start
+	.long LDIFF_SYM2309
+Lfde311_start:
 
 	.long 0
 	.align 3
 	.quad Mono_Security_Interface_MonoTlsSettings_Clone
 
-LDIFF_SYM2302=Lme_15b - Mono_Security_Interface_MonoTlsSettings_Clone
-	.long LDIFF_SYM2302
+LDIFF_SYM2310=Lme_15c - Mono_Security_Interface_MonoTlsSettings_Clone
+	.long LDIFF_SYM2310
 	.long 0
 	.byte 12,31,0,68,14,48,157,6,158,5,68,13,29
 	.align 3
-Lfde309_end:
+Lfde311_end:
 
 .section __DWARF, __debug_info,regular,debug
 
@@ -61456,38 +61735,38 @@ Lfde309_end:
 	.asciz "Mono.Security.Interface.MonoTlsSettings:.ctor"
 	.asciz "Mono_Security_Interface_MonoTlsSettings__ctor_Mono_Security_Interface_MonoTlsSettings"
 
-	.byte 27,102
+	.byte 27,109
 	.quad Mono_Security_Interface_MonoTlsSettings__ctor_Mono_Security_Interface_MonoTlsSettings
-	.quad Lme_15c
+	.quad Lme_15d
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2303=LTDIE_80_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2303
+LDIFF_SYM2311=LTDIE_80_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2311
 	.byte 1,105,3
 	.asciz "other"
 
-LDIFF_SYM2304=LTDIE_80_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2304
+LDIFF_SYM2312=LTDIE_80_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2312
 	.byte 1,106,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2305=Lfde310_end - Lfde310_start
-	.long LDIFF_SYM2305
-Lfde310_start:
+LDIFF_SYM2313=Lfde312_end - Lfde312_start
+	.long LDIFF_SYM2313
+Lfde312_start:
 
 	.long 0
 	.align 3
 	.quad Mono_Security_Interface_MonoTlsSettings__ctor_Mono_Security_Interface_MonoTlsSettings
 
-LDIFF_SYM2306=Lme_15c - Mono_Security_Interface_MonoTlsSettings__ctor_Mono_Security_Interface_MonoTlsSettings
-	.long LDIFF_SYM2306
+LDIFF_SYM2314=Lme_15d - Mono_Security_Interface_MonoTlsSettings__ctor_Mono_Security_Interface_MonoTlsSettings
+	.long LDIFF_SYM2314
 	.long 0
 	.byte 12,31,0,68,14,80,157,10,158,9,68,13,29,68,153,8,154,7
 	.align 3
-Lfde310_end:
+Lfde312_end:
 
 .section __DWARF, __debug_info,regular,debug
 LTDIE_89:
@@ -61496,69 +61775,69 @@ LTDIE_89:
 	.asciz "Mono_Security_Interface_TlsException"
 
 	.byte 144,1,16
-LDIFF_SYM2307=LTDIE_43 - Ldebug_info_start
-	.long LDIFF_SYM2307
+LDIFF_SYM2315=LTDIE_43 - Ldebug_info_start
+	.long LDIFF_SYM2315
 	.byte 2,35,0,6
 	.asciz "alert"
 
-LDIFF_SYM2308=LTDIE_76_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2308
+LDIFF_SYM2316=LTDIE_76_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2316
 	.byte 3,35,136,1,0,7
 	.asciz "Mono_Security_Interface_TlsException"
 
-LDIFF_SYM2309=LTDIE_89 - Ldebug_info_start
-	.long LDIFF_SYM2309
+LDIFF_SYM2317=LTDIE_89 - Ldebug_info_start
+	.long LDIFF_SYM2317
 LTDIE_89_POINTER:
 
 	.byte 13
-LDIFF_SYM2310=LTDIE_89 - Ldebug_info_start
-	.long LDIFF_SYM2310
+LDIFF_SYM2318=LTDIE_89 - Ldebug_info_start
+	.long LDIFF_SYM2318
 LTDIE_89_REFERENCE:
 
 	.byte 14
-LDIFF_SYM2311=LTDIE_89 - Ldebug_info_start
-	.long LDIFF_SYM2311
+LDIFF_SYM2319=LTDIE_89 - Ldebug_info_start
+	.long LDIFF_SYM2319
 	.byte 2
 	.asciz "Mono.Security.Interface.TlsException:.ctor"
 	.asciz "Mono_Security_Interface_TlsException__ctor_Mono_Security_Interface_Alert"
 
 	.byte 28,52
 	.quad Mono_Security_Interface_TlsException__ctor_Mono_Security_Interface_Alert
-	.quad Lme_15d
+	.quad Lme_15e
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2312=LTDIE_89_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2312
+LDIFF_SYM2320=LTDIE_89_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2320
 	.byte 2,141,24,3
 	.asciz "alert"
 
-LDIFF_SYM2313=LTDIE_76_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2313
+LDIFF_SYM2321=LTDIE_76_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2321
 	.byte 1,106,11
 	.asciz "V_0"
 
-LDIFF_SYM2314=LDIE_I4 - Ldebug_info_start
-	.long LDIFF_SYM2314
+LDIFF_SYM2322=LDIE_I4 - Ldebug_info_start
+	.long LDIFF_SYM2322
 	.byte 0,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2315=Lfde311_end - Lfde311_start
-	.long LDIFF_SYM2315
-Lfde311_start:
+LDIFF_SYM2323=Lfde313_end - Lfde313_start
+	.long LDIFF_SYM2323
+Lfde313_start:
 
 	.long 0
 	.align 3
 	.quad Mono_Security_Interface_TlsException__ctor_Mono_Security_Interface_Alert
 
-LDIFF_SYM2316=Lme_15d - Mono_Security_Interface_TlsException__ctor_Mono_Security_Interface_Alert
-	.long LDIFF_SYM2316
+LDIFF_SYM2324=Lme_15e - Mono_Security_Interface_TlsException__ctor_Mono_Security_Interface_Alert
+	.long LDIFF_SYM2324
 	.long 0
 	.byte 12,31,0,68,14,48,157,6,158,5,68,13,29,68,154,4
 	.align 3
-Lfde311_end:
+Lfde313_end:
 
 .section __DWARF, __debug_info,regular,debug
 
@@ -61568,41 +61847,41 @@ Lfde311_end:
 
 	.byte 28,57
 	.quad Mono_Security_Interface_TlsException__ctor_Mono_Security_Interface_Alert_string
-	.quad Lme_15e
+	.quad Lme_15f
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2317=LTDIE_89_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2317
+LDIFF_SYM2325=LTDIE_89_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2325
 	.byte 2,141,16,3
 	.asciz "alert"
 
-LDIFF_SYM2318=LTDIE_76_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2318
+LDIFF_SYM2326=LTDIE_76_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2326
 	.byte 2,141,24,3
 	.asciz "message"
 
-LDIFF_SYM2319=LDIE_STRING - Ldebug_info_start
-	.long LDIFF_SYM2319
+LDIFF_SYM2327=LDIE_STRING - Ldebug_info_start
+	.long LDIFF_SYM2327
 	.byte 2,141,32,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2320=Lfde312_end - Lfde312_start
-	.long LDIFF_SYM2320
-Lfde312_start:
+LDIFF_SYM2328=Lfde314_end - Lfde314_start
+	.long LDIFF_SYM2328
+Lfde314_start:
 
 	.long 0
 	.align 3
 	.quad Mono_Security_Interface_TlsException__ctor_Mono_Security_Interface_Alert_string
 
-LDIFF_SYM2321=Lme_15e - Mono_Security_Interface_TlsException__ctor_Mono_Security_Interface_Alert_string
-	.long LDIFF_SYM2321
+LDIFF_SYM2329=Lme_15f - Mono_Security_Interface_TlsException__ctor_Mono_Security_Interface_Alert_string
+	.long LDIFF_SYM2329
 	.long 0
 	.byte 12,31,0,68,14,48,157,6,158,5,68,13,29
 	.align 3
-Lfde312_end:
+Lfde314_end:
 
 .section __DWARF, __debug_info,regular,debug
 
@@ -61612,36 +61891,36 @@ Lfde312_end:
 
 	.byte 28,68
 	.quad Mono_Security_Interface_TlsException__ctor_Mono_Security_Interface_AlertDescription
-	.quad Lme_15f
+	.quad Lme_160
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2322=LTDIE_89_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2322
+LDIFF_SYM2330=LTDIE_89_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2330
 	.byte 2,141,16,3
 	.asciz "description"
 
-LDIFF_SYM2323=LTDIE_78 - Ldebug_info_start
-	.long LDIFF_SYM2323
+LDIFF_SYM2331=LTDIE_78 - Ldebug_info_start
+	.long LDIFF_SYM2331
 	.byte 2,141,24,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2324=Lfde313_end - Lfde313_start
-	.long LDIFF_SYM2324
-Lfde313_start:
+LDIFF_SYM2332=Lfde315_end - Lfde315_start
+	.long LDIFF_SYM2332
+Lfde315_start:
 
 	.long 0
 	.align 3
 	.quad Mono_Security_Interface_TlsException__ctor_Mono_Security_Interface_AlertDescription
 
-LDIFF_SYM2325=Lme_15f - Mono_Security_Interface_TlsException__ctor_Mono_Security_Interface_AlertDescription
-	.long LDIFF_SYM2325
+LDIFF_SYM2333=Lme_160 - Mono_Security_Interface_TlsException__ctor_Mono_Security_Interface_AlertDescription
+	.long LDIFF_SYM2333
 	.long 0
 	.byte 12,31,0,68,14,48,157,6,158,5,68,13,29
 	.align 3
-Lfde313_end:
+Lfde315_end:
 
 .section __DWARF, __debug_info,regular,debug
 
@@ -61651,41 +61930,41 @@ Lfde313_end:
 
 	.byte 28,73
 	.quad Mono_Security_Interface_TlsException__ctor_Mono_Security_Interface_AlertDescription_string
-	.quad Lme_160
+	.quad Lme_161
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2326=LTDIE_89_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2326
+LDIFF_SYM2334=LTDIE_89_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2334
 	.byte 2,141,16,3
 	.asciz "description"
 
-LDIFF_SYM2327=LTDIE_78 - Ldebug_info_start
-	.long LDIFF_SYM2327
+LDIFF_SYM2335=LTDIE_78 - Ldebug_info_start
+	.long LDIFF_SYM2335
 	.byte 2,141,24,3
 	.asciz "message"
 
-LDIFF_SYM2328=LDIE_STRING - Ldebug_info_start
-	.long LDIFF_SYM2328
+LDIFF_SYM2336=LDIE_STRING - Ldebug_info_start
+	.long LDIFF_SYM2336
 	.byte 2,141,32,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2329=Lfde314_end - Lfde314_start
-	.long LDIFF_SYM2329
-Lfde314_start:
+LDIFF_SYM2337=Lfde316_end - Lfde316_start
+	.long LDIFF_SYM2337
+Lfde316_start:
 
 	.long 0
 	.align 3
 	.quad Mono_Security_Interface_TlsException__ctor_Mono_Security_Interface_AlertDescription_string
 
-LDIFF_SYM2330=Lme_160 - Mono_Security_Interface_TlsException__ctor_Mono_Security_Interface_AlertDescription_string
-	.long LDIFF_SYM2330
+LDIFF_SYM2338=Lme_161 - Mono_Security_Interface_TlsException__ctor_Mono_Security_Interface_AlertDescription_string
+	.long LDIFF_SYM2338
 	.long 0
 	.byte 12,31,0,68,14,64,157,8,158,7,68,13,29
 	.align 3
-Lfde314_end:
+Lfde316_end:
 
 .section __DWARF, __debug_info,regular,debug
 
@@ -61695,46 +61974,46 @@ Lfde314_end:
 
 	.byte 28,78
 	.quad Mono_Security_Interface_TlsException__ctor_Mono_Security_Interface_AlertDescription_string_object__
-	.quad Lme_161
+	.quad Lme_162
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2331=LTDIE_89_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2331
+LDIFF_SYM2339=LTDIE_89_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2339
 	.byte 2,141,16,3
 	.asciz "description"
 
-LDIFF_SYM2332=LTDIE_78 - Ldebug_info_start
-	.long LDIFF_SYM2332
+LDIFF_SYM2340=LTDIE_78 - Ldebug_info_start
+	.long LDIFF_SYM2340
 	.byte 2,141,24,3
 	.asciz "format"
 
-LDIFF_SYM2333=LDIE_STRING - Ldebug_info_start
-	.long LDIFF_SYM2333
+LDIFF_SYM2341=LDIE_STRING - Ldebug_info_start
+	.long LDIFF_SYM2341
 	.byte 2,141,32,3
 	.asciz "args"
 
-LDIFF_SYM2334=LDIE_SZARRAY - Ldebug_info_start
-	.long LDIFF_SYM2334
+LDIFF_SYM2342=LDIE_SZARRAY - Ldebug_info_start
+	.long LDIFF_SYM2342
 	.byte 2,141,40,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2335=Lfde315_end - Lfde315_start
-	.long LDIFF_SYM2335
-Lfde315_start:
+LDIFF_SYM2343=Lfde317_end - Lfde317_start
+	.long LDIFF_SYM2343
+Lfde317_start:
 
 	.long 0
 	.align 3
 	.quad Mono_Security_Interface_TlsException__ctor_Mono_Security_Interface_AlertDescription_string_object__
 
-LDIFF_SYM2336=Lme_161 - Mono_Security_Interface_TlsException__ctor_Mono_Security_Interface_AlertDescription_string_object__
-	.long LDIFF_SYM2336
+LDIFF_SYM2344=Lme_162 - Mono_Security_Interface_TlsException__ctor_Mono_Security_Interface_AlertDescription_string_object__
+	.long LDIFF_SYM2344
 	.long 0
 	.byte 12,31,0,68,14,64,157,8,158,7,68,13,29
 	.align 3
-Lfde315_end:
+Lfde317_end:
 
 .section __DWARF, __debug_info,regular,debug
 LTDIE_91:
@@ -61743,82 +62022,82 @@ LTDIE_91:
 	.asciz "Mono_Security_Cryptography_MD2"
 
 	.byte 40,16
-LDIFF_SYM2337=LTDIE_42 - Ldebug_info_start
-	.long LDIFF_SYM2337
+LDIFF_SYM2345=LTDIE_42 - Ldebug_info_start
+	.long LDIFF_SYM2345
 	.byte 2,35,0,0,7
 	.asciz "Mono_Security_Cryptography_MD2"
 
-LDIFF_SYM2338=LTDIE_91 - Ldebug_info_start
-	.long LDIFF_SYM2338
+LDIFF_SYM2346=LTDIE_91 - Ldebug_info_start
+	.long LDIFF_SYM2346
 LTDIE_91_POINTER:
 
 	.byte 13
-LDIFF_SYM2339=LTDIE_91 - Ldebug_info_start
-	.long LDIFF_SYM2339
+LDIFF_SYM2347=LTDIE_91 - Ldebug_info_start
+	.long LDIFF_SYM2347
 LTDIE_91_REFERENCE:
 
 	.byte 14
-LDIFF_SYM2340=LTDIE_91 - Ldebug_info_start
-	.long LDIFF_SYM2340
+LDIFF_SYM2348=LTDIE_91 - Ldebug_info_start
+	.long LDIFF_SYM2348
 LTDIE_90:
 
 	.byte 5
 	.asciz "Mono_Security_Cryptography_MD2Managed"
 
 	.byte 48,16
-LDIFF_SYM2341=LTDIE_91 - Ldebug_info_start
-	.long LDIFF_SYM2341
+LDIFF_SYM2349=LTDIE_91 - Ldebug_info_start
+	.long LDIFF_SYM2349
 	.byte 2,35,0,6
 	.asciz "ctx"
 
-LDIFF_SYM2342=LDIE_I - Ldebug_info_start
-	.long LDIFF_SYM2342
+LDIFF_SYM2350=LDIE_I - Ldebug_info_start
+	.long LDIFF_SYM2350
 	.byte 2,35,40,0,7
 	.asciz "Mono_Security_Cryptography_MD2Managed"
 
-LDIFF_SYM2343=LTDIE_90 - Ldebug_info_start
-	.long LDIFF_SYM2343
+LDIFF_SYM2351=LTDIE_90 - Ldebug_info_start
+	.long LDIFF_SYM2351
 LTDIE_90_POINTER:
 
 	.byte 13
-LDIFF_SYM2344=LTDIE_90 - Ldebug_info_start
-	.long LDIFF_SYM2344
+LDIFF_SYM2352=LTDIE_90 - Ldebug_info_start
+	.long LDIFF_SYM2352
 LTDIE_90_REFERENCE:
 
 	.byte 14
-LDIFF_SYM2345=LTDIE_90 - Ldebug_info_start
-	.long LDIFF_SYM2345
+LDIFF_SYM2353=LTDIE_90 - Ldebug_info_start
+	.long LDIFF_SYM2353
 	.byte 2
 	.asciz "Mono.Security.Cryptography.MD2Managed:.ctor"
 	.asciz "Mono_Security_Cryptography_MD2Managed__ctor"
 
 	.byte 29,32
 	.quad Mono_Security_Cryptography_MD2Managed__ctor
-	.quad Lme_165
+	.quad Lme_166
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2346=LTDIE_90_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2346
+LDIFF_SYM2354=LTDIE_90_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2354
 	.byte 2,141,16,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2347=Lfde316_end - Lfde316_start
-	.long LDIFF_SYM2347
-Lfde316_start:
+LDIFF_SYM2355=Lfde318_end - Lfde318_start
+	.long LDIFF_SYM2355
+Lfde318_start:
 
 	.long 0
 	.align 3
 	.quad Mono_Security_Cryptography_MD2Managed__ctor
 
-LDIFF_SYM2348=Lme_165 - Mono_Security_Cryptography_MD2Managed__ctor
-	.long LDIFF_SYM2348
+LDIFF_SYM2356=Lme_166 - Mono_Security_Cryptography_MD2Managed__ctor
+	.long LDIFF_SYM2356
 	.long 0
 	.byte 12,31,0,68,14,32,157,4,158,3,68,13,29
 	.align 3
-Lfde316_end:
+Lfde318_end:
 
 .section __DWARF, __debug_info,regular,debug
 
@@ -61828,92 +62107,14 @@ Lfde316_end:
 
 	.byte 29,39
 	.quad Mono_Security_Cryptography_MD2Managed_Finalize
-	.quad Lme_166
-
-	.byte 2,118,16,3
-	.asciz "this"
-
-LDIFF_SYM2349=LTDIE_90_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2349
-	.byte 2,141,16,0
-
-.section __DWARF, __debug_frame,regular,debug
-
-LDIFF_SYM2350=Lfde317_end - Lfde317_start
-	.long LDIFF_SYM2350
-Lfde317_start:
-
-	.long 0
-	.align 3
-	.quad Mono_Security_Cryptography_MD2Managed_Finalize
-
-LDIFF_SYM2351=Lme_166 - Mono_Security_Cryptography_MD2Managed_Finalize
-	.long LDIFF_SYM2351
-	.long 0
-	.byte 12,31,0,68,14,64,157,8,158,7,68,13,29
-	.align 3
-Lfde317_end:
-
-.section __DWARF, __debug_info,regular,debug
-
-	.byte 2
-	.asciz "Mono.Security.Cryptography.MD2Managed:Dispose"
-	.asciz "Mono_Security_Cryptography_MD2Managed_Dispose_bool"
-
-	.byte 29,44
-	.quad Mono_Security_Cryptography_MD2Managed_Dispose_bool
 	.quad Lme_167
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2352=LTDIE_90_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2352
-	.byte 1,105,3
-	.asciz "disposing"
-
-LDIFF_SYM2353=LDIE_BOOLEAN - Ldebug_info_start
-	.long LDIFF_SYM2353
-	.byte 2,141,24,0
-
-.section __DWARF, __debug_frame,regular,debug
-
-LDIFF_SYM2354=Lfde318_end - Lfde318_start
-	.long LDIFF_SYM2354
-Lfde318_start:
-
-	.long 0
-	.align 3
-	.quad Mono_Security_Cryptography_MD2Managed_Dispose_bool
-
-LDIFF_SYM2355=Lme_167 - Mono_Security_Cryptography_MD2Managed_Dispose_bool
-	.long LDIFF_SYM2355
-	.long 0
-	.byte 12,31,0,68,14,32,157,4,158,3,68,13,29,68,153,2
-	.align 3
-Lfde318_end:
-
-.section __DWARF, __debug_info,regular,debug
-
-	.byte 2
-	.asciz "Mono.Security.Cryptography.MD2Managed:Initialize"
-	.asciz "Mono_Security_Cryptography_MD2Managed_Initialize"
-
-	.byte 29,54
-	.quad Mono_Security_Cryptography_MD2Managed_Initialize
-	.quad Lme_168
-
-	.byte 2,118,16,3
-	.asciz "this"
-
-LDIFF_SYM2356=LTDIE_90_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2356
-	.byte 1,106,11
-	.asciz "hr"
-
-LDIFF_SYM2357=LDIE_I4 - Ldebug_info_start
+LDIFF_SYM2357=LTDIE_90_REFERENCE - Ldebug_info_start
 	.long LDIFF_SYM2357
-	.byte 1,106,0
+	.byte 2,141,16,0
 
 .section __DWARF, __debug_frame,regular,debug
 
@@ -61923,14 +62124,92 @@ Lfde319_start:
 
 	.long 0
 	.align 3
+	.quad Mono_Security_Cryptography_MD2Managed_Finalize
+
+LDIFF_SYM2359=Lme_167 - Mono_Security_Cryptography_MD2Managed_Finalize
+	.long LDIFF_SYM2359
+	.long 0
+	.byte 12,31,0,68,14,64,157,8,158,7,68,13,29
+	.align 3
+Lfde319_end:
+
+.section __DWARF, __debug_info,regular,debug
+
+	.byte 2
+	.asciz "Mono.Security.Cryptography.MD2Managed:Dispose"
+	.asciz "Mono_Security_Cryptography_MD2Managed_Dispose_bool"
+
+	.byte 29,44
+	.quad Mono_Security_Cryptography_MD2Managed_Dispose_bool
+	.quad Lme_168
+
+	.byte 2,118,16,3
+	.asciz "this"
+
+LDIFF_SYM2360=LTDIE_90_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2360
+	.byte 1,105,3
+	.asciz "disposing"
+
+LDIFF_SYM2361=LDIE_BOOLEAN - Ldebug_info_start
+	.long LDIFF_SYM2361
+	.byte 2,141,24,0
+
+.section __DWARF, __debug_frame,regular,debug
+
+LDIFF_SYM2362=Lfde320_end - Lfde320_start
+	.long LDIFF_SYM2362
+Lfde320_start:
+
+	.long 0
+	.align 3
+	.quad Mono_Security_Cryptography_MD2Managed_Dispose_bool
+
+LDIFF_SYM2363=Lme_168 - Mono_Security_Cryptography_MD2Managed_Dispose_bool
+	.long LDIFF_SYM2363
+	.long 0
+	.byte 12,31,0,68,14,32,157,4,158,3,68,13,29,68,153,2
+	.align 3
+Lfde320_end:
+
+.section __DWARF, __debug_info,regular,debug
+
+	.byte 2
+	.asciz "Mono.Security.Cryptography.MD2Managed:Initialize"
+	.asciz "Mono_Security_Cryptography_MD2Managed_Initialize"
+
+	.byte 29,54
+	.quad Mono_Security_Cryptography_MD2Managed_Initialize
+	.quad Lme_169
+
+	.byte 2,118,16,3
+	.asciz "this"
+
+LDIFF_SYM2364=LTDIE_90_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2364
+	.byte 1,106,11
+	.asciz "hr"
+
+LDIFF_SYM2365=LDIE_I4 - Ldebug_info_start
+	.long LDIFF_SYM2365
+	.byte 1,106,0
+
+.section __DWARF, __debug_frame,regular,debug
+
+LDIFF_SYM2366=Lfde321_end - Lfde321_start
+	.long LDIFF_SYM2366
+Lfde321_start:
+
+	.long 0
+	.align 3
 	.quad Mono_Security_Cryptography_MD2Managed_Initialize
 
-LDIFF_SYM2359=Lme_168 - Mono_Security_Cryptography_MD2Managed_Initialize
-	.long LDIFF_SYM2359
+LDIFF_SYM2367=Lme_169 - Mono_Security_Cryptography_MD2Managed_Initialize
+	.long LDIFF_SYM2367
 	.long 0
 	.byte 12,31,0,68,14,48,157,6,158,5,68,13,29,68,154,4
 	.align 3
-Lfde319_end:
+Lfde321_end:
 
 .section __DWARF, __debug_info,regular,debug
 
@@ -61940,56 +62219,56 @@ Lfde319_end:
 
 	.byte 29,64
 	.quad Mono_Security_Cryptography_MD2Managed_HashCore_byte___int_int
-	.quad Lme_169
+	.quad Lme_16a
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2360=LTDIE_90_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2360
+LDIFF_SYM2368=LTDIE_90_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2368
 	.byte 1,103,3
 	.asciz "data"
 
-LDIFF_SYM2361=LDIE_SZARRAY - Ldebug_info_start
-	.long LDIFF_SYM2361
+LDIFF_SYM2369=LDIE_SZARRAY - Ldebug_info_start
+	.long LDIFF_SYM2369
 	.byte 1,104,3
 	.asciz "start"
 
-LDIFF_SYM2362=LDIE_I4 - Ldebug_info_start
-	.long LDIFF_SYM2362
+LDIFF_SYM2370=LDIE_I4 - Ldebug_info_start
+	.long LDIFF_SYM2370
 	.byte 2,141,40,3
 	.asciz "length"
 
-LDIFF_SYM2363=LDIE_I4 - Ldebug_info_start
-	.long LDIFF_SYM2363
+LDIFF_SYM2371=LDIE_I4 - Ldebug_info_start
+	.long LDIFF_SYM2371
 	.byte 1,106,11
 	.asciz "p"
 
-LDIFF_SYM2364=LDIE_I - Ldebug_info_start
-	.long LDIFF_SYM2364
+LDIFF_SYM2372=LDIE_I - Ldebug_info_start
+	.long LDIFF_SYM2372
 	.byte 1,104,11
 	.asciz "hr"
 
-LDIFF_SYM2365=LDIE_I4 - Ldebug_info_start
-	.long LDIFF_SYM2365
+LDIFF_SYM2373=LDIE_I4 - Ldebug_info_start
+	.long LDIFF_SYM2373
 	.byte 1,106,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2366=Lfde320_end - Lfde320_start
-	.long LDIFF_SYM2366
-Lfde320_start:
+LDIFF_SYM2374=Lfde322_end - Lfde322_start
+	.long LDIFF_SYM2374
+Lfde322_start:
 
 	.long 0
 	.align 3
 	.quad Mono_Security_Cryptography_MD2Managed_HashCore_byte___int_int
 
-LDIFF_SYM2367=Lme_169 - Mono_Security_Cryptography_MD2Managed_HashCore_byte___int_int
-	.long LDIFF_SYM2367
+LDIFF_SYM2375=Lme_16a - Mono_Security_Cryptography_MD2Managed_HashCore_byte___int_int
+	.long LDIFF_SYM2375
 	.long 0
 	.byte 12,31,0,68,14,64,157,8,158,7,68,13,29,68,151,6,152,5,68,154,4
 	.align 3
-Lfde320_end:
+Lfde322_end:
 
 .section __DWARF, __debug_info,regular,debug
 
@@ -61999,36 +62278,36 @@ Lfde320_end:
 
 	.byte 29,81
 	.quad Mono_Security_Cryptography_MD2Managed_HashFinal
-	.quad Lme_16a
+	.quad Lme_16b
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2368=LTDIE_90_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2368
+LDIFF_SYM2376=LTDIE_90_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2376
 	.byte 1,106,11
 	.asciz "hr"
 
-LDIFF_SYM2369=LDIE_I4 - Ldebug_info_start
-	.long LDIFF_SYM2369
+LDIFF_SYM2377=LDIE_I4 - Ldebug_info_start
+	.long LDIFF_SYM2377
 	.byte 1,106,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2370=Lfde321_end - Lfde321_start
-	.long LDIFF_SYM2370
-Lfde321_start:
+LDIFF_SYM2378=Lfde323_end - Lfde323_start
+	.long LDIFF_SYM2378
+Lfde323_start:
 
 	.long 0
 	.align 3
 	.quad Mono_Security_Cryptography_MD2Managed_HashFinal
 
-LDIFF_SYM2371=Lme_16a - Mono_Security_Cryptography_MD2Managed_HashFinal
-	.long LDIFF_SYM2371
+LDIFF_SYM2379=Lme_16b - Mono_Security_Cryptography_MD2Managed_HashFinal
+	.long LDIFF_SYM2379
 	.long 0
 	.byte 12,31,0,68,14,48,157,6,158,5,68,13,29,68,154,4
 	.align 3
-Lfde321_end:
+Lfde323_end:
 
 .section __DWARF, __debug_info,regular,debug
 LTDIE_93:
@@ -62037,82 +62316,82 @@ LTDIE_93:
 	.asciz "Mono_Security_Cryptography_MD4"
 
 	.byte 40,16
-LDIFF_SYM2372=LTDIE_42 - Ldebug_info_start
-	.long LDIFF_SYM2372
+LDIFF_SYM2380=LTDIE_42 - Ldebug_info_start
+	.long LDIFF_SYM2380
 	.byte 2,35,0,0,7
 	.asciz "Mono_Security_Cryptography_MD4"
 
-LDIFF_SYM2373=LTDIE_93 - Ldebug_info_start
-	.long LDIFF_SYM2373
+LDIFF_SYM2381=LTDIE_93 - Ldebug_info_start
+	.long LDIFF_SYM2381
 LTDIE_93_POINTER:
 
 	.byte 13
-LDIFF_SYM2374=LTDIE_93 - Ldebug_info_start
-	.long LDIFF_SYM2374
+LDIFF_SYM2382=LTDIE_93 - Ldebug_info_start
+	.long LDIFF_SYM2382
 LTDIE_93_REFERENCE:
 
 	.byte 14
-LDIFF_SYM2375=LTDIE_93 - Ldebug_info_start
-	.long LDIFF_SYM2375
+LDIFF_SYM2383=LTDIE_93 - Ldebug_info_start
+	.long LDIFF_SYM2383
 LTDIE_92:
 
 	.byte 5
 	.asciz "Mono_Security_Cryptography_MD4Managed"
 
 	.byte 48,16
-LDIFF_SYM2376=LTDIE_93 - Ldebug_info_start
-	.long LDIFF_SYM2376
+LDIFF_SYM2384=LTDIE_93 - Ldebug_info_start
+	.long LDIFF_SYM2384
 	.byte 2,35,0,6
 	.asciz "ctx"
 
-LDIFF_SYM2377=LDIE_I - Ldebug_info_start
-	.long LDIFF_SYM2377
+LDIFF_SYM2385=LDIE_I - Ldebug_info_start
+	.long LDIFF_SYM2385
 	.byte 2,35,40,0,7
 	.asciz "Mono_Security_Cryptography_MD4Managed"
 
-LDIFF_SYM2378=LTDIE_92 - Ldebug_info_start
-	.long LDIFF_SYM2378
+LDIFF_SYM2386=LTDIE_92 - Ldebug_info_start
+	.long LDIFF_SYM2386
 LTDIE_92_POINTER:
 
 	.byte 13
-LDIFF_SYM2379=LTDIE_92 - Ldebug_info_start
-	.long LDIFF_SYM2379
+LDIFF_SYM2387=LTDIE_92 - Ldebug_info_start
+	.long LDIFF_SYM2387
 LTDIE_92_REFERENCE:
 
 	.byte 14
-LDIFF_SYM2380=LTDIE_92 - Ldebug_info_start
-	.long LDIFF_SYM2380
+LDIFF_SYM2388=LTDIE_92 - Ldebug_info_start
+	.long LDIFF_SYM2388
 	.byte 2
 	.asciz "Mono.Security.Cryptography.MD4Managed:.ctor"
 	.asciz "Mono_Security_Cryptography_MD4Managed__ctor"
 
 	.byte 30,32
 	.quad Mono_Security_Cryptography_MD4Managed__ctor
-	.quad Lme_16e
+	.quad Lme_16f
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2381=LTDIE_92_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2381
+LDIFF_SYM2389=LTDIE_92_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2389
 	.byte 2,141,16,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2382=Lfde322_end - Lfde322_start
-	.long LDIFF_SYM2382
-Lfde322_start:
+LDIFF_SYM2390=Lfde324_end - Lfde324_start
+	.long LDIFF_SYM2390
+Lfde324_start:
 
 	.long 0
 	.align 3
 	.quad Mono_Security_Cryptography_MD4Managed__ctor
 
-LDIFF_SYM2383=Lme_16e - Mono_Security_Cryptography_MD4Managed__ctor
-	.long LDIFF_SYM2383
+LDIFF_SYM2391=Lme_16f - Mono_Security_Cryptography_MD4Managed__ctor
+	.long LDIFF_SYM2391
 	.long 0
 	.byte 12,31,0,68,14,32,157,4,158,3,68,13,29
 	.align 3
-Lfde322_end:
+Lfde324_end:
 
 .section __DWARF, __debug_info,regular,debug
 
@@ -62122,92 +62401,14 @@ Lfde322_end:
 
 	.byte 30,39
 	.quad Mono_Security_Cryptography_MD4Managed_Finalize
-	.quad Lme_16f
-
-	.byte 2,118,16,3
-	.asciz "this"
-
-LDIFF_SYM2384=LTDIE_92_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2384
-	.byte 2,141,16,0
-
-.section __DWARF, __debug_frame,regular,debug
-
-LDIFF_SYM2385=Lfde323_end - Lfde323_start
-	.long LDIFF_SYM2385
-Lfde323_start:
-
-	.long 0
-	.align 3
-	.quad Mono_Security_Cryptography_MD4Managed_Finalize
-
-LDIFF_SYM2386=Lme_16f - Mono_Security_Cryptography_MD4Managed_Finalize
-	.long LDIFF_SYM2386
-	.long 0
-	.byte 12,31,0,68,14,64,157,8,158,7,68,13,29
-	.align 3
-Lfde323_end:
-
-.section __DWARF, __debug_info,regular,debug
-
-	.byte 2
-	.asciz "Mono.Security.Cryptography.MD4Managed:Dispose"
-	.asciz "Mono_Security_Cryptography_MD4Managed_Dispose_bool"
-
-	.byte 30,44
-	.quad Mono_Security_Cryptography_MD4Managed_Dispose_bool
 	.quad Lme_170
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2387=LTDIE_92_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2387
-	.byte 1,105,3
-	.asciz "disposing"
-
-LDIFF_SYM2388=LDIE_BOOLEAN - Ldebug_info_start
-	.long LDIFF_SYM2388
-	.byte 2,141,24,0
-
-.section __DWARF, __debug_frame,regular,debug
-
-LDIFF_SYM2389=Lfde324_end - Lfde324_start
-	.long LDIFF_SYM2389
-Lfde324_start:
-
-	.long 0
-	.align 3
-	.quad Mono_Security_Cryptography_MD4Managed_Dispose_bool
-
-LDIFF_SYM2390=Lme_170 - Mono_Security_Cryptography_MD4Managed_Dispose_bool
-	.long LDIFF_SYM2390
-	.long 0
-	.byte 12,31,0,68,14,32,157,4,158,3,68,13,29,68,153,2
-	.align 3
-Lfde324_end:
-
-.section __DWARF, __debug_info,regular,debug
-
-	.byte 2
-	.asciz "Mono.Security.Cryptography.MD4Managed:Initialize"
-	.asciz "Mono_Security_Cryptography_MD4Managed_Initialize"
-
-	.byte 30,54
-	.quad Mono_Security_Cryptography_MD4Managed_Initialize
-	.quad Lme_171
-
-	.byte 2,118,16,3
-	.asciz "this"
-
-LDIFF_SYM2391=LTDIE_92_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2391
-	.byte 1,106,11
-	.asciz "hr"
-
-LDIFF_SYM2392=LDIE_I4 - Ldebug_info_start
+LDIFF_SYM2392=LTDIE_92_REFERENCE - Ldebug_info_start
 	.long LDIFF_SYM2392
-	.byte 1,106,0
+	.byte 2,141,16,0
 
 .section __DWARF, __debug_frame,regular,debug
 
@@ -62217,14 +62418,92 @@ Lfde325_start:
 
 	.long 0
 	.align 3
+	.quad Mono_Security_Cryptography_MD4Managed_Finalize
+
+LDIFF_SYM2394=Lme_170 - Mono_Security_Cryptography_MD4Managed_Finalize
+	.long LDIFF_SYM2394
+	.long 0
+	.byte 12,31,0,68,14,64,157,8,158,7,68,13,29
+	.align 3
+Lfde325_end:
+
+.section __DWARF, __debug_info,regular,debug
+
+	.byte 2
+	.asciz "Mono.Security.Cryptography.MD4Managed:Dispose"
+	.asciz "Mono_Security_Cryptography_MD4Managed_Dispose_bool"
+
+	.byte 30,44
+	.quad Mono_Security_Cryptography_MD4Managed_Dispose_bool
+	.quad Lme_171
+
+	.byte 2,118,16,3
+	.asciz "this"
+
+LDIFF_SYM2395=LTDIE_92_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2395
+	.byte 1,105,3
+	.asciz "disposing"
+
+LDIFF_SYM2396=LDIE_BOOLEAN - Ldebug_info_start
+	.long LDIFF_SYM2396
+	.byte 2,141,24,0
+
+.section __DWARF, __debug_frame,regular,debug
+
+LDIFF_SYM2397=Lfde326_end - Lfde326_start
+	.long LDIFF_SYM2397
+Lfde326_start:
+
+	.long 0
+	.align 3
+	.quad Mono_Security_Cryptography_MD4Managed_Dispose_bool
+
+LDIFF_SYM2398=Lme_171 - Mono_Security_Cryptography_MD4Managed_Dispose_bool
+	.long LDIFF_SYM2398
+	.long 0
+	.byte 12,31,0,68,14,32,157,4,158,3,68,13,29,68,153,2
+	.align 3
+Lfde326_end:
+
+.section __DWARF, __debug_info,regular,debug
+
+	.byte 2
+	.asciz "Mono.Security.Cryptography.MD4Managed:Initialize"
+	.asciz "Mono_Security_Cryptography_MD4Managed_Initialize"
+
+	.byte 30,54
+	.quad Mono_Security_Cryptography_MD4Managed_Initialize
+	.quad Lme_172
+
+	.byte 2,118,16,3
+	.asciz "this"
+
+LDIFF_SYM2399=LTDIE_92_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2399
+	.byte 1,106,11
+	.asciz "hr"
+
+LDIFF_SYM2400=LDIE_I4 - Ldebug_info_start
+	.long LDIFF_SYM2400
+	.byte 1,106,0
+
+.section __DWARF, __debug_frame,regular,debug
+
+LDIFF_SYM2401=Lfde327_end - Lfde327_start
+	.long LDIFF_SYM2401
+Lfde327_start:
+
+	.long 0
+	.align 3
 	.quad Mono_Security_Cryptography_MD4Managed_Initialize
 
-LDIFF_SYM2394=Lme_171 - Mono_Security_Cryptography_MD4Managed_Initialize
-	.long LDIFF_SYM2394
+LDIFF_SYM2402=Lme_172 - Mono_Security_Cryptography_MD4Managed_Initialize
+	.long LDIFF_SYM2402
 	.long 0
 	.byte 12,31,0,68,14,48,157,6,158,5,68,13,29,68,154,4
 	.align 3
-Lfde325_end:
+Lfde327_end:
 
 .section __DWARF, __debug_info,regular,debug
 
@@ -62234,56 +62513,56 @@ Lfde325_end:
 
 	.byte 30,64
 	.quad Mono_Security_Cryptography_MD4Managed_HashCore_byte___int_int
-	.quad Lme_172
+	.quad Lme_173
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2395=LTDIE_92_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2395
+LDIFF_SYM2403=LTDIE_92_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2403
 	.byte 1,103,3
 	.asciz "data"
 
-LDIFF_SYM2396=LDIE_SZARRAY - Ldebug_info_start
-	.long LDIFF_SYM2396
+LDIFF_SYM2404=LDIE_SZARRAY - Ldebug_info_start
+	.long LDIFF_SYM2404
 	.byte 1,104,3
 	.asciz "start"
 
-LDIFF_SYM2397=LDIE_I4 - Ldebug_info_start
-	.long LDIFF_SYM2397
+LDIFF_SYM2405=LDIE_I4 - Ldebug_info_start
+	.long LDIFF_SYM2405
 	.byte 2,141,40,3
 	.asciz "length"
 
-LDIFF_SYM2398=LDIE_I4 - Ldebug_info_start
-	.long LDIFF_SYM2398
+LDIFF_SYM2406=LDIE_I4 - Ldebug_info_start
+	.long LDIFF_SYM2406
 	.byte 1,106,11
 	.asciz "p"
 
-LDIFF_SYM2399=LDIE_I - Ldebug_info_start
-	.long LDIFF_SYM2399
+LDIFF_SYM2407=LDIE_I - Ldebug_info_start
+	.long LDIFF_SYM2407
 	.byte 1,104,11
 	.asciz "hr"
 
-LDIFF_SYM2400=LDIE_I4 - Ldebug_info_start
-	.long LDIFF_SYM2400
+LDIFF_SYM2408=LDIE_I4 - Ldebug_info_start
+	.long LDIFF_SYM2408
 	.byte 1,106,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2401=Lfde326_end - Lfde326_start
-	.long LDIFF_SYM2401
-Lfde326_start:
+LDIFF_SYM2409=Lfde328_end - Lfde328_start
+	.long LDIFF_SYM2409
+Lfde328_start:
 
 	.long 0
 	.align 3
 	.quad Mono_Security_Cryptography_MD4Managed_HashCore_byte___int_int
 
-LDIFF_SYM2402=Lme_172 - Mono_Security_Cryptography_MD4Managed_HashCore_byte___int_int
-	.long LDIFF_SYM2402
+LDIFF_SYM2410=Lme_173 - Mono_Security_Cryptography_MD4Managed_HashCore_byte___int_int
+	.long LDIFF_SYM2410
 	.long 0
 	.byte 12,31,0,68,14,64,157,8,158,7,68,13,29,68,151,6,152,5,68,154,4
 	.align 3
-Lfde326_end:
+Lfde328_end:
 
 .section __DWARF, __debug_info,regular,debug
 
@@ -62293,36 +62572,36 @@ Lfde326_end:
 
 	.byte 30,81
 	.quad Mono_Security_Cryptography_MD4Managed_HashFinal
-	.quad Lme_173
+	.quad Lme_174
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2403=LTDIE_92_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2403
+LDIFF_SYM2411=LTDIE_92_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2411
 	.byte 1,106,11
 	.asciz "hr"
 
-LDIFF_SYM2404=LDIE_I4 - Ldebug_info_start
-	.long LDIFF_SYM2404
+LDIFF_SYM2412=LDIE_I4 - Ldebug_info_start
+	.long LDIFF_SYM2412
 	.byte 1,106,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2405=Lfde327_end - Lfde327_start
-	.long LDIFF_SYM2405
-Lfde327_start:
+LDIFF_SYM2413=Lfde329_end - Lfde329_start
+	.long LDIFF_SYM2413
+Lfde329_start:
 
 	.long 0
 	.align 3
 	.quad Mono_Security_Cryptography_MD4Managed_HashFinal
 
-LDIFF_SYM2406=Lme_173 - Mono_Security_Cryptography_MD4Managed_HashFinal
-	.long LDIFF_SYM2406
+LDIFF_SYM2414=Lme_174 - Mono_Security_Cryptography_MD4Managed_HashFinal
+	.long LDIFF_SYM2414
 	.long 0
 	.byte 12,31,0,68,14,48,157,6,158,5,68,13,29,68,154,4
 	.align 3
-Lfde327_end:
+Lfde329_end:
 
 .section __DWARF, __debug_info,regular,debug
 
@@ -62332,31 +62611,31 @@ Lfde327_end:
 
 	.byte 31,41
 	.quad Mono_Security_Cryptography_MD2__ctor
-	.quad Lme_174
+	.quad Lme_175
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2407=LTDIE_91_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2407
+LDIFF_SYM2415=LTDIE_91_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2415
 	.byte 2,141,16,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2408=Lfde328_end - Lfde328_start
-	.long LDIFF_SYM2408
-Lfde328_start:
+LDIFF_SYM2416=Lfde330_end - Lfde330_start
+	.long LDIFF_SYM2416
+Lfde330_start:
 
 	.long 0
 	.align 3
 	.quad Mono_Security_Cryptography_MD2__ctor
 
-LDIFF_SYM2409=Lme_174 - Mono_Security_Cryptography_MD2__ctor
-	.long LDIFF_SYM2409
+LDIFF_SYM2417=Lme_175 - Mono_Security_Cryptography_MD2__ctor
+	.long LDIFF_SYM2417
 	.long 0
 	.byte 12,31,0,68,14,32,157,4,158,3,68,13,29
 	.align 3
-Lfde328_end:
+Lfde330_end:
 
 .section __DWARF, __debug_info,regular,debug
 
@@ -62366,26 +62645,26 @@ Lfde328_end:
 
 	.byte 31,50
 	.quad Mono_Security_Cryptography_MD2_Create
-	.quad Lme_175
+	.quad Lme_176
 
 	.byte 2,118,16,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2410=Lfde329_end - Lfde329_start
-	.long LDIFF_SYM2410
-Lfde329_start:
+LDIFF_SYM2418=Lfde331_end - Lfde331_start
+	.long LDIFF_SYM2418
+Lfde331_start:
 
 	.long 0
 	.align 3
 	.quad Mono_Security_Cryptography_MD2_Create
 
-LDIFF_SYM2411=Lme_175 - Mono_Security_Cryptography_MD2_Create
-	.long LDIFF_SYM2411
+LDIFF_SYM2419=Lme_176 - Mono_Security_Cryptography_MD2_Create
+	.long LDIFF_SYM2419
 	.long 0
 	.byte 12,31,0,68,14,16,157,2,158,1,68,13,29
 	.align 3
-Lfde329_end:
+Lfde331_end:
 
 .section __DWARF, __debug_info,regular,debug
 
@@ -62395,31 +62674,31 @@ Lfde329_end:
 
 	.byte 32,42
 	.quad Mono_Security_Cryptography_MD4__ctor
-	.quad Lme_176
+	.quad Lme_177
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2412=LTDIE_93_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2412
+LDIFF_SYM2420=LTDIE_93_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2420
 	.byte 2,141,16,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2413=Lfde330_end - Lfde330_start
-	.long LDIFF_SYM2413
-Lfde330_start:
+LDIFF_SYM2421=Lfde332_end - Lfde332_start
+	.long LDIFF_SYM2421
+Lfde332_start:
 
 	.long 0
 	.align 3
 	.quad Mono_Security_Cryptography_MD4__ctor
 
-LDIFF_SYM2414=Lme_176 - Mono_Security_Cryptography_MD4__ctor
-	.long LDIFF_SYM2414
+LDIFF_SYM2422=Lme_177 - Mono_Security_Cryptography_MD4__ctor
+	.long LDIFF_SYM2422
 	.long 0
 	.byte 12,31,0,68,14,32,157,4,158,3,68,13,29
 	.align 3
-Lfde330_end:
+Lfde332_end:
 
 .section __DWARF, __debug_info,regular,debug
 
@@ -62429,26 +62708,26 @@ Lfde330_end:
 
 	.byte 32,51
 	.quad Mono_Security_Cryptography_MD4_Create
-	.quad Lme_177
+	.quad Lme_178
 
 	.byte 2,118,16,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2415=Lfde331_end - Lfde331_start
-	.long LDIFF_SYM2415
-Lfde331_start:
+LDIFF_SYM2423=Lfde333_end - Lfde333_start
+	.long LDIFF_SYM2423
+Lfde333_start:
 
 	.long 0
 	.align 3
 	.quad Mono_Security_Cryptography_MD4_Create
 
-LDIFF_SYM2416=Lme_177 - Mono_Security_Cryptography_MD4_Create
-	.long LDIFF_SYM2416
+LDIFF_SYM2424=Lme_178 - Mono_Security_Cryptography_MD4_Create
+	.long LDIFF_SYM2424
 	.long 0
 	.byte 12,31,0,68,14,16,157,2,158,1,68,13,29
 	.align 3
-Lfde331_end:
+Lfde333_end:
 
 .section __DWARF, __debug_info,regular,debug
 
@@ -62458,41 +62737,41 @@ Lfde331_end:
 
 	.byte 33,209,3
 	.quad Mono_Security_Cryptography_PKCS1_CreateFromName_string
-	.quad Lme_178
+	.quad Lme_179
 
 	.byte 2,118,16,3
 	.asciz "name"
 
-LDIFF_SYM2417=LDIE_STRING - Ldebug_info_start
-	.long LDIFF_SYM2417
+LDIFF_SYM2425=LDIE_STRING - Ldebug_info_start
+	.long LDIFF_SYM2425
 	.byte 2,141,24,11
 	.asciz "V_0"
 
-LDIFF_SYM2418=LDIE_U4 - Ldebug_info_start
-	.long LDIFF_SYM2418
+LDIFF_SYM2426=LDIE_U4 - Ldebug_info_start
+	.long LDIFF_SYM2426
 	.byte 1,106,11
 	.asciz "V_1"
 
-LDIFF_SYM2419=LTDIE_42_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2419
+LDIFF_SYM2427=LTDIE_42_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2427
 	.byte 2,141,32,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2420=Lfde332_end - Lfde332_start
-	.long LDIFF_SYM2420
-Lfde332_start:
+LDIFF_SYM2428=Lfde334_end - Lfde334_start
+	.long LDIFF_SYM2428
+Lfde334_start:
 
 	.long 0
 	.align 3
 	.quad Mono_Security_Cryptography_PKCS1_CreateFromName_string
 
-LDIFF_SYM2421=Lme_178 - Mono_Security_Cryptography_PKCS1_CreateFromName_string
-	.long LDIFF_SYM2421
+LDIFF_SYM2429=Lme_179 - Mono_Security_Cryptography_PKCS1_CreateFromName_string
+	.long LDIFF_SYM2429
 	.long 0
 	.byte 12,31,0,68,14,80,157,10,158,9,68,13,29,68,154,8
 	.align 3
-Lfde332_end:
+Lfde334_end:
 
 .section __DWARF, __debug_info,regular,debug
 
@@ -62502,26 +62781,26 @@ Lfde332_end:
 
 	.byte 33,70
 	.quad Mono_Security_Cryptography_PKCS1__cctor
-	.quad Lme_179
+	.quad Lme_17a
 
 	.byte 2,118,16,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2422=Lfde333_end - Lfde333_start
-	.long LDIFF_SYM2422
-Lfde333_start:
+LDIFF_SYM2430=Lfde335_end - Lfde335_start
+	.long LDIFF_SYM2430
+Lfde335_start:
 
 	.long 0
 	.align 3
 	.quad Mono_Security_Cryptography_PKCS1__cctor
 
-LDIFF_SYM2423=Lme_179 - Mono_Security_Cryptography_PKCS1__cctor
-	.long LDIFF_SYM2423
+LDIFF_SYM2431=Lme_17a - Mono_Security_Cryptography_PKCS1__cctor
+	.long LDIFF_SYM2431
 	.long 0
 	.byte 12,31,0,68,14,48,157,6,158,5,68,13,29
 	.align 3
-Lfde333_end:
+Lfde335_end:
 
 .section __DWARF, __debug_info,regular,debug
 
@@ -62531,92 +62810,14 @@ Lfde333_end:
 
 	.byte 34,104
 	.quad Mono_Security_Cryptography_PKCS8_PrivateKeyInfo__ctor
-	.quad Lme_17a
-
-	.byte 2,118,16,3
-	.asciz "this"
-
-LDIFF_SYM2424=LTDIE_39_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2424
-	.byte 2,141,16,0
-
-.section __DWARF, __debug_frame,regular,debug
-
-LDIFF_SYM2425=Lfde334_end - Lfde334_start
-	.long LDIFF_SYM2425
-Lfde334_start:
-
-	.long 0
-	.align 3
-	.quad Mono_Security_Cryptography_PKCS8_PrivateKeyInfo__ctor
-
-LDIFF_SYM2426=Lme_17a - Mono_Security_Cryptography_PKCS8_PrivateKeyInfo__ctor
-	.long LDIFF_SYM2426
-	.long 0
-	.byte 12,31,0,68,14,32,157,4,158,3,68,13,29
-	.align 3
-Lfde334_end:
-
-.section __DWARF, __debug_info,regular,debug
-
-	.byte 2
-	.asciz "Mono.Security.Cryptography.PKCS8/PrivateKeyInfo:.ctor"
-	.asciz "Mono_Security_Cryptography_PKCS8_PrivateKeyInfo__ctor_byte__"
-
-	.byte 34,110
-	.quad Mono_Security_Cryptography_PKCS8_PrivateKeyInfo__ctor_byte__
 	.quad Lme_17b
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2427=LTDIE_39_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2427
-	.byte 2,141,16,3
-	.asciz "data"
-
-LDIFF_SYM2428=LDIE_SZARRAY - Ldebug_info_start
-	.long LDIFF_SYM2428
-	.byte 2,141,24,0
-
-.section __DWARF, __debug_frame,regular,debug
-
-LDIFF_SYM2429=Lfde335_end - Lfde335_start
-	.long LDIFF_SYM2429
-Lfde335_start:
-
-	.long 0
-	.align 3
-	.quad Mono_Security_Cryptography_PKCS8_PrivateKeyInfo__ctor_byte__
-
-LDIFF_SYM2430=Lme_17b - Mono_Security_Cryptography_PKCS8_PrivateKeyInfo__ctor_byte__
-	.long LDIFF_SYM2430
-	.long 0
-	.byte 12,31,0,68,14,32,157,4,158,3,68,13,29
-	.align 3
-Lfde335_end:
-
-.section __DWARF, __debug_info,regular,debug
-
-	.byte 2
-	.asciz "Mono.Security.Cryptography.PKCS8/PrivateKeyInfo:set_Algorithm"
-	.asciz "Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_set_Algorithm_string"
-
-	.byte 34,119
-	.quad Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_set_Algorithm_string
-	.quad Lme_17c
-
-	.byte 2,118,16,3
-	.asciz "this"
-
-LDIFF_SYM2431=LTDIE_39_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2431
-	.byte 2,141,16,3
-	.asciz "value"
-
-LDIFF_SYM2432=LDIE_STRING - Ldebug_info_start
+LDIFF_SYM2432=LTDIE_39_REFERENCE - Ldebug_info_start
 	.long LDIFF_SYM2432
-	.byte 2,141,24,0
+	.byte 2,141,16,0
 
 .section __DWARF, __debug_frame,regular,debug
 
@@ -62626,9 +62827,9 @@ Lfde336_start:
 
 	.long 0
 	.align 3
-	.quad Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_set_Algorithm_string
+	.quad Mono_Security_Cryptography_PKCS8_PrivateKeyInfo__ctor
 
-LDIFF_SYM2434=Lme_17c - Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_set_Algorithm_string
+LDIFF_SYM2434=Lme_17b - Mono_Security_Cryptography_PKCS8_PrivateKeyInfo__ctor
 	.long LDIFF_SYM2434
 	.long 0
 	.byte 12,31,0,68,14,32,157,4,158,3,68,13,29
@@ -62638,36 +62839,114 @@ Lfde336_end:
 .section __DWARF, __debug_info,regular,debug
 
 	.byte 2
-	.asciz "Mono.Security.Cryptography.PKCS8/PrivateKeyInfo:get_PrivateKey"
-	.asciz "Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_get_PrivateKey"
+	.asciz "Mono.Security.Cryptography.PKCS8/PrivateKeyInfo:.ctor"
+	.asciz "Mono_Security_Cryptography_PKCS8_PrivateKeyInfo__ctor_byte__"
 
-	.byte 34,128,1
-	.quad Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_get_PrivateKey
-	.quad Lme_17d
+	.byte 34,110
+	.quad Mono_Security_Cryptography_PKCS8_PrivateKeyInfo__ctor_byte__
+	.quad Lme_17c
 
 	.byte 2,118,16,3
 	.asciz "this"
 
 LDIFF_SYM2435=LTDIE_39_REFERENCE - Ldebug_info_start
 	.long LDIFF_SYM2435
+	.byte 2,141,16,3
+	.asciz "data"
+
+LDIFF_SYM2436=LDIE_SZARRAY - Ldebug_info_start
+	.long LDIFF_SYM2436
+	.byte 2,141,24,0
+
+.section __DWARF, __debug_frame,regular,debug
+
+LDIFF_SYM2437=Lfde337_end - Lfde337_start
+	.long LDIFF_SYM2437
+Lfde337_start:
+
+	.long 0
+	.align 3
+	.quad Mono_Security_Cryptography_PKCS8_PrivateKeyInfo__ctor_byte__
+
+LDIFF_SYM2438=Lme_17c - Mono_Security_Cryptography_PKCS8_PrivateKeyInfo__ctor_byte__
+	.long LDIFF_SYM2438
+	.long 0
+	.byte 12,31,0,68,14,32,157,4,158,3,68,13,29
+	.align 3
+Lfde337_end:
+
+.section __DWARF, __debug_info,regular,debug
+
+	.byte 2
+	.asciz "Mono.Security.Cryptography.PKCS8/PrivateKeyInfo:set_Algorithm"
+	.asciz "Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_set_Algorithm_string"
+
+	.byte 34,119
+	.quad Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_set_Algorithm_string
+	.quad Lme_17d
+
+	.byte 2,118,16,3
+	.asciz "this"
+
+LDIFF_SYM2439=LTDIE_39_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2439
+	.byte 2,141,16,3
+	.asciz "value"
+
+LDIFF_SYM2440=LDIE_STRING - Ldebug_info_start
+	.long LDIFF_SYM2440
+	.byte 2,141,24,0
+
+.section __DWARF, __debug_frame,regular,debug
+
+LDIFF_SYM2441=Lfde338_end - Lfde338_start
+	.long LDIFF_SYM2441
+Lfde338_start:
+
+	.long 0
+	.align 3
+	.quad Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_set_Algorithm_string
+
+LDIFF_SYM2442=Lme_17d - Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_set_Algorithm_string
+	.long LDIFF_SYM2442
+	.long 0
+	.byte 12,31,0,68,14,32,157,4,158,3,68,13,29
+	.align 3
+Lfde338_end:
+
+.section __DWARF, __debug_info,regular,debug
+
+	.byte 2
+	.asciz "Mono.Security.Cryptography.PKCS8/PrivateKeyInfo:get_PrivateKey"
+	.asciz "Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_get_PrivateKey"
+
+	.byte 34,128,1
+	.quad Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_get_PrivateKey
+	.quad Lme_17e
+
+	.byte 2,118,16,3
+	.asciz "this"
+
+LDIFF_SYM2443=LTDIE_39_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2443
 	.byte 1,106,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2436=Lfde337_end - Lfde337_start
-	.long LDIFF_SYM2436
-Lfde337_start:
+LDIFF_SYM2444=Lfde339_end - Lfde339_start
+	.long LDIFF_SYM2444
+Lfde339_start:
 
 	.long 0
 	.align 3
 	.quad Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_get_PrivateKey
 
-LDIFF_SYM2437=Lme_17d - Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_get_PrivateKey
-	.long LDIFF_SYM2437
+LDIFF_SYM2445=Lme_17e - Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_get_PrivateKey
+	.long LDIFF_SYM2445
 	.long 0
 	.byte 12,31,0,68,14,32,157,4,158,3,68,13,29,68,154,2
 	.align 3
-Lfde337_end:
+Lfde339_end:
 
 .section __DWARF, __debug_info,regular,debug
 
@@ -62677,36 +62956,36 @@ Lfde337_end:
 
 	.byte 34,133,1
 	.quad Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_set_PrivateKey_byte__
-	.quad Lme_17e
+	.quad Lme_17f
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2438=LTDIE_39_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2438
+LDIFF_SYM2446=LTDIE_39_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2446
 	.byte 2,141,24,3
 	.asciz "value"
 
-LDIFF_SYM2439=LDIE_SZARRAY - Ldebug_info_start
-	.long LDIFF_SYM2439
+LDIFF_SYM2447=LDIE_SZARRAY - Ldebug_info_start
+	.long LDIFF_SYM2447
 	.byte 1,106,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2440=Lfde338_end - Lfde338_start
-	.long LDIFF_SYM2440
-Lfde338_start:
+LDIFF_SYM2448=Lfde340_end - Lfde340_start
+	.long LDIFF_SYM2448
+Lfde340_start:
 
 	.long 0
 	.align 3
 	.quad Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_set_PrivateKey_byte__
 
-LDIFF_SYM2441=Lme_17e - Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_set_PrivateKey_byte__
-	.long LDIFF_SYM2441
+LDIFF_SYM2449=Lme_17f - Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_set_PrivateKey_byte__
+	.long LDIFF_SYM2449
 	.long 0
 	.byte 12,31,0,68,14,32,157,4,158,3,68,13,29,68,154,2
 	.align 3
-Lfde338_end:
+Lfde340_end:
 
 .section __DWARF, __debug_info,regular,debug
 
@@ -62716,66 +62995,66 @@ Lfde338_end:
 
 	.byte 34,152,1
 	.quad Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_Decode_byte__
-	.quad Lme_17f
+	.quad Lme_180
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2442=LTDIE_39_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2442
+LDIFF_SYM2450=LTDIE_39_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2450
 	.byte 1,105,3
 	.asciz "data"
 
-LDIFF_SYM2443=LDIE_SZARRAY - Ldebug_info_start
-	.long LDIFF_SYM2443
+LDIFF_SYM2451=LDIE_SZARRAY - Ldebug_info_start
+	.long LDIFF_SYM2451
 	.byte 1,106,11
 	.asciz "privateKeyInfo"
 
-LDIFF_SYM2444=LTDIE_15_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2444
+LDIFF_SYM2452=LTDIE_15_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2452
 	.byte 1,106,11
 	.asciz "version"
 
-LDIFF_SYM2445=LTDIE_15_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2445
+LDIFF_SYM2453=LTDIE_15_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2453
 	.byte 1,104,11
 	.asciz "algorithm"
 
-LDIFF_SYM2446=LTDIE_15_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2446
+LDIFF_SYM2454=LTDIE_15_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2454
 	.byte 1,104,11
 	.asciz "privateKey"
 
-LDIFF_SYM2447=LTDIE_15_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2447
+LDIFF_SYM2455=LTDIE_15_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2455
 	.byte 1,104,11
 	.asciz "attributes"
 
-LDIFF_SYM2448=LTDIE_15_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2448
+LDIFF_SYM2456=LTDIE_15_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2456
 	.byte 1,106,11
 	.asciz "i"
 
-LDIFF_SYM2449=LDIE_I4 - Ldebug_info_start
-	.long LDIFF_SYM2449
+LDIFF_SYM2457=LDIE_I4 - Ldebug_info_start
+	.long LDIFF_SYM2457
 	.byte 1,104,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2450=Lfde339_end - Lfde339_start
-	.long LDIFF_SYM2450
-Lfde339_start:
+LDIFF_SYM2458=Lfde341_end - Lfde341_start
+	.long LDIFF_SYM2458
+Lfde341_start:
 
 	.long 0
 	.align 3
 	.quad Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_Decode_byte__
 
-LDIFF_SYM2451=Lme_17f - Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_Decode_byte__
-	.long LDIFF_SYM2451
+LDIFF_SYM2459=Lme_180 - Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_Decode_byte__
+	.long LDIFF_SYM2459
 	.long 0
 	.byte 12,31,0,68,14,64,157,8,158,7,68,13,29,68,152,6,153,5,68,154,4
 	.align 3
-Lfde339_end:
+Lfde341_end:
 
 .section __DWARF, __debug_info,regular,debug
 
@@ -62785,61 +63064,61 @@ Lfde339_end:
 
 	.byte 34,184,1
 	.quad Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_GetBytes
-	.quad Lme_180
+	.quad Lme_181
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2452=LTDIE_39_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2452
+LDIFF_SYM2460=LTDIE_39_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2460
 	.byte 1,106,11
 	.asciz "privateKeyAlgorithm"
 
-LDIFF_SYM2453=LDIE_I4 - Ldebug_info_start
-	.long LDIFF_SYM2453
+LDIFF_SYM2461=LDIE_I4 - Ldebug_info_start
+	.long LDIFF_SYM2461
 	.byte 0,11
 	.asciz "pki"
 
-LDIFF_SYM2454=LTDIE_15_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2454
+LDIFF_SYM2462=LTDIE_15_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2462
 	.byte 1,105,11
 	.asciz "attributes"
 
-LDIFF_SYM2455=LTDIE_15_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2455
+LDIFF_SYM2463=LTDIE_15_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2463
 	.byte 1,104,11
 	.asciz "V_3"
 
-LDIFF_SYM2456=LTDIE_17_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2456
+LDIFF_SYM2464=LTDIE_17_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2464
 	.byte 2,141,48,11
 	.asciz "attribute"
 
-LDIFF_SYM2457=LTDIE_15_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2457
+LDIFF_SYM2465=LTDIE_15_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2465
 	.byte 1,103,11
 	.asciz "V_5"
 
-LDIFF_SYM2458=LTDIE_18_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2458
+LDIFF_SYM2466=LTDIE_18_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2466
 	.byte 2,141,56,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2459=Lfde340_end - Lfde340_start
-	.long LDIFF_SYM2459
-Lfde340_start:
+LDIFF_SYM2467=Lfde342_end - Lfde342_start
+	.long LDIFF_SYM2467
+Lfde342_start:
 
 	.long 0
 	.align 3
 	.quad Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_GetBytes
 
-LDIFF_SYM2460=Lme_180 - Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_GetBytes
-	.long LDIFF_SYM2460
+LDIFF_SYM2468=Lme_181 - Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_GetBytes
+	.long LDIFF_SYM2468
 	.long 0
-	.byte 12,31,0,68,14,208,1,157,26,158,25,68,13,29,68,151,24,152,23,68,153,22,154,21
+	.byte 12,31,0,68,14,224,1,157,28,158,27,68,13,29,68,151,26,152,25,68,153,24,154,23
 	.align 3
-Lfde340_end:
+Lfde342_end:
 
 .section __DWARF, __debug_info,regular,debug
 
@@ -62849,46 +63128,46 @@ Lfde340_end:
 
 	.byte 34,208,1
 	.quad Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_RemoveLeadingZero_byte__
-	.quad Lme_181
+	.quad Lme_182
 
 	.byte 2,118,16,3
 	.asciz "bigInt"
 
-LDIFF_SYM2461=LDIE_SZARRAY - Ldebug_info_start
-	.long LDIFF_SYM2461
+LDIFF_SYM2469=LDIE_SZARRAY - Ldebug_info_start
+	.long LDIFF_SYM2469
 	.byte 1,106,11
 	.asciz "start"
 
-LDIFF_SYM2462=LDIE_I4 - Ldebug_info_start
-	.long LDIFF_SYM2462
+LDIFF_SYM2470=LDIE_I4 - Ldebug_info_start
+	.long LDIFF_SYM2470
 	.byte 1,105,11
 	.asciz "length"
 
-LDIFF_SYM2463=LDIE_I4 - Ldebug_info_start
-	.long LDIFF_SYM2463
+LDIFF_SYM2471=LDIE_I4 - Ldebug_info_start
+	.long LDIFF_SYM2471
 	.byte 1,104,11
 	.asciz "bi"
 
-LDIFF_SYM2464=LDIE_SZARRAY - Ldebug_info_start
-	.long LDIFF_SYM2464
+LDIFF_SYM2472=LDIE_SZARRAY - Ldebug_info_start
+	.long LDIFF_SYM2472
 	.byte 1,103,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2465=Lfde341_end - Lfde341_start
-	.long LDIFF_SYM2465
-Lfde341_start:
+LDIFF_SYM2473=Lfde343_end - Lfde343_start
+	.long LDIFF_SYM2473
+Lfde343_start:
 
 	.long 0
 	.align 3
 	.quad Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_RemoveLeadingZero_byte__
 
-LDIFF_SYM2466=Lme_181 - Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_RemoveLeadingZero_byte__
-	.long LDIFF_SYM2466
+LDIFF_SYM2474=Lme_182 - Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_RemoveLeadingZero_byte__
+	.long LDIFF_SYM2474
 	.long 0
 	.byte 12,31,0,68,14,48,157,6,158,5,68,13,29,68,151,4,152,3,68,153,2,154,1
 	.align 3
-Lfde341_end:
+Lfde343_end:
 
 .section __DWARF, __debug_info,regular,debug
 
@@ -62898,41 +63177,41 @@ Lfde341_end:
 
 	.byte 34,221,1
 	.quad Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_Normalize_byte___int
-	.quad Lme_182
+	.quad Lme_183
 
 	.byte 2,118,16,3
 	.asciz "bigInt"
 
-LDIFF_SYM2467=LDIE_SZARRAY - Ldebug_info_start
-	.long LDIFF_SYM2467
+LDIFF_SYM2475=LDIE_SZARRAY - Ldebug_info_start
+	.long LDIFF_SYM2475
 	.byte 1,105,3
 	.asciz "length"
 
-LDIFF_SYM2468=LDIE_I4 - Ldebug_info_start
-	.long LDIFF_SYM2468
+LDIFF_SYM2476=LDIE_I4 - Ldebug_info_start
+	.long LDIFF_SYM2476
 	.byte 1,106,11
 	.asciz "bi"
 
-LDIFF_SYM2469=LDIE_SZARRAY - Ldebug_info_start
-	.long LDIFF_SYM2469
+LDIFF_SYM2477=LDIE_SZARRAY - Ldebug_info_start
+	.long LDIFF_SYM2477
 	.byte 1,104,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2470=Lfde342_end - Lfde342_start
-	.long LDIFF_SYM2470
-Lfde342_start:
+LDIFF_SYM2478=Lfde344_end - Lfde344_start
+	.long LDIFF_SYM2478
+Lfde344_start:
 
 	.long 0
 	.align 3
 	.quad Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_Normalize_byte___int
 
-LDIFF_SYM2471=Lme_182 - Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_Normalize_byte___int
-	.long LDIFF_SYM2471
+LDIFF_SYM2479=Lme_183 - Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_Normalize_byte___int
+	.long LDIFF_SYM2479
 	.long 0
 	.byte 12,31,0,68,14,48,157,6,158,5,68,13,29,68,152,4,153,3,68,154,2
 	.align 3
-Lfde342_end:
+Lfde344_end:
 
 .section __DWARF, __debug_info,regular,debug
 
@@ -62942,56 +63221,56 @@ Lfde342_end:
 
 	.byte 34,249,1
 	.quad Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_DecodeRSA_byte__
-	.quad Lme_183
+	.quad Lme_184
 
 	.byte 2,118,16,3
 	.asciz "keypair"
 
-LDIFF_SYM2472=LDIE_SZARRAY - Ldebug_info_start
-	.long LDIFF_SYM2472
+LDIFF_SYM2480=LDIE_SZARRAY - Ldebug_info_start
+	.long LDIFF_SYM2480
 	.byte 1,106,11
 	.asciz "privateKey"
 
-LDIFF_SYM2473=LTDIE_15_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2473
+LDIFF_SYM2481=LTDIE_15_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2481
 	.byte 1,106,11
 	.asciz "param"
 
-LDIFF_SYM2474=LDIE_I4 - Ldebug_info_start
-	.long LDIFF_SYM2474
+LDIFF_SYM2482=LDIE_I4 - Ldebug_info_start
+	.long LDIFF_SYM2482
 	.byte 3,141,232,1,11
 	.asciz "keysize"
 
-LDIFF_SYM2475=LDIE_I4 - Ldebug_info_start
-	.long LDIFF_SYM2475
+LDIFF_SYM2483=LDIE_I4 - Ldebug_info_start
+	.long LDIFF_SYM2483
 	.byte 1,105,11
 	.asciz "keysize2"
 
-LDIFF_SYM2476=LDIE_I4 - Ldebug_info_start
-	.long LDIFF_SYM2476
+LDIFF_SYM2484=LDIE_I4 - Ldebug_info_start
+	.long LDIFF_SYM2484
 	.byte 1,104,11
 	.asciz "rsa"
 
-LDIFF_SYM2477=LTDIE_35_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2477
+LDIFF_SYM2485=LTDIE_35_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2485
 	.byte 1,106,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2478=Lfde343_end - Lfde343_start
-	.long LDIFF_SYM2478
-Lfde343_start:
+LDIFF_SYM2486=Lfde345_end - Lfde345_start
+	.long LDIFF_SYM2486
+Lfde345_start:
 
 	.long 0
 	.align 3
 	.quad Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_DecodeRSA_byte__
 
-LDIFF_SYM2479=Lme_183 - Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_DecodeRSA_byte__
-	.long LDIFF_SYM2479
+LDIFF_SYM2487=Lme_184 - Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_DecodeRSA_byte__
+	.long LDIFF_SYM2487
 	.long 0
 	.byte 12,31,0,68,14,144,3,157,50,158,49,68,13,29,68,152,48,153,47,68,154,46
 	.align 3
-Lfde343_end:
+Lfde345_end:
 
 .section __DWARF, __debug_info,regular,debug
 
@@ -63001,102 +63280,24 @@ Lfde343_end:
 
 	.byte 34,185,2
 	.quad Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_Encode_System_Security_Cryptography_RSA
-	.quad Lme_184
+	.quad Lme_185
 
 	.byte 2,118,16,3
 	.asciz "rsa"
 
-LDIFF_SYM2480=LTDIE_35_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2480
+LDIFF_SYM2488=LTDIE_35_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2488
 	.byte 2,141,16,11
 	.asciz "param"
 
-LDIFF_SYM2481=LDIE_I4 - Ldebug_info_start
-	.long LDIFF_SYM2481
+LDIFF_SYM2489=LDIE_I4 - Ldebug_info_start
+	.long LDIFF_SYM2489
 	.byte 0,11
 	.asciz "rsaPrivateKey"
 
-LDIFF_SYM2482=LDIE_I4 - Ldebug_info_start
-	.long LDIFF_SYM2482
-	.byte 0,0
-
-.section __DWARF, __debug_frame,regular,debug
-
-LDIFF_SYM2483=Lfde344_end - Lfde344_start
-	.long LDIFF_SYM2483
-Lfde344_start:
-
-	.long 0
-	.align 3
-	.quad Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_Encode_System_Security_Cryptography_RSA
-
-LDIFF_SYM2484=Lme_184 - Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_Encode_System_Security_Cryptography_RSA
-	.long LDIFF_SYM2484
-	.long 0
-	.byte 12,31,0,84,14,208,5,157,90,158,89,68,13,29
-	.align 3
-Lfde344_end:
-
-.section __DWARF, __debug_info,regular,debug
-
-	.byte 2
-	.asciz "Mono.Security.Cryptography.PKCS8/PrivateKeyInfo:DecodeDSA"
-	.asciz "Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_DecodeDSA_byte___System_Security_Cryptography_DSAParameters"
-
-	.byte 34,208,2
-	.quad Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_DecodeDSA_byte___System_Security_Cryptography_DSAParameters
-	.quad Lme_185
-
-	.byte 2,118,16,3
-	.asciz "privateKey"
-
-LDIFF_SYM2485=LDIE_SZARRAY - Ldebug_info_start
-	.long LDIFF_SYM2485
-	.byte 1,106,3
-	.asciz "dsaParameters"
-
-LDIFF_SYM2486=LDIE_I4 - Ldebug_info_start
-	.long LDIFF_SYM2486
-	.byte 1,80,11
-	.asciz "pvk"
-
-LDIFF_SYM2487=LTDIE_15_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2487
-	.byte 1,106,0
-
-.section __DWARF, __debug_frame,regular,debug
-
-LDIFF_SYM2488=Lfde345_end - Lfde345_start
-	.long LDIFF_SYM2488
-Lfde345_start:
-
-	.long 0
-	.align 3
-	.quad Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_DecodeDSA_byte___System_Security_Cryptography_DSAParameters
-
-LDIFF_SYM2489=Lme_185 - Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_DecodeDSA_byte___System_Security_Cryptography_DSAParameters
-	.long LDIFF_SYM2489
-	.long 0
-	.byte 12,31,0,68,14,176,1,157,22,158,21,68,13,29,68,154,20
-	.align 3
-Lfde345_end:
-
-.section __DWARF, __debug_info,regular,debug
-
-	.byte 2
-	.asciz "Mono.Security.Cryptography.PKCS8/PrivateKeyInfo:Encode"
-	.asciz "Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_Encode_System_Security_Cryptography_DSA"
-
-	.byte 34,221,2
-	.quad Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_Encode_System_Security_Cryptography_DSA
-	.quad Lme_186
-
-	.byte 2,118,16,3
-	.asciz "dsa"
-
-LDIFF_SYM2490=LTDIE_37_REFERENCE - Ldebug_info_start
+LDIFF_SYM2490=LDIE_I4 - Ldebug_info_start
 	.long LDIFF_SYM2490
-	.byte 2,141,16,0
+	.byte 0,0
 
 .section __DWARF, __debug_frame,regular,debug
 
@@ -63106,14 +63307,92 @@ Lfde346_start:
 
 	.long 0
 	.align 3
+	.quad Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_Encode_System_Security_Cryptography_RSA
+
+LDIFF_SYM2492=Lme_185 - Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_Encode_System_Security_Cryptography_RSA
+	.long LDIFF_SYM2492
+	.long 0
+	.byte 12,31,0,84,14,208,5,157,90,158,89,68,13,29
+	.align 3
+Lfde346_end:
+
+.section __DWARF, __debug_info,regular,debug
+
+	.byte 2
+	.asciz "Mono.Security.Cryptography.PKCS8/PrivateKeyInfo:DecodeDSA"
+	.asciz "Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_DecodeDSA_byte___System_Security_Cryptography_DSAParameters"
+
+	.byte 34,208,2
+	.quad Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_DecodeDSA_byte___System_Security_Cryptography_DSAParameters
+	.quad Lme_186
+
+	.byte 2,118,16,3
+	.asciz "privateKey"
+
+LDIFF_SYM2493=LDIE_SZARRAY - Ldebug_info_start
+	.long LDIFF_SYM2493
+	.byte 1,106,3
+	.asciz "dsaParameters"
+
+LDIFF_SYM2494=LDIE_I4 - Ldebug_info_start
+	.long LDIFF_SYM2494
+	.byte 1,80,11
+	.asciz "pvk"
+
+LDIFF_SYM2495=LTDIE_15_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2495
+	.byte 1,106,0
+
+.section __DWARF, __debug_frame,regular,debug
+
+LDIFF_SYM2496=Lfde347_end - Lfde347_start
+	.long LDIFF_SYM2496
+Lfde347_start:
+
+	.long 0
+	.align 3
+	.quad Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_DecodeDSA_byte___System_Security_Cryptography_DSAParameters
+
+LDIFF_SYM2497=Lme_186 - Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_DecodeDSA_byte___System_Security_Cryptography_DSAParameters
+	.long LDIFF_SYM2497
+	.long 0
+	.byte 12,31,0,68,14,176,1,157,22,158,21,68,13,29,68,154,20
+	.align 3
+Lfde347_end:
+
+.section __DWARF, __debug_info,regular,debug
+
+	.byte 2
+	.asciz "Mono.Security.Cryptography.PKCS8/PrivateKeyInfo:Encode"
+	.asciz "Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_Encode_System_Security_Cryptography_DSA"
+
+	.byte 34,221,2
+	.quad Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_Encode_System_Security_Cryptography_DSA
+	.quad Lme_187
+
+	.byte 2,118,16,3
+	.asciz "dsa"
+
+LDIFF_SYM2498=LTDIE_37_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2498
+	.byte 2,141,16,0
+
+.section __DWARF, __debug_frame,regular,debug
+
+LDIFF_SYM2499=Lfde348_end - Lfde348_start
+	.long LDIFF_SYM2499
+Lfde348_start:
+
+	.long 0
+	.align 3
 	.quad Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_Encode_System_Security_Cryptography_DSA
 
-LDIFF_SYM2492=Lme_186 - Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_Encode_System_Security_Cryptography_DSA
-	.long LDIFF_SYM2492
+LDIFF_SYM2500=Lme_187 - Mono_Security_Cryptography_PKCS8_PrivateKeyInfo_Encode_System_Security_Cryptography_DSA
+	.long LDIFF_SYM2500
 	.long 0
 	.byte 12,31,0,68,14,96,157,12,158,11,68,13,29
 	.align 3
-Lfde346_end:
+Lfde348_end:
 
 .section __DWARF, __debug_info,regular,debug
 
@@ -63123,31 +63402,31 @@ Lfde346_end:
 
 	.byte 34,137,3
 	.quad Mono_Security_Cryptography_PKCS8_EncryptedPrivateKeyInfo__ctor
-	.quad Lme_187
+	.quad Lme_188
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2493=LDIE_I4 - Ldebug_info_start
-	.long LDIFF_SYM2493
+LDIFF_SYM2501=LDIE_I4 - Ldebug_info_start
+	.long LDIFF_SYM2501
 	.byte 0,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2494=Lfde347_end - Lfde347_start
-	.long LDIFF_SYM2494
-Lfde347_start:
+LDIFF_SYM2502=Lfde349_end - Lfde349_start
+	.long LDIFF_SYM2502
+Lfde349_start:
 
 	.long 0
 	.align 3
 	.quad Mono_Security_Cryptography_PKCS8_EncryptedPrivateKeyInfo__ctor
 
-LDIFF_SYM2495=Lme_187 - Mono_Security_Cryptography_PKCS8_EncryptedPrivateKeyInfo__ctor
-	.long LDIFF_SYM2495
+LDIFF_SYM2503=Lme_188 - Mono_Security_Cryptography_PKCS8_EncryptedPrivateKeyInfo__ctor
+	.long LDIFF_SYM2503
 	.long 0
 	.byte 12,31,0,68,14,32,157,4,158,3,68,13,29
 	.align 3
-Lfde347_end:
+Lfde349_end:
 
 .section __DWARF, __debug_info,regular,debug
 
@@ -63157,36 +63436,36 @@ Lfde347_end:
 
 	.byte 34,139,3
 	.quad Mono_Security_Cryptography_PKCS8_EncryptedPrivateKeyInfo__ctor_byte__
-	.quad Lme_188
+	.quad Lme_189
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2496=LTDIE_28_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2496
+LDIFF_SYM2504=LTDIE_28_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2504
 	.byte 2,141,16,3
 	.asciz "data"
 
-LDIFF_SYM2497=LDIE_SZARRAY - Ldebug_info_start
-	.long LDIFF_SYM2497
+LDIFF_SYM2505=LDIE_SZARRAY - Ldebug_info_start
+	.long LDIFF_SYM2505
 	.byte 2,141,24,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2498=Lfde348_end - Lfde348_start
-	.long LDIFF_SYM2498
-Lfde348_start:
+LDIFF_SYM2506=Lfde350_end - Lfde350_start
+	.long LDIFF_SYM2506
+Lfde350_start:
 
 	.long 0
 	.align 3
 	.quad Mono_Security_Cryptography_PKCS8_EncryptedPrivateKeyInfo__ctor_byte__
 
-LDIFF_SYM2499=Lme_188 - Mono_Security_Cryptography_PKCS8_EncryptedPrivateKeyInfo__ctor_byte__
-	.long LDIFF_SYM2499
+LDIFF_SYM2507=Lme_189 - Mono_Security_Cryptography_PKCS8_EncryptedPrivateKeyInfo__ctor_byte__
+	.long LDIFF_SYM2507
 	.long 0
 	.byte 12,31,0,68,14,32,157,4,158,3,68,13,29
 	.align 3
-Lfde348_end:
+Lfde350_end:
 
 .section __DWARF, __debug_info,regular,debug
 
@@ -63196,31 +63475,31 @@ Lfde348_end:
 
 	.byte 34,147,3
 	.quad Mono_Security_Cryptography_PKCS8_EncryptedPrivateKeyInfo_get_Algorithm
-	.quad Lme_189
+	.quad Lme_18a
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2500=LTDIE_28_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2500
+LDIFF_SYM2508=LTDIE_28_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2508
 	.byte 2,141,16,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2501=Lfde349_end - Lfde349_start
-	.long LDIFF_SYM2501
-Lfde349_start:
+LDIFF_SYM2509=Lfde351_end - Lfde351_start
+	.long LDIFF_SYM2509
+Lfde351_start:
 
 	.long 0
 	.align 3
 	.quad Mono_Security_Cryptography_PKCS8_EncryptedPrivateKeyInfo_get_Algorithm
 
-LDIFF_SYM2502=Lme_189 - Mono_Security_Cryptography_PKCS8_EncryptedPrivateKeyInfo_get_Algorithm
-	.long LDIFF_SYM2502
+LDIFF_SYM2510=Lme_18a - Mono_Security_Cryptography_PKCS8_EncryptedPrivateKeyInfo_get_Algorithm
+	.long LDIFF_SYM2510
 	.long 0
 	.byte 12,31,0,68,14,32,157,4,158,3,68,13,29
 	.align 3
-Lfde349_end:
+Lfde351_end:
 
 .section __DWARF, __debug_info,regular,debug
 
@@ -63230,36 +63509,36 @@ Lfde349_end:
 
 	.byte 34,148,3
 	.quad Mono_Security_Cryptography_PKCS8_EncryptedPrivateKeyInfo_set_Algorithm_string
-	.quad Lme_18a
+	.quad Lme_18b
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2503=LTDIE_28_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2503
+LDIFF_SYM2511=LTDIE_28_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2511
 	.byte 2,141,16,3
 	.asciz "value"
 
-LDIFF_SYM2504=LDIE_STRING - Ldebug_info_start
-	.long LDIFF_SYM2504
+LDIFF_SYM2512=LDIE_STRING - Ldebug_info_start
+	.long LDIFF_SYM2512
 	.byte 2,141,24,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2505=Lfde350_end - Lfde350_start
-	.long LDIFF_SYM2505
-Lfde350_start:
+LDIFF_SYM2513=Lfde352_end - Lfde352_start
+	.long LDIFF_SYM2513
+Lfde352_start:
 
 	.long 0
 	.align 3
 	.quad Mono_Security_Cryptography_PKCS8_EncryptedPrivateKeyInfo_set_Algorithm_string
 
-LDIFF_SYM2506=Lme_18a - Mono_Security_Cryptography_PKCS8_EncryptedPrivateKeyInfo_set_Algorithm_string
-	.long LDIFF_SYM2506
+LDIFF_SYM2514=Lme_18b - Mono_Security_Cryptography_PKCS8_EncryptedPrivateKeyInfo_set_Algorithm_string
+	.long LDIFF_SYM2514
 	.long 0
 	.byte 12,31,0,68,14,32,157,4,158,3,68,13,29
 	.align 3
-Lfde350_end:
+Lfde352_end:
 
 .section __DWARF, __debug_info,regular,debug
 
@@ -63269,31 +63548,31 @@ Lfde350_end:
 
 	.byte 34,152,3
 	.quad Mono_Security_Cryptography_PKCS8_EncryptedPrivateKeyInfo_get_EncryptedData
-	.quad Lme_18b
+	.quad Lme_18c
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2507=LTDIE_28_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2507
+LDIFF_SYM2515=LTDIE_28_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2515
 	.byte 1,106,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2508=Lfde351_end - Lfde351_start
-	.long LDIFF_SYM2508
-Lfde351_start:
+LDIFF_SYM2516=Lfde353_end - Lfde353_start
+	.long LDIFF_SYM2516
+Lfde353_start:
 
 	.long 0
 	.align 3
 	.quad Mono_Security_Cryptography_PKCS8_EncryptedPrivateKeyInfo_get_EncryptedData
 
-LDIFF_SYM2509=Lme_18b - Mono_Security_Cryptography_PKCS8_EncryptedPrivateKeyInfo_get_EncryptedData
-	.long LDIFF_SYM2509
+LDIFF_SYM2517=Lme_18c - Mono_Security_Cryptography_PKCS8_EncryptedPrivateKeyInfo_get_EncryptedData
+	.long LDIFF_SYM2517
 	.long 0
 	.byte 12,31,0,68,14,32,157,4,158,3,68,13,29,68,154,2
 	.align 3
-Lfde351_end:
+Lfde353_end:
 
 .section __DWARF, __debug_info,regular,debug
 
@@ -63303,36 +63582,36 @@ Lfde351_end:
 
 	.byte 34,153,3
 	.quad Mono_Security_Cryptography_PKCS8_EncryptedPrivateKeyInfo_set_EncryptedData_byte__
-	.quad Lme_18c
+	.quad Lme_18d
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2510=LTDIE_28_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2510
+LDIFF_SYM2518=LTDIE_28_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2518
 	.byte 2,141,32,3
 	.asciz "value"
 
-LDIFF_SYM2511=LDIE_SZARRAY - Ldebug_info_start
-	.long LDIFF_SYM2511
+LDIFF_SYM2519=LDIE_SZARRAY - Ldebug_info_start
+	.long LDIFF_SYM2519
 	.byte 1,106,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2512=Lfde352_end - Lfde352_start
-	.long LDIFF_SYM2512
-Lfde352_start:
+LDIFF_SYM2520=Lfde354_end - Lfde354_start
+	.long LDIFF_SYM2520
+Lfde354_start:
 
 	.long 0
 	.align 3
 	.quad Mono_Security_Cryptography_PKCS8_EncryptedPrivateKeyInfo_set_EncryptedData_byte__
 
-LDIFF_SYM2513=Lme_18c - Mono_Security_Cryptography_PKCS8_EncryptedPrivateKeyInfo_set_EncryptedData_byte__
-	.long LDIFF_SYM2513
+LDIFF_SYM2521=Lme_18d - Mono_Security_Cryptography_PKCS8_EncryptedPrivateKeyInfo_set_EncryptedData_byte__
+	.long LDIFF_SYM2521
 	.long 0
 	.byte 12,31,0,68,14,48,157,6,158,5,68,13,29,68,152,4,68,154,3
 	.align 3
-Lfde352_end:
+Lfde354_end:
 
 .section __DWARF, __debug_info,regular,debug
 
@@ -63342,31 +63621,31 @@ Lfde352_end:
 
 	.byte 34,158,3
 	.quad Mono_Security_Cryptography_PKCS8_EncryptedPrivateKeyInfo_get_Salt
-	.quad Lme_18d
+	.quad Lme_18e
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2514=LTDIE_28_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2514
+LDIFF_SYM2522=LTDIE_28_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2522
 	.byte 1,106,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2515=Lfde353_end - Lfde353_start
-	.long LDIFF_SYM2515
-Lfde353_start:
+LDIFF_SYM2523=Lfde355_end - Lfde355_start
+	.long LDIFF_SYM2523
+Lfde355_start:
 
 	.long 0
 	.align 3
 	.quad Mono_Security_Cryptography_PKCS8_EncryptedPrivateKeyInfo_get_Salt
 
-LDIFF_SYM2516=Lme_18d - Mono_Security_Cryptography_PKCS8_EncryptedPrivateKeyInfo_get_Salt
-	.long LDIFF_SYM2516
+LDIFF_SYM2524=Lme_18e - Mono_Security_Cryptography_PKCS8_EncryptedPrivateKeyInfo_get_Salt
+	.long LDIFF_SYM2524
 	.long 0
 	.byte 12,31,0,68,14,48,157,6,158,5,68,13,29,68,154,4
 	.align 3
-Lfde353_end:
+Lfde355_end:
 
 .section __DWARF, __debug_info,regular,debug
 
@@ -63376,31 +63655,31 @@ Lfde353_end:
 
 	.byte 34,169,3
 	.quad Mono_Security_Cryptography_PKCS8_EncryptedPrivateKeyInfo_get_IterationCount
-	.quad Lme_18e
+	.quad Lme_18f
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2517=LTDIE_28_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2517
+LDIFF_SYM2525=LTDIE_28_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2525
 	.byte 2,141,16,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2518=Lfde354_end - Lfde354_start
-	.long LDIFF_SYM2518
-Lfde354_start:
+LDIFF_SYM2526=Lfde356_end - Lfde356_start
+	.long LDIFF_SYM2526
+Lfde356_start:
 
 	.long 0
 	.align 3
 	.quad Mono_Security_Cryptography_PKCS8_EncryptedPrivateKeyInfo_get_IterationCount
 
-LDIFF_SYM2519=Lme_18e - Mono_Security_Cryptography_PKCS8_EncryptedPrivateKeyInfo_get_IterationCount
-	.long LDIFF_SYM2519
+LDIFF_SYM2527=Lme_18f - Mono_Security_Cryptography_PKCS8_EncryptedPrivateKeyInfo_get_IterationCount
+	.long LDIFF_SYM2527
 	.long 0
 	.byte 12,31,0,68,14,32,157,4,158,3,68,13,29
 	.align 3
-Lfde354_end:
+Lfde356_end:
 
 .section __DWARF, __debug_info,regular,debug
 
@@ -63410,36 +63689,36 @@ Lfde354_end:
 
 	.byte 34,171,3
 	.quad Mono_Security_Cryptography_PKCS8_EncryptedPrivateKeyInfo_set_IterationCount_int
-	.quad Lme_18f
+	.quad Lme_190
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2520=LTDIE_28_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2520
+LDIFF_SYM2528=LTDIE_28_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2528
 	.byte 2,141,16,3
 	.asciz "value"
 
-LDIFF_SYM2521=LDIE_I4 - Ldebug_info_start
-	.long LDIFF_SYM2521
+LDIFF_SYM2529=LDIE_I4 - Ldebug_info_start
+	.long LDIFF_SYM2529
 	.byte 2,141,24,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2522=Lfde355_end - Lfde355_start
-	.long LDIFF_SYM2522
-Lfde355_start:
+LDIFF_SYM2530=Lfde357_end - Lfde357_start
+	.long LDIFF_SYM2530
+Lfde357_start:
 
 	.long 0
 	.align 3
 	.quad Mono_Security_Cryptography_PKCS8_EncryptedPrivateKeyInfo_set_IterationCount_int
 
-LDIFF_SYM2523=Lme_18f - Mono_Security_Cryptography_PKCS8_EncryptedPrivateKeyInfo_set_IterationCount_int
-	.long LDIFF_SYM2523
+LDIFF_SYM2531=Lme_190 - Mono_Security_Cryptography_PKCS8_EncryptedPrivateKeyInfo_set_IterationCount_int
+	.long LDIFF_SYM2531
 	.long 0
 	.byte 12,31,0,68,14,48,157,6,158,5,68,13,29
 	.align 3
-Lfde355_end:
+Lfde357_end:
 
 .section __DWARF, __debug_info,regular,debug
 
@@ -63449,61 +63728,61 @@ Lfde355_end:
 
 	.byte 34,181,3
 	.quad Mono_Security_Cryptography_PKCS8_EncryptedPrivateKeyInfo_Decode_byte__
-	.quad Lme_190
+	.quad Lme_191
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2524=LTDIE_28_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2524
+LDIFF_SYM2532=LTDIE_28_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2532
 	.byte 1,105,3
 	.asciz "data"
 
-LDIFF_SYM2525=LDIE_SZARRAY - Ldebug_info_start
-	.long LDIFF_SYM2525
+LDIFF_SYM2533=LDIE_SZARRAY - Ldebug_info_start
+	.long LDIFF_SYM2533
 	.byte 1,106,11
 	.asciz "encryptionAlgorithm"
 
-LDIFF_SYM2526=LTDIE_15_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2526
+LDIFF_SYM2534=LTDIE_15_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2534
 	.byte 1,104,11
 	.asciz "algorithm"
 
-LDIFF_SYM2527=LTDIE_15_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2527
+LDIFF_SYM2535=LTDIE_15_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2535
 	.byte 1,103,11
 	.asciz "encryptedData"
 
-LDIFF_SYM2528=LTDIE_15_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2528
+LDIFF_SYM2536=LTDIE_15_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2536
 	.byte 1,106,11
 	.asciz "salt"
 
-LDIFF_SYM2529=LTDIE_15_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2529
+LDIFF_SYM2537=LTDIE_15_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2537
 	.byte 1,103,11
 	.asciz "iterationCount"
 
-LDIFF_SYM2530=LTDIE_15_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2530
+LDIFF_SYM2538=LTDIE_15_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2538
 	.byte 1,104,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2531=Lfde356_end - Lfde356_start
-	.long LDIFF_SYM2531
-Lfde356_start:
+LDIFF_SYM2539=Lfde358_end - Lfde358_start
+	.long LDIFF_SYM2539
+Lfde358_start:
 
 	.long 0
 	.align 3
 	.quad Mono_Security_Cryptography_PKCS8_EncryptedPrivateKeyInfo_Decode_byte__
 
-LDIFF_SYM2532=Lme_190 - Mono_Security_Cryptography_PKCS8_EncryptedPrivateKeyInfo_Decode_byte__
-	.long LDIFF_SYM2532
+LDIFF_SYM2540=Lme_191 - Mono_Security_Cryptography_PKCS8_EncryptedPrivateKeyInfo_Decode_byte__
+	.long LDIFF_SYM2540
 	.long 0
 	.byte 12,31,0,68,14,64,157,8,158,7,68,13,29,68,151,6,152,5,68,153,4,154,3
 	.align 3
-Lfde356_end:
+Lfde358_end:
 
 .section __DWARF, __debug_info,regular,debug
 
@@ -63513,56 +63792,56 @@ Lfde356_end:
 
 	.byte 34,221,3
 	.quad Mono_Security_Cryptography_PKCS8_EncryptedPrivateKeyInfo_GetBytes
-	.quad Lme_191
+	.quad Lme_192
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2533=LTDIE_28_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2533
+LDIFF_SYM2541=LTDIE_28_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2541
 	.byte 1,106,11
 	.asciz "encryptionAlgorithm"
 
-LDIFF_SYM2534=LTDIE_15_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2534
+LDIFF_SYM2542=LTDIE_15_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2542
 	.byte 1,105,11
 	.asciz "encryptedData"
 
-LDIFF_SYM2535=LTDIE_15_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2535
+LDIFF_SYM2543=LTDIE_15_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2543
 	.byte 1,106,11
 	.asciz "salt"
 
-LDIFF_SYM2536=LTDIE_15_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2536
+LDIFF_SYM2544=LTDIE_15_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2544
 	.byte 2,141,40,11
 	.asciz "iterations"
 
-LDIFF_SYM2537=LTDIE_15_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2537
+LDIFF_SYM2545=LTDIE_15_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2545
 	.byte 2,141,48,11
 	.asciz "parameters"
 
-LDIFF_SYM2538=LTDIE_15_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2538
+LDIFF_SYM2546=LTDIE_15_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2546
 	.byte 1,102,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2539=Lfde357_end - Lfde357_start
-	.long LDIFF_SYM2539
-Lfde357_start:
+LDIFF_SYM2547=Lfde359_end - Lfde359_start
+	.long LDIFF_SYM2547
+Lfde359_start:
 
 	.long 0
 	.align 3
 	.quad Mono_Security_Cryptography_PKCS8_EncryptedPrivateKeyInfo_GetBytes
 
-LDIFF_SYM2540=Lme_191 - Mono_Security_Cryptography_PKCS8_EncryptedPrivateKeyInfo_GetBytes
-	.long LDIFF_SYM2540
+LDIFF_SYM2548=Lme_192 - Mono_Security_Cryptography_PKCS8_EncryptedPrivateKeyInfo_GetBytes
+	.long LDIFF_SYM2548
 	.long 0
 	.byte 12,31,0,68,14,112,157,14,158,13,68,13,29,68,150,12,68,153,11,154,10
 	.align 3
-Lfde357_end:
+Lfde359_end:
 
 .section __DWARF, __debug_info,regular,debug
 LTDIE_95:
@@ -63571,137 +63850,137 @@ LTDIE_95:
 	.asciz "_KeyGeneratedEventHandler"
 
 	.byte 112,16
-LDIFF_SYM2541=LTDIE_62 - Ldebug_info_start
-	.long LDIFF_SYM2541
+LDIFF_SYM2549=LTDIE_62 - Ldebug_info_start
+	.long LDIFF_SYM2549
 	.byte 2,35,0,0,7
 	.asciz "_KeyGeneratedEventHandler"
 
-LDIFF_SYM2542=LTDIE_95 - Ldebug_info_start
-	.long LDIFF_SYM2542
+LDIFF_SYM2550=LTDIE_95 - Ldebug_info_start
+	.long LDIFF_SYM2550
 LTDIE_95_POINTER:
 
 	.byte 13
-LDIFF_SYM2543=LTDIE_95 - Ldebug_info_start
-	.long LDIFF_SYM2543
+LDIFF_SYM2551=LTDIE_95 - Ldebug_info_start
+	.long LDIFF_SYM2551
 LTDIE_95_REFERENCE:
 
 	.byte 14
-LDIFF_SYM2544=LTDIE_95 - Ldebug_info_start
-	.long LDIFF_SYM2544
+LDIFF_SYM2552=LTDIE_95 - Ldebug_info_start
+	.long LDIFF_SYM2552
 LTDIE_94:
 
 	.byte 5
 	.asciz "Mono_Security_Cryptography_RSAManaged"
 
 	.byte 112,16
-LDIFF_SYM2545=LTDIE_35 - Ldebug_info_start
-	.long LDIFF_SYM2545
+LDIFF_SYM2553=LTDIE_35 - Ldebug_info_start
+	.long LDIFF_SYM2553
 	.byte 2,35,0,6
 	.asciz "isCRTpossible"
 
-LDIFF_SYM2546=LDIE_BOOLEAN - Ldebug_info_start
-	.long LDIFF_SYM2546
+LDIFF_SYM2554=LDIE_BOOLEAN - Ldebug_info_start
+	.long LDIFF_SYM2554
 	.byte 2,35,104,6
 	.asciz "keypairGenerated"
 
-LDIFF_SYM2547=LDIE_BOOLEAN - Ldebug_info_start
-	.long LDIFF_SYM2547
+LDIFF_SYM2555=LDIE_BOOLEAN - Ldebug_info_start
+	.long LDIFF_SYM2555
 	.byte 2,35,105,6
 	.asciz "m_disposed"
 
-LDIFF_SYM2548=LDIE_BOOLEAN - Ldebug_info_start
-	.long LDIFF_SYM2548
+LDIFF_SYM2556=LDIE_BOOLEAN - Ldebug_info_start
+	.long LDIFF_SYM2556
 	.byte 2,35,106,6
 	.asciz "d"
 
-LDIFF_SYM2549=LTDIE_0_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2549
+LDIFF_SYM2557=LTDIE_0_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2557
 	.byte 2,35,32,6
 	.asciz "p"
 
-LDIFF_SYM2550=LTDIE_0_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2550
+LDIFF_SYM2558=LTDIE_0_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2558
 	.byte 2,35,40,6
 	.asciz "q"
 
-LDIFF_SYM2551=LTDIE_0_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2551
+LDIFF_SYM2559=LTDIE_0_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2559
 	.byte 2,35,48,6
 	.asciz "dp"
 
-LDIFF_SYM2552=LTDIE_0_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2552
+LDIFF_SYM2560=LTDIE_0_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2560
 	.byte 2,35,56,6
 	.asciz "dq"
 
-LDIFF_SYM2553=LTDIE_0_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2553
+LDIFF_SYM2561=LTDIE_0_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2561
 	.byte 2,35,64,6
 	.asciz "qInv"
 
-LDIFF_SYM2554=LTDIE_0_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2554
+LDIFF_SYM2562=LTDIE_0_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2562
 	.byte 2,35,72,6
 	.asciz "n"
 
-LDIFF_SYM2555=LTDIE_0_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2555
+LDIFF_SYM2563=LTDIE_0_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2563
 	.byte 2,35,80,6
 	.asciz "e"
 
-LDIFF_SYM2556=LTDIE_0_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2556
+LDIFF_SYM2564=LTDIE_0_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2564
 	.byte 2,35,88,6
 	.asciz "KeyGenerated"
 
-LDIFF_SYM2557=LTDIE_95_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2557
+LDIFF_SYM2565=LTDIE_95_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2565
 	.byte 2,35,96,0,7
 	.asciz "Mono_Security_Cryptography_RSAManaged"
 
-LDIFF_SYM2558=LTDIE_94 - Ldebug_info_start
-	.long LDIFF_SYM2558
+LDIFF_SYM2566=LTDIE_94 - Ldebug_info_start
+	.long LDIFF_SYM2566
 LTDIE_94_POINTER:
 
 	.byte 13
-LDIFF_SYM2559=LTDIE_94 - Ldebug_info_start
-	.long LDIFF_SYM2559
+LDIFF_SYM2567=LTDIE_94 - Ldebug_info_start
+	.long LDIFF_SYM2567
 LTDIE_94_REFERENCE:
 
 	.byte 14
-LDIFF_SYM2560=LTDIE_94 - Ldebug_info_start
-	.long LDIFF_SYM2560
+LDIFF_SYM2568=LTDIE_94 - Ldebug_info_start
+	.long LDIFF_SYM2568
 	.byte 2
 	.asciz "Mono.Security.Cryptography.RSAManaged:Finalize"
 	.asciz "Mono_Security_Cryptography_RSAManaged_Finalize"
 
 	.byte 35,88
 	.quad Mono_Security_Cryptography_RSAManaged_Finalize
-	.quad Lme_192
+	.quad Lme_193
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2561=LTDIE_94_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2561
+LDIFF_SYM2569=LTDIE_94_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2569
 	.byte 2,141,16,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2562=Lfde358_end - Lfde358_start
-	.long LDIFF_SYM2562
-Lfde358_start:
+LDIFF_SYM2570=Lfde360_end - Lfde360_start
+	.long LDIFF_SYM2570
+Lfde360_start:
 
 	.long 0
 	.align 3
 	.quad Mono_Security_Cryptography_RSAManaged_Finalize
 
-LDIFF_SYM2563=Lme_192 - Mono_Security_Cryptography_RSAManaged_Finalize
-	.long LDIFF_SYM2563
+LDIFF_SYM2571=Lme_193 - Mono_Security_Cryptography_RSAManaged_Finalize
+	.long LDIFF_SYM2571
 	.long 0
 	.byte 12,31,0,68,14,64,157,8,158,7,68,13,29
 	.align 3
-Lfde358_end:
+Lfde360_end:
 
 .section __DWARF, __debug_info,regular,debug
 
@@ -63711,56 +63990,56 @@ Lfde358_end:
 
 	.byte 35,94
 	.quad Mono_Security_Cryptography_RSAManaged_GenerateKeyPair
-	.quad Lme_193
+	.quad Lme_194
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2564=LTDIE_94_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2564
+LDIFF_SYM2572=LTDIE_94_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2572
 	.byte 1,106,11
 	.asciz "pbitlength"
 
-LDIFF_SYM2565=LDIE_I4 - Ldebug_info_start
-	.long LDIFF_SYM2565
+LDIFF_SYM2573=LDIE_I4 - Ldebug_info_start
+	.long LDIFF_SYM2573
 	.byte 1,105,11
 	.asciz "qbitlength"
 
-LDIFF_SYM2566=LDIE_I4 - Ldebug_info_start
-	.long LDIFF_SYM2566
+LDIFF_SYM2574=LDIE_I4 - Ldebug_info_start
+	.long LDIFF_SYM2574
 	.byte 1,104,11
 	.asciz "pSub1"
 
-LDIFF_SYM2567=LTDIE_0_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2567
+LDIFF_SYM2575=LTDIE_0_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2575
 	.byte 1,105,11
 	.asciz "qSub1"
 
-LDIFF_SYM2568=LTDIE_0_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2568
+LDIFF_SYM2576=LTDIE_0_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2576
 	.byte 1,104,11
 	.asciz "phi"
 
-LDIFF_SYM2569=LTDIE_0_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2569
+LDIFF_SYM2577=LTDIE_0_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2577
 	.byte 2,141,40,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2570=Lfde359_end - Lfde359_start
-	.long LDIFF_SYM2570
-Lfde359_start:
+LDIFF_SYM2578=Lfde361_end - Lfde361_start
+	.long LDIFF_SYM2578
+Lfde361_start:
 
 	.long 0
 	.align 3
 	.quad Mono_Security_Cryptography_RSAManaged_GenerateKeyPair
 
-LDIFF_SYM2571=Lme_193 - Mono_Security_Cryptography_RSAManaged_GenerateKeyPair
-	.long LDIFF_SYM2571
+LDIFF_SYM2579=Lme_194 - Mono_Security_Cryptography_RSAManaged_GenerateKeyPair
+	.long LDIFF_SYM2579
 	.long 0
 	.byte 12,31,0,68,14,64,157,8,158,7,68,13,29,68,152,6,153,5,68,154,4
 	.align 3
-Lfde359_end:
+Lfde361_end:
 
 .section __DWARF, __debug_info,regular,debug
 
@@ -63770,36 +64049,36 @@ Lfde359_end:
 
 	.byte 35,149,1
 	.quad Mono_Security_Cryptography_RSAManaged_get_KeySize
-	.quad Lme_194
+	.quad Lme_195
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2572=LTDIE_94_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2572
+LDIFF_SYM2580=LTDIE_94_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2580
 	.byte 1,106,11
 	.asciz "ks"
 
-LDIFF_SYM2573=LDIE_I4 - Ldebug_info_start
-	.long LDIFF_SYM2573
+LDIFF_SYM2581=LDIE_I4 - Ldebug_info_start
+	.long LDIFF_SYM2581
 	.byte 1,106,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2574=Lfde360_end - Lfde360_start
-	.long LDIFF_SYM2574
-Lfde360_start:
+LDIFF_SYM2582=Lfde362_end - Lfde362_start
+	.long LDIFF_SYM2582
+Lfde362_start:
 
 	.long 0
 	.align 3
 	.quad Mono_Security_Cryptography_RSAManaged_get_KeySize
 
-LDIFF_SYM2575=Lme_194 - Mono_Security_Cryptography_RSAManaged_get_KeySize
-	.long LDIFF_SYM2575
+LDIFF_SYM2583=Lme_195 - Mono_Security_Cryptography_RSAManaged_get_KeySize
+	.long LDIFF_SYM2583
 	.long 0
 	.byte 12,31,0,68,14,32,157,4,158,3,68,13,29,68,154,2
 	.align 3
-Lfde360_end:
+Lfde362_end:
 
 .section __DWARF, __debug_info,regular,debug
 
@@ -63809,31 +64088,31 @@ Lfde360_end:
 
 	.byte 35,170,1
 	.quad Mono_Security_Cryptography_RSAManaged_get_PublicOnly
-	.quad Lme_195
+	.quad Lme_196
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2576=LTDIE_94_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2576
+LDIFF_SYM2584=LTDIE_94_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2584
 	.byte 2,141,16,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2577=Lfde361_end - Lfde361_start
-	.long LDIFF_SYM2577
-Lfde361_start:
+LDIFF_SYM2585=Lfde363_end - Lfde363_start
+	.long LDIFF_SYM2585
+Lfde363_start:
 
 	.long 0
 	.align 3
 	.quad Mono_Security_Cryptography_RSAManaged_get_PublicOnly
 
-LDIFF_SYM2578=Lme_195 - Mono_Security_Cryptography_RSAManaged_get_PublicOnly
-	.long LDIFF_SYM2578
+LDIFF_SYM2586=Lme_196 - Mono_Security_Cryptography_RSAManaged_get_PublicOnly
+	.long LDIFF_SYM2586
 	.long 0
 	.byte 12,31,0,68,14,32,157,4,158,3,68,13,29
 	.align 3
-Lfde361_end:
+Lfde363_end:
 
 .section __DWARF, __debug_info,regular,debug
 
@@ -63843,51 +64122,51 @@ Lfde361_end:
 
 	.byte 35,134,2
 	.quad Mono_Security_Cryptography_RSAManaged_ExportParameters_bool
-	.quad Lme_196
+	.quad Lme_197
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2579=LTDIE_94_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2579
+LDIFF_SYM2587=LTDIE_94_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2587
 	.byte 1,105,3
 	.asciz "includePrivateParameters"
 
-LDIFF_SYM2580=LDIE_BOOLEAN - Ldebug_info_start
-	.long LDIFF_SYM2580
+LDIFF_SYM2588=LDIE_BOOLEAN - Ldebug_info_start
+	.long LDIFF_SYM2588
 	.byte 1,106,11
 	.asciz "param"
 
-LDIFF_SYM2581=LDIE_I4 - Ldebug_info_start
-	.long LDIFF_SYM2581
+LDIFF_SYM2589=LDIE_I4 - Ldebug_info_start
+	.long LDIFF_SYM2589
 	.byte 3,141,232,3,11
 	.asciz "normalizedD"
 
-LDIFF_SYM2582=LDIE_SZARRAY - Ldebug_info_start
-	.long LDIFF_SYM2582
+LDIFF_SYM2590=LDIE_SZARRAY - Ldebug_info_start
+	.long LDIFF_SYM2590
 	.byte 1,106,11
 	.asciz "length"
 
-LDIFF_SYM2583=LDIE_I4 - Ldebug_info_start
-	.long LDIFF_SYM2583
+LDIFF_SYM2591=LDIE_I4 - Ldebug_info_start
+	.long LDIFF_SYM2591
 	.byte 1,106,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2584=Lfde362_end - Lfde362_start
-	.long LDIFF_SYM2584
-Lfde362_start:
+LDIFF_SYM2592=Lfde364_end - Lfde364_start
+	.long LDIFF_SYM2592
+Lfde364_start:
 
 	.long 0
 	.align 3
 	.quad Mono_Security_Cryptography_RSAManaged_ExportParameters_bool
 
-LDIFF_SYM2585=Lme_196 - Mono_Security_Cryptography_RSAManaged_ExportParameters_bool
-	.long LDIFF_SYM2585
+LDIFF_SYM2593=Lme_197 - Mono_Security_Cryptography_RSAManaged_ExportParameters_bool
+	.long LDIFF_SYM2593
 	.long 0
 	.byte 12,31,0,84,14,224,4,157,76,158,75,68,13,29,68,153,74,154,73
 	.align 3
-Lfde362_end:
+Lfde364_end:
 
 .section __DWARF, __debug_info,regular,debug
 
@@ -63897,72 +64176,72 @@ Lfde362_end:
 
 	.byte 35,170,2
 	.quad Mono_Security_Cryptography_RSAManaged_ImportParameters_System_Security_Cryptography_RSAParameters
-	.quad Lme_197
+	.quad Lme_198
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2586=LTDIE_94_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2586
+LDIFF_SYM2594=LTDIE_94_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2594
 	.byte 1,106,3
 	.asciz "parameters"
 
-LDIFF_SYM2587=LDIE_I4 - Ldebug_info_start
-	.long LDIFF_SYM2587
+LDIFF_SYM2595=LDIE_I4 - Ldebug_info_start
+	.long LDIFF_SYM2595
 	.byte 1,80,11
 	.asciz "privateKey"
 
-LDIFF_SYM2588=LDIE_BOOLEAN - Ldebug_info_start
-	.long LDIFF_SYM2588
+LDIFF_SYM2596=LDIE_BOOLEAN - Ldebug_info_start
+	.long LDIFF_SYM2596
 	.byte 1,104,11
 	.asciz "ok"
 
-LDIFF_SYM2589=LDIE_BOOLEAN - Ldebug_info_start
-	.long LDIFF_SYM2589
+LDIFF_SYM2597=LDIE_BOOLEAN - Ldebug_info_start
+	.long LDIFF_SYM2597
 	.byte 1,105,11
 	.asciz "V_2"
 
-LDIFF_SYM2590=LDIE_I4 - Ldebug_info_start
-	.long LDIFF_SYM2590
+LDIFF_SYM2598=LDIE_I4 - Ldebug_info_start
+	.long LDIFF_SYM2598
 	.byte 0,11
 	.asciz "pSub1"
 
-LDIFF_SYM2591=LTDIE_0_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2591
+LDIFF_SYM2599=LTDIE_0_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2599
 	.byte 1,104,11
 	.asciz "qSub1"
 
-LDIFF_SYM2592=LTDIE_0_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2592
+LDIFF_SYM2600=LTDIE_0_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2600
 	.byte 1,103,11
 	.asciz "phi"
 
-LDIFF_SYM2593=LTDIE_0_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2593
+LDIFF_SYM2601=LTDIE_0_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2601
 	.byte 1,105,11
 	.asciz "dcheck"
 
-LDIFF_SYM2594=LTDIE_0_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2594
+LDIFF_SYM2602=LTDIE_0_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2602
 	.byte 1,102,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2595=Lfde363_end - Lfde363_start
-	.long LDIFF_SYM2595
-Lfde363_start:
+LDIFF_SYM2603=Lfde365_end - Lfde365_start
+	.long LDIFF_SYM2603
+Lfde365_start:
 
 	.long 0
 	.align 3
 	.quad Mono_Security_Cryptography_RSAManaged_ImportParameters_System_Security_Cryptography_RSAParameters
 
-LDIFF_SYM2596=Lme_197 - Mono_Security_Cryptography_RSAManaged_ImportParameters_System_Security_Cryptography_RSAParameters
-	.long LDIFF_SYM2596
+LDIFF_SYM2604=Lme_198 - Mono_Security_Cryptography_RSAManaged_ImportParameters_System_Security_Cryptography_RSAParameters
+	.long LDIFF_SYM2604
 	.long 0
 	.byte 12,31,0,84,14,224,8,157,140,1,158,139,1,68,13,29,68,150,138,1,151,137,1,68,152,136,1,153,135,1,68,154
 	.byte 134,1
 	.align 3
-Lfde363_end:
+Lfde365_end:
 
 .section __DWARF, __debug_info,regular,debug
 
@@ -63972,36 +64251,36 @@ Lfde363_end:
 
 	.byte 35,240,2
 	.quad Mono_Security_Cryptography_RSAManaged_Dispose_bool
-	.quad Lme_198
+	.quad Lme_199
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2597=LTDIE_94_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2597
+LDIFF_SYM2605=LTDIE_94_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2605
 	.byte 1,105,3
 	.asciz "disposing"
 
-LDIFF_SYM2598=LDIE_BOOLEAN - Ldebug_info_start
-	.long LDIFF_SYM2598
+LDIFF_SYM2606=LDIE_BOOLEAN - Ldebug_info_start
+	.long LDIFF_SYM2606
 	.byte 2,141,24,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2599=Lfde364_end - Lfde364_start
-	.long LDIFF_SYM2599
-Lfde364_start:
+LDIFF_SYM2607=Lfde366_end - Lfde366_start
+	.long LDIFF_SYM2607
+Lfde366_start:
 
 	.long 0
 	.align 3
 	.quad Mono_Security_Cryptography_RSAManaged_Dispose_bool
 
-LDIFF_SYM2600=Lme_198 - Mono_Security_Cryptography_RSAManaged_Dispose_bool
-	.long LDIFF_SYM2600
+LDIFF_SYM2608=Lme_199 - Mono_Security_Cryptography_RSAManaged_Dispose_bool
+	.long LDIFF_SYM2608
 	.long 0
 	.byte 12,31,0,68,14,32,157,4,158,3,68,13,29,68,153,2
 	.align 3
-Lfde364_end:
+Lfde366_end:
 
 .section __DWARF, __debug_info,regular,debug
 
@@ -64011,46 +64290,46 @@ Lfde364_end:
 
 	.byte 35,162,3
 	.quad Mono_Security_Cryptography_RSAManaged_ToXmlString_bool
-	.quad Lme_199
+	.quad Lme_19a
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2601=LTDIE_94_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2601
+LDIFF_SYM2609=LTDIE_94_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2609
 	.byte 2,141,24,3
 	.asciz "includePrivateParameters"
 
-LDIFF_SYM2602=LDIE_BOOLEAN - Ldebug_info_start
-	.long LDIFF_SYM2602
+LDIFF_SYM2610=LDIE_BOOLEAN - Ldebug_info_start
+	.long LDIFF_SYM2610
 	.byte 2,141,32,11
 	.asciz "sb"
 
-LDIFF_SYM2603=LTDIE_19_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2603
+LDIFF_SYM2611=LTDIE_19_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2611
 	.byte 1,104,11
 	.asciz "rsaParams"
 
-LDIFF_SYM2604=LDIE_I4 - Ldebug_info_start
-	.long LDIFF_SYM2604
+LDIFF_SYM2612=LDIE_I4 - Ldebug_info_start
+	.long LDIFF_SYM2612
 	.byte 3,141,232,6,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2605=Lfde365_end - Lfde365_start
-	.long LDIFF_SYM2605
-Lfde365_start:
+LDIFF_SYM2613=Lfde367_end - Lfde367_start
+	.long LDIFF_SYM2613
+Lfde367_start:
 
 	.long 0
 	.align 3
 	.quad Mono_Security_Cryptography_RSAManaged_ToXmlString_bool
 
-LDIFF_SYM2606=Lme_199 - Mono_Security_Cryptography_RSAManaged_ToXmlString_bool
-	.long LDIFF_SYM2606
+LDIFF_SYM2614=Lme_19a - Mono_Security_Cryptography_RSAManaged_ToXmlString_bool
+	.long LDIFF_SYM2614
 	.long 0
 	.byte 12,31,0,84,14,224,16,157,140,2,158,139,2,68,13,29,68,152,138,2
 	.align 3
-Lfde365_end:
+Lfde367_end:
 
 .section __DWARF, __debug_info,regular,debug
 
@@ -64060,51 +64339,51 @@ Lfde365_end:
 
 	.byte 35,245,3
 	.quad Mono_Security_Cryptography_RSAManaged_GetPaddedValue_Mono_Math_BigInteger_int
-	.quad Lme_19a
+	.quad Lme_19b
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2607=LDIE_I4 - Ldebug_info_start
-	.long LDIFF_SYM2607
+LDIFF_SYM2615=LDIE_I4 - Ldebug_info_start
+	.long LDIFF_SYM2615
 	.byte 0,3
 	.asciz "value"
 
-LDIFF_SYM2608=LTDIE_0_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2608
+LDIFF_SYM2616=LTDIE_0_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2616
 	.byte 1,105,3
 	.asciz "length"
 
-LDIFF_SYM2609=LDIE_I4 - Ldebug_info_start
-	.long LDIFF_SYM2609
+LDIFF_SYM2617=LDIE_I4 - Ldebug_info_start
+	.long LDIFF_SYM2617
 	.byte 2,141,40,11
 	.asciz "result"
 
-LDIFF_SYM2610=LDIE_SZARRAY - Ldebug_info_start
-	.long LDIFF_SYM2610
+LDIFF_SYM2618=LDIE_SZARRAY - Ldebug_info_start
+	.long LDIFF_SYM2618
 	.byte 1,105,11
 	.asciz "padded"
 
-LDIFF_SYM2611=LDIE_SZARRAY - Ldebug_info_start
-	.long LDIFF_SYM2611
+LDIFF_SYM2619=LDIE_SZARRAY - Ldebug_info_start
+	.long LDIFF_SYM2619
 	.byte 1,104,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2612=Lfde366_end - Lfde366_start
-	.long LDIFF_SYM2612
-Lfde366_start:
+LDIFF_SYM2620=Lfde368_end - Lfde368_start
+	.long LDIFF_SYM2620
+Lfde368_start:
 
 	.long 0
 	.align 3
 	.quad Mono_Security_Cryptography_RSAManaged_GetPaddedValue_Mono_Math_BigInteger_int
 
-LDIFF_SYM2613=Lme_19a - Mono_Security_Cryptography_RSAManaged_GetPaddedValue_Mono_Math_BigInteger_int
-	.long LDIFF_SYM2613
+LDIFF_SYM2621=Lme_19b - Mono_Security_Cryptography_RSAManaged_GetPaddedValue_Mono_Math_BigInteger_int
+	.long LDIFF_SYM2621
 	.long 0
 	.byte 12,31,0,68,14,48,157,6,158,5,68,13,29,68,152,4,153,3
 	.align 3
-Lfde366_end:
+Lfde368_end:
 
 .section __DWARF, __debug_info,regular,debug
 
@@ -64114,41 +64393,41 @@ Lfde366_end:
 
 	.byte 0,0
 	.quad _PrivateImplementationDetails_ComputeStringHash_string
-	.quad Lme_19f
+	.quad Lme_1a0
 
 	.byte 2,118,16,3
 	.asciz "s"
 
-LDIFF_SYM2614=LDIE_STRING - Ldebug_info_start
-	.long LDIFF_SYM2614
+LDIFF_SYM2622=LDIE_STRING - Ldebug_info_start
+	.long LDIFF_SYM2622
 	.byte 1,106,11
 	.asciz "V_0"
 
-LDIFF_SYM2615=LDIE_U4 - Ldebug_info_start
-	.long LDIFF_SYM2615
+LDIFF_SYM2623=LDIE_U4 - Ldebug_info_start
+	.long LDIFF_SYM2623
 	.byte 1,105,11
 	.asciz "V_1"
 
-LDIFF_SYM2616=LDIE_I4 - Ldebug_info_start
-	.long LDIFF_SYM2616
+LDIFF_SYM2624=LDIE_I4 - Ldebug_info_start
+	.long LDIFF_SYM2624
 	.byte 1,104,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2617=Lfde367_end - Lfde367_start
-	.long LDIFF_SYM2617
-Lfde367_start:
+LDIFF_SYM2625=Lfde369_end - Lfde369_start
+	.long LDIFF_SYM2625
+Lfde369_start:
 
 	.long 0
 	.align 3
 	.quad _PrivateImplementationDetails_ComputeStringHash_string
 
-LDIFF_SYM2618=Lme_19f - _PrivateImplementationDetails_ComputeStringHash_string
-	.long LDIFF_SYM2618
+LDIFF_SYM2626=Lme_1a0 - _PrivateImplementationDetails_ComputeStringHash_string
+	.long LDIFF_SYM2626
 	.long 0
 	.byte 12,31,0,68,14,48,157,6,158,5,68,13,29,68,152,4,153,3,68,154,2
 	.align 3
-Lfde367_end:
+Lfde369_end:
 
 .section __DWARF, __debug_info,regular,debug
 LTDIE_97:
@@ -64157,8 +64436,8 @@ LTDIE_97:
 	.asciz "Mono_Security_Interface_MonoSslPolicyErrors"
 
 	.byte 4
-LDIFF_SYM2619=LDIE_I4 - Ldebug_info_start
-	.long LDIFF_SYM2619
+LDIFF_SYM2627=LDIE_I4 - Ldebug_info_start
+	.long LDIFF_SYM2627
 	.byte 9
 	.asciz "None"
 
@@ -64174,87 +64453,87 @@ LDIFF_SYM2619=LDIE_I4 - Ldebug_info_start
 	.byte 4,0,7
 	.asciz "Mono_Security_Interface_MonoSslPolicyErrors"
 
-LDIFF_SYM2620=LTDIE_97 - Ldebug_info_start
-	.long LDIFF_SYM2620
+LDIFF_SYM2628=LTDIE_97 - Ldebug_info_start
+	.long LDIFF_SYM2628
 LTDIE_97_POINTER:
 
 	.byte 13
-LDIFF_SYM2621=LTDIE_97 - Ldebug_info_start
-	.long LDIFF_SYM2621
+LDIFF_SYM2629=LTDIE_97 - Ldebug_info_start
+	.long LDIFF_SYM2629
 LTDIE_97_REFERENCE:
 
 	.byte 14
-LDIFF_SYM2622=LTDIE_97 - Ldebug_info_start
-	.long LDIFF_SYM2622
+LDIFF_SYM2630=LTDIE_97 - Ldebug_info_start
+	.long LDIFF_SYM2630
 LTDIE_96:
 
 	.byte 5
 	.asciz "System_Nullable`1"
 
 	.byte 24,16
-LDIFF_SYM2623=LTDIE_3 - Ldebug_info_start
-	.long LDIFF_SYM2623
+LDIFF_SYM2631=LTDIE_3 - Ldebug_info_start
+	.long LDIFF_SYM2631
 	.byte 2,35,0,6
 	.asciz "value"
 
-LDIFF_SYM2624=LTDIE_97 - Ldebug_info_start
-	.long LDIFF_SYM2624
+LDIFF_SYM2632=LTDIE_97 - Ldebug_info_start
+	.long LDIFF_SYM2632
 	.byte 2,35,16,6
 	.asciz "has_value"
 
-LDIFF_SYM2625=LDIE_BOOLEAN - Ldebug_info_start
-	.long LDIFF_SYM2625
+LDIFF_SYM2633=LDIE_BOOLEAN - Ldebug_info_start
+	.long LDIFF_SYM2633
 	.byte 2,35,20,0,7
 	.asciz "System_Nullable`1"
 
-LDIFF_SYM2626=LTDIE_96 - Ldebug_info_start
-	.long LDIFF_SYM2626
+LDIFF_SYM2634=LTDIE_96 - Ldebug_info_start
+	.long LDIFF_SYM2634
 LTDIE_96_POINTER:
 
 	.byte 13
-LDIFF_SYM2627=LTDIE_96 - Ldebug_info_start
-	.long LDIFF_SYM2627
+LDIFF_SYM2635=LTDIE_96 - Ldebug_info_start
+	.long LDIFF_SYM2635
 LTDIE_96_REFERENCE:
 
 	.byte 14
-LDIFF_SYM2628=LTDIE_96 - Ldebug_info_start
-	.long LDIFF_SYM2628
+LDIFF_SYM2636=LTDIE_96 - Ldebug_info_start
+	.long LDIFF_SYM2636
 	.byte 2
 	.asciz "System.Nullable`1<Mono.Security.Interface.MonoSslPolicyErrors>:.ctor"
 	.asciz "System_Nullable_1_Mono_Security_Interface_MonoSslPolicyErrors__ctor_Mono_Security_Interface_MonoSslPolicyErrors"
 
 	.byte 36,94
 	.quad System_Nullable_1_Mono_Security_Interface_MonoSslPolicyErrors__ctor_Mono_Security_Interface_MonoSslPolicyErrors
-	.quad Lme_1a1
+	.quad Lme_1a2
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2629=LDIE_I - Ldebug_info_start
-	.long LDIFF_SYM2629
+LDIFF_SYM2637=LDIE_I - Ldebug_info_start
+	.long LDIFF_SYM2637
 	.byte 2,141,16,3
 	.asciz "value"
 
-LDIFF_SYM2630=LTDIE_97 - Ldebug_info_start
-	.long LDIFF_SYM2630
+LDIFF_SYM2638=LTDIE_97 - Ldebug_info_start
+	.long LDIFF_SYM2638
 	.byte 2,141,24,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2631=Lfde368_end - Lfde368_start
-	.long LDIFF_SYM2631
-Lfde368_start:
+LDIFF_SYM2639=Lfde370_end - Lfde370_start
+	.long LDIFF_SYM2639
+Lfde370_start:
 
 	.long 0
 	.align 3
 	.quad System_Nullable_1_Mono_Security_Interface_MonoSslPolicyErrors__ctor_Mono_Security_Interface_MonoSslPolicyErrors
 
-LDIFF_SYM2632=Lme_1a1 - System_Nullable_1_Mono_Security_Interface_MonoSslPolicyErrors__ctor_Mono_Security_Interface_MonoSslPolicyErrors
-	.long LDIFF_SYM2632
+LDIFF_SYM2640=Lme_1a2 - System_Nullable_1_Mono_Security_Interface_MonoSslPolicyErrors__ctor_Mono_Security_Interface_MonoSslPolicyErrors
+	.long LDIFF_SYM2640
 	.long 0
 	.byte 12,31,0,68,14,32,157,4,158,3,68,13,29
 	.align 3
-Lfde368_end:
+Lfde370_end:
 
 .section __DWARF, __debug_info,regular,debug
 
@@ -64264,31 +64543,31 @@ Lfde368_end:
 
 	.byte 36,99
 	.quad System_Nullable_1_Mono_Security_Interface_MonoSslPolicyErrors_get_HasValue
-	.quad Lme_1a2
+	.quad Lme_1a3
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2633=LDIE_I - Ldebug_info_start
-	.long LDIFF_SYM2633
+LDIFF_SYM2641=LDIE_I - Ldebug_info_start
+	.long LDIFF_SYM2641
 	.byte 2,141,16,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2634=Lfde369_end - Lfde369_start
-	.long LDIFF_SYM2634
-Lfde369_start:
+LDIFF_SYM2642=Lfde371_end - Lfde371_start
+	.long LDIFF_SYM2642
+Lfde371_start:
 
 	.long 0
 	.align 3
 	.quad System_Nullable_1_Mono_Security_Interface_MonoSslPolicyErrors_get_HasValue
 
-LDIFF_SYM2635=Lme_1a2 - System_Nullable_1_Mono_Security_Interface_MonoSslPolicyErrors_get_HasValue
-	.long LDIFF_SYM2635
+LDIFF_SYM2643=Lme_1a3 - System_Nullable_1_Mono_Security_Interface_MonoSslPolicyErrors_get_HasValue
+	.long LDIFF_SYM2643
 	.long 0
 	.byte 12,31,0,68,14,32,157,4,158,3,68,13,29
 	.align 3
-Lfde369_end:
+Lfde371_end:
 
 .section __DWARF, __debug_info,regular,debug
 
@@ -64298,92 +64577,14 @@ Lfde369_end:
 
 	.byte 36,104
 	.quad System_Nullable_1_Mono_Security_Interface_MonoSslPolicyErrors_get_Value
-	.quad Lme_1a3
-
-	.byte 2,118,16,3
-	.asciz "this"
-
-LDIFF_SYM2636=LDIE_I - Ldebug_info_start
-	.long LDIFF_SYM2636
-	.byte 2,141,16,0
-
-.section __DWARF, __debug_frame,regular,debug
-
-LDIFF_SYM2637=Lfde370_end - Lfde370_start
-	.long LDIFF_SYM2637
-Lfde370_start:
-
-	.long 0
-	.align 3
-	.quad System_Nullable_1_Mono_Security_Interface_MonoSslPolicyErrors_get_Value
-
-LDIFF_SYM2638=Lme_1a3 - System_Nullable_1_Mono_Security_Interface_MonoSslPolicyErrors_get_Value
-	.long LDIFF_SYM2638
-	.long 0
-	.byte 12,31,0,68,14,32,157,4,158,3,68,13,29
-	.align 3
-Lfde370_end:
-
-.section __DWARF, __debug_info,regular,debug
-
-	.byte 2
-	.asciz "System.Nullable`1<Mono.Security.Interface.MonoSslPolicyErrors>:Equals"
-	.asciz "System_Nullable_1_Mono_Security_Interface_MonoSslPolicyErrors_Equals_object"
-
-	.byte 36,113
-	.quad System_Nullable_1_Mono_Security_Interface_MonoSslPolicyErrors_Equals_object
 	.quad Lme_1a4
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2639=LDIE_I - Ldebug_info_start
-	.long LDIFF_SYM2639
-	.byte 2,141,32,3
-	.asciz "other"
-
-LDIFF_SYM2640=LDIE_OBJECT - Ldebug_info_start
-	.long LDIFF_SYM2640
-	.byte 1,106,0
-
-.section __DWARF, __debug_frame,regular,debug
-
-LDIFF_SYM2641=Lfde371_end - Lfde371_start
-	.long LDIFF_SYM2641
-Lfde371_start:
-
-	.long 0
-	.align 3
-	.quad System_Nullable_1_Mono_Security_Interface_MonoSslPolicyErrors_Equals_object
-
-LDIFF_SYM2642=Lme_1a4 - System_Nullable_1_Mono_Security_Interface_MonoSslPolicyErrors_Equals_object
-	.long LDIFF_SYM2642
-	.long 0
-	.byte 12,31,0,68,14,64,157,8,158,7,68,13,29,68,152,6,68,154,5
-	.align 3
-Lfde371_end:
-
-.section __DWARF, __debug_info,regular,debug
-
-	.byte 2
-	.asciz "System.Nullable`1<Mono.Security.Interface.MonoSslPolicyErrors>:Equals"
-	.asciz "System_Nullable_1_Mono_Security_Interface_MonoSslPolicyErrors_Equals_System_Nullable_1_Mono_Security_Interface_MonoSslPolicyErrors"
-
-	.byte 36,123
-	.quad System_Nullable_1_Mono_Security_Interface_MonoSslPolicyErrors_Equals_System_Nullable_1_Mono_Security_Interface_MonoSslPolicyErrors
-	.quad Lme_1a5
-
-	.byte 2,118,16,3
-	.asciz "this"
-
-LDIFF_SYM2643=LDIE_I - Ldebug_info_start
-	.long LDIFF_SYM2643
-	.byte 2,141,16,3
-	.asciz "other"
-
-LDIFF_SYM2644=LDIE_I4 - Ldebug_info_start
+LDIFF_SYM2644=LDIE_I - Ldebug_info_start
 	.long LDIFF_SYM2644
-	.byte 2,141,24,0
+	.byte 2,141,16,0
 
 .section __DWARF, __debug_frame,regular,debug
 
@@ -64393,14 +64594,92 @@ Lfde372_start:
 
 	.long 0
 	.align 3
+	.quad System_Nullable_1_Mono_Security_Interface_MonoSslPolicyErrors_get_Value
+
+LDIFF_SYM2646=Lme_1a4 - System_Nullable_1_Mono_Security_Interface_MonoSslPolicyErrors_get_Value
+	.long LDIFF_SYM2646
+	.long 0
+	.byte 12,31,0,68,14,32,157,4,158,3,68,13,29
+	.align 3
+Lfde372_end:
+
+.section __DWARF, __debug_info,regular,debug
+
+	.byte 2
+	.asciz "System.Nullable`1<Mono.Security.Interface.MonoSslPolicyErrors>:Equals"
+	.asciz "System_Nullable_1_Mono_Security_Interface_MonoSslPolicyErrors_Equals_object"
+
+	.byte 36,113
+	.quad System_Nullable_1_Mono_Security_Interface_MonoSslPolicyErrors_Equals_object
+	.quad Lme_1a5
+
+	.byte 2,118,16,3
+	.asciz "this"
+
+LDIFF_SYM2647=LDIE_I - Ldebug_info_start
+	.long LDIFF_SYM2647
+	.byte 2,141,32,3
+	.asciz "other"
+
+LDIFF_SYM2648=LDIE_OBJECT - Ldebug_info_start
+	.long LDIFF_SYM2648
+	.byte 1,106,0
+
+.section __DWARF, __debug_frame,regular,debug
+
+LDIFF_SYM2649=Lfde373_end - Lfde373_start
+	.long LDIFF_SYM2649
+Lfde373_start:
+
+	.long 0
+	.align 3
+	.quad System_Nullable_1_Mono_Security_Interface_MonoSslPolicyErrors_Equals_object
+
+LDIFF_SYM2650=Lme_1a5 - System_Nullable_1_Mono_Security_Interface_MonoSslPolicyErrors_Equals_object
+	.long LDIFF_SYM2650
+	.long 0
+	.byte 12,31,0,68,14,64,157,8,158,7,68,13,29,68,152,6,68,154,5
+	.align 3
+Lfde373_end:
+
+.section __DWARF, __debug_info,regular,debug
+
+	.byte 2
+	.asciz "System.Nullable`1<Mono.Security.Interface.MonoSslPolicyErrors>:Equals"
+	.asciz "System_Nullable_1_Mono_Security_Interface_MonoSslPolicyErrors_Equals_System_Nullable_1_Mono_Security_Interface_MonoSslPolicyErrors"
+
+	.byte 36,123
+	.quad System_Nullable_1_Mono_Security_Interface_MonoSslPolicyErrors_Equals_System_Nullable_1_Mono_Security_Interface_MonoSslPolicyErrors
+	.quad Lme_1a6
+
+	.byte 2,118,16,3
+	.asciz "this"
+
+LDIFF_SYM2651=LDIE_I - Ldebug_info_start
+	.long LDIFF_SYM2651
+	.byte 2,141,16,3
+	.asciz "other"
+
+LDIFF_SYM2652=LDIE_I4 - Ldebug_info_start
+	.long LDIFF_SYM2652
+	.byte 2,141,24,0
+
+.section __DWARF, __debug_frame,regular,debug
+
+LDIFF_SYM2653=Lfde374_end - Lfde374_start
+	.long LDIFF_SYM2653
+Lfde374_start:
+
+	.long 0
+	.align 3
 	.quad System_Nullable_1_Mono_Security_Interface_MonoSslPolicyErrors_Equals_System_Nullable_1_Mono_Security_Interface_MonoSslPolicyErrors
 
-LDIFF_SYM2646=Lme_1a5 - System_Nullable_1_Mono_Security_Interface_MonoSslPolicyErrors_Equals_System_Nullable_1_Mono_Security_Interface_MonoSslPolicyErrors
-	.long LDIFF_SYM2646
+LDIFF_SYM2654=Lme_1a6 - System_Nullable_1_Mono_Security_Interface_MonoSslPolicyErrors_Equals_System_Nullable_1_Mono_Security_Interface_MonoSslPolicyErrors
+	.long LDIFF_SYM2654
 	.long 0
 	.byte 12,31,0,68,14,80,157,10,158,9,68,13,29
 	.align 3
-Lfde372_end:
+Lfde374_end:
 
 .section __DWARF, __debug_info,regular,debug
 
@@ -64410,31 +64689,31 @@ Lfde372_end:
 
 	.byte 36,134,1
 	.quad System_Nullable_1_Mono_Security_Interface_MonoSslPolicyErrors_GetHashCode
-	.quad Lme_1a6
+	.quad Lme_1a7
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2647=LDIE_I - Ldebug_info_start
-	.long LDIFF_SYM2647
+LDIFF_SYM2655=LDIE_I - Ldebug_info_start
+	.long LDIFF_SYM2655
 	.byte 1,106,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2648=Lfde373_end - Lfde373_start
-	.long LDIFF_SYM2648
-Lfde373_start:
+LDIFF_SYM2656=Lfde375_end - Lfde375_start
+	.long LDIFF_SYM2656
+Lfde375_start:
 
 	.long 0
 	.align 3
 	.quad System_Nullable_1_Mono_Security_Interface_MonoSslPolicyErrors_GetHashCode
 
-LDIFF_SYM2649=Lme_1a6 - System_Nullable_1_Mono_Security_Interface_MonoSslPolicyErrors_GetHashCode
-	.long LDIFF_SYM2649
+LDIFF_SYM2657=Lme_1a7 - System_Nullable_1_Mono_Security_Interface_MonoSslPolicyErrors_GetHashCode
+	.long LDIFF_SYM2657
 	.long 0
 	.byte 12,31,0,68,14,32,157,4,158,3,68,13,29,68,154,2
 	.align 3
-Lfde373_end:
+Lfde375_end:
 
 .section __DWARF, __debug_info,regular,debug
 
@@ -64444,31 +64723,31 @@ Lfde373_end:
 
 	.byte 36,142,1
 	.quad System_Nullable_1_Mono_Security_Interface_MonoSslPolicyErrors_GetValueOrDefault
-	.quad Lme_1a7
+	.quad Lme_1a8
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2650=LDIE_I - Ldebug_info_start
-	.long LDIFF_SYM2650
+LDIFF_SYM2658=LDIE_I - Ldebug_info_start
+	.long LDIFF_SYM2658
 	.byte 2,141,16,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2651=Lfde374_end - Lfde374_start
-	.long LDIFF_SYM2651
-Lfde374_start:
+LDIFF_SYM2659=Lfde376_end - Lfde376_start
+	.long LDIFF_SYM2659
+Lfde376_start:
 
 	.long 0
 	.align 3
 	.quad System_Nullable_1_Mono_Security_Interface_MonoSslPolicyErrors_GetValueOrDefault
 
-LDIFF_SYM2652=Lme_1a7 - System_Nullable_1_Mono_Security_Interface_MonoSslPolicyErrors_GetValueOrDefault
-	.long LDIFF_SYM2652
+LDIFF_SYM2660=Lme_1a8 - System_Nullable_1_Mono_Security_Interface_MonoSslPolicyErrors_GetValueOrDefault
+	.long LDIFF_SYM2660
 	.long 0
 	.byte 12,31,0,68,14,32,157,4,158,3,68,13,29
 	.align 3
-Lfde374_end:
+Lfde376_end:
 
 .section __DWARF, __debug_info,regular,debug
 
@@ -64478,31 +64757,31 @@ Lfde374_end:
 
 	.byte 36,152,1
 	.quad System_Nullable_1_Mono_Security_Interface_MonoSslPolicyErrors_ToString
-	.quad Lme_1a8
+	.quad Lme_1a9
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2653=LDIE_I - Ldebug_info_start
-	.long LDIFF_SYM2653
+LDIFF_SYM2661=LDIE_I - Ldebug_info_start
+	.long LDIFF_SYM2661
 	.byte 2,141,16,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2654=Lfde375_end - Lfde375_start
-	.long LDIFF_SYM2654
-Lfde375_start:
+LDIFF_SYM2662=Lfde377_end - Lfde377_start
+	.long LDIFF_SYM2662
+Lfde377_start:
 
 	.long 0
 	.align 3
 	.quad System_Nullable_1_Mono_Security_Interface_MonoSslPolicyErrors_ToString
 
-LDIFF_SYM2655=Lme_1a8 - System_Nullable_1_Mono_Security_Interface_MonoSslPolicyErrors_ToString
-	.long LDIFF_SYM2655
+LDIFF_SYM2663=Lme_1a9 - System_Nullable_1_Mono_Security_Interface_MonoSslPolicyErrors_ToString
+	.long LDIFF_SYM2663
 	.long 0
 	.byte 12,31,0,68,14,48,157,6,158,5,68,13,29
 	.align 3
-Lfde375_end:
+Lfde377_end:
 
 .section __DWARF, __debug_info,regular,debug
 
@@ -64512,31 +64791,31 @@ Lfde375_end:
 
 	.byte 36,177,1
 	.quad System_Nullable_1_Mono_Security_Interface_MonoSslPolicyErrors_Box_System_Nullable_1_Mono_Security_Interface_MonoSslPolicyErrors
-	.quad Lme_1a9
+	.quad Lme_1aa
 
 	.byte 2,118,16,3
 	.asciz "o"
 
-LDIFF_SYM2656=LDIE_I4 - Ldebug_info_start
-	.long LDIFF_SYM2656
+LDIFF_SYM2664=LDIE_I4 - Ldebug_info_start
+	.long LDIFF_SYM2664
 	.byte 2,141,16,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2657=Lfde376_end - Lfde376_start
-	.long LDIFF_SYM2657
-Lfde376_start:
+LDIFF_SYM2665=Lfde378_end - Lfde378_start
+	.long LDIFF_SYM2665
+Lfde378_start:
 
 	.long 0
 	.align 3
 	.quad System_Nullable_1_Mono_Security_Interface_MonoSslPolicyErrors_Box_System_Nullable_1_Mono_Security_Interface_MonoSslPolicyErrors
 
-LDIFF_SYM2658=Lme_1a9 - System_Nullable_1_Mono_Security_Interface_MonoSslPolicyErrors_Box_System_Nullable_1_Mono_Security_Interface_MonoSslPolicyErrors
-	.long LDIFF_SYM2658
+LDIFF_SYM2666=Lme_1aa - System_Nullable_1_Mono_Security_Interface_MonoSslPolicyErrors_Box_System_Nullable_1_Mono_Security_Interface_MonoSslPolicyErrors
+	.long LDIFF_SYM2666
 	.long 0
 	.byte 12,31,0,68,14,64,157,8,158,7,68,13,29
 	.align 3
-Lfde376_end:
+Lfde378_end:
 
 .section __DWARF, __debug_info,regular,debug
 
@@ -64546,36 +64825,36 @@ Lfde376_end:
 
 	.byte 36,185,1
 	.quad System_Nullable_1_Mono_Security_Interface_MonoSslPolicyErrors_Unbox_object
-	.quad Lme_1aa
+	.quad Lme_1ab
 
 	.byte 2,118,16,3
 	.asciz "o"
 
-LDIFF_SYM2659=LDIE_OBJECT - Ldebug_info_start
-	.long LDIFF_SYM2659
+LDIFF_SYM2667=LDIE_OBJECT - Ldebug_info_start
+	.long LDIFF_SYM2667
 	.byte 2,141,32,11
 	.asciz "V_0"
 
-LDIFF_SYM2660=LDIE_I4 - Ldebug_info_start
-	.long LDIFF_SYM2660
+LDIFF_SYM2668=LDIE_I4 - Ldebug_info_start
+	.long LDIFF_SYM2668
 	.byte 2,141,48,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2661=Lfde377_end - Lfde377_start
-	.long LDIFF_SYM2661
-Lfde377_start:
+LDIFF_SYM2669=Lfde379_end - Lfde379_start
+	.long LDIFF_SYM2669
+Lfde379_start:
 
 	.long 0
 	.align 3
 	.quad System_Nullable_1_Mono_Security_Interface_MonoSslPolicyErrors_Unbox_object
 
-LDIFF_SYM2662=Lme_1aa - System_Nullable_1_Mono_Security_Interface_MonoSslPolicyErrors_Unbox_object
-	.long LDIFF_SYM2662
+LDIFF_SYM2670=Lme_1ab - System_Nullable_1_Mono_Security_Interface_MonoSslPolicyErrors_Unbox_object
+	.long LDIFF_SYM2670
 	.long 0
 	.byte 12,31,0,68,14,64,157,8,158,7,68,13,29
 	.align 3
-Lfde377_end:
+Lfde379_end:
 
 .section __DWARF, __debug_info,regular,debug
 LTDIE_98:
@@ -64584,69 +64863,69 @@ LTDIE_98:
 	.asciz "System_Nullable`1"
 
 	.byte 18,16
-LDIFF_SYM2663=LTDIE_3 - Ldebug_info_start
-	.long LDIFF_SYM2663
+LDIFF_SYM2671=LTDIE_3 - Ldebug_info_start
+	.long LDIFF_SYM2671
 	.byte 2,35,0,6
 	.asciz "value"
 
-LDIFF_SYM2664=LDIE_BOOLEAN - Ldebug_info_start
-	.long LDIFF_SYM2664
+LDIFF_SYM2672=LDIE_BOOLEAN - Ldebug_info_start
+	.long LDIFF_SYM2672
 	.byte 2,35,16,6
 	.asciz "has_value"
 
-LDIFF_SYM2665=LDIE_BOOLEAN - Ldebug_info_start
-	.long LDIFF_SYM2665
+LDIFF_SYM2673=LDIE_BOOLEAN - Ldebug_info_start
+	.long LDIFF_SYM2673
 	.byte 2,35,17,0,7
 	.asciz "System_Nullable`1"
 
-LDIFF_SYM2666=LTDIE_98 - Ldebug_info_start
-	.long LDIFF_SYM2666
+LDIFF_SYM2674=LTDIE_98 - Ldebug_info_start
+	.long LDIFF_SYM2674
 LTDIE_98_POINTER:
 
 	.byte 13
-LDIFF_SYM2667=LTDIE_98 - Ldebug_info_start
-	.long LDIFF_SYM2667
+LDIFF_SYM2675=LTDIE_98 - Ldebug_info_start
+	.long LDIFF_SYM2675
 LTDIE_98_REFERENCE:
 
 	.byte 14
-LDIFF_SYM2668=LTDIE_98 - Ldebug_info_start
-	.long LDIFF_SYM2668
+LDIFF_SYM2676=LTDIE_98 - Ldebug_info_start
+	.long LDIFF_SYM2676
 	.byte 2
 	.asciz "System.Nullable`1<bool>:.ctor"
 	.asciz "System_Nullable_1_bool__ctor_bool"
 
 	.byte 36,94
 	.quad System_Nullable_1_bool__ctor_bool
-	.quad Lme_1ab
+	.quad Lme_1ac
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2669=LDIE_I - Ldebug_info_start
-	.long LDIFF_SYM2669
+LDIFF_SYM2677=LDIE_I - Ldebug_info_start
+	.long LDIFF_SYM2677
 	.byte 2,141,16,3
 	.asciz "value"
 
-LDIFF_SYM2670=LDIE_BOOLEAN - Ldebug_info_start
-	.long LDIFF_SYM2670
+LDIFF_SYM2678=LDIE_BOOLEAN - Ldebug_info_start
+	.long LDIFF_SYM2678
 	.byte 2,141,24,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2671=Lfde378_end - Lfde378_start
-	.long LDIFF_SYM2671
-Lfde378_start:
+LDIFF_SYM2679=Lfde380_end - Lfde380_start
+	.long LDIFF_SYM2679
+Lfde380_start:
 
 	.long 0
 	.align 3
 	.quad System_Nullable_1_bool__ctor_bool
 
-LDIFF_SYM2672=Lme_1ab - System_Nullable_1_bool__ctor_bool
-	.long LDIFF_SYM2672
+LDIFF_SYM2680=Lme_1ac - System_Nullable_1_bool__ctor_bool
+	.long LDIFF_SYM2680
 	.long 0
 	.byte 12,31,0,68,14,32,157,4,158,3,68,13,29
 	.align 3
-Lfde378_end:
+Lfde380_end:
 
 .section __DWARF, __debug_info,regular,debug
 
@@ -64656,31 +64935,31 @@ Lfde378_end:
 
 	.byte 36,99
 	.quad System_Nullable_1_bool_get_HasValue
-	.quad Lme_1ac
+	.quad Lme_1ad
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2673=LDIE_I - Ldebug_info_start
-	.long LDIFF_SYM2673
+LDIFF_SYM2681=LDIE_I - Ldebug_info_start
+	.long LDIFF_SYM2681
 	.byte 2,141,16,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2674=Lfde379_end - Lfde379_start
-	.long LDIFF_SYM2674
-Lfde379_start:
+LDIFF_SYM2682=Lfde381_end - Lfde381_start
+	.long LDIFF_SYM2682
+Lfde381_start:
 
 	.long 0
 	.align 3
 	.quad System_Nullable_1_bool_get_HasValue
 
-LDIFF_SYM2675=Lme_1ac - System_Nullable_1_bool_get_HasValue
-	.long LDIFF_SYM2675
+LDIFF_SYM2683=Lme_1ad - System_Nullable_1_bool_get_HasValue
+	.long LDIFF_SYM2683
 	.long 0
 	.byte 12,31,0,68,14,32,157,4,158,3,68,13,29
 	.align 3
-Lfde379_end:
+Lfde381_end:
 
 .section __DWARF, __debug_info,regular,debug
 
@@ -64690,92 +64969,14 @@ Lfde379_end:
 
 	.byte 36,104
 	.quad System_Nullable_1_bool_get_Value
-	.quad Lme_1ad
-
-	.byte 2,118,16,3
-	.asciz "this"
-
-LDIFF_SYM2676=LDIE_I - Ldebug_info_start
-	.long LDIFF_SYM2676
-	.byte 2,141,16,0
-
-.section __DWARF, __debug_frame,regular,debug
-
-LDIFF_SYM2677=Lfde380_end - Lfde380_start
-	.long LDIFF_SYM2677
-Lfde380_start:
-
-	.long 0
-	.align 3
-	.quad System_Nullable_1_bool_get_Value
-
-LDIFF_SYM2678=Lme_1ad - System_Nullable_1_bool_get_Value
-	.long LDIFF_SYM2678
-	.long 0
-	.byte 12,31,0,68,14,32,157,4,158,3,68,13,29
-	.align 3
-Lfde380_end:
-
-.section __DWARF, __debug_info,regular,debug
-
-	.byte 2
-	.asciz "System.Nullable`1<bool>:Equals"
-	.asciz "System_Nullable_1_bool_Equals_object"
-
-	.byte 36,113
-	.quad System_Nullable_1_bool_Equals_object
 	.quad Lme_1ae
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2679=LDIE_I - Ldebug_info_start
-	.long LDIFF_SYM2679
-	.byte 2,141,32,3
-	.asciz "other"
-
-LDIFF_SYM2680=LDIE_OBJECT - Ldebug_info_start
-	.long LDIFF_SYM2680
-	.byte 1,106,0
-
-.section __DWARF, __debug_frame,regular,debug
-
-LDIFF_SYM2681=Lfde381_end - Lfde381_start
-	.long LDIFF_SYM2681
-Lfde381_start:
-
-	.long 0
-	.align 3
-	.quad System_Nullable_1_bool_Equals_object
-
-LDIFF_SYM2682=Lme_1ae - System_Nullable_1_bool_Equals_object
-	.long LDIFF_SYM2682
-	.long 0
-	.byte 12,31,0,68,14,64,157,8,158,7,68,13,29,68,152,6,68,154,5
-	.align 3
-Lfde381_end:
-
-.section __DWARF, __debug_info,regular,debug
-
-	.byte 2
-	.asciz "System.Nullable`1<bool>:Equals"
-	.asciz "System_Nullable_1_bool_Equals_System_Nullable_1_bool"
-
-	.byte 36,123
-	.quad System_Nullable_1_bool_Equals_System_Nullable_1_bool
-	.quad Lme_1af
-
-	.byte 2,118,16,3
-	.asciz "this"
-
-LDIFF_SYM2683=LDIE_I - Ldebug_info_start
-	.long LDIFF_SYM2683
-	.byte 2,141,16,3
-	.asciz "other"
-
-LDIFF_SYM2684=LDIE_I4 - Ldebug_info_start
+LDIFF_SYM2684=LDIE_I - Ldebug_info_start
 	.long LDIFF_SYM2684
-	.byte 2,141,24,0
+	.byte 2,141,16,0
 
 .section __DWARF, __debug_frame,regular,debug
 
@@ -64785,14 +64986,92 @@ Lfde382_start:
 
 	.long 0
 	.align 3
+	.quad System_Nullable_1_bool_get_Value
+
+LDIFF_SYM2686=Lme_1ae - System_Nullable_1_bool_get_Value
+	.long LDIFF_SYM2686
+	.long 0
+	.byte 12,31,0,68,14,32,157,4,158,3,68,13,29
+	.align 3
+Lfde382_end:
+
+.section __DWARF, __debug_info,regular,debug
+
+	.byte 2
+	.asciz "System.Nullable`1<bool>:Equals"
+	.asciz "System_Nullable_1_bool_Equals_object"
+
+	.byte 36,113
+	.quad System_Nullable_1_bool_Equals_object
+	.quad Lme_1af
+
+	.byte 2,118,16,3
+	.asciz "this"
+
+LDIFF_SYM2687=LDIE_I - Ldebug_info_start
+	.long LDIFF_SYM2687
+	.byte 2,141,32,3
+	.asciz "other"
+
+LDIFF_SYM2688=LDIE_OBJECT - Ldebug_info_start
+	.long LDIFF_SYM2688
+	.byte 1,106,0
+
+.section __DWARF, __debug_frame,regular,debug
+
+LDIFF_SYM2689=Lfde383_end - Lfde383_start
+	.long LDIFF_SYM2689
+Lfde383_start:
+
+	.long 0
+	.align 3
+	.quad System_Nullable_1_bool_Equals_object
+
+LDIFF_SYM2690=Lme_1af - System_Nullable_1_bool_Equals_object
+	.long LDIFF_SYM2690
+	.long 0
+	.byte 12,31,0,68,14,64,157,8,158,7,68,13,29,68,152,6,68,154,5
+	.align 3
+Lfde383_end:
+
+.section __DWARF, __debug_info,regular,debug
+
+	.byte 2
+	.asciz "System.Nullable`1<bool>:Equals"
+	.asciz "System_Nullable_1_bool_Equals_System_Nullable_1_bool"
+
+	.byte 36,123
+	.quad System_Nullable_1_bool_Equals_System_Nullable_1_bool
+	.quad Lme_1b0
+
+	.byte 2,118,16,3
+	.asciz "this"
+
+LDIFF_SYM2691=LDIE_I - Ldebug_info_start
+	.long LDIFF_SYM2691
+	.byte 2,141,16,3
+	.asciz "other"
+
+LDIFF_SYM2692=LDIE_I4 - Ldebug_info_start
+	.long LDIFF_SYM2692
+	.byte 2,141,24,0
+
+.section __DWARF, __debug_frame,regular,debug
+
+LDIFF_SYM2693=Lfde384_end - Lfde384_start
+	.long LDIFF_SYM2693
+Lfde384_start:
+
+	.long 0
+	.align 3
 	.quad System_Nullable_1_bool_Equals_System_Nullable_1_bool
 
-LDIFF_SYM2686=Lme_1af - System_Nullable_1_bool_Equals_System_Nullable_1_bool
-	.long LDIFF_SYM2686
+LDIFF_SYM2694=Lme_1b0 - System_Nullable_1_bool_Equals_System_Nullable_1_bool
+	.long LDIFF_SYM2694
 	.long 0
 	.byte 12,31,0,68,14,64,157,8,158,7,68,13,29
 	.align 3
-Lfde382_end:
+Lfde384_end:
 
 .section __DWARF, __debug_info,regular,debug
 
@@ -64802,31 +65081,31 @@ Lfde382_end:
 
 	.byte 36,134,1
 	.quad System_Nullable_1_bool_GetHashCode
-	.quad Lme_1b0
+	.quad Lme_1b1
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2687=LDIE_I - Ldebug_info_start
-	.long LDIFF_SYM2687
+LDIFF_SYM2695=LDIE_I - Ldebug_info_start
+	.long LDIFF_SYM2695
 	.byte 1,106,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2688=Lfde383_end - Lfde383_start
-	.long LDIFF_SYM2688
-Lfde383_start:
+LDIFF_SYM2696=Lfde385_end - Lfde385_start
+	.long LDIFF_SYM2696
+Lfde385_start:
 
 	.long 0
 	.align 3
 	.quad System_Nullable_1_bool_GetHashCode
 
-LDIFF_SYM2689=Lme_1b0 - System_Nullable_1_bool_GetHashCode
-	.long LDIFF_SYM2689
+LDIFF_SYM2697=Lme_1b1 - System_Nullable_1_bool_GetHashCode
+	.long LDIFF_SYM2697
 	.long 0
 	.byte 12,31,0,68,14,32,157,4,158,3,68,13,29,68,154,2
 	.align 3
-Lfde383_end:
+Lfde385_end:
 
 .section __DWARF, __debug_info,regular,debug
 
@@ -64836,31 +65115,31 @@ Lfde383_end:
 
 	.byte 36,142,1
 	.quad System_Nullable_1_bool_GetValueOrDefault
-	.quad Lme_1b1
+	.quad Lme_1b2
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2690=LDIE_I - Ldebug_info_start
-	.long LDIFF_SYM2690
+LDIFF_SYM2698=LDIE_I - Ldebug_info_start
+	.long LDIFF_SYM2698
 	.byte 2,141,16,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2691=Lfde384_end - Lfde384_start
-	.long LDIFF_SYM2691
-Lfde384_start:
+LDIFF_SYM2699=Lfde386_end - Lfde386_start
+	.long LDIFF_SYM2699
+Lfde386_start:
 
 	.long 0
 	.align 3
 	.quad System_Nullable_1_bool_GetValueOrDefault
 
-LDIFF_SYM2692=Lme_1b1 - System_Nullable_1_bool_GetValueOrDefault
-	.long LDIFF_SYM2692
+LDIFF_SYM2700=Lme_1b2 - System_Nullable_1_bool_GetValueOrDefault
+	.long LDIFF_SYM2700
 	.long 0
 	.byte 12,31,0,68,14,32,157,4,158,3,68,13,29
 	.align 3
-Lfde384_end:
+Lfde386_end:
 
 .section __DWARF, __debug_info,regular,debug
 
@@ -64870,31 +65149,31 @@ Lfde384_end:
 
 	.byte 36,152,1
 	.quad System_Nullable_1_bool_ToString
-	.quad Lme_1b2
+	.quad Lme_1b3
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2693=LDIE_I - Ldebug_info_start
-	.long LDIFF_SYM2693
+LDIFF_SYM2701=LDIE_I - Ldebug_info_start
+	.long LDIFF_SYM2701
 	.byte 1,106,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2694=Lfde385_end - Lfde385_start
-	.long LDIFF_SYM2694
-Lfde385_start:
+LDIFF_SYM2702=Lfde387_end - Lfde387_start
+	.long LDIFF_SYM2702
+Lfde387_start:
 
 	.long 0
 	.align 3
 	.quad System_Nullable_1_bool_ToString
 
-LDIFF_SYM2695=Lme_1b2 - System_Nullable_1_bool_ToString
-	.long LDIFF_SYM2695
+LDIFF_SYM2703=Lme_1b3 - System_Nullable_1_bool_ToString
+	.long LDIFF_SYM2703
 	.long 0
 	.byte 12,31,0,68,14,32,157,4,158,3,68,13,29,68,154,2
 	.align 3
-Lfde385_end:
+Lfde387_end:
 
 .section __DWARF, __debug_info,regular,debug
 
@@ -64904,31 +65183,31 @@ Lfde385_end:
 
 	.byte 36,177,1
 	.quad System_Nullable_1_bool_Box_System_Nullable_1_bool
-	.quad Lme_1b3
+	.quad Lme_1b4
 
 	.byte 2,118,16,3
 	.asciz "o"
 
-LDIFF_SYM2696=LDIE_I4 - Ldebug_info_start
-	.long LDIFF_SYM2696
+LDIFF_SYM2704=LDIE_I4 - Ldebug_info_start
+	.long LDIFF_SYM2704
 	.byte 2,141,16,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2697=Lfde386_end - Lfde386_start
-	.long LDIFF_SYM2697
-Lfde386_start:
+LDIFF_SYM2705=Lfde388_end - Lfde388_start
+	.long LDIFF_SYM2705
+Lfde388_start:
 
 	.long 0
 	.align 3
 	.quad System_Nullable_1_bool_Box_System_Nullable_1_bool
 
-LDIFF_SYM2698=Lme_1b3 - System_Nullable_1_bool_Box_System_Nullable_1_bool
-	.long LDIFF_SYM2698
+LDIFF_SYM2706=Lme_1b4 - System_Nullable_1_bool_Box_System_Nullable_1_bool
+	.long LDIFF_SYM2706
 	.long 0
 	.byte 12,31,0,68,14,64,157,8,158,7,68,13,29
 	.align 3
-Lfde386_end:
+Lfde388_end:
 
 .section __DWARF, __debug_info,regular,debug
 
@@ -64938,36 +65217,36 @@ Lfde386_end:
 
 	.byte 36,185,1
 	.quad System_Nullable_1_bool_Unbox_object
-	.quad Lme_1b4
+	.quad Lme_1b5
 
 	.byte 2,118,16,3
 	.asciz "o"
 
-LDIFF_SYM2699=LDIE_OBJECT - Ldebug_info_start
-	.long LDIFF_SYM2699
+LDIFF_SYM2707=LDIE_OBJECT - Ldebug_info_start
+	.long LDIFF_SYM2707
 	.byte 2,141,32,11
 	.asciz "V_0"
 
-LDIFF_SYM2700=LDIE_I4 - Ldebug_info_start
-	.long LDIFF_SYM2700
+LDIFF_SYM2708=LDIE_I4 - Ldebug_info_start
+	.long LDIFF_SYM2708
 	.byte 2,141,48,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2701=Lfde387_end - Lfde387_start
-	.long LDIFF_SYM2701
-Lfde387_start:
+LDIFF_SYM2709=Lfde389_end - Lfde389_start
+	.long LDIFF_SYM2709
+Lfde389_start:
 
 	.long 0
 	.align 3
 	.quad System_Nullable_1_bool_Unbox_object
 
-LDIFF_SYM2702=Lme_1b4 - System_Nullable_1_bool_Unbox_object
-	.long LDIFF_SYM2702
+LDIFF_SYM2710=Lme_1b5 - System_Nullable_1_bool_Unbox_object
+	.long LDIFF_SYM2710
 	.long 0
 	.byte 12,31,0,68,14,64,157,8,158,7,68,13,29
 	.align 3
-Lfde387_end:
+Lfde389_end:
 
 .section __DWARF, __debug_info,regular,debug
 LTDIE_99:
@@ -64976,69 +65255,69 @@ LTDIE_99:
 	.asciz "System_Nullable`1"
 
 	.byte 32,16
-LDIFF_SYM2703=LTDIE_3 - Ldebug_info_start
-	.long LDIFF_SYM2703
+LDIFF_SYM2711=LTDIE_3 - Ldebug_info_start
+	.long LDIFF_SYM2711
 	.byte 2,35,0,6
 	.asciz "value"
 
-LDIFF_SYM2704=LDIE_I4 - Ldebug_info_start
-	.long LDIFF_SYM2704
+LDIFF_SYM2712=LDIE_I4 - Ldebug_info_start
+	.long LDIFF_SYM2712
 	.byte 2,35,16,6
 	.asciz "has_value"
 
-LDIFF_SYM2705=LDIE_BOOLEAN - Ldebug_info_start
-	.long LDIFF_SYM2705
+LDIFF_SYM2713=LDIE_BOOLEAN - Ldebug_info_start
+	.long LDIFF_SYM2713
 	.byte 2,35,24,0,7
 	.asciz "System_Nullable`1"
 
-LDIFF_SYM2706=LTDIE_99 - Ldebug_info_start
-	.long LDIFF_SYM2706
+LDIFF_SYM2714=LTDIE_99 - Ldebug_info_start
+	.long LDIFF_SYM2714
 LTDIE_99_POINTER:
 
 	.byte 13
-LDIFF_SYM2707=LTDIE_99 - Ldebug_info_start
-	.long LDIFF_SYM2707
+LDIFF_SYM2715=LTDIE_99 - Ldebug_info_start
+	.long LDIFF_SYM2715
 LTDIE_99_REFERENCE:
 
 	.byte 14
-LDIFF_SYM2708=LTDIE_99 - Ldebug_info_start
-	.long LDIFF_SYM2708
+LDIFF_SYM2716=LTDIE_99 - Ldebug_info_start
+	.long LDIFF_SYM2716
 	.byte 2
 	.asciz "System.Nullable`1<System.DateTime>:.ctor"
 	.asciz "System_Nullable_1_System_DateTime__ctor_System_DateTime"
 
 	.byte 36,94
 	.quad System_Nullable_1_System_DateTime__ctor_System_DateTime
-	.quad Lme_1b5
+	.quad Lme_1b6
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2709=LDIE_I - Ldebug_info_start
-	.long LDIFF_SYM2709
+LDIFF_SYM2717=LDIE_I - Ldebug_info_start
+	.long LDIFF_SYM2717
 	.byte 2,141,16,3
 	.asciz "value"
 
-LDIFF_SYM2710=LDIE_I4 - Ldebug_info_start
-	.long LDIFF_SYM2710
+LDIFF_SYM2718=LDIE_I4 - Ldebug_info_start
+	.long LDIFF_SYM2718
 	.byte 2,141,24,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2711=Lfde388_end - Lfde388_start
-	.long LDIFF_SYM2711
-Lfde388_start:
+LDIFF_SYM2719=Lfde390_end - Lfde390_start
+	.long LDIFF_SYM2719
+Lfde390_start:
 
 	.long 0
 	.align 3
 	.quad System_Nullable_1_System_DateTime__ctor_System_DateTime
 
-LDIFF_SYM2712=Lme_1b5 - System_Nullable_1_System_DateTime__ctor_System_DateTime
-	.long LDIFF_SYM2712
+LDIFF_SYM2720=Lme_1b6 - System_Nullable_1_System_DateTime__ctor_System_DateTime
+	.long LDIFF_SYM2720
 	.long 0
 	.byte 12,31,0,68,14,48,157,6,158,5,68,13,29
 	.align 3
-Lfde388_end:
+Lfde390_end:
 
 .section __DWARF, __debug_info,regular,debug
 
@@ -65048,31 +65327,31 @@ Lfde388_end:
 
 	.byte 36,99
 	.quad System_Nullable_1_System_DateTime_get_HasValue
-	.quad Lme_1b6
+	.quad Lme_1b7
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2713=LDIE_I - Ldebug_info_start
-	.long LDIFF_SYM2713
+LDIFF_SYM2721=LDIE_I - Ldebug_info_start
+	.long LDIFF_SYM2721
 	.byte 2,141,16,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2714=Lfde389_end - Lfde389_start
-	.long LDIFF_SYM2714
-Lfde389_start:
+LDIFF_SYM2722=Lfde391_end - Lfde391_start
+	.long LDIFF_SYM2722
+Lfde391_start:
 
 	.long 0
 	.align 3
 	.quad System_Nullable_1_System_DateTime_get_HasValue
 
-LDIFF_SYM2715=Lme_1b6 - System_Nullable_1_System_DateTime_get_HasValue
-	.long LDIFF_SYM2715
+LDIFF_SYM2723=Lme_1b7 - System_Nullable_1_System_DateTime_get_HasValue
+	.long LDIFF_SYM2723
 	.long 0
 	.byte 12,31,0,68,14,32,157,4,158,3,68,13,29
 	.align 3
-Lfde389_end:
+Lfde391_end:
 
 .section __DWARF, __debug_info,regular,debug
 
@@ -65082,92 +65361,14 @@ Lfde389_end:
 
 	.byte 36,104
 	.quad System_Nullable_1_System_DateTime_get_Value
-	.quad Lme_1b7
-
-	.byte 2,118,16,3
-	.asciz "this"
-
-LDIFF_SYM2716=LDIE_I - Ldebug_info_start
-	.long LDIFF_SYM2716
-	.byte 2,141,32,0
-
-.section __DWARF, __debug_frame,regular,debug
-
-LDIFF_SYM2717=Lfde390_end - Lfde390_start
-	.long LDIFF_SYM2717
-Lfde390_start:
-
-	.long 0
-	.align 3
-	.quad System_Nullable_1_System_DateTime_get_Value
-
-LDIFF_SYM2718=Lme_1b7 - System_Nullable_1_System_DateTime_get_Value
-	.long LDIFF_SYM2718
-	.long 0
-	.byte 12,31,0,68,14,48,157,6,158,5,68,13,29
-	.align 3
-Lfde390_end:
-
-.section __DWARF, __debug_info,regular,debug
-
-	.byte 2
-	.asciz "System.Nullable`1<System.DateTime>:Equals"
-	.asciz "System_Nullable_1_System_DateTime_Equals_object"
-
-	.byte 36,113
-	.quad System_Nullable_1_System_DateTime_Equals_object
 	.quad Lme_1b8
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2719=LDIE_I - Ldebug_info_start
-	.long LDIFF_SYM2719
-	.byte 2,141,32,3
-	.asciz "other"
-
-LDIFF_SYM2720=LDIE_OBJECT - Ldebug_info_start
-	.long LDIFF_SYM2720
-	.byte 1,106,0
-
-.section __DWARF, __debug_frame,regular,debug
-
-LDIFF_SYM2721=Lfde391_end - Lfde391_start
-	.long LDIFF_SYM2721
-Lfde391_start:
-
-	.long 0
-	.align 3
-	.quad System_Nullable_1_System_DateTime_Equals_object
-
-LDIFF_SYM2722=Lme_1b8 - System_Nullable_1_System_DateTime_Equals_object
-	.long LDIFF_SYM2722
-	.long 0
-	.byte 12,31,0,68,14,64,157,8,158,7,68,13,29,68,152,6,68,154,5
-	.align 3
-Lfde391_end:
-
-.section __DWARF, __debug_info,regular,debug
-
-	.byte 2
-	.asciz "System.Nullable`1<System.DateTime>:Equals"
-	.asciz "System_Nullable_1_System_DateTime_Equals_System_Nullable_1_System_DateTime"
-
-	.byte 36,123
-	.quad System_Nullable_1_System_DateTime_Equals_System_Nullable_1_System_DateTime
-	.quad Lme_1b9
-
-	.byte 2,118,16,3
-	.asciz "this"
-
-LDIFF_SYM2723=LDIE_I - Ldebug_info_start
-	.long LDIFF_SYM2723
-	.byte 2,141,16,3
-	.asciz "other"
-
-LDIFF_SYM2724=LDIE_I4 - Ldebug_info_start
+LDIFF_SYM2724=LDIE_I - Ldebug_info_start
 	.long LDIFF_SYM2724
-	.byte 2,141,24,0
+	.byte 2,141,32,0
 
 .section __DWARF, __debug_frame,regular,debug
 
@@ -65177,14 +65378,92 @@ Lfde392_start:
 
 	.long 0
 	.align 3
+	.quad System_Nullable_1_System_DateTime_get_Value
+
+LDIFF_SYM2726=Lme_1b8 - System_Nullable_1_System_DateTime_get_Value
+	.long LDIFF_SYM2726
+	.long 0
+	.byte 12,31,0,68,14,48,157,6,158,5,68,13,29
+	.align 3
+Lfde392_end:
+
+.section __DWARF, __debug_info,regular,debug
+
+	.byte 2
+	.asciz "System.Nullable`1<System.DateTime>:Equals"
+	.asciz "System_Nullable_1_System_DateTime_Equals_object"
+
+	.byte 36,113
+	.quad System_Nullable_1_System_DateTime_Equals_object
+	.quad Lme_1b9
+
+	.byte 2,118,16,3
+	.asciz "this"
+
+LDIFF_SYM2727=LDIE_I - Ldebug_info_start
+	.long LDIFF_SYM2727
+	.byte 2,141,32,3
+	.asciz "other"
+
+LDIFF_SYM2728=LDIE_OBJECT - Ldebug_info_start
+	.long LDIFF_SYM2728
+	.byte 1,106,0
+
+.section __DWARF, __debug_frame,regular,debug
+
+LDIFF_SYM2729=Lfde393_end - Lfde393_start
+	.long LDIFF_SYM2729
+Lfde393_start:
+
+	.long 0
+	.align 3
+	.quad System_Nullable_1_System_DateTime_Equals_object
+
+LDIFF_SYM2730=Lme_1b9 - System_Nullable_1_System_DateTime_Equals_object
+	.long LDIFF_SYM2730
+	.long 0
+	.byte 12,31,0,68,14,64,157,8,158,7,68,13,29,68,152,6,68,154,5
+	.align 3
+Lfde393_end:
+
+.section __DWARF, __debug_info,regular,debug
+
+	.byte 2
+	.asciz "System.Nullable`1<System.DateTime>:Equals"
+	.asciz "System_Nullable_1_System_DateTime_Equals_System_Nullable_1_System_DateTime"
+
+	.byte 36,123
+	.quad System_Nullable_1_System_DateTime_Equals_System_Nullable_1_System_DateTime
+	.quad Lme_1ba
+
+	.byte 2,118,16,3
+	.asciz "this"
+
+LDIFF_SYM2731=LDIE_I - Ldebug_info_start
+	.long LDIFF_SYM2731
+	.byte 2,141,16,3
+	.asciz "other"
+
+LDIFF_SYM2732=LDIE_I4 - Ldebug_info_start
+	.long LDIFF_SYM2732
+	.byte 2,141,24,0
+
+.section __DWARF, __debug_frame,regular,debug
+
+LDIFF_SYM2733=Lfde394_end - Lfde394_start
+	.long LDIFF_SYM2733
+Lfde394_start:
+
+	.long 0
+	.align 3
 	.quad System_Nullable_1_System_DateTime_Equals_System_Nullable_1_System_DateTime
 
-LDIFF_SYM2726=Lme_1b9 - System_Nullable_1_System_DateTime_Equals_System_Nullable_1_System_DateTime
-	.long LDIFF_SYM2726
+LDIFF_SYM2734=Lme_1ba - System_Nullable_1_System_DateTime_Equals_System_Nullable_1_System_DateTime
+	.long LDIFF_SYM2734
 	.long 0
 	.byte 12,31,0,68,14,80,157,10,158,9,68,13,29
 	.align 3
-Lfde392_end:
+Lfde394_end:
 
 .section __DWARF, __debug_info,regular,debug
 
@@ -65194,31 +65473,31 @@ Lfde392_end:
 
 	.byte 36,134,1
 	.quad System_Nullable_1_System_DateTime_GetHashCode
-	.quad Lme_1ba
+	.quad Lme_1bb
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2727=LDIE_I - Ldebug_info_start
-	.long LDIFF_SYM2727
+LDIFF_SYM2735=LDIE_I - Ldebug_info_start
+	.long LDIFF_SYM2735
 	.byte 1,106,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2728=Lfde393_end - Lfde393_start
-	.long LDIFF_SYM2728
-Lfde393_start:
+LDIFF_SYM2736=Lfde395_end - Lfde395_start
+	.long LDIFF_SYM2736
+Lfde395_start:
 
 	.long 0
 	.align 3
 	.quad System_Nullable_1_System_DateTime_GetHashCode
 
-LDIFF_SYM2729=Lme_1ba - System_Nullable_1_System_DateTime_GetHashCode
-	.long LDIFF_SYM2729
+LDIFF_SYM2737=Lme_1bb - System_Nullable_1_System_DateTime_GetHashCode
+	.long LDIFF_SYM2737
 	.long 0
 	.byte 12,31,0,68,14,32,157,4,158,3,68,13,29,68,154,2
 	.align 3
-Lfde393_end:
+Lfde395_end:
 
 .section __DWARF, __debug_info,regular,debug
 
@@ -65228,31 +65507,31 @@ Lfde393_end:
 
 	.byte 36,142,1
 	.quad System_Nullable_1_System_DateTime_GetValueOrDefault
-	.quad Lme_1bb
+	.quad Lme_1bc
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2730=LDIE_I - Ldebug_info_start
-	.long LDIFF_SYM2730
+LDIFF_SYM2738=LDIE_I - Ldebug_info_start
+	.long LDIFF_SYM2738
 	.byte 2,141,32,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2731=Lfde394_end - Lfde394_start
-	.long LDIFF_SYM2731
-Lfde394_start:
+LDIFF_SYM2739=Lfde396_end - Lfde396_start
+	.long LDIFF_SYM2739
+Lfde396_start:
 
 	.long 0
 	.align 3
 	.quad System_Nullable_1_System_DateTime_GetValueOrDefault
 
-LDIFF_SYM2732=Lme_1bb - System_Nullable_1_System_DateTime_GetValueOrDefault
-	.long LDIFF_SYM2732
+LDIFF_SYM2740=Lme_1bc - System_Nullable_1_System_DateTime_GetValueOrDefault
+	.long LDIFF_SYM2740
 	.long 0
 	.byte 12,31,0,68,14,48,157,6,158,5,68,13,29
 	.align 3
-Lfde394_end:
+Lfde396_end:
 
 .section __DWARF, __debug_info,regular,debug
 
@@ -65262,31 +65541,31 @@ Lfde394_end:
 
 	.byte 36,152,1
 	.quad System_Nullable_1_System_DateTime_ToString
-	.quad Lme_1bc
+	.quad Lme_1bd
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2733=LDIE_I - Ldebug_info_start
-	.long LDIFF_SYM2733
+LDIFF_SYM2741=LDIE_I - Ldebug_info_start
+	.long LDIFF_SYM2741
 	.byte 2,141,16,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2734=Lfde395_end - Lfde395_start
-	.long LDIFF_SYM2734
-Lfde395_start:
+LDIFF_SYM2742=Lfde397_end - Lfde397_start
+	.long LDIFF_SYM2742
+Lfde397_start:
 
 	.long 0
 	.align 3
 	.quad System_Nullable_1_System_DateTime_ToString
 
-LDIFF_SYM2735=Lme_1bc - System_Nullable_1_System_DateTime_ToString
-	.long LDIFF_SYM2735
+LDIFF_SYM2743=Lme_1bd - System_Nullable_1_System_DateTime_ToString
+	.long LDIFF_SYM2743
 	.long 0
 	.byte 12,31,0,68,14,32,157,4,158,3,68,13,29
 	.align 3
-Lfde395_end:
+Lfde397_end:
 
 .section __DWARF, __debug_info,regular,debug
 
@@ -65296,31 +65575,31 @@ Lfde395_end:
 
 	.byte 36,177,1
 	.quad System_Nullable_1_System_DateTime_Box_System_Nullable_1_System_DateTime
-	.quad Lme_1bd
+	.quad Lme_1be
 
 	.byte 2,118,16,3
 	.asciz "o"
 
-LDIFF_SYM2736=LDIE_I4 - Ldebug_info_start
-	.long LDIFF_SYM2736
+LDIFF_SYM2744=LDIE_I4 - Ldebug_info_start
+	.long LDIFF_SYM2744
 	.byte 2,141,16,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2737=Lfde396_end - Lfde396_start
-	.long LDIFF_SYM2737
-Lfde396_start:
+LDIFF_SYM2745=Lfde398_end - Lfde398_start
+	.long LDIFF_SYM2745
+Lfde398_start:
 
 	.long 0
 	.align 3
 	.quad System_Nullable_1_System_DateTime_Box_System_Nullable_1_System_DateTime
 
-LDIFF_SYM2738=Lme_1bd - System_Nullable_1_System_DateTime_Box_System_Nullable_1_System_DateTime
-	.long LDIFF_SYM2738
+LDIFF_SYM2746=Lme_1be - System_Nullable_1_System_DateTime_Box_System_Nullable_1_System_DateTime
+	.long LDIFF_SYM2746
 	.long 0
 	.byte 12,31,0,68,14,80,157,10,158,9,68,13,29
 	.align 3
-Lfde396_end:
+Lfde398_end:
 
 .section __DWARF, __debug_info,regular,debug
 
@@ -65330,36 +65609,36 @@ Lfde396_end:
 
 	.byte 36,185,1
 	.quad System_Nullable_1_System_DateTime_Unbox_object
-	.quad Lme_1be
+	.quad Lme_1bf
 
 	.byte 2,118,16,3
 	.asciz "o"
 
-LDIFF_SYM2739=LDIE_OBJECT - Ldebug_info_start
-	.long LDIFF_SYM2739
+LDIFF_SYM2747=LDIE_OBJECT - Ldebug_info_start
+	.long LDIFF_SYM2747
 	.byte 2,141,32,11
 	.asciz "V_0"
 
-LDIFF_SYM2740=LDIE_I4 - Ldebug_info_start
-	.long LDIFF_SYM2740
+LDIFF_SYM2748=LDIE_I4 - Ldebug_info_start
+	.long LDIFF_SYM2748
 	.byte 3,141,192,0,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2741=Lfde397_end - Lfde397_start
-	.long LDIFF_SYM2741
-Lfde397_start:
+LDIFF_SYM2749=Lfde399_end - Lfde399_start
+	.long LDIFF_SYM2749
+Lfde399_start:
 
 	.long 0
 	.align 3
 	.quad System_Nullable_1_System_DateTime_Unbox_object
 
-LDIFF_SYM2742=Lme_1be - System_Nullable_1_System_DateTime_Unbox_object
-	.long LDIFF_SYM2742
+LDIFF_SYM2750=Lme_1bf - System_Nullable_1_System_DateTime_Unbox_object
+	.long LDIFF_SYM2750
 	.long 0
 	.byte 12,31,0,68,14,80,157,10,158,9,68,13,29
 	.align 3
-Lfde397_end:
+Lfde399_end:
 
 .section __DWARF, __debug_info,regular,debug
 LTDIE_100:
@@ -65368,69 +65647,69 @@ LTDIE_100:
 	.asciz "System_Nullable`1"
 
 	.byte 24,16
-LDIFF_SYM2743=LTDIE_3 - Ldebug_info_start
-	.long LDIFF_SYM2743
+LDIFF_SYM2751=LTDIE_3 - Ldebug_info_start
+	.long LDIFF_SYM2751
 	.byte 2,35,0,6
 	.asciz "value"
 
-LDIFF_SYM2744=LTDIE_88 - Ldebug_info_start
-	.long LDIFF_SYM2744
+LDIFF_SYM2752=LTDIE_88 - Ldebug_info_start
+	.long LDIFF_SYM2752
 	.byte 2,35,16,6
 	.asciz "has_value"
 
-LDIFF_SYM2745=LDIE_BOOLEAN - Ldebug_info_start
-	.long LDIFF_SYM2745
+LDIFF_SYM2753=LDIE_BOOLEAN - Ldebug_info_start
+	.long LDIFF_SYM2753
 	.byte 2,35,20,0,7
 	.asciz "System_Nullable`1"
 
-LDIFF_SYM2746=LTDIE_100 - Ldebug_info_start
-	.long LDIFF_SYM2746
+LDIFF_SYM2754=LTDIE_100 - Ldebug_info_start
+	.long LDIFF_SYM2754
 LTDIE_100_POINTER:
 
 	.byte 13
-LDIFF_SYM2747=LTDIE_100 - Ldebug_info_start
-	.long LDIFF_SYM2747
+LDIFF_SYM2755=LTDIE_100 - Ldebug_info_start
+	.long LDIFF_SYM2755
 LTDIE_100_REFERENCE:
 
 	.byte 14
-LDIFF_SYM2748=LTDIE_100 - Ldebug_info_start
-	.long LDIFF_SYM2748
+LDIFF_SYM2756=LTDIE_100 - Ldebug_info_start
+	.long LDIFF_SYM2756
 	.byte 2
 	.asciz "System.Nullable`1<Mono.Security.Interface.TlsProtocols>:.ctor"
 	.asciz "System_Nullable_1_Mono_Security_Interface_TlsProtocols__ctor_Mono_Security_Interface_TlsProtocols"
 
 	.byte 36,94
 	.quad System_Nullable_1_Mono_Security_Interface_TlsProtocols__ctor_Mono_Security_Interface_TlsProtocols
-	.quad Lme_1bf
+	.quad Lme_1c0
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2749=LDIE_I - Ldebug_info_start
-	.long LDIFF_SYM2749
+LDIFF_SYM2757=LDIE_I - Ldebug_info_start
+	.long LDIFF_SYM2757
 	.byte 2,141,16,3
 	.asciz "value"
 
-LDIFF_SYM2750=LTDIE_88 - Ldebug_info_start
-	.long LDIFF_SYM2750
+LDIFF_SYM2758=LTDIE_88 - Ldebug_info_start
+	.long LDIFF_SYM2758
 	.byte 2,141,24,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2751=Lfde398_end - Lfde398_start
-	.long LDIFF_SYM2751
-Lfde398_start:
+LDIFF_SYM2759=Lfde400_end - Lfde400_start
+	.long LDIFF_SYM2759
+Lfde400_start:
 
 	.long 0
 	.align 3
 	.quad System_Nullable_1_Mono_Security_Interface_TlsProtocols__ctor_Mono_Security_Interface_TlsProtocols
 
-LDIFF_SYM2752=Lme_1bf - System_Nullable_1_Mono_Security_Interface_TlsProtocols__ctor_Mono_Security_Interface_TlsProtocols
-	.long LDIFF_SYM2752
+LDIFF_SYM2760=Lme_1c0 - System_Nullable_1_Mono_Security_Interface_TlsProtocols__ctor_Mono_Security_Interface_TlsProtocols
+	.long LDIFF_SYM2760
 	.long 0
 	.byte 12,31,0,68,14,32,157,4,158,3,68,13,29
 	.align 3
-Lfde398_end:
+Lfde400_end:
 
 .section __DWARF, __debug_info,regular,debug
 
@@ -65440,31 +65719,31 @@ Lfde398_end:
 
 	.byte 36,99
 	.quad System_Nullable_1_Mono_Security_Interface_TlsProtocols_get_HasValue
-	.quad Lme_1c0
+	.quad Lme_1c1
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2753=LDIE_I - Ldebug_info_start
-	.long LDIFF_SYM2753
+LDIFF_SYM2761=LDIE_I - Ldebug_info_start
+	.long LDIFF_SYM2761
 	.byte 2,141,16,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2754=Lfde399_end - Lfde399_start
-	.long LDIFF_SYM2754
-Lfde399_start:
+LDIFF_SYM2762=Lfde401_end - Lfde401_start
+	.long LDIFF_SYM2762
+Lfde401_start:
 
 	.long 0
 	.align 3
 	.quad System_Nullable_1_Mono_Security_Interface_TlsProtocols_get_HasValue
 
-LDIFF_SYM2755=Lme_1c0 - System_Nullable_1_Mono_Security_Interface_TlsProtocols_get_HasValue
-	.long LDIFF_SYM2755
+LDIFF_SYM2763=Lme_1c1 - System_Nullable_1_Mono_Security_Interface_TlsProtocols_get_HasValue
+	.long LDIFF_SYM2763
 	.long 0
 	.byte 12,31,0,68,14,32,157,4,158,3,68,13,29
 	.align 3
-Lfde399_end:
+Lfde401_end:
 
 .section __DWARF, __debug_info,regular,debug
 
@@ -65474,92 +65753,14 @@ Lfde399_end:
 
 	.byte 36,104
 	.quad System_Nullable_1_Mono_Security_Interface_TlsProtocols_get_Value
-	.quad Lme_1c1
-
-	.byte 2,118,16,3
-	.asciz "this"
-
-LDIFF_SYM2756=LDIE_I - Ldebug_info_start
-	.long LDIFF_SYM2756
-	.byte 2,141,16,0
-
-.section __DWARF, __debug_frame,regular,debug
-
-LDIFF_SYM2757=Lfde400_end - Lfde400_start
-	.long LDIFF_SYM2757
-Lfde400_start:
-
-	.long 0
-	.align 3
-	.quad System_Nullable_1_Mono_Security_Interface_TlsProtocols_get_Value
-
-LDIFF_SYM2758=Lme_1c1 - System_Nullable_1_Mono_Security_Interface_TlsProtocols_get_Value
-	.long LDIFF_SYM2758
-	.long 0
-	.byte 12,31,0,68,14,32,157,4,158,3,68,13,29
-	.align 3
-Lfde400_end:
-
-.section __DWARF, __debug_info,regular,debug
-
-	.byte 2
-	.asciz "System.Nullable`1<Mono.Security.Interface.TlsProtocols>:Equals"
-	.asciz "System_Nullable_1_Mono_Security_Interface_TlsProtocols_Equals_object"
-
-	.byte 36,113
-	.quad System_Nullable_1_Mono_Security_Interface_TlsProtocols_Equals_object
 	.quad Lme_1c2
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2759=LDIE_I - Ldebug_info_start
-	.long LDIFF_SYM2759
-	.byte 2,141,32,3
-	.asciz "other"
-
-LDIFF_SYM2760=LDIE_OBJECT - Ldebug_info_start
-	.long LDIFF_SYM2760
-	.byte 1,106,0
-
-.section __DWARF, __debug_frame,regular,debug
-
-LDIFF_SYM2761=Lfde401_end - Lfde401_start
-	.long LDIFF_SYM2761
-Lfde401_start:
-
-	.long 0
-	.align 3
-	.quad System_Nullable_1_Mono_Security_Interface_TlsProtocols_Equals_object
-
-LDIFF_SYM2762=Lme_1c2 - System_Nullable_1_Mono_Security_Interface_TlsProtocols_Equals_object
-	.long LDIFF_SYM2762
-	.long 0
-	.byte 12,31,0,68,14,64,157,8,158,7,68,13,29,68,152,6,68,154,5
-	.align 3
-Lfde401_end:
-
-.section __DWARF, __debug_info,regular,debug
-
-	.byte 2
-	.asciz "System.Nullable`1<Mono.Security.Interface.TlsProtocols>:Equals"
-	.asciz "System_Nullable_1_Mono_Security_Interface_TlsProtocols_Equals_System_Nullable_1_Mono_Security_Interface_TlsProtocols"
-
-	.byte 36,123
-	.quad System_Nullable_1_Mono_Security_Interface_TlsProtocols_Equals_System_Nullable_1_Mono_Security_Interface_TlsProtocols
-	.quad Lme_1c3
-
-	.byte 2,118,16,3
-	.asciz "this"
-
-LDIFF_SYM2763=LDIE_I - Ldebug_info_start
-	.long LDIFF_SYM2763
-	.byte 2,141,16,3
-	.asciz "other"
-
-LDIFF_SYM2764=LDIE_I4 - Ldebug_info_start
+LDIFF_SYM2764=LDIE_I - Ldebug_info_start
 	.long LDIFF_SYM2764
-	.byte 2,141,24,0
+	.byte 2,141,16,0
 
 .section __DWARF, __debug_frame,regular,debug
 
@@ -65569,14 +65770,92 @@ Lfde402_start:
 
 	.long 0
 	.align 3
+	.quad System_Nullable_1_Mono_Security_Interface_TlsProtocols_get_Value
+
+LDIFF_SYM2766=Lme_1c2 - System_Nullable_1_Mono_Security_Interface_TlsProtocols_get_Value
+	.long LDIFF_SYM2766
+	.long 0
+	.byte 12,31,0,68,14,32,157,4,158,3,68,13,29
+	.align 3
+Lfde402_end:
+
+.section __DWARF, __debug_info,regular,debug
+
+	.byte 2
+	.asciz "System.Nullable`1<Mono.Security.Interface.TlsProtocols>:Equals"
+	.asciz "System_Nullable_1_Mono_Security_Interface_TlsProtocols_Equals_object"
+
+	.byte 36,113
+	.quad System_Nullable_1_Mono_Security_Interface_TlsProtocols_Equals_object
+	.quad Lme_1c3
+
+	.byte 2,118,16,3
+	.asciz "this"
+
+LDIFF_SYM2767=LDIE_I - Ldebug_info_start
+	.long LDIFF_SYM2767
+	.byte 2,141,32,3
+	.asciz "other"
+
+LDIFF_SYM2768=LDIE_OBJECT - Ldebug_info_start
+	.long LDIFF_SYM2768
+	.byte 1,106,0
+
+.section __DWARF, __debug_frame,regular,debug
+
+LDIFF_SYM2769=Lfde403_end - Lfde403_start
+	.long LDIFF_SYM2769
+Lfde403_start:
+
+	.long 0
+	.align 3
+	.quad System_Nullable_1_Mono_Security_Interface_TlsProtocols_Equals_object
+
+LDIFF_SYM2770=Lme_1c3 - System_Nullable_1_Mono_Security_Interface_TlsProtocols_Equals_object
+	.long LDIFF_SYM2770
+	.long 0
+	.byte 12,31,0,68,14,64,157,8,158,7,68,13,29,68,152,6,68,154,5
+	.align 3
+Lfde403_end:
+
+.section __DWARF, __debug_info,regular,debug
+
+	.byte 2
+	.asciz "System.Nullable`1<Mono.Security.Interface.TlsProtocols>:Equals"
+	.asciz "System_Nullable_1_Mono_Security_Interface_TlsProtocols_Equals_System_Nullable_1_Mono_Security_Interface_TlsProtocols"
+
+	.byte 36,123
+	.quad System_Nullable_1_Mono_Security_Interface_TlsProtocols_Equals_System_Nullable_1_Mono_Security_Interface_TlsProtocols
+	.quad Lme_1c4
+
+	.byte 2,118,16,3
+	.asciz "this"
+
+LDIFF_SYM2771=LDIE_I - Ldebug_info_start
+	.long LDIFF_SYM2771
+	.byte 2,141,16,3
+	.asciz "other"
+
+LDIFF_SYM2772=LDIE_I4 - Ldebug_info_start
+	.long LDIFF_SYM2772
+	.byte 2,141,24,0
+
+.section __DWARF, __debug_frame,regular,debug
+
+LDIFF_SYM2773=Lfde404_end - Lfde404_start
+	.long LDIFF_SYM2773
+Lfde404_start:
+
+	.long 0
+	.align 3
 	.quad System_Nullable_1_Mono_Security_Interface_TlsProtocols_Equals_System_Nullable_1_Mono_Security_Interface_TlsProtocols
 
-LDIFF_SYM2766=Lme_1c3 - System_Nullable_1_Mono_Security_Interface_TlsProtocols_Equals_System_Nullable_1_Mono_Security_Interface_TlsProtocols
-	.long LDIFF_SYM2766
+LDIFF_SYM2774=Lme_1c4 - System_Nullable_1_Mono_Security_Interface_TlsProtocols_Equals_System_Nullable_1_Mono_Security_Interface_TlsProtocols
+	.long LDIFF_SYM2774
 	.long 0
 	.byte 12,31,0,68,14,80,157,10,158,9,68,13,29
 	.align 3
-Lfde402_end:
+Lfde404_end:
 
 .section __DWARF, __debug_info,regular,debug
 
@@ -65586,31 +65865,31 @@ Lfde402_end:
 
 	.byte 36,134,1
 	.quad System_Nullable_1_Mono_Security_Interface_TlsProtocols_GetHashCode
-	.quad Lme_1c4
+	.quad Lme_1c5
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2767=LDIE_I - Ldebug_info_start
-	.long LDIFF_SYM2767
+LDIFF_SYM2775=LDIE_I - Ldebug_info_start
+	.long LDIFF_SYM2775
 	.byte 1,106,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2768=Lfde403_end - Lfde403_start
-	.long LDIFF_SYM2768
-Lfde403_start:
+LDIFF_SYM2776=Lfde405_end - Lfde405_start
+	.long LDIFF_SYM2776
+Lfde405_start:
 
 	.long 0
 	.align 3
 	.quad System_Nullable_1_Mono_Security_Interface_TlsProtocols_GetHashCode
 
-LDIFF_SYM2769=Lme_1c4 - System_Nullable_1_Mono_Security_Interface_TlsProtocols_GetHashCode
-	.long LDIFF_SYM2769
+LDIFF_SYM2777=Lme_1c5 - System_Nullable_1_Mono_Security_Interface_TlsProtocols_GetHashCode
+	.long LDIFF_SYM2777
 	.long 0
 	.byte 12,31,0,68,14,32,157,4,158,3,68,13,29,68,154,2
 	.align 3
-Lfde403_end:
+Lfde405_end:
 
 .section __DWARF, __debug_info,regular,debug
 
@@ -65620,31 +65899,31 @@ Lfde403_end:
 
 	.byte 36,142,1
 	.quad System_Nullable_1_Mono_Security_Interface_TlsProtocols_GetValueOrDefault
-	.quad Lme_1c5
+	.quad Lme_1c6
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2770=LDIE_I - Ldebug_info_start
-	.long LDIFF_SYM2770
+LDIFF_SYM2778=LDIE_I - Ldebug_info_start
+	.long LDIFF_SYM2778
 	.byte 2,141,16,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2771=Lfde404_end - Lfde404_start
-	.long LDIFF_SYM2771
-Lfde404_start:
+LDIFF_SYM2779=Lfde406_end - Lfde406_start
+	.long LDIFF_SYM2779
+Lfde406_start:
 
 	.long 0
 	.align 3
 	.quad System_Nullable_1_Mono_Security_Interface_TlsProtocols_GetValueOrDefault
 
-LDIFF_SYM2772=Lme_1c5 - System_Nullable_1_Mono_Security_Interface_TlsProtocols_GetValueOrDefault
-	.long LDIFF_SYM2772
+LDIFF_SYM2780=Lme_1c6 - System_Nullable_1_Mono_Security_Interface_TlsProtocols_GetValueOrDefault
+	.long LDIFF_SYM2780
 	.long 0
 	.byte 12,31,0,68,14,32,157,4,158,3,68,13,29
 	.align 3
-Lfde404_end:
+Lfde406_end:
 
 .section __DWARF, __debug_info,regular,debug
 
@@ -65654,31 +65933,31 @@ Lfde404_end:
 
 	.byte 36,152,1
 	.quad System_Nullable_1_Mono_Security_Interface_TlsProtocols_ToString
-	.quad Lme_1c6
+	.quad Lme_1c7
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2773=LDIE_I - Ldebug_info_start
-	.long LDIFF_SYM2773
+LDIFF_SYM2781=LDIE_I - Ldebug_info_start
+	.long LDIFF_SYM2781
 	.byte 2,141,16,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2774=Lfde405_end - Lfde405_start
-	.long LDIFF_SYM2774
-Lfde405_start:
+LDIFF_SYM2782=Lfde407_end - Lfde407_start
+	.long LDIFF_SYM2782
+Lfde407_start:
 
 	.long 0
 	.align 3
 	.quad System_Nullable_1_Mono_Security_Interface_TlsProtocols_ToString
 
-LDIFF_SYM2775=Lme_1c6 - System_Nullable_1_Mono_Security_Interface_TlsProtocols_ToString
-	.long LDIFF_SYM2775
+LDIFF_SYM2783=Lme_1c7 - System_Nullable_1_Mono_Security_Interface_TlsProtocols_ToString
+	.long LDIFF_SYM2783
 	.long 0
 	.byte 12,31,0,68,14,48,157,6,158,5,68,13,29
 	.align 3
-Lfde405_end:
+Lfde407_end:
 
 .section __DWARF, __debug_info,regular,debug
 
@@ -65688,31 +65967,31 @@ Lfde405_end:
 
 	.byte 36,177,1
 	.quad System_Nullable_1_Mono_Security_Interface_TlsProtocols_Box_System_Nullable_1_Mono_Security_Interface_TlsProtocols
-	.quad Lme_1c7
+	.quad Lme_1c8
 
 	.byte 2,118,16,3
 	.asciz "o"
 
-LDIFF_SYM2776=LDIE_I4 - Ldebug_info_start
-	.long LDIFF_SYM2776
+LDIFF_SYM2784=LDIE_I4 - Ldebug_info_start
+	.long LDIFF_SYM2784
 	.byte 2,141,16,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2777=Lfde406_end - Lfde406_start
-	.long LDIFF_SYM2777
-Lfde406_start:
+LDIFF_SYM2785=Lfde408_end - Lfde408_start
+	.long LDIFF_SYM2785
+Lfde408_start:
 
 	.long 0
 	.align 3
 	.quad System_Nullable_1_Mono_Security_Interface_TlsProtocols_Box_System_Nullable_1_Mono_Security_Interface_TlsProtocols
 
-LDIFF_SYM2778=Lme_1c7 - System_Nullable_1_Mono_Security_Interface_TlsProtocols_Box_System_Nullable_1_Mono_Security_Interface_TlsProtocols
-	.long LDIFF_SYM2778
+LDIFF_SYM2786=Lme_1c8 - System_Nullable_1_Mono_Security_Interface_TlsProtocols_Box_System_Nullable_1_Mono_Security_Interface_TlsProtocols
+	.long LDIFF_SYM2786
 	.long 0
 	.byte 12,31,0,68,14,64,157,8,158,7,68,13,29
 	.align 3
-Lfde406_end:
+Lfde408_end:
 
 .section __DWARF, __debug_info,regular,debug
 
@@ -65722,36 +66001,36 @@ Lfde406_end:
 
 	.byte 36,185,1
 	.quad System_Nullable_1_Mono_Security_Interface_TlsProtocols_Unbox_object
-	.quad Lme_1c8
+	.quad Lme_1c9
 
 	.byte 2,118,16,3
 	.asciz "o"
 
-LDIFF_SYM2779=LDIE_OBJECT - Ldebug_info_start
-	.long LDIFF_SYM2779
+LDIFF_SYM2787=LDIE_OBJECT - Ldebug_info_start
+	.long LDIFF_SYM2787
 	.byte 2,141,32,11
 	.asciz "V_0"
 
-LDIFF_SYM2780=LDIE_I4 - Ldebug_info_start
-	.long LDIFF_SYM2780
+LDIFF_SYM2788=LDIE_I4 - Ldebug_info_start
+	.long LDIFF_SYM2788
 	.byte 2,141,48,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2781=Lfde407_end - Lfde407_start
-	.long LDIFF_SYM2781
-Lfde407_start:
+LDIFF_SYM2789=Lfde409_end - Lfde409_start
+	.long LDIFF_SYM2789
+Lfde409_start:
 
 	.long 0
 	.align 3
 	.quad System_Nullable_1_Mono_Security_Interface_TlsProtocols_Unbox_object
 
-LDIFF_SYM2782=Lme_1c8 - System_Nullable_1_Mono_Security_Interface_TlsProtocols_Unbox_object
-	.long LDIFF_SYM2782
+LDIFF_SYM2790=Lme_1c9 - System_Nullable_1_Mono_Security_Interface_TlsProtocols_Unbox_object
+	.long LDIFF_SYM2790
 	.long 0
 	.byte 12,31,0,68,14,64,157,8,158,7,68,13,29
 	.align 3
-Lfde407_end:
+Lfde409_end:
 
 .section __DWARF, __debug_info,regular,debug
 
@@ -65761,65 +66040,6 @@ Lfde407_end:
 
 	.byte 0,0
 	.quad wrapper_runtime_invoke__Module_runtime_invoke_void__this___byte_byte_int_Nullable_1_MonoSslPolicyErrors_object_intptr_intptr_intptr
-	.quad Lme_1c9
-
-	.byte 2,118,16,3
-	.asciz "this"
-
-LDIFF_SYM2783=LDIE_OBJECT - Ldebug_info_start
-	.long LDIFF_SYM2783
-	.byte 2,141,32,3
-	.asciz "params"
-
-LDIFF_SYM2784=LDIE_I - Ldebug_info_start
-	.long LDIFF_SYM2784
-	.byte 1,105,3
-	.asciz "exc"
-
-LDIFF_SYM2785=LDIE_I - Ldebug_info_start
-	.long LDIFF_SYM2785
-	.byte 2,141,40,3
-	.asciz "method"
-
-LDIFF_SYM2786=LDIE_I - Ldebug_info_start
-	.long LDIFF_SYM2786
-	.byte 2,141,48,11
-	.asciz "V_0"
-
-LDIFF_SYM2787=LDIE_OBJECT - Ldebug_info_start
-	.long LDIFF_SYM2787
-	.byte 3,141,200,0,11
-	.asciz "V_1"
-
-LDIFF_SYM2788=LDIE_OBJECT - Ldebug_info_start
-	.long LDIFF_SYM2788
-	.byte 3,141,208,0,0
-
-.section __DWARF, __debug_frame,regular,debug
-
-LDIFF_SYM2789=Lfde408_end - Lfde408_start
-	.long LDIFF_SYM2789
-Lfde408_start:
-
-	.long 0
-	.align 3
-	.quad wrapper_runtime_invoke__Module_runtime_invoke_void__this___byte_byte_int_Nullable_1_MonoSslPolicyErrors_object_intptr_intptr_intptr
-
-LDIFF_SYM2790=Lme_1c9 - wrapper_runtime_invoke__Module_runtime_invoke_void__this___byte_byte_int_Nullable_1_MonoSslPolicyErrors_object_intptr_intptr_intptr
-	.long LDIFF_SYM2790
-	.long 0
-	.byte 12,31,0,68,14,160,1,157,20,158,19,68,13,29,68,151,18,68,153,17
-	.align 3
-Lfde408_end:
-
-.section __DWARF, __debug_info,regular,debug
-
-	.byte 2
-	.asciz "(wrapper_runtime-invoke)_<Module>:runtime_invoke_void__this___Nullable`1<bool>"
-	.asciz "wrapper_runtime_invoke__Module_runtime_invoke_void__this___Nullable_1_bool_object_intptr_intptr_intptr"
-
-	.byte 0,0
-	.quad wrapper_runtime_invoke__Module_runtime_invoke_void__this___Nullable_1_bool_object_intptr_intptr_intptr
 	.quad Lme_1ca
 
 	.byte 2,118,16,3
@@ -65827,12 +66047,12 @@ Lfde408_end:
 
 LDIFF_SYM2791=LDIE_OBJECT - Ldebug_info_start
 	.long LDIFF_SYM2791
-	.byte 2,141,24,3
+	.byte 2,141,32,3
 	.asciz "params"
 
 LDIFF_SYM2792=LDIE_I - Ldebug_info_start
 	.long LDIFF_SYM2792
-	.byte 2,141,32,3
+	.byte 1,105,3
 	.asciz "exc"
 
 LDIFF_SYM2793=LDIE_I - Ldebug_info_start
@@ -65856,29 +66076,29 @@ LDIFF_SYM2796=LDIE_OBJECT - Ldebug_info_start
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2797=Lfde409_end - Lfde409_start
+LDIFF_SYM2797=Lfde410_end - Lfde410_start
 	.long LDIFF_SYM2797
-Lfde409_start:
+Lfde410_start:
 
 	.long 0
 	.align 3
-	.quad wrapper_runtime_invoke__Module_runtime_invoke_void__this___Nullable_1_bool_object_intptr_intptr_intptr
+	.quad wrapper_runtime_invoke__Module_runtime_invoke_void__this___byte_byte_int_Nullable_1_MonoSslPolicyErrors_object_intptr_intptr_intptr
 
-LDIFF_SYM2798=Lme_1ca - wrapper_runtime_invoke__Module_runtime_invoke_void__this___Nullable_1_bool_object_intptr_intptr_intptr
+LDIFF_SYM2798=Lme_1ca - wrapper_runtime_invoke__Module_runtime_invoke_void__this___byte_byte_int_Nullable_1_MonoSslPolicyErrors_object_intptr_intptr_intptr
 	.long LDIFF_SYM2798
 	.long 0
-	.byte 12,31,0,68,14,128,1,157,16,158,15,68,13,29,68,151,14
+	.byte 12,31,0,68,14,160,1,157,20,158,19,68,13,29,68,151,18,68,153,17
 	.align 3
-Lfde409_end:
+Lfde410_end:
 
 .section __DWARF, __debug_info,regular,debug
 
 	.byte 2
-	.asciz "(wrapper_runtime-invoke)_<Module>:runtime_invoke_void__this___Nullable`1<DateTime>"
-	.asciz "wrapper_runtime_invoke__Module_runtime_invoke_void__this___Nullable_1_DateTime_object_intptr_intptr_intptr"
+	.asciz "(wrapper_runtime-invoke)_<Module>:runtime_invoke_void__this___Nullable`1<bool>"
+	.asciz "wrapper_runtime_invoke__Module_runtime_invoke_void__this___Nullable_1_bool_object_intptr_intptr_intptr"
 
 	.byte 0,0
-	.quad wrapper_runtime_invoke__Module_runtime_invoke_void__this___Nullable_1_DateTime_object_intptr_intptr_intptr
+	.quad wrapper_runtime_invoke__Module_runtime_invoke_void__this___Nullable_1_bool_object_intptr_intptr_intptr
 	.quad Lme_1cb
 
 	.byte 2,118,16,3
@@ -65906,38 +66126,38 @@ LDIFF_SYM2802=LDIE_I - Ldebug_info_start
 
 LDIFF_SYM2803=LDIE_OBJECT - Ldebug_info_start
 	.long LDIFF_SYM2803
-	.byte 3,141,216,0,11
+	.byte 3,141,200,0,11
 	.asciz "V_1"
 
 LDIFF_SYM2804=LDIE_OBJECT - Ldebug_info_start
 	.long LDIFF_SYM2804
-	.byte 3,141,224,0,0
+	.byte 3,141,208,0,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2805=Lfde410_end - Lfde410_start
+LDIFF_SYM2805=Lfde411_end - Lfde411_start
 	.long LDIFF_SYM2805
-Lfde410_start:
+Lfde411_start:
 
 	.long 0
 	.align 3
-	.quad wrapper_runtime_invoke__Module_runtime_invoke_void__this___Nullable_1_DateTime_object_intptr_intptr_intptr
+	.quad wrapper_runtime_invoke__Module_runtime_invoke_void__this___Nullable_1_bool_object_intptr_intptr_intptr
 
-LDIFF_SYM2806=Lme_1cb - wrapper_runtime_invoke__Module_runtime_invoke_void__this___Nullable_1_DateTime_object_intptr_intptr_intptr
+LDIFF_SYM2806=Lme_1cb - wrapper_runtime_invoke__Module_runtime_invoke_void__this___Nullable_1_bool_object_intptr_intptr_intptr
 	.long LDIFF_SYM2806
 	.long 0
-	.byte 12,31,0,68,14,144,1,157,18,158,17,68,13,29,68,151,16
+	.byte 12,31,0,68,14,128,1,157,16,158,15,68,13,29,68,151,14
 	.align 3
-Lfde410_end:
+Lfde411_end:
 
 .section __DWARF, __debug_info,regular,debug
 
 	.byte 2
-	.asciz "(wrapper_runtime-invoke)_<Module>:runtime_invoke_void__this___Nullable`1<TlsProtocols>"
-	.asciz "wrapper_runtime_invoke__Module_runtime_invoke_void__this___Nullable_1_TlsProtocols_object_intptr_intptr_intptr"
+	.asciz "(wrapper_runtime-invoke)_<Module>:runtime_invoke_void__this___Nullable`1<DateTime>"
+	.asciz "wrapper_runtime_invoke__Module_runtime_invoke_void__this___Nullable_1_DateTime_object_intptr_intptr_intptr"
 
 	.byte 0,0
-	.quad wrapper_runtime_invoke__Module_runtime_invoke_void__this___Nullable_1_TlsProtocols_object_intptr_intptr_intptr
+	.quad wrapper_runtime_invoke__Module_runtime_invoke_void__this___Nullable_1_DateTime_object_intptr_intptr_intptr
 	.quad Lme_1cc
 
 	.byte 2,118,16,3
@@ -65965,29 +66185,88 @@ LDIFF_SYM2810=LDIE_I - Ldebug_info_start
 
 LDIFF_SYM2811=LDIE_OBJECT - Ldebug_info_start
 	.long LDIFF_SYM2811
-	.byte 3,141,200,0,11
+	.byte 3,141,216,0,11
 	.asciz "V_1"
 
 LDIFF_SYM2812=LDIE_OBJECT - Ldebug_info_start
 	.long LDIFF_SYM2812
+	.byte 3,141,224,0,0
+
+.section __DWARF, __debug_frame,regular,debug
+
+LDIFF_SYM2813=Lfde412_end - Lfde412_start
+	.long LDIFF_SYM2813
+Lfde412_start:
+
+	.long 0
+	.align 3
+	.quad wrapper_runtime_invoke__Module_runtime_invoke_void__this___Nullable_1_DateTime_object_intptr_intptr_intptr
+
+LDIFF_SYM2814=Lme_1cc - wrapper_runtime_invoke__Module_runtime_invoke_void__this___Nullable_1_DateTime_object_intptr_intptr_intptr
+	.long LDIFF_SYM2814
+	.long 0
+	.byte 12,31,0,68,14,144,1,157,18,158,17,68,13,29,68,151,16
+	.align 3
+Lfde412_end:
+
+.section __DWARF, __debug_info,regular,debug
+
+	.byte 2
+	.asciz "(wrapper_runtime-invoke)_<Module>:runtime_invoke_void__this___Nullable`1<TlsProtocols>"
+	.asciz "wrapper_runtime_invoke__Module_runtime_invoke_void__this___Nullable_1_TlsProtocols_object_intptr_intptr_intptr"
+
+	.byte 0,0
+	.quad wrapper_runtime_invoke__Module_runtime_invoke_void__this___Nullable_1_TlsProtocols_object_intptr_intptr_intptr
+	.quad Lme_1cd
+
+	.byte 2,118,16,3
+	.asciz "this"
+
+LDIFF_SYM2815=LDIE_OBJECT - Ldebug_info_start
+	.long LDIFF_SYM2815
+	.byte 2,141,24,3
+	.asciz "params"
+
+LDIFF_SYM2816=LDIE_I - Ldebug_info_start
+	.long LDIFF_SYM2816
+	.byte 2,141,32,3
+	.asciz "exc"
+
+LDIFF_SYM2817=LDIE_I - Ldebug_info_start
+	.long LDIFF_SYM2817
+	.byte 2,141,40,3
+	.asciz "method"
+
+LDIFF_SYM2818=LDIE_I - Ldebug_info_start
+	.long LDIFF_SYM2818
+	.byte 2,141,48,11
+	.asciz "V_0"
+
+LDIFF_SYM2819=LDIE_OBJECT - Ldebug_info_start
+	.long LDIFF_SYM2819
+	.byte 3,141,200,0,11
+	.asciz "V_1"
+
+LDIFF_SYM2820=LDIE_OBJECT - Ldebug_info_start
+	.long LDIFF_SYM2820
 	.byte 3,141,208,0,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2813=Lfde411_end - Lfde411_start
-	.long LDIFF_SYM2813
-Lfde411_start:
+LDIFF_SYM2821=Lfde413_end - Lfde413_start
+	.long LDIFF_SYM2821
+Lfde413_start:
 
 	.long 0
 	.align 3
 	.quad wrapper_runtime_invoke__Module_runtime_invoke_void__this___Nullable_1_TlsProtocols_object_intptr_intptr_intptr
 
-LDIFF_SYM2814=Lme_1cc - wrapper_runtime_invoke__Module_runtime_invoke_void__this___Nullable_1_TlsProtocols_object_intptr_intptr_intptr
-	.long LDIFF_SYM2814
+LDIFF_SYM2822=Lme_1cd - wrapper_runtime_invoke__Module_runtime_invoke_void__this___Nullable_1_TlsProtocols_object_intptr_intptr_intptr
+	.long LDIFF_SYM2822
 	.long 0
 	.byte 12,31,0,68,14,128,1,157,16,158,15,68,13,29,68,151,14
 	.align 3
-Lfde411_end:
+Lfde413_end:
 
 .section __DWARF, __debug_info,regular,debug
 LTDIE_101:
@@ -65998,112 +66277,112 @@ LTDIE_101:
 	.byte 16,7
 	.asciz "_<Module>"
 
-LDIFF_SYM2815=LTDIE_101 - Ldebug_info_start
-	.long LDIFF_SYM2815
+LDIFF_SYM2823=LTDIE_101 - Ldebug_info_start
+	.long LDIFF_SYM2823
 LTDIE_101_POINTER:
 
 	.byte 13
-LDIFF_SYM2816=LTDIE_101 - Ldebug_info_start
-	.long LDIFF_SYM2816
+LDIFF_SYM2824=LTDIE_101 - Ldebug_info_start
+	.long LDIFF_SYM2824
 LTDIE_101_REFERENCE:
 
 	.byte 14
-LDIFF_SYM2817=LTDIE_101 - Ldebug_info_start
-	.long LDIFF_SYM2817
+LDIFF_SYM2825=LTDIE_101 - Ldebug_info_start
+	.long LDIFF_SYM2825
 LTDIE_102:
 
 	.byte 5
 	.asciz "System_Array"
 
 	.byte 16,16
-LDIFF_SYM2818=LTDIE_1 - Ldebug_info_start
-	.long LDIFF_SYM2818
+LDIFF_SYM2826=LTDIE_1 - Ldebug_info_start
+	.long LDIFF_SYM2826
 	.byte 2,35,0,0,7
 	.asciz "System_Array"
 
-LDIFF_SYM2819=LTDIE_102 - Ldebug_info_start
-	.long LDIFF_SYM2819
+LDIFF_SYM2827=LTDIE_102 - Ldebug_info_start
+	.long LDIFF_SYM2827
 LTDIE_102_POINTER:
 
 	.byte 13
-LDIFF_SYM2820=LTDIE_102 - Ldebug_info_start
-	.long LDIFF_SYM2820
+LDIFF_SYM2828=LTDIE_102 - Ldebug_info_start
+	.long LDIFF_SYM2828
 LTDIE_102_REFERENCE:
 
 	.byte 14
-LDIFF_SYM2821=LTDIE_102 - Ldebug_info_start
-	.long LDIFF_SYM2821
+LDIFF_SYM2829=LTDIE_102 - Ldebug_info_start
+	.long LDIFF_SYM2829
 	.byte 2
 	.asciz "(wrapper_delegate-invoke)_<Module>:invoke_bool_BigInteger_ConfidenceFactor"
 	.asciz "wrapper_delegate_invoke__Module_invoke_bool_BigInteger_ConfidenceFactor_Mono_Math_BigInteger_Mono_Math_Prime_ConfidenceFactor"
 
 	.byte 0,0
 	.quad wrapper_delegate_invoke__Module_invoke_bool_BigInteger_ConfidenceFactor_Mono_Math_BigInteger_Mono_Math_Prime_ConfidenceFactor
-	.quad Lme_1cd
+	.quad Lme_1ce
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2822=LTDIE_101_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2822
+LDIFF_SYM2830=LTDIE_101_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2830
 	.byte 1,104,3
 	.asciz "param0"
 
-LDIFF_SYM2823=LTDIE_0_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2823
+LDIFF_SYM2831=LTDIE_0_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2831
 	.byte 1,105,3
 	.asciz "param1"
 
-LDIFF_SYM2824=LTDIE_12 - Ldebug_info_start
-	.long LDIFF_SYM2824
+LDIFF_SYM2832=LTDIE_12 - Ldebug_info_start
+	.long LDIFF_SYM2832
 	.byte 1,106,11
 	.asciz "V_0"
 
-LDIFF_SYM2825=LDIE_I4 - Ldebug_info_start
-	.long LDIFF_SYM2825
+LDIFF_SYM2833=LDIE_I4 - Ldebug_info_start
+	.long LDIFF_SYM2833
 	.byte 1,102,11
 	.asciz "V_1"
 
-LDIFF_SYM2826=LDIE_I4 - Ldebug_info_start
-	.long LDIFF_SYM2826
+LDIFF_SYM2834=LDIE_I4 - Ldebug_info_start
+	.long LDIFF_SYM2834
 	.byte 1,104,11
 	.asciz "V_2"
 
-LDIFF_SYM2827=LTDIE_102_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2827
+LDIFF_SYM2835=LTDIE_102_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2835
 	.byte 1,103,11
 	.asciz "V_3"
 
-LDIFF_SYM2828=LTDIE_62_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2828
+LDIFF_SYM2836=LTDIE_62_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2836
 	.byte 1,101,11
 	.asciz "V_4"
 
-LDIFF_SYM2829=LDIE_OBJECT - Ldebug_info_start
-	.long LDIFF_SYM2829
+LDIFF_SYM2837=LDIE_OBJECT - Ldebug_info_start
+	.long LDIFF_SYM2837
 	.byte 1,103,11
 	.asciz "V_5"
 
-LDIFF_SYM2830=LDIE_BOOLEAN - Ldebug_info_start
-	.long LDIFF_SYM2830
+LDIFF_SYM2838=LDIE_BOOLEAN - Ldebug_info_start
+	.long LDIFF_SYM2838
 	.byte 1,101,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2831=Lfde412_end - Lfde412_start
-	.long LDIFF_SYM2831
-Lfde412_start:
+LDIFF_SYM2839=Lfde414_end - Lfde414_start
+	.long LDIFF_SYM2839
+Lfde414_start:
 
 	.long 0
 	.align 3
 	.quad wrapper_delegate_invoke__Module_invoke_bool_BigInteger_ConfidenceFactor_Mono_Math_BigInteger_Mono_Math_Prime_ConfidenceFactor
 
-LDIFF_SYM2832=Lme_1cd - wrapper_delegate_invoke__Module_invoke_bool_BigInteger_ConfidenceFactor_Mono_Math_BigInteger_Mono_Math_Prime_ConfidenceFactor
-	.long LDIFF_SYM2832
+LDIFF_SYM2840=Lme_1ce - wrapper_delegate_invoke__Module_invoke_bool_BigInteger_ConfidenceFactor_Mono_Math_BigInteger_Mono_Math_Prime_ConfidenceFactor
+	.long LDIFF_SYM2840
 	.long 0
 	.byte 12,31,0,68,14,80,157,10,158,9,68,13,29,68,149,8,150,7,68,151,6,152,5,68,153,4,154,3
 	.align 3
-Lfde412_end:
+Lfde414_end:
 
 .section __DWARF, __debug_info,regular,debug
 LTDIE_103:
@@ -66112,84 +66391,84 @@ LTDIE_103:
 	.asciz "System_AsyncCallback"
 
 	.byte 112,16
-LDIFF_SYM2833=LTDIE_62 - Ldebug_info_start
-	.long LDIFF_SYM2833
+LDIFF_SYM2841=LTDIE_62 - Ldebug_info_start
+	.long LDIFF_SYM2841
 	.byte 2,35,0,0,7
 	.asciz "System_AsyncCallback"
 
-LDIFF_SYM2834=LTDIE_103 - Ldebug_info_start
-	.long LDIFF_SYM2834
+LDIFF_SYM2842=LTDIE_103 - Ldebug_info_start
+	.long LDIFF_SYM2842
 LTDIE_103_POINTER:
 
 	.byte 13
-LDIFF_SYM2835=LTDIE_103 - Ldebug_info_start
-	.long LDIFF_SYM2835
+LDIFF_SYM2843=LTDIE_103 - Ldebug_info_start
+	.long LDIFF_SYM2843
 LTDIE_103_REFERENCE:
 
 	.byte 14
-LDIFF_SYM2836=LTDIE_103 - Ldebug_info_start
-	.long LDIFF_SYM2836
+LDIFF_SYM2844=LTDIE_103 - Ldebug_info_start
+	.long LDIFF_SYM2844
 	.byte 2
 	.asciz "(wrapper_delegate-begin-invoke)_<Module>:begin_invoke_IAsyncResult__this___BigInteger_ConfidenceFactor_AsyncCallback_object"
 	.asciz "wrapper_delegate_begin_invoke__Module_begin_invoke_IAsyncResult__this___BigInteger_ConfidenceFactor_AsyncCallback_object_Mono_Math_BigInteger_Mono_Math_Prime_ConfidenceFactor_System_AsyncCallback_object"
 
 	.byte 0,0
 	.quad wrapper_delegate_begin_invoke__Module_begin_invoke_IAsyncResult__this___BigInteger_ConfidenceFactor_AsyncCallback_object_Mono_Math_BigInteger_Mono_Math_Prime_ConfidenceFactor_System_AsyncCallback_object
-	.quad Lme_1ce
+	.quad Lme_1cf
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2837=LTDIE_101_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2837
+LDIFF_SYM2845=LTDIE_101_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2845
 	.byte 2,141,32,3
 	.asciz "param0"
 
-LDIFF_SYM2838=LTDIE_0_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2838
+LDIFF_SYM2846=LTDIE_0_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2846
 	.byte 2,141,40,3
 	.asciz "param1"
 
-LDIFF_SYM2839=LTDIE_12 - Ldebug_info_start
-	.long LDIFF_SYM2839
+LDIFF_SYM2847=LTDIE_12 - Ldebug_info_start
+	.long LDIFF_SYM2847
 	.byte 2,141,48,3
 	.asciz "param2"
 
-LDIFF_SYM2840=LTDIE_103_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2840
+LDIFF_SYM2848=LTDIE_103_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2848
 	.byte 2,141,56,3
 	.asciz "param3"
 
-LDIFF_SYM2841=LDIE_OBJECT - Ldebug_info_start
-	.long LDIFF_SYM2841
+LDIFF_SYM2849=LDIE_OBJECT - Ldebug_info_start
+	.long LDIFF_SYM2849
 	.byte 3,141,192,0,11
 	.asciz "V_0"
 
-LDIFF_SYM2842=LDIE_I - Ldebug_info_start
-	.long LDIFF_SYM2842
+LDIFF_SYM2850=LDIE_I - Ldebug_info_start
+	.long LDIFF_SYM2850
 	.byte 1,105,11
 	.asciz "V_1"
 
-LDIFF_SYM2843=LDIE_I - Ldebug_info_start
-	.long LDIFF_SYM2843
+LDIFF_SYM2851=LDIE_I - Ldebug_info_start
+	.long LDIFF_SYM2851
 	.byte 1,105,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2844=Lfde413_end - Lfde413_start
-	.long LDIFF_SYM2844
-Lfde413_start:
+LDIFF_SYM2852=Lfde415_end - Lfde415_start
+	.long LDIFF_SYM2852
+Lfde415_start:
 
 	.long 0
 	.align 3
 	.quad wrapper_delegate_begin_invoke__Module_begin_invoke_IAsyncResult__this___BigInteger_ConfidenceFactor_AsyncCallback_object_Mono_Math_BigInteger_Mono_Math_Prime_ConfidenceFactor_System_AsyncCallback_object
 
-LDIFF_SYM2845=Lme_1ce - wrapper_delegate_begin_invoke__Module_begin_invoke_IAsyncResult__this___BigInteger_ConfidenceFactor_AsyncCallback_object_Mono_Math_BigInteger_Mono_Math_Prime_ConfidenceFactor_System_AsyncCallback_object
-	.long LDIFF_SYM2845
+LDIFF_SYM2853=Lme_1cf - wrapper_delegate_begin_invoke__Module_begin_invoke_IAsyncResult__this___BigInteger_ConfidenceFactor_AsyncCallback_object_Mono_Math_BigInteger_Mono_Math_Prime_ConfidenceFactor_System_AsyncCallback_object
+	.long LDIFF_SYM2853
 	.long 0
 	.byte 12,31,0,68,14,80,157,10,158,9,68,13,29,68,152,8,153,7
 	.align 3
-Lfde413_end:
+Lfde415_end:
 
 .section __DWARF, __debug_info,regular,debug
 LTDIE_104:
@@ -66200,64 +66479,64 @@ LTDIE_104:
 	.byte 16,7
 	.asciz "System_IAsyncResult"
 
-LDIFF_SYM2846=LTDIE_104 - Ldebug_info_start
-	.long LDIFF_SYM2846
+LDIFF_SYM2854=LTDIE_104 - Ldebug_info_start
+	.long LDIFF_SYM2854
 LTDIE_104_POINTER:
 
 	.byte 13
-LDIFF_SYM2847=LTDIE_104 - Ldebug_info_start
-	.long LDIFF_SYM2847
+LDIFF_SYM2855=LTDIE_104 - Ldebug_info_start
+	.long LDIFF_SYM2855
 LTDIE_104_REFERENCE:
 
 	.byte 14
-LDIFF_SYM2848=LTDIE_104 - Ldebug_info_start
-	.long LDIFF_SYM2848
+LDIFF_SYM2856=LTDIE_104 - Ldebug_info_start
+	.long LDIFF_SYM2856
 	.byte 2
 	.asciz "(wrapper_delegate-end-invoke)_<Module>:end_invoke_bool__this___IAsyncResult"
 	.asciz "wrapper_delegate_end_invoke__Module_end_invoke_bool__this___IAsyncResult_System_IAsyncResult"
 
 	.byte 0,0
 	.quad wrapper_delegate_end_invoke__Module_end_invoke_bool__this___IAsyncResult_System_IAsyncResult
-	.quad Lme_1cf
+	.quad Lme_1d0
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2849=LTDIE_101_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2849
+LDIFF_SYM2857=LTDIE_101_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2857
 	.byte 2,141,32,3
 	.asciz "param0"
 
-LDIFF_SYM2850=LTDIE_104_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2850
+LDIFF_SYM2858=LTDIE_104_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2858
 	.byte 2,141,40,11
 	.asciz "V_0"
 
-LDIFF_SYM2851=LDIE_I - Ldebug_info_start
-	.long LDIFF_SYM2851
+LDIFF_SYM2859=LDIE_I - Ldebug_info_start
+	.long LDIFF_SYM2859
 	.byte 1,105,11
 	.asciz "V_1"
 
-LDIFF_SYM2852=LDIE_I - Ldebug_info_start
-	.long LDIFF_SYM2852
+LDIFF_SYM2860=LDIE_I - Ldebug_info_start
+	.long LDIFF_SYM2860
 	.byte 2,141,48,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2853=Lfde414_end - Lfde414_start
-	.long LDIFF_SYM2853
-Lfde414_start:
+LDIFF_SYM2861=Lfde416_end - Lfde416_start
+	.long LDIFF_SYM2861
+Lfde416_start:
 
 	.long 0
 	.align 3
 	.quad wrapper_delegate_end_invoke__Module_end_invoke_bool__this___IAsyncResult_System_IAsyncResult
 
-LDIFF_SYM2854=Lme_1cf - wrapper_delegate_end_invoke__Module_end_invoke_bool__this___IAsyncResult_System_IAsyncResult
-	.long LDIFF_SYM2854
+LDIFF_SYM2862=Lme_1d0 - wrapper_delegate_end_invoke__Module_end_invoke_bool__this___IAsyncResult_System_IAsyncResult
+	.long LDIFF_SYM2862
 	.long 0
 	.byte 12,31,0,68,14,64,157,8,158,7,68,13,29,68,152,6,153,5
 	.align 3
-Lfde414_end:
+Lfde416_end:
 
 .section __DWARF, __debug_info,regular,debug
 LTDIE_106:
@@ -66266,358 +66545,199 @@ LTDIE_106:
 	.asciz "System_Security_Cryptography_X509Certificates_X509CertificateImpl"
 
 	.byte 24,16
-LDIFF_SYM2855=LTDIE_1 - Ldebug_info_start
-	.long LDIFF_SYM2855
+LDIFF_SYM2863=LTDIE_1 - Ldebug_info_start
+	.long LDIFF_SYM2863
 	.byte 2,35,0,6
 	.asciz "cachedCertificateHash"
 
-LDIFF_SYM2856=LDIE_SZARRAY - Ldebug_info_start
-	.long LDIFF_SYM2856
+LDIFF_SYM2864=LDIE_SZARRAY - Ldebug_info_start
+	.long LDIFF_SYM2864
 	.byte 2,35,16,0,7
 	.asciz "System_Security_Cryptography_X509Certificates_X509CertificateImpl"
 
-LDIFF_SYM2857=LTDIE_106 - Ldebug_info_start
-	.long LDIFF_SYM2857
+LDIFF_SYM2865=LTDIE_106 - Ldebug_info_start
+	.long LDIFF_SYM2865
 LTDIE_106_POINTER:
 
 	.byte 13
-LDIFF_SYM2858=LTDIE_106 - Ldebug_info_start
-	.long LDIFF_SYM2858
+LDIFF_SYM2866=LTDIE_106 - Ldebug_info_start
+	.long LDIFF_SYM2866
 LTDIE_106_REFERENCE:
 
 	.byte 14
-LDIFF_SYM2859=LTDIE_106 - Ldebug_info_start
-	.long LDIFF_SYM2859
+LDIFF_SYM2867=LTDIE_106 - Ldebug_info_start
+	.long LDIFF_SYM2867
 LTDIE_105:
 
 	.byte 5
 	.asciz "System_Security_Cryptography_X509Certificates_X509Certificate"
 
 	.byte 48,16
-LDIFF_SYM2860=LTDIE_1 - Ldebug_info_start
-	.long LDIFF_SYM2860
+LDIFF_SYM2868=LTDIE_1 - Ldebug_info_start
+	.long LDIFF_SYM2868
 	.byte 2,35,0,6
 	.asciz "impl"
 
-LDIFF_SYM2861=LTDIE_106_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2861
+LDIFF_SYM2869=LTDIE_106_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2869
 	.byte 2,35,16,6
 	.asciz "hideDates"
 
-LDIFF_SYM2862=LDIE_BOOLEAN - Ldebug_info_start
-	.long LDIFF_SYM2862
+LDIFF_SYM2870=LDIE_BOOLEAN - Ldebug_info_start
+	.long LDIFF_SYM2870
 	.byte 2,35,40,6
 	.asciz "issuer_name"
 
-LDIFF_SYM2863=LDIE_STRING - Ldebug_info_start
-	.long LDIFF_SYM2863
+LDIFF_SYM2871=LDIE_STRING - Ldebug_info_start
+	.long LDIFF_SYM2871
 	.byte 2,35,24,6
 	.asciz "subject_name"
 
-LDIFF_SYM2864=LDIE_STRING - Ldebug_info_start
-	.long LDIFF_SYM2864
+LDIFF_SYM2872=LDIE_STRING - Ldebug_info_start
+	.long LDIFF_SYM2872
 	.byte 2,35,32,0,7
 	.asciz "System_Security_Cryptography_X509Certificates_X509Certificate"
 
-LDIFF_SYM2865=LTDIE_105 - Ldebug_info_start
-	.long LDIFF_SYM2865
+LDIFF_SYM2873=LTDIE_105 - Ldebug_info_start
+	.long LDIFF_SYM2873
 LTDIE_105_POINTER:
 
 	.byte 13
-LDIFF_SYM2866=LTDIE_105 - Ldebug_info_start
-	.long LDIFF_SYM2866
+LDIFF_SYM2874=LTDIE_105 - Ldebug_info_start
+	.long LDIFF_SYM2874
 LTDIE_105_REFERENCE:
 
 	.byte 14
-LDIFF_SYM2867=LTDIE_105 - Ldebug_info_start
-	.long LDIFF_SYM2867
+LDIFF_SYM2875=LTDIE_105 - Ldebug_info_start
+	.long LDIFF_SYM2875
 LTDIE_108:
 
 	.byte 5
 	.asciz "System_Security_Cryptography_X509Certificates_X509ChainImpl"
 
 	.byte 16,16
-LDIFF_SYM2868=LTDIE_1 - Ldebug_info_start
-	.long LDIFF_SYM2868
+LDIFF_SYM2876=LTDIE_1 - Ldebug_info_start
+	.long LDIFF_SYM2876
 	.byte 2,35,0,0,7
 	.asciz "System_Security_Cryptography_X509Certificates_X509ChainImpl"
 
-LDIFF_SYM2869=LTDIE_108 - Ldebug_info_start
-	.long LDIFF_SYM2869
+LDIFF_SYM2877=LTDIE_108 - Ldebug_info_start
+	.long LDIFF_SYM2877
 LTDIE_108_POINTER:
 
 	.byte 13
-LDIFF_SYM2870=LTDIE_108 - Ldebug_info_start
-	.long LDIFF_SYM2870
+LDIFF_SYM2878=LTDIE_108 - Ldebug_info_start
+	.long LDIFF_SYM2878
 LTDIE_108_REFERENCE:
 
 	.byte 14
-LDIFF_SYM2871=LTDIE_108 - Ldebug_info_start
-	.long LDIFF_SYM2871
+LDIFF_SYM2879=LTDIE_108 - Ldebug_info_start
+	.long LDIFF_SYM2879
 LTDIE_107:
 
 	.byte 5
 	.asciz "System_Security_Cryptography_X509Certificates_X509Chain"
 
 	.byte 24,16
-LDIFF_SYM2872=LTDIE_1 - Ldebug_info_start
-	.long LDIFF_SYM2872
+LDIFF_SYM2880=LTDIE_1 - Ldebug_info_start
+	.long LDIFF_SYM2880
 	.byte 2,35,0,6
 	.asciz "impl"
 
-LDIFF_SYM2873=LTDIE_108_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2873
+LDIFF_SYM2881=LTDIE_108_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2881
 	.byte 2,35,16,0,7
 	.asciz "System_Security_Cryptography_X509Certificates_X509Chain"
 
-LDIFF_SYM2874=LTDIE_107 - Ldebug_info_start
-	.long LDIFF_SYM2874
+LDIFF_SYM2882=LTDIE_107 - Ldebug_info_start
+	.long LDIFF_SYM2882
 LTDIE_107_POINTER:
 
 	.byte 13
-LDIFF_SYM2875=LTDIE_107 - Ldebug_info_start
-	.long LDIFF_SYM2875
+LDIFF_SYM2883=LTDIE_107 - Ldebug_info_start
+	.long LDIFF_SYM2883
 LTDIE_107_REFERENCE:
 
 	.byte 14
-LDIFF_SYM2876=LTDIE_107 - Ldebug_info_start
-	.long LDIFF_SYM2876
+LDIFF_SYM2884=LTDIE_107 - Ldebug_info_start
+	.long LDIFF_SYM2884
 	.byte 2
 	.asciz "(wrapper_delegate-invoke)_<Module>:invoke_bool_string_X509Certificate_X509Chain_MonoSslPolicyErrors"
 	.asciz "wrapper_delegate_invoke__Module_invoke_bool_string_X509Certificate_X509Chain_MonoSslPolicyErrors_string_System_Security_Cryptography_X509Certificates_X509Certificate_System_Security_Cryptography_X509Certificates_X509Chain_Mono_Security_Interface_MonoSslPolicyErrors"
 
 	.byte 0,0
 	.quad wrapper_delegate_invoke__Module_invoke_bool_string_X509Certificate_X509Chain_MonoSslPolicyErrors_string_System_Security_Cryptography_X509Certificates_X509Certificate_System_Security_Cryptography_X509Certificates_X509Chain_Mono_Security_Interface_MonoSslPolicyErrors
-	.quad Lme_1d0
-
-	.byte 2,118,16,3
-	.asciz "this"
-
-LDIFF_SYM2877=LTDIE_101_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2877
-	.byte 1,102,3
-	.asciz "param0"
-
-LDIFF_SYM2878=LDIE_STRING - Ldebug_info_start
-	.long LDIFF_SYM2878
-	.byte 1,103,3
-	.asciz "param1"
-
-LDIFF_SYM2879=LTDIE_105_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2879
-	.byte 1,104,3
-	.asciz "param2"
-
-LDIFF_SYM2880=LTDIE_107_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2880
-	.byte 1,105,3
-	.asciz "param3"
-
-LDIFF_SYM2881=LTDIE_97 - Ldebug_info_start
-	.long LDIFF_SYM2881
-	.byte 1,106,11
-	.asciz "V_0"
-
-LDIFF_SYM2882=LDIE_I4 - Ldebug_info_start
-	.long LDIFF_SYM2882
-	.byte 1,100,11
-	.asciz "V_1"
-
-LDIFF_SYM2883=LDIE_I4 - Ldebug_info_start
-	.long LDIFF_SYM2883
-	.byte 1,102,11
-	.asciz "V_2"
-
-LDIFF_SYM2884=LTDIE_102_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2884
-	.byte 1,101,11
-	.asciz "V_3"
-
-LDIFF_SYM2885=LTDIE_62_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2885
-	.byte 1,99,11
-	.asciz "V_4"
-
-LDIFF_SYM2886=LDIE_OBJECT - Ldebug_info_start
-	.long LDIFF_SYM2886
-	.byte 1,101,11
-	.asciz "V_5"
-
-LDIFF_SYM2887=LDIE_BOOLEAN - Ldebug_info_start
-	.long LDIFF_SYM2887
-	.byte 1,99,0
-
-.section __DWARF, __debug_frame,regular,debug
-
-LDIFF_SYM2888=Lfde415_end - Lfde415_start
-	.long LDIFF_SYM2888
-Lfde415_start:
-
-	.long 0
-	.align 3
-	.quad wrapper_delegate_invoke__Module_invoke_bool_string_X509Certificate_X509Chain_MonoSslPolicyErrors_string_System_Security_Cryptography_X509Certificates_X509Certificate_System_Security_Cryptography_X509Certificates_X509Chain_Mono_Security_Interface_MonoSslPolicyErrors
-
-LDIFF_SYM2889=Lme_1d0 - wrapper_delegate_invoke__Module_invoke_bool_string_X509Certificate_X509Chain_MonoSslPolicyErrors_string_System_Security_Cryptography_X509Certificates_X509Certificate_System_Security_Cryptography_X509Certificates_X509Chain_Mono_Security_Interface_MonoSslPolicyErrors
-	.long LDIFF_SYM2889
-	.long 0
-	.byte 12,31,0,68,14,96,157,12,158,11,68,13,29,68,147,10,148,9,68,149,8,150,7,68,151,6,152,5,68,153,4,154
-	.byte 3
-	.align 3
-Lfde415_end:
-
-.section __DWARF, __debug_info,regular,debug
-
-	.byte 2
-	.asciz "(wrapper_delegate-begin-invoke)_<Module>:begin_invoke_IAsyncResult__this___string_X509Certificate_X509Chain_MonoSslPolicyErrors_AsyncCallback_object"
-	.asciz "wrapper_delegate_begin_invoke__Module_begin_invoke_IAsyncResult__this___string_X509Certificate_X509Chain_MonoSslPolicyErrors_AsyncCallback_object_string_System_Security_Cryptography_X509Certificates_X509Certificate_System_Security_Cryptography_X509Certificates_X509Chain_Mono_Security_Interface_MonoSslPolicyErrors_System_AsyncCallback_object"
-
-	.byte 0,0
-	.quad wrapper_delegate_begin_invoke__Module_begin_invoke_IAsyncResult__this___string_X509Certificate_X509Chain_MonoSslPolicyErrors_AsyncCallback_object_string_System_Security_Cryptography_X509Certificates_X509Certificate_System_Security_Cryptography_X509Certificates_X509Chain_Mono_Security_Interface_MonoSslPolicyErrors_System_AsyncCallback_object
 	.quad Lme_1d1
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2890=LTDIE_101_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2890
-	.byte 2,141,32,3
-	.asciz "param0"
-
-LDIFF_SYM2891=LDIE_STRING - Ldebug_info_start
-	.long LDIFF_SYM2891
-	.byte 2,141,40,3
-	.asciz "param1"
-
-LDIFF_SYM2892=LTDIE_105_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2892
-	.byte 2,141,48,3
-	.asciz "param2"
-
-LDIFF_SYM2893=LTDIE_107_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2893
-	.byte 2,141,56,3
-	.asciz "param3"
-
-LDIFF_SYM2894=LTDIE_97 - Ldebug_info_start
-	.long LDIFF_SYM2894
-	.byte 3,141,192,0,3
-	.asciz "param4"
-
-LDIFF_SYM2895=LTDIE_103_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2895
-	.byte 3,141,200,0,3
-	.asciz "param5"
-
-LDIFF_SYM2896=LDIE_OBJECT - Ldebug_info_start
-	.long LDIFF_SYM2896
-	.byte 3,141,208,0,11
-	.asciz "V_0"
-
-LDIFF_SYM2897=LDIE_I - Ldebug_info_start
-	.long LDIFF_SYM2897
-	.byte 1,105,11
-	.asciz "V_1"
-
-LDIFF_SYM2898=LDIE_I - Ldebug_info_start
-	.long LDIFF_SYM2898
-	.byte 1,105,0
-
-.section __DWARF, __debug_frame,regular,debug
-
-LDIFF_SYM2899=Lfde416_end - Lfde416_start
-	.long LDIFF_SYM2899
-Lfde416_start:
-
-	.long 0
-	.align 3
-	.quad wrapper_delegate_begin_invoke__Module_begin_invoke_IAsyncResult__this___string_X509Certificate_X509Chain_MonoSslPolicyErrors_AsyncCallback_object_string_System_Security_Cryptography_X509Certificates_X509Certificate_System_Security_Cryptography_X509Certificates_X509Chain_Mono_Security_Interface_MonoSslPolicyErrors_System_AsyncCallback_object
-
-LDIFF_SYM2900=Lme_1d1 - wrapper_delegate_begin_invoke__Module_begin_invoke_IAsyncResult__this___string_X509Certificate_X509Chain_MonoSslPolicyErrors_AsyncCallback_object_string_System_Security_Cryptography_X509Certificates_X509Certificate_System_Security_Cryptography_X509Certificates_X509Chain_Mono_Security_Interface_MonoSslPolicyErrors_System_AsyncCallback_object
-	.long LDIFF_SYM2900
-	.long 0
-	.byte 12,31,0,68,14,96,157,12,158,11,68,13,29,68,152,10,153,9
-	.align 3
-Lfde416_end:
-
-.section __DWARF, __debug_info,regular,debug
-
-	.byte 2
-	.asciz "(wrapper_delegate-invoke)_<Module>:invoke_X509Certificate_string_X509CertificateCollection_X509Certificate_string[]"
-	.asciz "wrapper_delegate_invoke__Module_invoke_X509Certificate_string_X509CertificateCollection_X509Certificate_string___string_System_Security_Cryptography_X509Certificates_X509CertificateCollection_System_Security_Cryptography_X509Certificates_X509Certificate_string__"
-
-	.byte 0,0
-	.quad wrapper_delegate_invoke__Module_invoke_X509Certificate_string_X509CertificateCollection_X509Certificate_string___string_System_Security_Cryptography_X509Certificates_X509CertificateCollection_System_Security_Cryptography_X509Certificates_X509Certificate_string__
-	.quad Lme_1d2
-
-	.byte 2,118,16,3
-	.asciz "this"
-
-LDIFF_SYM2901=LTDIE_101_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2901
+LDIFF_SYM2885=LTDIE_101_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2885
 	.byte 1,102,3
 	.asciz "param0"
 
-LDIFF_SYM2902=LDIE_STRING - Ldebug_info_start
-	.long LDIFF_SYM2902
+LDIFF_SYM2886=LDIE_STRING - Ldebug_info_start
+	.long LDIFF_SYM2886
 	.byte 1,103,3
 	.asciz "param1"
 
-LDIFF_SYM2903=LTDIE_83_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2903
+LDIFF_SYM2887=LTDIE_105_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2887
 	.byte 1,104,3
 	.asciz "param2"
 
-LDIFF_SYM2904=LTDIE_105_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2904
+LDIFF_SYM2888=LTDIE_107_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2888
 	.byte 1,105,3
 	.asciz "param3"
 
-LDIFF_SYM2905=LDIE_SZARRAY - Ldebug_info_start
-	.long LDIFF_SYM2905
+LDIFF_SYM2889=LTDIE_97 - Ldebug_info_start
+	.long LDIFF_SYM2889
 	.byte 1,106,11
 	.asciz "V_0"
 
-LDIFF_SYM2906=LDIE_I4 - Ldebug_info_start
-	.long LDIFF_SYM2906
+LDIFF_SYM2890=LDIE_I4 - Ldebug_info_start
+	.long LDIFF_SYM2890
 	.byte 1,100,11
 	.asciz "V_1"
 
-LDIFF_SYM2907=LDIE_I4 - Ldebug_info_start
-	.long LDIFF_SYM2907
+LDIFF_SYM2891=LDIE_I4 - Ldebug_info_start
+	.long LDIFF_SYM2891
 	.byte 1,102,11
 	.asciz "V_2"
 
-LDIFF_SYM2908=LTDIE_102_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2908
+LDIFF_SYM2892=LTDIE_102_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2892
 	.byte 1,101,11
 	.asciz "V_3"
 
-LDIFF_SYM2909=LTDIE_62_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2909
+LDIFF_SYM2893=LTDIE_62_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2893
 	.byte 1,99,11
 	.asciz "V_4"
 
-LDIFF_SYM2910=LDIE_OBJECT - Ldebug_info_start
-	.long LDIFF_SYM2910
+LDIFF_SYM2894=LDIE_OBJECT - Ldebug_info_start
+	.long LDIFF_SYM2894
 	.byte 1,101,11
 	.asciz "V_5"
 
-LDIFF_SYM2911=LTDIE_105_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2911
+LDIFF_SYM2895=LDIE_BOOLEAN - Ldebug_info_start
+	.long LDIFF_SYM2895
 	.byte 1,99,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2912=Lfde417_end - Lfde417_start
-	.long LDIFF_SYM2912
+LDIFF_SYM2896=Lfde417_end - Lfde417_start
+	.long LDIFF_SYM2896
 Lfde417_start:
 
 	.long 0
 	.align 3
-	.quad wrapper_delegate_invoke__Module_invoke_X509Certificate_string_X509CertificateCollection_X509Certificate_string___string_System_Security_Cryptography_X509Certificates_X509CertificateCollection_System_Security_Cryptography_X509Certificates_X509Certificate_string__
+	.quad wrapper_delegate_invoke__Module_invoke_bool_string_X509Certificate_X509Chain_MonoSslPolicyErrors_string_System_Security_Cryptography_X509Certificates_X509Certificate_System_Security_Cryptography_X509Certificates_X509Chain_Mono_Security_Interface_MonoSslPolicyErrors
 
-LDIFF_SYM2913=Lme_1d2 - wrapper_delegate_invoke__Module_invoke_X509Certificate_string_X509CertificateCollection_X509Certificate_string___string_System_Security_Cryptography_X509Certificates_X509CertificateCollection_System_Security_Cryptography_X509Certificates_X509Certificate_string__
-	.long LDIFF_SYM2913
+LDIFF_SYM2897=Lme_1d1 - wrapper_delegate_invoke__Module_invoke_bool_string_X509Certificate_X509Chain_MonoSslPolicyErrors_string_System_Security_Cryptography_X509Certificates_X509Certificate_System_Security_Cryptography_X509Certificates_X509Chain_Mono_Security_Interface_MonoSslPolicyErrors
+	.long LDIFF_SYM2897
 	.long 0
 	.byte 12,31,0,68,14,96,157,12,158,11,68,13,29,68,147,10,148,9,68,149,8,150,7,68,151,6,152,5,68,153,4,154
 	.byte 3
@@ -66627,76 +66747,235 @@ Lfde417_end:
 .section __DWARF, __debug_info,regular,debug
 
 	.byte 2
-	.asciz "(wrapper_delegate-begin-invoke)_<Module>:begin_invoke_IAsyncResult__this___string_X509CertificateCollection_X509Certificate_string[]_AsyncCallback_object"
-	.asciz "wrapper_delegate_begin_invoke__Module_begin_invoke_IAsyncResult__this___string_X509CertificateCollection_X509Certificate_string___AsyncCallback_object_string_System_Security_Cryptography_X509Certificates_X509CertificateCollection_System_Security_Cryptography_X509Certificates_X509Certificate_string___System_AsyncCallback_object"
+	.asciz "(wrapper_delegate-begin-invoke)_<Module>:begin_invoke_IAsyncResult__this___string_X509Certificate_X509Chain_MonoSslPolicyErrors_AsyncCallback_object"
+	.asciz "wrapper_delegate_begin_invoke__Module_begin_invoke_IAsyncResult__this___string_X509Certificate_X509Chain_MonoSslPolicyErrors_AsyncCallback_object_string_System_Security_Cryptography_X509Certificates_X509Certificate_System_Security_Cryptography_X509Certificates_X509Chain_Mono_Security_Interface_MonoSslPolicyErrors_System_AsyncCallback_object"
 
 	.byte 0,0
-	.quad wrapper_delegate_begin_invoke__Module_begin_invoke_IAsyncResult__this___string_X509CertificateCollection_X509Certificate_string___AsyncCallback_object_string_System_Security_Cryptography_X509Certificates_X509CertificateCollection_System_Security_Cryptography_X509Certificates_X509Certificate_string___System_AsyncCallback_object
+	.quad wrapper_delegate_begin_invoke__Module_begin_invoke_IAsyncResult__this___string_X509Certificate_X509Chain_MonoSslPolicyErrors_AsyncCallback_object_string_System_Security_Cryptography_X509Certificates_X509Certificate_System_Security_Cryptography_X509Certificates_X509Chain_Mono_Security_Interface_MonoSslPolicyErrors_System_AsyncCallback_object
+	.quad Lme_1d2
+
+	.byte 2,118,16,3
+	.asciz "this"
+
+LDIFF_SYM2898=LTDIE_101_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2898
+	.byte 2,141,32,3
+	.asciz "param0"
+
+LDIFF_SYM2899=LDIE_STRING - Ldebug_info_start
+	.long LDIFF_SYM2899
+	.byte 2,141,40,3
+	.asciz "param1"
+
+LDIFF_SYM2900=LTDIE_105_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2900
+	.byte 2,141,48,3
+	.asciz "param2"
+
+LDIFF_SYM2901=LTDIE_107_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2901
+	.byte 2,141,56,3
+	.asciz "param3"
+
+LDIFF_SYM2902=LTDIE_97 - Ldebug_info_start
+	.long LDIFF_SYM2902
+	.byte 3,141,192,0,3
+	.asciz "param4"
+
+LDIFF_SYM2903=LTDIE_103_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2903
+	.byte 3,141,200,0,3
+	.asciz "param5"
+
+LDIFF_SYM2904=LDIE_OBJECT - Ldebug_info_start
+	.long LDIFF_SYM2904
+	.byte 3,141,208,0,11
+	.asciz "V_0"
+
+LDIFF_SYM2905=LDIE_I - Ldebug_info_start
+	.long LDIFF_SYM2905
+	.byte 1,105,11
+	.asciz "V_1"
+
+LDIFF_SYM2906=LDIE_I - Ldebug_info_start
+	.long LDIFF_SYM2906
+	.byte 1,105,0
+
+.section __DWARF, __debug_frame,regular,debug
+
+LDIFF_SYM2907=Lfde418_end - Lfde418_start
+	.long LDIFF_SYM2907
+Lfde418_start:
+
+	.long 0
+	.align 3
+	.quad wrapper_delegate_begin_invoke__Module_begin_invoke_IAsyncResult__this___string_X509Certificate_X509Chain_MonoSslPolicyErrors_AsyncCallback_object_string_System_Security_Cryptography_X509Certificates_X509Certificate_System_Security_Cryptography_X509Certificates_X509Chain_Mono_Security_Interface_MonoSslPolicyErrors_System_AsyncCallback_object
+
+LDIFF_SYM2908=Lme_1d2 - wrapper_delegate_begin_invoke__Module_begin_invoke_IAsyncResult__this___string_X509Certificate_X509Chain_MonoSslPolicyErrors_AsyncCallback_object_string_System_Security_Cryptography_X509Certificates_X509Certificate_System_Security_Cryptography_X509Certificates_X509Chain_Mono_Security_Interface_MonoSslPolicyErrors_System_AsyncCallback_object
+	.long LDIFF_SYM2908
+	.long 0
+	.byte 12,31,0,68,14,96,157,12,158,11,68,13,29,68,152,10,153,9
+	.align 3
+Lfde418_end:
+
+.section __DWARF, __debug_info,regular,debug
+
+	.byte 2
+	.asciz "(wrapper_delegate-invoke)_<Module>:invoke_X509Certificate_string_X509CertificateCollection_X509Certificate_string[]"
+	.asciz "wrapper_delegate_invoke__Module_invoke_X509Certificate_string_X509CertificateCollection_X509Certificate_string___string_System_Security_Cryptography_X509Certificates_X509CertificateCollection_System_Security_Cryptography_X509Certificates_X509Certificate_string__"
+
+	.byte 0,0
+	.quad wrapper_delegate_invoke__Module_invoke_X509Certificate_string_X509CertificateCollection_X509Certificate_string___string_System_Security_Cryptography_X509Certificates_X509CertificateCollection_System_Security_Cryptography_X509Certificates_X509Certificate_string__
 	.quad Lme_1d3
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2914=LTDIE_101_REFERENCE - Ldebug_info_start
+LDIFF_SYM2909=LTDIE_101_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2909
+	.byte 1,102,3
+	.asciz "param0"
+
+LDIFF_SYM2910=LDIE_STRING - Ldebug_info_start
+	.long LDIFF_SYM2910
+	.byte 1,103,3
+	.asciz "param1"
+
+LDIFF_SYM2911=LTDIE_83_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2911
+	.byte 1,104,3
+	.asciz "param2"
+
+LDIFF_SYM2912=LTDIE_105_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2912
+	.byte 1,105,3
+	.asciz "param3"
+
+LDIFF_SYM2913=LDIE_SZARRAY - Ldebug_info_start
+	.long LDIFF_SYM2913
+	.byte 1,106,11
+	.asciz "V_0"
+
+LDIFF_SYM2914=LDIE_I4 - Ldebug_info_start
 	.long LDIFF_SYM2914
+	.byte 1,100,11
+	.asciz "V_1"
+
+LDIFF_SYM2915=LDIE_I4 - Ldebug_info_start
+	.long LDIFF_SYM2915
+	.byte 1,102,11
+	.asciz "V_2"
+
+LDIFF_SYM2916=LTDIE_102_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2916
+	.byte 1,101,11
+	.asciz "V_3"
+
+LDIFF_SYM2917=LTDIE_62_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2917
+	.byte 1,99,11
+	.asciz "V_4"
+
+LDIFF_SYM2918=LDIE_OBJECT - Ldebug_info_start
+	.long LDIFF_SYM2918
+	.byte 1,101,11
+	.asciz "V_5"
+
+LDIFF_SYM2919=LTDIE_105_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2919
+	.byte 1,99,0
+
+.section __DWARF, __debug_frame,regular,debug
+
+LDIFF_SYM2920=Lfde419_end - Lfde419_start
+	.long LDIFF_SYM2920
+Lfde419_start:
+
+	.long 0
+	.align 3
+	.quad wrapper_delegate_invoke__Module_invoke_X509Certificate_string_X509CertificateCollection_X509Certificate_string___string_System_Security_Cryptography_X509Certificates_X509CertificateCollection_System_Security_Cryptography_X509Certificates_X509Certificate_string__
+
+LDIFF_SYM2921=Lme_1d3 - wrapper_delegate_invoke__Module_invoke_X509Certificate_string_X509CertificateCollection_X509Certificate_string___string_System_Security_Cryptography_X509Certificates_X509CertificateCollection_System_Security_Cryptography_X509Certificates_X509Certificate_string__
+	.long LDIFF_SYM2921
+	.long 0
+	.byte 12,31,0,68,14,96,157,12,158,11,68,13,29,68,147,10,148,9,68,149,8,150,7,68,151,6,152,5,68,153,4,154
+	.byte 3
+	.align 3
+Lfde419_end:
+
+.section __DWARF, __debug_info,regular,debug
+
+	.byte 2
+	.asciz "(wrapper_delegate-begin-invoke)_<Module>:begin_invoke_IAsyncResult__this___string_X509CertificateCollection_X509Certificate_string[]_AsyncCallback_object"
+	.asciz "wrapper_delegate_begin_invoke__Module_begin_invoke_IAsyncResult__this___string_X509CertificateCollection_X509Certificate_string___AsyncCallback_object_string_System_Security_Cryptography_X509Certificates_X509CertificateCollection_System_Security_Cryptography_X509Certificates_X509Certificate_string___System_AsyncCallback_object"
+
+	.byte 0,0
+	.quad wrapper_delegate_begin_invoke__Module_begin_invoke_IAsyncResult__this___string_X509CertificateCollection_X509Certificate_string___AsyncCallback_object_string_System_Security_Cryptography_X509Certificates_X509CertificateCollection_System_Security_Cryptography_X509Certificates_X509Certificate_string___System_AsyncCallback_object
+	.quad Lme_1d4
+
+	.byte 2,118,16,3
+	.asciz "this"
+
+LDIFF_SYM2922=LTDIE_101_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2922
 	.byte 2,141,32,3
 	.asciz "param0"
 
-LDIFF_SYM2915=LDIE_STRING - Ldebug_info_start
-	.long LDIFF_SYM2915
+LDIFF_SYM2923=LDIE_STRING - Ldebug_info_start
+	.long LDIFF_SYM2923
 	.byte 2,141,40,3
 	.asciz "param1"
 
-LDIFF_SYM2916=LTDIE_83_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2916
+LDIFF_SYM2924=LTDIE_83_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2924
 	.byte 2,141,48,3
 	.asciz "param2"
 
-LDIFF_SYM2917=LTDIE_105_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2917
+LDIFF_SYM2925=LTDIE_105_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2925
 	.byte 2,141,56,3
 	.asciz "param3"
 
-LDIFF_SYM2918=LDIE_SZARRAY - Ldebug_info_start
-	.long LDIFF_SYM2918
+LDIFF_SYM2926=LDIE_SZARRAY - Ldebug_info_start
+	.long LDIFF_SYM2926
 	.byte 3,141,192,0,3
 	.asciz "param4"
 
-LDIFF_SYM2919=LTDIE_103_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2919
+LDIFF_SYM2927=LTDIE_103_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2927
 	.byte 3,141,200,0,3
 	.asciz "param5"
 
-LDIFF_SYM2920=LDIE_OBJECT - Ldebug_info_start
-	.long LDIFF_SYM2920
+LDIFF_SYM2928=LDIE_OBJECT - Ldebug_info_start
+	.long LDIFF_SYM2928
 	.byte 3,141,208,0,11
 	.asciz "V_0"
 
-LDIFF_SYM2921=LDIE_I - Ldebug_info_start
-	.long LDIFF_SYM2921
+LDIFF_SYM2929=LDIE_I - Ldebug_info_start
+	.long LDIFF_SYM2929
 	.byte 1,105,11
 	.asciz "V_1"
 
-LDIFF_SYM2922=LDIE_I - Ldebug_info_start
-	.long LDIFF_SYM2922
+LDIFF_SYM2930=LDIE_I - Ldebug_info_start
+	.long LDIFF_SYM2930
 	.byte 1,105,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2923=Lfde418_end - Lfde418_start
-	.long LDIFF_SYM2923
-Lfde418_start:
+LDIFF_SYM2931=Lfde420_end - Lfde420_start
+	.long LDIFF_SYM2931
+Lfde420_start:
 
 	.long 0
 	.align 3
 	.quad wrapper_delegate_begin_invoke__Module_begin_invoke_IAsyncResult__this___string_X509CertificateCollection_X509Certificate_string___AsyncCallback_object_string_System_Security_Cryptography_X509Certificates_X509CertificateCollection_System_Security_Cryptography_X509Certificates_X509Certificate_string___System_AsyncCallback_object
 
-LDIFF_SYM2924=Lme_1d3 - wrapper_delegate_begin_invoke__Module_begin_invoke_IAsyncResult__this___string_X509CertificateCollection_X509Certificate_string___AsyncCallback_object_string_System_Security_Cryptography_X509Certificates_X509CertificateCollection_System_Security_Cryptography_X509Certificates_X509Certificate_string___System_AsyncCallback_object
-	.long LDIFF_SYM2924
+LDIFF_SYM2932=Lme_1d4 - wrapper_delegate_begin_invoke__Module_begin_invoke_IAsyncResult__this___string_X509CertificateCollection_X509Certificate_string___AsyncCallback_object_string_System_Security_Cryptography_X509Certificates_X509CertificateCollection_System_Security_Cryptography_X509Certificates_X509Certificate_string___System_AsyncCallback_object
+	.long LDIFF_SYM2932
 	.long 0
 	.byte 12,31,0,68,14,96,157,12,158,11,68,13,29,68,152,10,153,9
 	.align 3
-Lfde418_end:
+Lfde420_end:
 
 .section __DWARF, __debug_info,regular,debug
 
@@ -66706,46 +66985,46 @@ Lfde418_end:
 
 	.byte 0,0
 	.quad wrapper_delegate_end_invoke__Module_end_invoke_X509Certificate__this___IAsyncResult_System_IAsyncResult
-	.quad Lme_1d4
+	.quad Lme_1d5
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2925=LTDIE_101_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2925
+LDIFF_SYM2933=LTDIE_101_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2933
 	.byte 2,141,32,3
 	.asciz "param0"
 
-LDIFF_SYM2926=LTDIE_104_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2926
+LDIFF_SYM2934=LTDIE_104_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2934
 	.byte 2,141,40,11
 	.asciz "V_0"
 
-LDIFF_SYM2927=LDIE_I - Ldebug_info_start
-	.long LDIFF_SYM2927
+LDIFF_SYM2935=LDIE_I - Ldebug_info_start
+	.long LDIFF_SYM2935
 	.byte 1,105,11
 	.asciz "V_1"
 
-LDIFF_SYM2928=LDIE_I - Ldebug_info_start
-	.long LDIFF_SYM2928
+LDIFF_SYM2936=LDIE_I - Ldebug_info_start
+	.long LDIFF_SYM2936
 	.byte 2,141,48,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2929=Lfde419_end - Lfde419_start
-	.long LDIFF_SYM2929
-Lfde419_start:
+LDIFF_SYM2937=Lfde421_end - Lfde421_start
+	.long LDIFF_SYM2937
+Lfde421_start:
 
 	.long 0
 	.align 3
 	.quad wrapper_delegate_end_invoke__Module_end_invoke_X509Certificate__this___IAsyncResult_System_IAsyncResult
 
-LDIFF_SYM2930=Lme_1d4 - wrapper_delegate_end_invoke__Module_end_invoke_X509Certificate__this___IAsyncResult_System_IAsyncResult
-	.long LDIFF_SYM2930
+LDIFF_SYM2938=Lme_1d5 - wrapper_delegate_end_invoke__Module_end_invoke_X509Certificate__this___IAsyncResult_System_IAsyncResult
+	.long LDIFF_SYM2938
 	.long 0
 	.byte 12,31,0,68,14,64,157,8,158,7,68,13,29,68,152,6,153,5
 	.align 3
-Lfde419_end:
+Lfde421_end:
 
 .section __DWARF, __debug_info,regular,debug
 LTDIE_109:
@@ -66754,89 +67033,89 @@ LTDIE_109:
 	.asciz "System_EventArgs"
 
 	.byte 16,16
-LDIFF_SYM2931=LTDIE_1 - Ldebug_info_start
-	.long LDIFF_SYM2931
+LDIFF_SYM2939=LTDIE_1 - Ldebug_info_start
+	.long LDIFF_SYM2939
 	.byte 2,35,0,0,7
 	.asciz "System_EventArgs"
 
-LDIFF_SYM2932=LTDIE_109 - Ldebug_info_start
-	.long LDIFF_SYM2932
+LDIFF_SYM2940=LTDIE_109 - Ldebug_info_start
+	.long LDIFF_SYM2940
 LTDIE_109_POINTER:
 
 	.byte 13
-LDIFF_SYM2933=LTDIE_109 - Ldebug_info_start
-	.long LDIFF_SYM2933
+LDIFF_SYM2941=LTDIE_109 - Ldebug_info_start
+	.long LDIFF_SYM2941
 LTDIE_109_REFERENCE:
 
 	.byte 14
-LDIFF_SYM2934=LTDIE_109 - Ldebug_info_start
-	.long LDIFF_SYM2934
+LDIFF_SYM2942=LTDIE_109 - Ldebug_info_start
+	.long LDIFF_SYM2942
 	.byte 2
 	.asciz "(wrapper_delegate-invoke)_<Module>:invoke_void_object_EventArgs"
 	.asciz "wrapper_delegate_invoke__Module_invoke_void_object_EventArgs_object_System_EventArgs"
 
 	.byte 0,0
 	.quad wrapper_delegate_invoke__Module_invoke_void_object_EventArgs_object_System_EventArgs
-	.quad Lme_1d5
+	.quad Lme_1d6
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2935=LTDIE_101_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2935
+LDIFF_SYM2943=LTDIE_101_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2943
 	.byte 1,104,3
 	.asciz "param0"
 
-LDIFF_SYM2936=LDIE_OBJECT - Ldebug_info_start
-	.long LDIFF_SYM2936
+LDIFF_SYM2944=LDIE_OBJECT - Ldebug_info_start
+	.long LDIFF_SYM2944
 	.byte 1,105,3
 	.asciz "param1"
 
-LDIFF_SYM2937=LTDIE_109_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2937
+LDIFF_SYM2945=LTDIE_109_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2945
 	.byte 1,106,11
 	.asciz "V_0"
 
-LDIFF_SYM2938=LDIE_I4 - Ldebug_info_start
-	.long LDIFF_SYM2938
+LDIFF_SYM2946=LDIE_I4 - Ldebug_info_start
+	.long LDIFF_SYM2946
 	.byte 1,102,11
 	.asciz "V_1"
 
-LDIFF_SYM2939=LDIE_I4 - Ldebug_info_start
-	.long LDIFF_SYM2939
+LDIFF_SYM2947=LDIE_I4 - Ldebug_info_start
+	.long LDIFF_SYM2947
 	.byte 1,104,11
 	.asciz "V_2"
 
-LDIFF_SYM2940=LTDIE_102_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2940
+LDIFF_SYM2948=LTDIE_102_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2948
 	.byte 1,103,11
 	.asciz "V_3"
 
-LDIFF_SYM2941=LTDIE_62_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2941
+LDIFF_SYM2949=LTDIE_62_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2949
 	.byte 1,101,11
 	.asciz "V_4"
 
-LDIFF_SYM2942=LDIE_OBJECT - Ldebug_info_start
-	.long LDIFF_SYM2942
+LDIFF_SYM2950=LDIE_OBJECT - Ldebug_info_start
+	.long LDIFF_SYM2950
 	.byte 1,103,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2943=Lfde420_end - Lfde420_start
-	.long LDIFF_SYM2943
-Lfde420_start:
+LDIFF_SYM2951=Lfde422_end - Lfde422_start
+	.long LDIFF_SYM2951
+Lfde422_start:
 
 	.long 0
 	.align 3
 	.quad wrapper_delegate_invoke__Module_invoke_void_object_EventArgs_object_System_EventArgs
 
-LDIFF_SYM2944=Lme_1d5 - wrapper_delegate_invoke__Module_invoke_void_object_EventArgs_object_System_EventArgs
-	.long LDIFF_SYM2944
+LDIFF_SYM2952=Lme_1d6 - wrapper_delegate_invoke__Module_invoke_void_object_EventArgs_object_System_EventArgs
+	.long LDIFF_SYM2952
 	.long 0
 	.byte 12,31,0,68,14,80,157,10,158,9,68,13,29,68,149,8,150,7,68,151,6,152,5,68,153,4,154,3
 	.align 3
-Lfde420_end:
+Lfde422_end:
 
 .section __DWARF, __debug_info,regular,debug
 
@@ -66846,61 +67125,61 @@ Lfde420_end:
 
 	.byte 0,0
 	.quad wrapper_delegate_begin_invoke__Module_begin_invoke_IAsyncResult__this___object_EventArgs_AsyncCallback_object_object_System_EventArgs_System_AsyncCallback_object
-	.quad Lme_1d6
+	.quad Lme_1d7
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2945=LTDIE_101_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2945
+LDIFF_SYM2953=LTDIE_101_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2953
 	.byte 2,141,32,3
 	.asciz "param0"
 
-LDIFF_SYM2946=LDIE_OBJECT - Ldebug_info_start
-	.long LDIFF_SYM2946
+LDIFF_SYM2954=LDIE_OBJECT - Ldebug_info_start
+	.long LDIFF_SYM2954
 	.byte 2,141,40,3
 	.asciz "param1"
 
-LDIFF_SYM2947=LTDIE_109_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2947
+LDIFF_SYM2955=LTDIE_109_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2955
 	.byte 2,141,48,3
 	.asciz "param2"
 
-LDIFF_SYM2948=LTDIE_103_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2948
+LDIFF_SYM2956=LTDIE_103_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2956
 	.byte 2,141,56,3
 	.asciz "param3"
 
-LDIFF_SYM2949=LDIE_OBJECT - Ldebug_info_start
-	.long LDIFF_SYM2949
+LDIFF_SYM2957=LDIE_OBJECT - Ldebug_info_start
+	.long LDIFF_SYM2957
 	.byte 3,141,192,0,11
 	.asciz "V_0"
 
-LDIFF_SYM2950=LDIE_I - Ldebug_info_start
-	.long LDIFF_SYM2950
+LDIFF_SYM2958=LDIE_I - Ldebug_info_start
+	.long LDIFF_SYM2958
 	.byte 1,105,11
 	.asciz "V_1"
 
-LDIFF_SYM2951=LDIE_I - Ldebug_info_start
-	.long LDIFF_SYM2951
+LDIFF_SYM2959=LDIE_I - Ldebug_info_start
+	.long LDIFF_SYM2959
 	.byte 1,105,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2952=Lfde421_end - Lfde421_start
-	.long LDIFF_SYM2952
-Lfde421_start:
+LDIFF_SYM2960=Lfde423_end - Lfde423_start
+	.long LDIFF_SYM2960
+Lfde423_start:
 
 	.long 0
 	.align 3
 	.quad wrapper_delegate_begin_invoke__Module_begin_invoke_IAsyncResult__this___object_EventArgs_AsyncCallback_object_object_System_EventArgs_System_AsyncCallback_object
 
-LDIFF_SYM2953=Lme_1d6 - wrapper_delegate_begin_invoke__Module_begin_invoke_IAsyncResult__this___object_EventArgs_AsyncCallback_object_object_System_EventArgs_System_AsyncCallback_object
-	.long LDIFF_SYM2953
+LDIFF_SYM2961=Lme_1d7 - wrapper_delegate_begin_invoke__Module_begin_invoke_IAsyncResult__this___object_EventArgs_AsyncCallback_object_object_System_EventArgs_System_AsyncCallback_object
+	.long LDIFF_SYM2961
 	.long 0
 	.byte 12,31,0,68,14,80,157,10,158,9,68,13,29,68,152,8,153,7
 	.align 3
-Lfde421_end:
+Lfde423_end:
 
 .section __DWARF, __debug_info,regular,debug
 
@@ -66910,46 +67189,46 @@ Lfde421_end:
 
 	.byte 0,0
 	.quad wrapper_delegate_end_invoke__Module_end_invoke_void__this___IAsyncResult_System_IAsyncResult
-	.quad Lme_1d7
+	.quad Lme_1d8
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2954=LTDIE_101_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2954
+LDIFF_SYM2962=LTDIE_101_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2962
 	.byte 2,141,32,3
 	.asciz "param0"
 
-LDIFF_SYM2955=LTDIE_104_REFERENCE - Ldebug_info_start
-	.long LDIFF_SYM2955
+LDIFF_SYM2963=LTDIE_104_REFERENCE - Ldebug_info_start
+	.long LDIFF_SYM2963
 	.byte 2,141,40,11
 	.asciz "V_0"
 
-LDIFF_SYM2956=LDIE_I - Ldebug_info_start
-	.long LDIFF_SYM2956
+LDIFF_SYM2964=LDIE_I - Ldebug_info_start
+	.long LDIFF_SYM2964
 	.byte 1,105,11
 	.asciz "V_1"
 
-LDIFF_SYM2957=LDIE_I - Ldebug_info_start
-	.long LDIFF_SYM2957
+LDIFF_SYM2965=LDIE_I - Ldebug_info_start
+	.long LDIFF_SYM2965
 	.byte 2,141,48,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2958=Lfde422_end - Lfde422_start
-	.long LDIFF_SYM2958
-Lfde422_start:
+LDIFF_SYM2966=Lfde424_end - Lfde424_start
+	.long LDIFF_SYM2966
+Lfde424_start:
 
 	.long 0
 	.align 3
 	.quad wrapper_delegate_end_invoke__Module_end_invoke_void__this___IAsyncResult_System_IAsyncResult
 
-LDIFF_SYM2959=Lme_1d7 - wrapper_delegate_end_invoke__Module_end_invoke_void__this___IAsyncResult_System_IAsyncResult
-	.long LDIFF_SYM2959
+LDIFF_SYM2967=Lme_1d8 - wrapper_delegate_end_invoke__Module_end_invoke_void__this___IAsyncResult_System_IAsyncResult
+	.long LDIFF_SYM2967
 	.long 0
 	.byte 12,31,0,68,14,64,157,8,158,7,68,13,29,68,152,6,153,5
 	.align 3
-Lfde422_end:
+Lfde424_end:
 
 .section __DWARF, __debug_info,regular,debug
 
@@ -66959,36 +67238,36 @@ Lfde422_end:
 
 	.byte 0,0
 	.quad wrapper_unknown_uint___Get_int
-	.quad Lme_1d8
+	.quad Lme_1d9
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2960=LDIE_SZARRAY - Ldebug_info_start
-	.long LDIFF_SYM2960
+LDIFF_SYM2968=LDIE_SZARRAY - Ldebug_info_start
+	.long LDIFF_SYM2968
 	.byte 2,141,16,3
 	.asciz "param0"
 
-LDIFF_SYM2961=LDIE_I4 - Ldebug_info_start
-	.long LDIFF_SYM2961
+LDIFF_SYM2969=LDIE_I4 - Ldebug_info_start
+	.long LDIFF_SYM2969
 	.byte 2,141,24,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2962=Lfde423_end - Lfde423_start
-	.long LDIFF_SYM2962
-Lfde423_start:
+LDIFF_SYM2970=Lfde425_end - Lfde425_start
+	.long LDIFF_SYM2970
+Lfde425_start:
 
 	.long 0
 	.align 3
 	.quad wrapper_unknown_uint___Get_int
 
-LDIFF_SYM2963=Lme_1d8 - wrapper_unknown_uint___Get_int
-	.long LDIFF_SYM2963
+LDIFF_SYM2971=Lme_1d9 - wrapper_unknown_uint___Get_int
+	.long LDIFF_SYM2971
 	.long 0
 	.byte 12,31,0,68,14,32,157,4,158,3,68,13,29
 	.align 3
-Lfde423_end:
+Lfde425_end:
 
 .section __DWARF, __debug_info,regular,debug
 
@@ -66998,56 +67277,56 @@ Lfde423_end:
 
 	.byte 0,0
 	.quad wrapper_runtime_invoke__Module_runtime_invoke_uint__this___int_object_intptr_intptr_intptr
-	.quad Lme_1d9
+	.quad Lme_1da
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2964=LDIE_OBJECT - Ldebug_info_start
-	.long LDIFF_SYM2964
+LDIFF_SYM2972=LDIE_OBJECT - Ldebug_info_start
+	.long LDIFF_SYM2972
 	.byte 2,141,24,3
 	.asciz "params"
 
-LDIFF_SYM2965=LDIE_I - Ldebug_info_start
-	.long LDIFF_SYM2965
+LDIFF_SYM2973=LDIE_I - Ldebug_info_start
+	.long LDIFF_SYM2973
 	.byte 2,141,32,3
 	.asciz "exc"
 
-LDIFF_SYM2966=LDIE_I - Ldebug_info_start
-	.long LDIFF_SYM2966
+LDIFF_SYM2974=LDIE_I - Ldebug_info_start
+	.long LDIFF_SYM2974
 	.byte 2,141,40,3
 	.asciz "method"
 
-LDIFF_SYM2967=LDIE_I - Ldebug_info_start
-	.long LDIFF_SYM2967
+LDIFF_SYM2975=LDIE_I - Ldebug_info_start
+	.long LDIFF_SYM2975
 	.byte 2,141,48,11
 	.asciz "V_0"
 
-LDIFF_SYM2968=LDIE_OBJECT - Ldebug_info_start
-	.long LDIFF_SYM2968
+LDIFF_SYM2976=LDIE_OBJECT - Ldebug_info_start
+	.long LDIFF_SYM2976
 	.byte 2,141,56,11
 	.asciz "V_1"
 
-LDIFF_SYM2969=LDIE_OBJECT - Ldebug_info_start
-	.long LDIFF_SYM2969
+LDIFF_SYM2977=LDIE_OBJECT - Ldebug_info_start
+	.long LDIFF_SYM2977
 	.byte 3,141,192,0,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2970=Lfde424_end - Lfde424_start
-	.long LDIFF_SYM2970
-Lfde424_start:
+LDIFF_SYM2978=Lfde426_end - Lfde426_start
+	.long LDIFF_SYM2978
+Lfde426_start:
 
 	.long 0
 	.align 3
 	.quad wrapper_runtime_invoke__Module_runtime_invoke_uint__this___int_object_intptr_intptr_intptr
 
-LDIFF_SYM2971=Lme_1d9 - wrapper_runtime_invoke__Module_runtime_invoke_uint__this___int_object_intptr_intptr_intptr
-	.long LDIFF_SYM2971
+LDIFF_SYM2979=Lme_1da - wrapper_runtime_invoke__Module_runtime_invoke_uint__this___int_object_intptr_intptr_intptr
+	.long LDIFF_SYM2979
 	.long 0
 	.byte 12,31,0,68,14,128,1,157,16,158,15,68,13,29,68,151,14
 	.align 3
-Lfde424_end:
+Lfde426_end:
 
 .section __DWARF, __debug_info,regular,debug
 
@@ -67057,41 +67336,41 @@ Lfde424_end:
 
 	.byte 0,0
 	.quad wrapper_unknown_uint___Set_int_uint
-	.quad Lme_1da
+	.quad Lme_1db
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2972=LDIE_SZARRAY - Ldebug_info_start
-	.long LDIFF_SYM2972
+LDIFF_SYM2980=LDIE_SZARRAY - Ldebug_info_start
+	.long LDIFF_SYM2980
 	.byte 2,141,16,3
 	.asciz "param0"
 
-LDIFF_SYM2973=LDIE_I4 - Ldebug_info_start
-	.long LDIFF_SYM2973
+LDIFF_SYM2981=LDIE_I4 - Ldebug_info_start
+	.long LDIFF_SYM2981
 	.byte 2,141,24,3
 	.asciz "param1"
 
-LDIFF_SYM2974=LDIE_U4 - Ldebug_info_start
-	.long LDIFF_SYM2974
+LDIFF_SYM2982=LDIE_U4 - Ldebug_info_start
+	.long LDIFF_SYM2982
 	.byte 2,141,32,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2975=Lfde425_end - Lfde425_start
-	.long LDIFF_SYM2975
-Lfde425_start:
+LDIFF_SYM2983=Lfde427_end - Lfde427_start
+	.long LDIFF_SYM2983
+Lfde427_start:
 
 	.long 0
 	.align 3
 	.quad wrapper_unknown_uint___Set_int_uint
 
-LDIFF_SYM2976=Lme_1da - wrapper_unknown_uint___Set_int_uint
-	.long LDIFF_SYM2976
+LDIFF_SYM2984=Lme_1db - wrapper_unknown_uint___Set_int_uint
+	.long LDIFF_SYM2984
 	.long 0
 	.byte 12,31,0,68,14,48,157,6,158,5,68,13,29
 	.align 3
-Lfde425_end:
+Lfde427_end:
 
 .section __DWARF, __debug_info,regular,debug
 
@@ -67101,56 +67380,56 @@ Lfde425_end:
 
 	.byte 0,0
 	.quad wrapper_runtime_invoke__Module_runtime_invoke_void__this___int_uint_object_intptr_intptr_intptr
-	.quad Lme_1db
+	.quad Lme_1dc
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2977=LDIE_OBJECT - Ldebug_info_start
-	.long LDIFF_SYM2977
+LDIFF_SYM2985=LDIE_OBJECT - Ldebug_info_start
+	.long LDIFF_SYM2985
 	.byte 2,141,32,3
 	.asciz "params"
 
-LDIFF_SYM2978=LDIE_I - Ldebug_info_start
-	.long LDIFF_SYM2978
+LDIFF_SYM2986=LDIE_I - Ldebug_info_start
+	.long LDIFF_SYM2986
 	.byte 1,105,3
 	.asciz "exc"
 
-LDIFF_SYM2979=LDIE_I - Ldebug_info_start
-	.long LDIFF_SYM2979
+LDIFF_SYM2987=LDIE_I - Ldebug_info_start
+	.long LDIFF_SYM2987
 	.byte 2,141,40,3
 	.asciz "method"
 
-LDIFF_SYM2980=LDIE_I - Ldebug_info_start
-	.long LDIFF_SYM2980
+LDIFF_SYM2988=LDIE_I - Ldebug_info_start
+	.long LDIFF_SYM2988
 	.byte 2,141,48,11
 	.asciz "V_0"
 
-LDIFF_SYM2981=LDIE_OBJECT - Ldebug_info_start
-	.long LDIFF_SYM2981
+LDIFF_SYM2989=LDIE_OBJECT - Ldebug_info_start
+	.long LDIFF_SYM2989
 	.byte 2,141,56,11
 	.asciz "V_1"
 
-LDIFF_SYM2982=LDIE_OBJECT - Ldebug_info_start
-	.long LDIFF_SYM2982
+LDIFF_SYM2990=LDIE_OBJECT - Ldebug_info_start
+	.long LDIFF_SYM2990
 	.byte 3,141,192,0,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2983=Lfde426_end - Lfde426_start
-	.long LDIFF_SYM2983
-Lfde426_start:
+LDIFF_SYM2991=Lfde428_end - Lfde428_start
+	.long LDIFF_SYM2991
+Lfde428_start:
 
 	.long 0
 	.align 3
 	.quad wrapper_runtime_invoke__Module_runtime_invoke_void__this___int_uint_object_intptr_intptr_intptr
 
-LDIFF_SYM2984=Lme_1db - wrapper_runtime_invoke__Module_runtime_invoke_void__this___int_uint_object_intptr_intptr_intptr
-	.long LDIFF_SYM2984
+LDIFF_SYM2992=Lme_1dc - wrapper_runtime_invoke__Module_runtime_invoke_void__this___int_uint_object_intptr_intptr_intptr
+	.long LDIFF_SYM2992
 	.long 0
 	.byte 12,31,0,68,14,112,157,14,158,13,68,13,29,68,151,12,68,153,11
 	.align 3
-Lfde426_end:
+Lfde428_end:
 
 .section __DWARF, __debug_info,regular,debug
 
@@ -67160,36 +67439,36 @@ Lfde426_end:
 
 	.byte 0,0
 	.quad wrapper_unknown_byte___Get_int
-	.quad Lme_1dc
+	.quad Lme_1dd
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2985=LDIE_SZARRAY - Ldebug_info_start
-	.long LDIFF_SYM2985
+LDIFF_SYM2993=LDIE_SZARRAY - Ldebug_info_start
+	.long LDIFF_SYM2993
 	.byte 2,141,16,3
 	.asciz "param0"
 
-LDIFF_SYM2986=LDIE_I4 - Ldebug_info_start
-	.long LDIFF_SYM2986
+LDIFF_SYM2994=LDIE_I4 - Ldebug_info_start
+	.long LDIFF_SYM2994
 	.byte 2,141,24,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2987=Lfde427_end - Lfde427_start
-	.long LDIFF_SYM2987
-Lfde427_start:
+LDIFF_SYM2995=Lfde429_end - Lfde429_start
+	.long LDIFF_SYM2995
+Lfde429_start:
 
 	.long 0
 	.align 3
 	.quad wrapper_unknown_byte___Get_int
 
-LDIFF_SYM2988=Lme_1dc - wrapper_unknown_byte___Get_int
-	.long LDIFF_SYM2988
+LDIFF_SYM2996=Lme_1dd - wrapper_unknown_byte___Get_int
+	.long LDIFF_SYM2996
 	.long 0
 	.byte 12,31,0,68,14,32,157,4,158,3,68,13,29
 	.align 3
-Lfde427_end:
+Lfde429_end:
 
 .section __DWARF, __debug_info,regular,debug
 
@@ -67199,56 +67478,56 @@ Lfde427_end:
 
 	.byte 0,0
 	.quad wrapper_runtime_invoke__Module_runtime_invoke_byte__this___int_object_intptr_intptr_intptr
-	.quad Lme_1dd
+	.quad Lme_1de
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2989=LDIE_OBJECT - Ldebug_info_start
-	.long LDIFF_SYM2989
+LDIFF_SYM2997=LDIE_OBJECT - Ldebug_info_start
+	.long LDIFF_SYM2997
 	.byte 2,141,24,3
 	.asciz "params"
 
-LDIFF_SYM2990=LDIE_I - Ldebug_info_start
-	.long LDIFF_SYM2990
+LDIFF_SYM2998=LDIE_I - Ldebug_info_start
+	.long LDIFF_SYM2998
 	.byte 2,141,32,3
 	.asciz "exc"
 
-LDIFF_SYM2991=LDIE_I - Ldebug_info_start
-	.long LDIFF_SYM2991
+LDIFF_SYM2999=LDIE_I - Ldebug_info_start
+	.long LDIFF_SYM2999
 	.byte 2,141,40,3
 	.asciz "method"
 
-LDIFF_SYM2992=LDIE_I - Ldebug_info_start
-	.long LDIFF_SYM2992
+LDIFF_SYM3000=LDIE_I - Ldebug_info_start
+	.long LDIFF_SYM3000
 	.byte 2,141,48,11
 	.asciz "V_0"
 
-LDIFF_SYM2993=LDIE_OBJECT - Ldebug_info_start
-	.long LDIFF_SYM2993
+LDIFF_SYM3001=LDIE_OBJECT - Ldebug_info_start
+	.long LDIFF_SYM3001
 	.byte 2,141,56,11
 	.asciz "V_1"
 
-LDIFF_SYM2994=LDIE_OBJECT - Ldebug_info_start
-	.long LDIFF_SYM2994
+LDIFF_SYM3002=LDIE_OBJECT - Ldebug_info_start
+	.long LDIFF_SYM3002
 	.byte 3,141,192,0,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM2995=Lfde428_end - Lfde428_start
-	.long LDIFF_SYM2995
-Lfde428_start:
+LDIFF_SYM3003=Lfde430_end - Lfde430_start
+	.long LDIFF_SYM3003
+Lfde430_start:
 
 	.long 0
 	.align 3
 	.quad wrapper_runtime_invoke__Module_runtime_invoke_byte__this___int_object_intptr_intptr_intptr
 
-LDIFF_SYM2996=Lme_1dd - wrapper_runtime_invoke__Module_runtime_invoke_byte__this___int_object_intptr_intptr_intptr
-	.long LDIFF_SYM2996
+LDIFF_SYM3004=Lme_1de - wrapper_runtime_invoke__Module_runtime_invoke_byte__this___int_object_intptr_intptr_intptr
+	.long LDIFF_SYM3004
 	.long 0
 	.byte 12,31,0,68,14,128,1,157,16,158,15,68,13,29,68,151,14
 	.align 3
-Lfde428_end:
+Lfde430_end:
 
 .section __DWARF, __debug_info,regular,debug
 
@@ -67258,41 +67537,41 @@ Lfde428_end:
 
 	.byte 0,0
 	.quad wrapper_unknown_byte___Set_int_byte
-	.quad Lme_1de
+	.quad Lme_1df
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM2997=LDIE_SZARRAY - Ldebug_info_start
-	.long LDIFF_SYM2997
+LDIFF_SYM3005=LDIE_SZARRAY - Ldebug_info_start
+	.long LDIFF_SYM3005
 	.byte 2,141,16,3
 	.asciz "param0"
 
-LDIFF_SYM2998=LDIE_I4 - Ldebug_info_start
-	.long LDIFF_SYM2998
+LDIFF_SYM3006=LDIE_I4 - Ldebug_info_start
+	.long LDIFF_SYM3006
 	.byte 2,141,24,3
 	.asciz "param1"
 
-LDIFF_SYM2999=LDIE_U1 - Ldebug_info_start
-	.long LDIFF_SYM2999
+LDIFF_SYM3007=LDIE_U1 - Ldebug_info_start
+	.long LDIFF_SYM3007
 	.byte 2,141,32,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM3000=Lfde429_end - Lfde429_start
-	.long LDIFF_SYM3000
-Lfde429_start:
+LDIFF_SYM3008=Lfde431_end - Lfde431_start
+	.long LDIFF_SYM3008
+Lfde431_start:
 
 	.long 0
 	.align 3
 	.quad wrapper_unknown_byte___Set_int_byte
 
-LDIFF_SYM3001=Lme_1de - wrapper_unknown_byte___Set_int_byte
-	.long LDIFF_SYM3001
+LDIFF_SYM3009=Lme_1df - wrapper_unknown_byte___Set_int_byte
+	.long LDIFF_SYM3009
 	.long 0
 	.byte 12,31,0,68,14,48,157,6,158,5,68,13,29
 	.align 3
-Lfde429_end:
+Lfde431_end:
 
 .section __DWARF, __debug_info,regular,debug
 
@@ -67302,56 +67581,56 @@ Lfde429_end:
 
 	.byte 0,0
 	.quad wrapper_runtime_invoke__Module_runtime_invoke_void__this___int_byte_object_intptr_intptr_intptr
-	.quad Lme_1df
+	.quad Lme_1e0
 
 	.byte 2,118,16,3
 	.asciz "this"
 
-LDIFF_SYM3002=LDIE_OBJECT - Ldebug_info_start
-	.long LDIFF_SYM3002
+LDIFF_SYM3010=LDIE_OBJECT - Ldebug_info_start
+	.long LDIFF_SYM3010
 	.byte 2,141,32,3
 	.asciz "params"
 
-LDIFF_SYM3003=LDIE_I - Ldebug_info_start
-	.long LDIFF_SYM3003
+LDIFF_SYM3011=LDIE_I - Ldebug_info_start
+	.long LDIFF_SYM3011
 	.byte 1,105,3
 	.asciz "exc"
 
-LDIFF_SYM3004=LDIE_I - Ldebug_info_start
-	.long LDIFF_SYM3004
+LDIFF_SYM3012=LDIE_I - Ldebug_info_start
+	.long LDIFF_SYM3012
 	.byte 2,141,40,3
 	.asciz "method"
 
-LDIFF_SYM3005=LDIE_I - Ldebug_info_start
-	.long LDIFF_SYM3005
+LDIFF_SYM3013=LDIE_I - Ldebug_info_start
+	.long LDIFF_SYM3013
 	.byte 2,141,48,11
 	.asciz "V_0"
 
-LDIFF_SYM3006=LDIE_OBJECT - Ldebug_info_start
-	.long LDIFF_SYM3006
+LDIFF_SYM3014=LDIE_OBJECT - Ldebug_info_start
+	.long LDIFF_SYM3014
 	.byte 2,141,56,11
 	.asciz "V_1"
 
-LDIFF_SYM3007=LDIE_OBJECT - Ldebug_info_start
-	.long LDIFF_SYM3007
+LDIFF_SYM3015=LDIE_OBJECT - Ldebug_info_start
+	.long LDIFF_SYM3015
 	.byte 3,141,192,0,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM3008=Lfde430_end - Lfde430_start
-	.long LDIFF_SYM3008
-Lfde430_start:
+LDIFF_SYM3016=Lfde432_end - Lfde432_start
+	.long LDIFF_SYM3016
+Lfde432_start:
 
 	.long 0
 	.align 3
 	.quad wrapper_runtime_invoke__Module_runtime_invoke_void__this___int_byte_object_intptr_intptr_intptr
 
-LDIFF_SYM3009=Lme_1df - wrapper_runtime_invoke__Module_runtime_invoke_void__this___int_byte_object_intptr_intptr_intptr
-	.long LDIFF_SYM3009
+LDIFF_SYM3017=Lme_1e0 - wrapper_runtime_invoke__Module_runtime_invoke_void__this___int_byte_object_intptr_intptr_intptr
+	.long LDIFF_SYM3017
 	.long 0
 	.byte 12,31,0,68,14,112,157,14,158,13,68,13,29,68,151,12,68,153,11
 	.align 3
-Lfde430_end:
+Lfde432_end:
 
 .section __DWARF, __debug_info,regular,debug
 
@@ -67361,52 +67640,52 @@ Lfde430_end:
 
 	.byte 0,0
 	.quad wrapper_managed_to_native_Mono_Security_Cryptography_MD2Managed_Init_intptr
-	.quad Lme_1e0
+	.quad Lme_1e1
 
 	.byte 2,118,16,3
 	.asciz "param0"
 
-LDIFF_SYM3010=LDIE_I - Ldebug_info_start
-	.long LDIFF_SYM3010
+LDIFF_SYM3018=LDIE_I - Ldebug_info_start
+	.long LDIFF_SYM3018
 	.byte 1,106,11
 	.asciz "V_0"
 
-LDIFF_SYM3011=LDIE_I4 - Ldebug_info_start
-	.long LDIFF_SYM3011
+LDIFF_SYM3019=LDIE_I4 - Ldebug_info_start
+	.long LDIFF_SYM3019
 	.byte 0,11
 	.asciz "V_1"
 
-LDIFF_SYM3012=LDIE_I4 - Ldebug_info_start
-	.long LDIFF_SYM3012
+LDIFF_SYM3020=LDIE_I4 - Ldebug_info_start
+	.long LDIFF_SYM3020
 	.byte 0,11
 	.asciz "V_2"
 
-LDIFF_SYM3013=LDIE_I4 - Ldebug_info_start
-	.long LDIFF_SYM3013
+LDIFF_SYM3021=LDIE_I4 - Ldebug_info_start
+	.long LDIFF_SYM3021
 	.byte 0,11
 	.asciz "V_3"
 
-LDIFF_SYM3014=LDIE_I4 - Ldebug_info_start
-	.long LDIFF_SYM3014
+LDIFF_SYM3022=LDIE_I4 - Ldebug_info_start
+	.long LDIFF_SYM3022
 	.byte 1,106,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM3015=Lfde431_end - Lfde431_start
-	.long LDIFF_SYM3015
-Lfde431_start:
+LDIFF_SYM3023=Lfde433_end - Lfde433_start
+	.long LDIFF_SYM3023
+Lfde433_start:
 
 	.long 0
 	.align 3
 	.quad wrapper_managed_to_native_Mono_Security_Cryptography_MD2Managed_Init_intptr
 
-LDIFF_SYM3016=Lme_1e0 - wrapper_managed_to_native_Mono_Security_Cryptography_MD2Managed_Init_intptr
-	.long LDIFF_SYM3016
+LDIFF_SYM3024=Lme_1e1 - wrapper_managed_to_native_Mono_Security_Cryptography_MD2Managed_Init_intptr
+	.long LDIFF_SYM3024
 	.long 0
 	.byte 12,31,0,68,14,144,1,157,18,158,17,68,13,29,76,147,13,148,12,68,149,11,150,10,68,151,9,152,8,68,153,7
 	.byte 154,6,68,155,5,156,4
 	.align 3
-Lfde431_end:
+Lfde433_end:
 
 .section __DWARF, __debug_info,regular,debug
 
@@ -67416,82 +67695,22 @@ Lfde431_end:
 
 	.byte 0,0
 	.quad wrapper_managed_to_native_Mono_Security_Cryptography_MD2Managed_Update_intptr_intptr_uint
-	.quad Lme_1e1
-
-	.byte 2,118,16,3
-	.asciz "param0"
-
-LDIFF_SYM3017=LDIE_I - Ldebug_info_start
-	.long LDIFF_SYM3017
-	.byte 2,141,16,3
-	.asciz "param1"
-
-LDIFF_SYM3018=LDIE_I - Ldebug_info_start
-	.long LDIFF_SYM3018
-	.byte 1,105,3
-	.asciz "param2"
-
-LDIFF_SYM3019=LDIE_U4 - Ldebug_info_start
-	.long LDIFF_SYM3019
-	.byte 1,106,11
-	.asciz "V_0"
-
-LDIFF_SYM3020=LDIE_I4 - Ldebug_info_start
-	.long LDIFF_SYM3020
-	.byte 0,11
-	.asciz "V_1"
-
-LDIFF_SYM3021=LDIE_I4 - Ldebug_info_start
-	.long LDIFF_SYM3021
-	.byte 0,11
-	.asciz "V_2"
-
-LDIFF_SYM3022=LDIE_I4 - Ldebug_info_start
-	.long LDIFF_SYM3022
-	.byte 0,11
-	.asciz "V_3"
-
-LDIFF_SYM3023=LDIE_I4 - Ldebug_info_start
-	.long LDIFF_SYM3023
-	.byte 1,106,0
-
-.section __DWARF, __debug_frame,regular,debug
-
-LDIFF_SYM3024=Lfde432_end - Lfde432_start
-	.long LDIFF_SYM3024
-Lfde432_start:
-
-	.long 0
-	.align 3
-	.quad wrapper_managed_to_native_Mono_Security_Cryptography_MD2Managed_Update_intptr_intptr_uint
-
-LDIFF_SYM3025=Lme_1e1 - wrapper_managed_to_native_Mono_Security_Cryptography_MD2Managed_Update_intptr_intptr_uint
-	.long LDIFF_SYM3025
-	.long 0
-	.byte 12,31,0,68,14,144,1,157,18,158,17,68,13,29,76,147,12,148,11,68,149,10,150,9,68,151,8,152,7,68,153,6
-	.byte 154,5,68,155,4,156,3
-	.align 3
-Lfde432_end:
-
-.section __DWARF, __debug_info,regular,debug
-
-	.byte 2
-	.asciz "(wrapper_managed-to-native)_Mono.Security.Cryptography.MD2Managed:Final"
-	.asciz "wrapper_managed_to_native_Mono_Security_Cryptography_MD2Managed_Final_byte___intptr"
-
-	.byte 0,0
-	.quad wrapper_managed_to_native_Mono_Security_Cryptography_MD2Managed_Final_byte___intptr
 	.quad Lme_1e2
 
 	.byte 2,118,16,3
 	.asciz "param0"
 
-LDIFF_SYM3026=LDIE_SZARRAY - Ldebug_info_start
-	.long LDIFF_SYM3026
+LDIFF_SYM3025=LDIE_I - Ldebug_info_start
+	.long LDIFF_SYM3025
 	.byte 2,141,16,3
 	.asciz "param1"
 
-LDIFF_SYM3027=LDIE_I - Ldebug_info_start
+LDIFF_SYM3026=LDIE_I - Ldebug_info_start
+	.long LDIFF_SYM3026
+	.byte 1,105,3
+	.asciz "param2"
+
+LDIFF_SYM3027=LDIE_U4 - Ldebug_info_start
 	.long LDIFF_SYM3027
 	.byte 1,106,11
 	.asciz "V_0"
@@ -67513,43 +67732,43 @@ LDIFF_SYM3030=LDIE_I4 - Ldebug_info_start
 
 LDIFF_SYM3031=LDIE_I4 - Ldebug_info_start
 	.long LDIFF_SYM3031
-	.byte 1,106,11
-	.asciz "V_4"
-
-LDIFF_SYM3032=LDIE_OBJECT - Ldebug_info_start
-	.long LDIFF_SYM3032
-	.byte 1,103,0
+	.byte 1,106,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM3033=Lfde433_end - Lfde433_start
-	.long LDIFF_SYM3033
-Lfde433_start:
+LDIFF_SYM3032=Lfde434_end - Lfde434_start
+	.long LDIFF_SYM3032
+Lfde434_start:
 
 	.long 0
 	.align 3
-	.quad wrapper_managed_to_native_Mono_Security_Cryptography_MD2Managed_Final_byte___intptr
+	.quad wrapper_managed_to_native_Mono_Security_Cryptography_MD2Managed_Update_intptr_intptr_uint
 
-LDIFF_SYM3034=Lme_1e2 - wrapper_managed_to_native_Mono_Security_Cryptography_MD2Managed_Final_byte___intptr
-	.long LDIFF_SYM3034
+LDIFF_SYM3033=Lme_1e2 - wrapper_managed_to_native_Mono_Security_Cryptography_MD2Managed_Update_intptr_intptr_uint
+	.long LDIFF_SYM3033
 	.long 0
 	.byte 12,31,0,68,14,144,1,157,18,158,17,68,13,29,76,147,12,148,11,68,149,10,150,9,68,151,8,152,7,68,153,6
 	.byte 154,5,68,155,4,156,3
 	.align 3
-Lfde433_end:
+Lfde434_end:
 
 .section __DWARF, __debug_info,regular,debug
 
 	.byte 2
-	.asciz "(wrapper_managed-to-native)_Mono.Security.Cryptography.MD4Managed:Init"
-	.asciz "wrapper_managed_to_native_Mono_Security_Cryptography_MD4Managed_Init_intptr"
+	.asciz "(wrapper_managed-to-native)_Mono.Security.Cryptography.MD2Managed:Final"
+	.asciz "wrapper_managed_to_native_Mono_Security_Cryptography_MD2Managed_Final_byte___intptr"
 
 	.byte 0,0
-	.quad wrapper_managed_to_native_Mono_Security_Cryptography_MD4Managed_Init_intptr
+	.quad wrapper_managed_to_native_Mono_Security_Cryptography_MD2Managed_Final_byte___intptr
 	.quad Lme_1e3
 
 	.byte 2,118,16,3
 	.asciz "param0"
+
+LDIFF_SYM3034=LDIE_SZARRAY - Ldebug_info_start
+	.long LDIFF_SYM3034
+	.byte 2,141,16,3
+	.asciz "param1"
 
 LDIFF_SYM3035=LDIE_I - Ldebug_info_start
 	.long LDIFF_SYM3035
@@ -67573,85 +67792,25 @@ LDIFF_SYM3038=LDIE_I4 - Ldebug_info_start
 
 LDIFF_SYM3039=LDIE_I4 - Ldebug_info_start
 	.long LDIFF_SYM3039
-	.byte 1,106,0
-
-.section __DWARF, __debug_frame,regular,debug
-
-LDIFF_SYM3040=Lfde434_end - Lfde434_start
-	.long LDIFF_SYM3040
-Lfde434_start:
-
-	.long 0
-	.align 3
-	.quad wrapper_managed_to_native_Mono_Security_Cryptography_MD4Managed_Init_intptr
-
-LDIFF_SYM3041=Lme_1e3 - wrapper_managed_to_native_Mono_Security_Cryptography_MD4Managed_Init_intptr
-	.long LDIFF_SYM3041
-	.long 0
-	.byte 12,31,0,68,14,144,1,157,18,158,17,68,13,29,76,147,13,148,12,68,149,11,150,10,68,151,9,152,8,68,153,7
-	.byte 154,6,68,155,5,156,4
-	.align 3
-Lfde434_end:
-
-.section __DWARF, __debug_info,regular,debug
-
-	.byte 2
-	.asciz "(wrapper_managed-to-native)_Mono.Security.Cryptography.MD4Managed:Update"
-	.asciz "wrapper_managed_to_native_Mono_Security_Cryptography_MD4Managed_Update_intptr_intptr_uint"
-
-	.byte 0,0
-	.quad wrapper_managed_to_native_Mono_Security_Cryptography_MD4Managed_Update_intptr_intptr_uint
-	.quad Lme_1e4
-
-	.byte 2,118,16,3
-	.asciz "param0"
-
-LDIFF_SYM3042=LDIE_I - Ldebug_info_start
-	.long LDIFF_SYM3042
-	.byte 2,141,16,3
-	.asciz "param1"
-
-LDIFF_SYM3043=LDIE_I - Ldebug_info_start
-	.long LDIFF_SYM3043
-	.byte 1,105,3
-	.asciz "param2"
-
-LDIFF_SYM3044=LDIE_U4 - Ldebug_info_start
-	.long LDIFF_SYM3044
 	.byte 1,106,11
-	.asciz "V_0"
+	.asciz "V_4"
 
-LDIFF_SYM3045=LDIE_I4 - Ldebug_info_start
-	.long LDIFF_SYM3045
-	.byte 0,11
-	.asciz "V_1"
-
-LDIFF_SYM3046=LDIE_I4 - Ldebug_info_start
-	.long LDIFF_SYM3046
-	.byte 0,11
-	.asciz "V_2"
-
-LDIFF_SYM3047=LDIE_I4 - Ldebug_info_start
-	.long LDIFF_SYM3047
-	.byte 0,11
-	.asciz "V_3"
-
-LDIFF_SYM3048=LDIE_I4 - Ldebug_info_start
-	.long LDIFF_SYM3048
-	.byte 1,106,0
+LDIFF_SYM3040=LDIE_OBJECT - Ldebug_info_start
+	.long LDIFF_SYM3040
+	.byte 1,103,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM3049=Lfde435_end - Lfde435_start
-	.long LDIFF_SYM3049
+LDIFF_SYM3041=Lfde435_end - Lfde435_start
+	.long LDIFF_SYM3041
 Lfde435_start:
 
 	.long 0
 	.align 3
-	.quad wrapper_managed_to_native_Mono_Security_Cryptography_MD4Managed_Update_intptr_intptr_uint
+	.quad wrapper_managed_to_native_Mono_Security_Cryptography_MD2Managed_Final_byte___intptr
 
-LDIFF_SYM3050=Lme_1e4 - wrapper_managed_to_native_Mono_Security_Cryptography_MD4Managed_Update_intptr_intptr_uint
-	.long LDIFF_SYM3050
+LDIFF_SYM3042=Lme_1e3 - wrapper_managed_to_native_Mono_Security_Cryptography_MD2Managed_Final_byte___intptr
+	.long LDIFF_SYM3042
 	.long 0
 	.byte 12,31,0,68,14,144,1,157,18,158,17,68,13,29,76,147,12,148,11,68,149,10,150,9,68,151,8,152,7,68,153,6
 	.byte 154,5,68,155,4,156,3
@@ -67661,22 +67820,82 @@ Lfde435_end:
 .section __DWARF, __debug_info,regular,debug
 
 	.byte 2
-	.asciz "(wrapper_managed-to-native)_Mono.Security.Cryptography.MD4Managed:Final"
-	.asciz "wrapper_managed_to_native_Mono_Security_Cryptography_MD4Managed_Final_byte___intptr"
+	.asciz "(wrapper_managed-to-native)_Mono.Security.Cryptography.MD4Managed:Init"
+	.asciz "wrapper_managed_to_native_Mono_Security_Cryptography_MD4Managed_Init_intptr"
 
 	.byte 0,0
-	.quad wrapper_managed_to_native_Mono_Security_Cryptography_MD4Managed_Final_byte___intptr
+	.quad wrapper_managed_to_native_Mono_Security_Cryptography_MD4Managed_Init_intptr
+	.quad Lme_1e4
+
+	.byte 2,118,16,3
+	.asciz "param0"
+
+LDIFF_SYM3043=LDIE_I - Ldebug_info_start
+	.long LDIFF_SYM3043
+	.byte 1,106,11
+	.asciz "V_0"
+
+LDIFF_SYM3044=LDIE_I4 - Ldebug_info_start
+	.long LDIFF_SYM3044
+	.byte 0,11
+	.asciz "V_1"
+
+LDIFF_SYM3045=LDIE_I4 - Ldebug_info_start
+	.long LDIFF_SYM3045
+	.byte 0,11
+	.asciz "V_2"
+
+LDIFF_SYM3046=LDIE_I4 - Ldebug_info_start
+	.long LDIFF_SYM3046
+	.byte 0,11
+	.asciz "V_3"
+
+LDIFF_SYM3047=LDIE_I4 - Ldebug_info_start
+	.long LDIFF_SYM3047
+	.byte 1,106,0
+
+.section __DWARF, __debug_frame,regular,debug
+
+LDIFF_SYM3048=Lfde436_end - Lfde436_start
+	.long LDIFF_SYM3048
+Lfde436_start:
+
+	.long 0
+	.align 3
+	.quad wrapper_managed_to_native_Mono_Security_Cryptography_MD4Managed_Init_intptr
+
+LDIFF_SYM3049=Lme_1e4 - wrapper_managed_to_native_Mono_Security_Cryptography_MD4Managed_Init_intptr
+	.long LDIFF_SYM3049
+	.long 0
+	.byte 12,31,0,68,14,144,1,157,18,158,17,68,13,29,76,147,13,148,12,68,149,11,150,10,68,151,9,152,8,68,153,7
+	.byte 154,6,68,155,5,156,4
+	.align 3
+Lfde436_end:
+
+.section __DWARF, __debug_info,regular,debug
+
+	.byte 2
+	.asciz "(wrapper_managed-to-native)_Mono.Security.Cryptography.MD4Managed:Update"
+	.asciz "wrapper_managed_to_native_Mono_Security_Cryptography_MD4Managed_Update_intptr_intptr_uint"
+
+	.byte 0,0
+	.quad wrapper_managed_to_native_Mono_Security_Cryptography_MD4Managed_Update_intptr_intptr_uint
 	.quad Lme_1e5
 
 	.byte 2,118,16,3
 	.asciz "param0"
 
-LDIFF_SYM3051=LDIE_SZARRAY - Ldebug_info_start
-	.long LDIFF_SYM3051
+LDIFF_SYM3050=LDIE_I - Ldebug_info_start
+	.long LDIFF_SYM3050
 	.byte 2,141,16,3
 	.asciz "param1"
 
-LDIFF_SYM3052=LDIE_I - Ldebug_info_start
+LDIFF_SYM3051=LDIE_I - Ldebug_info_start
+	.long LDIFF_SYM3051
+	.byte 1,105,3
+	.asciz "param2"
+
+LDIFF_SYM3052=LDIE_U4 - Ldebug_info_start
 	.long LDIFF_SYM3052
 	.byte 1,106,11
 	.asciz "V_0"
@@ -67698,30 +67917,90 @@ LDIFF_SYM3055=LDIE_I4 - Ldebug_info_start
 
 LDIFF_SYM3056=LDIE_I4 - Ldebug_info_start
 	.long LDIFF_SYM3056
+	.byte 1,106,0
+
+.section __DWARF, __debug_frame,regular,debug
+
+LDIFF_SYM3057=Lfde437_end - Lfde437_start
+	.long LDIFF_SYM3057
+Lfde437_start:
+
+	.long 0
+	.align 3
+	.quad wrapper_managed_to_native_Mono_Security_Cryptography_MD4Managed_Update_intptr_intptr_uint
+
+LDIFF_SYM3058=Lme_1e5 - wrapper_managed_to_native_Mono_Security_Cryptography_MD4Managed_Update_intptr_intptr_uint
+	.long LDIFF_SYM3058
+	.long 0
+	.byte 12,31,0,68,14,144,1,157,18,158,17,68,13,29,76,147,12,148,11,68,149,10,150,9,68,151,8,152,7,68,153,6
+	.byte 154,5,68,155,4,156,3
+	.align 3
+Lfde437_end:
+
+.section __DWARF, __debug_info,regular,debug
+
+	.byte 2
+	.asciz "(wrapper_managed-to-native)_Mono.Security.Cryptography.MD4Managed:Final"
+	.asciz "wrapper_managed_to_native_Mono_Security_Cryptography_MD4Managed_Final_byte___intptr"
+
+	.byte 0,0
+	.quad wrapper_managed_to_native_Mono_Security_Cryptography_MD4Managed_Final_byte___intptr
+	.quad Lme_1e6
+
+	.byte 2,118,16,3
+	.asciz "param0"
+
+LDIFF_SYM3059=LDIE_SZARRAY - Ldebug_info_start
+	.long LDIFF_SYM3059
+	.byte 2,141,16,3
+	.asciz "param1"
+
+LDIFF_SYM3060=LDIE_I - Ldebug_info_start
+	.long LDIFF_SYM3060
+	.byte 1,106,11
+	.asciz "V_0"
+
+LDIFF_SYM3061=LDIE_I4 - Ldebug_info_start
+	.long LDIFF_SYM3061
+	.byte 0,11
+	.asciz "V_1"
+
+LDIFF_SYM3062=LDIE_I4 - Ldebug_info_start
+	.long LDIFF_SYM3062
+	.byte 0,11
+	.asciz "V_2"
+
+LDIFF_SYM3063=LDIE_I4 - Ldebug_info_start
+	.long LDIFF_SYM3063
+	.byte 0,11
+	.asciz "V_3"
+
+LDIFF_SYM3064=LDIE_I4 - Ldebug_info_start
+	.long LDIFF_SYM3064
 	.byte 1,106,11
 	.asciz "V_4"
 
-LDIFF_SYM3057=LDIE_OBJECT - Ldebug_info_start
-	.long LDIFF_SYM3057
+LDIFF_SYM3065=LDIE_OBJECT - Ldebug_info_start
+	.long LDIFF_SYM3065
 	.byte 1,103,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM3058=Lfde436_end - Lfde436_start
-	.long LDIFF_SYM3058
-Lfde436_start:
+LDIFF_SYM3066=Lfde438_end - Lfde438_start
+	.long LDIFF_SYM3066
+Lfde438_start:
 
 	.long 0
 	.align 3
 	.quad wrapper_managed_to_native_Mono_Security_Cryptography_MD4Managed_Final_byte___intptr
 
-LDIFF_SYM3059=Lme_1e5 - wrapper_managed_to_native_Mono_Security_Cryptography_MD4Managed_Final_byte___intptr
-	.long LDIFF_SYM3059
+LDIFF_SYM3067=Lme_1e6 - wrapper_managed_to_native_Mono_Security_Cryptography_MD4Managed_Final_byte___intptr
+	.long LDIFF_SYM3067
 	.long 0
 	.byte 12,31,0,68,14,144,1,157,18,158,17,68,13,29,76,147,12,148,11,68,149,10,150,9,68,151,8,152,7,68,153,6
 	.byte 154,5,68,155,4,156,3
 	.align 3
-Lfde436_end:
+Lfde438_end:
 
 .section __DWARF, __debug_info,regular,debug
 
@@ -67731,31 +68010,31 @@ Lfde436_end:
 
 	.byte 37,143,7
 	.quad System_Array_Reverse_T_BYTE_T_BYTE__
-	.quad Lme_1e6
+	.quad Lme_1e7
 
 	.byte 2,118,16,3
 	.asciz "array"
 
-LDIFF_SYM3060=LDIE_SZARRAY - Ldebug_info_start
-	.long LDIFF_SYM3060
+LDIFF_SYM3068=LDIE_SZARRAY - Ldebug_info_start
+	.long LDIFF_SYM3068
 	.byte 2,141,16,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM3061=Lfde437_end - Lfde437_start
-	.long LDIFF_SYM3061
-Lfde437_start:
+LDIFF_SYM3069=Lfde439_end - Lfde439_start
+	.long LDIFF_SYM3069
+Lfde439_start:
 
 	.long 0
 	.align 3
 	.quad System_Array_Reverse_T_BYTE_T_BYTE__
 
-LDIFF_SYM3062=Lme_1e6 - System_Array_Reverse_T_BYTE_T_BYTE__
-	.long LDIFF_SYM3062
+LDIFF_SYM3070=Lme_1e7 - System_Array_Reverse_T_BYTE_T_BYTE__
+	.long LDIFF_SYM3070
 	.long 0
 	.byte 12,31,0,68,14,48,157,6,158,5,68,13,29
 	.align 3
-Lfde437_end:
+Lfde439_end:
 
 .section __DWARF, __debug_info,regular,debug
 
@@ -67765,56 +68044,56 @@ Lfde437_end:
 
 	.byte 37,151,7
 	.quad System_Array_Reverse_T_BYTE_T_BYTE___int_int
-	.quad Lme_1e7
+	.quad Lme_1e8
 
 	.byte 2,118,16,3
 	.asciz "array"
 
-LDIFF_SYM3063=LDIE_SZARRAY - Ldebug_info_start
-	.long LDIFF_SYM3063
+LDIFF_SYM3071=LDIE_SZARRAY - Ldebug_info_start
+	.long LDIFF_SYM3071
 	.byte 1,104,3
 	.asciz "index"
 
-LDIFF_SYM3064=LDIE_I4 - Ldebug_info_start
-	.long LDIFF_SYM3064
+LDIFF_SYM3072=LDIE_I4 - Ldebug_info_start
+	.long LDIFF_SYM3072
 	.byte 1,105,3
 	.asciz "length"
 
-LDIFF_SYM3065=LDIE_I4 - Ldebug_info_start
-	.long LDIFF_SYM3065
+LDIFF_SYM3073=LDIE_I4 - Ldebug_info_start
+	.long LDIFF_SYM3073
 	.byte 1,106,11
 	.asciz "i"
 
-LDIFF_SYM3066=LDIE_I4 - Ldebug_info_start
-	.long LDIFF_SYM3066
+LDIFF_SYM3074=LDIE_I4 - Ldebug_info_start
+	.long LDIFF_SYM3074
 	.byte 1,103,11
 	.asciz "j"
 
-LDIFF_SYM3067=LDIE_I4 - Ldebug_info_start
-	.long LDIFF_SYM3067
+LDIFF_SYM3075=LDIE_I4 - Ldebug_info_start
+	.long LDIFF_SYM3075
 	.byte 1,106,11
 	.asciz "temp"
 
-LDIFF_SYM3068=LDIE_I4 - Ldebug_info_start
-	.long LDIFF_SYM3068
+LDIFF_SYM3076=LDIE_I4 - Ldebug_info_start
+	.long LDIFF_SYM3076
 	.byte 1,105,0
 
 .section __DWARF, __debug_frame,regular,debug
 
-LDIFF_SYM3069=Lfde438_end - Lfde438_start
-	.long LDIFF_SYM3069
-Lfde438_start:
+LDIFF_SYM3077=Lfde440_end - Lfde440_start
+	.long LDIFF_SYM3077
+Lfde440_start:
 
 	.long 0
 	.align 3
 	.quad System_Array_Reverse_T_BYTE_T_BYTE___int_int
 
-LDIFF_SYM3070=Lme_1e7 - System_Array_Reverse_T_BYTE_T_BYTE___int_int
-	.long LDIFF_SYM3070
+LDIFF_SYM3078=Lme_1e8 - System_Array_Reverse_T_BYTE_T_BYTE___int_int
+	.long LDIFF_SYM3078
 	.long 0
 	.byte 12,31,0,68,14,64,157,8,158,7,68,13,29,68,151,6,152,5,68,153,4,154,3
 	.align 3
-Lfde438_end:
+Lfde440_end:
 
 .section __DWARF, __debug_info,regular,debug
 

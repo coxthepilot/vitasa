@@ -210,6 +210,10 @@ namespace zsquared
             return u1.Name.CompareTo(u2.Name);
         }
 
+        public static int CompareByNameToLower(C_VitaUser u1, C_VitaUser u2)
+        {
+            return u1.Name.ToLower().CompareTo(u2.Name.ToLower());
+        }
 
 	}
 }

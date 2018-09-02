@@ -3,8 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>VITA language redirect</title>
-</head>
-<body>
 <script>
     // figure out the language of the system hosting the browser
     var userLang = (navigator.language) ? navigator.language : navigator.userLanguage;
@@ -24,8 +22,11 @@
     var ix = window.location.href.indexOf("index.html");
     if (ix != -1)
         loc = window.location.href.substr(0, ix);
+
     // remove a trailing slash if needed
-    if (loc.endsWith("/"))
+    // get the last char in loc
+    var loclast = loc.substr(loc.length-1,1);
+    if (loclast == "/")
         loc = loc.substr(0, loc.length-1);
 
     // build the resulting destination
@@ -38,7 +39,7 @@
     window.location.href = loc;
 
     function detectmob() {
-    	let nuas = navigator.userAgent.toLowerCase();
+    	var nuas = navigator.userAgent.toLowerCase();
 
     	var res = 
     	       (nuas.indexOf("android") != -1)
@@ -46,7 +47,8 @@
 
     	return res;
     }
-
 </script>
+</head>
+<body>
 </body>
 </html>

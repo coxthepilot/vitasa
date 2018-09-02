@@ -1,0 +1,22 @@
+﻿<Properties StartupConfiguration="{54A26836-3009-4924-BE26-81B92FE271EC}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="SharedModels/C_VitaSite.cs">
+    <Files>
+      <File FileName="vitavol/Main.storyboard" />
+      <File FileName="SharedModels/C_VitaSite.cs" Line="1" Column="1" />
+      <File FileName="SharedModels/C_VitaUser.cs" Line="1" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|iPhoneSimulator" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore>
+      <Breakpoint file="/Users/Billy/Documents/source/vitasa/vitasaios/SharedModels/C_Global.cs" relfile="SharedModels/C_Global.cs" line="2058" column="1" />
+      <Breakpoint file="/Users/Billy/Documents/source/vitasa/vitasaios/SharedModels/C_Global.cs" relfile="SharedModels/C_Global.cs" line="2274" column="11" />
+      <Breakpoint file="/Users/Billy/Documents/source/vitasa/vitasaios/SharedModels/C_Global.cs" relfile="SharedModels/C_Global.cs" line="2286" column="1" />
+      <Breakpoint file="/Users/Billy/Documents/source/vitasa/vitasaios/SharedModels/C_Global.cs" relfile="SharedModels/C_Global.cs" line="2297" column="1" />
+    </BreakpointStore>
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.vitaadmin PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.AA467E17-F441-4645-947C-29A2851595A7" />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.vitavol PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneDeviceTarget" automaticSigning="False" />
+</Properties>

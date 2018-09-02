@@ -6,6 +6,10 @@
 	<dict>
 		<key>CFBundlePrimaryIcon</key>
 		<dict>
+			<key>CFBundleIconFiles</key>
+			<array>
+				<string>AppIcon20x20</string>
+			</array>
 			<key>CFBundleIconName</key>
 			<string>AppIcon</string>
 		</dict>

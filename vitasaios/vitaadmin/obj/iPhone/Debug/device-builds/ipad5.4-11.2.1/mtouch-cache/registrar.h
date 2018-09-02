@@ -8,17 +8,17 @@
 #include <objc/message.h>
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-#import <QuartzCore/QuartzCore.h>
 #import <MessageUI/MessageUI.h>
 #import <CloudKit/CloudKit.h>
+#import <QuartzCore/QuartzCore.h>
 #import <Intents/Intents.h>
 #import <CoreGraphics/CoreGraphics.h>
 
 @protocol UIPickerViewModel;
-@class MessageUI_Mono_MFMailComposeViewControllerDelegate;
-@class UIKit_UIControlEventProxy;
 @class __MonoMac_NSActionDispatcher;
 @class __MonoMac_NSAsyncActionDispatcher;
+@class MessageUI_Mono_MFMailComposeViewControllerDelegate;
+@class UIKit_UIControlEventProxy;
 @class zsquared_C_PickerModel;
 @class zsquared_C_ShiftsTableSource;
 @class AppDelegate;
@@ -30,6 +30,7 @@
 @class VC_Messages;
 @class vitaadmin_VC_Suggestions_C_SuggestionsTableSource;
 @class VC_Suggestions;
+@class vitaadmin_VC_WorkItems_C_WorkItemsTableSource;
 @class VC_WorkItems;
 @class vitaadmin_VC_Sites_C_SiteCoordinatorPickerModel;
 @class vitaadmin_VC_Sites_C_SitesTableSource;
@@ -48,9 +49,9 @@
 @class VC_CheckSignUps;
 @class vitaadmin_VC_OpenSites_C_OpenSitesTableSource;
 @class VC_OpenSites;
+@class VC_Stats;
 @class vitaadmin_VC_Suggestions_C_SuggestionsTableDelegate;
 @class vitaadmin_VC_WorkItems_C_WorkItemsTableDelegate;
-@class vitaadmin_VC_WorkItems_C_WorkItemsTableSource;
 @class vitaadmin_VC_Sites_C_SitesTableDelegate;
 @class vitaadmin_VC_Calendar_C_CalendarEntryTableManager_C_CalendarEntryTableSource;
 @class vitaadmin_VC_Calendar_C_ShiftTableManager_C_ShiftTableSource;
@@ -59,20 +60,10 @@
 @class vitaadmin_VC_CheckSignUps_C_WorkItemsTableSource;
 @class vitaadmin_VC_Calendar_C_CalendarEntryTableManager_C_CalendarEntryTableDelegate;
 @class vitaadmin_VC_Calendar_C_ShiftTableManager_C_ShiftTableDelegate;
-@class __UIGestureRecognizerToken;
-@class __UIGestureRecognizerParameterlessToken;
-@class __UIGestureRecognizerParametrizedToken;
-@class __UIRotationGestureRecognizer;
-@class __UILongPressGestureRecognizer;
-@class __UITapGestureRecognizer;
-@class __UIPanGestureRecognizer;
-@class __UIPinchGestureRecognizer;
-@class __UISwipeGestureRecognizer;
-@class __UIScreenEdgePanGestureRecognizer;
+@class __NSObject_Disposer;
 @class UIKit_UIBarButtonItem_Callback;
 @class UIKit_UIScrollView__UIScrollViewDelegate;
 @class UIKit_UITextView__UITextViewDelegate;
-@class __NSObject_Disposer;
 
 @protocol UIPickerViewModel<UIPickerViewDataSource, UIPickerViewDelegate>
 @end
@@ -177,6 +168,7 @@
 	@property (nonatomic, assign) UIButton * B_Notifications;
 	@property (nonatomic, assign) UIButton * B_OpenSites;
 	@property (nonatomic, assign) UIButton * B_Sites;
+	@property (nonatomic, assign) UIButton * B_Stats;
 	@property (nonatomic, assign) UIButton * B_Suggestions;
 	@property (nonatomic, assign) UIButton * B_Users;
 	@property (nonatomic, assign) UIButton * B_WorkItems;
@@ -200,6 +192,8 @@
 	-(void) setB_OpenSites:(UIButton *)p0;
 	-(UIButton *) B_Sites;
 	-(void) setB_Sites:(UIButton *)p0;
+	-(UIButton *) B_Stats;
+	-(void) setB_Stats:(UIButton *)p0;
 	-(UIButton *) B_Suggestions;
 	-(void) setB_Suggestions:(UIButton *)p0;
 	-(UIButton *) B_Users;
@@ -307,6 +301,19 @@
 	-(BOOL) conformsToProtocol:(void *)p0;
 @end
 
+@interface vitaadmin_VC_WorkItems_C_WorkItemsTableSource : NSObject<UIScrollViewDelegate> {
+}
+	-(void) release;
+	-(id) retain;
+	-(int) xamarinGetGCHandle;
+	-(void) xamarinSetGCHandle: (int) gchandle;
+	-(NSInteger) numberOfSectionsInTableView:(UITableView *)p0;
+	-(NSInteger) tableView:(UITableView *)p0 numberOfRowsInSection:(NSInteger)p1;
+	-(NSString *) tableView:(UITableView *)p0 titleForHeaderInSection:(NSInteger)p1;
+	-(UITableViewCell *) tableView:(UITableView *)p0 cellForRowAtIndexPath:(NSIndexPath *)p1;
+	-(BOOL) conformsToProtocol:(void *)p0;
+@end
+
 @interface VC_WorkItems : UIViewController {
 }
 	@property (nonatomic, assign) UIActivityIndicatorView * AI_Busy;
@@ -317,6 +324,7 @@
 	@property (nonatomic, assign) UILabel * L_Site;
 	@property (nonatomic, assign) UILabel * L_User;
 	@property (nonatomic, assign) UISegmentedControl * SC_Approval;
+	@property (nonatomic, assign) UISegmentedControl * SC_SortType;
 	@property (nonatomic, assign) UITextField * TB_Hours;
 	@property (nonatomic, assign) UITableView * TV_WorkItems;
 	-(void) release;
@@ -339,6 +347,8 @@
 	-(void) setL_User:(UILabel *)p0;
 	-(UISegmentedControl *) SC_Approval;
 	-(void) setSC_Approval:(UISegmentedControl *)p0;
+	-(UISegmentedControl *) SC_SortType;
+	-(void) setSC_SortType:(UISegmentedControl *)p0;
 	-(UITextField *) TB_Hours;
 	-(void) setTB_Hours:(UITextField *)p0;
 	-(UITableView *) TV_WorkItems;
@@ -850,6 +860,28 @@
 	-(BOOL) conformsToProtocol:(void *)p0;
 @end
 
+@interface VC_Stats : UIViewController {
+}
+	@property (nonatomic, assign) UIActivityIndicatorView * AI_Busy;
+	@property (nonatomic, assign) UIButton * B_Back;
+	@property (nonatomic, assign) UIButton * B_Copy;
+	@property (nonatomic, assign) UITextView * TV_Stats;
+	-(void) release;
+	-(id) retain;
+	-(int) xamarinGetGCHandle;
+	-(void) xamarinSetGCHandle: (int) gchandle;
+	-(UIActivityIndicatorView *) AI_Busy;
+	-(void) setAI_Busy:(UIActivityIndicatorView *)p0;
+	-(UIButton *) B_Back;
+	-(void) setB_Back:(UIButton *)p0;
+	-(UIButton *) B_Copy;
+	-(void) setB_Copy:(UIButton *)p0;
+	-(UITextView *) TV_Stats;
+	-(void) setTV_Stats:(UITextView *)p0;
+	-(void) viewDidLoad;
+	-(BOOL) conformsToProtocol:(void *)p0;
+@end
+
 @interface vitaadmin_VC_Suggestions_C_SuggestionsTableDelegate : NSObject<UITableViewDelegate, UIScrollViewDelegate> {
 }
 	-(void) release;
@@ -869,17 +901,6 @@
 	-(void) xamarinSetGCHandle: (int) gchandle;
 	-(NSArray *) tableView:(UITableView *)p0 editActionsForRowAtIndexPath:(NSIndexPath *)p1;
 	-(void) tableView:(UITableView *)p0 didSelectRowAtIndexPath:(NSIndexPath *)p1;
-	-(BOOL) conformsToProtocol:(void *)p0;
-@end
-
-@interface vitaadmin_VC_WorkItems_C_WorkItemsTableSource : NSObject<UIScrollViewDelegate> {
-}
-	-(void) release;
-	-(id) retain;
-	-(int) xamarinGetGCHandle;
-	-(void) xamarinSetGCHandle: (int) gchandle;
-	-(NSInteger) tableView:(UITableView *)p0 numberOfRowsInSection:(NSInteger)p1;
-	-(UITableViewCell *) tableView:(UITableView *)p0 cellForRowAtIndexPath:(NSIndexPath *)p1;
 	-(BOOL) conformsToProtocol:(void *)p0;
 @end
 
@@ -973,25 +994,6 @@
 	-(void) tableView:(UITableView *)p0 didDeselectRowAtIndexPath:(NSIndexPath *)p1;
 	-(void) tableView:(UITableView *)p0 didSelectRowAtIndexPath:(NSIndexPath *)p1;
 	-(BOOL) conformsToProtocol:(void *)p0;
-@end
-
-@interface __UIGestureRecognizerToken : NSObject {
-}
-	-(void) release;
-	-(id) retain;
-	-(int) xamarinGetGCHandle;
-	-(void) xamarinSetGCHandle: (int) gchandle;
-	-(BOOL) conformsToProtocol:(void *)p0;
-@end
-
-@interface __UIGestureRecognizerParameterlessToken : __UIGestureRecognizerToken {
-}
-	-(void) target;
-@end
-
-@interface __UIGestureRecognizerParametrizedToken : __UIGestureRecognizerToken {
-}
-	-(void) target:(UIGestureRecognizer *)p0;
 @end
 
 

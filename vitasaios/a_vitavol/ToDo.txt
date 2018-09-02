@@ -1,18 +1,42 @@
-﻿----- Issues -----
+﻿----- 2.0 features -----
+
+* New UI graphics (from city graphics designer)
+* Site can have mulitple SC (unlimited)(not just primary and backup)
+* Volunteer (and clients) can see open sites on a date without a login
+   - Can only designate prefered sites with registration and a login
+   - Will get notifications related to that site if registered
+* Remove volunteer signup's for shifts at a site
+* Allow vol/SC to update email, password, and phone
+* Generate email for new volunteer/SC registrations (destination email list management?)
+* New: site type: fixed, mobile
+* Add volunteer hours tracking
+   - volunteer creates record for site on date with hours worked
+   - SC can create records, edit, delete
+* All app features available in iOS (phone and tablet), Android, and web (same or similar UI)
+* Generate email on new feedback (from public or volunteer)
+* New site 'feature': "in-person prep" (in addition to MFT, DropOff, Express)
+* Full admin UI on phone/table/web
+
+
+----- Issues -----
 
 Fixes:
 
 Future features:
 * use new graphics for UI
-* allow more than 1 site coordinator and a backup
+* allow more than 1 site coordinator and a backup per site
 * create a site feature for in-person tax prep
 * allow volunteer to select all shifts at a site
-* allow advanced to signup for basic slots
 * allow update email in profile
 * no way for a volunteer to view past signups?
-* need option to include work intents on user and site, or not; separate control for each past and future
 * use notifications as way to know content has changed rather than timeouts
 * sort sites based on distance to user
+* generate emails on new user signup
+* make sure notifications are fully working
+* differentiate between mobile and fixed sites (site type?)
+* build tool for scheduling the mobile team (with emails on changes)
+* client features on Android
+* remove signup and hours tracking?
 
 Shared Models:
 * make sure models don't crash on bad data (such as nulls on date...)
