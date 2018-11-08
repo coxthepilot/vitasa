@@ -24,14 +24,16 @@ namespace vitavol
 		C_DayState[] DayState;
 		int FirstDayInMonthOffset;
         C_CVSource cvsource;
+        readonly bool AllowPastDates;
+
         UIColor BackgroundColor;
-        bool AllowPastDates;
 
         public C_CVHelper(UIColor bgcolor, UICollectionView collectionView, C_DateState[] dateState, C_DayState[] dayState, bool allowPastDates)
 		{
 			BackgroundColor = bgcolor;
 			DateState = dateState;
             AllowPastDates = allowPastDates;
+
             try
             {
                 FirstDayInMonthOffset = (int)dateState[0].Date.DayOfWeek;
@@ -48,9 +50,9 @@ namespace vitavol
                 collectionView.Delegate = this;
                 collectionView.BackgroundColor = BackgroundColor;
                 ViewSize = collectionView.Bounds;
-#if DEBUG
-                Console.WriteLine("[C_CVHelper] ViewSize.Width: " + ViewSize.Width.ToString());
-#endif
+//#if DEBUG
+//                Console.WriteLine("[C_CVHelper] ViewSize.Width: " + ViewSize.Width.ToString());
+//#endif
             }
             catch (Exception e)
             {
@@ -87,11 +89,6 @@ namespace vitavol
 		public override bool ShouldSelectItem(UICollectionView collectionView, NSIndexPath indexPath)
 		{
 			return true;
-		}
-
-		public override void ItemHighlighted(UICollectionView collectionView, NSIndexPath indexPath)
-		{
-			// todo: change the background so the user knows he touched it
 		}
 
 		public override void ItemUnhighlighted(UICollectionView collectionView, NSIndexPath indexPath)
@@ -173,14 +170,14 @@ namespace vitavol
                             cell.DayState = null;
                             cell.ContentView.BackgroundColor = BackgroundColor;
                             cell.ContentView.Layer.BorderColor = BackgroundColor.CGColor;
-                            cell.Label.TextColor = UIColor.Black;
+                            cell.Label.TextColor = UIColor.White;
                         }
                         else
                         {
                             cell.DayState = DayState[ix];
                             cell.ContentView.BackgroundColor = DayState[ix].NormalColor;
                             cell.ContentView.Layer.BorderColor = DayState[ix].NormalColor.CGColor;
-                            cell.Label.TextColor = UIColor.Black;
+                            cell.Label.TextColor = UIColor.White;
                         }
                     }
                     else
@@ -199,7 +196,7 @@ namespace vitavol
                             if (!AllowPastDates && (dateState.Date < now))
                             {
                                 normColor = BackgroundColor;
-                                textColor = UIColor.Black;
+                                textColor = UIColor.White;
                             }
 
 							cell.ContentView.BackgroundColor = normColor;
@@ -241,7 +238,7 @@ namespace vitavol
                 {
                     BackgroundView = new UIView { BackgroundColor = UIColor.LightGray };
 
-                    SelectedBackgroundView = new UIView { BackgroundColor = UIColor.Green };
+                    //SelectedBackgroundView = new UIView { BackgroundColor = UIColor.Green };
 
                     ContentView.Layer.BorderColor = UIColor.Black.CGColor;
                     ContentView.Layer.BorderWidth = 3.0f;

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>VITA San Antonio</title>
+</head>
+<body>
+<script>
+    // figure out the language of the system hosting the browser
+    var userLang = (navigator.language) ? navigator.language : navigator.userLanguage;
+    var l2 = userLang.substring(0, 2);
+    var lang = l2;
+    // if not English or Spanish, then force to English
+    if ((l2 != "es") && (l2 != "en"))
+        lang = "en";
+
+    // figure out if the system is an iPhone or Android device
+    // for these devices, we will go directly to the phone version of the site
+    var mobile = detectmob();
+
+    // figure out the root address for the site where we are hosted
+    var loc = window.location.href;
+    // remove the index.html if any
+    var ix = window.location.href.indexOf("index");
+    if (ix != -1)
+        loc = window.location.href.substr(0, ix);
+
+    // remove a trailing slash if needed
+    // get the last char in loc
+    var loclast = loc.substr(loc.length-1,1);
+    if (loclast == "/")
+        loc = loc.substr(0, loc.length-1);
+
+    // build the resulting destination
+    loc = loc + "/" + lang;
+    if (mobile)
+        loc = loc + "/phone";
+
+    loc = loc + "/index.html";
+
+    window.location.href = loc;
+
+    function detectmob() {
+    	let nuas = navigator.userAgent.toLowerCase();
+
+    	var res = 
+    	       (nuas.indexOf("android") != -1)
+    		|| (nuas.indexOf("iphone") != -1);
+
+    	return res;
+    }
+
+</script>
+</body>
+</html>

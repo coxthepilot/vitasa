@@ -3,11 +3,13 @@ using System.Json;
 using System.Net;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using System.Text;
 using System.Linq;
 
 namespace zsquared
 {
-    public enum E_VitaUserRoles { NewUser, SiteCoordinator, SiteCoordinatorInactive, Volunteer, Admin, Unknown }
+    public enum E_Certification { None, Basic, Advanced, Unknown }
+    public enum E_VitaUserRoles { None, SiteCoordinator, Volunteer, Admin, Mobile, Unknown, All }
 
     public class C_VitaUser
     {
@@ -17,13 +19,20 @@ namespace zsquared
         public string Password; // user password; never returned, only provided on PUT or POST
         public string Phone;    // user phone
         public E_Certification Certification;   // certification level for this user
-        public List<C_SignUp> WorkHistoryX;     // signups history
-        public List<C_SignUp> WorkIntentsX;     // signups pending
         public List<E_VitaUserRoles> Roles;     // roles assigned to this user
-        public List<C_Suggestion> Suggestions;  // suggestions created by this user
         public List<C_SiteCoordinated> SitesCoordinated;    // list of sites coordinated by this user
+        public List<C_WorkLogItem> WorkItems; // list of this users work items
+        public List<string> PreferredSiteSlugs; // the list of preferred sites for this user
+        public bool SubscribeMobile; // true if a member of a mobile team (and therefore will get notifications on mobile sites)
+        public bool SubscribePreferred; // true if the user wants notifications on changes to preferred sites
+        public bool SubscribeEmailFeedback;
+        public bool SubscribeEmailNewUser;
 
         public string Token; // saved across UI transitions, provided by the backend
+
+        public bool Flag; // not saved; used to know the switch state for this user
+        public bool IV_Flag; // not save, initial value of Flag
+        public bool Dirty; // not saved; used to know if the data has been modified
 
         public const string N_ID = "id";
         public const string N_Name = "name";
@@ -32,12 +41,15 @@ namespace zsquared
         public const string N_PasswordConfirmation = "password_confirmation";
         public const string N_Phone = "phone";
         public const string N_Certification = "certification";
-        public const string N_WorkHistory = "work_history";
-        public const string N_WorkIntents = "work_intents";
         public const string N_Roles = "roles";
-        public const string N_Suggestions = "suggestions";
         public const string N_SitesCoordinated = "sites_coordinated";
         public const string N_Token = "token";
+        public const string N_WorkItems = "workitems";
+        public const string N_PreferredSites = "preferredsites";
+        public const string N_SubscribeMobile = "subscribemobile";
+        public const string N_SubscribePreferred = "subscribepreferred";
+        public const string N_SubscribeEmailNewUser = "subscribenewuser";
+        public const string N_SubscribeEmailFeedback = "subscribefeedback";
 
         /// <summary>
         /// Returns true if this user has admin privilidge.
@@ -47,8 +59,9 @@ namespace zsquared
         {
             get
             {
-                var or = Roles.Where(r => r == E_VitaUserRoles.Admin);
-                return or.Any();
+                return Roles.Contains(E_VitaUserRoles.Admin);
+                //var or = Roles.Where(r => r == E_VitaUserRoles.Admin);
+                //return or.Any();
             }
         }
 
@@ -60,8 +73,9 @@ namespace zsquared
         {
             get
             {
-                var or = Roles.Where(r => r == E_VitaUserRoles.SiteCoordinator);
-                return or.Any();
+                return Roles.Contains(E_VitaUserRoles.SiteCoordinator);
+                //var or = Roles.Where(r => r == E_VitaUserRoles.SiteCoordinator);
+                //return or.Any();
             }
         }
 
@@ -73,8 +87,9 @@ namespace zsquared
         {
             get
             {
-                var or = Roles.Where(r => r == E_VitaUserRoles.Volunteer);
-                return or.Any();
+                return Roles.Contains(E_VitaUserRoles.Volunteer);
+                //var or = Roles.Where(r => r == E_VitaUserRoles.Volunteer);
+                //return or.Any();
             }
         }
 
@@ -82,12 +97,13 @@ namespace zsquared
         /// Returns true if this use is still flagged as a new user (awaiting approval from bak office)
         /// </summary>
         /// <value><c>true</c> if has new user; otherwise, <c>false</c>.</value>
-        public bool HasNewUser
+        public bool HasMobile
         {
             get
             {
-                var or = Roles.Where(r => r == E_VitaUserRoles.NewUser);
-                return or.Any();
+                return Roles.Contains(E_VitaUserRoles.Mobile);
+                //var or = Roles.Where(r => r == E_VitaUserRoles.Mobile);
+                //return or.Any();
             }
         }
 
@@ -101,11 +117,10 @@ namespace zsquared
             if (!(jv is JsonObject))
                 return;
 
-            WorkHistoryX = new List<C_SignUp>();
-            WorkIntentsX = new List<C_SignUp>();
             Roles = new List<E_VitaUserRoles>();
-            Suggestions = new List<C_Suggestion>();
             SitesCoordinated = new List<C_SiteCoordinated>();
+            WorkItems = new List<C_WorkLogItem>();
+            PreferredSiteSlugs = new List<string>();
 
             if (jv.ContainsKey(N_ID))
                 id = Tools.JsonProcessInt(jv[N_ID], id);
@@ -122,31 +137,44 @@ namespace zsquared
             if (jv.ContainsKey(N_Phone))
                 Phone = Tools.JsonProcessString(jv[N_Phone], Phone);
 
+            if (jv.ContainsKey(N_SubscribeMobile))
+                SubscribeMobile = Tools.JsonProcessBool(jv[N_SubscribeMobile], SubscribeMobile);
+
+            if (jv.ContainsKey(N_SubscribePreferred))
+                SubscribePreferred = Tools.JsonProcessBool(jv[N_SubscribePreferred], SubscribePreferred);
+
+            if (jv.ContainsKey(N_SubscribeEmailNewUser))
+                SubscribeEmailNewUser = Tools.JsonProcessBool(jv[N_SubscribeEmailNewUser], SubscribeEmailNewUser);
+
+            if (jv.ContainsKey(N_SubscribeEmailFeedback))
+                SubscribeEmailFeedback = Tools.JsonProcessBool(jv[N_SubscribeEmailFeedback], SubscribeEmailFeedback);
+
             if (jv.ContainsKey(N_Certification))
             {
                 string cs = Tools.JsonProcessString(jv[N_Certification], "Unknown");
                 Certification = Tools.StringToEnum<E_Certification>(cs);
             }
 
-            if (jv.ContainsKey(N_WorkHistory))
+            if (jv.ContainsKey(N_WorkItems))
             {
-                JsonValue jva = jv[N_WorkHistory]; // should be an array type
+                JsonValue jva = jv[N_WorkItems];
 
-                foreach (JsonValue jvav in jva)
+                foreach(JsonValue jvav in jva)
                 {
-                    C_SignUp wh = new C_SignUp(jvav);
-                    WorkHistoryX.Add(wh);
+                    C_WorkLogItem wi = new C_WorkLogItem(jvav);
+                    WorkItems.Add(wi);
                 }
             }
 
-            if (jv.ContainsKey(N_WorkIntents))
+            if (jv.ContainsKey(N_PreferredSites))
             {
-                JsonValue jva = jv[N_WorkIntents]; // should be an array type
+                JsonValue jva = jv[N_PreferredSites];
 
                 foreach (JsonValue jvav in jva)
                 {
-                    C_SignUp wh = new C_SignUp(jvav);
-                    WorkIntentsX.Add(wh);
+                    string pss = Tools.JsonProcessString(jvav, null);
+                    if (!string.IsNullOrWhiteSpace(pss))
+                        PreferredSiteSlugs.Add(pss);
                 }
             }
 
@@ -159,17 +187,6 @@ namespace zsquared
                     string role_s = jvav;
                     E_VitaUserRoles role_e = Tools.StringToEnum<E_VitaUserRoles>(role_s);
                     Roles.Add(role_e);
-                }
-            }
-
-            if (jv.ContainsKey(N_Suggestions))
-            {
-                JsonValue jva = jv[N_Suggestions]; // should be an array type
-
-                foreach (JsonValue jvav in jva)
-                {
-                    C_Suggestion s = new C_Suggestion(jvav);
-                    Suggestions.Add(s);
                 }
             }
 
@@ -186,6 +203,51 @@ namespace zsquared
 
             if (jv.ContainsKey(N_Token))
                 Token = Tools.JsonProcessString(jv[N_Token], Token);
+        }
+
+        public C_VitaUser()
+        {
+            Roles = new List<E_VitaUserRoles>();
+            SitesCoordinated = new List<C_SiteCoordinated>();
+            WorkItems = new List<C_WorkLogItem>();
+            PreferredSiteSlugs = new List<string>();
+        }
+
+        public string ToJson()
+        {
+            C_JsonBuilder jb = new C_JsonBuilder();
+
+            jb.Add(id, N_ID);
+            jb.Add(Name, N_Name);
+            jb.Add(Email, N_Email);
+            jb.Add(Phone, N_Phone);
+            jb.Add(Certification.ToString(), N_Certification);
+            jb.Add(SubscribeMobile, N_SubscribeMobile);
+            jb.Add(SubscribeEmailNewUser, N_SubscribeEmailNewUser);
+            jb.Add(SubscribeEmailFeedback, N_SubscribeEmailFeedback);
+
+            if (!string.IsNullOrWhiteSpace(Password))
+            {
+                jb.Add(Password, N_Password);
+                jb.Add(Password, N_PasswordConfirmation);
+            }
+
+            jb.StartArray(N_Roles);
+            foreach (E_VitaUserRoles role in Roles)
+                jb.AddArrayElement(role.ToString());
+            jb.EndArray();
+
+            jb.StartArray(N_SitesCoordinated);
+            foreach (C_SiteCoordinated sc in SitesCoordinated)
+                jb.AddArrayObject(sc.ToJson());
+            jb.EndArray();
+
+            jb.StartArray(N_PreferredSites);
+            foreach (string ps in PreferredSiteSlugs)
+                jb.AddArrayObject(ps);
+            jb.EndArray();
+
+            return jb.ToString();
         }
 
         /// <summary>
@@ -205,11 +267,20 @@ namespace zsquared
             return res;
         }
 
-        public static int CompareByName(C_VitaUser u1, C_VitaUser u2)
+        public override string ToString()
         {
-            return u1.Name.CompareTo(u2.Name);
+            return Name;
         }
 
+        public static int CompareByName(C_VitaUser u1, C_VitaUser u2)
+        {
+            return string.Compare(u1.Name, u2.Name, StringComparison.Ordinal);
+        }
+
+        public static int CompareByNameToLower(C_VitaUser u1, C_VitaUser u2)
+        {
+            return string.Compare(u1.Name.ToLower(), u2.Name.ToLower(), StringComparison.Ordinal);
+        }
 
 	}
 }

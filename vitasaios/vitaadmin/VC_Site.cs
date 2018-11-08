@@ -169,7 +169,7 @@ namespace vitaadmin
             daysInSeason.Add(date.ToString("yyyy-mm-dd"));
 
             C_ItemPicker seasonStartPicker = new C_ItemPicker(TB_SeasonStart, daysInSeason);
-            seasonStartPicker.TimePickerDone += (sender, e) =>
+            seasonStartPicker.PickerDone += (sender, e) =>
             {
                 TB_SeasonStart.Text = e.Selection;
 
@@ -179,7 +179,7 @@ namespace vitaadmin
             };
 
             C_ItemPicker seasonEndPicker = new C_ItemPicker(TB_SeasonEnd, daysInSeason);
-            seasonEndPicker.TimePickerDone += (sender, e) =>
+            seasonEndPicker.PickerDone += (sender, e) =>
             {
                 TB_SeasonEnd.Text = e.Selection;
 
@@ -357,7 +357,7 @@ namespace vitaadmin
             AI_Busy.StartAnimating();
 
             Task.Run(async delegate {
-                C_VitaSite site = await Global.GetSiteFromCache(SelectedSite.Slug);
+                C_VitaSite site = await Global.FetchSiteWithSlug(SelectedSite.Slug);
 
                 UIApplication.SharedApplication.InvokeOnMainThread(
                 new Action(async delegate
@@ -388,7 +388,7 @@ namespace vitaadmin
             try { SelectedSite.SeasonLastDate = new C_YMD(TB_SeasonEnd.Text); }
             catch { }
 
-            C_IOResult ior = await Global.UpdateSimpleFields(SelectedSite, LoggedInUser.Token);
+            C_IOResult ior = await Global.UpdateSite(SelectedSite, LoggedInUser.Token);
             if (ior.Success)
                 Dirty = false;
 

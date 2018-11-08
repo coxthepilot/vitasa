@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/V_AdminSiteCalendar"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+        android:orientation="vertical" 
+        android:layout_width="match_parent" 
+        android:layout_height="match_parent">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:id="@+id/textView1"
+            android:gravity="center"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:text="Site Calendar"
+            android:textColor="@android:color/white" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:id="@+id/L_SiteName"
+            android:gravity="center"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:text="[site name]"
+            android:textColor="@android:color/white" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <Button
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/B_PrevMonth"
+                android:layout_weight="1"
+                android:text="-"
+                android:textColor="@android:color/white"
+                android:background="#ff216093" />
+            <TextView
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/L_MonthYear"
+                android:layout_weight="10"
+                android:text="...month year..."
+                android:gravity="center_horizontal"
+                android:textColor="@android:color/white" />
+            <Button
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/B_NextMonth"
+                android:layout_weight="1"
+                android:text="+"
+                android:textColor="@android:color/white"
+                android:background="#ff216093" />
+        </LinearLayout>
+        <GridView
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:layout_width="match_parent"
+            android:layout_height="950px"
+            android:numColumns="7"
+            android:stretchMode="columnWidth"
+            android:gravity="center"
+            android:paddingRight="20dp"
+            android:paddingLeft="20dp"
+            android:clipToPadding="true"
+            android:fitsSystemWindows="true"
+            android:id="@+id/GV_Calendar" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/B_Save"
+            android:textColor="@android:color/white"
+            android:background="#ff216093"
+            android:layout_marginBottom="4dp"
+            android:text="Done" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/B_Reset"
+            android:textColor="@android:color/white"
+            android:background="#ff216093"
+            android:text="Reset Site Calendar" />
+    </LinearLayout>
+</ScrollView>

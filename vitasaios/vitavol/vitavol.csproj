@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\Xamarin.Forms.2.4.0.282\build\netstandard1.0\Xamarin.Forms.props" Condition="Exists('..\packages\Xamarin.Forms.2.4.0.282\build\netstandard1.0\Xamarin.Forms.props')" />
+  <Import Project="..\packages\Xamarin.Forms.3.3.0.912540\build\Xamarin.Forms.props" Condition="Exists('..\packages\Xamarin.Forms.3.3.0.912540\build\Xamarin.Forms.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">iPhoneSimulator</Platform>
@@ -10,12 +10,14 @@
     <RootNamespace>vitavol</RootNamespace>
     <AssemblyName>vitavol</AssemblyName>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
-    <ReleaseVersion>1.7</ReleaseVersion>
+    <ReleaseVersion>2.0</ReleaseVersion>
     <Description>This is the app for VITA SA Volunteers and Site Coordinators. 
 
-Volunteers us this app to sign up for shifts at sites.
+Clients use this app to find open sites, addresses, and updates for favorite sites.
 
-Site Coordinators use this to see signups and manage the site calendar.</Description>
+Volunteers us this app to find sites and record hours.
+
+Site Coordinators use this to see volunteer hours and manage the site calendar.</Description>
     <SynchReleaseVersion>false</SynchReleaseVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
@@ -88,7 +90,7 @@ Site Coordinators use this to see signups and manage the site calendar.</Descrip
     <MtouchLink>SdkOnly</MtouchLink>
     <MtouchArch>ARMv7, ARM64</MtouchArch>
     <MtouchHttpClientHandler>HttpClientHandler</MtouchHttpClientHandler>
-    <CodesignProvision></CodesignProvision>
+    <CodesignProvision>vita vol dev</CodesignProvision>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -98,16 +100,22 @@ Site Coordinators use this to see signups and manage the site calendar.</Descrip
     <Reference Include="System.Json" />
     <Reference Include="System.Net.Http" />
     <Reference Include="Xamarin.Forms.Core">
-      <HintPath>..\packages\Xamarin.Forms.2.4.0.282\lib\Xamarin.iOS10\Xamarin.Forms.Core.dll</HintPath>
+      <HintPath>..\packages\Xamarin.Forms.3.3.0.912540\lib\Xamarin.iOS10\Xamarin.Forms.Core.dll</HintPath>
     </Reference>
     <Reference Include="Xamarin.Forms.Platform">
-      <HintPath>..\packages\Xamarin.Forms.2.4.0.282\lib\Xamarin.iOS10\Xamarin.Forms.Platform.dll</HintPath>
+      <HintPath>..\packages\Xamarin.Forms.3.3.0.912540\lib\Xamarin.iOS10\Xamarin.Forms.Platform.dll</HintPath>
     </Reference>
     <Reference Include="Xamarin.Forms.Platform.iOS">
-      <HintPath>..\packages\Xamarin.Forms.2.4.0.282\lib\Xamarin.iOS10\Xamarin.Forms.Platform.iOS.dll</HintPath>
+      <HintPath>..\packages\Xamarin.Forms.3.3.0.912540\lib\Xamarin.iOS10\Xamarin.Forms.Platform.iOS.dll</HintPath>
     </Reference>
     <Reference Include="Xamarin.Forms.Xaml">
-      <HintPath>..\packages\Xamarin.Forms.2.4.0.282\lib\Xamarin.iOS10\Xamarin.Forms.Xaml.dll</HintPath>
+      <HintPath>..\packages\Xamarin.Forms.3.3.0.912540\lib\Xamarin.iOS10\Xamarin.Forms.Xaml.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Forms.Maps">
+      <HintPath>..\packages\Xamarin.Forms.Maps.3.3.0.912540\lib\Xamarin.iOS10\Xamarin.Forms.Maps.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Forms.Maps.iOS">
+      <HintPath>..\packages\Xamarin.Forms.Maps.3.3.0.912540\lib\Xamarin.iOS10\Xamarin.Forms.Maps.iOS.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -146,6 +154,8 @@ Site Coordinators use this to see signups and manage the site calendar.</Descrip
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vitasa 1024a.png" />
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vitasa 152.png" />
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\vitasa 167.png" />
+    <ImageAsset Include="Assets.xcassets\newbackground.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\newbackground.imageset\sariverwalk.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
@@ -159,10 +169,12 @@ Site Coordinators use this to see signups and manage the site calendar.</Descrip
     <Folder Include="Assets.xcassets\openwithneeds.imageset\" />
     <Folder Include="Assets.xcassets\openwithneedsboxed.imageset\" />
     <Folder Include="Assets.xcassets\closed.imageset\" />
+    <Folder Include="Assets.xcassets\newbackground.imageset\" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="LaunchScreen.storyboard" />
     <InterfaceDefinition Include="Main.storyboard" />
+    <InterfaceDefinition Include="Admin.storyboard" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -177,114 +189,185 @@ Site Coordinators use this to see signups and manage the site calendar.</Descrip
     <Compile Include="ViewController.designer.cs">
       <DependentUpon>ViewController.cs</DependentUpon>
     </Compile>
-    <Compile Include="VC_Suggestions.cs" />
-    <Compile Include="VC_Suggestions.designer.cs">
-      <DependentUpon>VC_Suggestions.cs</DependentUpon>
-    </Compile>
     <Compile Include="VC_About.cs" />
     <Compile Include="VC_About.designer.cs">
       <DependentUpon>VC_About.cs</DependentUpon>
     </Compile>
-    <Compile Include="VC_Register.cs" />
-    <Compile Include="VC_Register.designer.cs">
-      <DependentUpon>VC_Register.cs</DependentUpon>
-    </Compile>
-    <Compile Include="VC_MySignUps.cs" />
-    <Compile Include="VC_MySignUps.designer.cs">
-      <DependentUpon>VC_MySignUps.cs</DependentUpon>
-    </Compile>
-    <Compile Include="VC_Suggestion.cs" />
-    <Compile Include="VC_Suggestion.designer.cs">
-      <DependentUpon>VC_Suggestion.cs</DependentUpon>
-    </Compile>
-    <Compile Include="VC_Calendar.cs" />
-    <Compile Include="VC_Calendar.designer.cs">
-      <DependentUpon>VC_Calendar.cs</DependentUpon>
-    </Compile>
-    <Compile Include="VC_SitesOnDateList.cs" />
-    <Compile Include="VC_SitesOnDateList.designer.cs">
-      <DependentUpon>VC_SitesOnDateList.cs</DependentUpon>
-    </Compile>
-    <Compile Include="VC_SitesOnDateMap.cs" />
-    <Compile Include="VC_SitesOnDateMap.designer.cs">
-      <DependentUpon>VC_SitesOnDateMap.cs</DependentUpon>
-    </Compile>
-    <Compile Include="VC_SignUp.cs" />
-    <Compile Include="VC_SignUp.designer.cs">
-      <DependentUpon>VC_SignUp.cs</DependentUpon>
-    </Compile>
-    <Compile Include="VC_SCSites.cs" />
-    <Compile Include="VC_SCSites.designer.cs">
-      <DependentUpon>VC_SCSites.cs</DependentUpon>
-    </Compile>
-    <Compile Include="VC_SCSite.cs" />
-    <Compile Include="VC_SCSite.designer.cs">
-      <DependentUpon>VC_SCSite.cs</DependentUpon>
-    </Compile>
-    <Compile Include="VC_SCVolunteers.cs" />
-    <Compile Include="VC_SCVolunteers.designer.cs">
-      <DependentUpon>VC_SCVolunteers.cs</DependentUpon>
-    </Compile>
-    <Compile Include="VC_SCVolunteerHours.cs" />
-    <Compile Include="VC_SCVolunteerHours.designer.cs">
-      <DependentUpon>VC_SCVolunteerHours.cs</DependentUpon>
-    </Compile>
-    <Compile Include="VC_SCSiteCalendar.cs" />
-    <Compile Include="VC_SCSiteCalendar.designer.cs">
-      <DependentUpon>VC_SCSiteCalendar.cs</DependentUpon>
-    </Compile>
-    <Compile Include="VC_SCSiteOnDate.cs" />
-    <Compile Include="VC_SCSiteOnDate.designer.cs">
-      <DependentUpon>VC_SCSiteOnDate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="VC_SCSiteDefaults.cs" />
-    <Compile Include="VC_SCSiteDefaults.designer.cs">
-      <DependentUpon>VC_SCSiteDefaults.cs</DependentUpon>
-    </Compile>
     <Compile Include="C_LocalNotification.cs" />
     <Compile Include="C_UserNotificationCenterDelegate.cs" />
     <Compile Include="I_LocalNotification.cs" />
-    <Compile Include="C_NotificationEvent.cs" />
     <Compile Include="C_CVHelper.cs" />
-    <Compile Include="VC_VolunteerOptions.cs" />
-    <Compile Include="VC_VolunteerOptions.designer.cs">
-      <DependentUpon>VC_VolunteerOptions.cs</DependentUpon>
+    <Compile Include="VC_ClientBeforeYouGo.cs" />
+    <Compile Include="VC_ClientBeforeYouGo.designer.cs">
+      <DependentUpon>VC_ClientBeforeYouGo.cs</DependentUpon>
     </Compile>
-    <Compile Include="VC_UpdateProfile.cs" />
-    <Compile Include="VC_UpdateProfile.designer.cs">
-      <DependentUpon>VC_UpdateProfile.cs</DependentUpon>
+    <Compile Include="VC_SitesMap.cs" />
+    <Compile Include="VC_SitesMap.designer.cs">
+      <DependentUpon>VC_SitesMap.cs</DependentUpon>
     </Compile>
-    <Compile Include="VC_SCSiteVolCalendar.cs" />
-    <Compile Include="VC_SCSiteVolCalendar.designer.cs">
-      <DependentUpon>VC_SCSiteVolCalendar.cs</DependentUpon>
+    <Compile Include="VC_SitesFilter.cs" />
+    <Compile Include="VC_SitesFilter.designer.cs">
+      <DependentUpon>VC_SitesFilter.cs</DependentUpon>
     </Compile>
-    <Compile Include="VC_ShiftDetails.cs" />
-    <Compile Include="VC_ShiftDetails.designer.cs">
-      <DependentUpon>VC_ShiftDetails.cs</DependentUpon>
+    <Compile Include="VC_SiteDetails.cs" />
+    <Compile Include="VC_SiteDetails.designer.cs">
+      <DependentUpon>VC_SiteDetails.cs</DependentUpon>
     </Compile>
-    <Compile Include="VC_SiteShifts.cs" />
-    <Compile Include="VC_SiteShifts.designer.cs">
-      <DependentUpon>VC_SiteShifts.cs</DependentUpon>
-    </Compile>
-    <Compile Include="VC_VolSiteShifts.cs" />
-    <Compile Include="VC_VolSiteShifts.designer.cs">
-      <DependentUpon>VC_VolSiteShifts.cs</DependentUpon>
+    <Compile Include="VC_SiteCalendar.cs" />
+    <Compile Include="VC_SiteCalendar.designer.cs">
+      <DependentUpon>VC_SiteCalendar.cs</DependentUpon>
     </Compile>
     <Compile Include="VC_Login.cs" />
     <Compile Include="VC_Login.designer.cs">
       <DependentUpon>VC_Login.cs</DependentUpon>
     </Compile>
-    <Compile Include="VC_ClientSitesMap.cs" />
-    <Compile Include="VC_ClientSitesMap.designer.cs">
-      <DependentUpon>VC_ClientSitesMap.cs</DependentUpon>
+    <Compile Include="VC_VolHome.cs" />
+    <Compile Include="VC_VolHome.designer.cs">
+      <DependentUpon>VC_VolHome.cs</DependentUpon>
     </Compile>
-    <Compile Include="VC_ClientBeforeYouGo.cs" />
-    <Compile Include="VC_ClientBeforeYouGo.designer.cs">
-      <DependentUpon>VC_ClientBeforeYouGo.cs</DependentUpon>
+    <Compile Include="VC_VolHoursWorked.cs" />
+    <Compile Include="VC_VolHoursWorked.designer.cs">
+      <DependentUpon>VC_VolHoursWorked.cs</DependentUpon>
     </Compile>
-    <Compile Include="VC_ClientSiteDetails.cs" />
-    <Compile Include="VC_ClientSiteDetails.designer.cs">
-      <DependentUpon>VC_ClientSiteDetails.cs</DependentUpon>
+    <Compile Include="VC_EditHours.cs" />
+    <Compile Include="VC_EditHours.designer.cs">
+      <DependentUpon>VC_EditHours.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VC_Suggestion_.cs" />
+    <Compile Include="VC_Suggestion_.designer.cs">
+      <DependentUpon>VC_Suggestion_.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VC_SCSites_.cs" />
+    <Compile Include="VC_SCSites_.designer.cs">
+      <DependentUpon>VC_SCSites_.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VC_SCSite_.cs" />
+    <Compile Include="VC_SCSite_.designer.cs">
+      <DependentUpon>VC_SCSite_.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VC_SCVolHours.cs" />
+    <Compile Include="VC_SCVolHours.designer.cs">
+      <DependentUpon>VC_SCVolHours.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VC_SCSiteDetails.cs" />
+    <Compile Include="VC_SCSiteDetails.designer.cs">
+      <DependentUpon>VC_SCSiteDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VC_SCAddVolHours.cs" />
+    <Compile Include="VC_SCAddVolHours.designer.cs">
+      <DependentUpon>VC_SCAddVolHours.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VC_AdminMenu.cs" />
+    <Compile Include="VC_AdminMenu.designer.cs">
+      <DependentUpon>VC_AdminMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VC_AdminUsers.cs" />
+    <Compile Include="VC_AdminUsers.designer.cs">
+      <DependentUpon>VC_AdminUsers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VC_AdminUser.cs" />
+    <Compile Include="VC_AdminUser.designer.cs">
+      <DependentUpon>VC_AdminUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VC_AdminUserSites.cs" />
+    <Compile Include="VC_AdminUserSites.designer.cs">
+      <DependentUpon>VC_AdminUserSites.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VC_AdminSites.cs" />
+    <Compile Include="VC_AdminSites.designer.cs">
+      <DependentUpon>VC_AdminSites.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VC_AdminSite.cs" />
+    <Compile Include="VC_AdminSite.designer.cs">
+      <DependentUpon>VC_AdminSite.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VC_AdminSiteLocation.cs" />
+    <Compile Include="VC_AdminSiteLocation.designer.cs">
+      <DependentUpon>VC_AdminSiteLocation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VC_AdminSiteDetails.cs" />
+    <Compile Include="VC_AdminSiteDetails.designer.cs">
+      <DependentUpon>VC_AdminSiteDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VC_AdminSiteCalendar.cs" />
+    <Compile Include="VC_AdminSiteCalendar.designer.cs">
+      <DependentUpon>VC_AdminSiteCalendar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VC_AdminSiteCalDetails.cs" />
+    <Compile Include="VC_AdminSiteCalDetails.designer.cs">
+      <DependentUpon>VC_AdminSiteCalDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VC_AdminSiteCoord.cs" />
+    <Compile Include="VC_AdminSiteCoord.designer.cs">
+      <DependentUpon>VC_AdminSiteCoord.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VC_AdminSuggestions.cs" />
+    <Compile Include="VC_AdminSuggestions.designer.cs">
+      <DependentUpon>VC_AdminSuggestions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VC_AdminNotifications.cs" />
+    <Compile Include="VC_AdminNotifications.designer.cs">
+      <DependentUpon>VC_AdminNotifications.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VC_AdminSuggestion.cs" />
+    <Compile Include="VC_AdminSuggestion.designer.cs">
+      <DependentUpon>VC_AdminSuggestion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VC_AdminNotification.cs" />
+    <Compile Include="VC_AdminNotification.designer.cs">
+      <DependentUpon>VC_AdminNotification.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VC_AdminReports.cs" />
+    <Compile Include="VC_AdminReports.designer.cs">
+      <DependentUpon>VC_AdminReports.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VC_AdminReport.cs" />
+    <Compile Include="VC_AdminReport.designer.cs">
+      <DependentUpon>VC_AdminReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VC_Testing.cs" />
+    <Compile Include="VC_Testing.designer.cs">
+      <DependentUpon>VC_Testing.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VC_AdminSiteCalReset.cs" />
+    <Compile Include="VC_AdminSiteCalReset.designer.cs">
+      <DependentUpon>VC_AdminSiteCalReset.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VC_AdminSiteCalResetDOW.cs" />
+    <Compile Include="VC_AdminSiteCalResetDOW.designer.cs">
+      <DependentUpon>VC_AdminSiteCalResetDOW.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VC_VolEditSettings.cs" />
+    <Compile Include="VC_VolEditSettings.designer.cs">
+      <DependentUpon>VC_VolEditSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VC_SiteCalOnDate.cs" />
+    <Compile Include="VC_SiteCalOnDate.designer.cs">
+      <DependentUpon>VC_SiteCalOnDate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VC_VolMobileCalendar.cs" />
+    <Compile Include="VC_VolMobileCalendar.designer.cs">
+      <DependentUpon>VC_VolMobileCalendar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VC_VolMobileCalOnDate.cs" />
+    <Compile Include="VC_VolMobileCalOnDate.designer.cs">
+      <DependentUpon>VC_VolMobileCalOnDate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VC_AdminMobile.cs" />
+    <Compile Include="VC_AdminMobile.designer.cs">
+      <DependentUpon>VC_AdminMobile.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VC_AdminMobileDate.cs" />
+    <Compile Include="VC_AdminMobileDate.designer.cs">
+      <DependentUpon>VC_AdminMobileDate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VC_AdminEmailDistroMgmt.cs" />
+    <Compile Include="VC_AdminEmailDistroMgmt.designer.cs">
+      <DependentUpon>VC_AdminEmailDistroMgmt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VC_AdminSiteCalResetAction.cs" />
+    <Compile Include="VC_AdminSiteCalResetAction.designer.cs">
+      <DependentUpon>VC_AdminSiteCalResetAction.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -294,5 +377,5 @@ Site Coordinators use this to see signups and manage the site calendar.</Descrip
   <Import Project="..\iOSSharedModel\iOSSharedModels.projitems" Label="Shared" Condition="Exists('..\iOSSharedModel\iOSSharedModels.projitems')" />
   <Import Project="..\SharedModels\SharedModels.projitems" Label="Shared" Condition="Exists('..\SharedModels\SharedModels.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
-  <Import Project="..\packages\Xamarin.Forms.2.4.0.282\build\netstandard1.0\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.2.4.0.282\build\netstandard1.0\Xamarin.Forms.targets')" />
+  <Import Project="..\packages\Xamarin.Forms.3.3.0.912540\build\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.3.3.0.912540\build\Xamarin.Forms.targets')" />
 </Project>

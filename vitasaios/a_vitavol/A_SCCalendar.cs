@@ -121,7 +121,7 @@ namespace a_vitavol
 
 		void GVHelper_DateTouched(object sender, C_DateTouchedEventArgs e)
 		{
-            Global.SelectedDate = e.Date;
+            Global.CalendarDate = e.Date;
             StartActivity(new Intent(this, typeof(A_SCSiteCalShifts)));
 		}
 

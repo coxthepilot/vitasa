@@ -1,111 +1,175 @@
-﻿using System;
+﻿using System.Threading.Tasks;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
 using Android.Widget;
+using Android.OS;
+using Android.Content;
+using Android.Views;
 
 using zsquared;
 
 namespace a_vitavol
 {
-    [Activity(Label = "VITA: Volunteer Hours")]
+    [Activity(Theme = "@android:style/Theme.DeviceDefault.NoActionBar", Label = "VITA: Volunteer Hours")]
     public class A_SCVolHours : Activity
     {
-		C_Global Global;
+        C_Global Global;
+        C_VitaSite SelectedSite;
+        C_VitaUser LoggedInUser;
 
-		ProgressDialog AI_Busy;
+        ListView LV_Volunteers;
+        TextView L_SiteName;
+        Button B_MarkApproved;
+        Button B_AddHours;
+        Spinner SP_Date;
+        ProgressBar PB_Busy;
 
-        TextView L_Date;
-        TextView L_Site;
-        TextView L_User;
-        TextView L_Approval;
-        TextView L_Phone;
+        List<C_WorkLogItem> OurWorkLogItems;
+        List<C_YMD> DatesTheSiteHasACalendarEntry;
+        C_ListViewHelper<C_WorkLogItem> DatesListViewHelper;
 
-        EditText TB_Hours;
-
-		const float EPSILON = 0.001f;
-
-        C_YMD Now;
-
-		protected override void OnCreate(Bundle savedInstanceState)
+        protected override void OnCreate(Bundle savedInstanceState)
         {
-			base.OnCreate(savedInstanceState);
+            base.OnCreate(savedInstanceState);
 
-			MyAppDelegate g = (MyAppDelegate)Application;
-			if (g.Global == null)
-				g.Global = new C_Global();
-			Global = g.Global;
+            MyAppDelegate g = (MyAppDelegate)Application;
+            if (g.Global == null)
+                g.Global = new C_Global();
+            Global = g.Global;
 
-            Now = C_YMD.Now;
+            SelectedSite = Global.GetSiteFromSlugNoFetch(Global.SelectedSiteSlug);
+            LoggedInUser = Global.GetUserFromCacheNoFetch(Global.LoggedInUserId);
 
-			if (Global.SelectedDate == null)
-				Global.SelectedDate = C_YMD.Now;
-
-			// Set our view from the "main" layout resource
             SetContentView(Resource.Layout.SCVolHours);
 
-			AI_Busy = new ProgressDialog(this);
-			AI_Busy.SetMessage("Please wait...");
-			AI_Busy.SetCancelable(false);
-			AI_Busy.SetProgressStyle(ProgressDialogStyle.Spinner);
+            LV_Volunteers = FindViewById<ListView>(Resource.Id.LV_List);
+            L_SiteName = FindViewById<TextView>(Resource.Id.L_SiteName);
+            B_AddHours = FindViewById<Button>(Resource.Id.B_Add);
+            B_MarkApproved = FindViewById<Button>(Resource.Id.B_MarkApproved);
+            SP_Date = FindViewById<Spinner>(Resource.Id.SP_Date);
+            PB_Busy = FindViewById<ProgressBar>(Resource.Id.PB_Busy);
 
-            L_Date = FindViewById<TextView>(Resource.Id.L_Date);
-            L_Site = FindViewById<TextView>(Resource.Id.L_Site);
-            L_User = FindViewById<TextView>(Resource.Id.L_User);
-            L_Approval = FindViewById<TextView>(Resource.Id.L_Approval);
-			L_Phone = FindViewById<TextView>(Resource.Id.L_Phone);
+            C_Common.SetViewColors(this, Resource.Id.V_SCVolHours);
 
-			TB_Hours = FindViewById<EditText>(Resource.Id.TB_Hours);
+            if (Global.CalendarDate == null)
+                Global.CalendarDate = C_YMD.Now;
 
-            L_Phone.Click += (sender, e) => 
+            B_MarkApproved.Click += (sender, e) => 
             {
-				string phoneNumber = Global.VolunteerWorkShiftSignUp.User.Phone;
-				// clean up the number before we use it to make the call
-				phoneNumber = phoneNumber.Replace("-", "");
-				phoneNumber = phoneNumber.Trim();
-				phoneNumber = phoneNumber.Replace(" ", "");
-				phoneNumber = phoneNumber.Replace("(", "");
-				phoneNumber = phoneNumber.Replace(")", "");
+                PB_Busy.Visibility = ViewStates.Visible;
+                EnableUI(false);
 
-                var uri = Android.Net.Uri.Parse("tel:" + phoneNumber);
+                Task.Run(async () =>
+                {
+                    bool ioerror = false;
+                    foreach (C_WorkLogItem wi in OurWorkLogItems)
+                    {
+                        wi.Approved = true;
+                        C_VitaUser user = Global.GetUserFromCacheNoFetch(wi.UserId);
+                        C_IOResult ior = await Global.UpdateWorkLogItem(user, LoggedInUser.Token, wi);
+                        if (!ior.Success)
+                            ioerror = true;
+                    }
 
-				StartActivity(new Intent(Intent.ActionDial, uri));            
+                    void p()
+                    {
+                        PB_Busy.Visibility = ViewStates.Gone;
+                        EnableUI(true);
+
+                        if (ioerror)
+                        {
+                            C_MessageBox mbox = new C_MessageBox(this,
+                                "Error",
+                                "Unable to save one or more work items.",
+                                E_MessageBoxButtons.Ok);
+                            mbox.Show();
+                        }
+                        DatesListViewHelper.NotifyDataSetChanged();
+                    }
+                    RunOnUiThread(p);
+                });
             };
 
-			L_Date.Text = Global.VolunteerWorkShiftSignUp.TheSignUp.Date.ToString("dow mmm dd, yyyy");
-			L_Site.Text = Global.VolunteerWorkShiftSignUp.TheSignUp.SiteName;
-			L_User.Text = Global.VolunteerWorkShiftSignUp.User.UserName;
-			L_Approval.Text = Global.VolunteerWorkShiftSignUp.TheSignUp.Approved ? "Approved" : "not approved";
-			L_Phone.Text = Global.VolunteerWorkShiftSignUp.User.Phone;
+            B_AddHours.Click += (sender, e) => 
+            {
+                // signal that this is a new item
+                Global.SelectedWorkItem = null;
+                StartActivity(new Intent(this, typeof(A_SCAddVolHours)));
+            };
 
-			TB_Hours.Text = Global.VolunteerWorkShiftSignUp.TheSignUp.Hours.ToString();
+            PB_Busy.Visibility = ViewStates.Visible;
+            EnableUI(false);
+            Task.Run(async () =>
+            {
+                OurWorkLogItems = new List<C_WorkLogItem>();
+                foreach (C_WorkLogItem wi in SelectedSite.WorkLogItems)
+                {
+                    if (wi.Date == Global.CalendarDate)
+                        OurWorkLogItems.Add(wi);
+                }
 
-            TB_Hours.Enabled = (Global.VolunteerWorkShiftSignUp.TheSignUp.Date <= Now);
-		}
+                List<C_VitaUser> users = await Global.FetchAllUsers(LoggedInUser.Token);
 
-		public override void OnBackPressed()
-		{
-			try
-			{
-				float h = Convert.ToSingle(TB_Hours.Text);
-				if (Math.Abs(h - Global.VolunteerWorkShiftSignUp.TheSignUp.Hours) > EPSILON)
-				{
-					Global.VolunteerWorkShiftSignUp.TheSignUp.Dirty = true;
-					Global.VolunteerWorkShiftSignUp.TheSignUp.Hours = h;
-				}
-			}
-			catch
-			{
-				Global.VolunteerWorkShiftSignUp.TheSignUp.Dirty = false;
-			}
+                void p()
+                {
+                    PB_Busy.Visibility = ViewStates.Gone;
+                    EnableUI(true);
 
-            StartActivity(new Intent(this, typeof(A_SCSiteVol)));
-		}
-	}
+                    L_SiteName.Text = SelectedSite.Name;
+
+                    // figure out all the dates that have worklog items
+                    DatesTheSiteHasACalendarEntry = new List<C_YMD>();
+                    foreach (C_CalendarEntry ce in SelectedSite.SiteCalendar)
+                        DatesTheSiteHasACalendarEntry.Add(ce.Date);
+                    DatesTheSiteHasACalendarEntry.Sort(C_YMD.CompareYMD);
+
+                    C_SPinnerHelper<C_YMD> DatesHelper = new C_SPinnerHelper<C_YMD>(this, SP_Date, DatesTheSiteHasACalendarEntry);
+                    DatesHelper.ItemSelected += (object sender, SpinnerEventArgs<C_YMD> args) => 
+                    {
+                        OurWorkLogItems.Clear();
+                        foreach (C_WorkLogItem wi in SelectedSite.WorkLogItems)
+                        {
+                            if (wi.Date == Global.CalendarDate)
+                                OurWorkLogItems.Add(wi);
+                        }
+                        DatesListViewHelper.NotifyDataSetChanged();
+                    };
+
+                    DatesListViewHelper = new C_ListViewHelper<C_WorkLogItem>(this, LV_Volunteers, OurWorkLogItems);
+                    DatesListViewHelper.GetTextLabel += (sender, args) =>
+                    {
+                        C_WorkLogItem wi = args.Item;
+                        C_VitaUser wi_user = Global.GetUserFromCacheNoFetch(wi.UserId);
+                        return wi_user.Name;
+                    };
+                    DatesListViewHelper.GetDetailTextLabel += (sender, args) =>
+                    {
+                        C_WorkLogItem wi = args.Item;
+                        string apps = wi.Approved ? " [approved]" : " [not approved]";
+                        return wi.Hours.ToString() + " hours" + apps;
+                    };
+                    LV_Volunteers.ItemClick += (object sender, AdapterView.ItemClickEventArgs e) => 
+                    {
+                        // signal that we are doing an edit, not creating a new item
+                        Global.SelectedWorkItem = DatesListViewHelper.Items[e.Position];
+
+                        StartActivity(new Intent(this, typeof(A_SCAddVolHours)));
+                    };
+                }
+                RunOnUiThread(p);
+            });
+        }
+
+        public override void OnBackPressed() =>
+            StartActivity(new Intent(this, typeof(A_SCSite)));
+
+        private void EnableUI(bool en)
+        {
+            LV_Volunteers.Enabled = en;
+            B_AddHours.Enabled = en;
+            B_MarkApproved.Enabled = en;
+            SP_Date.Enabled = en;
+        }
+    }
 }

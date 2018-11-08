@@ -95,18 +95,18 @@ namespace a_vitavol
 
             CB_MFT.CheckedChange += (sender, e) => CommonSiteCapabilitiesUpdate();
 
-            B_Closed.Click += (sender, e) => CommonSiteStatusUpdate(E_ClientSiteStatus.Closed);
+            //B_Closed.Click += (sender, e) => CommonSiteStatusUpdate(E_ClientSiteStatus.Closed);
 
-            B_Accepting.Click += (sender, e) => CommonSiteStatusUpdate(E_ClientSiteStatus.Accepting);
+            //B_Accepting.Click += (sender, e) => CommonSiteStatusUpdate(E_ClientSiteStatus.Accepting);
 
-            B_NearLimit.Click += (sender, e) => CommonSiteStatusUpdate(E_ClientSiteStatus.NearLimit);
+            //B_NearLimit.Click += (sender, e) => CommonSiteStatusUpdate(E_ClientSiteStatus.NearLimit);
 
-            B_AtLimit.Click += (sender, e) => CommonSiteStatusUpdate(E_ClientSiteStatus.NotAccepting);
+            //B_AtLimit.Click += (sender, e) => CommonSiteStatusUpdate(E_ClientSiteStatus.NotAccepting);
 
             Task.Run(async () => 
             {
 				LoggedInUser = Global.GetUserFromCacheNoFetch(Global.LoggedInUserId);
-				OurSite = await Global.GetSiteFromCache(Global.SelectedSiteSlug);
+				OurSite = await Global.FetchSiteWithSlug(Global.SelectedSiteSlug);
 
                 RunOnUiThread(() => 
                 {
@@ -149,35 +149,35 @@ namespace a_vitavol
             });
         }
 
-        private void CommonSiteStatusUpdate(E_ClientSiteStatus newStatus)
-        {
-            EnableUI(false);
+        //private void CommonSiteStatusUpdate(E_ClientSiteStatus newStatus)
+        //{
+        //    EnableUI(false);
 
-            Task.Run(async () => 
-            {
-                C_VitaSite site = await Global.GetSiteFromCache(Global.SelectedSiteSlug);
-                if (site == null)
-                {
-                    RunOnUiThread(() => 
-                    {
-                        EnableUI(true);
-                        return;
-                    });
-                }
+        //    Task.Run(async () => 
+        //    {
+        //        C_VitaSite site = await Global.FetchSiteWithSlug(Global.SelectedSiteSlug);
+        //        if (site == null)
+        //        {
+        //            RunOnUiThread(() => 
+        //            {
+        //                EnableUI(true);
+        //                return;
+        //            });
+        //        }
 
-                C_IOResult ior = await Global.UpdateSiteStatus(site, newStatus, LoggedInUser.Token);
+        //        C_IOResult ior = await Global.UpdateSiteStatus(site, newStatus, LoggedInUser.Token);
 
-                RunOnUiThread(() => 
-                {
-                    EnableUI(true);
-                    if (!ior.Success)
-                    {
-                        C_MessageBox mbox = new C_MessageBox(this, "Error", "Unable to update site status [" + ior.ErrorMessage + "]", E_MessageBoxButtons.Ok);
-                        mbox.Show();
-                    }
-                });
-            });
-        }
+        //        RunOnUiThread(() => 
+        //        {
+        //            EnableUI(true);
+        //            if (!ior.Success)
+        //            {
+        //                C_MessageBox mbox = new C_MessageBox(this, "Error", "Unable to update site status [" + ior.ErrorMessage + "]", E_MessageBoxButtons.Ok);
+        //                mbox.Show();
+        //            }
+        //        });
+        //    });
+        //}
 
         bool killChanges;
         private void EnableUI(bool en)
@@ -185,7 +185,7 @@ namespace a_vitavol
             if (en)
             {
                 killChanges = true;
-                L_ClientStatus.Text = "Client status currently: " + C_VitaSite.N_ClientStatusNames[(int)OurSite.ClientStatus];
+                //L_ClientStatus.Text = "Client status currently: " + C_VitaSite.N_ClientStatusNames[(int)OurSite.ClientStatus];
                 CB_DropOff.Checked = OurSite.SiteCapabilities.Contains(E_SiteCapabilities.DropOff);
                 CB_Express.Checked = OurSite.SiteCapabilities.Contains(E_SiteCapabilities.Express);
                 CB_MFT.Checked = OurSite.SiteCapabilities.Contains(E_SiteCapabilities.MFT);
@@ -200,10 +200,10 @@ namespace a_vitavol
             CB_Express.Enabled = en;
             CB_MFT.Enabled = en;
 
-            B_Closed.Enabled = en && (OurSite.ClientStatus != E_ClientSiteStatus.Closed);
-            B_Accepting.Enabled = en && (OurSite.ClientStatus != E_ClientSiteStatus.Accepting);
-            B_NearLimit.Enabled = en && (OurSite.ClientStatus != E_ClientSiteStatus.NearLimit);
-            B_AtLimit.Enabled = en && (OurSite.ClientStatus != E_ClientSiteStatus.NotAccepting);
+            //B_Closed.Enabled = en && (OurSite.ClientStatus != E_ClientSiteStatus.Closed);
+            //B_Accepting.Enabled = en && (OurSite.ClientStatus != E_ClientSiteStatus.Accepting);
+            //B_NearLimit.Enabled = en && (OurSite.ClientStatus != E_ClientSiteStatus.NearLimit);
+            //B_AtLimit.Enabled = en && (OurSite.ClientStatus != E_ClientSiteStatus.NotAccepting);
 		}
 
 		public override void OnBackPressed()

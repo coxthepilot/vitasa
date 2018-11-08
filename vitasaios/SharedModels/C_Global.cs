@@ -10,22 +10,32 @@ using System.Net.Http.Headers;
 
 namespace zsquared
 {
-    public enum E_ViewCameFrom { Unknown = 0, List, Map, MySignUps, SCSites, SCSite, Login, VolOptions, Suggestions, CalEntry, CalDefaults, Users, User, Main }
+    public enum E_DistroType { NewUser, Feedback }
+    public enum E_Reports { Unknown = 0, WorkLog, Volunteers };
+    public enum E_ViewCameFrom { Unknown = 0, List, Map, MySignUps, SCSites, SCSite, Login, VolOptions, Suggestions, CalEntry, CalDefaults, 
+        Users, User, Main, SCOptions, Admin, AdminSiteCalendar, AdminSiteCalReset, SiteCalendar, AdminMobileDate }
     public enum E_IOResultCode { NoError, NoConfig, OutDate, Offline, WebException, Exception, VerOutOfDate, RetryFailure, ParseError }
 
     public class C_Global
     {
+        public static readonly string[] States = {
+            "AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "FL", "GA",
+            "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD",
+            "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ",
+            "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC",
+            "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY" };
+
         public static readonly string Name_Global = "global";
 
-        /// <summary>
-        /// Used in client; the message to show
-        /// </summary>
-        public E_Message MessageToShow;
+        ///// <summary>
+        ///// Used in client; the message to show
+        ///// </summary>
+        //public E_Message MessageToShow;
 
         /// <summary>
         /// This is the id user that we logged into the system with. This is the user with the valid token.
         /// </summary>
-        public int LoggedInUserId;
+        public int LoggedInUserId = -1;
 
         /// <summary>
         /// A cache of sites we know about. 
@@ -34,22 +44,10 @@ namespace zsquared
         public bool AllSitesFetched;
 
         /// <summary>
-        /// A list of C_WorkItems found in Site and User data
-        /// </summary>
-        public List<C_SignUp> SignUpsList;
-        // int = year * 12 + month
-        public Dictionary<int, bool> SignUpsFetched;
-
-        /// <summary>
         /// List of known users; this is not a list of ALL users, just ones we have seen
         /// </summary>
         public List<C_VitaUser> UserCache;
         public bool AllUsersFetched;
-
-        /// <summary>
-        /// A list of all WorkShifts we've seen
-        /// </summary>
-        public List<C_WorkShift> WorkShifts;
 
         /// <summary>
         /// The slug of the current selected site
@@ -58,53 +56,41 @@ namespace zsquared
         public string SelectedSiteName; // null if not known
 
         /// <summary>
-        /// The selected suggestion.
-        /// </summary>
-        public C_Suggestion SelectedSuggestion;
-
-        /// <summary>
-        /// In VC_Calendar, this is the date that the user picked, headed to SitesOnDate
-        /// </summary>
-        public C_YMD SelectedDate;
-
-        /// <summary>
         /// The details view controller needs to know where to go "Back" to
         /// </summary>
         public E_ViewCameFrom ViewCameFrom = E_ViewCameFrom.Unknown;
 
-        /// <summary>
-        /// The open sites that need help. Used in SitesOnDateMap after launch from SitesOnDateList, and
-        /// then in SitesOnDateList if return from Map; this is the slug for the site that needs help
-        /// </summary>
-        public List<string> OpenSitesThatNeedHelp;
-
-        public List<C_WorkShiftSignUp> WorkShiftSignUpsOnDate; // used in SCVolunteers
+        ///// <summary>
+        ///// The open sites that need help. Used in SitesOnDateMap after launch from SitesOnDateList, and
+        ///// then in SitesOnDateList if return from Map; this is the slug for the site that needs help
+        ///// </summary>
+        //public List<string> OpenSitesThatNeedHelp;
 
         /// <summary>
         /// The Month and Year last used in the Calendar view.
         /// </summary>
         public C_YMD CalendarDate;
 
-        public C_SignUp VolunteerSignUp;
-        public C_WorkShiftSignUp VolunteerWorkShiftSignUp;
-
-        // --- used in VC_Calendar ---
-        public List<C_SiteSchedule> SitesSchedule;
-
-        // used in ShiftDetails
-        public C_WorkShift SelectedShift;
-
-        // used in VC_SignUp
-        public C_SignUp SelectedSignUp;
-
-        Dictionary<int, List<C_SiteSchedule>> SitesScheduleCache;
-        // string = site-slug, int = year & month
-        Dictionary<string, Dictionary<int, List<C_SiteSchedule>>> SiteScheduleBySiteCache;
-
-        // used in vitaadmin, in Users for displaying signups for a user
+        // These are used to pass selections from screen to screen
         public C_VitaUser SelectedUser;
+        public C_VitaUser SelectedUserTemp;
+        public C_VitaSite SelectedSiteTemp;
+        public C_WorkLogItem SelectedWorkItem;
+        public C_Suggestion SelectedSuggestion;
+        public C_Notification SelectedNotification;
+        public E_Reports SelectedReport;
+        public List<C_CalendarEntry> DOWCalendar;
+        public DayOfWeek SelectedDOW;
+        public E_DistroType EmailDistroType;
 
+        public C_CalendarDateDetails CalendarDateDetails;
+
+        // a tally of the amount of traffic we have received over the network
         public long BytesReceived;
+
+        public bool UsingTestData;
+        public List<C_Suggestion> _SuggestionCache; // only used with test data
+        public List<C_Notification> _NotificationCache; // only used with test data
 
         public C_Global()
         {
@@ -112,11 +98,72 @@ namespace zsquared
 
             UserCache = new List<C_VitaUser>();
             SiteCache = new List<C_VitaSite>();
-            SignUpsList = new List<C_SignUp>();
-            SignUpsFetched = new Dictionary<int, bool>();
-            WorkShifts = new List<C_WorkShift>();
 
             BytesReceived = 0;
+
+            UsingTestData = false;
+        }
+
+        public void UseTestData(string sitesjson, string usersjson)
+        {
+            JsonValue jsonsites = JsonValue.Parse(sitesjson);
+            ImportSites(jsonsites);
+
+            int sid = 0;
+            foreach (C_VitaSite s in SiteCache)
+                s.id = sid++;
+
+            JsonValue jsonusers = JsonValue.Parse(usersjson);
+            List<C_VitaUser> users = new List<C_VitaUser>();
+            foreach (JsonValue jv1 in jsonusers)
+            {
+                C_VitaUser vu = new C_VitaUser(jv1);
+                users.Add(vu);
+
+                UserCache.Add(vu);
+            }
+            int uid = 0;
+            foreach (C_VitaUser u in UserCache)
+                u.id = uid++;
+
+            // fix up the site coordinator id/name in each site (the base data is missing this)
+            foreach(C_VitaSite site in SiteCache)
+            {
+                // find all users that support this site
+                List<C_VitaUser> scusers = new List<C_VitaUser>();
+                foreach(C_VitaUser user in UserCache)
+                {
+                    if (!user.HasSiteCoordinator)
+                        continue;
+
+                    var ou = user.SitesCoordinated.Where(sc => sc.SiteId == site.id);
+                    if (ou.Any())
+                        scusers.Add(user);
+                }
+                if (scusers.Count != 0)
+                {
+                    List<int> scids = new List<int>();
+                    List<string> scnames = new List<string>();
+                    foreach(C_VitaUser u in scusers)
+                    {
+                        scids.Add(u.id);
+                        scnames.Add(u.Name);
+                    }
+                    site.SiteCoordinatorsIds = scids;
+                    site.SiteCoordinatorNames = scnames;
+                }
+
+                // fix the SiteId in any calendar entries in case there were not set correctly
+                foreach (C_CalendarEntry ce in site.SiteCalendar)
+                    ce.SiteID = site.id;
+            }
+
+            _SuggestionCache = new List<C_Suggestion>();
+            _NotificationCache = new List<C_Notification>();
+
+            AllUsersFetched = true;
+
+            UsingTestData = true;
         }
 
         // ================= sites mgmt =======================
@@ -129,7 +176,20 @@ namespace zsquared
         /// <param name="calEntry">Cal entry.</param>
         public async Task<C_IOResult> CreateCalendarEntry(C_VitaSite site, string token, C_CalendarEntry calEntry)
         {
-            string bodyjson = calEntry.ToJson(false);
+            if (UsingTestData)
+            {
+                calEntry.id = GetLargestCalendarEntryId() + 1;
+                calEntry.SiteID = site.id;
+
+                // add it to the current Site instance
+                site.SiteCalendar.Add(calEntry);
+
+                calEntry.Dirty = false;
+
+                return new C_IOResult { Success = true };
+            }
+
+            string bodyjson = calEntry.ToJson();
 
             string updateurl = "/sites/" + site.Slug + "/calendars/";
 
@@ -173,7 +233,13 @@ namespace zsquared
         /// <param name="calEntry">Cal entry.</param>
         public async Task<C_IOResult> UpdateCalendarEntry(C_VitaSite site, string token, C_CalendarEntry calEntry)
         {
-            string bodyjson = calEntry.ToJson(false);
+            if (UsingTestData)
+            {
+                // return success
+                return new C_IOResult { Success = true };
+            }
+
+            string bodyjson = calEntry.ToJson();
 
             string updateurl = "/sites/" + site.Slug + "/calendars/" + calEntry.id.ToString();
 
@@ -194,6 +260,14 @@ namespace zsquared
         /// <param name="calEntry">Cal entry.</param>
         public async Task<C_IOResult> RemoveCalendarEntry(C_VitaSite site, string token, C_CalendarEntry calEntry)
         {
+            if (UsingTestData)
+            {
+                site.SiteCalendar.Remove(calEntry);
+
+                // return success
+                return new C_IOResult { Success = true };
+            }
+
             string bodyjson = "";
 
             string updateurl = "/sites/" + site.Slug + "/calendars/" + calEntry.id.ToString();
@@ -206,14 +280,35 @@ namespace zsquared
             return ior;
         }
 
+        private int GetLargestCalendarEntryId()
+        {
+            int res = -1;
+
+            foreach (C_VitaSite site in SiteCache)
+            {
+                foreach (C_CalendarEntry ce in site.SiteCalendar)
+                {
+                    if (ce.id > res) res = ce.id;
+                }
+            }
+
+            return res;
+        }
+
         /// <summary>
         /// Update selected fields in a site definition
         /// </summary>
         /// <returns>The simple fields.</returns>
         /// <param name="site">Site.</param>
         /// <param name="token">Token.</param>
-        public async Task<C_IOResult> UpdateSimpleFields(C_VitaSite site, string token)
+        public async Task<C_IOResult> UpdateSite(C_VitaSite site, string token)
         {
+            if (UsingTestData)
+            {
+                // return success
+                return new C_IOResult { Success = true };
+            }
+
             C_IOResult ior = null;
             try
             {
@@ -226,13 +321,9 @@ namespace zsquared
                 jb.Add(site.Latitude, C_VitaSite.N_Latitude);
                 jb.Add(site.Longitude, C_VitaSite.N_Longitude);
                 jb.Add(site.PlaceID, C_VitaSite.N_PlaceID);
-                jb.Add(site.PrimaryCoordinatorId, C_VitaSite.N_PrimaryCoordinatorId);
-                jb.Add(site.BackupCoordinatorId, C_VitaSite.N_BackupCoordinatorIdForPut);
-                jb.Add(site.SeasonFirstDate, C_VitaSite.N_SeasonFirstDate);
-                jb.Add(site.SeasonLastDate, C_VitaSite.N_SeasonLastDate);
                 string bodyjson = jb.ToString();
 
-                ior = await UpdateSite(site, bodyjson, token);
+                ior = await UpdateSiteFields(site, bodyjson, token);
             }
             catch (Exception e)
             {
@@ -248,50 +339,6 @@ namespace zsquared
         }
 
         /// <summary>
-        /// Update site status
-        /// </summary>
-        /// <returns>The site status.</returns>
-        /// <param name="site">Site.</param>
-        /// <param name="newClientSiteStatus">New client site status.</param>
-        /// <param name="token">Token.</param>
-        public async Task<C_IOResult> UpdateSiteStatus(C_VitaSite site, E_ClientSiteStatus newClientSiteStatus, string token)
-        {
-            if (site.ClientStatus == newClientSiteStatus)
-            {
-                C_IOResult res = new C_IOResult()
-                {
-                    Success = true,
-                    ResultCode = E_IOResultCode.NoError
-                };
-                return res;
-            }
-
-            C_IOResult ior = null;
-            try
-            {
-                C_JsonBuilder jb = new C_JsonBuilder();
-                jb.Add(newClientSiteStatus.ToString(), C_VitaSite.N_ClientStatus);
-                string bodyjson = jb.ToString();
-
-                ior = await UpdateSite(site, bodyjson, token);
-
-                if (ior.Success)
-                    site.ClientStatus = newClientSiteStatus;
-            }
-            catch (Exception e)
-            {
-#if DEBUG
-                Console.WriteLine(e.Message);
-#endif
-                ior.Success = false;
-                ior.ResultCode = E_IOResultCode.ParseError;
-                ior.ErrorMessage = "Unable to update site status";
-            }
-
-            return ior;
-        }
-
-        /// <summary>
         /// Update site capabilities list
         /// </summary>
         /// <returns>The site capabilities.</returns>
@@ -299,26 +346,15 @@ namespace zsquared
         /// <param name="token">Token.</param>
         public async Task<C_IOResult> UpdateSiteCapabilities(C_VitaSite site, string token)
         {
+            if (UsingTestData)
+            {
+                // return success
+                return new C_IOResult { Success = true };
+            }
+
             C_IOResult ior = null;
             try
             {
-                //StringBuilder sb = new StringBuilder();
-
-                //sb.Append("{ \"site_features\" : [");
-                //for (int ix = 0; ix != site.SiteCapabilities.Count; ix++)
-                //{
-                //    if (ix != 0)
-                //        sb.Append(",");
-                //    sb.Append("\"" + site.SiteCapabilities[ix].ToString() + "\"");
-                //}
-
-                //sb.Append("]");
-                //sb.Append(",");
-                //sb.Append("\"" + C_VitaSite.N_Slug + "\" : \"" + site.Slug + "\"");
-                //sb.Append("}");
-
-                //string bodyjson = sb.ToString();
-
                 C_JsonBuilder jb = new C_JsonBuilder();
                 jb.StartArray(C_VitaSite.N_SiteCapabilities);
                 foreach (E_SiteCapabilities sc in site.SiteCapabilities)
@@ -327,7 +363,7 @@ namespace zsquared
                 jb.Add(site.Slug, C_VitaSite.N_Slug);
                 string bodyjson = jb.ToString();
 
-                ior = await UpdateSite(site, bodyjson, token); // verify that bj == bodyjson, if so remove the manual version
+                ior = await UpdateSiteFields(site, bodyjson, token);
             }
             catch (Exception e)
             {
@@ -348,8 +384,13 @@ namespace zsquared
         /// <returns>true on success</returns>
         /// <param name="jsonString">Json string of items to update.</param>
         /// <param name="token">Token.</param>
-        private async Task<C_IOResult> UpdateSite(C_VitaSite site, string jsonString, string token)
+        public async Task<C_IOResult> UpdateSiteFields(C_VitaSite site, string jsonString, string token)
         {
+            if (UsingTestData)
+            {
+                return new C_IOResult() { Success = true };
+            }
+
             string updateurl = "/sites/" + site.Slug;
 
             C_IOResult ior = await Upload("PUT", updateurl, jsonString, token);
@@ -357,15 +398,99 @@ namespace zsquared
             return ior;
         }
 
-        public async Task<List<C_VitaSite>> RefetchAllSites(string token = null)
+        /// <summary>
+        /// Create a new site
+        /// </summary>
+        /// <returns>true on success</returns>
+        /// <param name="jsonString">Json string of items to update.</param>
+        /// <param name="token">Token.</param>
+        public async Task<C_IOResult> CreateSite(C_VitaSite site, string jsonString, string token)
         {
-            SiteCache = new List<C_VitaSite>();
+            if (UsingTestData)
+            {
+                int id = -1;
+                foreach (C_VitaSite s in SiteCache)
+                    if (s.id > id) id = s.id;
+                site.id = id + 1;
 
-            return await FetchAllSites(token);
+                site.Slug = BuildSlug(site);
+
+                // build the slug for the site
+
+                SiteCache.Add(site);
+
+                return new C_IOResult() { Success = true, Site = site };
+            }
+
+            string updateurl = "/sites/";
+
+            C_IOResult ior = await Upload("POST", updateurl, jsonString, token);
+
+            if (ior.Success)
+                SiteCache.Add(ior.Site);
+
+            return ior;
+        }
+
+        private string BuildSlug(C_VitaSite site)
+        {
+            if (!string.IsNullOrWhiteSpace(site.Slug))
+                return site.Slug;
+
+            string res = site.Name.Trim();
+            res = res.ToLower();
+            res = res.Replace(' ', '-');
+            res = System.Net.WebUtility.UrlEncode(res);
+
+            return res;
+        }
+
+        /// <summary>
+        /// Delete a new site
+        /// </summary>
+        /// <returns>true on success</returns>
+        /// <param name="token">Token.</param>
+        public async Task<C_IOResult> RemoveSite(C_VitaSite site, string token)
+        {
+            if (UsingTestData)
+            {
+                var ou = SiteCache.Where(s => s.Slug == site.Slug);
+                C_VitaSite site2 = ou.FirstOrDefault();
+                int ix2 = SiteCache.IndexOf(site2);
+                SiteCache.RemoveAt(ix2);
+
+                return new C_IOResult() { Success = true };
+            }
+
+            string updateurl = "/sites/" + site.id.ToString();
+
+            C_IOResult ior = await Upload("DELETE", updateurl, "", token);
+
+            if (ior.Success)
+            {
+                var ou = SiteCache.Where(s => s.Slug == site.Slug);
+                C_VitaSite site2 = ou.FirstOrDefault();
+                int ix2 = SiteCache.IndexOf(site2);
+                SiteCache.RemoveAt(ix2);
+            }
+
+            return ior;
         }
 
         public async Task<List<C_VitaSite>> FetchAllSites(string token = null)
         {
+            if (UsingTestData)
+            {
+                AllSitesFetched = true;
+
+                return SiteCache;
+            }
+
+            if (AllSitesFetched)
+            {
+                return SiteCache;
+            }
+
             List<C_VitaSite> siteslist = null;
 
             C_IOResult ior = await Download("/sites", token);
@@ -377,6 +502,8 @@ namespace zsquared
                     JsonValue responseJson = JsonValue.Parse(ior.ResponseString);
 
                     siteslist = ImportSites(responseJson);
+
+                    AllSitesFetched = true;
                 }
             }
             catch (Exception e)
@@ -411,13 +538,19 @@ namespace zsquared
             return ou.FirstOrDefault();
         }
 
+        public C_VitaSite GetSiteFromIDNoFetch(int id)
+        {
+            var ou = SiteCache.Where(site => site.id == id);
+            return ou.FirstOrDefault();
+        }
+
         public C_VitaSite GetSiteByNameNoFetch(string name)
         {
             var ou = SiteCache.Where(s => s.Name == name);
             return ou.FirstOrDefault();
         }
 
-        public async Task<C_VitaSite> GetSiteFromCache(string slug)
+        public async Task<C_VitaSite> FetchSiteWithSlug(string slug)
         {
             C_VitaSite res = GetSiteFromSlugNoFetch(slug);
 
@@ -429,14 +562,14 @@ namespace zsquared
                 refetch = ts.TotalMinutes > 30;
             }
 
-            if (refetch)
+            if (refetch && !UsingTestData)
             {
                 res = await FetchSite(slug);
                 if (res != null)
                 {
                     if (!SiteCacheContains(res.Slug))
                         SiteCache.Add(res);
-                    CleanWorkItemsFromSite(res);
+                    //CleanWorkItemsFromSite(res);
                 }
             }
 
@@ -448,14 +581,14 @@ namespace zsquared
             var ou = SiteCache.Where(site => site.Slug == slug);
             C_VitaSite res = ou.FirstOrDefault();
 
-            if (res == null)
+            if ((res == null) && !UsingTestData)
             {
                 res = await FetchSite(slug);
                 if (res != null)
                 {
                     if (!SiteCacheContains(res.Slug))
                         SiteCache.Add(res);
-                    CleanWorkItemsFromSite(res);
+                    //CleanWorkItemsFromSite(res);
                 }
             }
 
@@ -464,6 +597,11 @@ namespace zsquared
 
         private async Task<C_VitaSite> FetchSite(string slug)
         {
+            if (UsingTestData)
+            {
+                return GetSiteFromSlugNoFetch(slug);
+            }
+
             C_VitaSite site = null;
 
             string siteUrl = "/sites/" + slug;
@@ -511,8 +649,6 @@ namespace zsquared
                     if (!SiteCacheContains(vs.Slug))
                         SiteCache.Add(vs);
 
-                    CleanWorkItemsFromSite(vs);
-
                     AllSitesFetched = true;
                 }
                 catch (Exception e)
@@ -526,80 +662,20 @@ namespace zsquared
             return res;
         }
 
-        private void CleanWorkItemsFromSite(C_VitaSite site)
+        public List<C_VitaSite> GetSitesUsingFilterNoFetch(C_SitesFilter filter, bool userHasMobile)
         {
-            List<C_SignUp> intents = site.WorkIntentsX;
-            site.WorkIntentsX = null;
-            List<C_SignUp> history = site.WorkHistoryX;
-            site.WorkHistoryX = null;
-
-            if (intents != null)
-            {
-                foreach (C_SignUp wi in intents)
-                {
-                    if (!SignUpsHasId(wi.id))
-                        SignUpsList.Add(wi);
-                }
-            }
-
-            if (history != null)
-            {
-                foreach (C_SignUp wi in history)
-                {
-                    if (!SignUpsHasId(wi.id))
-                        SignUpsList.Add(wi);
-                }
-            }
-        }
-
-        //public async Task<List<C_VitaSite>> GetOpenSitesOnDate(C_YMD onDate)
-        //{
-        //    // at the current api level, the only option is to get data on ALL sites (slow, lots of data)
-        //    if (!AllSitesFetched)
-        //    {
-        //        List<C_VitaSite> sites = await FetchAllSites();
-        //    }
-
-        //    List<C_VitaSite> res = new List<C_VitaSite>();
-
-        //    foreach (C_VitaSite site in SiteCache)
-        //    {
-        //        if (site.SiteIsOpenOnDay(onDate))
-        //            res.Add(site);
-        //    }
-
-        //    return res;
-        //}
-
-        public async Task<List<C_VitaSite>> GetOpenSitesInDateRange(C_YMD from, C_YMD to)
-        {
-            // at the current api level, the only option is to get data on ALL sites (slow, lots of data)
-            // todo: get an API to fetch just exactly what we want
-            if (!AllSitesFetched)
-            {
-                List<C_VitaSite> allSites = await FetchAllSites();
-                AllSitesFetched = true;
-            }
-
-            List<string> SiteSlugsForOpenSites = new List<string>();
-            foreach (C_VitaSite site in SiteCache)
-            {
-                // scan through the dates
-                C_YMD date = new C_YMD(from);
-                while (date <= to)
-                {
-                    if ((site.SiteIsOpenOnDay(date)) && (!SiteSlugsForOpenSites.Contains(site.Slug)))
-                        SiteSlugsForOpenSites.Add(site.Slug);
-
-                    date = date.AddDays(1);
-                }
-            }
+            C_YMD date = filter.GetDateForFilter();
 
             List<C_VitaSite> res = new List<C_VitaSite>();
-            foreach (string slug in SiteSlugsForOpenSites)
+            foreach(C_VitaSite site in SiteCache)
             {
-                C_VitaSite site = GetSiteFromSlugNoFetch(slug);
-                res.Add(site);
+                bool openOnDay = true;
+                if (date != null)
+                    openOnDay = site.SiteIsOpenOnDay(date);
+                bool hasCapabilities = filter.SiteHasCapabilities(site, userHasMobile);
+
+                if (openOnDay && hasCapabilities)
+                    res.Add(site);
             }
 
             return res;
@@ -609,6 +685,23 @@ namespace zsquared
         {
             var ou = SiteCache.Where(s => s.Slug == slug);
             return ou.Any();
+        }
+
+        public string AllSitesToJson()
+        {
+            C_JsonBuilder jb = new C_JsonBuilder();
+
+            jb.StartArray("site");
+            foreach (C_VitaSite site in SiteCache)
+                jb.AddArrayObject(site.ToJson());
+            jb.EndArray();
+
+            string jsonstring = jb.ToString();
+
+            // just for fun, do a parse...
+            JsonValue testjv = JsonValue.Parse(jsonstring);
+
+            return jsonstring;
         }
 
         // ----------------- user mgmt ---------------------
@@ -622,6 +715,41 @@ namespace zsquared
         /// <param name="userPassword">User password.</param>
         public async Task<C_IOResult> PerformLogin(string email, string userPassword)
         {
+            if (UsingTestData)
+            {
+                // for testing, the email only has to be in our user list to get approved; no password needed
+                bool emailFound = false;
+                C_VitaUser fuser = null;
+                foreach(C_VitaUser user in UserCache)
+                {
+                    if (user.Email == email)
+                    {
+                        emailFound = true;
+                        fuser = user;
+                        break;
+                    }
+                }
+
+                C_IOResult tior = new C_IOResult();
+
+                if (emailFound)
+                {
+                    tior.Success = true;
+                    tior.ErrorMessage = "";
+                    tior.ResultCode = E_IOResultCode.NoError;
+                    tior.User = fuser;
+                }
+                else
+                {
+                    tior.Success = false;
+                    tior.ErrorMessage = "Bad email";
+                    tior.ResultCode = E_IOResultCode.WebException;
+                    tior.User = null;
+                }
+
+                return tior;
+            }
+
             bool b = await CheckConfig();
 
             C_IOResult res = StartIOResult();
@@ -637,11 +765,6 @@ namespace zsquared
                     BaseAddress = new Uri(Config.BackendUrl)
                 };
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-                //string jsonData = "{"
-                //+ "\"email\" : \"" + email + "\""
-                //+ ",\"password\" : \"" + userPassword + "\""
-                //+ "}";
 
                 C_JsonBuilder jb = new C_JsonBuilder();
                 jb.Add(email, C_VitaUser.N_Email);
@@ -699,10 +822,7 @@ namespace zsquared
                 res.User.Token = token;
                 LoggedInUserId = res.User.id;
                 if (!UserCacheContains(res.User.id))
-                {
                     UserCache.Add(res.User);
-                    CleanWorkItemsFromUser(res.User);
-                }
 
                 res.Success = true;
             }
@@ -720,39 +840,13 @@ namespace zsquared
             return res;
         }
 
-        public async Task<C_IOResult> UpdateUserPassword(C_VitaUser user, string token)
-        {
-            if (token == null)
-                token = user.Token;
-
-            C_JsonBuilder jb = new C_JsonBuilder();
-            jb.Add(user.Password, C_VitaUser.N_Password);
-            jb.Add(user.Password, C_VitaUser.N_PasswordConfirmation);
-            string bodyjson = jb.ToString();
-
-            string submiturl = "/users/" + user.id.ToString();
-
-            C_IOResult ior = await Upload("PUT", submiturl, bodyjson, token);
-
-            return ior;
-        }
-
-        //public async Task<C_IOResult> UpdateUserProfile(C_VitaUser user)
-        //{
-        //    C_JsonBuilder jb = new C_JsonBuilder();
-        //    jb.Add(user.Name, C_VitaUser.N_Name);
-        //    jb.Add(user.Phone, C_VitaUser.N_Phone);
-        //    string bodyjson = jb.ToString();
-
-        //    string submiturl = "/users/" + user.id.ToString();
-
-        //    C_IOResult ior = await Upload("PUT", submiturl, bodyjson, user.Token);
-
-        //    return ior;
-        //}
-
         public async Task<C_IOResult> UpdateUserFields(C_JsonBuilder jb, C_VitaUser user, string token)
         {
+            if (UsingTestData)
+            {
+                return new C_IOResult() { Success = true };
+            }
+
             string bodyjson = jb.ToString();
 
             string submiturl = "/users/" + user.id.ToString();
@@ -801,23 +895,6 @@ namespace zsquared
             return ior;
         }
 
-        public async Task<C_IOResult> UpdateUserProfile(C_VitaUser user, string token = null)
-        {
-            C_JsonBuilder jb = new C_JsonBuilder();
-            jb.Add(user.Name, C_VitaUser.N_Name);
-            jb.Add(user.Phone, C_VitaUser.N_Phone);
-            jb.Add(user.Email, C_VitaUser.N_Email);
-            jb.Add(user.Certification.ToString(), C_VitaUser.N_Certification);
-            jb.StartArray(C_VitaUser.N_Roles);
-            foreach (E_VitaUserRoles role in user.Roles)
-                jb.AddArrayElement(role.ToString());
-            jb.EndArray();
-
-            C_IOResult ior = await UpdateUserFields(jb, user, token);
-
-            return ior;
-        }
-
         /// <summary>
         /// Fetchs the users list. Must have admin privilege to run.
         /// </summary>
@@ -825,6 +902,12 @@ namespace zsquared
         /// <param name="token">Token.</param>
         public async Task<List<C_VitaUser>> FetchAllUsers(string token)
         {
+            if (UsingTestData)
+                return UserCache;
+
+            if (AllUsersFetched)
+                return UserCache;
+
             List<C_VitaUser> res = null;
             AllUsersFetched = false;
 
@@ -843,7 +926,7 @@ namespace zsquared
                     res.Add(vu);
 
                     UserCache.Add(vu);
-                    CleanWorkItemsFromUser(vu);
+                    //CleanWorkItemsFromUser(vu);
                 }
 
                 AllUsersFetched = true;
@@ -874,6 +957,23 @@ namespace zsquared
 
         public async Task<C_IOResult> RemoveUser(int id, string token)
         {
+            if (UsingTestData)
+            {
+                C_VitaUser user = null;
+                foreach(C_VitaUser u in UserCache)
+                {
+                    if (u.id == id)
+                    {
+                        user = u;
+                        break;
+                    }
+                }
+                if (user != null)
+                    UserCache.Remove(user);
+
+                return new C_IOResult() { Success = true };
+            }
+
             string usersUrl = "/users/" + id.ToString();
 
             C_IOResult ior = await Upload("DELETE", usersUrl, "", token);
@@ -884,6 +984,38 @@ namespace zsquared
                 if (u != null)
                     UserCache.Remove(u);
             }
+
+            return ior;
+        }
+
+        public async Task<C_IOResult> CreateUser(C_VitaUser user, string token)
+        {
+            if (UsingTestData)
+            {
+                if (!UserCache.Contains(user))
+                {
+                    // find the largest id in use so we can pick one higher for this user
+                    int nid = -1;
+                    foreach (C_VitaUser u in UserCache)
+                        if (u.id > nid) nid = u.id;
+
+                    foreach (C_VitaUser u in UserCache)
+                        if (u.id == -1) u.id = ++nid;
+
+                    user.id = ++nid;
+                    UserCache.Add(user);
+                }
+
+                return new C_IOResult() { Success = true, User = user };
+            }
+            string usersUrl = "/users/";
+
+            string userjson = user.ToJson();
+
+            C_IOResult ior = await Upload("POST", usersUrl, userjson, token);
+
+            if (ior.Success)
+                UserCache.Add(ior.User);
 
             return ior;
         }
@@ -900,7 +1032,7 @@ namespace zsquared
             return ou.Any();
         }
 
-        public async Task<C_VitaUser> GetUserFromCache(int userid)
+        public async Task<C_VitaUser> FetchUserWithId(int userid)
         {
             C_VitaUser user = GetUserFromCacheNoFetch(userid);
 
@@ -909,7 +1041,7 @@ namespace zsquared
             {
                 C_VitaUser loggedInUser = GetUserFromCacheNoFetch(LoggedInUserId);
 
-                if (loggedInUser == null)
+                if ((loggedInUser == null) || UsingTestData)
                     return null;
 
                 user = await FetchUser(loggedInUser.Token, userid);
@@ -917,48 +1049,11 @@ namespace zsquared
                 if (user != null)
                 {
                     UserCache.Add(user);
-                    CleanWorkItemsFromUser(user);
+                    //CleanWorkItemsFromUser(user);
                 }
             }
 
             return user;
-        }
-
-        //public async Task<bool> EnsureUserInCache(int userid, string token)
-        //{
-        //    C_VitaUser res = GetUserFromCacheNoFetch(userid);
-
-        //    if (res == null)
-        //    {
-        //        res = await FetchUser(token, userid);
-        //        if (res != null)
-        //        {
-        //            UserCache.Add(res);
-        //            CleanWorkItemsFromUser(res);
-        //        }
-        //    }
-
-        //    return res != null;
-        //}
-
-        private void CleanWorkItemsFromUser(C_VitaUser user)
-        {
-            List<C_SignUp> intents = user.WorkIntentsX;
-            user.WorkIntentsX = null;
-            List<C_SignUp> history = user.WorkHistoryX;
-            user.WorkHistoryX = null;
-
-            foreach (C_SignUp wi in intents)
-            {
-                if (!SignUpsHasId(wi.id))
-                    SignUpsList.Add(wi);
-            }
-
-            foreach (C_SignUp wi in history)
-            {
-                if (!SignUpsHasId(wi.id))
-                    SignUpsList.Add(wi);
-            }
         }
 
         /// <summary>
@@ -995,740 +1090,109 @@ namespace zsquared
             return res;
         }
 
-        // ---------------- SiteSchedule mgmt -----------
-
-        private List<C_SiteSchedule> ImportSitesSchedules(JsonValue json, C_YMD date)
+        public async Task<C_IOResult> SubscribeUserToPreferredSites(C_VitaUser user, string token, bool subscribe)
         {
-#if DEBUG
-            if (!(json is JsonArray))
-                throw new ApplicationException("the sites list must be an array");
-#endif
+            user.SubscribePreferred = subscribe;
 
-            // create the holding place for the results
-            List<C_SiteSchedule> res = new List<C_SiteSchedule>();
-            foreach (JsonValue j in json)
+            if (UsingTestData)
             {
-                C_SiteSchedule vs = new C_SiteSchedule(j, date)
-                {
-                    SampleTime = DateTime.Now
-                };
-                res.Add(vs);
+                return new C_IOResult() { Success = true };
             }
 
-            return res;
-        }
-
-        private async Task<List<C_SiteSchedule>> FetchSitesSchedules(C_YMD from, C_YMD to)
-        {
-            List<C_SiteSchedule> res = new List<C_SiteSchedule>();
-            C_YMD date = null;
-
-            string sitesUrl = "/schedule/?start=" + from.ToString("yyyy-mm-dd") + ";end=" + to.ToString("yyyy-mm-dd");
-
-            C_IOResult ior = await Download(sitesUrl, null);
-
-            if (ior.Success)
-            {
-                JsonValue jdoc = JsonValue.Parse(ior.ResponseString);
-
-                foreach (JsonValue jv in jdoc)
-                {
-                    if (jv.ContainsKey("date"))
-                        date = Tools.JsonProcessDate(jv["date"], date);
-
-                    if (jv.ContainsKey("sites"))
-                    {
-                        JsonValue jvx = jv["sites"];
-                        List<C_SiteSchedule> resx = ImportSitesSchedules(jvx, date);
-                        res.AddRange(resx);
-                    }
-                }
-            }
-
-            return res;
-        }
-
-        private async Task<List<C_SiteSchedule>> FetchSiteSchedules(C_YMD from, C_YMD to, string siteSlug)
-        {
-            List<C_SiteSchedule> res = new List<C_SiteSchedule>();
-            C_YMD date = null;
-
-            string sitesUrl = "/schedule/?start=" + from.ToString("yyyy-mm-dd") + ";end=" + to.ToString("yyyy-mm-dd") + ";site=" + siteSlug;
-
-            C_IOResult ior = await Download(sitesUrl, null);
-
-            if (ior.Success)
-            {
-                JsonValue jdoc = JsonValue.Parse(ior.ResponseString);
-
-                foreach (JsonValue jv in jdoc)
-                {
-                    if (jv.ContainsKey("date"))
-                        date = Tools.JsonProcessDate(jv["date"], date);
-
-                    if (jv.ContainsKey("sites"))
-                    {
-                        JsonValue jvx = jv["sites"];
-                        List<C_SiteSchedule> resx = ImportSitesSchedules(jvx, date);
-                        res.AddRange(resx);
-                    }
-                }
-            }
-
-            return res;
-        }
-
-
-
-        public async Task<List<C_SiteSchedule>> GetSitesScheduleCached(int year, int month)
-        {
-            if (SitesScheduleCache == null)
-                SitesScheduleCache = new Dictionary<int, List<C_SiteSchedule>>();
-
-            List<C_SiteSchedule> res = null;
-
-            int key = year * 12 + month;
-            if (SitesScheduleCache.ContainsKey(key))
-                res = SitesScheduleCache[key];
-
-            // if the siteschedule we fetched has expired data, then we need to force a refetch
-            bool refetch = res == null;
-            if (!refetch && (res.Count != 0))
-            {
-                DateTime dt = res[0].SampleTime;
-                TimeSpan ts = DateTime.Now - dt;
-                refetch = ts.TotalMinutes > 30;
-            }
-
-            if (refetch)
-            {
-                // if we fetch any data, we will always fetch 2 months at once
-                C_YMD start = new C_YMD(year, month, 1);
-                C_YMD nextMonth = new C_YMD(start);
-                nextMonth.AddMonths(1);
-                int daysInMonth = DateTime.DaysInMonth(nextMonth.Year, nextMonth.Month);
-                C_YMD end = new C_YMD(nextMonth.Year, nextMonth.Month, daysInMonth);
-
-                // get the siteschedules in our time range (2 months)
-                List<C_SiteSchedule> sslist = await FetchSitesSchedules(start, end);
-
-                // split into the 2 different months since that is how we cache them
-                List<C_SiteSchedule> month0 = new List<C_SiteSchedule>();
-                List<C_SiteSchedule> month1 = new List<C_SiteSchedule>();
-                foreach (C_SiteSchedule ss in sslist)
-                {
-                    if ((ss.Date.Year == year) && (ss.Date.Month == month))
-                        month0.Add(ss);
-                    else
-                        month1.Add(ss);
-                }
-
-                // build the keys for the 2 months
-                int key0 = key;
-                int key1 = nextMonth.Year * 12 + nextMonth.Month;
-
-                // if those entries are already there, remove them
-                if (SitesScheduleCache.ContainsKey(key0))
-                    SitesScheduleCache.Remove(key0);
-                if (SitesScheduleCache.ContainsKey(key1))
-                    SitesScheduleCache.Remove(key1);
-
-                // finally, add the new month schedule into the cache
-                SitesScheduleCache.Add(key0, month0);
-                SitesScheduleCache.Add(key1, month1);
-
-                // and return the one the user was actually asking for...
-                res = month0;
-            }
-
-            return res;
-        }
-
-        public async Task<List<C_SiteSchedule>> GetSitesScheduleForSiteCached(int year, int month, string siteSlug)
-        {
-            if (SiteScheduleBySiteCache == null)
-                SiteScheduleBySiteCache = new Dictionary<string, Dictionary<int, List<C_SiteSchedule>>>();
-
-            List<C_SiteSchedule> res = null;
-
-            int key = year * 12 + month;
-            if (SiteScheduleBySiteCache.ContainsKey(siteSlug))
-            {
-                Dictionary<int, List<C_SiteSchedule>> d = SiteScheduleBySiteCache[siteSlug];
-                if (d.ContainsKey(key))
-                    res = d[key];
-            }
-            else
-            {
-                Dictionary<int, List<C_SiteSchedule>> d = new Dictionary<int, List<C_SiteSchedule>>();
-                SiteScheduleBySiteCache.Add(siteSlug, d);
-            }
-
-            // if the siteschedule we fetched has expired data, then we need to force a refetch
-            bool refetch = res == null;
-            if (!refetch && (res.Count != 0))
-            {
-                DateTime dt = res[0].SampleTime;
-                TimeSpan ts = DateTime.Now - dt;
-                refetch = ts.TotalMinutes > 30;
-            }
-
-            if (refetch)
-            {
-                C_YMD start = new C_YMD(year, month, 1);
-                C_YMD end = new C_YMD(start.Year, start.Month, DateTime.DaysInMonth(start.Year, start.Month));
-
-                res = await FetchSiteSchedules(start, end, siteSlug);
-                if (res != null)
-                {
-                    Dictionary<int, List<C_SiteSchedule>> d = SiteScheduleBySiteCache[siteSlug];
-                    d.Add(key, res);
-                }
-            }
-
-            return res;
-        }
-
-        public void RemoveSiteFromSiteCache(string siteSlug)
-        {
-            if (SiteScheduleBySiteCache == null)
-                return;
-
-            if (SiteScheduleBySiteCache.ContainsKey(siteSlug))
-                SiteScheduleBySiteCache.Remove(siteSlug);
-        }
-
-        public C_SiteSchedule GetSiteScheduleForDay(C_YMD onDate, string siteSlug)
-        {
-            C_SiteSchedule res = null;
-
-            if (SitesScheduleCache == null)
-                return res;
-
-            int key = onDate.Year * 12 + onDate.Month;
-            if (SitesScheduleCache.ContainsKey(key))
-            {
-                List<C_SiteSchedule> sslist = SitesScheduleCache[key];
-                var ou = sslist.Where(ss => (ss.SiteSlug == siteSlug) && (ss.Date == onDate));
-                List<C_SiteSchedule> sslist2 = ou.ToList();
-                if (sslist2.Count != 0)
-                    res = sslist2[0];
-            }
-
-            return res;
-        }
-
-        // ---------------- workitems mgmt --------------
-
-        public async Task<List<C_SignUp>> GetSignUpsForSiteInDateRangeCached(string token, int year, int month, string siteSlug)
-        {
-            int key = year * 12 + month;
-
-            List<C_SignUp> res = new List<C_SignUp>();
-
-            if (!SignUpsFetched.ContainsKey(key))
-            {
-                bool success = await FetchSignsUpsForDateRangeForSite(token, year, month, siteSlug);
-            }
-
-            var ou = SignUpsList.Where(su => (su.Date.Year == year) && (su.Date.Month == month) && (su.SiteSlug == siteSlug));
-            res = ou.ToList();
-
-            return res;
-        }
-
-        public async Task<bool> FetchSignsUpsForDateRangeForSite(string token, int year, int month, string siteSlug)
-        {
-            C_YMD firstDate = new C_YMD(year, month, 1);
-            C_YMD lastDate = new C_YMD(year, month, DateTime.DaysInMonth(year, month));
-
-            string submitUrl = "/signups/?start=" + firstDate.ToString("yyyymmdd") + ";end=" + lastDate.ToString("yyyymmdd") + ";site=" + siteSlug;
-
-            C_IOResult ior = await Download(submitUrl, token);
-
-            try
-            {
-                if (ior.Success)
-                {
-                    JsonValue responseJson = JsonValue.Parse(ior.ResponseString);
-
-                    foreach (JsonValue jv in responseJson)
-                    {
-                        C_SignUp su = new C_SignUp(jv);
-
-                        var ou = SignUpsList.Where(sux => sux.id == su.id);
-                        if (!ou.Any())
-                            SignUpsList.Add(su);
-                    }
-
-                    int key = year * 12 + month;
-                    if (SignUpsFetched.ContainsKey(key))
-                        SignUpsFetched.Add(key, true);
-                    else
-                        SignUpsFetched[key] = true;
-
-                }
-            }
-            catch (Exception e)
-            {
-#if DEBUG
-                Console.WriteLine(e.Message);
-#endif
-                ior.Success = false;
-                ior.ResultCode = E_IOResultCode.ParseError;
-                ior.ErrorMessage = e.Message;
-            }
-
-            return ior.Success;
-        }
-
-        public async Task<List<C_SignUp>> FetchAllSignUps(string token)
-        {
-            string submitUrl = "/signups/";
-
-            C_IOResult ior = await Download(submitUrl, token);
-
-            List<C_SignUp> res = new List<C_SignUp>();
-
-            try
-            {
-                if (ior.Success)
-                {
-                    JsonValue responseJson = JsonValue.Parse(ior.ResponseString);
-
-                    foreach (JsonValue jv in responseJson)
-                    {
-                        C_SignUp su = new C_SignUp(jv);
-
-                        res.Add(su);
-
-                        //var ou = SignUpsList.Where(sux => sux.id == su.id);
-                        //if (!ou.Any())
-                            //SignUpsList.Add(su);
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-#if DEBUG
-                Console.WriteLine(e.Message);
-#endif
-                ior.Success = false;
-                ior.ResultCode = E_IOResultCode.ParseError;
-                ior.ErrorMessage = e.Message;
-            }
-
-            return res;
-
-        }
-
-        public C_SignUp GetSignUpFromUserIdWithShiftId(int userid, int shiftid)
-        {
-            var ou = SignUpsList.Where(sux => (sux.UserId == userid) && (sux.ShiftId == shiftid));
-            return ou.FirstOrDefault();
-        }
-
-//        public void UpdateSignUpsListEntry(C_SignUp su, bool approved, bool dirty)
-//        {
-//            var ou = SignUpsList.Where(sux => sux.id == su.id);
-//            C_SignUp suk = ou.FirstOrDefault();
-//            if (suk != null)
-//            {
-//                suk.Approved = approved;
-//                suk.Dirty = dirty;
-//            }
-//            else
-//            {
-//#if DEBUG
-//                Console.WriteLine("How did we get the signup?");
-//#endif
-        //    }
-        //}
-
-        public async Task<C_IOResult> FetchSignUpBySignUpId(string token, int signUpId)
-        {
-            var ou = SignUpsList.Where(sui => sui.id == signUpId);
-            if (ou.Any())
-            {
-                C_IOResult ior1 = new C_IOResult()
-                {
-                    Success = true,
-                    SignUp = ou.FirstOrDefault()
-                };
-                return ior1;
-            }
-            else
-            {
-#if DEBUG
-                Console.WriteLine("Should already have this signup");
-#endif
-            }
-
-            string submitUrl = "/signups/" + signUpId.ToString();
-
-            C_IOResult ior = await Download(submitUrl, token);
-
-            if (ior.Success)
-            {
-                JsonValue responseJson = JsonValue.Parse(ior.ResponseString);
-                ior.SignUp = new C_SignUp(responseJson);
-            }
+            C_JsonBuilder jb = new C_JsonBuilder();
+            jb.Add(user.SubscribePreferred, C_VitaUser.N_SubscribePreferred);
+            jb.StartArray(C_VitaUser.N_PreferredSites);
+            foreach(string pss in user.PreferredSiteSlugs)
+                jb.AddArrayElement(pss);
+            jb.EndArray();
+
+            C_IOResult ior = await UpdateUserFields(jb, user, token);
 
             return ior;
         }
 
-        public void AddToSignUps(C_SignUp su)
+        public async Task<C_IOResult> SubscribeUserToMobileSites(C_VitaUser user, string token, bool subscribe)
         {
-            if (!SignUpsList.Contains(su))
-                SignUpsList.Add(su);
-        }
+            user.SubscribeMobile = subscribe;
 
-        public void RemoveFromSignUps(C_SignUp su)
-        {
-            if (SignUpsList.Contains(su))
-                SignUpsList.Remove(su);
-        }
-
-        public void AdjustSiteCacheForNewSignUp(C_SignUp su, C_VitaUser user, C_VitaSite site)
-        {
-            // find the actual shift for this signup
-            C_CalendarEntry ce = site.GetCalendarEntryForDate(su.Date);
-            C_WorkShift ws = null;
-            if ((ce != null) && ce.HaveShifts)
+            if (UsingTestData)
             {
-                var ou = ce.WorkShifts.Where(wsx => wsx.id == su.ShiftId);
-                ws = ou.FirstOrDefault();
+                return new C_IOResult() { Success = true };
             }
-            if (ws == null)
-                return;
 
-            // get the site schedule for us to adjust
-            C_SiteSchedule ss = GetSiteScheduleForDay(su.Date, su.SiteSlug);
-            if (ss == null)
-                return;
+            C_JsonBuilder jb = new C_JsonBuilder();
+            jb.Add(user.SubscribeMobile ? "true" : "false", C_VitaUser.N_SubscribeMobile);
+            jb.EndArray();
 
-            // now find the SiteSchedule WorkShift that matches the shift
-            C_SiteScheduleShift sss = null;
-            foreach (C_SiteScheduleShift sssx in ss.Shifts)
-            {
-                if ((ws.OpenTime == sssx.OpenTime) && (ws.CloseTime == sssx.CloseTime))
-                {
-                    sss = sssx;
-                    break;
-                }
-            }
-            if (sss == null)
-                return;
+            C_IOResult ior = await UpdateUserFields(jb, user, token);
 
-            if (user.Certification == E_Certification.Basic)
-                sss.eFilersSignedUpBasic++;
-            else if (user.Certification == E_Certification.Advanced)
-                sss.eFilersSignedUpAdvanced++;
+            return ior;
         }
 
-        public void AdjustSiteSchedueCacheForRemovedSignUp(C_SignUp su, C_VitaUser user, C_VitaSite site)
+        // --------------------- work log items -------------------
+
+        public async Task<C_IOResult> AddWorkLogItem(C_VitaUser user, string token, C_WorkLogItem workLogItem)
         {
-            if (user == null)
-                return;
-            if (site == null)
-                return;
-
-            // find the actual shift for this signup
-            C_CalendarEntry ce = site.GetCalendarEntryForDate(su.Date);
-            C_WorkShift ws = null;
-            if ((ce != null) && ce.HaveShifts)
+            if (UsingTestData)
             {
-                var ou = ce.WorkShifts.Where(wsx => wsx.id == su.ShiftId);
-                ws = ou.FirstOrDefault();
+                workLogItem.id = GetLargestWorkLogItemID() + 1;
+                user.WorkItems.Add(workLogItem);
+
+                return new C_IOResult() { Success = true };
             }
-            if (ws == null)
-                return;
 
-            // get the site schedule for us to adjust
-            C_SiteSchedule ss = GetSiteScheduleForDay(su.Date, su.SiteSlug);
-            if (ss == null)
-                return;
+            user.WorkItems.Add(workLogItem);
 
-            // now find the SiteSchedule WorkShift that matches the shift
-            C_SiteScheduleShift sss = null;
-            foreach (C_SiteScheduleShift sssx in ss.Shifts)
-            {
-                if ((ws.OpenTime == sssx.OpenTime) && (ws.CloseTime == sssx.CloseTime))
-                {
-                    sss = sssx;
-                    break;
-                }
-            }
-            if (sss == null)
-                return;
-
-            if (user.Certification == E_Certification.Basic)
-                sss.eFilersSignedUpBasic--;
-            else if (user.Certification == E_Certification.Advanced)
-                sss.eFilersSignedUpAdvanced--;
+            throw new Exception("not implemented yet");
         }
 
-        private bool SignUpsHasId(int id)
+        public async Task<C_IOResult> UpdateWorkLogItem(C_VitaUser user, string token, C_WorkLogItem workLogItem)
         {
-            var ou = SignUpsList.Where(wi => wi.id == id);
+            if (UsingTestData)
+            {
 
-            return ou.Any();
+                return new C_IOResult() { Success = true };
+            }
+
+            throw new Exception("not implemented yet");
         }
 
-        public List<C_SignUp> GetSignUpsForUser(int userId)
+        public async Task<C_IOResult> RemoveWorkLogItem(C_VitaUser user, string token, C_WorkLogItem workLogItem)
         {
-            var ou = SignUpsList.Where(wi => wi.UserId == userId);
-            List<C_SignUp> res = ou.ToList();
+            if (UsingTestData)
+            {
+                user.WorkItems.Remove(workLogItem);
+
+                return new C_IOResult() { Success = true };
+            }
+
+            user.WorkItems.Remove(workLogItem);
+
+            throw new Exception("not implemented yet");
+        }
+
+        private int GetLargestWorkLogItemID()
+        {
+            int res = -1;
+
+            foreach(C_VitaUser u in UserCache)
+            {
+                foreach(C_WorkLogItem wi in u.WorkItems)
+                    if (wi.id > res) res = wi.id;
+            }
 
             return res;
-        }
-
-        public List<C_SignUp> GetSignUpsForSiteOnDate(C_YMD onDate, string siteSlug)
-        {
-            var ou = SignUpsList.Where(wi => ((wi.Date == onDate) && (wi.SiteSlug == siteSlug)));
-            return ou.ToList();
-        }
-
-        public void ClearDirtyFlagOnSignUps()
-        {
-            foreach (C_SignUp wi in SignUpsList)
-                wi.Dirty = false;
-        }
-
-        public List<C_SignUp> GetSignUpsByShiftId(int shiftId)
-        {
-            var ou = SignUpsList.Where(wi => wi.ShiftId == shiftId);
-            return ou.ToList();
-        }
-
-        //public int GetCountOfSignUpsByShiftId(int shiftId)
-        //{
-        //    var ou = SignUps.Where(wi => wi.ShiftId == shiftId);
-        //    return ou.Count();
-        //}
-
-        // ------------- workshifts mgmt ----------------
-
-        /// <summary>
-        /// Create a new work shift
-        /// </summary>
-        /// <returns>true if successful</returns>
-        /// <param name="token">Token.</param>
-        /// <param name="shift">shift to create</param>
-        /// <param name="calEntry">Calendar Entry to add the shift to</param>
-        public async Task<C_IOResult> CreateShift(string token, string siteSlug, C_WorkShift shift, C_CalendarEntry calEntry)
-        {
-            string bodyjson = shift.ToJson();
-
-            string updateurl = "/sites/" + siteSlug + "/calendars/" + calEntry.id.ToString() + "/shifts/";
-
-            C_IOResult ior = await Upload("POST", updateurl, bodyjson, token);
-
-            try
-            {
-                if (ior.Success)
-                {
-                    JsonValue responseJson = JsonValue.Parse(ior.ResponseString);
-
-                    C_WorkShift cex = new C_WorkShift(responseJson);
-                    shift.id = cex.id;
-                    if (cex.SiteSlug != null)
-                        shift.SiteSlug = cex.SiteSlug;
-
-                    // add it to the current Site instance
-                    calEntry.WorkShifts.Add(shift);
-                    WorkShifts.Add(shift);
-                }
-            }
-            catch (Exception e)
-            {
-#if DEBUG
-                Console.WriteLine(e.Message);
-#endif
-                ior.Success = false;
-                ior.ResultCode = E_IOResultCode.Exception;
-                ior.ErrorMessage = e.Message;
-            }
-
-            return ior;
-        }
-
-        /// <summary>
-        /// Update a shift
-        /// </summary>
-        /// <returns>true if successful</returns>
-        /// <param name="token">Token.</param>
-        /// <param name="shift">shift to update</param>
-        public async Task<C_IOResult> UpdateShift(string token, string siteSlug, C_WorkShift shift, C_CalendarEntry calEntry)
-        {
-            string bodyjson = shift.ToJson();
-
-            string updateurl = "/sites/" + siteSlug + "/calendars/" + calEntry.id.ToString() + "/shifts/" + shift.id.ToString();
-
-            C_IOResult ior = await Upload("PUT", updateurl, bodyjson, token);
-
-            try
-            {
-                if (ior.Success)
-                {
-                    JsonValue responseJson = JsonValue.Parse(ior.ResponseString);
-
-                    C_WorkShift cex = new C_WorkShift(responseJson);
-                    shift.id = cex.id;
-                    //shift.SiteSlug = cex.SiteSlug;
-                    shift.Dirty = false;
-                }
-            }
-            catch (Exception e)
-            {
-#if DEBUG
-                Console.WriteLine(e.Message);
-#endif
-                ior.Success = false;
-                ior.ResultCode = E_IOResultCode.Exception;
-                ior.ErrorMessage = e.Message;
-            }
-
-            return ior;
-        }
-
-        /// <summary>
-        /// Remove a shift
-        /// </summary>
-        /// <returns>true if successful</returns>
-        /// <param name="token">Token.</param>
-        /// <param name="shift">shift to remove</param>
-        /// <param name="calEntry">Calendar Entry to remove the shift from</param>
-        public async Task<C_IOResult> RemoveShift(string token, string siteSlug, C_WorkShift shift, C_CalendarEntry calEntry)
-        {
-            string bodyjson = shift.ToJson();
-
-            string updateurl = "/sites/" + siteSlug + "/calendars/" + calEntry.id.ToString() + "/shifts/" + shift.id.ToString();
-
-            C_IOResult ior = await Upload("DELETE", updateurl, bodyjson, token);
-
-            try
-            {
-                if (ior.Success)
-                {
-                    calEntry.WorkShifts.Remove(shift);
-                    WorkShifts.Remove(shift);
-                }
-            }
-            catch (Exception e)
-            {
-#if DEBUG
-                Console.WriteLine(e.Message);
-#endif
-                ior.Success = false;
-                ior.ResultCode = E_IOResultCode.Exception;
-                ior.ErrorMessage = e.Message;
-            }
-
-            return ior;
-        }
-
-        public async Task<bool> EnsureShiftsInCacheForSignUps(string token, List<C_SignUp> signups)
-        {
-            foreach (C_SignUp su in signups)
-            {
-                // see if the workshift is already in our cache
-                C_WorkShift wsfid = GetWorkShiftById(su.ShiftId);
-                if (wsfid == null)
-                {
-                    // if not, we need to fetch the calendar then the shift
-                    C_VitaSite site = await GetSiteFromCache(su.SiteSlug);
-                    C_CalendarEntry ce = site.GetCalendarEntryForDate(su.Date);
-                    List<C_WorkShift> shifts = await FetchAllShiftsForCalendarEntry(token, su.SiteSlug, ce);
-                }
-            }
-
-            return true;
-        }
-
-        /// <summary>
-        /// Get a list of all shifts for a calendar entry
-        /// </summary>
-        /// <returns>list of shifts for this calendar item</returns>
-        /// <param name="token">Token.</param>
-        public async Task<List<C_WorkShift>> FetchAllShiftsForCalendarEntry(string token, string siteSlug, C_CalendarEntry calEntry)
-        {
-            List<C_WorkShift> shifts = new List<C_WorkShift>();
-            calEntry.WorkShifts = shifts;
-
-            string updateurl = "/sites/" + siteSlug + "/calendars/" + calEntry.id.ToString() + "/shifts";
-
-            C_IOResult ior = await Download(updateurl, token);
-
-            try
-            {
-                if (ior.Success)
-                {
-                    JsonValue responseJson = JsonValue.Parse(ior.ResponseString);
-
-                    foreach (JsonValue jv in responseJson)
-                    {
-                        C_WorkShift ws = new C_WorkShift(jv)
-                        {
-                            SiteSlug = siteSlug
-                        };
-                        shifts.Add(ws);
-
-                        if (!WorkShifts.Contains(ws))
-                            WorkShifts.Add(ws);
-                    }
-
-                    calEntry.WorkShifts = shifts;
-                    calEntry.HaveShifts = true;
-                }
-                else
-                {
-                    shifts = new List<C_WorkShift>();
-                    calEntry.WorkShifts = shifts;
-                }
-            }
-            catch (Exception e)
-            {
-#if DEBUG
-                Console.WriteLine(e.Message);
-#endif
-                ior.Success = false;
-                ior.ResultCode = E_IOResultCode.Exception;
-                ior.ErrorMessage = e.Message;
-            }
-
-            return shifts;
-        }
-
-        //public async Task<C_IOResult> FetchWorkShiftById(int shiftId, string token, string siteSlug, C_CalendarEntry ce)
-        //{
-        //    string shiftUrl = "/sites/" + siteSlug + "/calendars/" + ce.id.ToString() + "/shifts/" + shiftId.ToString();
-
-        //    C_IOResult ior = await Download(shiftUrl, token);
-
-        //    if (ior.Success)
-        //    {
-        //        JsonValue responseJson = JsonValue.Parse(ior.ResponseString);
-
-        //        ior.WorkShift = new C_WorkShift(responseJson);
-
-        //        if (!WorkShifts.Contains(ior.WorkShift))
-        //            WorkShifts.Add(ior.WorkShift);
-        //    }
-
-        //    return ior;
-        //}
-
-        public C_WorkShift GetWorkShiftById(int id)
-        {
-            var ou = WorkShifts.Where(ws => ws.id == id);
-            return ou.FirstOrDefault();
         }
 
         // ==================== suggestion mgmt ==================
 
         public async Task<List<C_Suggestion>> FetchAllSuggestions(string token)
         {
+            if (UsingTestData)
+            {
+                return _SuggestionCache;
+            }
+
             List<C_Suggestion> res = null;
 
             string submiturl = "/suggestions";
@@ -1779,8 +1243,15 @@ namespace zsquared
             return res;
         }
 
-        public async Task<C_IOResult> AddSuggestion(C_Suggestion sug, string token)
+        public async Task<C_IOResult> CreateSuggestion(C_Suggestion sug, string token)
         {
+            if (UsingTestData)
+            {
+                _SuggestionCache.Add(sug);
+
+                return new C_IOResult() { Success = true };
+            }
+
             string escapedText = sug.Text.Replace("\n", "\\n");
 
             C_JsonBuilder jb = new C_JsonBuilder();
@@ -1822,6 +1293,11 @@ namespace zsquared
         /// <returns>true on success</returns>
         public async Task<C_IOResult> UpdateSuggestion(C_Suggestion sug, string token)
         {
+            if (UsingTestData)
+            {
+                return new C_IOResult() { Success = true };
+            }
+
             string escapedText = sug.Text.Replace("\n", "\\n");
 
             C_JsonBuilder jb = new C_JsonBuilder();
@@ -1843,105 +1319,16 @@ namespace zsquared
         /// <returns>True on success</returns>
         public async Task<C_IOResult> RemoveSuggestion(C_Suggestion sug, string token)
         {
+            if (UsingTestData)
+            {
+                _SuggestionCache.Remove(sug);
+
+                return new C_IOResult() { Success = true };
+            }
+
             string submiturl = "/suggestions/" + sug.id.ToString();
 
             C_IOResult ior = await Upload("DELETE", submiturl, "", token);
-
-            return ior;
-        }
-
-        // ================= signups =============
-
-        /// <summary>
-        /// Adds an intent for the specified user
-        /// </summary>
-        /// <returns>The intent.</returns>
-        /// <param name="token">Token.</param>
-        public async Task<C_IOResult> AddSignUp(C_SignUp signup, string token, int userId)
-        {
-            C_JsonBuilder jb = new C_JsonBuilder();
-            jb.Add(signup.SiteSlug, C_SignUp.N_SiteSlug);
-            jb.Add(signup.Date, C_SignUp.N_Date);
-            jb.Add(userId, C_SignUp.N_UserId);
-            jb.Add(signup.ShiftId, C_SignUp.N_ShiftId);
-            string bodyjson = jb.ToString();
-
-            string submiturl = "/signups/";
-
-            C_IOResult ior = await Upload("POST", submiturl, bodyjson, token);
-
-            try
-            {
-                if (ior.Success)
-                {
-                    JsonValue responseJson = JsonValue.Parse(ior.ResponseString);
-                    C_SignUp wix = new C_SignUp(responseJson);
-                    signup.id = wix.id;
-                }
-            }
-            catch (Exception e)
-            {
-#if DEBUG
-                Console.WriteLine(e.Message);
-#endif
-                ior.Success = false;
-                ior.ResultCode = E_IOResultCode.Exception;
-                ior.ErrorMessage = e.Message;
-            }
-
-            return ior;
-        }
-
-        /// <summary>
-        /// Updates an existing intent
-        /// </summary>
-        /// <returns>The intent.</returns>
-        /// <param name="token">Token.</param>
-        public async Task<C_IOResult> UpdateSignUp(C_SignUp signup, string token)
-        {
-            C_JsonBuilder jb = new C_JsonBuilder();
-            jb.Add(signup.Approved, C_SignUp.N_Approved);
-            jb.Add(signup.Hours, C_SignUp.N_Hours);
-            jb.Add(signup.UserId, C_SignUp.N_UserId);
-            string bodyjson = jb.ToString();
-
-            string submiturl = "/signups/" + signup.id.ToString();
-
-            C_IOResult ior = await Upload("PUT", submiturl, bodyjson, token);
-
-            return ior;
-        }
-
-        /// <summary>
-        /// Removes the intent from the DB
-        /// </summary>
-        /// <returns>The intent.</returns>
-        /// <param name="token">Token.</param>
-        public async Task<C_IOResult> RemoveIntent(C_SignUp signup, string token)
-        {
-            string submiturl = "/signups/" + signup.id.ToString();
-
-            C_IOResult ior = await Upload("DELETE", submiturl, "", token);
-
-            return ior;
-        }
-
-        // ================= registration ================
-
-        public async Task<C_IOResult> SubmitRegistration(string username, string email, string password, string phone, E_Certification cert)
-        {
-            C_JsonBuilder jb = new C_JsonBuilder();
-            jb.Add(username, C_Registration.N_Name);
-            jb.Add(email, C_Registration.N_Email);
-            jb.Add(password, C_Registration.N_Password);
-            jb.Add(password, C_Registration.N_PasswordConfirmation);
-            jb.Add(phone, C_Registration.N_Phone);
-            jb.Add(cert.ToString(), C_Registration.N_Certification);
-            string bodyjson = jb.ToString();
-
-            string submiturl = "/users/";
-
-            C_IOResult ior = await Upload("POST", submiturl, bodyjson, null);
 
             return ior;
         }
@@ -1957,6 +1344,9 @@ namespace zsquared
         /// <param name="authToken">this is the cookie that allows us to access the backend</param>
         public async Task<C_IOResult> RegisterNotificationToken(E_Platform platform, string deviceToken, string authToken)
         {
+            if (UsingTestData)
+                return new C_IOResult() { Success = true };
+
             C_JsonBuilder jb = new C_JsonBuilder();
             jb.Add(deviceToken, C_Notifications.N_RegistrationToken);
             jb.Add(platform.ToString().ToLower(), C_Notifications.N_Platform);
@@ -1973,6 +1363,11 @@ namespace zsquared
 
         public async Task<List<C_Notification>> FetchAllNotifications(string token)
         {
+            if (UsingTestData)
+            {
+                return _NotificationCache;
+            }
+
             List<C_Notification> res = new List<C_Notification>();
 
             string url = "/notification_requests/";
@@ -1995,6 +1390,23 @@ namespace zsquared
 
         public async Task<C_IOResult> UpdateNotification(C_Notification notification, string token)
         {
+            if (UsingTestData)
+            {
+                if (notification.id == -1)
+                {
+                    int xid = -1;
+                    foreach(C_Notification n in _NotificationCache)
+                    {
+                        if (n.id > -1) xid = n.id;
+                    }
+                    notification.id = ++xid;
+
+                    _NotificationCache.Add(notification);
+                }
+
+                return new C_IOResult() { Success = true };
+            }
+
             C_IOResult ior = null;
 
             string auds = notification.Audience == E_NotificationAudience.Volunteers ? "volunteers" : "sc";
@@ -2031,8 +1443,15 @@ namespace zsquared
             return ior;
         }
 
-        public async Task<C_IOResult> DeleteNotification(C_Notification notification, string token)
+        public async Task<C_IOResult> RemoveNotification(C_Notification notification, string token)
         {
+            if (UsingTestData)
+            {
+                _NotificationCache.Remove(notification);
+
+                return new C_IOResult() { Success = true };
+            }
+
             if (notification.id == -1)
             {
                 C_IOResult res = new C_IOResult()
@@ -2051,72 +1470,17 @@ namespace zsquared
 
         public async Task<C_IOResult> SendNotification(C_Notification notification, string token)
         {
+            if (UsingTestData)
+            {
+                notification.SentDT = DateTime.Now;
+                return new C_IOResult() { Success = true };
+            }
+
             string url = "/notification_requests/" + notification.id.ToString() + "/resend/";
             if (notification.SentDT == DateTime.MinValue)
                 url = "/notification_requests/" + notification.id.ToString() + "/send/";
 
             C_IOResult ior = await Upload("POST", url, "", token);
-
-            return ior;
-        }
-
-        // ========================== messages ====================
-
-        public async Task<C_IOResult> GetMessage(E_Language language, string slug)
-        {
-            string acceptLanguage = language == E_Language.Spanish ? "es" : "en";
-
-            string submiturl = "/resources/" + slug + "/";
-
-            C_IOResult ior = await Download(submiturl, null, acceptLanguage);
-
-            if (ior.Success)
-            {
-                JsonValue responseJson = JsonValue.Parse(ior.ResponseString);
-                ior.Message = new C_Message(responseJson);
-            }
-
-            return ior;
-        }
-
-        public async Task<C_IOResult> AddMessage(string token, C_Message english, C_Message spanish)
-        {
-            C_JsonBuilder jb = new C_JsonBuilder();
-            jb.Add(english.Slug, "slug");
-            jb.Add(EscapeText(english.Text), "text_en");
-            jb.Add(EscapeText(spanish.Text), "text_es");
-            string bodyjson = jb.ToString();
-
-            C_IOResult ior = await Upload("POST", "/resources", bodyjson, token);
-
-            return ior;
-        }
-
-        private static string EscapeText(string s)
-        {
-            return s.Replace("\n", "\\n");
-        }
-
-        public async Task<C_IOResult> UpdateMessage(C_Message message, string token)
-        {
-            string submiturl = "/resources/" + message.Slug + "/";
-
-            string messageLanguage = message.Language == E_Language.Spanish ? "text_es" : "text_en";
-
-            C_JsonBuilder jb = new C_JsonBuilder();
-            jb.Add(message.Text, messageLanguage);
-            string bodyjson = jb.ToString();
-
-            C_IOResult ior = await Upload("PUT", submiturl, bodyjson, token);
-
-            return ior;
-        }
-
-        public async Task<C_IOResult> RemoveMessage(C_Message message, string token)
-        {
-            string submiturl = "/resources/" + message.Slug + "/";
-
-            C_IOResult ior = await Upload("DELETE", submiturl, "", token);
 
             return ior;
         }
@@ -2271,7 +1635,7 @@ namespace zsquared
 						retry = retryCount < 3;
 						retryCount++;
 #if DEBUG
-						Console.WriteLine(we.Message);
+                        Console.WriteLine(we.Message);
 #endif
                         if (!retry)
                         {
@@ -2283,7 +1647,7 @@ namespace zsquared
 					else
 					{
 #if DEBUG
-						Console.WriteLine(we.Message);
+                        Console.WriteLine(we.Message);
 #endif
 						retry = false;
                         res.Success = false;
@@ -2294,7 +1658,7 @@ namespace zsquared
 				catch (Exception e)
 				{
 #if DEBUG
-					Console.WriteLine(e.Message);
+                    Console.WriteLine(e.Message);
 #endif
                     retry = false;
                     res.Success = false;
@@ -2309,15 +1673,15 @@ namespace zsquared
 
 		public async Task<C_IOResult> Download(string submiturl, string token = null, string acceptLanguage = null)
 		{
-			bool b = await CheckConfig();
+            bool b = await CheckConfig();
 
-			C_IOResult res = StartIOResult();
+            C_IOResult res = StartIOResult();
 
-			if (res.ResultCode != E_IOResultCode.NoError)
-				return res;
+            if (res.ResultCode != E_IOResultCode.NoError)
+                return res;
 
-			int retryCount = 0;
-			bool retry = false;
+            int retryCount = 0;
+            bool retry = false;
 			do
 			{
 				try
@@ -2335,7 +1699,7 @@ namespace zsquared
 					if (acceptLanguage != null)
 						wc.Headers.Add(HttpRequestHeader.AcceptLanguage, acceptLanguage);
 
-                    if (!submiturl.EndsWith("/"))
+                    if (!submiturl.EndsWith("/", StringComparison.Ordinal))
                         submiturl = submiturl + "/";
                     
 					res.ResponseString = await wc.DownloadStringTaskAsync(submiturl);
@@ -2353,7 +1717,7 @@ namespace zsquared
 						retry = retryCount < 3;
 						retryCount++;
 #if DEBUG
-						Console.WriteLine(we.Message);
+                        Console.WriteLine(we.Message);
 #endif
 						if (!retry)
 						{
@@ -2365,7 +1729,7 @@ namespace zsquared
 					else
 					{
 #if DEBUG
-						Console.WriteLine(we.Message);
+                        Console.WriteLine(we.Message);
 #endif
 						retry = false;
 						res.Success = false;
@@ -2376,7 +1740,7 @@ namespace zsquared
 				catch (Exception e)
 				{
 #if DEBUG
-					Console.WriteLine(e.Message);
+                    Console.WriteLine(e.Message);
 #endif
 					retry = false;
 					res.Success = false;
@@ -2388,5 +1752,5 @@ namespace zsquared
 
 			return res;
 		}
-	}
+    }
 }

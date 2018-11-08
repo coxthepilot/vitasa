@@ -1,12 +1,9 @@
 using Foundation;
-using Xamarin.Forms;
 using System;
 using UIKit;
 using System.IO;
-using MessageUI;
 
 using zsquared;
-
 
 namespace vitavol
 {
@@ -26,9 +23,14 @@ namespace vitavol
             Global = myAppDelegate.Global;
 
             B_Back.TouchUpInside += (sender, e) =>
-            {
                 PerformSegue("Segue_ClientBeforeYouGoToMain", this);
-            };
+        }
+
+        public override void ViewDidAppear(bool animated)
+        {
+            base.ViewDidAppear(animated);
+
+            C_Common.SetUIColors(View);
 
             WV_BeforeYouGo.Delegate = new C_WebViewDelegateAbout(this);
             string fileName = "beforeyougo.html"; // remember case-sensitive

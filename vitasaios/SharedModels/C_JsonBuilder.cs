@@ -1,9 +1,8 @@
-﻿using System;
-using System.Text;
+﻿using System.Text;
 using System.Collections.Generic;
 namespace zsquared
 {
-	public class C_JsonBuilder
+    public class C_JsonBuilder
 	{
 		readonly StringBuilder sb;
 		bool IsFirst;
@@ -48,6 +47,9 @@ namespace zsquared
 				sb.Append(",");
 			IsFirst = false;
 
+            if (date == null)
+                date = new C_YMD(0, 0, 0);
+
 			sb.Append("\"" + name + "\" : \"" + date.ToString("yyyy-mm-dd") + "\"");
 		}
 
@@ -57,6 +59,9 @@ namespace zsquared
 				sb.Append(",");
 			IsFirst = false;
 
+            if (time == null)
+                time = new C_HMS(0, 0, 0);
+
 			sb.Append("\"" + name + "\" : \"" + time.ToString("hh:mm") + "\"");
 		}
 
@@ -65,6 +70,9 @@ namespace zsquared
 			if (!IsFirst)
 				sb.Append(",");
 			IsFirst = false;
+
+            if (s == null)
+                s = "";
 
 			sb.Append("\"" + name + "\" : \"" + s + "\"");
 		}
@@ -78,7 +86,16 @@ namespace zsquared
             sb.Append("\"" + name + "\" : \"" + f.ToString("R") + "\"");
 		}
 
-		public void StartArray(string name)
+        public void Add(double f, string name)
+        {
+            if (!IsFirst)
+                sb.Append(",");
+            IsFirst = false;
+
+            sb.Append("\"" + name + "\" : \"" + f.ToString("R") + "\"");
+        }
+
+        public void StartArray(string name)
 		{
 			if (!IsFirst)
 				sb.Append(",");
@@ -105,5 +122,14 @@ namespace zsquared
 
 			sb.Append("\"" + s + "\"");
 		}
-	}
+
+        public void AddArrayObject(string s)
+        {
+            if (!IsFirst)
+                sb.Append(",");
+            IsFirst = false;
+
+            sb.Append(s);
+        }
+    }
 }

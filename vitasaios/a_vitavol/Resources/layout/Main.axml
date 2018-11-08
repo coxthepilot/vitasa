@@ -1,89 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bkgnd"
+    android:id="@+id/V_MainActivity"
     android:orientation="vertical">
     <TextView
-        android:textAppearance="?android:attr/textAppearanceLarge"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/textView2"
-        android:text="For Volunteers and Site Coordinators"
-        android:gravity="center_horizontal" />
+        android:id="@+id/L_Title"
+        android:text="VITA San Antonio"
+        android:gravity="center"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        android:textColor="@android:color/white" />
     <Space
         android:layout_width="match_parent"
         android:layout_height="20dp"
         android:id="@+id/space1" />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/B_FindASite"
+        android:textColor="#FFFFFFFF"
+        android:text="Find a Site Near You"
+        android:background="#E013436b" />
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:id="@+id/space2" />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/B_BeforeYouGo"
+        android:textColor="#FFFFFFFF"
+        android:text="Before You Go"
+        android:background="#E013436b" />
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:id="@+id/space4"
+        android:layout_marginBottom="0.0dp" />
     <TextView
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/textView3"
-        android:text="Email"
-        android:textStyle="bold" />
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:singleLine="true"
-        android:id="@+id/TB_Email"
-        android:background="#C0FFFFFF"
-        android:textColor="#FF000000"
-        android:hint="email"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:inputType="textEmailAddress" />
-    <TextView
-        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="For Volunteers and Site Coordinators"
+        android:textStyle="bold"
+        android:gravity="center_horizontal"
+        android:textColor="@android:color/white"
+        android:layout_marginTop="100dp" />
+    <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/textView4"
-        android:text="Password"
-        android:textStyle="bold" />
-    <EditText
+        android:id="@+id/B_StaffAccess"
+        android:textColor="#FFFFFFFF"
+        android:text="Staff Access"
+        android:background="#E013436b" />
+    <ProgressBar
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:id="@+id/TB_Password"
-        android:singleLine="true"
-        android:hint="password"
-        android:background="#C0FFFFFF"
-        android:textColor="#FF000000"
-        android:password="true"
-        android:paddingRight="10dp"
-        android:paddingLeft="10dp" />
+        android:layout_height="wrap_content"
+        android:id="@+id/PB_Busy"
+        android:indeterminate="true"
+        android:visibility="gone" />
     <Space
         android:layout_width="match_parent"
         android:layout_height="20dp"
-        android:id="@+id/space2"
-        android:paddingTop="0dp" />
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/B_Login"
-        android:text="Login"
-        android:textColor="#FF000000"
-        android:backgroundTint="#F0FFFFFF" />
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:id="@+id/space3" />
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/B_Register"
-        android:text="Register"
-        android:textColor="#FFFFFFFF"
-        android:backgroundTint="#C0202020" />
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:id="@+id/space4" />
+        android:id="@+id/space2" />
     <Button
         android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:id="@+id/B_About"
         android:text="About"
         android:textColor="#FFFFFFFF"
-        android:backgroundTint="#C0202020"
-        android:gravity="center" />
+        android:gravity="center"
+        android:background="#E013436b" />
 </LinearLayout>

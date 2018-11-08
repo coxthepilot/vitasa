@@ -46,7 +46,7 @@ namespace a_vitavol
 				List<C_VitaSite> OurSites = new List<C_VitaSite>();
 				foreach (C_SiteCoordinated sc in LoggedInUser.SitesCoordinated)
 				{
-                    C_VitaSite site = await Global.GetSiteFromCache(sc.Slug);
+                    C_VitaSite site = await Global.FetchSiteWithSlug(sc.Slug);
                     OurSites.Add(site);
 				}
 
@@ -104,7 +104,7 @@ namespace a_vitavol
 
 				View view = convertView;
 				if (view == null) // no view to re-use, create new
-					view = context.LayoutInflater.Inflate(Resource.Layout.SuggestionCell, null);
+                    view = context.LayoutInflater.Inflate(Resource.Layout.ListViewCell, null);
 
 
                 string a = item.Street + ", " + item.City + " " + item.Zip;

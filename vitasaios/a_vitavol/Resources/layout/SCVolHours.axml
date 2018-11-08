@@ -1,56 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
+    android:id="@+id/V_SCVolHours"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <TextView
-        android:textAppearance="?android:attr/textAppearanceMedium"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/L_Date"
-        android:gravity="center_horizontal"
-        android:text="...date..." />
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:id="@+id/textView1"
+        android:gravity="center"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:text="Volunteer Hours"
+        android:textColor="@android:color/white"
+        android:background="#FF13436B" />
     <TextView
-        android:textAppearance="?android:attr/textAppearanceMedium"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/L_Site"
-        android:gravity="center_horizontal"
-        android:text="...site..." />
-    <TextView
-        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:id="@+id/L_SiteName"
+        android:gravity="center"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:text="[site name]"
+        android:textColor="@android:color/white"
+        android:background="#FF13436B" />
+    <Spinner
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/L_User"
-        android:gravity="center_horizontal"
-        android:text="...user..." />
-    <TextView
-        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/SP_Date" />
+    <ProgressBar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/L_Phone"
-        android:gravity="center_horizontal"
-        android:text="...phone..." />
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:id="@+id/space1" />
-    <TextView
-        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:id="@+id/PB_Busy"
+        android:indeterminate="true"
+        android:visibility="gone" />
+    <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/textView5"
-        android:text="Hours" />
-    <EditText
-        android:inputType="numberDecimal"
-        android:layout_width="match_parent"
-        android:singleLine="true"
-        android:layout_height="wrap_content"
-        android:id="@+id/TB_Hours" />
-    <TextView
-        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:id="@+id/B_MarkApproved"
+        android:text="Mark All As Approved"
+        android:textColor="@android:color/white"
+        android:background="#ff216093" />
+    <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/L_Approval"
-        android:text="...approval..." />
+        android:id="@+id/B_Add"
+        android:text="Add Volunteer and Hours"
+        android:textColor="@android:color/white"
+        android:background="#ff216093"
+        android:layout_marginTop="4dp" />
+    <ListView
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/LV_List" />
 </LinearLayout>

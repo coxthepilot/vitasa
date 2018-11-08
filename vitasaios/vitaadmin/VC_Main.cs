@@ -106,6 +106,11 @@ namespace vitaadmin
                     PresentViewController(mailController, true, null);
                 }
             };
+
+            B_Stats.TouchUpInside += (sender, e) => 
+            {
+                PerformSegue("Segue_MainToStats", this);
+            };
         }
     }
 }

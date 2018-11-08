@@ -1,8 +1,8 @@
 _xamarin_timezone_get_data
 _xamarin_GetFolderPath
 _xamarin_log
-_UIApplicationMain
 _xamarin_get_block_descriptor
+_UIApplicationMain
 _CreateZStream
 _CloseZStream
 _Flush
@@ -17,8 +17,8 @@ _xamarin_dyn_objc_msgSendSuper_stret
 _xamarin_timezone_get_data
 _xamarin_GetFolderPath
 _xamarin_log
-_UIApplicationMain
 _xamarin_get_block_descriptor
+_UIApplicationMain
 _CreateZStream
 _CloseZStream
 _Flush

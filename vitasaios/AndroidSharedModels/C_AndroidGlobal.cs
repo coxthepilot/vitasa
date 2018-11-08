@@ -9,7 +9,7 @@ using Android.Widget;
 
 namespace zsquared
 {
-    public class C_AndroidGlobal
+    public class C_AndroidGlobalX
     {
         public Activity CurrentActivity;
     }

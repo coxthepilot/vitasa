@@ -95,7 +95,7 @@ namespace vitaadmin
             {
                 Task.Run(async () =>
                 {
-                    C_VitaUser u = await Global.GetUserFromCache(s.UserId);
+                    C_VitaUser u = await Global.FetchUserWithId(s.UserId);
 
                     UIApplication.SharedApplication.InvokeOnMainThread(
                     new Action(() =>
