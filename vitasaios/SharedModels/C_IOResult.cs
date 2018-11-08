@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Collections.Generic;
 namespace zsquared
 {
     public class C_IOResult
@@ -10,8 +10,5 @@ namespace zsquared
 
         public C_VitaSite Site;
         public C_VitaUser User;
-        public C_SignUp SignUp;
-        public C_WorkShift WorkShift;
-        public C_Message Message;
     }
 }

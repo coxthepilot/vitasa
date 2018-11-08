@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\Xamarin.Build.Download.0.4.7\build\Xamarin.Build.Download.props" Condition="Exists('..\packages\Xamarin.Build.Download.0.4.7\build\Xamarin.Build.Download.props')" />
+  <Import Project="..\packages\Xamarin.Forms.3.3.0.912540\build\Xamarin.Forms.props" Condition="Exists('..\packages\Xamarin.Forms.3.3.0.912540\build\Xamarin.Forms.props')" />
+  <Import Project="..\packages\Xamarin.Build.Download.0.4.11\build\Xamarin.Build.Download.props" Condition="Exists('..\packages\Xamarin.Build.Download.0.4.11\build\Xamarin.Build.Download.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -9,7 +10,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>a_vitavol</RootNamespace>
     <AssemblyName>a_vitavol</AssemblyName>
-    <TargetFrameworkVersion>v8.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v9.0</TargetFrameworkVersion>
     <AndroidApplication>True</AndroidApplication>
     <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
     <AndroidResgenClass>Resource</AndroidResgenClass>
@@ -18,7 +19,7 @@
     <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
     <AndroidUseLatestPlatformSdk>true</AndroidUseLatestPlatformSdk>
     <AndroidEnableMultiDex>true</AndroidEnableMultiDex>
-    <ReleaseVersion>1.4</ReleaseVersion>
+    <ReleaseVersion>2.0</ReleaseVersion>
     <SynchReleaseVersion>false</SynchReleaseVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -50,51 +51,106 @@
     <Reference Include="System.Json" />
     <Reference Include="System.Net" />
     <Reference Include="System.Net.Http" />
-    <Reference Include="Xamarin.GooglePlayServices.Basement">
-      <HintPath>..\packages\Xamarin.GooglePlayServices.Basement.42.1021.1\lib\MonoAndroid70\Xamarin.GooglePlayServices.Basement.dll</HintPath>
-    </Reference>
-    <Reference Include="Xamarin.GooglePlayServices.Tasks">
-      <HintPath>..\packages\Xamarin.GooglePlayServices.Tasks.42.1021.1\lib\MonoAndroid70\Xamarin.GooglePlayServices.Tasks.dll</HintPath>
-    </Reference>
-    <Reference Include="Xamarin.GooglePlayServices.Base">
-      <HintPath>..\packages\Xamarin.GooglePlayServices.Base.42.1021.1\lib\MonoAndroid70\Xamarin.GooglePlayServices.Base.dll</HintPath>
-    </Reference>
-    <Reference Include="Xamarin.Firebase.Common">
-      <HintPath>..\packages\Xamarin.Firebase.Common.42.1021.1\lib\MonoAndroid70\Xamarin.Firebase.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="Xamarin.Firebase.Iid">
-      <HintPath>..\packages\Xamarin.Firebase.Iid.42.1021.1\lib\MonoAndroid70\Xamarin.Firebase.Iid.dll</HintPath>
-    </Reference>
-    <Reference Include="Xamarin.Firebase.Messaging">
-      <HintPath>..\packages\Xamarin.Firebase.Messaging.42.1021.1\lib\MonoAndroid70\Xamarin.Firebase.Messaging.dll</HintPath>
-    </Reference>
-    <Reference Include="Xamarin.GooglePlayServices.Maps">
-      <HintPath>..\packages\Xamarin.GooglePlayServices.Maps.42.1021.1\lib\MonoAndroid70\Xamarin.GooglePlayServices.Maps.dll</HintPath>
-    </Reference>
     <Reference Include="Xamarin.Android.Support.Annotations">
-      <HintPath>..\packages\Xamarin.Android.Support.Annotations.25.4.0.2\lib\MonoAndroid70\Xamarin.Android.Support.Annotations.dll</HintPath>
+      <HintPath>..\packages\Xamarin.Android.Support.Annotations.27.0.2.1\lib\MonoAndroid81\Xamarin.Android.Support.Annotations.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Android.Arch.Core.Common">
+      <HintPath>..\packages\Xamarin.Android.Arch.Core.Common.1.0.0.1\lib\MonoAndroid80\Xamarin.Android.Arch.Core.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Android.Arch.Lifecycle.Common">
+      <HintPath>..\packages\Xamarin.Android.Arch.Lifecycle.Common.1.0.3.1\lib\MonoAndroid80\Xamarin.Android.Arch.Lifecycle.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Android.Arch.Lifecycle.Runtime">
+      <HintPath>..\packages\Xamarin.Android.Arch.Lifecycle.Runtime.1.0.3.1\lib\MonoAndroid80\Xamarin.Android.Arch.Lifecycle.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="Xamarin.Android.Support.Compat">
-      <HintPath>..\packages\Xamarin.Android.Support.Compat.25.4.0.2\lib\MonoAndroid70\Xamarin.Android.Support.Compat.dll</HintPath>
+      <HintPath>..\packages\Xamarin.Android.Support.Compat.27.0.2.1\lib\MonoAndroid81\Xamarin.Android.Support.Compat.dll</HintPath>
     </Reference>
     <Reference Include="Xamarin.Android.Support.Core.UI">
-      <HintPath>..\packages\Xamarin.Android.Support.Core.UI.25.4.0.2\lib\MonoAndroid70\Xamarin.Android.Support.Core.UI.dll</HintPath>
+      <HintPath>..\packages\Xamarin.Android.Support.Core.UI.27.0.2.1\lib\MonoAndroid81\Xamarin.Android.Support.Core.UI.dll</HintPath>
     </Reference>
     <Reference Include="Xamarin.Android.Support.Core.Utils">
-      <HintPath>..\packages\Xamarin.Android.Support.Core.Utils.25.4.0.2\lib\MonoAndroid70\Xamarin.Android.Support.Core.Utils.dll</HintPath>
-    </Reference>
-    <Reference Include="Xamarin.Android.Support.Media.Compat">
-      <HintPath>..\packages\Xamarin.Android.Support.Media.Compat.25.4.0.2\lib\MonoAndroid70\Xamarin.Android.Support.Media.Compat.dll</HintPath>
+      <HintPath>..\packages\Xamarin.Android.Support.Core.Utils.27.0.2.1\lib\MonoAndroid81\Xamarin.Android.Support.Core.Utils.dll</HintPath>
     </Reference>
     <Reference Include="Xamarin.Android.Support.Fragment">
-      <HintPath>..\packages\Xamarin.Android.Support.Fragment.25.4.0.2\lib\MonoAndroid70\Xamarin.Android.Support.Fragment.dll</HintPath>
+      <HintPath>..\packages\Xamarin.Android.Support.Fragment.27.0.2.1\lib\MonoAndroid81\Xamarin.Android.Support.Fragment.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Android.Support.Media.Compat">
+      <HintPath>..\packages\Xamarin.Android.Support.Media.Compat.27.0.2.1\lib\MonoAndroid81\Xamarin.Android.Support.Media.Compat.dll</HintPath>
     </Reference>
     <Reference Include="Xamarin.Android.Support.v4">
-      <HintPath>..\packages\Xamarin.Android.Support.v4.25.4.0.2\lib\MonoAndroid70\Xamarin.Android.Support.v4.dll</HintPath>
+      <HintPath>..\packages\Xamarin.Android.Support.v4.27.0.2.1\lib\MonoAndroid81\Xamarin.Android.Support.v4.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.GooglePlayServices.Basement">
+      <HintPath>..\packages\Xamarin.GooglePlayServices.Basement.60.1142.1\lib\MonoAndroid80\Xamarin.GooglePlayServices.Basement.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.GooglePlayServices.Tasks">
+      <HintPath>..\packages\Xamarin.GooglePlayServices.Tasks.60.1142.1\lib\MonoAndroid80\Xamarin.GooglePlayServices.Tasks.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Firebase.Common">
+      <HintPath>..\packages\Xamarin.Firebase.Common.60.1142.1\lib\MonoAndroid80\Xamarin.Firebase.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Firebase.Iid">
+      <HintPath>..\packages\Xamarin.Firebase.Iid.60.1142.1\lib\MonoAndroid80\Xamarin.Firebase.Iid.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Firebase.Messaging">
+      <HintPath>..\packages\Xamarin.Firebase.Messaging.60.1142.1\lib\MonoAndroid80\Xamarin.Firebase.Messaging.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.GooglePlayServices.Base">
+      <HintPath>..\packages\Xamarin.GooglePlayServices.Base.60.1142.1\lib\MonoAndroid80\Xamarin.GooglePlayServices.Base.dll</HintPath>
     </Reference>
     <Reference Include="Xamarin.GooglePlayServices.Location">
-      <HintPath>..\packages\Xamarin.GooglePlayServices.Location.42.1021.1\lib\MonoAndroid70\Xamarin.GooglePlayServices.Location.dll</HintPath>
+      <HintPath>..\packages\Xamarin.GooglePlayServices.Location.60.1142.1\lib\MonoAndroid80\Xamarin.GooglePlayServices.Location.dll</HintPath>
     </Reference>
+    <Reference Include="Xamarin.GooglePlayServices.Maps">
+      <HintPath>..\packages\Xamarin.GooglePlayServices.Maps.60.1142.1\lib\MonoAndroid80\Xamarin.GooglePlayServices.Maps.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Android.Support.Transition">
+      <HintPath>..\packages\Xamarin.Android.Support.Transition.27.0.2.1\lib\MonoAndroid81\Xamarin.Android.Support.Transition.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Android.Support.v7.CardView">
+      <HintPath>..\packages\Xamarin.Android.Support.v7.CardView.27.0.2.1\lib\MonoAndroid81\Xamarin.Android.Support.v7.CardView.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Android.Support.v7.Palette">
+      <HintPath>..\packages\Xamarin.Android.Support.v7.Palette.27.0.2.1\lib\MonoAndroid81\Xamarin.Android.Support.v7.Palette.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Android.Support.v7.RecyclerView">
+      <HintPath>..\packages\Xamarin.Android.Support.v7.RecyclerView.27.0.2.1\lib\MonoAndroid81\Xamarin.Android.Support.v7.RecyclerView.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Android.Support.Vector.Drawable">
+      <HintPath>..\packages\Xamarin.Android.Support.Vector.Drawable.27.0.2.1\lib\MonoAndroid81\Xamarin.Android.Support.Vector.Drawable.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Android.Support.Animated.Vector.Drawable">
+      <HintPath>..\packages\Xamarin.Android.Support.Animated.Vector.Drawable.27.0.2.1\lib\MonoAndroid81\Xamarin.Android.Support.Animated.Vector.Drawable.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Android.Support.v7.AppCompat">
+      <HintPath>..\packages\Xamarin.Android.Support.v7.AppCompat.27.0.2.1\lib\MonoAndroid81\Xamarin.Android.Support.v7.AppCompat.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Android.Support.Design">
+      <HintPath>..\packages\Xamarin.Android.Support.Design.27.0.2.1\lib\MonoAndroid81\Xamarin.Android.Support.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Android.Support.v7.MediaRouter">
+      <HintPath>..\packages\Xamarin.Android.Support.v7.MediaRouter.27.0.2.1\lib\MonoAndroid81\Xamarin.Android.Support.v7.MediaRouter.dll</HintPath>
+    </Reference>
+    <Reference Include="FormsViewGroup">
+      <HintPath>..\packages\Xamarin.Forms.3.3.0.912540\lib\MonoAndroid10\FormsViewGroup.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Forms.Core">
+      <HintPath>..\packages\Xamarin.Forms.3.3.0.912540\lib\MonoAndroid10\Xamarin.Forms.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Forms.Platform.Android">
+      <HintPath>..\packages\Xamarin.Forms.3.3.0.912540\lib\MonoAndroid10\Xamarin.Forms.Platform.Android.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Forms.Platform">
+      <HintPath>..\packages\Xamarin.Forms.3.3.0.912540\lib\MonoAndroid10\Xamarin.Forms.Platform.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Forms.Xaml">
+      <HintPath>..\packages\Xamarin.Forms.3.3.0.912540\lib\MonoAndroid10\Xamarin.Forms.Xaml.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Maps.Utils.Droid">
+      <HintPath>..\packages\Xamarin.Google.Maps.Utils.1.0.0\lib\monoandroid81\Google.Maps.Utils.Droid.dll</HintPath>
+    </Reference>
+    <Reference Include="Java.Interop" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainActivity.cs" />
@@ -102,37 +158,51 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="AppDelegate.cs" />
     <Compile Include="A_About.cs" />
-    <Compile Include="A_MySignUps.cs" />
-    <Compile Include="A_Profile.cs" />
-    <Compile Include="A_Registration.cs" />
-    <Compile Include="A_SCCalendar.cs" />
-    <Compile Include="A_SCMySite.cs" />
-    <Compile Include="A_SCMySites.cs" />
-    <Compile Include="A_SCSiteVol.cs" />
     <Compile Include="A_SCVolHours.cs" />
     <Compile Include="A_Suggestion.cs" />
-    <Compile Include="A_Suggestions.cs" />
     <Compile Include="A_ViewNotification.cs" />
-    <Compile Include="A_ViewSignUpExisting.cs" />
-    <Compile Include="A_ViewSignUpNew.cs" />
-    <Compile Include="A_VolCalendar.cs" />
-    <Compile Include="A_VolPickSite.cs" />
-    <Compile Include="A_VolPickSiteMap.cs" />
-    <Compile Include="A_VolunteerActivity.cs" />
-    <Compile Include="A_SCSiteVolCalendar.cs" />
-    <Compile Include="A_VolPickShift.cs" />
-    <Compile Include="A_SCSiteShifts.cs" />
-    <Compile Include="A_SCSiteCalShifts.cs" />
-    <Compile Include="A_SCShiftDetails.cs" />
+    <Compile Include="A_BeforeYouGo.cs" />
+    <Compile Include="A_SitesMap.cs" />
+    <Compile Include="A_SiteDetails.cs" />
+    <Compile Include="A_SiteCalendar.cs" />
+    <Compile Include="A_SitesFilter.cs" />
+    <Compile Include="A_Login.cs" />
+    <Compile Include="A_VolHome.cs" />
+    <Compile Include="A_SCSites.cs" />
+    <Compile Include="A_AdminMenu.cs" />
+    <Compile Include="A_EditHours.cs" />
+    <Compile Include="A_VolEditSettings.cs" />
+    <Compile Include="A_VolHoursWorked.cs" />
+    <Compile Include="A_SCSite.cs" />
+    <Compile Include="A_SCAddVolHours.cs" />
+    <Compile Include="A_AdminUsers.cs" />
+    <Compile Include="A_AdminSites.cs" />
+    <Compile Include="A_AdminNotifications.cs" />
+    <Compile Include="A_AdminSuggestions.cs" />
+    <Compile Include="A_AdminUser.cs" />
+    <Compile Include="A_AdminUserSites.cs" />
+    <Compile Include="A_AdminSite.cs" />
+    <Compile Include="A_AdminSiteLocation.cs" />
+    <Compile Include="A_AdminSiteDetails.cs" />
+    <Compile Include="A_AdminSiteCalendar.cs" />
+    <Compile Include="A_AdminSiteCalReset.cs" />
+    <Compile Include="A_AdminSiteCoord.cs" />
+    <Compile Include="A_AdminNotification.cs" />
+    <Compile Include="A_AdminSuggestion.cs" />
+    <Compile Include="A_CalendarDateDetails.cs" />
+    <Compile Include="A_AdminSiteCalResetAction.cs" />
+    <Compile Include="A_AdminEmailDistroMgmt.cs" />
+    <Compile Include="A_AdminMobile.cs" />
+    <Compile Include="A_AdminMobileDate.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\AndroidManifest.xml" />
     <None Include="Assets\AboutAssets.txt" />
     <None Include="LICENSE.txt" />
-    <None Include="packages.config" />
     <None Include="ToDo.txt" />
     <None Include="showdebugkey.txt" />
     <None Include="showreleasekey.txt" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\Main.axml" />
@@ -144,24 +214,9 @@
     <AndroidResource Include="Resources\mipmap-xxxhdpi\Icon.png" />
     <AndroidResource Include="Resources\layout\About.axml" />
     <AndroidResource Include="Resources\layout\GridCell.axml" />
-    <AndroidResource Include="Resources\layout\MySignUps.axml" />
-    <AndroidResource Include="Resources\layout\Profile.axml" />
-    <AndroidResource Include="Resources\layout\Registration.axml" />
-    <AndroidResource Include="Resources\layout\SCCalendar.axml" />
-    <AndroidResource Include="Resources\layout\SCMySite.axml" />
-    <AndroidResource Include="Resources\layout\SCMySites.axml" />
-    <AndroidResource Include="Resources\layout\SCSiteVol.axml" />
     <AndroidResource Include="Resources\layout\SCVolHours.axml" />
     <AndroidResource Include="Resources\layout\Suggestion.axml" />
-    <AndroidResource Include="Resources\layout\SuggestionCell.axml" />
-    <AndroidResource Include="Resources\layout\Suggestions.axml" />
     <AndroidResource Include="Resources\layout\ViewNotification.axml" />
-    <AndroidResource Include="Resources\layout\ViewSignUpExisting.axml" />
-    <AndroidResource Include="Resources\layout\ViewSignUpNew.axml" />
-    <AndroidResource Include="Resources\layout\VolCalendar.axml" />
-    <AndroidResource Include="Resources\layout\VolPickSite.axml" />
-    <AndroidResource Include="Resources\layout\VolPickSiteMap.axml" />
-    <AndroidResource Include="Resources\layout\VolunteerOptions.axml" />
     <AndroidResource Include="Resources\drawable\background.jpg" />
     <AndroidResource Include="Resources\drawable\bkgnd.xml" />
     <AndroidResource Include="Resources\drawable\closed.jpg" />
@@ -172,12 +227,43 @@
     <AndroidResource Include="Resources\drawable\openwithneedsboxed.jpg" />
     <AndroidResource Include="Resources\drawable\riverwalk.jpg" />
     <AndroidResource Include="Resources\drawable\riverwalk2.jpg" />
-    <AndroidResource Include="Resources\layout\SCSiteVolCalendar.axml" />
-    <AndroidResource Include="Resources\layout\VolPickShift.axml" />
-    <AndroidResource Include="Resources\layout\SCSiteShifts.axml" />
-    <AndroidResource Include="Resources\layout\SCSiteCalShifts.axml" />
-    <AndroidResource Include="Resources\layout\SCShiftDetails.axml" />
     <AndroidResource Include="Resources\drawable\vitasaicon.png" />
+    <AndroidResource Include="Resources\layout\Login.axml" />
+    <AndroidResource Include="Resources\layout\BeforeYouGo.axml" />
+    <AndroidResource Include="Resources\drawable\sariverwalk4.jpg" />
+    <AndroidResource Include="Resources\layout\SitesMap.axml" />
+    <AndroidResource Include="Resources\layout\SiteDetails.axml" />
+    <AndroidResource Include="Resources\layout\SiteCalendar.axml" />
+    <AndroidResource Include="Resources\layout\ListViewCell.axml" />
+    <AndroidResource Include="Resources\layout\SitesFilter.axml" />
+    <AndroidResource Include="Resources\layout\VolHome.axml" />
+    <AndroidResource Include="Resources\layout\VolHoursWorked.axml" />
+    <AndroidResource Include="Resources\layout\EditHours.axml" />
+    <AndroidResource Include="Resources\layout\VolEditSettings.axml" />
+    <AndroidResource Include="Resources\layout\SCSites.axml" />
+    <AndroidResource Include="Resources\layout\SCSite.axml" />
+    <AndroidResource Include="Resources\layout\AdminMenu.axml" />
+    <AndroidResource Include="Resources\layout\AdminUser.axml" />
+    <AndroidResource Include="Resources\layout\AdminUsers.axml" />
+    <AndroidResource Include="Resources\layout\AdminUserSites.axml" />
+    <AndroidResource Include="Resources\layout\AdminSites.axml" />
+    <AndroidResource Include="Resources\layout\AdminSite.axml" />
+    <AndroidResource Include="Resources\layout\AdminSiteLocation.axml" />
+    <AndroidResource Include="Resources\layout\AdminSiteDetails.axml" />
+    <AndroidResource Include="Resources\layout\AdminSiteCalendar.axml" />
+    <AndroidResource Include="Resources\layout\AdminSiteCalReset.axml" />
+    <AndroidResource Include="Resources\layout\AdminSiteCoord.axml" />
+    <AndroidResource Include="Resources\layout\AdminNotifications.axml" />
+    <AndroidResource Include="Resources\layout\AdminNotification.axml" />
+    <AndroidResource Include="Resources\layout\AdminSuggestions.axml" />
+    <AndroidResource Include="Resources\layout\AdminSuggestion.axml" />
+    <AndroidResource Include="Resources\layout\SCAddVolHours.axml" />
+    <AndroidResource Include="Resources\layout\SpinnerItem.axml" />
+    <AndroidResource Include="Resources\layout\CalendarDateDetails.axml" />
+    <AndroidResource Include="Resources\layout\AdminSiteCalResetAction.axml" />
+    <AndroidResource Include="Resources\layout\AdminEmailDistroMgmt.axml" />
+    <AndroidResource Include="Resources\layout\AdminMobile.axml" />
+    <AndroidResource Include="Resources\layout\AdminMobileDate.axml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable\" />
@@ -187,23 +273,44 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\about.htm" />
+    <AndroidAsset Include="Assets\beforeyougo.htm" />
+    <AndroidAsset Include="Assets\MarkerPinFlagBlack50.png" />
+    <AndroidAsset Include="Assets\MarkerPinFlagGreen50.png" />
+    <AndroidAsset Include="Assets\MarkerPinFlagRed50.png" />
+    <AndroidAsset Include="Assets\MarkerPinFlagWhite50.png" />
+    <AndroidAsset Include="Assets\testdata_sites.json" />
+    <AndroidAsset Include="Assets\testdata_users.json" />
   </ItemGroup>
   <Import Project="..\AndroidSharedModels\AndroidSharedModels.projitems" Label="Shared" Condition="Exists('..\AndroidSharedModels\AndroidSharedModels.projitems')" />
   <Import Project="..\SharedModels\SharedModels.projitems" Label="Shared" Condition="Exists('..\SharedModels\SharedModels.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
-  <Import Project="..\packages\Xamarin.GooglePlayServices.Basement.42.1021.1\build\MonoAndroid70\Xamarin.GooglePlayServices.Basement.targets" Condition="Exists('..\packages\Xamarin.GooglePlayServices.Basement.42.1021.1\build\MonoAndroid70\Xamarin.GooglePlayServices.Basement.targets')" />
-  <Import Project="..\packages\Xamarin.GooglePlayServices.Tasks.42.1021.1\build\MonoAndroid70\Xamarin.GooglePlayServices.Tasks.targets" Condition="Exists('..\packages\Xamarin.GooglePlayServices.Tasks.42.1021.1\build\MonoAndroid70\Xamarin.GooglePlayServices.Tasks.targets')" />
-  <Import Project="..\packages\Xamarin.GooglePlayServices.Base.42.1021.1\build\MonoAndroid70\Xamarin.GooglePlayServices.Base.targets" Condition="Exists('..\packages\Xamarin.GooglePlayServices.Base.42.1021.1\build\MonoAndroid70\Xamarin.GooglePlayServices.Base.targets')" />
-  <Import Project="..\packages\Xamarin.Firebase.Common.42.1021.1\build\MonoAndroid70\Xamarin.Firebase.Common.targets" Condition="Exists('..\packages\Xamarin.Firebase.Common.42.1021.1\build\MonoAndroid70\Xamarin.Firebase.Common.targets')" />
-  <Import Project="..\packages\Xamarin.Firebase.Iid.42.1021.1\build\MonoAndroid70\Xamarin.Firebase.Iid.targets" Condition="Exists('..\packages\Xamarin.Firebase.Iid.42.1021.1\build\MonoAndroid70\Xamarin.Firebase.Iid.targets')" />
-  <Import Project="..\packages\Xamarin.Firebase.Messaging.42.1021.1\build\MonoAndroid70\Xamarin.Firebase.Messaging.targets" Condition="Exists('..\packages\Xamarin.Firebase.Messaging.42.1021.1\build\MonoAndroid70\Xamarin.Firebase.Messaging.targets')" />
-  <Import Project="..\packages\Xamarin.GooglePlayServices.Maps.42.1021.1\build\MonoAndroid70\Xamarin.GooglePlayServices.Maps.targets" Condition="Exists('..\packages\Xamarin.GooglePlayServices.Maps.42.1021.1\build\MonoAndroid70\Xamarin.GooglePlayServices.Maps.targets')" />
-  <Import Project="..\packages\Xamarin.Android.Support.Compat.25.4.0.2\build\MonoAndroid70\Xamarin.Android.Support.Compat.targets" Condition="Exists('..\packages\Xamarin.Android.Support.Compat.25.4.0.2\build\MonoAndroid70\Xamarin.Android.Support.Compat.targets')" />
-  <Import Project="..\packages\Xamarin.Android.Support.Core.UI.25.4.0.2\build\MonoAndroid70\Xamarin.Android.Support.Core.UI.targets" Condition="Exists('..\packages\Xamarin.Android.Support.Core.UI.25.4.0.2\build\MonoAndroid70\Xamarin.Android.Support.Core.UI.targets')" />
-  <Import Project="..\packages\Xamarin.Android.Support.Core.Utils.25.4.0.2\build\MonoAndroid70\Xamarin.Android.Support.Core.Utils.targets" Condition="Exists('..\packages\Xamarin.Android.Support.Core.Utils.25.4.0.2\build\MonoAndroid70\Xamarin.Android.Support.Core.Utils.targets')" />
-  <Import Project="..\packages\Xamarin.Android.Support.Media.Compat.25.4.0.2\build\MonoAndroid70\Xamarin.Android.Support.Media.Compat.targets" Condition="Exists('..\packages\Xamarin.Android.Support.Media.Compat.25.4.0.2\build\MonoAndroid70\Xamarin.Android.Support.Media.Compat.targets')" />
-  <Import Project="..\packages\Xamarin.Android.Support.Fragment.25.4.0.2\build\MonoAndroid70\Xamarin.Android.Support.Fragment.targets" Condition="Exists('..\packages\Xamarin.Android.Support.Fragment.25.4.0.2\build\MonoAndroid70\Xamarin.Android.Support.Fragment.targets')" />
-  <Import Project="..\packages\Xamarin.Android.Support.v4.25.4.0.2\build\MonoAndroid70\Xamarin.Android.Support.v4.targets" Condition="Exists('..\packages\Xamarin.Android.Support.v4.25.4.0.2\build\MonoAndroid70\Xamarin.Android.Support.v4.targets')" />
-  <Import Project="..\packages\Xamarin.Build.Download.0.4.7\build\Xamarin.Build.Download.targets" Condition="Exists('..\packages\Xamarin.Build.Download.0.4.7\build\Xamarin.Build.Download.targets')" />
-  <Import Project="..\packages\Xamarin.GooglePlayServices.Location.42.1021.1\build\MonoAndroid70\Xamarin.GooglePlayServices.Location.targets" Condition="Exists('..\packages\Xamarin.GooglePlayServices.Location.42.1021.1\build\MonoAndroid70\Xamarin.GooglePlayServices.Location.targets')" />
+  <Import Project="..\packages\Xamarin.Android.Support.Annotations.27.0.2.1\build\MonoAndroid81\Xamarin.Android.Support.Annotations.targets" Condition="Exists('..\packages\Xamarin.Android.Support.Annotations.27.0.2.1\build\MonoAndroid81\Xamarin.Android.Support.Annotations.targets')" />
+  <Import Project="..\packages\Xamarin.Android.Arch.Core.Common.1.0.0.1\build\MonoAndroid80\Xamarin.Android.Arch.Core.Common.targets" Condition="Exists('..\packages\Xamarin.Android.Arch.Core.Common.1.0.0.1\build\MonoAndroid80\Xamarin.Android.Arch.Core.Common.targets')" />
+  <Import Project="..\packages\Xamarin.Android.Arch.Lifecycle.Common.1.0.3.1\build\MonoAndroid80\Xamarin.Android.Arch.Lifecycle.Common.targets" Condition="Exists('..\packages\Xamarin.Android.Arch.Lifecycle.Common.1.0.3.1\build\MonoAndroid80\Xamarin.Android.Arch.Lifecycle.Common.targets')" />
+  <Import Project="..\packages\Xamarin.Android.Arch.Lifecycle.Runtime.1.0.3.1\build\MonoAndroid80\Xamarin.Android.Arch.Lifecycle.Runtime.targets" Condition="Exists('..\packages\Xamarin.Android.Arch.Lifecycle.Runtime.1.0.3.1\build\MonoAndroid80\Xamarin.Android.Arch.Lifecycle.Runtime.targets')" />
+  <Import Project="..\packages\Xamarin.Android.Support.Compat.27.0.2.1\build\MonoAndroid81\Xamarin.Android.Support.Compat.targets" Condition="Exists('..\packages\Xamarin.Android.Support.Compat.27.0.2.1\build\MonoAndroid81\Xamarin.Android.Support.Compat.targets')" />
+  <Import Project="..\packages\Xamarin.Android.Support.Core.UI.27.0.2.1\build\MonoAndroid81\Xamarin.Android.Support.Core.UI.targets" Condition="Exists('..\packages\Xamarin.Android.Support.Core.UI.27.0.2.1\build\MonoAndroid81\Xamarin.Android.Support.Core.UI.targets')" />
+  <Import Project="..\packages\Xamarin.Android.Support.Core.Utils.27.0.2.1\build\MonoAndroid81\Xamarin.Android.Support.Core.Utils.targets" Condition="Exists('..\packages\Xamarin.Android.Support.Core.Utils.27.0.2.1\build\MonoAndroid81\Xamarin.Android.Support.Core.Utils.targets')" />
+  <Import Project="..\packages\Xamarin.Android.Support.Fragment.27.0.2.1\build\MonoAndroid81\Xamarin.Android.Support.Fragment.targets" Condition="Exists('..\packages\Xamarin.Android.Support.Fragment.27.0.2.1\build\MonoAndroid81\Xamarin.Android.Support.Fragment.targets')" />
+  <Import Project="..\packages\Xamarin.Android.Support.Media.Compat.27.0.2.1\build\MonoAndroid81\Xamarin.Android.Support.Media.Compat.targets" Condition="Exists('..\packages\Xamarin.Android.Support.Media.Compat.27.0.2.1\build\MonoAndroid81\Xamarin.Android.Support.Media.Compat.targets')" />
+  <Import Project="..\packages\Xamarin.Android.Support.v4.27.0.2.1\build\MonoAndroid81\Xamarin.Android.Support.v4.targets" Condition="Exists('..\packages\Xamarin.Android.Support.v4.27.0.2.1\build\MonoAndroid81\Xamarin.Android.Support.v4.targets')" />
+  <Import Project="..\packages\Xamarin.Build.Download.0.4.11\build\Xamarin.Build.Download.targets" Condition="Exists('..\packages\Xamarin.Build.Download.0.4.11\build\Xamarin.Build.Download.targets')" />
+  <Import Project="..\packages\Xamarin.GooglePlayServices.Basement.60.1142.1\build\MonoAndroid80\Xamarin.GooglePlayServices.Basement.targets" Condition="Exists('..\packages\Xamarin.GooglePlayServices.Basement.60.1142.1\build\MonoAndroid80\Xamarin.GooglePlayServices.Basement.targets')" />
+  <Import Project="..\packages\Xamarin.GooglePlayServices.Tasks.60.1142.1\build\MonoAndroid80\Xamarin.GooglePlayServices.Tasks.targets" Condition="Exists('..\packages\Xamarin.GooglePlayServices.Tasks.60.1142.1\build\MonoAndroid80\Xamarin.GooglePlayServices.Tasks.targets')" />
+  <Import Project="..\packages\Xamarin.Firebase.Common.60.1142.1\build\MonoAndroid80\Xamarin.Firebase.Common.targets" Condition="Exists('..\packages\Xamarin.Firebase.Common.60.1142.1\build\MonoAndroid80\Xamarin.Firebase.Common.targets')" />
+  <Import Project="..\packages\Xamarin.Firebase.Iid.60.1142.1\build\MonoAndroid80\Xamarin.Firebase.Iid.targets" Condition="Exists('..\packages\Xamarin.Firebase.Iid.60.1142.1\build\MonoAndroid80\Xamarin.Firebase.Iid.targets')" />
+  <Import Project="..\packages\Xamarin.Firebase.Messaging.60.1142.1\build\MonoAndroid80\Xamarin.Firebase.Messaging.targets" Condition="Exists('..\packages\Xamarin.Firebase.Messaging.60.1142.1\build\MonoAndroid80\Xamarin.Firebase.Messaging.targets')" />
+  <Import Project="..\packages\Xamarin.GooglePlayServices.Base.60.1142.1\build\MonoAndroid80\Xamarin.GooglePlayServices.Base.targets" Condition="Exists('..\packages\Xamarin.GooglePlayServices.Base.60.1142.1\build\MonoAndroid80\Xamarin.GooglePlayServices.Base.targets')" />
+  <Import Project="..\packages\Xamarin.GooglePlayServices.Location.60.1142.1\build\MonoAndroid80\Xamarin.GooglePlayServices.Location.targets" Condition="Exists('..\packages\Xamarin.GooglePlayServices.Location.60.1142.1\build\MonoAndroid80\Xamarin.GooglePlayServices.Location.targets')" />
+  <Import Project="..\packages\Xamarin.GooglePlayServices.Maps.60.1142.1\build\MonoAndroid80\Xamarin.GooglePlayServices.Maps.targets" Condition="Exists('..\packages\Xamarin.GooglePlayServices.Maps.60.1142.1\build\MonoAndroid80\Xamarin.GooglePlayServices.Maps.targets')" />
+  <Import Project="..\packages\Xamarin.Android.Support.Transition.27.0.2.1\build\MonoAndroid81\Xamarin.Android.Support.Transition.targets" Condition="Exists('..\packages\Xamarin.Android.Support.Transition.27.0.2.1\build\MonoAndroid81\Xamarin.Android.Support.Transition.targets')" />
+  <Import Project="..\packages\Xamarin.Android.Support.v7.CardView.27.0.2.1\build\MonoAndroid81\Xamarin.Android.Support.v7.CardView.targets" Condition="Exists('..\packages\Xamarin.Android.Support.v7.CardView.27.0.2.1\build\MonoAndroid81\Xamarin.Android.Support.v7.CardView.targets')" />
+  <Import Project="..\packages\Xamarin.Android.Support.v7.Palette.27.0.2.1\build\MonoAndroid81\Xamarin.Android.Support.v7.Palette.targets" Condition="Exists('..\packages\Xamarin.Android.Support.v7.Palette.27.0.2.1\build\MonoAndroid81\Xamarin.Android.Support.v7.Palette.targets')" />
+  <Import Project="..\packages\Xamarin.Android.Support.v7.RecyclerView.27.0.2.1\build\MonoAndroid81\Xamarin.Android.Support.v7.RecyclerView.targets" Condition="Exists('..\packages\Xamarin.Android.Support.v7.RecyclerView.27.0.2.1\build\MonoAndroid81\Xamarin.Android.Support.v7.RecyclerView.targets')" />
+  <Import Project="..\packages\Xamarin.Android.Support.Vector.Drawable.27.0.2.1\build\MonoAndroid81\Xamarin.Android.Support.Vector.Drawable.targets" Condition="Exists('..\packages\Xamarin.Android.Support.Vector.Drawable.27.0.2.1\build\MonoAndroid81\Xamarin.Android.Support.Vector.Drawable.targets')" />
+  <Import Project="..\packages\Xamarin.Android.Support.Animated.Vector.Drawable.27.0.2.1\build\MonoAndroid81\Xamarin.Android.Support.Animated.Vector.Drawable.targets" Condition="Exists('..\packages\Xamarin.Android.Support.Animated.Vector.Drawable.27.0.2.1\build\MonoAndroid81\Xamarin.Android.Support.Animated.Vector.Drawable.targets')" />
+  <Import Project="..\packages\Xamarin.Android.Support.v7.AppCompat.27.0.2.1\build\MonoAndroid81\Xamarin.Android.Support.v7.AppCompat.targets" Condition="Exists('..\packages\Xamarin.Android.Support.v7.AppCompat.27.0.2.1\build\MonoAndroid81\Xamarin.Android.Support.v7.AppCompat.targets')" />
+  <Import Project="..\packages\Xamarin.Android.Support.Design.27.0.2.1\build\MonoAndroid81\Xamarin.Android.Support.Design.targets" Condition="Exists('..\packages\Xamarin.Android.Support.Design.27.0.2.1\build\MonoAndroid81\Xamarin.Android.Support.Design.targets')" />
+  <Import Project="..\packages\Xamarin.Android.Support.v7.MediaRouter.27.0.2.1\build\MonoAndroid81\Xamarin.Android.Support.v7.MediaRouter.targets" Condition="Exists('..\packages\Xamarin.Android.Support.v7.MediaRouter.27.0.2.1\build\MonoAndroid81\Xamarin.Android.Support.v7.MediaRouter.targets')" />
+  <Import Project="..\packages\Xamarin.Forms.3.3.0.912540\build\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.3.3.0.912540\build\Xamarin.Forms.targets')" />
 </Project>

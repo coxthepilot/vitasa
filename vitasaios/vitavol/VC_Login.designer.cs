@@ -16,11 +16,7 @@ namespace vitavol
     {
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UIActivityIndicatorView AI_Spinner { get; set; }
-
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UIButton B_About { get; set; }
+        UIKit.UIActivityIndicatorView AI_Busy { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
@@ -28,11 +24,7 @@ namespace vitavol
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UIButton B_Login { get; set; }
-
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UIButton B_Register { get; set; }
+        UIKit.UIButton B_Submit { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
@@ -42,16 +34,15 @@ namespace vitavol
         [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UITextField TB_Password { get; set; }
 
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UITextView TxV_Note { get; set; }
+
         void ReleaseDesignerOutlets ()
         {
-            if (AI_Spinner != null) {
-                AI_Spinner.Dispose ();
-                AI_Spinner = null;
-            }
-
-            if (B_About != null) {
-                B_About.Dispose ();
-                B_About = null;
+            if (AI_Busy != null) {
+                AI_Busy.Dispose ();
+                AI_Busy = null;
             }
 
             if (B_Back != null) {
@@ -59,14 +50,9 @@ namespace vitavol
                 B_Back = null;
             }
 
-            if (B_Login != null) {
-                B_Login.Dispose ();
-                B_Login = null;
-            }
-
-            if (B_Register != null) {
-                B_Register.Dispose ();
-                B_Register = null;
+            if (B_Submit != null) {
+                B_Submit.Dispose ();
+                B_Submit = null;
             }
 
             if (TB_Email != null) {
@@ -77,6 +63,11 @@ namespace vitavol
             if (TB_Password != null) {
                 TB_Password.Dispose ();
                 TB_Password = null;
+            }
+
+            if (TxV_Note != null) {
+                TxV_Note.Dispose ();
+                TxV_Note = null;
             }
         }
     }

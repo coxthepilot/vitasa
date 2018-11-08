@@ -67,7 +67,7 @@ namespace vitaadmin
                     AI_Busy.StopAnimating();
 
                     DateInSeasonPicker = new C_ItemPicker(TB_Date, daysInSeason);
-                    DateInSeasonPicker.TimePickerDone += (sender, e) =>
+                    DateInSeasonPicker.PickerDone += (sender, e) =>
                     {
                         SelectedDate = new C_YMD(e.Selection);
                         PopulateOpenSitesTable();

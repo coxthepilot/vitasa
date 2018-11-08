@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Json;
-using System.Text;
 
 namespace zsquared
 {
@@ -16,21 +14,49 @@ namespace zsquared
         public int SiteID;
         public C_YMD Date;
 		public bool SiteIsOpen;
-		public List<C_WorkShift> WorkShifts;
+        public C_HMS OpenTime;
+        public C_HMS CloseTime;
 
-        public bool HaveShifts;         // not saved in the db; only used to prevent multiple loads of the shifts
+        public DayOfWeek DOW;   // not saved in the db; used in the admincal reset
         public bool Dirty;
 
         public static readonly string N_ID = "id";
         public static readonly string N_SiteID = "siteid";
         public static readonly string N_Date = "date";
         public static readonly string N_IsClosed = "is_closed";
-        public static readonly string N_WorkShifts = "workshifts";
+        public static readonly string N_OpenTime = "opentime";
+        public static readonly string N_CloseTime = "closetime";
 
         public C_CalendarEntry()
         {
-            WorkShifts = new List<C_WorkShift>();
-            HaveShifts = false;
+        }
+
+        public C_CalendarEntry(C_CalendarEntry ce)
+        {
+            id = ce.id;
+            SiteID = ce.SiteID;
+            if (ce.Date != null)
+                Date = new C_YMD(ce.Date);
+            SiteIsOpen = ce.SiteIsOpen;
+            if (ce.OpenTime != null)
+                OpenTime = new C_HMS(ce.OpenTime);
+            if (ce.CloseTime != null)
+                CloseTime = new C_HMS(ce.CloseTime);
+            Dirty = ce.Dirty;
+        }
+
+        public void CopyFrom(C_CalendarEntry ce)
+        {
+            id = ce.id;
+            SiteID = ce.SiteID;
+            if (ce.Date != null)
+               Date = new C_YMD(ce.Date);
+            SiteIsOpen = ce.SiteIsOpen;
+            if (ce.OpenTime != null)
+                OpenTime = new C_HMS(ce.OpenTime);
+            if (ce.CloseTime != null)
+                CloseTime = new C_HMS(ce.CloseTime);
+            Dirty = ce.Dirty;
         }
 
         /// <summary>
@@ -39,7 +65,7 @@ namespace zsquared
         /// <param name="j">Must be Parsed already</param>
         public C_CalendarEntry(JsonValue j)
         {
-			WorkShifts = new List<C_WorkShift>();
+			//WorkShifts = new List<C_WorkShift>();
 
 			if (!(j is JsonObject))
                 return;
@@ -56,36 +82,23 @@ namespace zsquared
             if (j.ContainsKey(N_IsClosed))
                 SiteIsOpen = !Tools.JsonProcessBool(j[N_IsClosed], !SiteIsOpen);
 
-            if (j.ContainsKey(N_WorkShifts))
-            {
-				var jv = j[N_WorkShifts];
-				if (jv is JsonArray)
-				{
-					foreach (JsonValue jav in jv)
-					{
-                        C_WorkShift ws = new C_WorkShift(jav);
-                        WorkShifts.Add(ws);
-					}
-				}
-			}
-		}
+            if (j.ContainsKey(N_OpenTime))
+                OpenTime = Tools.JsonProcessTime(j.ContainsKey(N_OpenTime), new C_HMS(8, 0, 0));
 
-        public string ToJson(bool withShifts)
+            if (j.ContainsKey(N_CloseTime))
+                CloseTime = Tools.JsonProcessTime(j.ContainsKey(N_CloseTime), new C_HMS(17, 0, 0));
+        }
+
+        public string ToJson()
         {
             C_JsonBuilder jb = new C_JsonBuilder();
             jb.Add(SiteID, N_SiteID);
             jb.Add(Date, N_Date);
             jb.Add(!SiteIsOpen, N_IsClosed);
-
-            if (withShifts)
-            {
-                jb.StartArray(N_WorkShifts);
-                foreach(C_WorkShift ws in WorkShifts)
-                    ws.AddJson(jb);
-                jb.EndArray();
-            }
-
+            jb.Add(OpenTime, N_OpenTime);
+            jb.Add(CloseTime, N_CloseTime);
             string res = jb.ToString();
+
             return res;
 		}
 

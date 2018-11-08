@@ -20,11 +20,6 @@ namespace vitavol
     [Register("AppDelegate")]
     public class AppDelegate : UIApplicationDelegate
     {
-        public static readonly string N_KnownEventsJson = "knowneventsjson";
-        public static readonly string N_Email = "email";
-        public static readonly string N_Password = "password";
-        public static readonly string N_PushDeviceToken = "PushDeviceToken";
-		public static readonly string N_PushDeviceTokenUpdated = "PushDeviceTokenUpdated";
 
 		/// <summary>
 		/// These are values that get pass from ViewController to ViewController.
@@ -109,8 +104,10 @@ namespace vitavol
 				DeviceToken = DeviceToken.Trim('<').Trim('>');
 			}
 
-			// Get previous device token
-			var oldDeviceToken = NSUserDefaults.StandardUserDefaults.StringForKey(N_PushDeviceToken);
+            C_PersistentSettings Settings = new C_PersistentSettings();
+
+            // Get previous device token
+            var oldDeviceToken = Settings.NotificationToken;
 
 			// Has the token changed?
 			if (string.IsNullOrEmpty(oldDeviceToken) || !oldDeviceToken.Equals(DeviceToken))
@@ -119,9 +116,8 @@ namespace vitavol
                 Console.WriteLine(DeviceToken);
 			}
 
-			// Save new device token
-			NSUserDefaults.StandardUserDefaults.SetString(DeviceToken, N_PushDeviceToken);
-			NSUserDefaults.StandardUserDefaults.SetString("true", N_PushDeviceTokenUpdated);
+            Settings.NotificationToken = DeviceToken;
+            Settings.NotificationTokenUpdated = true;
 		}
 
 		public override void FailedToRegisterForRemoteNotifications(UIApplication application, NSError error)

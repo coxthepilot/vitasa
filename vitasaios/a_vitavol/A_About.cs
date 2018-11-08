@@ -1,20 +1,21 @@
-﻿using Android.App;
+﻿using System;
+using System.Collections.Generic;
+using System.Json;
+using System.IO;
+
+using Android.App;
 using Android.Widget;
 using Android.OS;
 using Android.Content;
 using Android.Content.Res;
 using Android.Webkit;
-
-using System;
-using System.Collections.Generic;
-using System.Json;
-using System.IO;
+using Android.Views;
 
 using zsquared;
 
 namespace a_vitavol
 {
-    [Activity(Label = "VITA: About this App")]
+    [Activity(Theme = "@android:style/Theme.DeviceDefault.NoActionBar", Label = "VITA: About this App")]
     public class A_About : Activity
     {
         C_Global Global;
@@ -27,19 +28,18 @@ namespace a_vitavol
         {
             base.OnCreate(savedInstanceState);
 
-			MyAppDelegate g = (MyAppDelegate)Application;
+            MyAppDelegate g = (MyAppDelegate)Application;
 			if (g.Global == null)
 				g.Global = new C_Global();
 			Global = g.Global;
 
-			// Set our view from the "main" layout resource
-			SetContentView(Resource.Layout.About);
+            SetContentView(Resource.Layout.About);
 
-            IList<string> alist = this.Intent.GetStringArrayListExtra("global");
-
-			WV_About = FindViewById<WebView>(Resource.Id.WV_About_About);
+            WV_About = FindViewById<WebView>(Resource.Id.WV_About_About);
             L_Bytes = FindViewById<TextView>(Resource.Id.L_Bytes);
             L_Version = FindViewById<TextView>(Resource.Id.L_Version);
+
+            C_Common.SetViewColors(this, Resource.Id.V_About);
 
             L_Bytes.Text = Global.BytesReceived.ToString("N0");
 

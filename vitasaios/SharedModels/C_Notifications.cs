@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Threading.Tasks;
-using System.Collections.Generic;
 using System.Json;
-using System.Net;
 
 namespace zsquared
 {
-	public enum E_Platform { iOS, Android, SMS }
+    public enum E_Platform { iOS, Android, SMS }
 
 	public static class C_Notifications
     {

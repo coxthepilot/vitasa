@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -31,14 +30,14 @@ namespace a_vitavol
 
             C_VitaUser user = Global.GetUserFromCacheNoFetch(Global.LoggedInUserId);
 
-            ListAdapter = new SuggestionsAdapter(this, user.Suggestions);
-            ListView.ItemClick += (sender, e) => 
-            {
-                Global.SelectedSuggestion = user.Suggestions[e.Position];
+   //         ListAdapter = new SuggestionsAdapter(this, user.Suggestions);
+   //         ListView.ItemClick += (sender, e) => 
+   //         {
+   //             Global.SelectedSuggestion = user.Suggestions[e.Position];
 
-                Intent i = new Intent(this, typeof(A_Suggestion));
-				StartActivity(i);
-			};
+   //             Intent i = new Intent(this, typeof(A_Suggestion));
+			//	StartActivity(i);
+			//};
 		}
 
 		public override void OnBackPressed()
@@ -79,7 +78,7 @@ namespace a_vitavol
 
 				View view = convertView;
 				if (view == null) // no view to re-use, create new
-                    view = context.LayoutInflater.Inflate(Resource.Layout.SuggestionCell, null);
+                    view = context.LayoutInflater.Inflate(Resource.Layout.ListViewCell, null);
 
                 // fix the text so that it doesn't have \n's
                 string stext = item.Text.Replace('\n', ' ');

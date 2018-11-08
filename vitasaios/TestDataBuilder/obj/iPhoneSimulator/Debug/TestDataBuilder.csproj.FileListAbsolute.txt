@@ -1,0 +1,15 @@
+/Users/Billy/Documents/source/vitasa/vitasaios/TestDataBuilder/bin/Debug/TestDataBuilder.exe
+/Users/Billy/Documents/source/vitasa/vitasaios/TestDataBuilder/bin/Debug/TestDataBuilder.pdb
+/Users/Billy/Documents/source/vitasa/vitasaios/TestDataBuilder/obj/iPhoneSimulator/Debug/actool/partial-info.plist
+/Users/Billy/Documents/source/vitasa/vitasaios/TestDataBuilder/obj/iPhoneSimulator/Debug/actool/asset-manifest.plist
+/Users/Billy/Documents/source/vitasa/vitasaios/TestDataBuilder/obj/iPhoneSimulator/Debug/actool/bundle/AppIcon.icns
+/Users/Billy/Documents/source/vitasa/vitasaios/TestDataBuilder/obj/iPhoneSimulator/Debug/actool/bundle/Assets.car
+/Users/Billy/Documents/source/vitasa/vitasaios/TestDataBuilder/obj/iPhoneSimulator/Debug/ibtool-manifests/Main.storyboardc
+/Users/Billy/Documents/source/vitasa/vitasaios/TestDataBuilder/obj/iPhoneSimulator/Debug/ibtool/Main.storyboardc/Info.plist
+/Users/Billy/Documents/source/vitasa/vitasaios/TestDataBuilder/obj/iPhoneSimulator/Debug/ibtool/Main.storyboardc/MainMenu.nib
+/Users/Billy/Documents/source/vitasa/vitasaios/TestDataBuilder/obj/iPhoneSimulator/Debug/ibtool/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib
+/Users/Billy/Documents/source/vitasa/vitasaios/TestDataBuilder/obj/iPhoneSimulator/Debug/ibtool/Main.storyboardc/XfG-lQ-9wD-view-m2S-Jp-Qdl.nib
+/Users/Billy/Documents/source/vitasa/vitasaios/TestDataBuilder/obj/iPhoneSimulator/Debug/TestDataBuilder.csprojAssemblyReference.cache
+/Users/Billy/Documents/source/vitasa/vitasaios/TestDataBuilder/obj/iPhoneSimulator/Debug/TestDataBuilder.csproj.CoreCompileInputs.cache
+/Users/Billy/Documents/source/vitasa/vitasaios/TestDataBuilder/obj/iPhoneSimulator/Debug/TestDataBuilder.exe
+/Users/Billy/Documents/source/vitasa/vitasaios/TestDataBuilder/obj/iPhoneSimulator/Debug/TestDataBuilder.pdb

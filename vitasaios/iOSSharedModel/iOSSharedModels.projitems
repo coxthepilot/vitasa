@@ -9,14 +9,18 @@
     <Import_RootNamespace>iOSSharedModel</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)MyClass.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)C_PickerModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)C_MessageBox.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)C_NSDateConversions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)C_Common.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)C_ShiftTableSource.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)C_TimePicker.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)C_ItemPicker.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)C_UserPicker.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)C_MapDelegate.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)C_SitesMapDelegate.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)C_PreferredSites.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)C_TableSource.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)C_DatePicker.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)C_NSDateConversions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)C_PersistentSettings.cs" />
   </ItemGroup>
 </Project>

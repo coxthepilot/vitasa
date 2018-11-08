@@ -5,17 +5,30 @@ using Xamarin.Forms;
 
 namespace zsquared
 {
-	public class C_ItemPicker
+	public class C_ItemPicker<T>
 	{
-		readonly UITextField TB_;
 
-		public event ItemPickerEventHandler TimePickerDone;
+        public class C_ItemPickerSelect<T1> : EventArgs
+        {
+            public T1 Selection;
+
+            public C_ItemPickerSelect(T1 sel)
+            {
+                Selection = sel;
+            }
+        }
+
+        public delegate void ItemPickerEventHandler(object sender, C_ItemPickerSelect<T> e);
+
+        readonly UITextField TB_;
+
+		public event ItemPickerEventHandler PickerDone;
 
         readonly UIPickerView PV_;
-        List<string> Items;
-        public string Selection;
+        List<T> Items;
+        public T Selection;
 
-		public C_ItemPicker(UITextField tb, List<string> items)
+		public C_ItemPicker(UITextField tb, List<T> items)
 		{
 			TB_ = tb;
             Items = items;
@@ -25,7 +38,7 @@ namespace zsquared
                 ShowSelectionIndicator = true
             };
 
-            C_PickerDataModel pdmodel = new C_PickerDataModel(Items);
+            C_PickerDataModel<T> pdmodel = new C_PickerDataModel<T>(Items);
             PV_.Model = pdmodel;
 
             UIToolbar ToolBar_ = new UIToolbar()
@@ -38,9 +51,10 @@ namespace zsquared
 			UIBarButtonItem doneButtonOpen = new UIBarButtonItem("Done", UIBarButtonItemStyle.Done, (s, e) =>
 			{
                 int xsel = (int)PV_.SelectedRowInComponent(0);
-                string sel = Items[xsel];
-                TB_.Text = sel;
-				TimePickerDone?.Invoke(this, new C_ItemPickerSelect(sel));
+                T sel = Items[xsel];
+                Selection = sel;
+                TB_.Text = sel.ToString();
+				PickerDone?.Invoke(this, new C_ItemPickerSelect<T>(sel));
 				TB_.ResignFirstResponder();
 			});
 			ToolBar_.SetItems(new UIBarButtonItem[] { doneButtonOpen }, true);
@@ -54,12 +68,12 @@ namespace zsquared
 			TB_.InputAccessoryView = ToolBar_;
 		}
 
-        public void SetSelection(string v)
+        public void SetSelection(T v)
         {
             int selix = -1;
             for (int ix = 0; ix != Items.Count; ix++)
             {
-                if (Items[ix] == v)
+                if (Items[ix].ToString() == v.ToString())
                 {
                     selix = ix;
                     break;
@@ -67,25 +81,29 @@ namespace zsquared
             }
 
             if (selix != -1)
+            {
+                Selection = v;
                 PV_.Select(selix, 0, true);
+                TB_.Text = v.ToString();
+            }
         }
 
-		public string Value
-		{
-			get { return Selection; }
-		}
+		//public string Value
+		//{
+		//	get { return Selection; }
+		//}
 
-		public void SetValue(string sel)
-		{
-            Selection = sel;
-            TB_.Text = sel;
-		}
+		//public void SetValue(string sel)
+		//{
+  //          Selection = sel;
+  //          TB_.Text = sel;
+		//}
 
-        public class C_PickerDataModel : UIPickerViewModel
+        public class C_PickerDataModel<T1> : UIPickerViewModel
         {
-            public List<string> Items;
+            public List<T1> Items;
 
-            public C_PickerDataModel(List<string> items)
+            public C_PickerDataModel(List<T1> items)
             {
                 Items = items;
             }
@@ -102,20 +120,9 @@ namespace zsquared
 
             public override string GetTitle(UIPickerView pickerView, nint row, nint component)
             {
-                return Items[(int)row];
+                return Items[(int)row].ToString();
             }
         }
 	}
 
-	public class C_ItemPickerSelect : EventArgs
-	{
-        public string Selection;
-
-		public C_ItemPickerSelect(string sel)
-		{
-            Selection = sel;
-		}
-	}
-
-	public delegate void ItemPickerEventHandler(object sender, C_ItemPickerSelect e);
 }

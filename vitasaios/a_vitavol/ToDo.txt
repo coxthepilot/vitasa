@@ -1,180 +1,117 @@
-﻿----- 2.0 features -----
+﻿----- Issues/Actions -----
 
-* New UI graphics (from city graphics designer)
-* Site can have mulitple SC (unlimited)(not just primary and backup)
-* Volunteer (and clients) can see open sites on a date without a login
-   - Can only designate prefered sites with registration and a login
-   - Will get notifications related to that site if registered
-* Remove volunteer signup's for shifts at a site
-* Allow vol/SC to update email, password, and phone
-* Generate email for new volunteer/SC registrations (destination email list management?)
-* New: site type: fixed, mobile
-* Add volunteer hours tracking
-   - volunteer creates record for site on date with hours worked
-   - SC can create records, edit, delete
-* All app features available in iOS (phone and tablet), Android, and web (same or similar UI)
-* Generate email on new feedback (from public or volunteer)
-* New site 'feature': "in-person prep" (in addition to MFT, DropOff, Express)
-* Full admin UI on phone/table/web
+* need to put the privacy policy at vitasa.org/en/privacy-policy.html
+* use config?
+* Android: first time back from SitesFilter with UseTheseSettings, the loc reverts to San Jose; the 
+  provided lat/long are correct [cnd]
+
+Improvements:
+* AdminUser: lost all input on return from sites coord [future] [ios also?]
+* on click calendar date, just do a popup with the details, don't need to change screens
+* for SC in adding hours, put users that frequent that site at the top in a section
+* for vol, put their frequent sites at the top in a section
+* GV helper
+   - use callbacks for each grid element
+   - light (dark?) grey behind day of week name
+   - background as standard background color (not graphic)
+   - new symbols graphics?
+* move geocode to the save activity; handle multiple responses and hide lat/long in view?
+* (Android) create an activity indicator in a fragment?
+* allow SC's to see the list of volunteers and place a call to them?
+* sitedetails: for client, show closed now, next opens at xxx on yyy
+* use notifications as way to know site has changed rather than timeouts
+
+[38 screens]
+* MainActivity/ViewController
+* BeforeYouGo
+* About
+* SitesMap
+* SiteCalendar
+* (iOS) SiteCalOnDate
+* SitesFilter
+* SiteDetails
+* Login
+* VolHome
+* VolHoursWorked
+* EditHours
+* Suggestion
+* (iOS) VolMobileCalendar
+* (iOS) VolMobileCalOnDate
+* VolEditSettings
+* SCSites
+* SCSite
+* SCVolHours
+* SCAddVolHours
+* AdminMenu
+* AdminUsers
+* AdminUser
+* AdminUserSites
+* AdminSites
+* AdminSite
+* AdminSiteLocation
+   - jams buttons together on 5s at bottom [verify]
+* AdminSiteDetails
+* AdminSiteCalendar
+* (iOS) AdminSiteCalDetails
+* AdminSiteCalReset
+* (iOS) AdminSiteCalResetDOW
+   - time boxes are cutoff on 5s [verify]
+* AdminSiteCalResetAction
+* AdminSiteCoord
+* AdminNotifications
+* AdminNotification
+* AdminSuggestions
+* AdminSuggestion
+* AdminMobile
+* AdminMobileDate
+* (Android) CalendarDateDetails
+* AdminEmailDistroMgmt
+* (android) ViewNotification
 
 
------ Issues -----
+Android examples:
+* Button and Label with picker: SCSiteDetails
+* ScrollView: Suggestion
+* ListView: SCVolHours
+* SPinner: SCAddVolHours
+            ArrayAdapter VolunteerAdapter = new ArrayAdapter(this, Resource.Layout.SpinnerItem, AllVolunteers);
+            VolunteerAdapter.SetDropDownViewResource(Resource.Layout.SpinnerItem);
+            SP_Volunteer.Adapter = VolunteerAdapter;
+* ProgressBar: Login
+* FrameLayout: AdminMenu
+         
 
-Fixes:
+* ios/android: 
+   - [ios] use Siri to get site info?
 
-Future features:
-* use new graphics for UI
-* allow more than 1 site coordinator and a backup per site
-* create a site feature for in-person tax prep
-* allow volunteer to select all shifts at a site
-* allow update email in profile
-* no way for a volunteer to view past signups?
-* use notifications as way to know content has changed rather than timeouts
-* sort sites based on distance to user
-* generate emails on new user signup
-* make sure notifications are fully working
-* differentiate between mobile and fixed sites (site type?)
-* build tool for scheduling the mobile team (with emails on changes)
-* client features on Android
-* remove signup and hours tracking?
+* sync to github since ios mostly done
 
-Shared Models:
-* make sure models don't crash on bad data (such as nulls on date...)
+* verify notifications
+    - preferred site changes
+    - mobile site changes
+    
+How is this updated?
+    "http://s3-us-west-2.amazonaws.com/vita-static-content-prod/config.json";
+    
+Default URL for backend
+    Debug: BackendUrl = "https://vitasa.abandonedfactory.net";
+    Prod: BackendUrl = "https://volunteer-savvy.com/";
 
 
-Android:
-<<<<<<< HEAD
-* [android] allow user to change password on profile page
-=======
-* need to make the adv/basic signup more robust; fixed it on iOS after I did the Android release
-* on notification, the graphic is a tiny slice from the middle of the icon [defer]
 
->>>>>>> origin/master
 
-iOS: 
->> note: some changes made but not yet released through Apple
-* [ios] allow user to change password on profile page
 
-online:
-* allow user to change password on profile page
-* create admin UI similar to iPad
 
 vitaadmin:
-* [vitaadmin] not able to change state of a suggestion
-* [vitaadmin] need view of signups on a date
-* [vitaadmin] need all pages to handle vert and horiz
-* show grid calendar for site calendar
-* hours summary (with export)
-* tool to set basic/adv number on shift
+--- requires major upgrades ---
+
 
 
 Chris
+* Generate email for new volunteer/SC registrations (destination email list management?)
+* Generate email on new feedback (from public or volunteer)
 
 
 
-Completed
-* [vitaadmin] refresh on sites doesn't update the list [done]
-* [vitaadmin] start date on site calendar at today [done]
-* [vitaadmin] update to user email, phone, password? don't stick [fixed]
-<<<<<<< HEAD
-* add to calendar on new signup shows calendar not selected [cnd]
-* [ios] 5s is showing 8 days in a week [done]
-* [ios] get prompt to allow calendar before add to calendar [done]
-* vitaadmin: for user, site coordinator, show sites assigned [done]
-* vitaadmin: for site, show number of signups [done]
-* vitaadmin: only show site coordinators on sites page, sort by name [done]
-* vitaadmin: tool to check for signups for which the calendar event or shift has been deleted [done]
-* vitaadmin: on new shift, default to 5 ea for basic and advanced [done]
-* vitaadmin: on shift edit, select the numeric keyboard [done]
-* vitaadmin: sites refresh doesn't work or doesn't refresh the list [done]
-* vitaadmin: don't allow shift delete if signups are still connected [done]
-* vitaadmin: check enabling of controls on sites; can select Calendar when no site selected [done]
-* vitaadmin: need to be able to see activity across all sites for a given day [done]
-* vitaadmin: sort calendar entries by date (site -> calendar) [done]
-* vitaadmin: don't delete a calendar entry if shifts remain [done]
 
-* get the schema on signups under site to match from /signups/ [urgent, done]
-=======
-* ignore signups in site; only use get /signups/ [done android]
-* all advanced to use a basic slot [done android]
-* allow email update [done]
->>>>>>> origin/master
-* [vitaadmin] show values from config.json [done]
-* [vitaadmin] generate email to all volunteers and site coordinators [done]
-* migrate to DO backend over Christmas [done]
-* past dates do not show up correctly; need api to only get signups for a site in a date range [done]
-* past dates do not show up correctly; need api to only get signups for a site in a date range [done]
-* accept certificates for abandoned factory and volunteer-savvy [done]
-* about needs reference to privacy polcy [done]
-* register needs refernece to privacy policy [done]
-* make sure I/O error handling is correct [done]
-* support for offline and user message [done]
-* support for out of date app version [done]
-* fix the certificate handling to accept other domains [done]
-* can't update backup site coordinator [cnd]
-* about needs to reference the privacy polcy [done]
-* fetch config.json from s3 [done]
-* in I/O, use URL from config, test for out of date [done]
-* in I/O use enhanced return codes (more than bool) [done]
-* [ios] can't get to submit button on 5S [done]
-* [ios] registration page needs reference to privacy policy [done]
-
-* support for offline and user message [done]
-* support for out of date app version [done]
-* version number [done]
-* add user management [done]
-* add ability to send notifications [done]
-* admin: not updating the backup site coordinator [done]
-* both: Registration, not clear why Submit button is not enabled; highlight the box green when entry is ok [done] 
-* add support for shifts [done]
-* use updated icon [done]
-* version number [done]
-* change to shift values, not updated in siteschedule? [done]
-* in a series of logins, create signup, the delete, re-login, still shows in the list; on delete
-  remove from signups in global; and from site schedule [done]
-* fix app name on the screen [done]
-* all I/O through Download and Upload [done]
-* on add signup, modify any stored site schedule [done]
-* updated icon [done]
-* Make Apple notifications work [done]
-* test notifications from AWS SNS [done]
-* NSLocationWhenInUseUsageDescription with a string explaning use of location in the app [CND]
-* add support for shifts [done]
-* [vitavol, vol and sc] Needs list of signups (with userid, name, cert) on a given shift [done]
-* [vitavol, sc] way to get list of signups for a site on a date? [done]
-* [vitavol] Get on /schedule gets 500 [done]
-* [vitavol, vitaadmin] Get on /signup/?user={id} gets error 500; is this the correct call? or /users/{id}/signups/ (which gets 404)? [done]
-* [vitavol] Date not being returned in signup; was sent with post, but not getting returned [done]
-* set value for season start and end for all sites [done]
-* vitavol map should use color for needs: green (no needs), red (1 or more needed) [done]
-* release version with distribution certificate [later][done]
-* [DateTime, iso format] Need Season fields added to Site [done]
-* need Season in API /get/site [in progress from Chris] [done]
-* need Season in API /get/site [in progress from Chris] [done]
-* for SC: volunteer approvals calendar [done, ios]
-* updated screen shots [done, ios]
-* screen shots [done, android]
-* for SC: volunteer approvals calendar [done, android]
-* vol options screen: show number of signups in future for this user [done, ios]
-* add vol phone on sitevol and volhours screens [done, android]
-* [fixed] Need Status included in Suggestions
-* verify that suggestions that have changed status cannot be edited or deleted. [done]
-* updated icon (in all sizes!) [ios, done]
-* add vol phone on sitevol and volhours screens [ios, done]
-* add volunteer options screen [done]
-* add profile update screen [done]
-* move site capabilities buttons to common screen [done]
-* expire some content (SitesSchedule, Sites, Users) - handle in the cache? [done]
-* on fetch sitesschedule, autofetch the next one also? especially at end of month [done]
-* retries on all api gets? should only retry on the specific error type; C_SiteSchedule for WebException [done!!!]
-* fix the gitignore [done]
-* don't believe calendar signups' are working [done]
-* riverwalk background not showing up on device [done, previous image was too large]
-* openning image is distorted [done]
-* didn't allow a second signup on a date [done]
-* Add new signup to local calendar [done, need to register a calendar?]
-* use grey on open screen register and about buttons [done]
-* view signup, open/close time were empty string [done]
-* save hours button, grey out, 'save hours' [wnf]
-* new signup, don't know there is no one else signed up [done]
 

@@ -23,12 +23,6 @@ namespace vitavol
 
 			AppDelegate myAppDelegate = (AppDelegate)UIApplication.SharedApplication.Delegate;
 			Global = myAppDelegate.Global;
-			
-            WV_About.Delegate = new C_WebViewDelegateAbout(this);
-			string fileName = "about.htm"; // remember case-sensitive
-			string localHtmlUrl = Path.Combine(NSBundle.MainBundle.BundlePath, fileName);
-            WV_About.LoadRequest(new NSUrlRequest(new NSUrl(localHtmlUrl, false)));
-
 			B_Back.TouchUpInside += (sender, e) =>
 			{
                 if (Global.ViewCameFrom == E_ViewCameFrom.Main)
@@ -36,17 +30,21 @@ namespace vitavol
                 else if (Global.ViewCameFrom == E_ViewCameFrom.Login)
                     PerformSegue("Segue_AboutToLogin", this);
 			};
-
-			var verString = NSBundle.MainBundle.InfoDictionary["CFBundleShortVersionString"];
-            L_Version.Text = verString.ToString();
-
-            B_BytesReceived.Text = Global.BytesReceived.ToString("N0");
 		}
 
         public override void ViewDidAppear(bool animated)
         {
-            // set the standard background color
-            View.BackgroundColor = C_Common.StandardBackground;
+            C_Common.SetUIColors(View);
+
+            WV_About.Delegate = new C_WebViewDelegateAbout(this);
+            string fileName = "about.htm"; // remember case-sensitive
+            string localHtmlUrl = Path.Combine(NSBundle.MainBundle.BundlePath, fileName);
+            WV_About.LoadRequest(new NSUrlRequest(new NSUrl(localHtmlUrl, false)));
+
+            var verString = NSBundle.MainBundle.InfoDictionary["CFBundleShortVersionString"];
+            L_Version.Text = verString.ToString();
+
+            B_BytesReceived.Text = Global.BytesReceived.ToString("N0");
         }
     }
 

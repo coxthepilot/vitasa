@@ -171,7 +171,7 @@ namespace vitavol
 
             Task.Run(async () => 
             {
-                SelectedSite = await Global.GetSiteFromCache(Global.SelectedSiteSlug);
+                SelectedSite = await Global.GetSiteWithSlug(Global.SelectedSiteSlug);
 
 				UIApplication.SharedApplication.InvokeOnMainThread(
                 new Action(() =>

@@ -261,7 +261,7 @@ namespace vitaadmin
                 B_Save.Enabled = false;
                 B_Send.Enabled = false;
 
-                C_IOResult ior = await Global.DeleteNotification(selNote, LoggedInUser.Token);
+                C_IOResult ior = await Global.RemoveNotification(selNote, LoggedInUser.Token);
 
                 AI_Busy.StopAnimating();;
                 EnableUI(true);

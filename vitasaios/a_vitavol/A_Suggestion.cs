@@ -1,14 +1,8 @@
-﻿
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 using Android.App;
 using Android.Content;
 using Android.OS;
-using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 
@@ -16,181 +10,85 @@ using zsquared;
 
 namespace a_vitavol
 {
-    [Activity(Label = "VITA: Volunteer Suggestion")]
+    [Activity(Theme = "@android:style/Theme.DeviceDefault.NoActionBar", Label = "VITA: Volunteer Suggestion")]
     public class A_Suggestion : Activity
     {
 		C_Global Global;
+        C_VitaUser LoggedInUser;
 
-        C_Suggestion OurSuggestion;
-        C_VitaUser OurUser;
-
-		TextView L_From;
-		TextView L_Date;
-		TextView L_State;
-
-		Button B_Save;
-		Button B_Delete;
+		Button B_Submit;
 		
         EditText TB_Subject;
 		EditText TB_Message;
 
-		ProgressDialog AI_Busy;
+        ProgressBar PB_Busy;
 
 		protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
 
-			MyAppDelegate g = (MyAppDelegate)Application;
+            MyAppDelegate g = (MyAppDelegate)Application;
 			if (g.Global == null)
 				g.Global = new C_Global();
 			Global = g.Global;
 
-            OurSuggestion = Global.SelectedSuggestion;
-            OurUser = Global.GetUserFromCacheNoFetch(Global.LoggedInUserId);
-
-			// Set our view from the "main" layout resource
             SetContentView(Resource.Layout.Suggestion);
 
-            L_From = FindViewById<TextView>(Resource.Id.L_From);
-            L_Date = FindViewById<TextView>(Resource.Id.L_Date);
-            L_State = FindViewById<TextView>(Resource.Id.L_State);
+            B_Submit = FindViewById<Button>(Resource.Id.B_Save);
+            TB_Subject = FindViewById<EditText>(Resource.Id.TB_Subject);
+            TB_Message = FindViewById<EditText>(Resource.Id.TB_Message);
+            PB_Busy = FindViewById<ProgressBar>(Resource.Id.PB_Busy);
 
-            B_Save = FindViewById<Button>(Resource.Id.B_SaveSuggestion);
-            B_Delete = FindViewById<Button>(Resource.Id.B_DeleteSuggestion);
+            C_Common.SetViewColors(this, Resource.Id.V_Suggestion);
 
-            TB_Subject = FindViewById<EditText>(Resource.Id.TB_SubjectSuggestion);
-            TB_Message = FindViewById<EditText>(Resource.Id.TB_MessageSuggestion);
-
-            B_Save.Enabled = (OurSuggestion.Status == E_SuggestionStatus.Open) && OurSuggestion.dirty;
-            B_Delete.Enabled = (OurSuggestion.Status == E_SuggestionStatus.Open);
-
-			AI_Busy = new ProgressDialog(this);
-			AI_Busy.SetMessage("Please wait...");
-			AI_Busy.SetCancelable(false);
-			AI_Busy.SetProgressStyle(ProgressDialogStyle.Spinner);
-
-			TB_Message.TextChanged += (sender, e) => 
+            TB_Message.TextChanged += (sender, e) => 
             {
-                OurSuggestion.dirty = true;
-				B_Save.Enabled = (OurSuggestion.Status == E_SuggestionStatus.Open) && OurSuggestion.dirty;
-			};
+                B_Submit.Enabled = (TB_Subject.Text.Length > 0) && (TB_Message.Text.Length > 0);
+            };
 
-            TB_Subject.TextChanged += (sender, e) => 
+            TB_Subject.TextChanged += (sender, e) =>
             {
-				OurSuggestion.dirty = true;
-				B_Save.Enabled = (OurSuggestion.Status == E_SuggestionStatus.Open) && OurSuggestion.dirty;
-			};
+                B_Submit.Enabled = (TB_Subject.Text.Length > 0) && (TB_Message.Text.Length > 0);
+            };
 
-            B_Save.Click += async (sender, e) => 
+            B_Submit.Click += (sender, e) => 
             {
-                Global.SelectedSuggestion.Subject = TB_Subject.Text;
-                Global.SelectedSuggestion.Text = TB_Message.Text;
+                PB_Busy.Visibility = ViewStates.Visible;
+                EnableUI(false);
 
-                AI_Busy.Show();
-				EnableUI(false);
-
-                C_IOResult ior = await SaveSuggestion();
-
-                AI_Busy.Cancel();
-				EnableUI(true);
-
-				if (!ior.Success)
-				{
-                    C_MessageBox mbox = new C_MessageBox(this,
-						 "Error",
-                         "Unable to add or update the suggestion [" + ior.ErrorMessage + "]",
-						 E_MessageBoxButtons.Ok);
-                    mbox.Show();
-
-					return;
-				}
-
-                Intent register = new Intent(this, typeof(A_Suggestions));
-				StartActivity(register);
-			};
-
-            B_Delete.Click += (sende1r, e1) => 
-            {
-                C_MessageBox mbox = new C_MessageBox(this,
-						   "Delete item?",
-						   "Are you sure you want to delete this suggestion?",
-						   E_MessageBoxButtons.YesNo);
-                mbox.Dismissed += async (sender2, args2) => 
+                Task.Run(async () =>
                 {
-					if ((args2.Result == E_MessageBoxResults.No) || (Global.SelectedSuggestion.id == -1))
-					{
-						Global.SelectedSuggestion = null;
+                    LoggedInUser = Global.GetUserFromCacheNoFetch(Global.LoggedInUserId);
+                    C_Suggestion sug = new C_Suggestion(Global.LoggedInUserId, C_YMD.Now, false);
+                    C_IOResult ior = await Global.CreateSuggestion(sug, LoggedInUser.Token);
 
-						Intent i = new Intent(this, typeof(A_Suggestions));
-						StartActivity(i);
+                    void p()
+                    {
+                        PB_Busy.Visibility = ViewStates.Gone;
+                        EnableUI(true);
 
-						return;
-					}
+                        if (!ior.Success)
+                        {
+                            C_MessageBox mbox = new C_MessageBox(this, "Error", "Unable to save the Suggestion.", E_MessageBoxButtons.Ok);
+                            mbox.Show();
+                        }
+                        StartActivity(new Intent(this, typeof(A_VolHome)));
+                    }
+                    RunOnUiThread(p);
+                });
+            };
 
-                    AI_Busy.Show();
-					EnableUI(false);
+            B_Submit.Enabled = (TB_Subject.Text.Length > 0) && (TB_Message.Text.Length > 0);
+        }
 
-                    C_IOResult ior = await Global.RemoveSuggestion(Global.SelectedSuggestion, OurUser.Token);
-                    OurUser.Suggestions.Remove(Global.SelectedSuggestion);
-                    Global.SelectedSuggestion = null;
-
-                    AI_Busy.Cancel();
-					EnableUI(true);
-
-                    if (!ior.Success)
-					{
-                        C_MessageBox mbox1 = new C_MessageBox(this,
-															  "Error",
-                                                              "Unable to delete the suggestion [" + ior.ErrorMessage + "]",
-														      E_MessageBoxButtons.Ok);
-                        mbox.Show();
-                        return;
-					}
-
-					Intent register = new Intent(this, typeof(A_Suggestions));
-					StartActivity(register);
-				};
-
-                mbox.Show();
-			};
-
-            TB_Subject.Text = OurSuggestion.Subject;
-            TB_Message.Text = OurSuggestion.Text;
-            L_From.Text = OurUser.Name;
-            L_Date.Text = OurSuggestion.CreateDate.ToString("mmm dd, yyyy");
-            L_State.Text = OurSuggestion.Status.ToString();
-		}
-
-		public override void OnBackPressed()
-		{
-            Intent i = new Intent(this, typeof(A_Suggestions));
-			StartActivity(i);
-		}
+        public override void OnBackPressed() =>
+            StartActivity(new Intent(this, typeof(A_VolHome)));
 
 		private void EnableUI(bool en)
         {
-			B_Save.Enabled = en && (OurSuggestion.Status == E_SuggestionStatus.Open) && OurSuggestion.dirty;
-			B_Delete.Enabled = en && (OurSuggestion.Status == E_SuggestionStatus.Open);
+            B_Submit.Enabled = en && (TB_Subject.Text.Length > 0) && (TB_Message.Text.Length > 0);
             TB_Message.Enabled = en;
             TB_Subject.Enabled = en;
-		}
-
-        private async Task<C_IOResult> SaveSuggestion()
-		{
-            C_IOResult ior = null;
-
-			if (Global.SelectedSuggestion.id == -1)
-			{
-                ior = await Global.AddSuggestion(Global.SelectedSuggestion, OurUser.Token);
-				//success = await Global.LoggedInUser.AddSuggestion(Global.SelectedSuggestion);
-				OurUser.Suggestions.Add(Global.SelectedSuggestion);
-			}
-			else
-                ior = await Global.UpdateSuggestion(Global.SelectedSuggestion, OurUser.Token);
-            
-			Global.SelectedSuggestion.dirty = false;
-
-            return ior;
-		}
+        }
 	}
 }

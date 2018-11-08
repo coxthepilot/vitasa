@@ -1,0 +1,91 @@
+﻿This is a summary of the API calls made or used by the app
+
+/sites/
+- GET: returns json for all sites
+
+/sites/<slug>
+- GET: return json for the specified site <slug>
+- PUT: update fields in json for site <slug>, returns updated site
+- POST: create site with <slug> fields from json
+- DELETE: delete specified site <slug>
+
+/sites/<slug>/calendars
+- POST: create calendar entry for specified site using json for the calendar entry
+
+/sites/<slug>/calendars/<cid>
+- GET: returns calendar entry for specified site with <cid>
+- PUT: update calendar entry <cid> for specified site <slug> using json for the calendar entry
+- DELETE: remove calendar entry <cid> for specified site<slug>
+
+/login
+- GET: performs login using json with email/password, return user (json) and token if successful
+
+/users
+- GET: returns all users
+- POST: create new user with fields from json, returns created user
+
+/users/<uid>
+- GET: returns the specified user <uid>
+- PUT: updates the provided fields json, returns the updated user <uid>
+    -- may contain an update to the list of sites the user wants notifications on when site changes
+- DELETE: deletes specified user <uid>
+
+/users/<uid>/worklogitem
+- POST: create new worklog item json for specified user <uid>
+
+/users/<uid>/worklogitem/<wlid>
+- GET: returns the worklogitem for the user
+- PUT: updates the worklogitem for the user
+- DELETE: deletes the worklogitem for the user
+
+/sugestions
+- GET: returns all suggestions
+
+/sugestions/<sid>
+- GET: returns the specified suggestion
+- PUT: updates the specified suggestion
+- DELETE: deletes the specified suggestion
+
+/notification_registrations
+- POST: registers an app for notifications (the logged in user)
+
+/notification_requests/
+- POST: creates a new notification
+
+/notification_requests/<nid>
+- GET: returns the specified notification
+- PUT: updates the specified notification
+- DELETE: deletes the specified notification
+
+/notification_requests/<nid>/send
+- POST: create and send the specified notification
+
+/notification_requests/<nid>/resend
+- POST: (re-)send the (existing) specified notification
+
+/distribution_lists/registrations
+- GET: returns the users (list of ids) subscribed to new registrations
+X- POST: create the list
+X- PUT: update the list
+X- DELETE: delete the list
+
+/distribution_lists/suggestions
+- GET: returns the users (list of ids) subscribed to new suggestions
+X- POST: create the list
+X- PUT: update the list
+X- DELETE: delete the list
+
+---- side effects ---
+
+Notifications
+* an update to a site causes notifications to all volunteers with that site listed in their preferred site subscriptions
+* an update to a mobile site causes a notification to all mobile volunteers that are requesting mobile updates
+
+Email
+* to <registrations> list on new user added
+* to <suggestions> list when new volunteer feedback
+
+Other
+* an update to any site updates a sites.json file with summary of all sites (could collect changes if practical)
+    - how much slower than just pulling all sites? create a version of get site that doesn't include worklog?
+

@@ -17,7 +17,7 @@ namespace a_vitavol
     // This activity is only used to show the just received notification. The notification can be when
     //  the app is in the foreground OR in background (the sending agent is required to set click_activity to A_ViewNotification
 
-    [Activity(Label = "VITA: View Notification")]
+    [Activity(Theme = "@android:style/Theme.DeviceDefault.NoActionBar", Label = "VITA: View Notification")]
     public class A_ViewNotification : Activity
     {
 		string Body;
@@ -35,8 +35,10 @@ namespace a_vitavol
             L_Body = FindViewById<TextView>(Resource.Id.L_Body);
             L_Time = FindViewById<TextView>(Resource.Id.L_Time);
 
-			// the following can be user to see if we were launched from a notification event
-			if (Intent.Extras != null)
+            C_Common.SetViewColors(this, Resource.Id.V_ViewNotification);
+
+            // the following can be user to see if we were launched from a notification event
+            if (Intent.Extras != null)
 			{
                 if (Intent.Extras.ContainsKey("message"))
                 {
@@ -44,7 +46,6 @@ namespace a_vitavol
 
                     Body = b.GetString("body");
 					long time = b.GetLong("time");
-                    Console.WriteLine("time = " + time.ToString());
                     Time = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
                     TimeSpan ts = new TimeSpan(time * 10000);
                     Time = Time.Add(ts);

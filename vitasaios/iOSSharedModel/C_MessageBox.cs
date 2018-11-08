@@ -34,5 +34,6 @@ namespace zsquared
 			parent.PresentViewController(alert, true, null);
 
 			return taskCompletionSource.Task;
-		}    }
+        }
+    }
 }

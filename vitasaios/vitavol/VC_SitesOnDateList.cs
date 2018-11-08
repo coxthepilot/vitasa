@@ -111,7 +111,7 @@ namespace vitavol
                 List<C_VitaSite> sitesThatNeedHelp = new List<C_VitaSite>();
                 foreach(C_SiteSchedule ss in sitesOpenAndNeedOurUserHelp)
                 {
-                    C_VitaSite site = await Global.GetSiteFromCache(ss.SiteSlug);
+                    C_VitaSite site = await Global.GetSiteWithSlug(ss.SiteSlug);
                     sitesThatNeedHelp.Add(site);
                 }
 

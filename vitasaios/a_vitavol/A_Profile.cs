@@ -67,7 +67,11 @@ namespace a_vitavol
                 AI_Busy.Show();
                 EnableUI(false);
 
-                C_IOResult ior = await Global.UpdateUserProfile(LoggedInUser);
+                C_JsonBuilder jb = new C_JsonBuilder();
+                jb.Add(LoggedInUser.Name, C_VitaUser.N_Name);
+                jb.Add(LoggedInUser.Phone, C_VitaUser.N_Phone);
+                jb.Add(LoggedInUser.Email, C_VitaUser.N_Email);
+                C_IOResult ior = await Global.UpdateUserFields(jb, LoggedInUser, LoggedInUser.Token);
 
                 AI_Busy.Cancel();
                 EnableUI(true);

@@ -10,11 +10,17 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)C_MessageBox.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)C_AndroidGlobal.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)C_GVHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)C_GooglePlayHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MyFirebaseIIDService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MyFirebaseMessagingService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)C_ToolsExtra.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)C_Common.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)C_ListViewHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)C_DatePicker.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)C_TimePicker.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)C_SpinnerHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)C_GeoCode.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)C_PersistentSettings.cs" />
   </ItemGroup>
 </Project>

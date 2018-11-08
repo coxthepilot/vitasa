@@ -15,21 +15,22 @@ namespace zsquared
                 // CN=Let's Encrypt Authority X3, O=Let's Encrypt, C=US
                 bool res = issuer.Contains("Let's Encrypt Authority");
 
-    //            string issuer = cert.Subject;
-    //            string[] issuers = issuer.Split(new char[] { '=' });
+                //            string issuer = cert.Subject;
+                //            string[] issuers = issuer.Split(new char[] { '=' });
 
-				////string issuer = cert.Issuer;
-				////string[] issuers = issuer.Split(new char[] { '=' });
+                ////string issuer = cert.Issuer;
+                ////string[] issuers = issuer.Split(new char[] { '=' });
 
-				//bool res = issuers.Length == 2;
-				//if (res)
-					//res = issuers[1] == host;
+                //bool res = issuers.Length == 2;
+                //if (res)
+                //res = issuers[1] == host;
                 //res = issuers[1] == "vitasa.abandonedfactory.net";
 
+#if DEBUG
                 if (!res)
                     Console.WriteLine("failed to validate certificate.");
-
-				return res;
+#endif
+                return res;
 			};
 		}
 	}

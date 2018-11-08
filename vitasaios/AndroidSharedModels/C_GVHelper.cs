@@ -4,6 +4,8 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using Android.Graphics;
+using Android.Content.Res;
 
 using System;
 using System.Collections.Generic;
@@ -71,16 +73,22 @@ namespace zsquared
 		Closed,                 // site is closed
 		OpenWithNeeds,          // site is open and has needs
 		OpenNoNeeds,            // site is open but has no needs
-        Background              // just put the plain background in place
+        Background,             // just put the plain background in place
+        Normal                  // just a regular day of the month
 	}
 
 	public class C_DateDetails
 	{
-		public C_YMD Date;
+        public E_DateType DateType;
+        public C_YMD Date;
 		public int DayOfWeek;
 
-		public E_DateType DateType;
+        public int BackgroundResourceId = -1;
+        public Color BackgroundColor;           // us this if BackgroundResourceId == -1
+        public ColorStateList TextColors;
+
 		public E_SiteState SiteState;
+
 		public bool Boxed;
 	}
 
@@ -100,9 +108,9 @@ namespace zsquared
 
 		public event EventHandler<C_DayOfWeekTouchedEventArgs> DayOfWeekTouched;
 
-		GridView GV;
+		readonly GridView GV;
 		List<C_DateDetails> DateDetails;
-		Activity _activity;
+        readonly Activity _activity;
         Dictionary<string, int> ResourceIds;
 
         public C_GVHelper(Activity a, GridView gv)

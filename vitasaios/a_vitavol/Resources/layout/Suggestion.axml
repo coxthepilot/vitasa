@@ -1,137 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/V_Suggestion"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
         <TextView
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:layout_width="10dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:id="@+id/textView4"
-            android:text="From:"
-            android:layout_marginRight="0.0dp" />
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:id="@+id/textView1"
+            android:gravity="center"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:text="Volunteer - Suggestion"
+            android:textColor="@android:color/white"
+            android:background="#FF13436B" />
         <TextView
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:layout_width="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="6"
-            android:id="@+id/L_From"
-            android:text="...from..."
-            android:layout_marginRight="0.0dp" />
-    </LinearLayout>
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="10dp"
-        android:id="@+id/space1" />
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+            android:id="@+id/textView5"
+            android:text="Subject"
+            android:textColor="@android:color/white"
+            android:background="#FF13436B"
+            android:textSize="18dp"
+            android:textStyle="bold" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:id="@+id/TB_Subject" />
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:id="@+id/space1"
+            android:background="#FF13436B" />
         <TextView
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:layout_width="10dp"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:id="@+id/textView4"
-            android:text="Date:"
-            android:layout_marginRight="0.0dp" />
-        <TextView
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:layout_width="wrap_content"
+            android:id="@+id/textView6"
+            android:text="Message"
+            android:textColor="@android:color/white"
+            android:background="#FF13436B"
+            android:textSize="18dp"
+            android:textStyle="bold" />
+        <EditText
+            android:inputType="textMultiLine"
+            android:layout_width="match_parent"
+            android:layout_height="238.5dp"
+            android:id="@+id/TB_Message"
+            android:gravity="top" />
+        <ProgressBar
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="6"
-            android:id="@+id/L_Date"
-            android:text="...date..."
-            android:layout_marginRight="0.0dp" />
-    </LinearLayout>
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="10dp"
-        android:id="@+id/space1" />
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <TextView
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:layout_width="10dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:id="@+id/textView4"
-            android:text="State:"
-            android:layout_marginRight="0.0dp" />
-        <TextView
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="6"
-            android:id="@+id/L_State"
-            android:text="...state..."
-            android:layout_marginRight="0.0dp" />
-    </LinearLayout>
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="10dp"
-        android:id="@+id/space1" />
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+            android:id="@+id/PB_Busy"
+            android:indeterminate="true"
+            android:visibility="gone" />
         <Button
-            android:id="@+id/B_SaveSuggestion"
-            android:layout_width="0dp"
-            android:layout_weight="2"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Save" />
-        <Button
-            android:id="@+id/B_DeleteSuggestion"
-            android:layout_width="0dp"
-            android:layout_weight="2"
-            android:layout_height="wrap_content"
-            android:text="Delete" />
+            android:id="@+id/B_Save"
+            android:text="Submit"
+            android:textColor="@android:color/white"
+            android:background="#ff216093" />
     </LinearLayout>
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="10dp"
-        android:id="@+id/space1" />
-    <TextView
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView5"
-        android:text="Subject" />
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="10dp"
-        android:id="@+id/space1" />
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:singleLine="true"
-        android:id="@+id/TB_SubjectSuggestion" />
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="10dp"
-        android:id="@+id/space1" />
-    <TextView
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView6"
-        android:text="Message" />
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="10dp"
-        android:id="@+id/space1" />
-    <EditText
-        android:inputType="textMultiLine"
-        android:layout_width="match_parent"
-        android:layout_height="238.5dp"
-        android:id="@+id/TB_MessageSuggestion"
-        android:gravity="top" />
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="600dp"
-        android:id="@+id/space2" />
-</LinearLayout>
+</ScrollView>

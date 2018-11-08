@@ -1,8 +1,6 @@
 
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vitasa", "vitasa\vitasa.csproj", "{6B22298C-4080-4B07-9765-083359A6381A}"
-EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "SharedModels", "SharedModels\SharedModels.shproj", "{A00E7063-860B-4124-9C8E-0FCFCE560ED6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vitavol", "vitavol\vitavol.csproj", "{6A54BBFE-FE39-4316-BA0B-E74DA172F56E}"
@@ -15,6 +13,8 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "AndroidSharedModels", "Andr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "a_vitavol", "a_vitavol\a_vitavol.csproj", "{AD1C86D4-8E32-4FEC-85A2-B1D982F3DE61}"
 EndProject
+Project("{9344BDBB-3E7F-41FC-A0DD-8665D75EE146}") = "vitasa", "vitasa\vitasa.csproj", "{94100B5C-5652-47BF-8516-8084C50A5B25}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|iPhoneSimulator = Debug|iPhoneSimulator
@@ -23,14 +23,6 @@ Global
 		Debug|iPhone = Debug|iPhone
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{6B22298C-4080-4B07-9765-083359A6381A}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
-		{6B22298C-4080-4B07-9765-083359A6381A}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
-		{6B22298C-4080-4B07-9765-083359A6381A}.Release|iPhone.ActiveCfg = Release|iPhone
-		{6B22298C-4080-4B07-9765-083359A6381A}.Release|iPhone.Build.0 = Release|iPhone
-		{6B22298C-4080-4B07-9765-083359A6381A}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
-		{6B22298C-4080-4B07-9765-083359A6381A}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
-		{6B22298C-4080-4B07-9765-083359A6381A}.Debug|iPhone.ActiveCfg = Debug|iPhone
-		{6B22298C-4080-4B07-9765-083359A6381A}.Debug|iPhone.Build.0 = Debug|iPhone
 		{6A54BBFE-FE39-4316-BA0B-E74DA172F56E}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
 		{6A54BBFE-FE39-4316-BA0B-E74DA172F56E}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
 		{6A54BBFE-FE39-4316-BA0B-E74DA172F56E}.Release|iPhone.ActiveCfg = Release|iPhone
@@ -55,6 +47,14 @@ Global
 		{AD1C86D4-8E32-4FEC-85A2-B1D982F3DE61}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 		{AD1C86D4-8E32-4FEC-85A2-B1D982F3DE61}.Debug|iPhone.ActiveCfg = Debug|Any CPU
 		{AD1C86D4-8E32-4FEC-85A2-B1D982F3DE61}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{94100B5C-5652-47BF-8516-8084C50A5B25}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
+		{94100B5C-5652-47BF-8516-8084C50A5B25}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
+		{94100B5C-5652-47BF-8516-8084C50A5B25}.Release|iPhone.ActiveCfg = Release|iPhone
+		{94100B5C-5652-47BF-8516-8084C50A5B25}.Release|iPhone.Build.0 = Release|iPhone
+		{94100B5C-5652-47BF-8516-8084C50A5B25}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
+		{94100B5C-5652-47BF-8516-8084C50A5B25}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
+		{94100B5C-5652-47BF-8516-8084C50A5B25}.Debug|iPhone.ActiveCfg = Debug|iPhone
+		{94100B5C-5652-47BF-8516-8084C50A5B25}.Debug|iPhone.Build.0 = Debug|iPhone
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		version = 0.2
