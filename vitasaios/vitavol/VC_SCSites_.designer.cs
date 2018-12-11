@@ -32,6 +32,10 @@ namespace vitavol
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UIButton B_VolList { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UITableView TV_Sites { get; set; }
 
         void ReleaseDesignerOutlets ()
@@ -54,6 +58,11 @@ namespace vitavol
             if (B_Settings != null) {
                 B_Settings.Dispose ();
                 B_Settings = null;
+            }
+
+            if (B_VolList != null) {
+                B_VolList.Dispose ();
+                B_VolList = null;
             }
 
             if (TV_Sites != null) {

@@ -47,6 +47,7 @@ namespace a_vitavol
             B_Save = FindViewById<Button>(Resource.Id.B_Save);
             PB_Busy = FindViewById<ProgressBar>(Resource.Id.PB_Busy);
             SP_Site = FindViewById<Spinner>(Resource.Id.SP_Site);
+            //SP_Date = FindViewById<Spinner>(Resource.Id.SP_Date);
             TB_Hours = FindViewById<EditText>(Resource.Id.TB_Hours);
             B_Date = FindViewById<Button>(Resource.Id.B_Date);
             L_Date = FindViewById<TextView>(Resource.Id.L_Date);
@@ -55,14 +56,14 @@ namespace a_vitavol
 
             NewWorkLogItem = Global.SelectedWorkItem == null;
             if (NewWorkLogItem)
-                Global.SelectedWorkItem = new C_WorkLogItem();
+                Global.SelectedWorkItem = new C_WorkLogItem(LoggedInUser.id);
                 
             B_Save.Click += (sender, e) => 
             {
                 // save the values from the form into the object
                 int six = SP_Site.SelectedItemPosition;
                 C_VitaSite selSite = AllSites[six];
-                Global.SelectedWorkItem.SiteId = selSite.id;
+                Global.SelectedWorkItem.SiteSlug = selSite.Slug;
                 try { Global.SelectedWorkItem.Hours = Convert.ToSingle(TB_Hours.Text); }
                 catch (Exception ex) { Log.Debug("vita", ex.Message); }
 
@@ -101,22 +102,28 @@ namespace a_vitavol
             B_Date.Click += (sender, e) => 
                 DatePicker.Show(FragmentManager, "vita");
 
+            PB_Busy.Visibility = ViewStates.Visible;
+            EnableUI(false);
+
             Task.Run(async () =>
             {
                 AllSites = await Global.FetchAllSites();
 
                 void p()
                 {
+                    PB_Busy.Visibility = ViewStates.Gone;
+                    EnableUI(true);
+
                     ArrayAdapter SitesAdapter = new ArrayAdapter(this, Resource.Layout.SpinnerItem, AllSites);
                     SitesAdapter.SetDropDownViewResource(Resource.Layout.SpinnerItem);
                     SP_Site.Adapter = SitesAdapter;
 
                     int selix = -1;
-                    if (Global.SelectedWorkItem.SiteId != -1)
+                    if (Global.SelectedWorkItem.SiteSlug != null)
                     {
                         for (int ix = 0; ix != AllSites.Count; ix++)
                         {
-                            if (Global.SelectedWorkItem.SiteId == AllSites[ix].id)
+                            if (Global.SelectedWorkItem.SiteSlug == AllSites[ix].Slug)
                             {
                                 selix = ix;
                                 break;
@@ -154,11 +161,16 @@ namespace a_vitavol
                       && SP_Site.SelectedItemPosition != -1;
         }
 
-        public override void OnBackPressed() => 
-            StartActivity(new Intent(this, typeof(A_VolHoursWorked)));
+        public override void OnBackPressed()
+        {
+            if (UIIsEnabled)
+                StartActivity(new Intent(this, typeof(A_VolHoursWorked)));
+        }
 
+        bool UIIsEnabled;
         private void EnableUI(bool en)
         {
+            UIIsEnabled = en;
             B_Save.Enabled = en;
             SP_Site.Enabled = en;
             TB_Hours.Enabled = en;

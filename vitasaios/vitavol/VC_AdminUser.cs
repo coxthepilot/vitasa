@@ -1,5 +1,6 @@
 using System;
 using UIKit;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using static zsquared.C_MessageBox;
@@ -31,6 +32,14 @@ namespace vitavol
 
             SelectedUser = Global.SelectedUser ?? new C_VitaUser();
 
+            UITapGestureRecognizer labelTap = new UITapGestureRecognizer(() =>
+            {
+                C_Common.DropFirstResponder(View);
+            });
+
+            L_Title.UserInteractionEnabled = true;
+            L_Title.AddGestureRecognizer(labelTap);
+
             B_Back.TouchUpInside += async (sender, e) =>
             {
                 if (!GetDirty() || !ValidUser())
@@ -52,9 +61,27 @@ namespace vitavol
                     return;
                 }
 
-                C_JsonBuilder jb = null;
-                if (Global.SelectedUser != null)
-                    jb = CaptureUserFields();
+                // (introduced after the push of 2.0)
+                if (!ValidUser())
+                {
+                    E_MessageBoxResults mbres2 = await MessageBox(this,
+                        "Error",
+                        "Invalid user (must have name, email, and phone).",
+                        E_MessageBoxButtons.Ok);
+
+                    return;
+                }
+
+                // (introduced after the push of 2.0)
+                C_VitaUser u = Global.GetUserFromCacheNoFetch(TB_Email.Text);
+                if (u != null)
+                {
+                    E_MessageBoxResults mbres3 = await MessageBox(this,
+                        "Error",
+                        "That email is already in use.",
+                        E_MessageBoxButtons.Ok);
+                    return;
+                }
 
                 PullValuesFromForm();
 
@@ -63,6 +90,10 @@ namespace vitavol
 
                 await Task.Run(async () => 
                 {
+                    C_JsonBuilder jb = null;
+                    if (Global.SelectedUser != null)
+                        jb = CapturePrivateFields();
+
                     bool ok = await SaveUser(jb);
 
                     async void p()
@@ -103,9 +134,17 @@ namespace vitavol
                     return;
                 }
 
-                C_JsonBuilder jb = null;
-                if (Global.SelectedUser != null)
-                    jb = CaptureUserFields();
+                // (introduced after the push of 2.0)
+                C_VitaUser u = Global.GetUserFromCacheNoFetch(TB_Email.Text);
+                if (u != null)
+                {
+                    E_MessageBoxResults mbres = await MessageBox(this,
+                        "Error",
+                        "That email is already in use.",
+                        E_MessageBoxButtons.Ok);
+                    return;
+                }
+
                 PullValuesFromForm();
 
                 AI_Busy.StartAnimating();
@@ -113,6 +152,10 @@ namespace vitavol
 
                 await Task.Run(async () => 
                 {
+                    C_JsonBuilder jb = null;
+                    if (Global.SelectedUser != null)
+                        jb = CapturePrivateFields();
+
                     bool ok = await SaveUser(jb);
 
                     async void p()
@@ -215,6 +258,7 @@ namespace vitavol
             List<E_Certification> certifications = new List<E_Certification>
             {
                 E_Certification.None,
+                E_Certification.Greeter,
                 E_Certification.Basic,
                 E_Certification.Advanced
             };
@@ -223,7 +267,6 @@ namespace vitavol
 
             List<E_VitaUserRoles> roles = new List<E_VitaUserRoles>
             {
-                E_VitaUserRoles.None,
                 E_VitaUserRoles.Volunteer,
                 E_VitaUserRoles.SiteCoordinator,
                 E_VitaUserRoles.Admin
@@ -233,10 +276,8 @@ namespace vitavol
                 RolePicker.SetSelection(E_VitaUserRoles.Admin);
             else if (SelectedUser.HasSiteCoordinator)
                 RolePicker.SetSelection(E_VitaUserRoles.SiteCoordinator);
-            else if (SelectedUser.HasVolunteer)
-                RolePicker.SetSelection(E_VitaUserRoles.Volunteer);
             else
-                RolePicker.SetSelection(E_VitaUserRoles.None);
+                RolePicker.SetSelection(E_VitaUserRoles.Volunteer);
 
             EnableUI(true);
         }
@@ -296,17 +337,20 @@ namespace vitavol
 
         private void CheckEnableSaveButton()
         {
-            bool valuesOk = true;
-
-            valuesOk &= TB_Name.Text.Length > 3;
-            valuesOk &= Tools.EmailAddressIsValid(TB_Email.Text);
-            valuesOk &= TB_Phone.Text.Length > 10;
-            valuesOk &= TB_Cert.Text.Length > 0;
-            valuesOk &= TB_Role.Text.Length > 0;
+            bool nameok = TB_Name.Text.Length > 3;
+            bool emailok = Tools.EmailAddressIsValid(TB_Email.Text);
+            bool phoneok = TB_Phone.Text.Length > 10;
+            bool certok = TB_Cert.Text.Length > 0;
+            bool roleok = TB_Role.Text.Length > 0;
+            bool pwok = true;
             if (!string.IsNullOrWhiteSpace(TB_Password.Text) || !string.IsNullOrWhiteSpace(TB_PasswordConfirm.Text))
-                valuesOk &= (TB_Password.Text.Length > 7) && (TB_Password.Text == TB_PasswordConfirm.Text);
+                pwok = (TB_Password.Text.Length > 7) && (TB_Password.Text == TB_PasswordConfirm.Text);
 
-            B_Save.Enabled = valuesOk;
+            bool valuesOk = nameok && emailok && phoneok && certok && roleok && pwok;
+
+            bool sitesCoordinatedDirty = (Global.SelectedUserTemp != null) && Global.SelectedUserTemp.Dirty;
+
+            B_Save.Enabled = valuesOk || sitesCoordinatedDirty;
         }
 
         private bool ValidUser()
@@ -318,47 +362,9 @@ namespace vitavol
             return okName || okEmail || okPhone;
         }
 
-        private async Task<bool> SaveUser(C_JsonBuilder jb)
+        private C_JsonBuilder CapturePrivateFields()
         {
-            C_IOResult ior = null;
-            if (Global.SelectedUser == null)
-            {
-                // new user
-                if (Global.SelectedUserTemp != null)
-                    SelectedUser.SitesCoordinated = Global.SelectedUserTemp.SitesCoordinated;
-                ior = await Global.CreateUser(SelectedUser, LoggedInUser.Token);
-            }
-            else
-                ior = await Global.UpdateUserFields(jb, SelectedUser, LoggedInUser.Token);
-
-            return ior.Success;
-        }
-
-        private C_JsonBuilder CaptureUserFields()
-        {
-            // must be an update; find the fields that have changed
-            C_JsonBuilder jb = new C_JsonBuilder();
-
-            if (TB_Name.Text.Length > 3)
-                jb.Add(TB_Name.Text, C_VitaUser.N_Name);
-            if (Tools.EmailAddressIsValid(TB_Email.Text))
-                jb.Add(TB_Email.Text, C_VitaUser.N_Email);
-            jb.Add(TB_Phone.Text, C_VitaUser.N_Phone);
-            if (!string.IsNullOrWhiteSpace(TB_Password.Text) && (TB_Password.Text.Length > 7))
-            {
-                jb.Add(TB_Password.Text, C_VitaUser.N_Password);
-                jb.Add(TB_Password.Text, C_VitaUser.N_PasswordConfirmation);
-            }
-
-            if ((SelectedUser.HasMobile && !SW_Mobile.On) || (!SelectedUser.HasMobile && SW_Mobile.On))
-                jb.Add(SW_Mobile.On, C_VitaUser.N_SubscribeMobile);
-
-            jb.Add(CertificationPicker.Selection.ToString(), C_VitaUser.N_Certification);
-
-            jb.StartArray(C_VitaUser.N_Roles);
-            foreach (E_VitaUserRoles role in SelectedUser.Roles)
-                jb.AddArrayElement(role.ToString());
-            jb.EndArray();
+            C_JsonBuilder jb = SelectedUser.ToJsonAsJsonBuilder();
 
             if (Global.SelectedUserTemp == null)
             {
@@ -376,6 +382,72 @@ namespace vitavol
             }
 
             return jb;
+        }
+
+        private async Task<bool> SaveUser(C_JsonBuilder jb)
+        {
+            C_IOResult ior = null;
+            try
+            {
+                if (Global.SelectedUser == null)
+                {
+                    // new user
+                    if (Global.SelectedUserTemp != null)
+                    {
+                        SelectedUser.SitesCoordinated = Global.SelectedUserTemp.SitesCoordinated;
+                        await AdjustSiteCoordinators();
+                    }
+                    ior = await Global.CreateUser(SelectedUser, LoggedInUser.Token);
+                }
+                else
+                {
+                    await AdjustSiteCoordinators();
+
+                    ior = await Global.UpdateUserFields(jb, SelectedUser, LoggedInUser.Token);
+                }
+            }
+            catch
+            {
+                ior = new C_IOResult();
+                ior.Success = false;
+            }
+
+            return (ior != null) && ior.Success;
+        }
+
+        private async Task<bool> AdjustSiteCoordinators()
+        {
+            foreach (C_VitaSite site in Global.SiteCache)
+            {
+                var ou = SelectedUser.SitesCoordinated.Where(sc => sc.SiteId == site.id);
+                if (ou.Any())
+                {
+                    // make sure this user is listed in the site
+                    var ou1 = site.SiteCoordinators.Where(sc => sc.UserId == SelectedUser.id);
+                    if (!ou1.Any())
+                    {
+                        C_SiteCoordinator sc = new C_SiteCoordinator(SelectedUser);
+                        site.SiteCoordinators.Add(sc);
+
+                        await Global.UpdateSite(site, LoggedInUser.Token);
+                    }
+                }
+                else
+                {
+                    // make sure this user is not listed in the site
+                    var ou1 = site.SiteCoordinators.Where(sc => sc.UserId == SelectedUser.id);
+                    if (ou1.Any())
+                    {
+                        C_SiteCoordinator sc = ou1.First();
+                        int ix = site.SiteCoordinators.IndexOf(sc);
+                        site.SiteCoordinators.RemoveAt(ix);
+
+                        await Global.UpdateSite(site, LoggedInUser.Token);
+                    }
+                }
+            }
+
+            return true;
         }
     }
 }

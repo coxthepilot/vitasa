@@ -1,5 +1,10 @@
 ﻿using Android.App;
+using Android.Widget;
+using Android.OS;
 using Android.Content;
+using Android.Util;
+using Android.Gms.Common.Apis;
+using Android.Views;
 
 using System;
 
@@ -53,4 +58,79 @@ namespace zsquared
 	{
 		public E_MessageBoxResults Result { get; set; }
 	}
+
+    public class C_AlertBox
+    {
+        readonly Dialog dialog;
+        AlertDialog.Builder alert;
+
+        public C_AlertBox(Activity context, string title, string message)
+        {
+            alert = new AlertDialog.Builder((Context)context);
+            alert.SetTitle(title);
+            alert.SetMessage(message);
+            dialog = alert.Create();
+            dialog.SetCanceledOnTouchOutside(false);
+        }
+
+        public void Show()
+        {
+            dialog.Show();
+        }
+
+        public void SetMessage(string m)
+        {
+            //alert.SetMessage(m);
+            TextView tv = (TextView)dialog.FindViewById(Android.Resource.Id.Message);
+            tv.Text = m;
+        }
+
+        public void Hide()
+        {
+            dialog.Hide();
+        }
+    }
+
+    public class C_BusyBox
+    {
+        Dialog dialog;
+        AlertDialog.Builder alert;
+        readonly View PB_Busy_View;
+        bool BoxIsVisible;
+
+        public C_BusyBox(Activity context, string message)
+        {
+            PB_Busy_View = context.LayoutInflater.Inflate(a_vitavol.Resource.Layout.BusyBox, null);
+
+            alert = new AlertDialog.Builder((Context)context);
+            alert.SetTitle("");
+            alert.SetMessage(message);
+            alert.SetView(PB_Busy_View);
+            dialog = alert.Create();
+
+            BoxIsVisible = false;
+        }
+
+        public void Show()
+        {
+            BoxIsVisible = true;
+            dialog.Show();
+        }
+
+        public void SetMessage(string m)
+        {
+            alert.SetMessage(m);
+        }
+
+        public void Hide()
+        {
+            if (BoxIsVisible)
+                dialog.Hide();
+        }
+
+        //public void Dispose()
+        //{
+        //    dialog = null;
+        //}
+    }
 }

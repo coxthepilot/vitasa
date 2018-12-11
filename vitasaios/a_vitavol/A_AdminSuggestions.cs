@@ -51,21 +51,26 @@ namespace a_vitavol
 
             Task.Run(async () =>
             {
+                List<C_VitaUser> users = await Global.FetchAllUsers(LoggedInUser.Token);
+
                 List<C_Suggestion> suggestions = await Global.FetchAllSuggestions(LoggedInUser.Token);
 
-                // make sure the users that have sent suggestions are in the user cache
-                foreach (C_Suggestion sug in suggestions)
-                {
-                    if (!sug.FromPublic && (sug.id >= 0))
-                    {
-                        C_VitaUser u = await Global.FetchUserWithId(sug.id);
-                    }
-                }
+                //// make sure the users that have sent suggestions are in the user cache
+                //foreach (C_Suggestion sug in suggestions)
+                //{
+                //    if (!sug.FromPublic && (sug.id >= 0))
+                //    {
+                //        C_VitaUser u = await Global.FetchUserWithId(sug.id);
+                //    }
+                //}
+                suggestions.Sort(C_Suggestion.CompareByDateReverse);
 
                 void p()
                 {
                     PB_Busy.Visibility = ViewStates.Gone;
                     EnableUI(true);
+
+                    suggestions.Sort(C_Suggestion.CompareByDate);
 
                     SuggestionsAdapter = new C_ListViewHelper<C_Suggestion>(this, LV_Suggestions, suggestions);
                     SuggestionsAdapter.GetTextLabel += (object sender, ListAdapterEventArgs<C_Suggestion> args) => 
@@ -78,8 +83,9 @@ namespace a_vitavol
                         C_Suggestion sug = args.Item;
                         C_VitaUser u = null;
                         if (!sug.FromPublic)
-                            u = Global.GetUserFromCacheNoFetch(sug.id);
-                        string from = sug.FromPublic ? "public" : u.Name;
+                            u = Global.GetUserFromCacheNoFetch(sug.UserId);
+                        string xn = u == null ? "" : u.Name;
+                        string from = sug.FromPublic ? "public" : xn;
 
                         return sug.CreateDate.ToString("dow mmm dd, yyyy") + " [" + from + "]";
                     };
@@ -88,11 +94,18 @@ namespace a_vitavol
             });
         }
 
-        void EnableUI(bool en) =>
+        bool UIIsEnabled;
+        void EnableUI(bool en)
+        {
+            UIIsEnabled = en;
             LV_Suggestions.Enabled = en;
+        }
 
         public override void OnBackPressed()
         {
+            if (!UIIsEnabled)
+                return;
+
             Global.SelectedSuggestion = null;
             StartActivity(new Intent(this, typeof(A_AdminMenu)));
         }

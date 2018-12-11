@@ -13,7 +13,6 @@ namespace vitavol
         C_Global Global;
         C_VitaUser LoggedInUser;
         C_VitaSite SelectedSite;
-        C_ItemPicker<C_YMD> DatePicker;
         C_TableSource<C_WorkLogItem> WorkLogItemTableSource;
 
         public VC_SCVolHours (IntPtr handle) : base (handle)
@@ -27,28 +26,15 @@ namespace vitavol
             AppDelegate myAppDelegate = (AppDelegate)UIApplication.SharedApplication.Delegate;
             Global = myAppDelegate.Global;
             LoggedInUser = Global.GetUserFromCacheNoFetch(Global.LoggedInUserId);
-            SelectedSite = Global.GetSiteFromSlugNoFetch(Global.SelectedSiteSlug);
 
             B_Back.TouchUpInside += (sender, e) => 
+                PerformSegue("Segue_SCVolHoursToSCSites", this);
+
+            B_GoToSiteCalendar.TouchUpInside += (object sender, EventArgs e) => 
                 PerformSegue("Segue_SCVolHoursToSCSite", this);
 
             if (Global.CalendarDate == null)
                 Global.CalendarDate = C_YMD.Now;
-
-            TB_Date.AddTarget((sender, e) => 
-            {
-                Global.CalendarDate = new C_YMD(TB_Date.Text);
-
-                List<C_WorkLogItem> worklogitems = new List<C_WorkLogItem>();
-                foreach (C_WorkLogItem wi in SelectedSite.WorkLogItems)
-                {
-                    if (wi.Date == Global.CalendarDate)
-                        worklogitems.Add(wi);
-                }
-
-                InstallWorkLogItemsTableSource(worklogitems);
-
-            }, UIControlEvent.AllEditingEvents);
 
             B_MarkAsApproved.TouchUpInside += (sender, e) => 
             {
@@ -60,11 +46,19 @@ namespace vitavol
                     bool ioerror = false;
                     foreach(C_WorkLogItem wi in WorkLogItemTableSource.List)
                     {
-                        wi.Approved = true;
-                        C_VitaUser user = Global.GetUserFromCacheNoFetch(wi.UserId);
-                        C_IOResult ior = await Global.UpdateWorkLogItem(user, LoggedInUser.Token, wi);
-                        if (!ior.Success)
-                            ioerror = true;
+                        if (!wi.Approved)
+                        {
+                            wi.Approved = true;
+                            C_VitaUser user = Global.GetUserFromCacheNoFetch(wi.UserId);
+                            if (user == null)
+                                user = FindUserForWorkItem(wi);
+                            if (user != null)
+                            {
+                                C_IOResult ior = await Global.UpdateWorkLogItem(user, LoggedInUser.Token, wi);
+                                if (!ior.Success)
+                                    ioerror = true;
+                            }
+                        }
                     }
 
                     async void p()
@@ -100,17 +94,6 @@ namespace vitavol
 
             C_Common.SetUIColors(View);
 
-            L_SiteName.Text = SelectedSite.Name;
-
-            List<C_WorkLogItem> worklogitems = new List<C_WorkLogItem>();
-            foreach(C_WorkLogItem wi in SelectedSite.WorkLogItems)
-            {
-                if (wi.Date == Global.CalendarDate)
-                    worklogitems.Add(wi);
-            }
-
-            InstallWorkLogItemsTableSource(worklogitems);
-
             AI_Busy.StartAnimating();
             EnableUI(false);
 
@@ -120,28 +103,18 @@ namespace vitavol
 
                 List<C_VitaSite> sites = await Global.FetchAllSites(LoggedInUser.Token);
 
-                List<C_YMD> dates = new List<C_YMD>();
-                foreach (C_VitaSite site in sites)
-                {
-                    foreach (C_CalendarEntry ce in site.SiteCalendar)
-                    {
-                        if ((ce.SiteIsOpen) && !dates.Contains(ce.Date))
-                            dates.Add(ce.Date);
-
-                    }
-                }
-                dates.Sort(C_YMD.CompareYMD);
+                SelectedSite = Global.GetSiteFromSlugNoFetch(Global.SelectedSiteSlug);
 
                 void p()
                 {
-                    DatePicker = new C_ItemPicker<C_YMD>(TB_Date, dates);
-
-                    if (Global.CalendarDate < dates[0])
-                        Global.CalendarDate = dates[0];
-                    DatePicker.SetSelection(Global.CalendarDate);
-
                     AI_Busy.StopAnimating();
                     EnableUI(true);
+
+                    L_SiteName.Text = SelectedSite.Name;
+
+                    SelectedSite.WorkLogItems.Sort(C_WorkLogItem.CompareByDateReverse);
+
+                    InstallWorkLogItemsTableSource(SelectedSite.WorkLogItems);
                 }
                 UIApplication.SharedApplication.InvokeOnMainThread(p);
             });
@@ -153,17 +126,21 @@ namespace vitavol
         private void InstallWorkLogItemsTableSource(List<C_WorkLogItem> items)
         {
             WorkLogItemTableSource = new C_TableSource<C_WorkLogItem>(this, TV_WorkLogItems, items);
+            items.Sort(C_WorkLogItem.CompareByDateReverse);
             WorkLogItemTableSource.GetTextLabel += (object sender, C_TableSource<C_WorkLogItem>.TableSourceEventArgs<C_WorkLogItem> args) =>
             {
                 C_WorkLogItem wi = args.Item;
                 C_VitaUser user = Global.GetUserFromCacheNoFetch(wi.UserId);
-                return user.Name;
+                if (user == null)
+                    user = FindUserForWorkItem(wi);
+                string un = user == null ? "" : user.Name;
+                return un;
             };
             WorkLogItemTableSource.GetDetailTextLabel += (object sender, C_TableSource<C_WorkLogItem>.TableSourceEventArgs<C_WorkLogItem> args) =>
             {
                 C_WorkLogItem wi = args.Item;
                 string apps = wi.Approved ? " [approved]" : " [not approved]";
-                return wi.Hours.ToString() + " hours" + apps;
+                return wi.Date.ToString("mmm dd, yyyy") + " for " + wi.Hours.ToString() + " hours" + apps;
             };
             WorkLogItemTableSource.Selected += (object sender, C_TableSource<C_WorkLogItem>.TableSourceEventArgs<C_WorkLogItem> args) =>
             {
@@ -171,17 +148,45 @@ namespace vitavol
                 Global.SelectedWorkItem = args.Item;
                 PerformSegue("Segue_SCVolHoursToSCAddVolHours", this);
             };
-            WorkLogItemTableSource.Delete += async (sender, args) =>
+            async void deleteHandler(object sender, C_TableSource<C_WorkLogItem>.TableSourceEventArgs<C_WorkLogItem> args)
             {
                 C_WorkLogItem wi = args.Item;
                 // find the work log item in the site list (the actions below only delete from the user)
-                SelectedSite.WorkLogItems.Remove(wi);
                 // get the user so we can actually do the delete
                 C_VitaUser user = Global.GetUserFromCacheNoFetch(wi.UserId);
-                C_IOResult ior = await Global.RemoveWorkLogItem(user, LoggedInUser.Token, wi);
-            };
+                if (user == null)
+                    user = FindUserForWorkItem(wi);
+                if (user != null)
+                {
+                    C_IOResult ior = await Global.RemoveWorkLogItem(user, LoggedInUser.Token, wi);
+                    if (ior.Success)
+                        SelectedSite.WorkLogItems.Remove(wi);
+                }
+            }
+            WorkLogItemTableSource.Delete += deleteHandler;
             TV_WorkLogItems.Source = WorkLogItemTableSource;
             TV_WorkLogItems.ReloadData();
+        }
+
+        private C_VitaUser FindUserForWorkItem(C_WorkLogItem wi)
+        {
+            C_VitaUser user = null;
+            // the backend is supposed to store the UserId; in the case where it doesn't we do another search for the user
+            foreach (C_VitaUser u in Global.UserCache)
+            {
+                bool found = false;
+                foreach (C_WorkLogItem wx in u.WorkItems)
+                {
+                    if (wx.id == wi.id)
+                    {
+                        found = true;
+                        user = u;
+                    }
+                }
+                if (found)
+                    break;
+            }
+            return user;
         }
     }
 }

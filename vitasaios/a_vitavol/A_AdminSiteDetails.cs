@@ -58,7 +58,7 @@ namespace a_vitavol
             CB_MFT.Checked = Global.SelectedSiteTemp.SiteCapabilities.Contains(E_SiteCapabilities.MFT);
             CB_Dropoff.Checked = Global.SelectedSiteTemp.SiteCapabilities.Contains(E_SiteCapabilities.DropOff);
             CB_Express.Checked = Global.SelectedSiteTemp.SiteCapabilities.Contains(E_SiteCapabilities.Express);
-            CB_InPerson.Checked = Global.SelectedSiteTemp.SiteCapabilities.Contains(E_SiteCapabilities.InPerson);
+            CB_InPerson.Checked = Global.SelectedSiteTemp.SiteCapabilities.Contains(E_SiteCapabilities.InPersonTaxPrep);
         }
 
         public override void OnBackPressed()
@@ -75,7 +75,7 @@ namespace a_vitavol
             if (CB_MFT.Checked) Global.SelectedSiteTemp.SiteCapabilities.Add(E_SiteCapabilities.MFT);
             if (CB_Dropoff.Checked) Global.SelectedSiteTemp.SiteCapabilities.Add(E_SiteCapabilities.DropOff);
             if (CB_Express.Checked) Global.SelectedSiteTemp.SiteCapabilities.Add(E_SiteCapabilities.Express);
-            if (CB_InPerson.Checked) Global.SelectedSiteTemp.SiteCapabilities.Add(E_SiteCapabilities.InPerson);
+            if (CB_InPerson.Checked) Global.SelectedSiteTemp.SiteCapabilities.Add(E_SiteCapabilities.InPersonTaxPrep);
 
             Global.SelectedSiteTemp.Dirty = true;
         }

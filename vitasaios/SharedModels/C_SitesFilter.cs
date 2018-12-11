@@ -6,7 +6,7 @@ namespace zsquared
 {
     public enum E_DateFilter { AllDays, Today, Tomorrow, TodayP2, TodayP3, TodayP4, TodayP5, TodayP6, ThisWeek };
     // Note: the following needs to include all items from E_SiteCapabilities
-    public enum E_CapabilitiesFilter { Any, DropOff, Express, MFT, InPerson, Mobile };
+    public enum E_CapabilitiesFilter { Any, Virtual, Express, MFT, InPerson, Mobile };
 
     public class C_SitesFilter
     {
@@ -69,6 +69,20 @@ namespace zsquared
         public bool FilterIsActive()
         {
             return (DateFilter != E_DateFilter.AllDays) || !_CapabilitiesFilter.Contains(E_CapabilitiesFilter.Any);
+        }
+
+        public string ServicesAsString()
+        {
+            string res = "";
+
+            foreach(E_CapabilitiesFilter cf in _CapabilitiesFilter)
+            {
+                if (res.Length > 0)
+                    res += ", ";
+                res += Tools.FixCamelCaseDisplay(cf.ToString());
+            }
+
+            return res;
         }
 
         public string ToJson()
@@ -145,7 +159,7 @@ namespace zsquared
                 return false;
 
             // if the filter is not looking for any capabilities in specific: then this is a match
-            if ((_CapabilitiesFilter.Count == 0) || (_CapabilitiesFilter.Contains(E_CapabilitiesFilter.Any)))
+            if (((_CapabilitiesFilter.Count == 0) || (_CapabilitiesFilter.Contains(E_CapabilitiesFilter.Any))) && (site.SiteType != E_SiteType.Mobile)) 
                 return true;
 
             // we are now looking for sites that have at least one of the capabilities specified
@@ -154,10 +168,10 @@ namespace zsquared
             {
                 switch (cf)
                 {
-                    case E_CapabilitiesFilter.DropOff: res = site.SiteCapabilities.Contains(E_SiteCapabilities.DropOff); break;
+                    case E_CapabilitiesFilter.Virtual: res = site.SiteCapabilities.Contains(E_SiteCapabilities.DropOff); break;
                     case E_CapabilitiesFilter.Express: res = site.SiteCapabilities.Contains(E_SiteCapabilities.Express); break;
                     case E_CapabilitiesFilter.MFT: res = site.SiteCapabilities.Contains(E_SiteCapabilities.MFT); break;
-                    case E_CapabilitiesFilter.InPerson: res = site.SiteCapabilities.Contains(E_SiteCapabilities.InPerson); break;
+                    case E_CapabilitiesFilter.InPerson: res = site.SiteCapabilities.Contains(E_SiteCapabilities.InPersonTaxPrep); break;
                     case E_CapabilitiesFilter.Mobile: res = site.SiteType == E_SiteType.Mobile; break;
                 }
                 // if the site has any of these desired capabilities, then this site is a match
@@ -178,9 +192,9 @@ namespace zsquared
                     JsonValue filterjsonparsed = JsonValue.Parse(filterjson);
                     Filter = new C_SitesFilter(filterjsonparsed);
                 }
-                catch (Exception e)
+                catch
                 {
-                    Console.WriteLine(e.Message);
+                    Filter = new C_SitesFilter();
                 }
             }
 

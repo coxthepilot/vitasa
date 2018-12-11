@@ -59,7 +59,11 @@ namespace a_vitavol
                 Task.Run(async () =>
                 {
                     LoggedInUser = Global.GetUserFromCacheNoFetch(Global.LoggedInUserId);
-                    C_Suggestion sug = new C_Suggestion(Global.LoggedInUserId, C_YMD.Now, false);
+                    C_Suggestion sug = new C_Suggestion(Global.LoggedInUserId, C_YMD.Now, false)
+                    {
+                        Subject = TB_Subject.Text,
+                        Text = TB_Message.Text
+                    };
                     C_IOResult ior = await Global.CreateSuggestion(sug, LoggedInUser.Token);
 
                     void p()
@@ -79,16 +83,22 @@ namespace a_vitavol
             };
 
             B_Submit.Enabled = (TB_Subject.Text.Length > 0) && (TB_Message.Text.Length > 0);
+            EnableUI(true);
         }
 
-        public override void OnBackPressed() =>
-            StartActivity(new Intent(this, typeof(A_VolHome)));
-
+        bool UIIsEnabled;
 		private void EnableUI(bool en)
         {
+            UIIsEnabled = en;
             B_Submit.Enabled = en && (TB_Subject.Text.Length > 0) && (TB_Message.Text.Length > 0);
             TB_Message.Enabled = en;
             TB_Subject.Enabled = en;
         }
-	}
+
+        public override void OnBackPressed()
+        {
+            if (UIIsEnabled)
+                StartActivity(new Intent(this, typeof(A_VolHome)));
+        }
+    }
 }

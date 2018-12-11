@@ -26,6 +26,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)C_SitesFilter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)C_WorkLogItem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)C_CalendarDateDetails.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)C_SiteCoordinator.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)C_YMDhms.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)testdata_sites.json">
@@ -37,5 +39,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)API Call Summary.txt" />
+    <None Include="$(MSBuildThisFileDirectory)Test Plan.txt" />
+    <None Include="$(MSBuildThisFileDirectory)testplan_sites.json" />
+    <None Include="$(MSBuildThisFileDirectory)config.json" />
+    <None Include="$(MSBuildThisFileDirectory)testplan_users.json" />
   </ItemGroup>
 </Project>

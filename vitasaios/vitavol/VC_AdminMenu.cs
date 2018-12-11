@@ -8,7 +8,7 @@ namespace vitavol
 {
     public partial class VC_AdminMenu : UIViewController
     {
-        enum E_AdminMenu { Users, Sites, Notifications, Suggestions, Mobile, NewUserEmail, NewFeedbackEmail, Settings }
+        enum E_AdminMenu { Users, Sites, Notifications, Suggestions, Mobile, Settings }
 
         C_Global Global;
         C_PersistentSettings Settings;
@@ -80,14 +80,6 @@ namespace vitavol
                     case E_AdminMenu.Mobile:
                         PerformSegue("Segue_AdminMenuToAdminMobile", this);
                         break;
-                    case E_AdminMenu.NewUserEmail:
-                        Global.EmailDistroType = E_DistroType.NewUser;
-                        PerformSegue("Segue_AdminMenuToAdminEmailDistroMgmt", this);
-                        break;
-                    case E_AdminMenu.NewFeedbackEmail:
-                        Global.EmailDistroType = E_DistroType.Feedback;
-                        PerformSegue("Segue_AdminMenuToAdminEmailDistroMgmt", this);
-                        break;
                     case E_AdminMenu.Settings:
                         Global.ViewCameFrom = E_ViewCameFrom.Admin;
 
@@ -96,6 +88,9 @@ namespace vitavol
                         PresentViewController(vc_adminmenu, false, null);
                         //PerformSegue("Segue_AdminMenuToAdminSettings", this);
                         break;
+                    //case E_AdminMenu.ExportImport:
+                        //PerformSegue("Segue_AdminMenuToAdminExportImport", this);
+                        //break;
                 }
             };
             TV_Menu.Source = MenuSource;

@@ -28,6 +28,10 @@ namespace vitavol
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UILabel L_Title { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UITextField TB_LastSent { get; set; }
 
         [Outlet]
@@ -53,6 +57,11 @@ namespace vitavol
             if (B_Send != null) {
                 B_Send.Dispose ();
                 B_Send = null;
+            }
+
+            if (L_Title != null) {
+                L_Title.Dispose ();
+                L_Title = null;
             }
 
             if (TB_LastSent != null) {

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 
 using Android.App;
 using Android.Widget;
@@ -79,6 +80,7 @@ namespace a_vitavol
                             }
                         }
                     }
+
                     void p()
                     {
                         PB_Busy.Visibility = Android.Views.ViewStates.Invisible;
@@ -104,6 +106,10 @@ namespace a_vitavol
 
                         Settings.UserEmail = TB_Email.Text;
                         Settings.UserPassword = TB_Password.Text;
+
+                        Settings.PreferedSites = new List<string>();
+                        foreach (string ps in ior.User.PreferredSiteSlugs)
+                            Settings.AddPreferedSite(ps);
                         Settings.Save();
 
                         if (ior.User.HasAdmin)
@@ -130,19 +136,24 @@ namespace a_vitavol
             TB_Password.TextChanged += (sender, e) => 
                 B_Submit.Enabled = CheckSubmitEnabled();
 
-            B_Submit.Enabled = CheckSubmitEnabled();
+            EnableUI(true);
         }
 
+        bool UIIsEnabled;
         private void EnableUI(bool en)
         {
+            UIIsEnabled = en;
             TB_Email.Enabled = en;
             TB_Password.Enabled = en;
 
             B_Submit.Enabled = en && CheckSubmitEnabled();
         }
 
-        public override void OnBackPressed() => 
-        StartActivity(new Intent(this, typeof(MainActivity)));
+        public override void OnBackPressed()
+        {
+            if (UIIsEnabled)
+                StartActivity(new Intent(this, typeof(MainActivity)));
+        }
 
         private bool CheckSubmitEnabled()
         {

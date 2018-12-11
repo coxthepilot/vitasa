@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Json;
+using System.Collections.Generic;
 
 namespace zsquared
 {
@@ -24,8 +25,8 @@ namespace zsquared
         public static readonly string N_SiteID = "siteid";
         public static readonly string N_Date = "date";
         public static readonly string N_IsClosed = "is_closed";
-        public static readonly string N_OpenTime = "opentime";
-        public static readonly string N_CloseTime = "closetime";
+        public static readonly string N_OpenTime = "open";
+        public static readonly string N_CloseTime = "close";
 
         public C_CalendarEntry()
         {
@@ -63,9 +64,12 @@ namespace zsquared
         /// Create a vita site from the json values, read from the web service
         /// </summary>
         /// <param name="j">Must be Parsed already</param>
-        public C_CalendarEntry(JsonValue j)
+        public C_CalendarEntry(JsonValue j, int siteid)
         {
-			//WorkShifts = new List<C_WorkShift>();
+            //WorkShifts = new List<C_WorkShift>();
+            OpenTime = new C_HMS(8, 0, 0);
+            CloseTime = new C_HMS(17, 0, 0);
+            SiteID = siteid;
 
 			if (!(j is JsonObject))
                 return;
@@ -83,10 +87,10 @@ namespace zsquared
                 SiteIsOpen = !Tools.JsonProcessBool(j[N_IsClosed], !SiteIsOpen);
 
             if (j.ContainsKey(N_OpenTime))
-                OpenTime = Tools.JsonProcessTime(j.ContainsKey(N_OpenTime), new C_HMS(8, 0, 0));
+                OpenTime = Tools.JsonProcessTime(j[N_OpenTime], new C_HMS(8, 0, 0));
 
             if (j.ContainsKey(N_CloseTime))
-                CloseTime = Tools.JsonProcessTime(j.ContainsKey(N_CloseTime), new C_HMS(17, 0, 0));
+                CloseTime = Tools.JsonProcessTime(j[N_CloseTime], new C_HMS(17, 0, 0));
         }
 
         public string ToJson()
@@ -101,6 +105,34 @@ namespace zsquared
 
             return res;
 		}
+
+        public static bool Overlap(List<C_CalendarEntry> ceList)
+        {
+            bool res = false;
+            for (int ceix = 0; ceix != ceList.Count; ceix++)
+            {
+                C_CalendarEntry ce = ceList[ceix];
+
+                // with this one, see if any other entry overlaps
+                for (int cetix = 0; cetix != ceList.Count; cetix++)
+                {
+                    C_CalendarEntry cet = ceList[cetix];
+
+                    if (ceix != cetix)
+                    {
+                        res = ((ce.OpenTime >= cet.OpenTime) && (ce.OpenTime < cet.CloseTime))
+                            || ((ce.CloseTime > cet.OpenTime) && (ce.CloseTime <= cet.CloseTime));
+                    }
+                    if (res)
+                        break;
+                }
+                if (res)
+                    break;
+            }
+
+            return res;
+        }
+
 
         public static int CompareByDate(C_CalendarEntry ce1, C_CalendarEntry ce2) => ce1.Date.CompareTo(ce2.Date);
     }

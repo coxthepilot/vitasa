@@ -1,4 +1,6 @@
 using System;
+using System.Threading.Tasks;
+using System.Collections.Generic;
 using UIKit;
 using zsquared;
 
@@ -37,32 +39,56 @@ namespace vitavol
             base.ViewDidAppear(animated);
 
             C_Common.SetUIColors(View);
+            AI_Busy.StartAnimating();
+            EnableUI(false);
 
-            float hours = 0.0f;
-            foreach (C_WorkLogItem wi in LoggedInUser.WorkItems)
-                hours += wi.Hours;
-            TB_Hours.Text = hours.ToString();
+            Task.Run(async () => 
+            {
+                List<C_VitaSite> sites = await Global.FetchAllSites();
 
-            WorkItemTableSource = new C_TableSource<C_WorkLogItem>(this, TV_HoursWorked, LoggedInUser.WorkItems);
-            WorkItemTableSource.GetTextLabel += (object sender, C_TableSource<C_WorkLogItem>.TableSourceEventArgs<C_WorkLogItem> args) =>
-            {
-                C_WorkLogItem wi = args.Item;
-                return wi.Date.ToString("dow mmm dd, yyyy");
-            };
-            WorkItemTableSource.GetDetailTextLabel += (object sender, C_TableSource<C_WorkLogItem>.TableSourceEventArgs<C_WorkLogItem> args) =>
-            {
-                C_WorkLogItem wi = args.Item;
-                C_VitaSite site = Global.GetSiteFromIDNoFetch(wi.SiteId);
-                return wi.Hours.ToString() + " hours at " + site.Name;
-            };
-            WorkItemTableSource.Selected += (object sender, C_TableSource<C_WorkLogItem>.TableSourceEventArgs<C_WorkLogItem> args) =>
-            {
-                Global.SelectedWorkItem = args.Item;
-                if (!Global.SelectedWorkItem.Approved)
-                    PerformSegue("Segue_VolHoursToVolHoursEdit", this);
-            };
-            TV_HoursWorked.Source = WorkItemTableSource;
-            TV_HoursWorked.ReloadData();
+                void p()
+                {
+                    AI_Busy.StopAnimating();
+                    EnableUI(true);
+
+                    float hours = 0.0f;
+                    foreach (C_WorkLogItem wi in LoggedInUser.WorkItems)
+                        hours += wi.Hours;
+                    TB_Hours.Text = hours.ToString();
+
+                    WorkItemTableSource = new C_TableSource<C_WorkLogItem>(this, TV_HoursWorked, LoggedInUser.WorkItems);
+                    LoggedInUser.WorkItems.Sort(C_WorkLogItem.CompareByDateReverse);
+                    WorkItemTableSource.GetTextLabel += (object sender, C_TableSource<C_WorkLogItem>.TableSourceEventArgs<C_WorkLogItem> args) =>
+                    {
+                        C_WorkLogItem wi = args.Item;
+                        return wi.Date.ToString("dow mmm dd, yyyy");
+                    };
+                    WorkItemTableSource.GetDetailTextLabel += (object sender, C_TableSource<C_WorkLogItem>.TableSourceEventArgs<C_WorkLogItem> args) =>
+                    {
+                        C_WorkLogItem wi = args.Item;
+                        C_VitaSite site = Global.GetSiteFromSlugNoFetch(wi.SiteSlug);
+                        string approvedString = wi.Approved ? " [approved]" : " [not approved]";
+                        return wi.Hours.ToString() + " hours at " + site.Name + approvedString;
+                    };
+                    WorkItemTableSource.Selected += (object sender, C_TableSource<C_WorkLogItem>.TableSourceEventArgs<C_WorkLogItem> args) =>
+                    {
+                        Global.SelectedWorkItem = args.Item;
+                        if (!Global.SelectedWorkItem.Approved)
+                            PerformSegue("Segue_VolHoursToVolHoursEdit", this);
+                    };
+                    TV_HoursWorked.Source = WorkItemTableSource;
+                    TV_HoursWorked.ReloadData();
+
+                }
+                UIApplication.SharedApplication.InvokeOnMainThread(p);
+            });
+        }
+
+         private void EnableUI(bool en)
+        {
+            B_Back.Enabled = en;
+            B_AddHours.Enabled = en;
+            TV_HoursWorked.UserInteractionEnabled = en;
         }
     }
 }

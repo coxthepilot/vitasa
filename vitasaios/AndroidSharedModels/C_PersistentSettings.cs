@@ -207,6 +207,11 @@ namespace zsquared
                 PreferedSites.Remove(slug);
         }
 
+        public bool IsPreferedSite(string slug)
+        {
+            return PreferedSites.Contains(slug);
+        }
+
         private string GetSharedPreferences(Android.App.Activity a, string key, string defaultValue = null)
         {
             ISharedPreferences SharedPreferences = a.GetSharedPreferences("vitasa", FileCreationMode.MultiProcess);

@@ -1,21 +1,8 @@
 ﻿using System;
-using System.Threading.Tasks;
-using System.Collections.Generic;
-using System.Linq;
 
 using Android.App;
 using Android.Widget;
 using Android.OS;
-using Android.Content;
-using Android.Util;
-using Android.Views;
-
-using Android.Gms.Common.Apis;
-using Android.Gms.Maps;
-using Android.Gms.Maps.Model;
-using Android.Gms.Location;
-using Android.Gms.Common;
-using Android.Locations;
 
 namespace zsquared
 {

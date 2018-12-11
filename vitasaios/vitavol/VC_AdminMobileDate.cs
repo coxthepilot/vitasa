@@ -40,15 +40,17 @@ namespace vitavol
             L_Date.Text = Global.CalendarDate.ToString("mmm dd, yyyy");
 
             List<C_VitaSite> sites = Global.GetAllSitesNoFetch();
+            // reduce to the list of mobile sites
             var ou = sites.Where(site => site.SiteType == E_SiteType.Mobile);
             sites = ou.ToList();
 
+            // build the list of sites open on this date
             List<C_CalendarEntry> calEntriesOnDate = new List<C_CalendarEntry>();
             foreach (C_VitaSite site in sites)
             {
                 foreach (C_CalendarEntry ce in site.SiteCalendar)
                 {
-                    if (ce.Date == Global.CalendarDate)
+                    if ((ce.Date == Global.CalendarDate) && ce.SiteIsOpen)
                         calEntriesOnDate.Add(ce);
                 }
             }

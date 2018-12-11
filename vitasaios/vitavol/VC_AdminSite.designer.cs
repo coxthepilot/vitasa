@@ -24,6 +24,10 @@ namespace vitavol
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UIButton B_ContactAndNotes { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UIButton B_Coordinators { get; set; }
 
         [Outlet]
@@ -76,6 +80,11 @@ namespace vitavol
             if (B_Back != null) {
                 B_Back.Dispose ();
                 B_Back = null;
+            }
+
+            if (B_ContactAndNotes != null) {
+                B_ContactAndNotes.Dispose ();
+                B_ContactAndNotes = null;
             }
 
             if (B_Coordinators != null) {

@@ -42,6 +42,11 @@ namespace vitavol
                 Global.ViewCameFrom = E_ViewCameFrom.SCOptions;
                 PerformSegue("Segue_SCSitesToVolEditSettings", this);
             };
+
+            B_VolList.TouchUpInside += (object sender, EventArgs e) => 
+            {
+                PerformSegue("Segue_SCSitesToSCVolList", this);
+            };
         }
 
         public override void ViewDidAppear(bool animated)
@@ -49,6 +54,8 @@ namespace vitavol
             base.ViewDidAppear(animated);
 
             C_Common.SetUIColors(View);
+
+            LoggedInUser.SitesCoordinated.Sort(C_SiteCoordinated.CompareByNameToLower);
 
             SitesTableSource = new C_TableSource<C_SiteCoordinated>(this, TV_Sites, LoggedInUser.SitesCoordinated);
             SitesTableSource.GetTextLabel += (object sender, C_TableSource<C_SiteCoordinated>.TableSourceEventArgs<C_SiteCoordinated> args) =>
@@ -62,7 +69,8 @@ namespace vitavol
                 Global.SelectedSiteName = args.Item.Name;
 
                 Global.ViewCameFrom = E_ViewCameFrom.SCSites;
-                PerformSegue("Segue_SCSitesToSCSite", this);
+                PerformSegue("Segue_SCSitesToSCVolHours", this);
+                //PerformSegue("Segue_SCSitesToSCSite", this);
             };
             TV_Sites.Source = SitesTableSource;
             TV_Sites.ReloadData();

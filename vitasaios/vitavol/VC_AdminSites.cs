@@ -34,6 +34,7 @@ namespace vitavol
             {
                 Global.SelectedSiteName = null;
                 Global.SelectedSiteSlug = null;
+                Global.SelectedSiteTemp = null;
                 PerformSegue("Segue_AdminSitesToAdminSite", this);
             };
 

@@ -207,6 +207,7 @@ namespace zsquared
                     foreach (JsonValue jvv in jv)
                     {
                         SitesFilter = new C_SitesFilter(jvv);
+                        SitesFilter.FilterChanged += SitesFilter_FilterChanged;
                         break;
                     }
                 }
@@ -235,7 +236,9 @@ namespace zsquared
             }
             catch (Exception ex)
             {
+#if DEBUG
                 Console.WriteLine("Failed to obtain the persistent settings. [" + ex.Message + "]");
+#endif
             }
         }
 
@@ -312,6 +315,16 @@ namespace zsquared
         public List<string> GetPreferedSites()
         {
             return _PreferedSites.ToList();
+        }
+
+        public void ClearPreferedSites()
+        {
+            _PreferedSites = new List<string>();
+        }
+
+        public bool IsPreferedSite(string siteslug)
+        {
+            return _PreferedSites.Contains(siteslug);
         }
 
         private string GetSharedPreferences(string key, string defaultValue = null)

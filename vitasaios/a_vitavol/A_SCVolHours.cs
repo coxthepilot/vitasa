@@ -22,12 +22,10 @@ namespace a_vitavol
         TextView L_SiteName;
         Button B_MarkApproved;
         Button B_AddHours;
-        Spinner SP_Date;
+        Button B_SiteCalendar;
         ProgressBar PB_Busy;
 
-        List<C_WorkLogItem> OurWorkLogItems;
-        List<C_YMD> DatesTheSiteHasACalendarEntry;
-        C_ListViewHelper<C_WorkLogItem> DatesListViewHelper;
+        C_ListViewHelper<C_WorkLogItem> WorkItemsListViewHelper;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -38,7 +36,7 @@ namespace a_vitavol
                 g.Global = new C_Global();
             Global = g.Global;
 
-            SelectedSite = Global.GetSiteFromSlugNoFetch(Global.SelectedSiteSlug);
+            //SelectedSite = Global.GetSiteFromSlugNoFetch(Global.SelectedSiteSlug);
             LoggedInUser = Global.GetUserFromCacheNoFetch(Global.LoggedInUserId);
 
             SetContentView(Resource.Layout.SCVolHours);
@@ -47,7 +45,7 @@ namespace a_vitavol
             L_SiteName = FindViewById<TextView>(Resource.Id.L_SiteName);
             B_AddHours = FindViewById<Button>(Resource.Id.B_Add);
             B_MarkApproved = FindViewById<Button>(Resource.Id.B_MarkApproved);
-            SP_Date = FindViewById<Spinner>(Resource.Id.SP_Date);
+            B_SiteCalendar = FindViewById<Button>(Resource.Id.B_SCCalendar);
             PB_Busy = FindViewById<ProgressBar>(Resource.Id.PB_Busy);
 
             C_Common.SetViewColors(this, Resource.Id.V_SCVolHours);
@@ -63,13 +61,18 @@ namespace a_vitavol
                 Task.Run(async () =>
                 {
                     bool ioerror = false;
-                    foreach (C_WorkLogItem wi in OurWorkLogItems)
+                    foreach (C_WorkLogItem wi in SelectedSite.WorkLogItems)
                     {
                         wi.Approved = true;
                         C_VitaUser user = Global.GetUserFromCacheNoFetch(wi.UserId);
-                        C_IOResult ior = await Global.UpdateWorkLogItem(user, LoggedInUser.Token, wi);
-                        if (!ior.Success)
-                            ioerror = true;
+                        if (user == null)
+                            user = FindUserForWorkItem(wi);
+                        if (user != null)
+                        {
+                            C_IOResult ior = await Global.UpdateWorkLogItem(user, LoggedInUser.Token, wi);
+                            if (!ior.Success)
+                                ioerror = true;
+                        }
                     }
 
                     void p()
@@ -85,7 +88,7 @@ namespace a_vitavol
                                 E_MessageBoxButtons.Ok);
                             mbox.Show();
                         }
-                        DatesListViewHelper.NotifyDataSetChanged();
+                        WorkItemsListViewHelper.NotifyDataSetChanged();
                     }
                     RunOnUiThread(p);
                 });
@@ -98,18 +101,18 @@ namespace a_vitavol
                 StartActivity(new Intent(this, typeof(A_SCAddVolHours)));
             };
 
+            B_SiteCalendar.Click += (sender, e) =>
+            {
+                StartActivity(new Intent(this, typeof(A_SCSite)));
+            };
+
             PB_Busy.Visibility = ViewStates.Visible;
             EnableUI(false);
             Task.Run(async () =>
             {
-                OurWorkLogItems = new List<C_WorkLogItem>();
-                foreach (C_WorkLogItem wi in SelectedSite.WorkLogItems)
-                {
-                    if (wi.Date == Global.CalendarDate)
-                        OurWorkLogItems.Add(wi);
-                }
-
                 List<C_VitaUser> users = await Global.FetchAllUsers(LoggedInUser.Token);
+
+                SelectedSite = await Global.FetchSiteWithSlug(Global.SelectedSiteSlug);
 
                 void p()
                 {
@@ -118,41 +121,27 @@ namespace a_vitavol
 
                     L_SiteName.Text = SelectedSite.Name;
 
-                    // figure out all the dates that have worklog items
-                    DatesTheSiteHasACalendarEntry = new List<C_YMD>();
-                    foreach (C_CalendarEntry ce in SelectedSite.SiteCalendar)
-                        DatesTheSiteHasACalendarEntry.Add(ce.Date);
-                    DatesTheSiteHasACalendarEntry.Sort(C_YMD.CompareYMD);
-
-                    C_SPinnerHelper<C_YMD> DatesHelper = new C_SPinnerHelper<C_YMD>(this, SP_Date, DatesTheSiteHasACalendarEntry);
-                    DatesHelper.ItemSelected += (object sender, SpinnerEventArgs<C_YMD> args) => 
-                    {
-                        OurWorkLogItems.Clear();
-                        foreach (C_WorkLogItem wi in SelectedSite.WorkLogItems)
-                        {
-                            if (wi.Date == Global.CalendarDate)
-                                OurWorkLogItems.Add(wi);
-                        }
-                        DatesListViewHelper.NotifyDataSetChanged();
-                    };
-
-                    DatesListViewHelper = new C_ListViewHelper<C_WorkLogItem>(this, LV_Volunteers, OurWorkLogItems);
-                    DatesListViewHelper.GetTextLabel += (sender, args) =>
+                    SelectedSite.WorkLogItems.Sort(C_WorkLogItem.CompareByDateReverse);
+                    WorkItemsListViewHelper = new C_ListViewHelper<C_WorkLogItem>(this, LV_Volunteers, SelectedSite.WorkLogItems);
+                    WorkItemsListViewHelper.GetTextLabel += (sender, args) =>
                     {
                         C_WorkLogItem wi = args.Item;
                         C_VitaUser wi_user = Global.GetUserFromCacheNoFetch(wi.UserId);
-                        return wi_user.Name;
+                        if (wi_user == null)
+                            wi_user = FindUserForWorkItem(wi);
+                        string s = wi_user == null ? "" : wi_user.Name;
+                        return s;
                     };
-                    DatesListViewHelper.GetDetailTextLabel += (sender, args) =>
+                    WorkItemsListViewHelper.GetDetailTextLabel += (sender, args) =>
                     {
                         C_WorkLogItem wi = args.Item;
                         string apps = wi.Approved ? " [approved]" : " [not approved]";
-                        return wi.Hours.ToString() + " hours" + apps;
+                        return wi.Date.ToString("mmm dd, yyyy") + " for " + wi.Hours.ToString() + " hours" + apps;
                     };
                     LV_Volunteers.ItemClick += (object sender, AdapterView.ItemClickEventArgs e) => 
                     {
                         // signal that we are doing an edit, not creating a new item
-                        Global.SelectedWorkItem = DatesListViewHelper.Items[e.Position];
+                        Global.SelectedWorkItem = WorkItemsListViewHelper.Items[e.Position];
 
                         StartActivity(new Intent(this, typeof(A_SCAddVolHours)));
                     };
@@ -161,15 +150,41 @@ namespace a_vitavol
             });
         }
 
-        public override void OnBackPressed() =>
-            StartActivity(new Intent(this, typeof(A_SCSite)));
+        public override void OnBackPressed()
+        {
+            if (UIIsEnabled)
+                StartActivity(new Intent(this, typeof(A_SCSites)));
+        }
 
+        bool UIIsEnabled;
         private void EnableUI(bool en)
         {
+            UIIsEnabled = en;
             LV_Volunteers.Enabled = en;
             B_AddHours.Enabled = en;
             B_MarkApproved.Enabled = en;
-            SP_Date.Enabled = en;
         }
+
+        private C_VitaUser FindUserForWorkItem(C_WorkLogItem wi)
+        {
+            C_VitaUser user = null;
+            // the backend is supposed to store the UserId; in the case where it doesn't we do another search for the user
+            foreach (C_VitaUser u in Global.UserCache)
+            {
+                bool found = false;
+                foreach (C_WorkLogItem wx in u.WorkItems)
+                {
+                    if (wx.id == wi.id)
+                    {
+                        found = true;
+                        user = u;
+                    }
+                }
+                if (found)
+                    break;
+            }
+            return user;
+        }
+
     }
 }

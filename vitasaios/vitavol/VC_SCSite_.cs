@@ -34,19 +34,7 @@ namespace vitavol
                 Global.CalendarDate = C_YMD.Now;
 
             B_Back.TouchUpInside += (sender, e) =>
-            {
-                string segue = null;
-
-                switch (Global.ViewCameFrom)
-                {
-                    case E_ViewCameFrom.Main: segue = "Segue_SCSiteToMain"; break;
-                    case E_ViewCameFrom.Login: segue = "Segue_SCSiteToSCSites"; break;
-                    case E_ViewCameFrom.SCSites: segue = "Segue_SCSiteToSCSites"; break;
-                    default: segue = "Segue_SCSiteToMain"; break;
-                }
-
-                PerformSegue(segue, this);
-            };
+                PerformSegue("Segue_SCSiteToSCVolHours", this);
 
             B_MonthNext.TouchUpInside += (sender, e) =>
             {
@@ -79,9 +67,6 @@ namespace vitavol
 
                 CV_Grid.ReloadData();
             };
-
-            B_ManageVolunteerHours.TouchUpInside += (sender, e) => 
-                PerformSegue("Segue_SCSiteToSCVolHours", this);
         }
 
         public override void ViewDidAppear(bool animated)

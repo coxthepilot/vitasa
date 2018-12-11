@@ -32,6 +32,10 @@ namespace vitavol
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UILabel L_Title { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UITextField TB_Subject { get; set; }
 
         [Outlet]
@@ -58,6 +62,11 @@ namespace vitavol
             if (B_Save != null) {
                 B_Save.Dispose ();
                 B_Save = null;
+            }
+
+            if (L_Title != null) {
+                L_Title.Dispose ();
+                L_Title = null;
             }
 
             if (TB_Subject != null) {

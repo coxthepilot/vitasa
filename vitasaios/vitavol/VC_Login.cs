@@ -91,6 +91,10 @@ namespace vitavol
                         Settings.UserEmail = email;
                         Settings.UserPassword = pw;
 
+                        Settings.ClearPreferedSites();
+                        foreach (string ps in ior.User.PreferredSiteSlugs)
+                            Settings.AddPreferedSite(ps);
+
                         Global.ViewCameFrom = E_ViewCameFrom.Login;
                         if (user.HasAdmin)
                         {

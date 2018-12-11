@@ -25,6 +25,18 @@ namespace vitavol
             Global = myAppDelegate.Global;
             SelectedSite = Global.GetSiteFromSlugNoFetch(Global.SelectedSiteSlug);
 
+            UITapGestureRecognizer labelTap = new UITapGestureRecognizer(() =>
+            {
+                C_Common.DropFirstResponder(View);
+            });
+
+            L_Title.UserInteractionEnabled = true;
+            L_Title.AddGestureRecognizer(labelTap);
+            L_Date.UserInteractionEnabled = true;
+            L_Date.AddGestureRecognizer(labelTap);
+            L_SiteName.UserInteractionEnabled = true;
+            L_SiteName.AddGestureRecognizer(labelTap);
+
             B_Back.TouchUpInside += (sender, e) =>
                 PerformSegue("Segue_SiteCalOnDateToSiteCalendar", this);
 

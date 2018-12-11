@@ -14,6 +14,7 @@ namespace vitavol
     {
         C_Global Global;
         C_VitaSite SelectedSite;
+        C_VitaUser LoggedInUser;
 
         C_PersistentSettings Settings;
 
@@ -27,6 +28,9 @@ namespace vitavol
 
             AppDelegate myAppDelegate = (AppDelegate)UIApplication.SharedApplication.Delegate;
             Global = myAppDelegate.Global;
+            LoggedInUser = null;
+            if (Global.LoggedInUserId != -1)
+                LoggedInUser = Global.GetUserFromCacheNoFetch(Global.LoggedInUserId);
 
             SelectedSite = Global.GetSiteFromSlugNoFetch(Global.SelectedSiteSlug);
 
@@ -40,46 +44,58 @@ namespace vitavol
 
             SW_PreferredSite.ValueChanged += (sender, e) => 
             {
-                if (SW_PreferredSite.On)
-                    Settings.AddPreferedSite(SelectedSite.Slug);
-                else
-                    Settings.RemovePreferedSite(SelectedSite.Slug);
-
-                // if we have user settings
-                if (!string.IsNullOrWhiteSpace(Settings.UserEmail) && !string.IsNullOrWhiteSpace(Settings.UserPassword))
+                if ((LoggedInUser != null) && LoggedInUser.HasVolunteer)
                 {
                     AI_Busy.StartAnimating();
                     EnableUI(false);
+
                     bool preferedSiteOn = SW_PreferredSite.On;
+
+                    if (SW_PreferredSite.On)
+                    {
+                        if (!LoggedInUser.PreferredSiteSlugs.Contains(SelectedSite.Slug))
+                            LoggedInUser.PreferredSiteSlugs.Add(SelectedSite.Slug);
+                    }
+                    else
+                    {
+                        if (LoggedInUser.PreferredSiteSlugs.Contains(SelectedSite.Slug))
+                            LoggedInUser.PreferredSiteSlugs.Remove(SelectedSite.Slug);
+                    }
 
                     Task.Run(async () => 
                     {
-                        bool settingsSaved = false;
-                        // see if they are already logged in; if not, log them and the do the save
-                        if (Global.LoggedInUserId == -1)
-                        {
-                            bool loginOk = await DoLogin();
-                        }
-
-                        // if the login was successful or they were already logged in, then do the save
-                        if ((Global.LoggedInUserId != -1) && Global.SelectedUser.HasVolunteer)
-                            settingsSaved = await AdjustAndSaveUserPreferedSites(preferedSiteOn);
+                        C_IOResult ior = await Global.UpdateUserFields(LoggedInUser.ToJsonAsJsonBuilder(), LoggedInUser, LoggedInUser.Token);
 
                         async void p()
                         {
                             AI_Busy.StopAnimating();
                             EnableUI(true);
 
-                            if (!settingsSaved)
+                            if (!ior.Success)
                             {
                                 E_MessageBoxResults mbres = await MessageBox(this,
                                  "Error",
                                  "Unable to save the save preferences.",
                                  E_MessageBoxButtons.Ok);
                             }
+                            else
+                            {
+                                if (SW_PreferredSite.On)
+                                    Settings.AddPreferedSite(SelectedSite.Slug);
+                                else
+                                    Settings.RemovePreferedSite(SelectedSite.Slug);
+                            }
                         }
                         UIApplication.SharedApplication.InvokeOnMainThread(p);
+
                     });
+                }
+                else
+                {
+                    if (SW_PreferredSite.On)
+                        Settings.AddPreferedSite(SelectedSite.Slug);
+                    else
+                        Settings.RemovePreferedSite(SelectedSite.Slug);
                 }
             };
 
@@ -129,43 +145,42 @@ namespace vitavol
                 L_HoursToday.Text = cef.OpenTime.ToString("hh:mm p") + "-" + cef.CloseTime.ToString("hh:mm p");
             }
             else
-                L_HoursToday.Text = "- closed -";
+            {
+                if (SelectedSite.SiteCalendar.Count == 0)
+                    L_HoursToday.Text = "- closed -";
+                else
+                {
+                    // find the next open date
+                    SelectedSite.SiteCalendar.Sort(C_CalendarEntry.CompareByDate);
+                    int ix = 0;
+                    while ((ix != SelectedSite.SiteCalendar.Count) && (SelectedSite.SiteCalendar[ix].Date <= today))
+                        ix++;
+
+                    while ((ix != SelectedSite.SiteCalendar.Count) && SelectedSite.SiteCalendar[ix].SiteIsOpen)
+                        ix++;
+
+                    if (ix == SelectedSite.SiteCalendar.Count)
+                        L_HoursToday.Text = "- closed -";
+                    else
+                    {
+                        C_CalendarEntry ce = SelectedSite.SiteCalendar[ix];
+                        L_HoursToday.Text = "Closed today. Next open on " + ce.Date.ToString("mmm dd, yyyy") + " from "
+                        + ce.OpenTime.ToString("hh:mm p") + "-" + ce.CloseTime.ToString("hh:mm p");
+                    }
+                }
+            }
 
             L_MobileSite.Hidden = SelectedSite.SiteType != E_SiteType.Mobile;
             L_DropOff.Hidden = !SelectedSite.SiteCapabilities.Contains(E_SiteCapabilities.DropOff);
-            L_InPerson.Hidden = !SelectedSite.SiteCapabilities.Contains(E_SiteCapabilities.InPerson);
+            L_InPerson.Hidden = !SelectedSite.SiteCapabilities.Contains(E_SiteCapabilities.InPersonTaxPrep);
             L_Express.Hidden = !SelectedSite.SiteCapabilities.Contains(E_SiteCapabilities.Express);
             L_MFT.Hidden = !SelectedSite.SiteCapabilities.Contains(E_SiteCapabilities.MFT);
 
-            SW_PreferredSite.On = SelectedSite.PreferredSite;
+            SW_PreferredSite.On = Settings.IsPreferedSite(SelectedSite.Slug);
         }
 
         private void EnableUI(bool en) =>
             C_Common.EnableUI(View, en);
-
-        private async Task<bool> AdjustAndSaveUserPreferedSites(bool preferedSiteOn)
-        {
-            if (preferedSiteOn)
-            {
-                if (!Global.SelectedUser.PreferredSiteSlugs.Contains(SelectedSite.Slug))
-                    Global.SelectedUser.PreferredSiteSlugs.Add(SelectedSite.Slug);
-            }
-            else
-            {
-                if (Global.SelectedUser.PreferredSiteSlugs.Contains(SelectedSite.Slug))
-                    Global.SelectedUser.PreferredSiteSlugs.Remove(SelectedSite.Slug);
-            }
-
-            C_JsonBuilder jb = new C_JsonBuilder();
-            jb.StartArray(C_VitaUser.N_PreferredSites);
-            foreach (string ps in Global.SelectedUser.PreferredSiteSlugs)
-                jb.AddArrayObject(ps);
-            jb.EndArray();
-
-            C_IOResult ior1 = await Global.UpdateUserFields(jb, Global.SelectedUser, Global.SelectedUser.Token);
-
-            return ior1.Success;
-        }
 
         private async Task<bool> DoLogin()
         {

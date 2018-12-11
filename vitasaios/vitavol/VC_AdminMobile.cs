@@ -86,6 +86,8 @@ namespace vitavol
 
             C_Common.SetUIColors(View);
 
+            L_MonthYear.Text = "";
+
             AI_Busy.StartAnimating();
             EnableUI(false);
 
@@ -165,7 +167,7 @@ namespace vitavol
                     var ou = calendarEntries.Where(ce => ce.SiteIsOpen);
                     if (!ou.Any())
                     {
-                        dayState.NormalColor = UIColor.Gray;
+                        dayState.NormalColor = C_Common.Color_NoSiteOpen;
                         dayState.TextColor = UIColor.White;
                         dayState.CanClick = false;
                     }
@@ -174,21 +176,21 @@ namespace vitavol
                         List<C_CalendarEntry> ceOpenOnOurDate = ou.ToList();
                         if (ceOpenOnOurDate.Count == 1)
                         {
-                            dayState.NormalColor = C_Common.SwitchOn;
+                            dayState.NormalColor = C_Common.Color_OneAppt;
                             dayState.HighlightedColor = C_Common.SwitchOn;
                             dayState.TextColor = UIColor.White;
                         }
                         else
                         { // 2 or more
-                            if ((ceOpenOnOurDate.Count == 2) && !Overlap(ceOpenOnOurDate))
+                            if ((ceOpenOnOurDate.Count == 2) && !C_CalendarEntry.Overlap(ceOpenOnOurDate))
                             {
-                                dayState.NormalColor = UIColor.Green;
+                                dayState.NormalColor = C_Common.Color_TwoAppt;
                                 dayState.HighlightedColor = UIColor.Green;
                                 dayState.TextColor = UIColor.White;
                             }
                             else
                             {
-                                dayState.NormalColor = UIColor.Red;
+                                dayState.NormalColor = C_Common.Color_BadAppt;
                                 dayState.HighlightedColor = UIColor.Red;
                                 dayState.TextColor = UIColor.White;
                                 dayState.ShowBox = true;
@@ -201,33 +203,6 @@ namespace vitavol
             }
 
             return DateState;
-        }
-
-        private bool Overlap(List<C_CalendarEntry> ceList)
-        {
-            bool res = false;
-            for (int ceix = 0; ceix != ceList.Count; ceix++)
-            {
-                C_CalendarEntry ce = ceList[ceix];
-
-                // with this one, see if any other entry overlaps
-                for (int cetix = 0; cetix != ceList.Count; cetix++)
-                {
-                    C_CalendarEntry cet = ceList[cetix];
-
-                    if (ceix != cetix)
-                    {
-                        res = ((ce.OpenTime >= cet.OpenTime) && (ce.OpenTime < cet.CloseTime))
-                            || ((ce.CloseTime > cet.OpenTime) && (ce.CloseTime <= cet.CloseTime));
-                    }
-                    if (res)
-                        break;
-                }
-                if (res)
-                    break;
-            }
-
-            return res;
         }
 
         private void EnableUI(bool en) =>

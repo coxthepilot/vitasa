@@ -28,6 +28,10 @@ namespace vitavol
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UILabel L_Name { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UITableView TV_Sites { get; set; }
 
         void ReleaseDesignerOutlets ()
@@ -45,6 +49,11 @@ namespace vitavol
             if (B_Save != null) {
                 B_Save.Dispose ();
                 B_Save = null;
+            }
+
+            if (L_Name != null) {
+                L_Name.Dispose ();
+                L_Name = null;
             }
 
             if (TV_Sites != null) {

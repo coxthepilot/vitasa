@@ -74,14 +74,16 @@ namespace vitavol
             Task.Run(async () =>
             {
                 List<C_VitaUser> users = await Global.FetchAllUsers(LoggedInUser.Token);
-                users.Sort(C_VitaUser.CompareByNameToLower);
+                if (users != null)
+                    users.Sort(C_VitaUser.CompareByNameToLower);
 
                 void p()
                 {
                     AI_Busy.StopAnimating();
                     EnableUI(true);
 
-                    SetUserTableSource(users);
+                    if (users != null)
+                        SetUserTableSource(users);
                 }
                 UIApplication.SharedApplication.InvokeOnMainThread(p);
             });

@@ -31,6 +31,14 @@ namespace vitavol
             Global = myAppDelegate.Global;
             LoggedInUser = Global.GetUserFromCacheNoFetch(Global.LoggedInUserId);
 
+            UITapGestureRecognizer labelTap = new UITapGestureRecognizer(() =>
+            {
+                C_Common.DropFirstResponder(View);
+            });
+
+            L_Title.UserInteractionEnabled = true;
+            L_Title.AddGestureRecognizer(labelTap);
+
             B_Back.TouchUpInside += (object sender, EventArgs e) => 
                 PerformSegue("Segue_AdminSiteCalResetActionToAdminSiteCalReset", this);
 
@@ -39,6 +47,21 @@ namespace vitavol
 
             B_Save.TouchUpInside += async (object sender, EventArgs e) => 
             {
+                C_YMD firstDate = FirstDatePicker.Value;
+                C_YMD lastDate = LastDatePicker.Value;
+                C_PersistentSettings ps = new C_PersistentSettings();
+                ps.SeasonFirstDate = firstDate;
+                ps.SeasonLastDate = lastDate;
+
+                if (firstDate >= lastDate)
+                {
+                    E_MessageBoxResults mbres2 = await MessageBox(this,
+                                 "Error?",
+                                 "The starting date must be before the ending date.",
+                                 E_MessageBoxButtons.Ok);
+                    return;
+                }
+
                 E_MessageBoxResults mbres = await MessageBox(this, 
                          "Are you really sure?", 
                          "This action will erase the existing site calendar and create a new one. No Undo.", 
@@ -56,16 +79,17 @@ namespace vitavol
 
                 AI_Busy.StartAnimating();
                 EnableUI(false);
-
-                C_YMD firstDate = FirstDatePicker.Value;
-                C_YMD lastDate = LastDatePicker.Value;
+                C_AlertBox alertBox = new C_AlertBox(this, "Long Operation", "This could take a while...");
+                alertBox.Show();
 
                 await Task.Run(async () => 
                 {
-                    bool err = await SaveForm(firstDate, lastDate);
+                    bool err = await SaveForm(firstDate, lastDate, alertBox);
 
                     async void p()
                     {
+                        await alertBox.Hide();
+
                         AI_Busy.StopAnimating();
                         EnableUI(true);
 
@@ -97,11 +121,12 @@ namespace vitavol
             SW_Confirm.On = false;
             B_Save.Enabled = SW_Confirm.On;
 
+            C_PersistentSettings ps = new C_PersistentSettings();
             FirstDatePicker = new C_DatePicker(TB_SeasonFirst);
-            FirstDatePicker.SetValue(new C_YMD(2019, 1, 1));
+            FirstDatePicker.SetValue(ps.SeasonFirstDate);
 
             LastDatePicker = new C_DatePicker(TB_SeasonLast);
-            LastDatePicker.SetValue(new C_YMD(2019, 04, 15));
+            LastDatePicker.SetValue(ps.SeasonLastDate);
         }
 
         private void EnableUI(bool en)
@@ -111,21 +136,28 @@ namespace vitavol
             B_Save.Enabled = SW_Confirm.On;
         }
 
-        private async Task<bool> SaveForm(C_YMD firstDate, C_YMD lastDate)
+        private async Task<bool> SaveForm(C_YMD firstDate, C_YMD lastDate, C_AlertBox abox)
         {
-                bool error = false;
-                List<C_CalendarEntry> celist = new List<C_CalendarEntry>();
-                foreach (C_CalendarEntry ce in Global.SelectedSiteTemp.SiteCalendar)
-                    celist.Add(ce);
-                foreach (C_CalendarEntry ce in celist)
+            bool error = false;
+
+            List<C_CalendarEntry> celist = new List<C_CalendarEntry>();
+            foreach (C_CalendarEntry ce in Global.SelectedSiteTemp.SiteCalendar)
+                celist.Add(ce);
+
+            foreach (C_CalendarEntry ce in celist)
+            {
+                C_IOResult ior = await Global.RemoveCalendarEntry(Global.SelectedSiteTemp, LoggedInUser.Token, ce);
+                if (!ior.Success)
                 {
-                    C_IOResult ior = await Global.RemoveCalendarEntry(Global.SelectedSiteTemp, LoggedInUser.Token, ce);
-                    if (!ior.Success)
-                    {
-                        error = true;
-                        break;
-                    }
+                    error = true;
+                    break;
                 }
+                void p()
+                {
+                    abox.SetMessage("This could take a while...\nRemoved: " + ce.Date.ToString());
+                }
+                UIApplication.SharedApplication.InvokeOnMainThread(p);
+            }
 
             if (!error)
             {
@@ -150,6 +182,11 @@ namespace vitavol
                             error = true;
                             break;
                         }
+                        void p()
+                        {
+                            abox.SetMessage("This could take a while...\nAdded: " + nce.Date.ToString());
+                        }
+                        UIApplication.SharedApplication.InvokeOnMainThread(p);
                     }
 
                     today = today.AddDays(1);

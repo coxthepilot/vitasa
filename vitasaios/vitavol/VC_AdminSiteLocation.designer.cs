@@ -32,6 +32,10 @@ namespace vitavol
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UILabel L_SiteLocation { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UILabel L_SiteName { get; set; }
 
         [Outlet]
@@ -82,6 +86,11 @@ namespace vitavol
             if (B_Save != null) {
                 B_Save.Dispose ();
                 B_Save = null;
+            }
+
+            if (L_SiteLocation != null) {
+                L_SiteLocation.Dispose ();
+                L_SiteLocation = null;
             }
 
             if (L_SiteName != null) {

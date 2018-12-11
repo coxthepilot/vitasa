@@ -30,32 +30,6 @@ namespace vitavol
             B_Back.TouchUpInside += (sender, e) =>
                 PerformSegue("Segue_VolunteerHomeToMain", this);
 
-            SW_Site.ValueChanged += (sender, e) => 
-            {
-                AI_Busy.StartAnimating();
-                EnableUI(false);
-
-                bool subscribe = SW_Site.On;
-                Task.Run(async () =>
-                {
-                    C_IOResult ior = await Global.SubscribeUserToPreferredSites(LoggedInUser, LoggedInUser.Token, subscribe);
-
-                    async void p()
-                    {
-                        if (!ior.Success)
-                        {
-                            E_MessageBoxResults mbres = await MessageBox(this,
-                                 "Error",
-                                 "Unable to subscribe (or unsubscribe) to preferred site notifications.",
-                                 E_MessageBoxButtons.Ok);
-                        }
-                        AI_Busy.StopAnimating();
-                        EnableUI(true);
-                    }
-                    UIApplication.SharedApplication.InvokeOnMainThread(p);
-                });
-            };
-
             SW_Mobile.ValueChanged += (sender, e) => 
             {
                 AI_Busy.StartAnimating();
@@ -118,7 +92,6 @@ namespace vitavol
                 hours += wi.Hours;
             TB_Hours.Text = hours.ToString();
 
-            SW_Site.On = LoggedInUser.SubscribePreferred;
             SW_Mobile.On = LoggedInUser.SubscribeMobile;
 
             SW_Mobile.Hidden = !LoggedInUser.HasMobile;

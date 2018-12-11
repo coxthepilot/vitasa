@@ -26,7 +26,8 @@ namespace zsquared
 
         public C_Config()
         {
-            BackendUrl = "https://vitasa.abandonedfactory.net";
+            //BackendUrl = "https://vitasa.abandonedfactory.net";
+            BackendUrl = "http://staging.volunteer-savvy.com";
             SitesJsonUrl = null;
             Offline = false;
             MinimumVersions = new Dictionary<string, string>();
@@ -36,7 +37,8 @@ namespace zsquared
 
         public C_Config(JsonValue jv)
         {
-            BackendUrl = "https://vitasa.abandonedfactory.net";
+            //BackendUrl = "https://vitasa.abandonedfactory.net";
+            BackendUrl = "http://staging.volunteer-savvy.com";
             SitesJsonUrl = null;
             Offline = false;
             MinimumVersions = new Dictionary<string, string>();
@@ -58,18 +60,21 @@ namespace zsquared
                 ProcessMinimumVersions(jv[N_MinimumVersions]);
 
             SampleValidUntil = DateTime.Now.AddHours(ValidTimeHours);
+            if (Offline)
+                SampleValidUntil = DateTime.Now; // don't wait to retry if offline
 
-#if DEBUG
-            // this is where we set the backend we will test against
-            //BackendUrl = "https://vitasa.abandonedfactory.net/";
-            BackendUrl = "https://volunteer-savvy.com/";
-            Offline = false;
-            //MinimumVersions = new Dictionary<string, string>();
-#endif
+            //#if DEBUG
+            //            // this is where we set the backend we will test against
+            //            BackendUrl = "https://volunteer-savvy.com/";
+            //            //BackendUrl = "http://staging.volunteer-savvy.com";
+            //            Offline = false;
+            //            //MinimumVersions = new Dictionary<string, string>();
+            //#endif
             Uri uri = new Uri(BackendUrl);
 
             if (uri.Scheme == "https")
                 C_Vita.SetupCertificateHandling(uri.Host);
+
         }
 
         private void ProcessMinimumVersions(JsonValue jv)

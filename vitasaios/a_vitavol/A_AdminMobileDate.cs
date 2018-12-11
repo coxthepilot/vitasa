@@ -44,15 +44,15 @@ namespace a_vitavol
                 C_CalendarEntry ce = CalendarEntriesHelper.Items[pos];
                 C_VitaSite site = Global.GetSiteFromIDNoFetch(ce.SiteID);
 
-                Global.ViewCameFrom = E_ViewCameFrom.AdminMobileDate;
                 Global.CalendarDateDetails = new C_CalendarDateDetails()
                 {
-                    SaveAction = E_CalendarDateDetailsSaveAction.Save,
+                    SaveAction = E_CalendarDateDetailsSaveAction.ReadOnly,
                     MainTitle = "Site Calendar",
                     SiteName = site.Name,
                     Date = Global.CalendarDate.ToString("mmm dd, yyyy"),
                     Note = "Note that a change to a site's details will cause a notification to be sent to all volunteers with this site as a prefered site.",
-                    CalendarEntry = ce
+                    CalendarEntry = ce,
+                    CameFrom = E_ViewCameFrom.AdminMobileDate
                 };
                 StartActivity(new Intent(this, typeof(A_CalendarDateDetails)));
             };
@@ -66,7 +66,7 @@ namespace a_vitavol
             {
                 foreach(C_CalendarEntry ce in site.SiteCalendar)
                 {
-                    if (ce.Date == Global.CalendarDate)
+                    if ((ce.Date == Global.CalendarDate) && ce.SiteIsOpen)
                         calEntriesOnDate.Add(ce);
                 }
             }

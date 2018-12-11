@@ -20,7 +20,6 @@ namespace a_vitavol
         C_Global Global;
         C_VitaUser LoggedInUser;
 
-        CheckBox CB_PreferedSiteNotification;
         CheckBox CB_MobileSiteNotification;
         Button B_AddHours;
         Button B_Suggestion;
@@ -46,7 +45,6 @@ namespace a_vitavol
 
             SetContentView(Resource.Layout.VolHome);
 
-            CB_PreferedSiteNotification = FindViewById<CheckBox>(Resource.Id.CB_PreferedSiteChanges);
             CB_MobileSiteNotification = FindViewById<CheckBox>(Resource.Id.CB_Mobile);
             B_AddHours = FindViewById<Button>(Resource.Id.B_EditHours);
             B_Suggestion = FindViewById<Button>(Resource.Id.B_Suggestion);
@@ -58,38 +56,14 @@ namespace a_vitavol
             PB_Busy.Visibility = Android.Views.ViewStates.Invisible;
 
             C_Common.SetViewColors(this, Resource.Id.V_VolHome);
-            B_Logout.SetBackgroundColor(C_Common.LogoutButton);
+            B_Logout.SetBackgroundColor(C_Common.Color_LogoutButton);
 
-            CB_PreferedSiteNotification.CheckedChange += (sender, e) =>
-            {
-                PB_Busy.Visibility = Android.Views.ViewStates.Visible;
-                EnableUI(false);
-
-                bool subscribe = CB_PreferedSiteNotification.Checked;
-                Task.Run(async () =>
-                {
-                    C_IOResult ior = await Global.SubscribeUserToPreferredSites(LoggedInUser, LoggedInUser.Token, subscribe);
-
-                    void p()
-                    {
-                        PB_Busy.Visibility = Android.Views.ViewStates.Invisible;
-                        EnableUI(true);
-
-                        if (!ior.Success)
-                        {
-                            C_MessageBox mbox = new C_MessageBox(this,
-                                 "Error",
-                                 "Unable to subscribe (or unsubscribe) to preferred site notifications.",
-                                 E_MessageBoxButtons.Ok);
-                            mbox.Show();
-                        }
-                    }
-                    RunOnUiThread(p);
-                });
-            };
-
+            bool killChanges = false;
             CB_MobileSiteNotification.CheckedChange += (sender, e) =>
             {
+                if (killChanges)
+                    return;
+
                 PB_Busy.Visibility = Android.Views.ViewStates.Visible;
                 EnableUI(false);
 
@@ -140,28 +114,35 @@ namespace a_vitavol
                 StartActivity(new Intent(this, typeof(MainActivity)));
             };
 
+            EnableUI(true);
+
             float hours = 0.0f;
             foreach (C_WorkLogItem wi in LoggedInUser.WorkItems)
                 hours += wi.Hours;
             L_Hours.Text = "Hours worked: " + hours.ToString();
 
-            CB_PreferedSiteNotification.Checked = LoggedInUser.SubscribePreferred;
+            killChanges = true;
             CB_MobileSiteNotification.Checked = LoggedInUser.SubscribeMobile;
+            killChanges = false;
             CB_MobileSiteNotification.Visibility = LoggedInUser.HasMobile ? ViewStates.Visible : ViewStates.Invisible;
             B_MobileCalendar.Visibility = LoggedInUser.HasMobile ? ViewStates.Visible : ViewStates.Invisible;
         }
 
+        bool UIIsEnabled;
         private void EnableUI(bool en)
         {
+            UIIsEnabled = en;
             CB_MobileSiteNotification.Enabled = en;
-            CB_PreferedSiteNotification.Enabled = en;
             B_AddHours.Enabled = en;
             B_Logout.Enabled = en;
             B_Suggestion.Enabled = en;
             B_EditSettings.Enabled = en;
         }
 
-        public override void OnBackPressed() => 
-        StartActivity(new Intent(this, typeof(MainActivity)));
+        public override void OnBackPressed()
+        {
+            if (UIIsEnabled)
+                StartActivity(new Intent(this, typeof(MainActivity)));
+        }
     }
 }

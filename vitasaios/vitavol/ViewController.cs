@@ -9,6 +9,11 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.IO;
 
+using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
+
+
 using zsquared;
 
 namespace vitavol
@@ -40,61 +45,87 @@ namespace vitavol
                 Global = myAppDelegate.Global;
             }
 
-            // the following installs the test data and tells Global to use it rather than the api's
-            if (!Global.UsingTestData)
-            {
-                try
-                {
-                    Assembly assembly = typeof(VC_SitesMap).Assembly;
+            //Task.Run(async () => 
+            //{
 
-                    //string[] rnames = assembly.GetManifestResourceNames();
-                    using (Stream stream_s = assembly.GetManifestResourceStream("vitavol.testdata_sites.json"))
-                    {
-                        using (StreamReader sr_s = new StreamReader(stream_s))
-                        {
-                            using (Stream stream_u = assembly.GetManifestResourceStream("vitavol.testdata_users.json"))
-                            {
-                                using (StreamReader sr_u = new StreamReader(stream_u))
-                                {
-                                    string sitesjson = sr_s.ReadToEnd();
+            //    try
+            //    {
+            //        WebClient wc = new WebClient()
+            //        {
+            //            BaseAddress = "https://bexarmg.org/"
+            //        };
+            //        wc.Headers.Add(HttpRequestHeader.ContentType, "application/json");
+            //        wc.Headers.Add(HttpRequestHeader.Accept, "application/json");
 
-                                    string usersjson = sr_u.ReadToEnd();
+            //        string response = await wc.DownloadStringTaskAsync("index.html");
 
-                                    Global.UseTestData(sitesjson, usersjson);
+            //        int x = response.Length;
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        Console.WriteLine(ex.Message);
+            //    }
+            //});
 
-                                    C_Suggestion sug = new C_Suggestion(-1, C_YMD.Now, true)
-                                    {
-                                        Subject = "123 subject",
-                                        Text = "new message\nand more"
-                                    };
-                                    Global._SuggestionCache.Add(sug);
 
-                                    C_Notification not = new C_Notification
-                                    {
-                                        Audience = E_NotificationAudience.Volunteers,
-                                        CreatedDT = DateTime.Now,
-                                        Message = "the notification text",
-                                        SentDT = DateTime.MinValue,
-                                        id = 1
-                                    };
-                                    Global._NotificationCache.Add(not);
-                                }
-                            }
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                }
-            }
+
+            //// the following installs the test data and tells Global to use it rather than the api's
+            //if (!Global.UsingTestData)
+            //{
+            //    try
+            //    {
+            //        Assembly assembly = typeof(VC_SitesMap).Assembly;
+
+            //        //string[] rnames = assembly.GetManifestResourceNames();
+            //        using (Stream stream_s = assembly.GetManifestResourceStream("vitavol.testdata_sites.json"))
+            //        {
+            //            using (StreamReader sr_s = new StreamReader(stream_s))
+            //            {
+            //                using (Stream stream_u = assembly.GetManifestResourceStream("vitavol.testdata_users.json"))
+            //                {
+            //                    using (StreamReader sr_u = new StreamReader(stream_u))
+            //                    {
+            //                        string sitesjson = sr_s.ReadToEnd();
+
+            //                        string usersjson = sr_u.ReadToEnd();
+
+            //                        Global.UseTestData(sitesjson, usersjson);
+
+            //                        C_Suggestion sug = new C_Suggestion(-1, C_YMD.Now, true)
+            //                        {
+            //                            Subject = "123 subject",
+            //                            Text = "new message\nand more"
+            //                        };
+            //                        Global._SuggestionCache.Add(sug);
+
+            //                        C_Notification not = new C_Notification
+            //                        {
+            //                            Audience = E_NotificationAudience.Volunteers,
+            //                            CreatedDT = DateTime.Now,
+            //                            Message = "the notification text",
+            //                            SentDT = DateTime.MinValue,
+            //                            id = 1
+            //                        };
+            //                        Global._NotificationCache.Add(not);
+            //                    }
+            //                }
+            //            }
+            //        }
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        Console.WriteLine(ex.Message);
+            //    }
+            //}
 
             // on a new instance, reset a few of the values
-            Settings = new C_PersistentSettings();
-            // must not use the short form of the initializer
-            Settings.Zoom = 10.0f;
-            Settings.Latitude = 29.415411f;
-            Settings.Longitude = -98.4918232f;
+            Settings = new C_PersistentSettings
+            {
+                // must not use the short form of the initializer
+                Zoom = 10.0f,
+                Latitude = 29.415411f,
+                Longitude = -98.4918232f
+            };
 
             B_About.TouchUpInside += (sender, e) =>
             {
@@ -136,6 +167,10 @@ namespace vitavol
                     if (ior.Success && (ior.User != null))
                     {
                         Global.LoggedInUserId = ior.User.id;
+
+                        Settings.ClearPreferedSites();
+                        foreach (string ps in ior.User.PreferredSiteSlugs)
+                            Settings.AddPreferedSite(ps);
 
                         Global.ViewCameFrom = E_ViewCameFrom.Main;
                         if (ior.User.HasAdmin)

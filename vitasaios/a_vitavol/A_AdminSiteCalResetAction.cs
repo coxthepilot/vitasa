@@ -9,8 +9,7 @@ using Android.OS;
 using Android.Content;
 using Android.Util;
 using Android.Views;
-
-
+//using Android.Support.V4.App;
 using Android.Gms.Common.Apis;
 
 using zsquared;
@@ -22,6 +21,7 @@ namespace a_vitavol
     {
         C_Global Global;
         C_VitaUser LoggedInUser;
+        C_PersistentSettings Settings;
 
         TextView L_SiteName;
         CheckBox CB_Confirm;
@@ -38,6 +38,8 @@ namespace a_vitavol
         C_YMD SelectedFirstDate;
         C_YMD SelectedLastDate;
 
+        C_AlertBox AlertBox;
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -47,6 +49,8 @@ namespace a_vitavol
                 g.Global = new C_Global();
             Global = g.Global;
             LoggedInUser = Global.GetUserFromCacheNoFetch(Global.LoggedInUserId);
+
+            Settings = new C_PersistentSettings(this);
 
             SetContentView(Resource.Layout.AdminSiteCalResetAction);
 
@@ -93,9 +97,15 @@ namespace a_vitavol
                         return;
                     }
 
+                    Settings.SeasonFirstDate = SelectedFirstDate;
+                    Settings.SeasonLastDate = SelectedLastDate;
+                    Settings.Save();
+
                     bool errors = false;
                     PB_Busy.Visibility = ViewStates.Visible;
                     EnableUI(false);
+                    AlertBox = new C_AlertBox(this, "Long Running Action", "This may take awhile...");
+                    AlertBox.Show();
 
                     Task.Run(async () => 
                     {
@@ -103,6 +113,7 @@ namespace a_vitavol
 
                         void p()
                         {
+                            AlertBox.Hide();
                             PB_Busy.Visibility = ViewStates.Gone;
                             EnableUI(true);
 
@@ -124,7 +135,7 @@ namespace a_vitavol
                 };
             };
 
-            SelectedFirstDate = new C_YMD(2019, 01, 01);
+            SelectedFirstDate = Settings.SeasonFirstDate;
             FirstDatePicker = new C_DatePicker(SelectedFirstDate);
             FirstDatePicker.DateSelected += (object sender, C_DatePicker.DatePickerEventArgs args) =>
             {
@@ -133,7 +144,7 @@ namespace a_vitavol
             };
             L_FirstDate.Text = SelectedFirstDate.ToString("mmm dd, yyyy");
 
-            SelectedLastDate = new C_YMD(2019, 04, 15);
+            SelectedLastDate = Settings.SeasonLastDate;
             LastDatePicker = new C_DatePicker(SelectedLastDate);
             LastDatePicker.DateSelected += (object sender, C_DatePicker.DatePickerEventArgs args) =>
             {
@@ -144,10 +155,14 @@ namespace a_vitavol
 
             B_FirstDate.Enabled = true;
             B_LastDate.Enabled = true;
+
+            EnableUI(true);
         }
 
+        bool UIIsEnabled;
         private void EnableUI(bool en)
         {
+            UIIsEnabled = en;
             B_Save.Enabled = en && CB_Confirm.Checked;
             B_LastDate.Enabled = en;
             B_FirstDate.Enabled = en;
@@ -156,6 +171,9 @@ namespace a_vitavol
 
         public override void OnBackPressed()
         {
+            if (!UIIsEnabled)
+                return;
+
             Global.DOWCalendar = null;
             StartActivity(new Intent(this, typeof(A_AdminSiteCalendar)));
         }
@@ -175,6 +193,14 @@ namespace a_vitavol
                     {
                         error = true;
                         break;
+                    }
+                    else
+                    {
+                        void p()
+                        {
+                            AlertBox.SetMessage("This may take awhile.\nRemoving: " + ce.Date.ToString());
+                        }
+                        RunOnUiThread(p);
                     }
                 }
 
@@ -201,6 +227,14 @@ namespace a_vitavol
                             {
                                 error = true;
                                 break;
+                            }
+                            else
+                            {
+                                void p()
+                                {
+                                    AlertBox.SetMessage("This may take awhile.\nAdding: " + nce.Date.ToString());
+                                }
+                                RunOnUiThread(p);
                             }
                         }
                         today = today.AddDays(1);

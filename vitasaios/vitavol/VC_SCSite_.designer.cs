@@ -20,10 +20,6 @@ namespace vitavol
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UIButton B_ManageVolunteerHours { get; set; }
-
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UIButton B_MonthNext { get; set; }
 
         [Outlet]
@@ -47,11 +43,6 @@ namespace vitavol
             if (B_Back != null) {
                 B_Back.Dispose ();
                 B_Back = null;
-            }
-
-            if (B_ManageVolunteerHours != null) {
-                B_ManageVolunteerHours.Dispose ();
-                B_ManageVolunteerHours = null;
             }
 
             if (B_MonthNext != null) {

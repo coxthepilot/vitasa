@@ -51,11 +51,14 @@ namespace zsquared
 			UIBarButtonItem doneButtonOpen = new UIBarButtonItem("Done", UIBarButtonItemStyle.Done, (s, e) =>
 			{
                 int xsel = (int)PV_.SelectedRowInComponent(0);
-                T sel = Items[xsel];
-                Selection = sel;
-                TB_.Text = sel.ToString();
-				PickerDone?.Invoke(this, new C_ItemPickerSelect<T>(sel));
-				TB_.ResignFirstResponder();
+                if (xsel < Items.Count)
+                {
+                    T sel = Items[xsel];
+                    Selection = sel;
+                    TB_.Text = sel.ToString();
+                    PickerDone?.Invoke(this, new C_ItemPickerSelect<T>(sel));
+                    TB_.ResignFirstResponder();
+                }
 			});
 			ToolBar_.SetItems(new UIBarButtonItem[] { doneButtonOpen }, true);
 			UITextAttributes uitaot = new UITextAttributes()

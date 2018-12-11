@@ -40,8 +40,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/CB_Dropoff"
-        android:text="Drop-off"
-        android:textColor="@android:color/white" />
+        android:textColor="@android:color/white"
+        android:text="Virtual" />
     <CheckBox
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -1,9 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
-              android:orientation="vertical" 
-              android:layout_width="match_parent" 
-              android:id="@+id/V_SCSite"
-              android:layout_height="match_parent">
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:id="@+id/V_SCSite"
+    android:layout_height="match_parent">
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -28,15 +29,6 @@
         android:text="[site name]"
         android:textColor="@android:color/white"
         android:background="#FF13436B" />
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/B_ManageVolHours"
-        android:text="Manage Volunteer Hours"
-        android:textColor="@android:color/white"
-        android:background="#ff216093"
-        android:layout_marginTop="4dp"
-        android:layout_marginBottom="4dp" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">

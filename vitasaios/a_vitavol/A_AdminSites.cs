@@ -21,7 +21,8 @@ namespace a_vitavol
         Button B_NewSite;
         Spinner SP_WhichSites;
         ListView LV_Sites;
-        ProgressBar PB_Busy;
+        //ProgressBar PB_Busy;
+        C_BusyBox BusyBox;
 
         List<E_SiteType> SiteTypes;
         C_ListViewHelper<C_VitaSite> SitesAdapter;
@@ -42,7 +43,8 @@ namespace a_vitavol
             B_NewSite = FindViewById<Button>(Resource.Id.B_NewSite);
             SP_WhichSites = FindViewById<Spinner>(Resource.Id.SP_WhichSite);
             LV_Sites = FindViewById<ListView>(Resource.Id.LV_Sites);
-            PB_Busy = FindViewById<ProgressBar>(Resource.Id.PB_Busy);
+            //PB_Busy = FindViewById<ProgressBar>(Resource.Id.PB_Busy);
+            BusyBox = new C_BusyBox(this, "Loading...");
 
             C_Common.SetViewColors(this, Resource.Id.V_AdminSites);
 
@@ -50,6 +52,7 @@ namespace a_vitavol
             {
                 Global.SelectedSiteName = null;
                 Global.SelectedSiteSlug = null;
+                Global.SelectedSiteTemp = null;
                 StartActivity(new Intent(this, typeof(A_AdminSite)));
             };
 
@@ -77,16 +80,20 @@ namespace a_vitavol
                 StartLV(sitesList);
             };
 
-            PB_Busy.Visibility = ViewStates.Visible;
+            //PB_Busy.Visibility = ViewStates.Visible;
+            if (!Global.AllSitesFetched)
+                BusyBox.Show();
             EnableUI(false);
+
             Task.Run(async () =>
             {
                 List<C_VitaSite> ourSites = await Global.FetchAllSites(LoggedInUser.Token);
-                ourSites.Sort(C_VitaSite.CompareSitesByNameAscending);
+                ourSites.Sort(C_VitaSite.CompareSitesByNameAscendingLower);
 
                 void p()
                 {
-                    PB_Busy.Visibility = ViewStates.Gone;
+                    //PB_Busy.Visibility = ViewStates.Gone;
+                    BusyBox.Hide();
                     EnableUI(true);
 
                     StartLV(ourSites);
@@ -111,14 +118,19 @@ namespace a_vitavol
             };
         }
 
+        bool UIIsEnabled;
         private void EnableUI(bool en)
         {
+            UIIsEnabled = en;
             B_NewSite.Enabled = en;
             SP_WhichSites.Enabled = en;
             LV_Sites.Enabled = en;
         }
 
-        public override void OnBackPressed() =>
-            StartActivity(new Intent(this, typeof(A_AdminMenu)));
+        public override void OnBackPressed()
+        {
+            if (UIIsEnabled)
+                StartActivity(new Intent(this, typeof(A_AdminMenu)));
+        }
     }
 }

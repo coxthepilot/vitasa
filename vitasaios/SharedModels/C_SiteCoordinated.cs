@@ -49,5 +49,10 @@ namespace zsquared
 
             return jb.ToString();
         }
+
+        public static int CompareByNameToLower(C_SiteCoordinated sc1, C_SiteCoordinated sc2)
+        {
+            return string.Compare(sc1.Name.ToLower(), sc2.Name.ToLower(), System.StringComparison.Ordinal);
+        }
     }
 }

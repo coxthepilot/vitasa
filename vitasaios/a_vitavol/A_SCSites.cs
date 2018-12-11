@@ -15,6 +15,7 @@ namespace a_vitavol
 
         Button B_Settings;
         Button B_Logout;
+        Button B_Volunteers;
         ListView LV_Sites;
 
         C_PersistentSettings Settings;
@@ -35,10 +36,11 @@ namespace a_vitavol
 
             B_Logout = FindViewById<Button>(Resource.Id.B_Logout);
             B_Settings = FindViewById<Button>(Resource.Id.B_EditSettings);
+            B_Volunteers = FindViewById<Button>(Resource.Id.B_Volunteers);
             LV_Sites = FindViewById<ListView>(Resource.Id.LV_Sites);
 
             C_Common.SetViewColors(this, Resource.Id.V_SCSites);
-            B_Logout.SetBackgroundColor(C_Common.LogoutButton);
+            B_Logout.SetBackgroundColor(C_Common.Color_LogoutButton);
 
             Settings = new C_PersistentSettings(this);
 
@@ -58,6 +60,13 @@ namespace a_vitavol
                 StartActivity(new Intent(this, typeof(A_VolEditSettings)));
             };
 
+            B_Volunteers.Click += (sender, e) => 
+            {
+                StartActivity(new Intent(this, typeof(A_SCVolList)));
+            };
+
+            LoggedInUser.SitesCoordinated.Sort(C_SiteCoordinated.CompareByNameToLower);
+
             SitesListViewHelper = new C_ListViewHelper<C_SiteCoordinated>(this, LV_Sites, LoggedInUser.SitesCoordinated);
             SitesListViewHelper.GetTextLabel += (sender, args) =>
             {
@@ -73,6 +82,7 @@ namespace a_vitavol
 
                 Global.ViewCameFrom = E_ViewCameFrom.SCSites;
                 StartActivity(new Intent(this, typeof(A_SCSite)));
+                StartActivity(new Intent(this, typeof(A_SCVolHours)));
             };
         }
 

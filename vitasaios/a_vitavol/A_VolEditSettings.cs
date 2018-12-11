@@ -26,6 +26,8 @@ namespace a_vitavol
         Button B_Cancel;
         ProgressBar PB_Busy;
 
+        C_PersistentSettings Settings;
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -35,6 +37,7 @@ namespace a_vitavol
                 g.Global = new C_Global();
             Global = g.Global;
             LoggedInUser = Global.GetUserFromCacheNoFetch(Global.LoggedInUserId);
+            Settings = new C_PersistentSettings(this);
 
             SetContentView(Resource.Layout.VolEditSettings);
 
@@ -51,38 +54,20 @@ namespace a_vitavol
 
             B_Save.Click += (sender, e) =>
             {
-                C_JsonBuilder jb = new C_JsonBuilder();
+                LoggedInUser.Name = TB_Name.Text;
+                LoggedInUser.Email = TB_Email.Text;
+                LoggedInUser.Phone = TB_Phone.Text;
 
-                if (TB_Name.Text != LoggedInUser.Name)
-                {
-                    jb.Add(TB_Name.Text, C_VitaUser.N_Name);
-                    LoggedInUser.Name = TB_Name.Text;
-                }
-                if ((LoggedInUser.Email != TB_Email.Text) && Tools.EmailAddressIsValid(TB_Email.Text))
-                {
-                    jb.Add(TB_Email.Text, C_VitaUser.N_Email);
-                    LoggedInUser.Email = TB_Email.Text;
-                }
-                if (LoggedInUser.Phone != TB_Phone.Text)
-                {
-                    jb.Add(TB_Phone.Text, C_VitaUser.N_Phone);
-                    LoggedInUser.Phone = TB_Phone.Text;
-                }
-                if  (   !string.IsNullOrWhiteSpace(TB_Password.Text)
-                    &&  !string.IsNullOrWhiteSpace(TB_PasswordConfirm.Text)
-                    && (TB_Password.Text == TB_PasswordConfirm.Text)
-                    && (TB_Password.Text.Length > 7))
-                {
-                    jb.Add(TB_Password.Text, C_VitaUser.N_Password);
-                    jb.Add(TB_Password.Text, C_VitaUser.N_PasswordConfirmation);
-                }
+                if (!string.IsNullOrWhiteSpace(TB_Password.Text)
+                    && (TB_Password.Text == TB_PasswordConfirm.Text) && (TB_Password.Text.Length > 7))
+                    LoggedInUser.Password = TB_Password.Text;
 
                 PB_Busy.Visibility = ViewStates.Visible;
                 EnableUI(false);
 
                 Task.Run(async () =>
                 {
-                    C_IOResult ior = await Global.UpdateUserFields(jb, LoggedInUser, LoggedInUser.Token);
+                    C_IOResult ior = await Global.UpdateUserFields(LoggedInUser.ToJsonAsJsonBuilder(), LoggedInUser, LoggedInUser.Token);
 
                     void p()
                     {
@@ -98,7 +83,17 @@ namespace a_vitavol
                             mbox.Show();
                         }
                         else
+                        {
+                            Settings.UserEmail = TB_Email.Text;
+                            if (!string.IsNullOrWhiteSpace(TB_Password.Text)
+                                && !string.IsNullOrWhiteSpace(TB_PasswordConfirm.Text)
+                                && (TB_Password.Text == TB_PasswordConfirm.Text)
+                                && (TB_Password.Text.Length > 7))
+                                Settings.UserPassword = TB_Password.Text;
+                            Settings.Save();
+
                             GoBack();
+                        }
                     }
                     RunOnUiThread(p);
                 });
@@ -108,6 +103,8 @@ namespace a_vitavol
             {
                 GoBack();
             };
+
+            EnableUI(true);
 
             TB_Name.TextChanged += (object sender, Android.Text.TextChangedEventArgs e) => SomeTextFieldChanged(sender, e);
             TB_Email.TextChanged += (object sender, Android.Text.TextChangedEventArgs e) => SomeTextFieldChanged(sender, e);
@@ -145,8 +142,10 @@ namespace a_vitavol
             return okToSave;
         }
 
+        bool UIIsEnabled;
         private void EnableUI(bool en)
         {
+            UIIsEnabled = en;
             TB_Email.Enabled = en;
             TB_Name.Enabled = en;
             TB_Password.Enabled = en;
@@ -161,6 +160,9 @@ namespace a_vitavol
 
         private void GoBack()
         {
+            if (!UIIsEnabled)
+                return;
+
             switch (Global.ViewCameFrom)
             {
                 case E_ViewCameFrom.VolOptions:

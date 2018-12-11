@@ -39,12 +39,15 @@ namespace vitavol
             B_Save.TouchUpInside += (sender, e) =>
             {
                 C_VitaSite sel = SitePicker.Selection;
-                Global.SelectedWorkItem.SiteId = sel.id;
+                Global.SelectedWorkItem.SiteSlug = sel.Slug;
                 Global.SelectedWorkItem.Date = DatePicker.Selection;
+                //Global.SelectedWorkItem.UserId = LoggedInUser.id;
                 try { Global.SelectedWorkItem.Hours = Convert.ToSingle(TB_Hours.Text); }
                 catch (Exception ex)
                 {
+#if DEBUG
                     Console.WriteLine(ex.Message);
+#endif
                 }
 
                 AI_Busy.StartAnimating();
@@ -91,7 +94,7 @@ namespace vitavol
 
             NewWorkLogItem = Global.SelectedWorkItem == null;
             if (NewWorkLogItem)
-                Global.SelectedWorkItem = new C_WorkLogItem();
+                Global.SelectedWorkItem = new C_WorkLogItem(LoggedInUser.id);
 
             AI_Busy.StartAnimating();
             EnableUI(false);
@@ -106,6 +109,7 @@ namespace vitavol
                     var ou = sites.Where(s => s.SiteType == E_SiteType.Fixed);
                     sites = ou.ToList();
                 }
+                sites.Sort(C_VitaSite.CompareSitesByNameAscendingLower);
 
                 List<C_YMD> dates = new List<C_YMD>();
                 foreach(C_VitaSite site in sites)
@@ -125,13 +129,21 @@ namespace vitavol
                     EnableUI(true);
 
                     DatePicker = new C_ItemPicker<C_YMD>(TB_Date, dates);
+                    if (dates.Count != 0)
+                    {
+                        if (dates.Contains(Global.SelectedWorkItem.Date))
+                            DatePicker.SetSelection(Global.SelectedWorkItem.Date);
+                        else
+                            DatePicker.SetSelection(dates[0]);
+                    }
 
                     if (sites != null)
                         SitePicker = new C_ItemPicker<C_VitaSite>(TB_Site, sites);
 
                     if (!NewWorkLogItem)
                     {
-                        C_VitaSite site = Global.GetSiteFromIDNoFetch(Global.SelectedWorkItem.SiteId);
+                        C_VitaSite site = Global.GetSiteFromSlugNoFetch(Global.SelectedWorkItem.SiteSlug);
+                        //C_VitaSite site = Global.GetSiteFromIDNoFetch(Global.SelectedWorkItem.SiteId);
                         if (site != null)
                             SitePicker.SetSelection(site);
                         DatePicker.SetSelection(Global.SelectedWorkItem.Date);
@@ -151,7 +163,10 @@ namespace vitavol
         {
             double h;
 
-            B_Save.Enabled = double.TryParse(TB_Hours.Text, out h);
+            bool hoursok = double.TryParse(TB_Hours.Text, out h);
+            bool dateok = TB_Date.Text.Length > 0;
+
+            B_Save.Enabled = hoursok && dateok;
         }
     }
 }

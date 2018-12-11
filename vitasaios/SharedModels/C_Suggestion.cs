@@ -72,5 +72,15 @@ namespace zsquared
 
             dirty = false;
         }
-	}
+
+        public static int CompareByDate(C_Suggestion s1, C_Suggestion s2)
+        {
+            return s1.UpdateDate.CompareTo(s2.UpdateDate);
+        }
+
+        public static int CompareByDateReverse(C_Suggestion s1, C_Suggestion s2)
+        {
+            return s2.UpdateDate.CompareTo(s1.UpdateDate);
+        }
+    }
 }

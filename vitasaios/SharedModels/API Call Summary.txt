@@ -1,4 +1,4 @@
-﻿This is a summary of the API calls made or used by the app
+This is a summary of the API calls made or used by the app
 
 /sites/
 - GET: returns json for all sites
@@ -13,7 +13,7 @@
 - POST: create calendar entry for specified site using json for the calendar entry
 
 /sites/<slug>/calendars/<cid>
-- GET: returns calendar entry for specified site with <cid>
+- GET: returns calendar entry for specified site <slug> with <cid>
 - PUT: update calendar entry <cid> for specified site <slug> using json for the calendar entry
 - DELETE: remove calendar entry <cid> for specified site<slug>
 
@@ -30,10 +30,10 @@
     -- may contain an update to the list of sites the user wants notifications on when site changes
 - DELETE: deletes specified user <uid>
 
-/users/<uid>/worklogitem
+/users/<uid>/worklog
 - POST: create new worklog item json for specified user <uid>
 
-/users/<uid>/worklogitem/<wlid>
+/users/<uid>/worklog/<wlid>
 - GET: returns the worklogitem for the user
 - PUT: updates the worklogitem for the user
 - DELETE: deletes the worklogitem for the user

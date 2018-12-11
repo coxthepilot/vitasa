@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace zsquared
 {
-    public enum E_SiteCapabilities { DropOff, Express, MFT, InPerson }
+    public enum E_SiteCapabilities { DropOff, Express, MFT, InPersonTaxPrep, Fixed, Mobile }
 
     public enum E_SiteType {
         All = 2,         // only used in filtering; not a valid site type
@@ -28,20 +28,20 @@ namespace zsquared
         public string Latitude;
         public string Longitude;
         public string PlaceID;
+        public string ContactName;
+        public string ContactPhone;
+        public string Notes;
 
-        public List<int> SiteCoordinatorsIds;
-        public List<string> SiteCoordinatorNames; // offsets must match
-
+        public List<C_SiteCoordinator> SiteCoordinators;
         public List<C_CalendarEntry> SiteCalendar;  // site calendar, 1 entry per day the site is open in the season
         public List<E_SiteCapabilities> SiteCapabilities;
-
-        public E_SiteType SiteType;
-
         public List<C_WorkLogItem> WorkLogItems;
+
+        public E_SiteType SiteType; // this is a derived value, based on sitecapabilities
 
         public DateTime SampleTime; // not stored in the DB; is used to age out site entries
         public double DistanceFromUserLocation; // not save in the DB, calculated distance from user, for sorting
-        public bool PreferredSite; // not saved in the DB, set true if the user wants this as a preferred site
+        //public bool PreferredSite; // not saved in the DB, set true if the user wants this as a preferred site
         public bool Dirty; // not saved
 
         public static readonly string N_ID = "id";
@@ -54,14 +54,14 @@ namespace zsquared
         public static readonly string N_Latitude = "latitude";
         public static readonly string N_Longitude = "longitude";
         public static readonly string N_PlaceID = "google_place_id";
-        public static readonly string N_SiteCoordinatorIds = "sitecoordinatorids";
-        public static readonly string N_SiteCoordinatorNames = "sitecoordinatornames";
+        public static readonly string N_SiteCoordinators = "sitecoordinators";
         public static readonly string N_SiteType = "sitetype";
-        public static readonly string N_WorkLogItems = "worklogitems";
-
+        public static readonly string N_WorkLogItems = "work_log";
         public static readonly string N_SiteCalendar = "calendar_overrides";
-
         public static readonly string N_SiteCapabilities = "site_features";
+        public static readonly string N_ContactName = "contact_name";
+        public static readonly string N_ContactPhone = "contact_phone";
+        public static readonly string N_Notes = "notes";
 
         /// <summary>
         /// Create a vita site from the json values, read from the web service
@@ -71,13 +71,14 @@ namespace zsquared
         {
 			SiteCalendar = new List<C_CalendarEntry>();
 			SiteCapabilities = new List<E_SiteCapabilities>();
-
-            SiteCoordinatorsIds = new List<int>();
-            SiteCoordinatorNames = new List<string>();
-
+            SiteCoordinators = new List<C_SiteCoordinator>();
             WorkLogItems = new List<C_WorkLogItem>();
 
             State = "TX";
+            City = "San Antonio";
+            ContactName = "";
+            ContactPhone = "";
+            Notes = "";
 
 			if (j.ContainsKey(N_ID))
 				id = Tools.JsonProcessInt(j[N_ID], id);
@@ -109,6 +110,15 @@ namespace zsquared
 			if (j.ContainsKey(N_PlaceID))
 				PlaceID = Tools.JsonProcessString(j[N_PlaceID], PlaceID);
 
+            if (j.ContainsKey(N_ContactName))
+                ContactName = Tools.JsonProcessString(j[N_ContactName], ContactName);
+
+            if (j.ContainsKey(N_ContactPhone))
+                ContactPhone = Tools.JsonProcessString(j[N_ContactPhone], ContactPhone);
+
+            if (j.ContainsKey(N_Notes))
+                Notes = Tools.JsonProcessString(j[N_Notes], Notes);
+
             if (j.ContainsKey(N_SiteType))
             {
                 string st = Tools.JsonProcessString(j[N_SiteType], SiteType.ToString());
@@ -122,7 +132,9 @@ namespace zsquared
 				{
 					foreach (JsonValue jav in jv)
 					{
-						C_CalendarEntry ce = new C_CalendarEntry(jav);
+                        C_CalendarEntry aa = new C_CalendarEntry();
+
+						C_CalendarEntry ce = new C_CalendarEntry(jav, id);
 						SiteCalendar.Add(ce);
 					}
 				}
@@ -135,7 +147,7 @@ namespace zsquared
                 {
                     foreach(JsonValue jav in jv)
                     {
-                        C_WorkLogItem wi = new C_WorkLogItem(jav);
+                        C_WorkLogItem wi = new C_WorkLogItem(jav, -1);
                         WorkLogItems.Add(wi);
                     }
                 }
@@ -150,33 +162,25 @@ namespace zsquared
 					{
 						string s_jav = Tools.JsonProcessString(jav, "Unknown");
 						E_SiteCapabilities sc = Tools.StringToEnum<E_SiteCapabilities>(s_jav);
-						SiteCapabilities.Add(sc);
+                        if (sc == E_SiteCapabilities.Fixed)
+                            SiteType = E_SiteType.Fixed;
+                        else if (sc == E_SiteCapabilities.Mobile)
+                            SiteType = E_SiteType.Mobile;
+                        else
+    						SiteCapabilities.Add(sc);
 					}
 				}
 			}
 
-            if (j.ContainsKey(N_SiteCoordinatorIds))
+            if (j.ContainsKey(N_SiteCoordinators))
             {
-                var jv = j[N_SiteCoordinatorIds];
+                var jv = j[N_SiteCoordinators];
                 if (jv is JsonArray)
                 {
-                    foreach (JsonValue jav in jv)
+                    foreach(JsonValue jav in jv)
                     {
-                        int scid = Tools.JsonProcessInt(jav, -1);
-                        SiteCoordinatorsIds.Add(scid);
-                    }
-                }
-            }
-
-            if (j.ContainsKey(N_SiteCoordinatorNames))
-            {
-                var jv = j[N_SiteCoordinatorNames];
-                if (jv is JsonArray)
-                {
-                    foreach (JsonValue jav in jv)
-                    {
-                        string scname = Tools.JsonProcessString(jav, null);
-                        SiteCoordinatorNames.Add(scname);
+                        C_SiteCoordinator sc = new C_SiteCoordinator(jav);
+                        SiteCoordinators.Add(sc);
                     }
                 }
             }
@@ -186,15 +190,17 @@ namespace zsquared
 
         public C_VitaSite()
         {
+            id = -1;
             SiteCalendar = new List<C_CalendarEntry>();
             SiteCapabilities = new List<E_SiteCapabilities>();
-
-            SiteCoordinatorsIds = new List<int>();
-            SiteCoordinatorNames = new List<string>();
-
+            SiteCoordinators = new List<C_SiteCoordinator>();
             WorkLogItems = new List<C_WorkLogItem>();
 
             State = "TX";
+            City = "San Antonio";
+            ContactName = "";
+            ContactPhone = "";
+            Notes = "";
         }
 
         /// <summary>
@@ -213,8 +219,10 @@ namespace zsquared
             Latitude = s.Latitude;
             Longitude = s.Longitude;
             PlaceID = s.PlaceID;
-            SiteCoordinatorsIds = s.SiteCoordinatorsIds;
-            SiteCoordinatorNames = s.SiteCoordinatorNames;
+            ContactName = s.ContactName;
+            ContactPhone = s.ContactPhone;
+            Notes = s.Notes;
+            SiteCoordinators = s.SiteCoordinators;
             SiteCalendar = s.SiteCalendar;
             SiteCapabilities = s.SiteCapabilities;
             SiteType = s.SiteType;
@@ -270,7 +278,8 @@ namespace zsquared
         {
             C_JsonBuilder jb = new C_JsonBuilder();
 
-            jb.Add(id, N_ID);
+            if (id != -1)
+                jb.Add(id, N_ID);
             jb.Add(Name, N_Name);
             jb.Add(Slug, N_Slug);
             jb.Add(Street, N_Street);
@@ -280,7 +289,9 @@ namespace zsquared
             jb.Add(Latitude, N_Latitude);
             jb.Add(Longitude, N_Longitude);
             jb.Add(PlaceID, N_PlaceID);
-            jb.Add(SiteType.ToString(), N_SiteType);
+            jb.Add(ContactName, N_ContactName);
+            jb.Add(ContactPhone, N_ContactPhone);
+            jb.Add(Notes, N_Notes);
 
             jb.StartArray(N_SiteCalendar);
             foreach (C_CalendarEntry ce in SiteCalendar)
@@ -288,17 +299,18 @@ namespace zsquared
             jb.EndArray();
 
             jb.StartArray(N_SiteCapabilities);
+            jb.AddArrayElement(SiteType.ToString());
             foreach (E_SiteCapabilities sc in SiteCapabilities)
                 jb.AddArrayElement(sc.ToString());
             jb.EndArray();
 
+            jb.StartArray(N_SiteCoordinators);
+            foreach(C_SiteCoordinator sc in SiteCoordinators)
+                jb.AddArrayObject(sc.ToJson());
+            jb.EndArray();
+
             if (full)
             {
-                jb.StartArray(N_SiteCoordinatorIds);
-                foreach (int scid in SiteCoordinatorsIds)
-                    jb.AddArrayElement(scid.ToString());
-                jb.EndArray();
-
                 jb.StartArray(N_WorkLogItems);
                 foreach (C_WorkLogItem wi in WorkLogItems)
                     jb.AddArrayObject(wi.ToJson());
@@ -306,14 +318,6 @@ namespace zsquared
             }
 
             string json = jb.ToString();
-
-#if DEBUG
-            // just for fun, make sure we can re-import the site
-            JsonValue jsonv = JsonValue.Parse(json);
-            C_VitaSite testSite = new C_VitaSite(jsonv);
-            bool nameok = Name == testSite.Name;
-            // todo: check more items...
-#endif
 
             return json;
         }

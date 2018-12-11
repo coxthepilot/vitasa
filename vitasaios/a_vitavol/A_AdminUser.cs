@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using System.Collections.Generic;
+using System.Linq;
 
 using Android.App;
 using Android.Widget;
@@ -88,9 +89,16 @@ namespace a_vitavol
                     return;
                 }
 
-                C_JsonBuilder jb = null;
-                if (Global.SelectedUser != null)
-                    jb = CapturePrivateFields();
+                C_VitaUser u = Global.GetUserFromCacheNoFetch(TB_Email.Text);
+                if (u != null)
+                {
+                    C_MessageBox mbox1 = new C_MessageBox(this,
+                     "Error",
+                     "That email is already in use.",
+                     E_MessageBoxButtons.Ok);
+                    mbox1.Show();
+                    return;
+                }
 
                 PullValuesFromForm();
 
@@ -99,12 +107,16 @@ namespace a_vitavol
 
                 Task.Run(async () => 
                 {
+                    C_JsonBuilder jb = null;
+                    if (Global.SelectedUser != null)
+                        jb = CaptureSiteCoordFields();
+
                     bool ok = await SaveUser(jb);
 
                     void p()
                     {
                         PB_Busy.Visibility = ViewStates.Gone;
-                        EnableUI(false);
+                        EnableUI(true);
 
                         if (ok)
                         {
@@ -183,6 +195,7 @@ namespace a_vitavol
             Certifications = new List<E_Certification>
             {
                 E_Certification.None,
+                E_Certification.Greeter,
                 E_Certification.Basic,
                 E_Certification.Advanced
             };
@@ -223,6 +236,9 @@ namespace a_vitavol
 
         public override void OnBackPressed()
         {
+            if (!UIIsEnabled)
+                return;
+
             if (!GetDirty() || !ValidUser())
             {
                 GoBack();
@@ -245,17 +261,38 @@ namespace a_vitavol
                     return;
                 }
 
-                PB_Busy.Visibility = ViewStates.Visible;
-                EnableUI(false);
+                if (!ValidUser())
+                {
+                    C_MessageBox mbox2 = new C_MessageBox(this,
+                         "Error",
+                         "Invalid user (must have name, email, and phone).",
+                     E_MessageBoxButtons.Ok);
+                    mbox2.Show();
+                    return;
+                }
 
-                C_JsonBuilder jb = null;
-                if (Global.SelectedUser != null)
-                    jb = CapturePrivateFields();
+                C_VitaUser u = Global.GetUserFromCacheNoFetch(TB_Email.Text);
+                if (u != null)
+                {
+                    C_MessageBox mbox1 = new C_MessageBox(this,
+                     "Error",
+                     "That email is already in use.",
+                     E_MessageBoxButtons.Ok);
+                    mbox1.Show();
+                    return;
+                }
 
                 PullValuesFromForm();
 
+                PB_Busy.Visibility = ViewStates.Visible;
+                EnableUI(false);
+
                 Task.Run(async () =>
                 {
+                    C_JsonBuilder jb = null;
+                    if (Global.SelectedUser != null)
+                        jb = CaptureSiteCoordFields();
+
                     bool ok = await SaveUser(jb);
 
                     void p()
@@ -305,8 +342,10 @@ namespace a_vitavol
             return nameDirty || emailDirty || phoneDirty || mobileDirty || certDirty || roleDirty || sitesCoordinatedDirty || passwordChanged;
         }
 
+        bool UIIsEnabled;
         private void EnableUI(bool en)
         {
+            UIIsEnabled = en;
             TB_Name.Enabled = en;
             TB_Email.Enabled = en;
             TB_Password.Enabled = en;
@@ -331,14 +370,25 @@ namespace a_vitavol
             if (!string.IsNullOrWhiteSpace(TB_Password.Text) || !string.IsNullOrWhiteSpace(TB_PasswordConfirm.Text))
                 valuesOk &= (TB_Password.Text.Length > 7) && (TB_Password.Text == TB_PasswordConfirm.Text);
 
-            B_Save.Enabled = valuesOk;
+            bool sitesCoordinatedDirty = (Global.SelectedUserTemp != null) && Global.SelectedUserTemp.Dirty;
+
+            B_Save.Enabled = valuesOk || sitesCoordinatedDirty;
         }
 
         private void PullValuesFromForm()
         {
             SelectedUser.Name = TB_Name.Text;
             SelectedUser.Email = TB_Email.Text;
+
+            if (!string.IsNullOrWhiteSpace(TB_Password.Text)
+                && (TB_Password.Text.Length > 7)
+                && (TB_Password.Text == TB_PasswordConfirm.Text))
+            {
+                SelectedUser.Password = TB_Password.Text;
+            }
+
             SelectedUser.Password = TB_Password.Text;
+
             SelectedUser.Phone = TB_Phone.Text;
 
             SelectedUser.Roles = new List<E_VitaUserRoles>();
@@ -362,45 +412,30 @@ namespace a_vitavol
         private async Task<bool> SaveUser(C_JsonBuilder jb)
         {
             C_IOResult ior = null;
+
             if (Global.SelectedUser == null)
             {
                 // new user
                 if (Global.SelectedUserTemp != null)
+                {
                     SelectedUser.SitesCoordinated = Global.SelectedUserTemp.SitesCoordinated;
-
+                    await AdjustSiteCoordinators();
+                }
                 ior = await Global.CreateUser(SelectedUser, LoggedInUser.Token);
-                SelectedUser = ior.User;
             }
             else
+            {
+                await AdjustSiteCoordinators();
+
                 ior = await Global.UpdateUserFields(jb, SelectedUser, LoggedInUser.Token);
+            }
 
             return ior.Success;
         }
 
-        private C_JsonBuilder CapturePrivateFields()
+        private C_JsonBuilder CaptureSiteCoordFields()
         {
-            // must be an update; find the fields that have changed
-            C_JsonBuilder jb = new C_JsonBuilder();
-
-            jb.Add(TB_Name.Text, C_VitaUser.N_Name);
-            if (Tools.EmailAddressIsValid(TB_Email.Text))
-                jb.Add(TB_Email.Text, C_VitaUser.N_Email);
-            jb.Add(TB_Phone.Text, C_VitaUser.N_Phone);
-            if (!string.IsNullOrWhiteSpace(TB_Password.Text) && (TB_Password.Text.Length > 7))
-            {
-                jb.Add(TB_Password.Text, C_VitaUser.N_Password);
-                jb.Add(TB_Password.Text, C_VitaUser.N_PasswordConfirmation);
-            }
-
-            if ((SelectedUser.HasMobile && !CB_Mobile.Checked) || (!SelectedUser.HasMobile && CB_Mobile.Checked))
-                jb.Add(CB_Mobile.Checked, C_VitaUser.N_SubscribeMobile);
-
-            jb.Add(SelectedUser.Certification.ToString(), C_VitaUser.N_Certification);
-
-            jb.StartArray(C_VitaUser.N_Roles);
-            foreach (E_VitaUserRoles role in SelectedUser.Roles)
-                jb.AddArrayElement(role.ToString());
-            jb.EndArray();
+            C_JsonBuilder jb = SelectedUser.ToJsonAsJsonBuilder();
 
             if (Global.SelectedUserTemp == null)
             {
@@ -418,6 +453,41 @@ namespace a_vitavol
             }
 
             return jb;
+        }
+
+        private async Task<bool> AdjustSiteCoordinators()
+        {
+            foreach (C_VitaSite site in Global.SiteCache)
+            {
+                var ou = SelectedUser.SitesCoordinated.Where(sc => sc.SiteId == site.id);
+                if (ou.Any())
+                {
+                    // make sure this user is listed in the site
+                    var ou1 = site.SiteCoordinators.Where(sc => sc.UserId == SelectedUser.id);
+                    if (!ou1.Any())
+                    {
+                        C_SiteCoordinator sc = new C_SiteCoordinator(SelectedUser);
+                        site.SiteCoordinators.Add(sc);
+
+                        await Global.UpdateSite(site, LoggedInUser.Token);
+                    }
+                }
+                else
+                {
+                    // make sure this user is not listed in the site
+                    var ou1 = site.SiteCoordinators.Where(sc => sc.UserId == SelectedUser.id);
+                    if (ou1.Any())
+                    {
+                        C_SiteCoordinator sc = ou1.First();
+                        int ix = site.SiteCoordinators.IndexOf(sc);
+                        site.SiteCoordinators.RemoveAt(ix);
+
+                        await Global.UpdateSite(site, LoggedInUser.Token);
+                    }
+                }
+            }
+
+            return true;
         }
     }
 }

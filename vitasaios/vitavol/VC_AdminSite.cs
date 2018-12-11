@@ -12,9 +12,11 @@ namespace vitavol
     {
         C_Global Global;
         C_VitaUser LoggedInUser;
+        bool SkipToLocation;
 
         public VC_AdminSite (IntPtr handle) : base (handle)
         {
+            SkipToLocation = false;
         }
 
         public override void ViewDidLoad()
@@ -29,6 +31,7 @@ namespace vitavol
             {
                 Global.SelectedSiteTemp = Global.SelectedSiteSlug == null ? new C_VitaSite() : Global.GetSiteFromSlugNoFetch(Global.SelectedSiteSlug);
                 Global.SelectedSiteTemp.Dirty = false;
+                SkipToLocation = Global.SelectedSiteSlug == null;
             }
 
             B_Back.TouchUpInside += async (sender, e) => 
@@ -95,6 +98,9 @@ namespace vitavol
 
             B_Coordinators.TouchUpInside += (sender, e) => 
                 PerformSegue("Segue_AdminSiteToAdminSiteCoord", this);
+
+            B_ContactAndNotes.TouchUpInside += (sender, e) => 
+                PerformSegue("Segue_AdminSiteToAdminSiteContactAndNotes", this);
 
             B_Save.TouchUpInside += (sender, e) => 
             {
@@ -182,6 +188,9 @@ namespace vitavol
         {
             base.ViewDidAppear(animated);
 
+            if (SkipToLocation)
+                PerformSegue("Segue_AdminSiteToAdminSiteLocation", this);
+
             C_Common.SetUIColors(View);
 
             L_SiteName.Text = Global.SelectedSiteTemp.Name;
@@ -194,7 +203,7 @@ namespace vitavol
             {
                 if (c.Length > 0)
                     c += ", ";
-                c += cap.ToString();
+                c += Tools.FixCamelCaseDisplay(cap.ToString());
             }
             L_Capabilities.Text = c;
         }
@@ -226,197 +235,12 @@ namespace vitavol
             bool errors = false;
             if (Global.SelectedSiteSlug == null)
             {
-                // create new site
-                Global.SelectedSiteTemp.Slug = BuildSlug(Global.SelectedSiteTemp);
-                errors = string.IsNullOrWhiteSpace(Global.SelectedSiteTemp.Slug);
-
-                if (!errors)
-                {
-                    C_JsonBuilder jb = new C_JsonBuilder();
-                    jb.Add(Global.SelectedSiteTemp.id, C_VitaSite.N_ID);
-                    jb.Add(Global.SelectedSiteTemp.Name, C_VitaSite.N_Name);
-                    jb.Add(Global.SelectedSiteTemp.Slug, C_VitaSite.N_Slug);
-                    jb.Add(Global.SelectedSiteTemp.Street, C_VitaSite.N_Street);
-                    jb.Add(Global.SelectedSiteTemp.City, C_VitaSite.N_City);
-                    jb.Add(Global.SelectedSiteTemp.State, C_VitaSite.N_State);
-                    jb.Add(Global.SelectedSiteTemp.Zip, C_VitaSite.N_Zip);
-                    jb.Add(Global.SelectedSiteTemp.Latitude, C_VitaSite.N_Latitude);
-                    jb.Add(Global.SelectedSiteTemp.Longitude, C_VitaSite.N_Longitude);
-                    jb.Add(Global.SelectedSiteTemp.PlaceID, C_VitaSite.N_PlaceID);
-                    jb.Add(Global.SelectedSiteTemp.SiteType.ToString(), C_VitaSite.N_SiteType);
-
-                    jb.StartArray(C_VitaSite.N_SiteCapabilities);
-                    foreach (E_SiteCapabilities sc in Global.SelectedSiteTemp.SiteCapabilities)
-                        jb.AddArrayElement(sc.ToString());
-                    jb.EndArray();
-
-                    jb.StartArray(C_VitaSite.N_SiteCalendar);
-                    foreach (C_CalendarEntry ce in Global.SelectedSiteTemp.SiteCalendar)
-                        jb.AddArrayObject(ce.ToJson());
-                    jb.EndArray();
-
-                    C_IOResult ior = await Global.CreateSite(Global.SelectedSiteTemp, jb.ToString(), LoggedInUser.Token);
-                    Global.SelectedSiteTemp.id = ior.Site.id;
-
-                    // make the site coordinator assignments
-                    // create a sitescoordinated for the user for each sc added
-                    foreach (int nsc in Global.SelectedSiteTemp.SiteCoordinatorsIds)
-                    {
-                        // get the user, fetch if needed
-                        C_VitaUser scu = await Global.FetchUserWithId(nsc);
-                        // create the record
-                        C_SiteCoordinated nsic = new C_SiteCoordinated(Global.SelectedSiteTemp);
-                        // add to his list
-                        scu.SitesCoordinated.Add(nsic);
-                        // update the user on the db
-                        C_JsonBuilder jb2 = new C_JsonBuilder();
-                        jb2.StartArray(C_VitaUser.N_SitesCoordinated);
-                        foreach (C_SiteCoordinated sc in scu.SitesCoordinated)
-                            jb2.AddArrayObject(sc.ToJson());
-                        jb2.EndArray();
-
-                        C_IOResult ior2 = await Global.UpdateUserFields(jb2, scu, LoggedInUser.Token);
-                        if (!ior.Success)
-                        {
-                            errors = true;
-                            Console.WriteLine("site coord add failed.");
-                        }
-                    }
-                }
+                throw new ApplicationException("create happens in AdminSiteLocation");
             }
             else
             {
-                // update existing site
-                C_JsonBuilder jb = new C_JsonBuilder();
-                jb.Add(Global.SelectedSiteTemp.id, C_VitaSite.N_ID);
-                jb.Add(Global.SelectedSiteTemp.Name, C_VitaSite.N_Name);
-                jb.Add(Global.SelectedSiteTemp.Slug, C_VitaSite.N_Slug);
-                jb.Add(Global.SelectedSiteTemp.Street, C_VitaSite.N_Street);
-                jb.Add(Global.SelectedSiteTemp.City, C_VitaSite.N_City);
-                jb.Add(Global.SelectedSiteTemp.State, C_VitaSite.N_State);
-                jb.Add(Global.SelectedSiteTemp.Zip, C_VitaSite.N_Zip);
-                jb.Add(Global.SelectedSiteTemp.Latitude, C_VitaSite.N_Latitude);
-                jb.Add(Global.SelectedSiteTemp.Longitude, C_VitaSite.N_Longitude);
-                jb.Add(Global.SelectedSiteTemp.PlaceID, C_VitaSite.N_PlaceID);
-                jb.Add(Global.SelectedSiteTemp.SiteType.ToString(), C_VitaSite.N_SiteType);
-
-                jb.StartArray(C_VitaSite.N_SiteCapabilities);
-                foreach (E_SiteCapabilities sc in Global.SelectedSiteTemp.SiteCapabilities)
-                    jb.AddArrayElement(sc.ToString());
-                jb.EndArray();
-
-                C_IOResult ior = await Global.UpdateSiteFields(Global.SelectedSiteTemp, jb.ToString(), LoggedInUser.Token);
-
-                // build a list of changes to the site coord ids
-                List<int> addedSiteCoordIds = new List<int>();
-                List<int> removedSiteCoordIds = new List<int>();
-
-                // find any that were added by going through the new site to ensure they are in the old site
-                foreach (int scidns in Global.SelectedSiteTemp.SiteCoordinatorsIds)
-                {
-                    if (!Global.SelectedSiteTemp.SiteCoordinatorsIds.Contains(scidns))
-                        addedSiteCoordIds.Add(scidns);
-                }
-
-                // find any ids that were removed
-                foreach (int scidos in Global.SelectedSiteTemp.SiteCoordinatorsIds)
-                {
-                    if (!Global.SelectedSiteTemp.SiteCoordinatorsIds.Contains(scidos))
-                        removedSiteCoordIds.Add(scidos);
-                }
-
-                // create a sitescoordinated for the user for each sc added
-                foreach (int nsc in addedSiteCoordIds)
-                {
-                    // get the user, fetch if needed
-                    C_VitaUser scu = await Global.FetchUserWithId(nsc);
-                    // create the record
-                    C_SiteCoordinated nsic = new C_SiteCoordinated(Global.SelectedSiteTemp);
-                    // add to his list
-                    scu.SitesCoordinated.Add(nsic);
-                    // update the user on the db
-                    C_JsonBuilder jb2 = new C_JsonBuilder();
-                    jb2.StartArray(C_VitaUser.N_SitesCoordinated);
-                    foreach (C_SiteCoordinated sc in scu.SitesCoordinated)
-                        jb2.AddArrayObject(sc.ToJson());
-                    jb2.EndArray();
-
-                    C_IOResult ior2 = await Global.UpdateUserFields(jb2, scu, LoggedInUser.Token);
-                    if (!ior.Success)
-                    {
-                        errors = true;
-                        Console.WriteLine("site coord add failed.");
-                    }
-                }
-
-                // remove a sitescoordinated from the users with remove
-                foreach (int rsc in removedSiteCoordIds)
-                {
-                    // get the user, fetch if needed
-                    C_VitaUser scu = await Global.FetchUserWithId(rsc);
-                    // remove from the list
-                    int ix = Global.SelectedSiteTemp.SiteCoordinatorsIds.IndexOf(rsc);
-                    if (ix != -1)
-                    {
-                        Global.SelectedSiteTemp.SiteCoordinatorsIds.RemoveAt(ix);
-                        Global.SelectedSiteTemp.SiteCoordinatorNames.RemoveAt(ix);
-                        // update the user on the db
-                        C_JsonBuilder jb2 = new C_JsonBuilder();
-                        jb2.StartArray(C_VitaUser.N_SitesCoordinated);
-                        foreach (C_SiteCoordinated sc in scu.SitesCoordinated)
-                            jb2.AddArrayObject(sc.ToJson());
-                        jb2.EndArray();
-
-                        C_IOResult ior2 = await Global.UpdateUserFields(jb2, scu, LoggedInUser.Token);
-                        if (!ior.Success)
-                        {
-                            errors = true;
-                            Console.WriteLine("site coord add failed.");
-                        }
-                    }
-                    else
-                    {
-                        errors = true;
-                        Console.WriteLine("didn't find the sc to remove!");
-                    }
-                }
-
-                // build a list of changed calendar entries so we do the updates
-                List<C_CalendarEntry> changedCalendarEntries = new List<C_CalendarEntry>();
-                foreach (C_CalendarEntry ce in Global.SelectedSiteTemp.SiteCalendar)
-                {
-                    C_CalendarEntry nce = Global.SelectedSiteTemp.GetCalendarEntryForDate(ce.Date);
-                    if (nce != null)
-                    {
-                        if ((ce.SiteIsOpen != nce.SiteIsOpen)
-                            && (ce.OpenTime != nce.OpenTime)
-                            && (ce.CloseTime != nce.CloseTime))
-                            changedCalendarEntries.Add(nce);
-                    }
-                    else
-                    {
-                        errors = true;
-                        Console.WriteLine("The calendar has been modified!");
-                    }
-                }
-                // actually do the updates to the site calendar
-                foreach (C_CalendarEntry nce in changedCalendarEntries)
-                {
-                    C_IOResult ior1 = await Global.UpdateCalendarEntry(Global.SelectedSiteTemp, LoggedInUser.Token, nce);
-                    if (ior1.Success)
-                    {
-                        C_CalendarEntry oce = Global.SelectedSiteTemp.GetCalendarEntryForDate(nce.Date);
-                        oce.SiteIsOpen = nce.SiteIsOpen;
-                        oce.OpenTime = nce.OpenTime;
-                        oce.CloseTime = nce.CloseTime;
-                        oce.Dirty = false;
-                    }
-                    else
-                    {
-                        errors = false;
-                        Console.WriteLine("update failed");
-                    }
-                }
+                C_IOResult ior = await Global.UpdateSiteFields(Global.SelectedSiteTemp, Global.SelectedSiteTemp.ToJson(false), LoggedInUser.Token);
+                errors = !ior.Success;
             }
 
             return errors;

@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Json;
 using System.Linq;
+using static zsquared.C_MessageBox;
 
 using zsquared;
 
@@ -17,8 +18,6 @@ namespace vitavol
         C_Global Global;
         C_DateState[] DateState;
         C_CVHelper CollectionViewHelper;
-
-        C_PersistentSettings Settings;
 
         public VC_VolMobileCalendar (IntPtr handle) : base (handle)
         {
@@ -92,6 +91,8 @@ namespace vitavol
 
             CV_Grid.BackgroundColor = C_Common.StandardBackground;
 
+            AI_Busy.StartAnimating();
+
             Task.Run(async () =>
             {
                 List<C_VitaSite> sites = await Global.FetchAllSites();
@@ -105,6 +106,8 @@ namespace vitavol
                 UIApplication.SharedApplication.InvokeOnMainThread(
                 new Action(() =>
                 {
+                    AI_Busy.StopAnimating();
+
                     L_MonthYear.Text = Global.CalendarDate.ToString("mmm-yyyy");
 
                     CollectionViewHelper = new C_CVHelper(C_Common.StandardBackground, CV_Grid, DateState, null, false);
@@ -112,7 +115,20 @@ namespace vitavol
                     {
                         C_DateTouchedEventArgs ea = e;
                         Global.CalendarDate = ea.Date;
-                        PerformSegue("Segue_VolMobileCalendarToVolMobileCalOnDate", this);
+
+                        // build a list of all calendar entries for this date
+                        List<C_CalendarEntry> calendarEntries = new List<C_CalendarEntry>();
+                        foreach (C_VitaSite site in sites)
+                        {
+                            foreach (C_CalendarEntry ce in site.SiteCalendar)
+                            {
+                                if ((ce.Date == Global.CalendarDate) && ce.SiteIsOpen)
+                                    calendarEntries.Add(ce);
+                            }
+                        }
+
+                        if (calendarEntries.Count != 0)
+                            PerformSegue("Segue_VolMobileCalendarToVolMobileCalOnDate", this);
                     };
                 }));
             });
@@ -165,7 +181,7 @@ namespace vitavol
                     var ou = calendarEntries.Where(ce => ce.SiteIsOpen);
                     if (!ou.Any())
                     {
-                        dayState.NormalColor = C_Common.ClosedDefault;
+                        dayState.NormalColor = C_Common.Color_NoSiteOpen;
                         dayState.HighlightedColor = C_Common.ClosedDefault;
                         dayState.TextColor = UIColor.White;
                     }
@@ -174,19 +190,25 @@ namespace vitavol
                         List<C_CalendarEntry> ceOpenOnOurDate = ou.ToList();
                         if (ceOpenOnOurDate.Count == 1)
                         {
-                            dayState.NormalColor = C_Common.OpenDefault;
+                            dayState.NormalColor = C_Common.Color_OneAppt;
                             dayState.HighlightedColor = C_Common.OpenDefault;
-                            dayState.TextColor = UIColor.DarkGray;
+                            dayState.TextColor = UIColor.White;
                         }
                         else
                         { // 2 or more
-                            // todo: need another color choice here
-                            dayState.NormalColor = C_Common.OpenDefault;
-                            dayState.HighlightedColor = C_Common.OpenDefault;
-                            dayState.TextColor = UIColor.DarkGray;
-
-                            if (!((ceOpenOnOurDate.Count == 2) && !Overlap(ceOpenOnOurDate)))
-                                dayState.BoxColor = UIColor.Black;
+                            if ((ceOpenOnOurDate.Count == 2) && !C_CalendarEntry.Overlap(ceOpenOnOurDate))
+                            {
+                                dayState.NormalColor = C_Common.Color_TwoAppt;
+                                dayState.HighlightedColor = UIColor.Green;
+                                dayState.TextColor = UIColor.White;
+                            }
+                            else
+                            {
+                                dayState.NormalColor = C_Common.Color_BadAppt;
+                                dayState.HighlightedColor = UIColor.Red;
+                                dayState.TextColor = UIColor.White;
+                                dayState.ShowBox = true;
+                            }
                         }
                     }
                 }
@@ -196,33 +218,5 @@ namespace vitavol
 
             return DateState;
         }
-
-        private bool Overlap(List<C_CalendarEntry> ceList)
-        {
-            bool res = false;
-            for (int ceix = 0; ceix != ceList.Count; ceix++)
-            {
-                C_CalendarEntry ce = ceList[ceix];
-
-                // with this one, see if any other entry overlaps
-                for (int cetix = 0; cetix != ceList.Count; cetix++)
-                {
-                    C_CalendarEntry cet = ceList[cetix];
-
-                    if (ceix != cetix)
-                    {
-                        res = ((ce.OpenTime >= cet.OpenTime) && (ce.OpenTime < cet.CloseTime))
-                            || ((ce.CloseTime > cet.OpenTime) && (ce.CloseTime <= cet.CloseTime));
-                    }
-                    if (res)
-                        break;
-                }
-                if (res)
-                    break;
-            }
-
-            return res;
-        }
-
     }
 }

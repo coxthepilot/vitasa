@@ -25,7 +25,7 @@ namespace vitavol
             AppDelegate myAppDelegate = (AppDelegate)UIApplication.SharedApplication.Delegate;
             Global = myAppDelegate.Global;
 
-            B_Back.TouchUpInside += async (sender, e) => 
+            B_Back.TouchUpInside += (sender, e) => 
             {
                 SaveDetails();
                 PerformSegue("Segue_AdminSiteDetailsToAdminSite", this);
@@ -55,7 +55,7 @@ namespace vitavol
             SW_MFT.On = Global.SelectedSiteTemp.SiteCapabilities.Contains(E_SiteCapabilities.MFT);
             SW_DropOff.On = Global.SelectedSiteTemp.SiteCapabilities.Contains(E_SiteCapabilities.DropOff);
             SW_Express.On = Global.SelectedSiteTemp.SiteCapabilities.Contains(E_SiteCapabilities.Express);
-            SW_InPerson.On = Global.SelectedSiteTemp.SiteCapabilities.Contains(E_SiteCapabilities.InPerson);
+            SW_InPerson.On = Global.SelectedSiteTemp.SiteCapabilities.Contains(E_SiteCapabilities.InPersonTaxPrep);
         }
 
         private void SaveDetails()
@@ -67,7 +67,7 @@ namespace vitavol
             if (SW_MFT.On) Global.SelectedSiteTemp.SiteCapabilities.Add(E_SiteCapabilities.MFT);
             if (SW_DropOff.On) Global.SelectedSiteTemp.SiteCapabilities.Add(E_SiteCapabilities.DropOff);
             if (SW_Express.On) Global.SelectedSiteTemp.SiteCapabilities.Add(E_SiteCapabilities.Express);
-            if (SW_InPerson.On) Global.SelectedSiteTemp.SiteCapabilities.Add(E_SiteCapabilities.InPerson);
+            if (SW_InPerson.On) Global.SelectedSiteTemp.SiteCapabilities.Add(E_SiteCapabilities.InPersonTaxPrep);
         }
     }
 }

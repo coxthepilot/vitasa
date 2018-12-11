@@ -29,10 +29,11 @@ namespace zsquared
 				sb.Append(",");
 			IsFirst = false;
 
-			sb.Append("\"" + name + "\" : \"" + (b ? "true" : "false") + "\"");
-		}
+			//sb.Append("\"" + name + "\" : \"" + (b ? "true" : "false") + "\"");
+            sb.Append("\"" + name + "\" : " + (b ? "true" : "false"));
+        }
 
-		public void Add(int i, string name)
+        public void Add(int i, string name)
 		{
 			if (!IsFirst)
 				sb.Append(",");

@@ -26,6 +26,7 @@ namespace a_vitavol
     public class A_SitesFilter : Activity
     {
         C_Global Global;
+        C_VitaUser LoggedInUser;
         List<string> DateValues;
         C_PersistentSettings Settings;
 
@@ -39,6 +40,9 @@ namespace a_vitavol
             if (g.Global == null)
                 g.Global = new C_Global();
             Global = g.Global;
+            LoggedInUser = null;
+            if (Global.LoggedInUserId != -1)
+                LoggedInUser = Global.GetUserFromCacheNoFetch(Global.LoggedInUserId);
 
             Settings = new C_PersistentSettings(this);
 
@@ -58,7 +62,7 @@ namespace a_vitavol
             {
                 Settings.SitesFilter.ClearSiteCapabilities();
                 if (CB_Dropoff.Checked)
-                    Settings.SitesFilter.AddSiteCapability(E_CapabilitiesFilter.DropOff);
+                    Settings.SitesFilter.AddSiteCapability(E_CapabilitiesFilter.Virtual);
                 if (CB_InPerson.Checked)
                     Settings.SitesFilter.AddSiteCapability(E_CapabilitiesFilter.InPerson);
                 if (CB_MFT.Checked)
@@ -79,56 +83,66 @@ namespace a_vitavol
                 StartActivity(new Intent(this, typeof(A_SitesMap)));
             };
 
-            // we don't need to log in any local user since that was done in the sitesmap screen
-            bool hasMobile =
-                (Global.LoggedInUserId != -1)
-                && (Global.SelectedUser != null)
-                && Global.SelectedUser.HasVolunteer
-                && Global.SelectedUser.HasMobile;
-
-            CB_Mobile.Visibility = hasMobile ? ViewStates.Visible : ViewStates.Invisible;
-
-            // populate the selector for the dates and preselect the current value
-            DateValues = new List<string> { "Any", "Today", "Tomorrow" };
-            for (int i = 2; i != 7; i++)
+            Task.Run(async () => 
             {
-                C_YMD d = C_YMD.Now.AddDays(i);
-                DateValues.Add(d.ToString("dow mmm dd, yyyy"));
-            }
+                if (LoggedInUser == null)
+                    LoggedInUser = await Global.FetchUserWithId(Global.LoggedInUserId);
 
-            DateValuesSpinner = new C_SPinnerHelper<string>(this, SP_Dates, DateValues);
-            int dfix = (int)Settings.SitesFilter.DateFilter;
-            DateValuesSpinner.SetValue(DateValues[dfix]);
-            DateValuesSpinner.ItemSelected += (object sender, SpinnerEventArgs<string> args) => 
-            {
-                string res = args.Item;
-                if (res == "Any")
-                    Settings.SitesFilter.DateFilter = E_DateFilter.AllDays;
-                else if (res == "Today")
-                    Settings.SitesFilter.DateFilter = E_DateFilter.Today;
-                else if (res == "Tomorrow")
-                    Settings.SitesFilter.DateFilter = E_DateFilter.Tomorrow;
-                else
+                void p()
                 {
-                    int ix = DateValues.IndexOf(res);
-                    switch (ix)
+                    // we don't need to log in any local user since that was done in the sitesmap screen
+                    bool hasMobile =
+                        (Global.LoggedInUserId != -1)
+                        && (LoggedInUser != null)
+                        && LoggedInUser.HasVolunteer
+                        && LoggedInUser.HasMobile;
+
+                    CB_Mobile.Visibility = hasMobile ? ViewStates.Visible : ViewStates.Invisible;
+
+                    // populate the selector for the dates and preselect the current value
+                    DateValues = new List<string> { "Any", "Today", "Tomorrow" };
+                    for (int i = 2; i != 7; i++)
                     {
-                        case 3: Settings.SitesFilter.DateFilter = E_DateFilter.TodayP2; break;
-                        case 4: Settings.SitesFilter.DateFilter = E_DateFilter.TodayP3; break;
-                        case 5: Settings.SitesFilter.DateFilter = E_DateFilter.TodayP4; break;
-                        case 6: Settings.SitesFilter.DateFilter = E_DateFilter.TodayP5; break;
-                        case 7: Settings.SitesFilter.DateFilter = E_DateFilter.TodayP6; break;
+                        C_YMD d = C_YMD.Now.AddDays(i);
+                        DateValues.Add(d.ToString("dow mmm dd, yyyy"));
                     }
+
+                    DateValuesSpinner = new C_SPinnerHelper<string>(this, SP_Dates, DateValues);
+                    int dfix = (int)Settings.SitesFilter.DateFilter;
+                    DateValuesSpinner.SetValue(DateValues[dfix]);
+                    DateValuesSpinner.ItemSelected += (object sender, SpinnerEventArgs<string> args) =>
+                    {
+                        string res = args.Item;
+                        if (res == "Any")
+                            Settings.SitesFilter.DateFilter = E_DateFilter.AllDays;
+                        else if (res == "Today")
+                            Settings.SitesFilter.DateFilter = E_DateFilter.Today;
+                        else if (res == "Tomorrow")
+                            Settings.SitesFilter.DateFilter = E_DateFilter.Tomorrow;
+                        else
+                        {
+                            int ix = DateValues.IndexOf(res);
+                            switch (ix)
+                            {
+                                case 3: Settings.SitesFilter.DateFilter = E_DateFilter.TodayP2; break;
+                                case 4: Settings.SitesFilter.DateFilter = E_DateFilter.TodayP3; break;
+                                case 5: Settings.SitesFilter.DateFilter = E_DateFilter.TodayP4; break;
+                                case 6: Settings.SitesFilter.DateFilter = E_DateFilter.TodayP5; break;
+                                case 7: Settings.SitesFilter.DateFilter = E_DateFilter.TodayP6; break;
+                            }
+                        }
+                    };
+
+                    // set the values for the switches
+                    CB_Dropoff.Checked = Settings.SitesFilter.SiteCapabilityContains(E_CapabilitiesFilter.Virtual);
+                    CB_InPerson.Checked = Settings.SitesFilter.SiteCapabilityContains(E_CapabilitiesFilter.InPerson);
+                    CB_MFT.Checked = Settings.SitesFilter.SiteCapabilityContains(E_CapabilitiesFilter.MFT);
+                    CB_Express.Checked = Settings.SitesFilter.SiteCapabilityContains(E_CapabilitiesFilter.Express);
+
+                    CB_Mobile.Checked = Settings.SitesFilter.SiteCapabilityContains(E_CapabilitiesFilter.Mobile);
                 }
-            };
-
-            // set the values for the switches
-            CB_Dropoff.Checked = Settings.SitesFilter.SiteCapabilityContains(E_CapabilitiesFilter.DropOff);
-            CB_InPerson.Checked = Settings.SitesFilter.SiteCapabilityContains(E_CapabilitiesFilter.InPerson);
-            CB_MFT.Checked = Settings.SitesFilter.SiteCapabilityContains(E_CapabilitiesFilter.MFT);
-            CB_Express.Checked = Settings.SitesFilter.SiteCapabilityContains(E_CapabilitiesFilter.Express);
-
-            CB_Mobile.Checked = Settings.SitesFilter.SiteCapabilityContains(E_CapabilitiesFilter.Mobile);
+                RunOnUiThread(p);
+            });
         }
 
         public override void OnBackPressed() => 

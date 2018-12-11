@@ -1,6 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using UIKit;
+using static zsquared.C_MessageBox;
 
 using zsquared;
 
@@ -91,11 +92,18 @@ namespace vitavol
                     L_SiteName.Text = SelectedSite.Name;
 
                     CollectionViewHelper = new C_CVHelper(C_Common.StandardBackground, CV_Grid, DateState, null, false);
-                    CollectionViewHelper.DateTouched += (sender, e) =>
+                    CollectionViewHelper.DateTouched += async (sender, e) =>
                     {
                         C_DateTouchedEventArgs ea = e;
                         Global.CalendarDate = ea.Date;
-                        PerformSegue("Segue_SiteCalendarToSiteCalOnDate", this);
+                        //PerformSegue("Segue_SiteCalendarToSiteCalOnDate", this);
+
+                        C_CalendarEntry ce = SelectedSite.GetCalendarEntryForDate(Global.CalendarDate);
+                        string msg = "On " + ce.Date.ToString("mmm dd, yyyy") + " the ";
+                        msg += ce.SiteIsOpen ? "site is Open:\n" : "Site is Closed";
+                        if (ce.SiteIsOpen)
+                            msg += ce.OpenTime.ToString("hh:mm p") + " to " + ce.CloseTime.ToString("hh:mm p");
+                        E_MessageBoxResults mbres = await MessageBox(this, SelectedSite.Name, msg, E_MessageBoxButtons.Ok);
                     };
                 }));
             });

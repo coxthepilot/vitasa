@@ -9,5 +9,6 @@
         public string Date;
         public string Note;
         public C_CalendarEntry CalendarEntry;
+        public E_ViewCameFrom CameFrom;
     }
 }

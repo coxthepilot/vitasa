@@ -44,32 +44,56 @@ namespace vitavol
 
             B_Back.TouchUpInside += async (sender, e) => 
             {
-                if (Dirty)
+                if (!Dirty)
+                    PerformSegue("Segue_AdminSiteCalDetailsToAdminSiteCalendar", this);
+
+                E_MessageBoxResults mbres = await MessageBox(this,
+                    "Changes",
+                    "Changes have been made. Save the changes?",
+                     E_MessageBoxButtons.YesNoCancel);
+
+                if (mbres == E_MessageBoxResults.Cancel)
+                    return;
+
+                if (mbres != E_MessageBoxResults.Yes)
                 {
-                    E_MessageBoxResults mbres = await MessageBox(this,
-                        "Changes",
-                        "Changes have been made. Save the changes?",
-                         E_MessageBoxButtons.YesNoCancel);
-                    if (mbres == E_MessageBoxResults.Yes)
-                    {
-                        SaveCalDetails();
-                        PerformSegue("Segue_AdminSiteCalDetailsToAdminSiteCalendar", this);
-                    }
-                    else if (mbres == E_MessageBoxResults.No)
-                    {
-                        PerformSegue("Segue_AdminSiteCalDetailsToAdminSiteCalendar", this);
-                    }
-                    // else cancel, just ignore
+                    PerformSegue("Segue_AdminSiteCalDetailsToAdminSiteCalendar", this);
+                    return;
+                }
+
+                AI_Busy.StartAnimating();
+
+                bool error = await SaveCalDetails();
+
+                AI_Busy.StopAnimating();
+
+                if (error) 
+                {
+                    E_MessageBoxResults mbres1 = await MessageBox(this,
+                                "Error",
+                                "Unable to save the changes.",
+                                  E_MessageBoxButtons.Ok);
                 }
                 else
                     PerformSegue("Segue_AdminSiteCalDetailsToAdminSiteCalendar", this);
             };
 
-            B_Save.TouchUpInside += (sender, e) => 
+            B_Save.TouchUpInside += async (sender, e) => 
             {
-                SaveCalDetails();
+                AI_Busy.StartAnimating();
+                
+                bool error = await SaveCalDetails();
 
-                PerformSegue("Segue_AdminSiteCalDetailsToAdminSiteCalendar", this);
+                AI_Busy.StopAnimating();
+                if (error)
+                {
+                    E_MessageBoxResults mbres1 = await MessageBox(this,
+                                "Error",
+                                "Unable to save the changes.",
+                                  E_MessageBoxButtons.Ok);
+                }
+                else
+                    PerformSegue("Segue_AdminSiteCalDetailsToAdminSiteCalendar", this);
             };
 
             TB_OpenTime.AddTarget((sender, e) => { Dirty = true; Global.SelectedSiteTemp.Dirty = true; }, UIControlEvent.AllEditingEvents);
@@ -111,11 +135,15 @@ namespace vitavol
             CloseTimePicker.SetValue(SelectedCalendarEntry.CloseTime);
         }
 
-        private void SaveCalDetails()
+        private async Task<bool> SaveCalDetails()
         {
             SelectedCalendarEntry.SiteIsOpen = SW_Open.On;
             SelectedCalendarEntry.OpenTime = new C_HMS(TB_OpenTime.Text);
             SelectedCalendarEntry.CloseTime = new C_HMS(TB_CloseTime.Text);
+
+            C_IOResult ior = await Global.UpdateCalendarEntry(SelectedSite, LoggedInUser.Token, SelectedCalendarEntry);
+
+            return !ior.Success;
         }
     }
 }

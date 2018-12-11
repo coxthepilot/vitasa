@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 
 using zsquared;
+using static zsquared.C_MessageBox;
 
 namespace vitavol
 {
@@ -44,16 +45,20 @@ namespace vitavol
 
             Task.Run(async () => 
             {
+                List<C_VitaUser> users = await Global.FetchAllUsers(LoggedInUser.Token);
+
                 List<C_Suggestion> suggestions = await Global.FetchAllSuggestions(LoggedInUser.Token);
 
-                // make sure the users that have sent suggestions are in the user cache
-                foreach(C_Suggestion sug in suggestions)
-                {
-                    if (!sug.FromPublic && (sug.id >= 0))
-                    {
-                        C_VitaUser u = await Global.FetchUserWithId(sug.id);
-                    }
-                }
+                // removed after the release of 2.0
+                //// make sure the users that have sent suggestions are in the user cache
+                //foreach(C_Suggestion sug in suggestions)
+                //{
+                //    if (!sug.FromPublic && (sug.id >= 0))
+                //    {
+                //        C_VitaUser u = await Global.FetchUserWithId(sug.id);
+                //    }
+                //}
+                suggestions.Sort(C_Suggestion.CompareByDateReverse);
 
                 void p()
                 {
@@ -71,8 +76,9 @@ namespace vitavol
                         C_Suggestion sug = args.Item;
                         C_VitaUser u = null;
                         if (!sug.FromPublic)
-                            u = Global.GetUserFromCacheNoFetch(sug.id);
-                        string from = sug.FromPublic ? "public" : u.Name;
+                            u = Global.GetUserFromCacheNoFetch(sug.UserId);
+                        string uname = u == null ? "" : u.Name;
+                        string from = sug.FromPublic ? "public" : uname;
 
                         return sug.CreateDate.ToString("dow mmm dd, yyyy") + " [" + from + "]";
                     };
@@ -81,6 +87,27 @@ namespace vitavol
                         C_Suggestion sug = args.Item;
                         Global.SelectedSuggestion = sug;
                         PerformSegue("Segue_AdminSuggestionsToAdminSuggestion", this);
+                    };
+                    SuggestionsTableSource.DeleteAllowed += (object sender, C_TableSource<C_Suggestion>.TableSourceEventArgs<C_Suggestion> args) => 
+                    {
+                        return true;
+                    };
+                    SuggestionsTableSource.Delete += (object sender, C_TableSource<C_Suggestion>.TableSourceEventArgs<C_Suggestion> args) => 
+                    {
+                        C_Suggestion sugg = args.Item;
+
+                        Task.Run(async () =>
+                        {
+                            C_IOResult ior = await Global.RemoveSuggestion(sugg, LoggedInUser.Token);
+
+                            if (!ior.Success)
+                            {
+                                E_MessageBoxResults mbresx = await MessageBox(this,
+                                    "Error",
+                                    "Unable to delete the suggestion.",
+                                    E_MessageBoxButtons.Ok);
+                            }
+                        });
                     };
                     TV_Suggestions.Source = SuggestionsTableSource;
                     TV_Suggestions.ReloadData();

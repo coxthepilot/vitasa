@@ -67,7 +67,7 @@ namespace a_vitavol
                 int ix = e.Position;
                 Global.SelectedDOW = DOWList[ix];
                 C_CalendarEntry ce = Global.DOWCalendar[ix];
-                Global.ViewCameFrom = E_ViewCameFrom.AdminSiteCalReset;
+                //Global.ViewCameFrom = E_ViewCameFrom.AdminSiteCalReset;
                 Global.CalendarDateDetails = new C_CalendarDateDetails()
                 {
                     SaveAction = E_CalendarDateDetailsSaveAction.None,
@@ -75,7 +75,8 @@ namespace a_vitavol
                     SiteName = Global.SelectedSiteTemp.Name,
                     Date = Global.SelectedDOW.ToString(),
                     Note = null,
-                    CalendarEntry = ce
+                    CalendarEntry = ce,
+                    CameFrom = E_ViewCameFrom.AdminSiteCalReset
                 };
                 StartActivity(new Intent(this, typeof(A_CalendarDateDetails)));
             };

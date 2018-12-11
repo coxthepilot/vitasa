@@ -8,6 +8,7 @@ using Android.Widget;
 using Android.OS;
 using Android.Content;
 using Android.Views;
+using Android.Graphics;
 
 using zsquared;
 
@@ -26,7 +27,7 @@ namespace a_vitavol
         ProgressBar PB_Busy;
         Button B_Done;
 
-        C_GVHelper GVHelper;
+        C_GVHelper2 GVHelper;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -67,9 +68,8 @@ namespace a_vitavol
                 sites = ou.ToList();
                 sites.Sort(C_VitaSite.CompareSitesByNameAscending);
 
-                C_DateDetails[] detailsx = BuildDateStateArray(Global.CalendarDate, sites);
-                C_DateDetails[] dayDetailsx = BuildDayStateArray();
-                GVHelper.SetNewDateDetails(detailsx, dayDetailsx);
+                C_DateDetails2[] detailsx = BuildDateStateArray2(Global.CalendarDate, sites);
+                GVHelper.SetNewDateDetails(detailsx);
             };
 
             B_MonthPrev.Click += (sender, e) =>
@@ -86,9 +86,8 @@ namespace a_vitavol
                 sites = ou.ToList();
                 sites.Sort(C_VitaSite.CompareSitesByNameAscending);
 
-                C_DateDetails[] detailsx = BuildDateStateArray(Global.CalendarDate, sites);
-                C_DateDetails[] dayDetailsx = BuildDayStateArray();
-                GVHelper.SetNewDateDetails(detailsx, dayDetailsx);
+                C_DateDetails2[] detailsx = BuildDateStateArray2(Global.CalendarDate, sites);
+                GVHelper.SetNewDateDetails(detailsx);
             };
 
             PB_Busy.Visibility = ViewStates.Visible;
@@ -106,21 +105,10 @@ namespace a_vitavol
                     PB_Busy.Visibility = ViewStates.Gone;
                     EnableUI(true);
 
-                    C_DateDetails[] details = BuildDateStateArray(Global.CalendarDate, sites);
-                    C_DateDetails[] dayDetails = BuildDayStateArray();
-                    GVHelper = new C_GVHelper(this, GV_Calendar);
+                    C_DateDetails2[] details = BuildDateStateArray2(Global.CalendarDate, sites);
 
-                    GVHelper.SetResourceID(C_GVHelper.ID_Background, Resource.Drawable.background);
-                    GVHelper.SetResourceID(C_GVHelper.ID_OpenWithNeeds, Resource.Drawable.openwithneeds);
-                    GVHelper.SetResourceID(C_GVHelper.ID_OpenWithNeedsBoxed, Resource.Drawable.openwithneedsboxed);
-                    GVHelper.SetResourceID(C_GVHelper.ID_OpenNoNeeds, Resource.Drawable.opennoneeds);
-                    GVHelper.SetResourceID(C_GVHelper.ID_OpenNoNeedsBoxed, Resource.Drawable.opennoneedsboxed);
-                    GVHelper.SetResourceID(C_GVHelper.ID_Closed, Resource.Drawable.closed);
-                    GVHelper.SetResourceID(C_GVHelper.ID_ClosedBoxed, Resource.Drawable.closedboxed);
-                    GVHelper.SetResourceID(C_GVHelper.ID_GridCell, Resource.Layout.GridCell);
-                    GVHelper.SetResourceID(C_GVHelper.ID_GridCellText, Resource.Id.L_Cell);
-
-                    GVHelper.SetNewDateDetails(details, dayDetails);
+                    GVHelper = new C_GVHelper2(this, GV_Calendar);
+                    GVHelper.SetNewDateDetails(details);
                     GVHelper.DateTouched += GVHelper_DateTouched;
 
                     L_MonthYear.Text = Global.CalendarDate.ToString("mmm-yyyy");
@@ -129,7 +117,11 @@ namespace a_vitavol
             });
         }
 
-        public override void OnBackPressed() => GoBack();
+        public override void OnBackPressed()
+        {
+            if (UIIsEnabled)
+                GoBack();
+        }
 
         private void GoBack()
         {
@@ -138,71 +130,37 @@ namespace a_vitavol
             else if (Global.ViewCameFrom == E_ViewCameFrom.VolOptions)
                 StartActivity(new Intent(this, typeof(A_VolHome)));
             else
-                throw new ApplicationException("Unknow view cam from");
+                throw new ApplicationException("Unknow view came from");
         }
 
         void GVHelper_DateTouched(object sender, C_DateTouchedEventArgs e)
         {
+            if (e.Date == null)
+                return;
+
             Global.CalendarDate = e.Date;
 
             StartActivity(new Intent(this, typeof(A_AdminMobileDate)));
         }
 
-        public C_DateDetails[] BuildDayStateArray()
-        {
-            C_DateDetails[] DayOfWeekState = new C_DateDetails[7];
-
-            for (int ix = 0; ix != 7; ix++)
-            {
-                C_DateDetails dayState = new C_DateDetails()
-                {
-                    Date = null,
-                    DayOfWeek = ix,
-
-                    DateType = E_DateType.Header,
-                    SiteState = E_SiteState.Background
-                };
-
-                DayOfWeekState[ix] = dayState;
-            }
-
-            return DayOfWeekState;
-        }
-
-        public C_DateDetails[] BuildDateStateArray(C_YMD Date, List<C_VitaSite> sites)
+        public C_DateDetails2[] BuildDateStateArray2(C_YMD Date, List<C_VitaSite> sites)
         {
             int daysInMonth = DateTime.DaysInMonth(Date.Year, Date.Month);
 
-            //C_YMD now = C_YMD.Now;
-
-            C_DateDetails[] DateState = new C_DateDetails[daysInMonth];
+            C_DateDetails2[] DateState = new C_DateDetails2[daysInMonth];
 
             // scan through the days to determine the state of that date
             for (int day = 1; day <= daysInMonth; day++)
             {
                 C_YMD ourDate = new C_YMD(Date.Year, Date.Month, day);
 
-                C_DateDetails dayState = new C_DateDetails()
-                {
-                    Date = ourDate,
-                    DayOfWeek = (int)ourDate.DayOfWeek,
-
-                    DateType = E_DateType.DayOfMonth,
-                    Boxed = false
-                };
-
-                // we are looking for
-                // - [bkgd]   no calendar event for any site (outside season)
-                // - [grey]   no mobile site has an appointment on this date
-                // - [orange] only one mobile site has an appointment
-                // - [green]  exactly 2 mobile sites have appointments that don't overlap
-                // - [green/boxed]    more than 2 one one day or 2 that overlap
+                C_DateDetails2 dayState = new C_DateDetails2(ourDate);
 
                 // build a list of all calendar entries for this date
                 List<C_CalendarEntry> calendarEntries = new List<C_CalendarEntry>();
-                foreach(C_VitaSite site in sites)
+                foreach (C_VitaSite site in sites)
                 {
-                    foreach(C_CalendarEntry ce in site.SiteCalendar)
+                    foreach (C_CalendarEntry ce in site.SiteCalendar)
                     {
                         if (ce.Date == ourDate)
                             calendarEntries.Add(ce);
@@ -210,26 +168,41 @@ namespace a_vitavol
                 }
 
                 if (calendarEntries.Count == 0)
-                    dayState.DateType = E_DateType.PastDate; // bkgd
+                {
+                    dayState.NormalColor = C_Common.Color_StandardBackground;
+                    dayState.TextColor = Color.White;
+                    dayState.CanClick = false;
+                }
                 else
                 {
                     // see how many are open
                     var ou = calendarEntries.Where(ce => ce.SiteIsOpen);
                     if (!ou.Any())
-                        dayState.SiteState = E_SiteState.Closed; // grey
+                    {
+                        dayState.NormalColor = C_Common.Color_NoSiteOpen;
+                        dayState.TextColor = Color.White;
+                        dayState.CanClick = false;
+                    }
                     else
                     {
                         List<C_CalendarEntry> ceOpenOnOurDate = ou.ToList();
                         if (ceOpenOnOurDate.Count == 1)
-                            dayState.SiteState = E_SiteState.OpenWithNeeds;
+                        {
+                            dayState.NormalColor = C_Common.Color_OneAppt;
+                            dayState.TextColor = Color.White;
+                        }
                         else
                         { // 2 or more
-                            if ((ceOpenOnOurDate.Count == 2) && !Overlap(ceOpenOnOurDate))
-                                dayState.SiteState = E_SiteState.OpenNoNeeds;
+                            if ((ceOpenOnOurDate.Count == 2) && !C_CalendarEntry.Overlap(ceOpenOnOurDate))
+                            {
+                                dayState.NormalColor = C_Common.Color_TwoAppt;
+                                dayState.TextColor = Color.White;
+                            }
                             else
                             {
-                                dayState.SiteState = E_SiteState.OpenNoNeeds;
-                                dayState.Boxed = true;
+                                dayState.NormalColor = C_Common.Color_BadAppt;
+                                dayState.TextColor = Color.White;
+                                dayState.ShowBox = true;
                             }
                         }
                     }
@@ -241,35 +214,10 @@ namespace a_vitavol
             return DateState;
         }
 
-        private bool Overlap(List<C_CalendarEntry> ceList)
-        {
-            bool res = false;
-            for (int ceix = 0; ceix != ceList.Count; ceix++)
-            {
-                C_CalendarEntry ce = ceList[ceix];
-
-                // with this one, see if any other entry overlaps
-                for (int cetix = 0; cetix != ceList.Count; cetix++)
-                {
-                    C_CalendarEntry cet = ceList[cetix];
-
-                    if (ceix != cetix)
-                    {
-                        res = ((ce.OpenTime >= cet.OpenTime) && (ce.OpenTime < cet.CloseTime))
-                            || ((ce.CloseTime > cet.OpenTime) && (ce.CloseTime <= cet.CloseTime));
-                    }
-                    if (res)
-                        break;
-                }
-                if (res)
-                    break;
-            }
-
-            return res;
-        }
-
+        bool UIIsEnabled;
         private void EnableUI(bool en)
         {
+            UIIsEnabled = en;
             B_MonthNext.Enabled = en;
             B_MonthPrev.Enabled = en;
             GV_Calendar.Enabled = en;

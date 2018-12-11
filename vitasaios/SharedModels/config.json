@@ -1,0 +1,10 @@
+﻿{
+  "sites_url": "https://volunteer-savvy.com/sites.json",
+  "hostname": "volunteer-savvy.com",
+  "offline" : "false",
+  "minimum-versions": {
+    "ios-vol-phone": "2.0",
+    "android-vol-phone": "1.4",
+    "ios-admin-tablet": "1.2"
+  }
+}

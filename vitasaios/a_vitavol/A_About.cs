@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Json;
-using System.IO;
+﻿using System.IO;
 
 using Android.App;
 using Android.Widget;
 using Android.OS;
-using Android.Content;
 using Android.Content.Res;
 using Android.Webkit;
-using Android.Views;
 
 using zsquared;
 

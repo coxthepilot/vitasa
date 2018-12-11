@@ -150,24 +150,34 @@ namespace a_vitavol
             };
             L_CloseTime.Text = Global.CalendarDateDetails.CalendarEntry.CloseTime.ToString("hh:mm p");
             SelectedCloseTime = Global.CalendarDateDetails.CalendarEntry.CloseTime;
+
+            EnableUI(true);
         }
 
+        bool UIIsEnabled;
         private void EnableUI(bool en)
         {
+            UIIsEnabled = en;
             CB_SiteIsOpen.Enabled = en && (Global.CalendarDateDetails.SaveAction != E_CalendarDateDetailsSaveAction.ReadOnly);
             B_OpenTime.Enabled = en && Global.CalendarDateDetails.CalendarEntry.SiteIsOpen && (Global.CalendarDateDetails.SaveAction != E_CalendarDateDetailsSaveAction.ReadOnly);
             B_CloseTime.Enabled = en && Global.CalendarDateDetails.CalendarEntry.SiteIsOpen && (Global.CalendarDateDetails.SaveAction != E_CalendarDateDetailsSaveAction.ReadOnly);
             B_Save.Enabled = en && (Global.CalendarDateDetails.SaveAction != E_CalendarDateDetailsSaveAction.ReadOnly);
         }
 
-        public override void OnBackPressed() =>
-            GoBack();
+        public override void OnBackPressed()
+        {
+            if (UIIsEnabled)
+                GoBack();
+        }
 
         private void GoBack()
         {
             Intent intent = null;
-            switch (Global.ViewCameFrom)
+            switch (Global.CalendarDateDetails.CameFrom)
             {
+                case E_ViewCameFrom.AdminMobileDate:
+                    intent = new Intent(this, typeof(A_AdminMobileDate));
+                    break;
                 case E_ViewCameFrom.SCSite:
                     intent = new Intent(this, typeof(A_SCSite));
                     break;
@@ -180,11 +190,8 @@ namespace a_vitavol
                 case E_ViewCameFrom.SiteCalendar:
                     intent = new Intent(this, typeof(A_SiteCalendar));
                     break;
-                case E_ViewCameFrom.AdminMobileDate:
-                    intent = new Intent(this, typeof(A_AdminMobileDate));
-                    break;
                 default:
-                    throw new ApplicationException("unknown view from value");
+                    throw new ApplicationException("unknown view came from value");
             }
 
             if (intent != null)

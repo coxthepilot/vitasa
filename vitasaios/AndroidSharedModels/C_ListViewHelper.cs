@@ -67,7 +67,7 @@ namespace zsquared
 
             T t = Items[position];
 
-            view.SetBackgroundColor(C_Common.StandardBackground);
+            view.SetBackgroundColor(C_Common.Color_StandardBackground);
 
             string text1 = "";
             if (GetTextLabel != null)

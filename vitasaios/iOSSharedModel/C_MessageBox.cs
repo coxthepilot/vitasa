@@ -36,4 +36,39 @@ namespace zsquared
 			return taskCompletionSource.Task;
         }
     }
+
+    public class C_AlertBox
+    {
+        private UIAlertController Alert;
+        private readonly UIViewController Parent;
+
+        public C_AlertBox(UIViewController parent, string title, string message)
+        {
+            Parent = parent;
+
+            Alert = UIAlertController.Create(title, message, UIAlertControllerStyle.Alert);
+            if (Alert.PopoverPresentationController != null)
+            {
+                Alert.PopoverPresentationController.SourceView = Parent.View;
+                Alert.PopoverPresentationController.SourceRect = Parent.View.Bounds;
+            }
+        }
+
+        public void Show()
+        {
+            Parent.PresentViewController(Alert, true, null);
+        }
+
+        public void SetMessage(string m)
+        {
+            Alert.Message = m;
+        }
+
+        public async Task<bool> Hide() 
+        {
+            await Parent.DismissViewControllerAsync(false);
+
+            return true;
+        }
+    }
 }

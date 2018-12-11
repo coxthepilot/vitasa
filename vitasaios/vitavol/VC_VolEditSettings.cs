@@ -11,6 +11,7 @@ namespace vitavol
     {
         C_Global Global;
         C_VitaUser LoggedInUser;
+        C_PersistentSettings Settings;
 
         public VC_VolEditSettings (IntPtr handle) : base (handle)
         {
@@ -23,48 +24,37 @@ namespace vitavol
             AppDelegate myAppDelegate = (AppDelegate)UIApplication.SharedApplication.Delegate;
             Global = myAppDelegate.Global;
             LoggedInUser = Global.GetUserFromCacheNoFetch(Global.LoggedInUserId);
+            Settings = new C_PersistentSettings();
+
+            UITapGestureRecognizer labelTap = new UITapGestureRecognizer(() =>
+            {
+                C_Common.DropFirstResponder(View);
+            });
+
+            L_Title.UserInteractionEnabled = true;
+            L_Title.AddGestureRecognizer(labelTap);
 
             B_Back.TouchUpInside += (sender, e) =>
-                GoBack();
-
-            B_Cancel.TouchUpInside += (sender, e) =>
                 GoBack();
 
             B_Save.TouchUpInside += (sender, e) => 
             {
                 LoggedInUser = Global.GetUserFromCacheNoFetch(Global.LoggedInUserId);
 
-                C_JsonBuilder jb = new C_JsonBuilder();
+                LoggedInUser.Name = TB_Name.Text;
+                LoggedInUser.Email = TB_Email.Text;
+                LoggedInUser.Phone = TB_Phone.Text;
 
-                if (TB_Name.Text != LoggedInUser.Name)
-                {
-                    jb.Add(TB_Name.Text, C_VitaUser.N_Name);
-                    LoggedInUser.Name = TB_Name.Text;
-                }
-                if ((LoggedInUser.Email != TB_Email.Text) && Tools.EmailAddressIsValid(TB_Email.Text))
-                {
-                    jb.Add(TB_Email.Text, C_VitaUser.N_Email);
-                    LoggedInUser.Email = TB_Email.Text;
-                }
-                if (LoggedInUser.Phone != TB_Phone.Text)
-                {
-                    jb.Add(TB_Phone.Text, C_VitaUser.N_Phone);
-                    LoggedInUser.Phone = TB_Phone.Text;
-                }
                 if (!string.IsNullOrWhiteSpace(TB_Password.Text) 
-                    && (TB_Password.Text == TB_PasswordVerify.Text)
-                    && (TB_Password.Text.Length > 7))
-                {
-                    jb.Add(TB_Password.Text, C_VitaUser.N_Password);
-                    jb.Add(TB_Password.Text, C_VitaUser.N_PasswordConfirmation);
-                }
+                    && (TB_Password.Text == TB_PasswordVerify.Text) && (TB_Password.Text.Length > 7))
+                    LoggedInUser.Password = TB_Password.Text;
 
                 AI_Busy.StartAnimating();
                 EnableUI(false);
 
                 Task.Run(async () => 
                 {
-                    C_IOResult ior = await Global.UpdateUserFields(jb, LoggedInUser, LoggedInUser.Token);
+                    C_IOResult ior = await Global.UpdateUserFields(LoggedInUser.ToJsonAsJsonBuilder(), LoggedInUser, LoggedInUser.Token);
 
                     async void p()
                     {
@@ -79,11 +69,17 @@ namespace vitavol
                                 E_MessageBoxButtons.Ok);
                         }
                         else
+                        {
+                            // update the local copy of the email and password in case they changed
+                            Settings.UserEmail = LoggedInUser.Email;
+                            if (!string.IsNullOrWhiteSpace(TB_Password.Text)
+                                            && (TB_Password.Text == TB_PasswordVerify.Text) && (TB_Password.Text.Length > 7))
+                                Settings.UserPassword = LoggedInUser.Password;
                             GoBack();
+                        }
                     }
                     UIApplication.SharedApplication.InvokeOnMainThread(p);
                 });
-
             };
 
             TB_Name.AddTarget(SomeTextFieldChanged, UIControlEvent.AllEditingEvents);

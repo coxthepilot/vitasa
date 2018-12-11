@@ -28,15 +28,15 @@ namespace vitavol
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UIButton B_GoToSiteCalendar { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UIButton B_MarkAsApproved { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UILabel L_SiteName { get; set; }
-
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UITextField TB_Date { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
@@ -59,6 +59,11 @@ namespace vitavol
                 B_Back = null;
             }
 
+            if (B_GoToSiteCalendar != null) {
+                B_GoToSiteCalendar.Dispose ();
+                B_GoToSiteCalendar = null;
+            }
+
             if (B_MarkAsApproved != null) {
                 B_MarkAsApproved.Dispose ();
                 B_MarkAsApproved = null;
@@ -67,11 +72,6 @@ namespace vitavol
             if (L_SiteName != null) {
                 L_SiteName.Dispose ();
                 L_SiteName = null;
-            }
-
-            if (TB_Date != null) {
-                TB_Date.Dispose ();
-                TB_Date = null;
             }
 
             if (TV_WorkLogItems != null) {

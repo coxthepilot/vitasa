@@ -13,7 +13,7 @@ namespace a_vitavol
     [Activity(Theme = "@android:style/Theme.DeviceDefault.NoActionBar", Label = "A_AdminMenu")]
     public class A_AdminMenu : Activity
     {
-        enum E_AdminMenu { Users, Sites, Notifications, Suggestions, Mobile, NewUserEmail, NewFeedbackEmail, Settings }
+        enum E_AdminMenu { Users, Sites, Notifications, Suggestions, Mobile, Settings }
 
         C_Global Global;
 
@@ -41,7 +41,7 @@ namespace a_vitavol
             B_Logout = FindViewById<Button>(Resource.Id.B_Logout);
 
             C_Common.SetViewColors(this, Resource.Id.V_AdminMenu);
-            B_Logout.SetBackgroundColor(C_Common.LogoutButton);
+            B_Logout.SetBackgroundColor(C_Common.Color_LogoutButton);
 
             MainMenu = new List<E_AdminMenu>();
             foreach (E_AdminMenu eam in Enum.GetValues(typeof(E_AdminMenu)))
@@ -82,18 +82,18 @@ namespace a_vitavol
                     case E_AdminMenu.Settings:
                         newIntent = new Intent(this, typeof(A_VolEditSettings));
                         break;
-                    case E_AdminMenu.NewFeedbackEmail:
-                        newIntent = new Intent(this, typeof(A_AdminEmailDistroMgmt));
-                        Bundle b = new Bundle();
-                        b.PutString("emailtype", "feedback");
-                        newIntent.PutExtras(b);
-                        break;
-                    case E_AdminMenu.NewUserEmail:
-                        newIntent = new Intent(this, typeof(A_AdminEmailDistroMgmt));
-                        Bundle b1 = new Bundle();
-                        b1.PutString("emailtype", "newuser");
-                        newIntent.PutExtras(b1);
-                        break;
+                    //case E_AdminMenu.NewFeedbackEmail:
+                    //    newIntent = new Intent(this, typeof(A_AdminEmailDistroMgmt));
+                    //    Bundle b = new Bundle();
+                    //    b.PutString("emailtype", "feedback");
+                    //    newIntent.PutExtras(b);
+                    //    break;
+                    //case E_AdminMenu.NewUserEmail:
+                        //newIntent = new Intent(this, typeof(A_AdminEmailDistroMgmt));
+                        //Bundle b1 = new Bundle();
+                        //b1.PutString("emailtype", "newuser");
+                        //newIntent.PutExtras(b1);
+                        //break;
                     case E_AdminMenu.Mobile:
                         newIntent = new Intent(this, typeof(A_AdminMobile));
                         break;

@@ -19,6 +19,7 @@ namespace a_vitavol
         ProgressBar PB_Busy;
         Button B_Save;
         ListView LV_Sites;
+        TextView L_Name;
 
         bool Dirty;
 
@@ -39,6 +40,7 @@ namespace a_vitavol
             PB_Busy = FindViewById<ProgressBar>(Resource.Id.PB_Busy);
             B_Save = FindViewById<Button>(Resource.Id.B_Save);
             LV_Sites = FindViewById<ListView>(Resource.Id.LV_Sites);
+            L_Name = FindViewById<TextView>(Resource.Id.L_Name);
 
             C_Common.SetViewColors(this, Resource.Id.V_AdminUserSites);
 
@@ -56,6 +58,7 @@ namespace a_vitavol
             };
 
             PB_Busy.Visibility = Android.Views.ViewStates.Visible;
+            EnableUI(false);
 
             Task.Run(async () =>
             {
@@ -77,8 +80,11 @@ namespace a_vitavol
 
                 void p()
                 {
+                    L_Name.Text = Global.SelectedUserTemp.Name;
                     PB_Busy.Visibility = Android.Views.ViewStates.Gone;
+                    EnableUI(true);
 
+                    SitesCoordinated.Sort(C_SiteCoordinated.CompareByNameToLower);
                     SitesCoordinatedListViewHelper = new C_ListViewHelper<C_SiteCoordinated>(this, LV_Sites, SitesCoordinated);
                     SitesCoordinatedListViewHelper.GetTextLabel += (sender, args) =>
                     {
@@ -108,8 +114,19 @@ namespace a_vitavol
             });
         }
 
+        bool UIIsEnabled;
+        private void EnableUI(bool en)
+        {
+            UIIsEnabled = en;
+            B_Save.Enabled = en;
+            LV_Sites.Enabled = en;
+        }
+
         public override void OnBackPressed()
         {
+            if (!UIIsEnabled)
+                return;
+
             if (!Dirty)
             {
                 StartActivity(new Intent(this, typeof(A_AdminUser)));

@@ -34,10 +34,13 @@ namespace a_vitavol
         GoogleApiClient apiClient;
 
         Button B_Filter;
+        Button B_Services;
 
         List<C_VitaSite> SelectedSites;
 
         C_PersistentSettings Settings;
+
+        C_AlertBox AlertBox;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -53,13 +56,21 @@ namespace a_vitavol
             SetContentView(Resource.Layout.SitesMap);
 
             B_Filter = FindViewById<Button>(Resource.Id.B_Filter);
+            B_Services = FindViewById<Button>(Resource.Id.B_Services);
 
             C_Common.SetViewColors(this, Resource.Id.V_SitesMap);
 
             B_Filter.Click += (sender, e) => 
                 StartActivity(new Intent(this, typeof(A_SitesFilter)));
 
+            B_Services.Click += (sender, e) =>
+                StartActivity(new Intent(this, typeof(A_SitesFilter)));
+
             SelectedSites = new List<C_VitaSite>();
+
+            EnableUI(false);
+            AlertBox = new C_AlertBox(this, "", "Loading site information...");
+            AlertBox.Show();
 
             Task.Run(async () => 
             {
@@ -81,6 +92,11 @@ namespace a_vitavol
                             {
                                 Global.LoggedInUserId = ior.User.id;
                                 Global.SelectedUser = ior.User;
+
+                                Settings.PreferedSites = new List<string>();
+                                foreach (string ps in ior.User.PreferredSiteSlugs)
+                                    Settings.AddPreferedSite(ps);
+                                Settings.Save();
                             }
                         }
                     }
@@ -91,22 +107,32 @@ namespace a_vitavol
                     && Global.SelectedUser.HasVolunteer
                     && Global.SelectedUser.HasMobile;
 
-                    if (((Global.LoggedInUserId == -1) || (Global.SelectedUser == null))
-                        && Settings.SitesFilter.SiteCapabilityContains(E_CapabilitiesFilter.Mobile))
+                    // this is for the case where a mobile user was signed in and another signin happens without
+                    //  mobile, then we need to ensure that the mobile filter is off
+                    if (!hasMobile)
                     {
                         Settings.SitesFilter.RemoveSiteCapability(E_CapabilitiesFilter.Mobile);
                         if (Settings.SitesFilter.SiteCapabilitiesCount == 0)
                             Settings.SitesFilter.AddSiteCapability(E_CapabilitiesFilter.Any);
                     }
 
+
+                    //if (((Global.LoggedInUserId == -1) || (Global.SelectedUser == null))
+                    //    && Settings.SitesFilter.SiteCapabilityContains(E_CapabilitiesFilter.Mobile))
+                    //{
+                    //    Settings.SitesFilter.RemoveSiteCapability(E_CapabilitiesFilter.Mobile);
+                    //    if (Settings.SitesFilter.SiteCapabilitiesCount == 0)
+                    //        Settings.SitesFilter.AddSiteCapability(E_CapabilitiesFilter.Any);
+                    //}
+
                     // find the sites that match our filter
                     SelectedSites = Global.GetSitesUsingFilterNoFetch(Settings.SitesFilter, hasMobile);
 
-                    // set the flag so that the pin maker will set the appropriate color for a preferred site
-                    //List<string> preferredSiteSlugs = C_PreferredSites.GetPreferredSites(this);
-                    List<string> preferredSiteSlugs = Settings.PreferedSites;
-                    foreach (C_VitaSite site in SelectedSites)
-                        site.PreferredSite = preferredSiteSlugs.Contains(site.Slug);
+                    //// set the flag so that the pin maker will set the appropriate color for a preferred site
+                    ////List<string> preferredSiteSlugs = C_PreferredSites.GetPreferredSites(this);
+                    //List<string> preferredSiteSlugs = Settings.PreferedSites;
+                    //foreach (C_VitaSite site in SelectedSites)
+                        //sitePreferredSite = preferredSiteSlugs.Contains(site.Slug);
 
                     if (C_GooglePlayHelper.IsGooglePlayServicesInstalled(this))
                     {
@@ -122,8 +148,21 @@ namespace a_vitavol
 
                 void p()
                 {
-                    string buttontext = Settings.SitesFilter.FilterIsActive() ? "Filter Active" : "Set Filter";
-                    B_Filter.SetText(buttontext, TextView.BufferType.Normal);
+                    AlertBox.Hide();
+                    EnableUI(true);
+
+                    string filterButtonTitle = Settings.SitesFilter.DateFilter.ToString();
+                    if (Settings.SitesFilter.DateFilter == E_DateFilter.AllDays)
+                        filterButtonTitle = "All Days";
+                    else if ((Settings.SitesFilter.DateFilter != E_DateFilter.Today)
+                        && (Settings.SitesFilter.DateFilter != E_DateFilter.Tomorrow))
+                        filterButtonTitle = Settings.SitesFilter.GetDateForFilter().ToString("mmm dd, yyyy");
+                    B_Filter.SetText(filterButtonTitle, TextView.BufferType.Normal);
+
+                    string servicesString = Settings.SitesFilter.ServicesAsString();
+                    if (Settings.SitesFilter.SiteCapabilityContains(E_CapabilitiesFilter.Any))
+                        servicesString = "Services";
+                    B_Services.SetText(servicesString, TextView.BufferType.Normal);
 
                     InitMapFragment();
                 }
@@ -149,8 +188,17 @@ namespace a_vitavol
             _mapFragment.GetMapAsync(this);
         }
 
-        public override void OnBackPressed() =>
-            StartActivity(new Intent(this, typeof(MainActivity)));
+        bool UIIsEnabled;
+        private void EnableUI(bool en)
+        {
+            UIIsEnabled = en;
+        }
+
+        public override void OnBackPressed()
+        {
+            if (UIIsEnabled)
+                StartActivity(new Intent(this, typeof(MainActivity)));
+        }
 
         protected override void OnResume()
         {
@@ -166,8 +214,6 @@ namespace a_vitavol
 
             Task.Run(async () => 
             {
-                //Log.Debug("OnPause", "OnPause called, stopping location updates");
-
                 if (apiClient.IsConnected)
                 {
                     // stop location updates, passing in the LocationListener
@@ -188,7 +234,7 @@ namespace a_vitavol
             float lat = Settings.Latitude;
             float longi = Settings.Longitude;
 
-            Log.Debug("vita", "Map zoom: " + zoom.ToString() + " at: " + lat.ToString() + " / " + longi.ToString());
+            //Log.Debug("vita", "Map zoom: " + zoom.ToString() + " at: " + lat.ToString() + " / " + longi.ToString());
 
             // default starting location, center of San Antonio
             //LatLng location = new LatLng(29.415411, -98.4918232);
@@ -222,7 +268,8 @@ namespace a_vitavol
                     MarkerOptions markerOpt1 = new MarkerOptions();
                     markerOpt1.SetPosition(new LatLng(latitude, longitude));
                     markerOpt1.SetTitle(site.Name);
-                    BitmapDescriptor bmd = site.PreferredSite ?
+                    bool siteIsPrefered = Settings.IsPreferedSite(site.Slug);
+                    BitmapDescriptor bmd = siteIsPrefered ?
                                                BitmapDescriptorFactory.FromAsset("MarkerPinFlagBlack50.png") :
                                                BitmapDescriptorFactory.FromAsset("MarkerPinFlagGreen50.png");
                     markerOpt1.SetIcon(bmd);

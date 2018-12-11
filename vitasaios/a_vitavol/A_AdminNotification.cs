@@ -20,6 +20,7 @@ namespace a_vitavol
 
         ProgressBar PB_Busy;
         Button B_SaveAndSend;
+        Button B_Delete;
         Spinner SP_To;
         TextView L_LastSent;
         EditText TB_Message;
@@ -42,6 +43,7 @@ namespace a_vitavol
 
             PB_Busy = FindViewById<ProgressBar>(Resource.Id.PB_Busy);
             B_SaveAndSend = FindViewById<Button>(Resource.Id.B_SaveAndSend);
+            B_Delete = FindViewById<Button>(Resource.Id.B_Delete);
             SP_To = FindViewById<Spinner>(Resource.Id.SP_To);
             L_LastSent = FindViewById<TextView>(Resource.Id.L_LastSent);
             TB_Message = FindViewById<EditText>(Resource.Id.TB_Message);
@@ -92,6 +94,59 @@ namespace a_vitavol
                 });
             };
 
+            B_Delete.Click += (object sender, EventArgs e) => 
+            {
+                if (SelectedNotification.id == -1)
+                {
+                    Global.SelectedNotification = null;
+                    StartActivity(new Intent(this, typeof(A_AdminNotifications)));
+
+                    return;
+                }
+
+                Activity ourContext = this;
+                C_MessageBox mbox = new C_MessageBox(this,
+                    "Are you sure?",
+                    "This action will delete this Notification. There is NO UNDO.",
+                    E_MessageBoxButtons.YesNo);
+                mbox.Show();
+                mbox.Dismissed += (object sender1, C_MessageBoxEventArgs args) =>
+                {
+                    if (args.Result == E_MessageBoxResults.No)
+                        return;
+
+                    C_BusyBox bbox = new C_BusyBox(ourContext, "Deleting the Notification.");
+                    bbox.Show();
+                    EnableUI(false);
+
+                    Task.Run(async () => 
+                    {
+                        C_IOResult ior = await Global.RemoveNotification(SelectedNotification, LoggedInUser.Token);
+
+                        void p()
+                        {
+                            bbox.Hide();
+                            EnableUI(true);
+
+                            if (!ior.Success)
+                            {
+                                C_MessageBox mbox1 = new C_MessageBox(this,
+                                    "Error",
+                                    "One or more errors occurred. Notification not deleted.",
+                                    E_MessageBoxButtons.Ok);
+                                mbox1.Show();
+                            }
+                            else
+                            {
+                                Global.SelectedNotification = null;
+                                StartActivity(new Intent(this, typeof(A_AdminNotifications)));
+                            }
+                        }
+                        RunOnUiThread(p);
+                    });
+                };
+            };
+
             TB_Message.TextChanged += (object sender, Android.Text.TextChangedEventArgs e) => 
             {
                 B_SaveAndSend.Enabled = TB_Message.Text.Length > 0;
@@ -105,18 +160,24 @@ namespace a_vitavol
             L_LastSent.Text = "Last Sent: " + (SelectedNotification.SentDT == DateTime.MinValue ? "never" : SelectedNotification.SentDT.ToShortDateString());
             TB_Message.Text = SelectedNotification.Message;
 
+            EnableUI(true);
             B_SaveAndSend.Enabled = TB_Message.Text.Length > 0;
         }
 
+        bool UIIsEnabled;
         private void EnableUI(bool en)
         {
-            B_SaveAndSend.Enabled = en;
+            UIIsEnabled = en;
+            B_SaveAndSend.Enabled = TB_Message.Text.Length > 0;
             SP_To.Enabled = en;
             TB_Message.Enabled = en;
         }
 
         public override void OnBackPressed()
         {
+            if (!UIIsEnabled)
+                return;
+
             Global.SelectedNotification = null;
             StartActivity(new Intent(this, typeof(A_AdminNotifications)));
         }

@@ -114,10 +114,13 @@ namespace vitavol
 
                     sitescoord.Add(sc);
                 }
+                sitescoord.Sort(C_SiteCoordinated.CompareByNameToLower);
 
                 void p()
                 {
                     AI_Busy.StopAnimating();
+
+                    L_Name.Text = SelectedUser.Name;
 
                     SitesTableSource = new C_TableSource<C_SiteCoordinated>(this, TV_Sites, sitescoord, "sitesselcell");
                     SitesTableSource.IncludeSwitch += (sender, args) => 
@@ -138,7 +141,7 @@ namespace vitavol
                     };
                     SitesTableSource.SwitchValueChanged += (sender, args) => 
                     {
-                        args.Item.Include = true;
+                        args.Item.Include = args.SwitchState;
                         SelectedUser.Dirty = true;
                         Dirty = true;
                     };

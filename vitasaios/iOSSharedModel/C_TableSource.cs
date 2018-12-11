@@ -26,8 +26,6 @@ namespace zsquared
         public event ReturnBoolEventHandler IncludeSwitch;
         public event TableEventHandler SwitchValueChanged;
 
-        //public bool ShowIndex = false;
-
         public class TableSourceEventArgs<U> : EventArgs
         {
             public U Item;
@@ -59,8 +57,6 @@ namespace zsquared
         {
             UITableViewCell cell = tableView.DequeueReusableCell(CellIdentifier);
             //---- if there are no cells to reuse, create a new one ---
-            //if (cell == null)
-                //cell = new UITableViewCell(UITableViewCellStyle.Subtitle, CellIdentifier);
             if (cell == null)
                 cell = new CustomCell(CellIdentifier);
 
@@ -75,10 +71,6 @@ namespace zsquared
             cell.BackgroundColor = C_Common.StandardButton;
             cell.TextLabel.TextColor = UIColor.White;
             cell.DetailTextLabel.TextColor = UIColor.White;
-
-            //cell.BackgroundView.BackgroundColor = C_Common.StandardButton;
-            //cell.SelectedBackgroundView.BackgroundColor = C_Common.StandardButtonLight;
-            //cell.SelectionStyle = UITableViewCellSelectionStyle.
 
             if (IncludeSwitch != null)
             {
@@ -102,19 +94,15 @@ namespace zsquared
             return cell;
         }
 
-        public override void RowDeselected(UITableView tableView, NSIndexPath indexPath)
-        {
-            //UITableViewCell cell = TableView.CellAt(indexPath);
-            //cell.BackgroundColor = C_Common.StandardButton;
-        }
+        //public override void RowDeselected(UITableView tableView, NSIndexPath indexPath)
+        //{
+        //    //UITableViewCell cell = TableView.CellAt(indexPath);
+        //    //cell.BackgroundColor = C_Common.StandardButton;
+        //}
 
         public override void RowSelected(UITableView tableView, NSIndexPath indexPath)
         {
             T ce = List[indexPath.Row];
-
-            //UITableViewCell cell = TableView.CellAt(indexPath);
-            //cell.BackgroundView.BackgroundColor = C_Common.StandardButtonLight;
-            //cell.SelectedBackgroundView.BackgroundColor = C_Common.StandardButton;
 
             Selected?.Invoke(this, new TableSourceEventArgs<T>(ce, indexPath.Row));
         }
@@ -142,51 +130,6 @@ namespace zsquared
                 Delete?.Invoke(this, new TableSourceEventArgs<T>(ce, indexPath.Row));
             }
         }
-
-        //public override string[] SectionIndexTitles(UITableView tableView)
-        //{
-        //    if (!ShowIndex || (GetTextLabel == null))
-        //        return null;
-
-        //    List<string> index = new List<string>();
-        //    foreach(T t in List)
-        //    {
-        //        string l = GetTextLabel(this, new TableSourceEventArgs<T>(t));
-        //        if (l.Length > 0)
-        //        {
-        //            string fl = l.Substring(0, 1).ToLower();
-        //            if (!index.Contains(fl))
-        //                index.Add(fl);
-        //        }
-        //    }
-        //    index.Sort();
-
-        //    return index.ToArray();
-        //}
-
-        //// doesn't work; need to implement sections...sigh
-        //public override nint SectionFor(UITableView tableView, string title, nint atIndex)
-        //{
-        //    if (!ShowIndex || (GetTextLabel == null))
-        //        return 0;
-
-        //    string flit = title.Substring(0, 1).ToLower();
-
-        //    int ix = -1;
-        //    for (int x = 0; x != List.Count; x++)
-        //    {
-        //        T t = List[x];
-        //        string l = GetTextLabel(this, new TableSourceEventArgs<T>(t));
-        //        string flil = l.Substring(0, 1).ToLower();
-        //        if (flil == flit)
-        //        {
-        //            ix = x;
-        //            break;
-        //        }
-        //    }
-
-        //    return ix;
-        //}
 
         public class CustomCell : UITableViewCell
         {

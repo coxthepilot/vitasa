@@ -32,6 +32,14 @@ namespace vitavol
 
             SelectedNotification = Global.SelectedNotification ?? new C_Notification();
 
+            UITapGestureRecognizer labelTap = new UITapGestureRecognizer(() =>
+            {
+                C_Common.DropFirstResponder(View);
+            });
+
+            L_Title.UserInteractionEnabled = true;
+            L_Title.AddGestureRecognizer(labelTap);
+
             B_Back.TouchUpInside += (sender, e) =>
             {
                 Global.SelectedNotification = null;

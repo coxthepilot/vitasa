@@ -15,6 +15,7 @@ namespace vitavol
     public partial class VC_SitesFilter : UIViewController
     {
         C_Global Global;
+        C_VitaUser LoggedInUser;
         C_ItemPicker<string> DatePicker;
         C_PersistentSettings Settings;
 
@@ -28,6 +29,9 @@ namespace vitavol
 
             AppDelegate myAppDelegate = (AppDelegate)UIApplication.SharedApplication.Delegate;
             Global = myAppDelegate.Global;
+            LoggedInUser = null;
+            if (Global.LoggedInUserId != -1)
+                LoggedInUser = Global.GetUserFromCacheNoFetch(Global.LoggedInUserId);
 
             Settings = new C_PersistentSettings();
 
@@ -38,7 +42,7 @@ namespace vitavol
             {
                 Settings.SitesFilter.ClearSiteCapabilities();
                 if (SW_DropOff.On)
-                    Settings.SitesFilter.AddSiteCapability(E_CapabilitiesFilter.DropOff);
+                    Settings.SitesFilter.AddSiteCapability(E_CapabilitiesFilter.Virtual);
                 if (SW_InPersonPrep.On)
                     Settings.SitesFilter.AddSiteCapability(E_CapabilitiesFilter.InPerson);
                 if (SW_MFT.On)
@@ -62,57 +66,76 @@ namespace vitavol
             C_Common.SetUIColors(View);
             View.BackgroundColor = C_Common.StandardBackground;
 
-            // we don't need to log in any local user since that was done in the sitesmap screen
-            bool hasMobile =
-                (Global.LoggedInUserId != -1)
-                && (Global.SelectedUser != null)
-                && Global.SelectedUser.HasVolunteer
-                && Global.SelectedUser.HasMobile;
-
-            SW_Mobile.Hidden = !hasMobile;
-            L_Mobile.Hidden = !hasMobile;
-
-            // populate the selector for the dates and preselect the current value
-            List<string> dateValues = new List<string> { "Any", "Today", "Tomorrow" };
-            for (int i = 2; i != 7; i++)
+            Task.Run(async () => 
             {
-                C_YMD d = C_YMD.Now.AddDays(i);
-                dateValues.Add(d.ToString("dow mmm dd, yyyy"));
-            }
+                if (LoggedInUser == null)
+                    LoggedInUser = await Global.FetchUserWithId(Global.LoggedInUserId);
 
-            TB_Dates.Text = C_SitesFilter.GetFriendlyString(Settings.SitesFilter.DateFilter);
-            DatePicker = new C_ItemPicker<string>(TB_Dates, dateValues);
-            DatePicker.SetSelection(Settings.SitesFilter.DateFilter.ToString());
-            DatePicker.PickerDone += (sender, e) =>
-            {
-                string res = e.Selection;
-                if (res == "Any")
-                    Settings.SitesFilter.DateFilter = E_DateFilter.AllDays;
-                else if (res == "Today")
-                    Settings.SitesFilter.DateFilter = E_DateFilter.Today;
-                else if (res == "Tomorrow")
-                    Settings.SitesFilter.DateFilter = E_DateFilter.Tomorrow;
-                else
+                void p()
                 {
-                    int ix = dateValues.IndexOf(res);
-                    switch (ix)
+                    // we don't need to log in any local user since that was done in the sitesmap screen
+                    bool hasMobile =
+                        (Global.LoggedInUserId != -1)
+                        && (LoggedInUser != null)
+                        && LoggedInUser.HasVolunteer
+                        && LoggedInUser.HasMobile;
+
+                    // this is for the case where a mobile user was signed in and another signin happens without
+                    //  mobile, then we need to ensure that the mobile filter is off
+                    if (!hasMobile)
                     {
-                        case 3: Settings.SitesFilter.DateFilter = E_DateFilter.TodayP2; break;
-                        case 4: Settings.SitesFilter.DateFilter = E_DateFilter.TodayP3; break;
-                        case 5: Settings.SitesFilter.DateFilter = E_DateFilter.TodayP4; break;
-                        case 6: Settings.SitesFilter.DateFilter = E_DateFilter.TodayP5; break;
-                        case 7: Settings.SitesFilter.DateFilter = E_DateFilter.TodayP6; break;
+                        Settings.SitesFilter.RemoveSiteCapability(E_CapabilitiesFilter.Mobile);
+                        if (Settings.SitesFilter.SiteCapabilitiesCount == 0)
+                            Settings.SitesFilter.AddSiteCapability(E_CapabilitiesFilter.Any);
                     }
+
+                    SW_Mobile.Hidden = !hasMobile;
+                    L_Mobile.Hidden = !hasMobile;
+
+                    // populate the selector for the dates and preselect the current value
+                    List<string> dateValues = new List<string> { "Any", "Today", "Tomorrow" };
+                    for (int i = 2; i != 7; i++)
+                    {
+                        C_YMD d = C_YMD.Now.AddDays(i);
+                        dateValues.Add(d.ToString("dow mmm dd, yyyy"));
+                    }
+
+                    TB_Dates.Text = C_SitesFilter.GetFriendlyString(Settings.SitesFilter.DateFilter);
+                    DatePicker = new C_ItemPicker<string>(TB_Dates, dateValues);
+                    DatePicker.SetSelection(Settings.SitesFilter.DateFilter.ToString());
+                    DatePicker.PickerDone += (sender, e) =>
+                    {
+                        string res = e.Selection;
+                        if (res == "Any")
+                            Settings.SitesFilter.DateFilter = E_DateFilter.AllDays;
+                        else if (res == "Today")
+                            Settings.SitesFilter.DateFilter = E_DateFilter.Today;
+                        else if (res == "Tomorrow")
+                            Settings.SitesFilter.DateFilter = E_DateFilter.Tomorrow;
+                        else
+                        {
+                            int ix = dateValues.IndexOf(res);
+                            switch (ix)
+                            {
+                                case 3: Settings.SitesFilter.DateFilter = E_DateFilter.TodayP2; break;
+                                case 4: Settings.SitesFilter.DateFilter = E_DateFilter.TodayP3; break;
+                                case 5: Settings.SitesFilter.DateFilter = E_DateFilter.TodayP4; break;
+                                case 6: Settings.SitesFilter.DateFilter = E_DateFilter.TodayP5; break;
+                                case 7: Settings.SitesFilter.DateFilter = E_DateFilter.TodayP6; break;
+                            }
+                        }
+                    };
+
+                    // set the values for the switches
+                    SW_DropOff.On = Settings.SitesFilter.SiteCapabilityContains(E_CapabilitiesFilter.Virtual);
+                    SW_InPersonPrep.On = Settings.SitesFilter.SiteCapabilityContains(E_CapabilitiesFilter.InPerson);
+                    SW_MFT.On = Settings.SitesFilter.SiteCapabilityContains(E_CapabilitiesFilter.MFT);
+                    SW_Express.On = Settings.SitesFilter.SiteCapabilityContains(E_CapabilitiesFilter.Express);
+
+                    SW_Mobile.On = Settings.SitesFilter.SiteCapabilityContains(E_CapabilitiesFilter.Mobile);
                 }
-            };
-
-            // set the values for the switches
-            SW_DropOff.On = Settings.SitesFilter.SiteCapabilityContains(E_CapabilitiesFilter.DropOff);
-            SW_InPersonPrep.On = Settings.SitesFilter.SiteCapabilityContains(E_CapabilitiesFilter.InPerson);
-            SW_MFT.On = Settings.SitesFilter.SiteCapabilityContains(E_CapabilitiesFilter.MFT);
-            SW_Express.On = Settings.SitesFilter.SiteCapabilityContains(E_CapabilitiesFilter.Express);
-
-            SW_Mobile.On = Settings.SitesFilter.SiteCapabilityContains(E_CapabilitiesFilter.Mobile);
+                UIApplication.SharedApplication.InvokeOnMainThread(p);
+            });
         }
     }
 }

@@ -77,10 +77,9 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
-                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="914220">
-                                <rect key="frame" x="29" y="538" width="20" height="20"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="color" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="914220">
+                                <rect key="frame" x="184" y="462" width="37" height="37"/>
+                                <color key="color" colorSpace="calibratedWhite" white="1" alpha="1"/>
                             </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -106,6 +105,8 @@
                             <constraint firstItem="850644" firstAttribute="trailing" secondItem="147491" secondAttribute="trailing" constant="2" id="857389"/>
                             <constraint firstItem="2184" firstAttribute="leading" secondItem="850644" secondAttribute="leading" constant="4" id="857390"/>
                             <constraint firstItem="3" firstAttribute="bottom" secondItem="2184" secondAttribute="bottom" constant="25" id="857391"/>
+                            <constraint id="1252595" firstAttribute="centerX" secondItem="914220" secondAttribute="centerX" constant="4"/>
+                            <constraint id="1252596" firstItem="914220" firstAttribute="bottom" secondItem="147491" secondAttribute="top" constant="4"/>
                         </constraints>
                     </view>
                     <connections>
@@ -289,58 +290,59 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
-                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="894636">
-                                <rect key="frame" x="357" y="20" width="20" height="20"/>
-                                <color key="color" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="894636">
+                                <rect key="frame" x="340" y="32" width="37" height="37"/>
+                                <color key="color" colorSpace="calibratedWhite" white="0" alpha="1"/>
                             </activityIndicatorView>
-                            <button opaque="NO" alpha="0.40000000000000002" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="895808">
+                            <button opaque="NO" alpha="0.6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="895808">
                                 <rect key="frame" x="100" y="33" width="214" height="35"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="214" id="1187106"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                                <state key="normal" title="Filter">
+                                <state key="normal">
                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.40000000000000002" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="user" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1187813">
-                                <rect key="frame" x="20" y="688" width="357" height="21"/>
+                            <button opaque="NO" alpha="0.6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1275935">
+                                <rect key="frame" x="20" y="681" width="374" height="35"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="357" id="1188519"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                <size key="titleShadowOffset" width="0" height="0"/>
+                                <state key="normal">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.93333333333333335" green="0.93333333333333335" blue="0.93333333333333335" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="leading" secondItem="894635" secondAttribute="leading" constant="16" id="907357"/>
                             <constraint firstItem="894635" firstAttribute="trailing" secondItem="893627" secondAttribute="trailing" constant="16" id="907358"/>
                             <constraint firstItem="894635" firstAttribute="bottom" secondItem="893627" secondAttribute="bottom" id="907359"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="894636" secondAttribute="trailing" constant="17" id="907370"/>
                             <constraint firstAttribute="leadingMargin" secondItem="894633" secondAttribute="leading" constant="11" id="907566"/>
                             <constraint firstItem="893623" firstAttribute="bottom" secondItem="894633" secondAttribute="top" constant="5" id="907568"/>
-                            <constraint firstItem="894636" firstAttribute="top" secondItem="893623" secondAttribute="bottom" id="907570"/>
                             <constraint firstItem="893623" firstAttribute="bottom" secondItem="894635" secondAttribute="top" constant="20" id="907571"/>
                             <constraint firstItem="895808" firstAttribute="top" secondItem="894635" secondAttribute="top" constant="33" id="1187104"/>
                             <constraint firstItem="895808" firstAttribute="centerX" secondItem="894635" secondAttribute="centerX" id="1187105"/>
-                            <constraint firstItem="894635" firstAttribute="bottom" secondItem="1187813" secondAttribute="bottom" constant="27" id="1188517"/>
-                            <constraint firstItem="894635" firstAttribute="centerX" secondItem="1187813" secondAttribute="centerX" constant="8" id="1188518"/>
+                            <constraint id="1249072" firstItem="894636" firstAttribute="top" secondItem="894635" secondAttribute="top" constant="32"/>
+                            <constraint id="1249073" firstAttribute="trailingMargin" secondItem="894636" secondAttribute="trailing" constant="17"/>
+                            <constraint id="1275939" firstItem="1275935" firstAttribute="trailing" secondItem="893627" secondAttribute="trailingMargin"/>
+                            <constraint id="1275940" firstItem="1275935" firstAttribute="leading" secondItem="893627" secondAttribute="leadingMargin"/>
+                            <constraint id="1278677" firstItem="894635" firstAttribute="bottom" secondItem="1275935" secondAttribute="bottom" constant="20"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="AI_Busy" destination="894636" id="name-outlet-894636"/>
                         <outlet property="B_Back" destination="894633" id="name-outlet-894633"/>
                         <outlet property="B_Filter" destination="895808" id="name-outlet-895808"/>
-                        <outlet property="L_User" destination="1187813" id="name-outlet-1187813"/>
                         <outlet property="Map_SitesMap" destination="894635" id="name-outlet-894635"/>
                         <segue destination="BYZ-38-t0r" kind="show" identifier="Segue_SitesMapToMain" animates="NO" id="894797"/>
                         <segue destination="898058" kind="show" identifier="Segue_SitesMapToSitesFilter" animates="NO" id="900131"/>
                         <segue destination="907972" kind="show" identifier="Segue_SitesMapToSiteDetails" animates="NO" id="909112"/>
+                        <outlet property="B_Services" destination="1275935" id="name-outlet-1275935"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="893628" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -370,7 +372,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sites Filter" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="901195">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sites Map Filter" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="901195">
                                 <rect key="frame" x="58" y="42" width="276" height="29"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="24"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -391,13 +393,13 @@
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="901201">
                                 <rect key="frame" x="41" y="263" width="51" height="31"/>
                             </switch>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Drop-off" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="901202">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Virtual" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="901202" misplaced="YES">
                                 <rect key="frame" x="98" y="268" width="66.5" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Filter for these capabilities:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="901205">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Filter for these services:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="901205">
                                 <rect key="frame" x="41" y="211" width="322" height="24"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -433,7 +435,7 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Include Mobile Sites" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="902228">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Show Mobile Sites" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="902228">
                                 <rect key="frame" x="100" y="472" width="263" height="20"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -441,7 +443,7 @@
                             </label>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="902229">
                                 <rect key="frame" x="357" y="20" width="20" height="20"/>
-                                <color key="color" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="color" colorSpace="calibratedWhite" white="1" alpha="1"/>
                             </activityIndicatorView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="903254">
                                 <rect key="frame" x="0.0" y="519" width="414" height="36"/>
@@ -540,7 +542,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sites Details" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="907977">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Site Details" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="907977">
                                 <rect key="frame" x="58" y="42" width="276" height="29"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="24"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -567,21 +569,8 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hours Today:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="908086">
-                                <rect key="frame" x="20" y="198" width="114" height="21"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="114" id="919363"/>
-                                    <constraint firstAttribute="height" constant="21" id="919364"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="...hours today..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="908087">
-                                <rect key="frame" x="142" y="198" width="252" height="21"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="21" id="919368"/>
-                                </constraints>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="...hours today..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" translatesAutoresizingMaskIntoConstraints="NO" id="908087" minimumScaleFactor="0.5">
+                                <rect key="frame" x="20" y="198" width="374" height="20"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -610,13 +599,13 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Drop-off" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="908096">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Virtual" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="908096" misplaced="YES">
                                 <rect key="frame" x="20" y="427" width="296" height="20"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fully assisted tax preparation" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="908098">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fully assisted tax preparation" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="908098" misplaced="YES">
                                 <rect key="frame" x="22" y="467" width="296" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="919642"/>
@@ -625,7 +614,7 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Express (very simple returns)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="908100">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Express (very simple returns)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="908100" misplaced="YES">
                                 <rect key="frame" x="22" y="507" width="296" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="919641"/>
@@ -634,7 +623,7 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DIY (My Free Taxes)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="908102">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DIY (My Free Taxes)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="908102" misplaced="YES">
                                 <rect key="frame" x="22" y="547" width="296" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="919646"/>
@@ -643,7 +632,7 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="908103">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="908103" misplaced="YES">
                                 <rect key="frame" x="0.0" y="591" width="414" height="36"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
@@ -663,7 +652,7 @@
                             </button>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="1190829">
                                 <rect key="frame" x="357" y="20" width="20" height="20"/>
-                                <color key="color" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="color" colorSpace="calibratedWhite" white="1" alpha="1"/>
                             </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666696" alpha="1" colorSpace="calibratedWhite"/>
@@ -679,10 +668,6 @@
                             <constraint firstItem="907979" firstAttribute="top" secondItem="907978" secondAttribute="bottom" constant="32" id="919346"/>
                             <constraint firstItem="907979" firstAttribute="leading" secondItem="907973" secondAttribute="leadingMargin" id="919347"/>
                             <constraint firstItem="907979" firstAttribute="trailing" secondItem="907973" secondAttribute="trailingMargin" id="919348"/>
-                            <constraint firstItem="908086" firstAttribute="leading" secondItem="907973" secondAttribute="leadingMargin" id="919362"/>
-                            <constraint firstItem="908087" firstAttribute="top" secondItem="908086" secondAttribute="top" id="919365"/>
-                            <constraint firstItem="908087" firstAttribute="leading" secondItem="908086" secondAttribute="trailing" constant="8" id="919366"/>
-                            <constraint firstItem="908087" firstAttribute="trailing" secondItem="907973" secondAttribute="trailingMargin" id="919367"/>
                             <constraint firstItem="908090" firstAttribute="leading" secondItem="907973" secondAttribute="leadingMargin" constant="9" id="919378"/>
                             <constraint firstItem="908091" firstAttribute="top" secondItem="908090" secondAttribute="top" constant="5" id="919379"/>
                             <constraint firstItem="908091" firstAttribute="leading" secondItem="908090" secondAttribute="trailing" constant="10" id="919380"/>
@@ -702,10 +687,8 @@
                             <constraint firstItem="908102" firstAttribute="top" secondItem="908100" secondAttribute="bottom" constant="20" id="919643"/>
                             <constraint firstItem="908102" firstAttribute="leading" secondItem="907973" secondAttribute="leadingMargin" constant="2" id="919644"/>
                             <constraint firstAttribute="trailingMargin" secondItem="908102" secondAttribute="trailing" constant="76" id="919645"/>
-                            <constraint firstItem="908089" firstAttribute="top" secondItem="908086" secondAttribute="bottom" constant="7" id="1035048"/>
                             <constraint firstAttribute="leadingMargin" secondItem="908089" secondAttribute="leading" constant="20" id="1035049"/>
                             <constraint firstItem="908089" firstAttribute="trailing" secondItem="907973" secondAttribute="trailingMargin" constant="20" id="1035050"/>
-                            <constraint firstItem="911565" firstAttribute="top" secondItem="908089" secondAttribute="bottom" constant="13" id="1035051"/>
                             <constraint firstAttribute="leadingMargin" secondItem="911565" secondAttribute="leading" constant="20" id="1035052"/>
                             <constraint firstItem="911565" firstAttribute="trailing" secondItem="907973" secondAttribute="trailingMargin" constant="20" id="1035053"/>
                             <constraint firstItem="908090" firstAttribute="top" secondItem="911565" secondAttribute="bottom" constant="21" id="1035054"/>
@@ -715,9 +698,13 @@
                             <constraint firstItem="907980" firstAttribute="top" secondItem="907979" secondAttribute="bottom" constant="8" id="1142452"/>
                             <constraint firstItem="907980" firstAttribute="leading" secondItem="907973" secondAttribute="leadingMargin" id="1142453"/>
                             <constraint firstItem="907980" firstAttribute="trailing" secondItem="907973" secondAttribute="trailingMargin" id="1142454"/>
-                            <constraint firstItem="908086" firstAttribute="top" secondItem="907980" secondAttribute="bottom" constant="8" id="1142456"/>
                             <constraint firstItem="1190829" firstAttribute="top" secondItem="907973" secondAttribute="top" constant="20" id="1190830"/>
                             <constraint firstAttribute="trailingMargin" secondItem="1190829" secondAttribute="trailing" constant="17" id="1190831"/>
+                            <constraint id="1304849" firstItem="908087" firstAttribute="top" secondItem="907980" secondAttribute="bottom" constant="8"/>
+                            <constraint id="1304850" firstItem="908087" firstAttribute="leading" secondItem="907973" secondAttribute="leadingMargin"/>
+                            <constraint id="1304851" firstItem="908087" firstAttribute="trailing" secondItem="907980" secondAttribute="trailing"/>
+                            <constraint id="1304853" firstItem="908089" firstAttribute="top" secondItem="908087" secondAttribute="bottom" constant="8"/>
+                            <constraint id="1304854" firstItem="911565" firstAttribute="top" secondItem="908089" secondAttribute="bottom" constant="13"/>
                         </constraints>
                     </view>
                     <connections>
@@ -766,7 +753,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sites Calendar" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="911448">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Site Calendar" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="911448">
                                 <rect key="frame" x="58" y="42" width="276" height="29"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="24"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -960,7 +947,7 @@
                             </textField>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="914735">
                                 <rect key="frame" x="357" y="20" width="20" height="20"/>
-                                <color key="color" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="color" colorSpace="calibratedWhite" white="1" alpha="1"/>
                             </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666696" alpha="1" colorSpace="calibratedWhite"/>
@@ -1035,32 +1022,11 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notifications:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="915209">
-                                <rect key="frame" x="20" y="90" width="124" height="21"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="124" id="919978"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="915341">
-                                <rect key="frame" x="46" y="136" width="51" height="31"/>
-                            </switch>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Send me notifications when a preferred Site's calendar changes." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="915342">
-                                <rect key="frame" x="105" y="113" width="289" height="67"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="67" id="946139"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="915343">
-                                <rect key="frame" x="46" y="198" width="51" height="31"/>
+                                <rect key="frame" x="46" y="90" width="51" height="31"/>
                             </switch>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="915344">
-                                <rect key="frame" x="105" y="188" width="289" height="65"/>
+                                <rect key="frame" x="105" y="73" width="289" height="65"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="65" id="948204"/>
                                 </constraints>
@@ -1071,7 +1037,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="hours" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="915476">
-                                <rect key="frame" x="34" y="262" width="97" height="30"/>
+                                <rect key="frame" x="34" y="138" width="97" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="97" id="920333"/>
                                 </constraints>
@@ -1080,7 +1046,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total Hours" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="915477">
-                                <rect key="frame" x="139" y="261" width="248" height="32"/>
+                                <rect key="frame" x="139" y="137" width="248" height="32"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="248" id="920336"/>
                                     <constraint firstAttribute="height" constant="32" id="920337"/>
@@ -1090,7 +1056,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="915478">
-                                <rect key="frame" x="0.0" y="320" width="414" height="36"/>
+                                <rect key="frame" x="0.0" y="185" width="414" height="36"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="View/Add Hours Worked">
@@ -1099,7 +1065,7 @@
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="915479">
-                                <rect key="frame" x="0.0" y="370" width="414" height="36"/>
+                                <rect key="frame" x="0.0" y="235" width="414" height="36"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="Post a Suggestion">
@@ -1109,7 +1075,7 @@
                             </button>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="917736">
                                 <rect key="frame" x="357" y="20" width="20" height="20"/>
-                                <color key="color" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="color" colorSpace="calibratedWhite" white="1" alpha="1"/>
                             </activityIndicatorView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="955209">
                                 <rect key="frame" x="0.0" y="686" width="414" height="36"/>
@@ -1121,7 +1087,7 @@
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1113851">
-                                <rect key="frame" x="0.0" y="420" width="414" height="36"/>
+                                <rect key="frame" x="0.0" y="285" width="414" height="36"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="Edit Settings">
@@ -1130,7 +1096,7 @@
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1204504">
-                                <rect key="frame" x="0.0" y="470" width="414" height="36"/>
+                                <rect key="frame" x="0.0" y="335" width="414" height="36"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="Mobile Calendar">
@@ -1148,37 +1114,30 @@
                             <constraint firstItem="915208" firstAttribute="top" secondItem="915204" secondAttribute="top" constant="42" id="919973"/>
                             <constraint firstItem="915208" firstAttribute="leading" secondItem="915204" secondAttribute="leadingMargin" constant="38" id="919974"/>
                             <constraint firstAttribute="trailingMargin" secondItem="915208" secondAttribute="trailing" constant="60" id="919975"/>
-                            <constraint firstItem="915209" firstAttribute="top" secondItem="915208" secondAttribute="bottom" constant="19" id="919976"/>
-                            <constraint firstItem="915209" firstAttribute="leading" secondItem="915204" secondAttribute="leadingMargin" id="919977"/>
-                            <constraint firstItem="915341" firstAttribute="top" secondItem="915209" secondAttribute="bottom" constant="25" id="919979"/>
-                            <constraint firstItem="915341" firstAttribute="leading" secondItem="915204" secondAttribute="leadingMargin" constant="26" id="919980"/>
-                            <constraint firstItem="915343" firstAttribute="top" secondItem="915341" secondAttribute="bottom" constant="31" id="919986"/>
                             <constraint firstItem="915343" firstAttribute="leading" secondItem="915204" secondAttribute="leadingMargin" constant="26" id="919987"/>
-                            <constraint firstItem="915476" firstAttribute="top" secondItem="915343" secondAttribute="bottom" constant="33" id="919991"/>
                             <constraint firstItem="915476" firstAttribute="leading" secondItem="915204" secondAttribute="leadingMargin" constant="14" id="920332"/>
-                            <constraint firstItem="915476" firstAttribute="top" secondItem="915477" secondAttribute="top" constant="1" id="920334"/>
                             <constraint firstItem="915477" firstAttribute="leading" secondItem="915476" secondAttribute="trailing" constant="8" id="920335"/>
-                            <constraint firstItem="915342" firstAttribute="top" secondItem="915209" secondAttribute="bottom" constant="2" id="946136"/>
-                            <constraint firstItem="915342" firstAttribute="trailing" secondItem="915204" secondAttribute="trailingMargin" id="946138"/>
-                            <constraint firstItem="915342" firstAttribute="leading" secondItem="915204" secondAttribute="leadingMargin" constant="85" id="947170"/>
-                            <constraint firstItem="915344" firstAttribute="top" secondItem="915209" secondAttribute="bottom" constant="77" id="948201"/>
                             <constraint firstItem="915344" firstAttribute="leading" secondItem="915204" secondAttribute="leadingMargin" constant="85" id="948202"/>
                             <constraint firstItem="915344" firstAttribute="trailing" secondItem="915204" secondAttribute="trailingMargin" id="948203"/>
-                            <constraint firstItem="915478" firstAttribute="top" secondItem="915476" secondAttribute="bottom" constant="28" id="1076737"/>
                             <constraint firstAttribute="leadingMargin" secondItem="915478" secondAttribute="leading" constant="20" id="1076738"/>
                             <constraint firstItem="915478" firstAttribute="trailing" secondItem="915204" secondAttribute="trailingMargin" constant="20" id="1076739"/>
-                            <constraint firstItem="915479" firstAttribute="top" secondItem="915478" secondAttribute="bottom" constant="14" id="1076740"/>
                             <constraint firstAttribute="leadingMargin" secondItem="915479" secondAttribute="leading" constant="20" id="1076741"/>
                             <constraint firstItem="915479" firstAttribute="trailing" secondItem="915204" secondAttribute="trailingMargin" constant="20" id="1076742"/>
                             <constraint firstItem="915201" firstAttribute="top" secondItem="955209" secondAttribute="bottom" constant="14" id="1077400"/>
                             <constraint firstAttribute="leadingMargin" secondItem="955209" secondAttribute="leading" constant="20" id="1077401"/>
                             <constraint firstItem="955209" firstAttribute="trailing" secondItem="915204" secondAttribute="trailingMargin" constant="20" id="1077402"/>
-                            <constraint firstItem="1113851" firstAttribute="top" secondItem="915479" secondAttribute="bottom" constant="14" id="1113852"/>
                             <constraint firstAttribute="leadingMargin" secondItem="1113851" secondAttribute="leading" constant="20" id="1113853"/>
                             <constraint firstItem="1113851" firstAttribute="trailing" secondItem="915204" secondAttribute="trailingMargin" constant="20" id="1113854"/>
-                            <constraint id="1215337" firstItem="1204504" firstAttribute="top" secondItem="1113851" secondAttribute="bottom" constant="14"/>
                             <constraint id="1215338" firstAttribute="leadingMargin" secondItem="1204504" secondAttribute="leading" constant="20"/>
                             <constraint id="1215339" firstItem="1204504" firstAttribute="trailing" secondItem="915204" secondAttribute="trailingMargin" constant="20"/>
+                            <constraint id="1300223" firstItem="915344" firstAttribute="top" secondItem="915208" secondAttribute="bottom" constant="2"/>
+                            <constraint id="1300224" firstItem="915343" firstAttribute="top" secondItem="915208" secondAttribute="bottom" constant="19"/>
+                            <constraint id="1300225" firstItem="915476" firstAttribute="top" secondItem="915343" secondAttribute="bottom" constant="17"/>
+                            <constraint id="1300226" firstItem="915476" firstAttribute="top" secondItem="915477" secondAttribute="top" constant="1"/>
+                            <constraint id="1300227" firstItem="915478" firstAttribute="top" secondItem="915476" secondAttribute="bottom" constant="17"/>
+                            <constraint id="1300228" firstItem="915479" firstAttribute="top" secondItem="915478" secondAttribute="bottom" constant="14"/>
+                            <constraint id="1300229" firstItem="1113851" firstAttribute="top" secondItem="915479" secondAttribute="bottom" constant="14"/>
+                            <constraint id="1300230" firstItem="1204504" firstAttribute="top" secondItem="1113851" secondAttribute="bottom" constant="14"/>
                         </constraints>
                     </view>
                     <connections>
@@ -1190,7 +1149,6 @@
                         <outlet property="B_ViewOrAddWorkItems" destination="915478" id="name-outlet-915478"/>
                         <outlet property="L_Mobile" destination="915344" id="name-outlet-915344"/>
                         <outlet property="SW_Mobile" destination="915343" id="name-outlet-915343"/>
-                        <outlet property="SW_Site" destination="915341" id="name-outlet-915341"/>
                         <outlet property="TB_Hours" destination="915476" id="name-outlet-915476"/>
                         <segue destination="BYZ-38-t0r" kind="show" identifier="Segue_VolunteerHomeToMain" animates="NO" id="915588"/>
                         <segue destination="915827" kind="show" identifier="Segue_VolHomeToVolHours" animates="NO" id="916509"/>
@@ -1283,6 +1241,10 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="1267798">
+                                <rect key="frame" x="357" y="20" width="20" height="20"/>
+                                <color key="color" colorSpace="calibratedWhite" white="1" alpha="1"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666696" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -1305,6 +1267,8 @@
                             <constraint firstItem="916468" firstAttribute="trailing" secondItem="915828" secondAttribute="trailingMargin" constant="20" id="1080691"/>
                             <constraint firstAttribute="bottom" secondItem="916468" secondAttribute="bottom" constant="47" id="1080692"/>
                             <constraint firstItem="917891" firstAttribute="top" secondItem="916468" secondAttribute="bottom" constant="8" id="1080693"/>
+                            <constraint id="1267799" firstItem="1267798" firstAttribute="top" secondItem="915828" secondAttribute="top" constant="20"/>
+                            <constraint id="1267800" firstAttribute="trailingMargin" secondItem="1267798" secondAttribute="trailing" constant="17"/>
                         </constraints>
                     </view>
                     <connections>
@@ -1314,6 +1278,7 @@
                         <outlet property="TV_HoursWorked" destination="916468" id="name-outlet-916468"/>
                         <segue destination="915203" kind="show" identifier="Segue_VolHoursToVolHome" animates="NO" id="916559"/>
                         <segue destination="916996" kind="show" identifier="Segue_VolHoursToVolHoursEdit" animates="NO" id="917533"/>
+                        <outlet property="AI_Busy" destination="1267798" id="name-outlet-1267798"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="915829" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1404,7 +1369,7 @@
                             </button>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="918047">
                                 <rect key="frame" x="357" y="20" width="20" height="20"/>
-                                <color key="color" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="color" colorSpace="calibratedWhite" white="1" alpha="1"/>
                             </activityIndicatorView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Site" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1221712">
                                 <rect key="frame" x="71" y="78" width="323" height="30"/>
@@ -1497,7 +1462,7 @@
                             </label>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="942577">
                                 <rect key="frame" x="357" y="20" width="20" height="20"/>
-                                <color key="color" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="color" colorSpace="calibratedWhite" white="1" alpha="1"/>
                             </activityIndicatorView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Subject:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="942579">
                                 <rect key="frame" x="20" y="83" width="92" height="21"/>
@@ -1588,6 +1553,7 @@
                         <outlet property="TB_Subject" destination="942581" id="name-outlet-942581"/>
                         <outlet property="TxV_Message" destination="942584" id="name-outlet-942584"/>
                         <segue destination="915203" kind="show" identifier="Segue_SuggestionToVolHome" animates="NO" id="942159"/>
+                        <outlet property="L_Title" destination="941994" id="name-outlet-941994"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="941988" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1607,7 +1573,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="956793">
-                                <rect key="frame" x="0.0" y="86" width="414" height="502"/>
+                                <rect key="frame" x="0.0" y="86" width="414" height="470"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="956794">
@@ -1638,17 +1604,8 @@
                             </button>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="956800">
                                 <rect key="frame" x="357" y="20" width="20" height="20"/>
-                                <color key="color" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="color" colorSpace="calibratedWhite" white="1" alpha="1"/>
                             </activityIndicatorView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Touch Item to Edit" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="956804">
-                                <rect key="frame" x="20" y="590" width="248" height="21"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="248" id="1130835"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="960921">
                                 <rect key="frame" x="0.0" y="686" width="414" height="36"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1663,6 +1620,15 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="Edit Settings">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1294004">
+                                <rect key="frame" x="0.0" y="574" width="414" height="36"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="List of Volunteers">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -1682,13 +1648,14 @@
                             <constraint firstItem="956793" firstAttribute="top" secondItem="956796" secondAttribute="bottom" constant="15" id="1130829"/>
                             <constraint firstAttribute="leadingMargin" secondItem="956793" secondAttribute="leading" constant="20" id="1130830"/>
                             <constraint firstItem="956793" firstAttribute="trailing" secondItem="956332" secondAttribute="trailingMargin" constant="20" id="1130831"/>
-                            <constraint firstAttribute="bottom" secondItem="956793" secondAttribute="bottom" constant="148" id="1130832"/>
-                            <constraint firstItem="956804" firstAttribute="top" secondItem="956793" secondAttribute="bottom" constant="2" id="1130833"/>
-                            <constraint firstItem="956804" firstAttribute="leading" secondItem="956332" secondAttribute="leadingMargin" id="1130834"/>
-                            <constraint firstItem="1130129" firstAttribute="top" secondItem="956804" secondAttribute="bottom" constant="19" id="1131542"/>
                             <constraint firstAttribute="leadingMargin" secondItem="1130129" secondAttribute="leading" constant="20" id="1131543"/>
                             <constraint firstItem="1130129" firstAttribute="trailing" secondItem="956332" secondAttribute="trailingMargin" constant="20" id="1131544"/>
                             <constraint firstItem="960921" firstAttribute="top" secondItem="1130129" secondAttribute="bottom" constant="20" id="1132254"/>
+                            <constraint id="1294005" firstAttribute="bottom" secondItem="956793" secondAttribute="bottom" constant="180"/>
+                            <constraint id="1294006" firstItem="1294004" firstAttribute="top" secondItem="956793" secondAttribute="bottom" constant="18"/>
+                            <constraint id="1294007" firstAttribute="leadingMargin" secondItem="1294004" secondAttribute="leading" constant="20"/>
+                            <constraint id="1294008" firstItem="1294004" firstAttribute="trailing" secondItem="956332" secondAttribute="trailingMargin" constant="20"/>
+                            <constraint id="1294009" firstItem="1130129" firstAttribute="top" secondItem="1294004" secondAttribute="bottom" constant="20"/>
                         </constraints>
                     </view>
                     <connections>
@@ -1701,6 +1668,9 @@
                         <segue destination="BYZ-38-t0r" kind="show" identifier="Segue_SCSitesToMain" animates="NO" id="958404"/>
                         <segue destination="965273" kind="show" identifier="Segue_SCSitesToSCSite" animates="NO" id="968988"/>
                         <segue destination="1113197" kind="show" identifier="Segue_SCSitesToVolEditSettings" animates="NO" id="1133005"/>
+                        <segue id="1270637" destination="983859" kind="show" animates="NO" identifier="Segue_SCSitesToSCVolHours"/>
+                        <outlet property="B_VolList" destination="1294004" id="name-outlet-1294004"/>
+                        <segue id="1294911" destination="1293167" kind="show" animates="NO" identifier="Segue_SCSitesToSCVolList"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="956333" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1737,7 +1707,7 @@
                             </label>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="966462">
                                 <rect key="frame" x="357" y="20" width="20" height="20"/>
-                                <color key="color" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="color" colorSpace="calibratedWhite" white="1" alpha="1"/>
                             </activityIndicatorView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-- site name --" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="966463">
                                 <rect key="frame" x="56" y="79" width="276" height="29"/>
@@ -1746,7 +1716,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="966464">
-                                <rect key="frame" x="20" y="194" width="374" height="495"/>
+                                <rect key="frame" x="20" y="155" width="374" height="495"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="966466">
                                     <size key="itemSize" width="50" height="50"/>
@@ -1766,7 +1736,7 @@
                                 </cells>
                             </collectionView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="967454">
-                                <rect key="frame" x="20" y="155" width="94" height="30"/>
+                                <rect key="frame" x="20" y="116" width="94" height="30"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="94" id="982261"/>
@@ -1779,7 +1749,7 @@
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="967459">
-                                <rect key="frame" x="300" y="155" width="94" height="30"/>
+                                <rect key="frame" x="300" y="116" width="94" height="30"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="94" id="982784"/>
@@ -1792,7 +1762,7 @@
                                 </state>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="mmm - yyyy" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="968456">
-                                <rect key="frame" x="114" y="155" width="167" height="32"/>
+                                <rect key="frame" x="114" y="116" width="167" height="32"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="32" id="983312"/>
                                 </constraints>
@@ -1800,15 +1770,6 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="982254">
-                                <rect key="frame" x="0.0" y="116" width="414" height="36"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <state key="normal" title="Manage Volunteer Hours">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666696" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -1829,18 +1790,14 @@
                             <constraint firstItem="966464" firstAttribute="top" secondItem="967454" secondAttribute="bottom" constant="9" id="983313"/>
                             <constraint firstItem="966464" firstAttribute="leading" secondItem="965274" secondAttribute="leadingMargin" id="983314"/>
                             <constraint firstItem="966464" firstAttribute="trailing" secondItem="965274" secondAttribute="trailingMargin" id="983315"/>
-                            <constraint firstAttribute="bottom" secondItem="966464" secondAttribute="bottom" constant="47" id="983316"/>
-                            <constraint firstItem="982254" firstAttribute="top" secondItem="966463" secondAttribute="bottom" constant="8" id="1095083"/>
-                            <constraint firstAttribute="leadingMargin" secondItem="982254" secondAttribute="leading" constant="20" id="1095084"/>
-                            <constraint firstItem="982254" firstAttribute="trailing" secondItem="965274" secondAttribute="trailingMargin" constant="20" id="1095085"/>
-                            <constraint firstItem="967454" firstAttribute="top" secondItem="982254" secondAttribute="bottom" constant="3" id="1095086"/>
-                            <constraint firstItem="967459" firstAttribute="top" secondItem="982254" secondAttribute="bottom" constant="3" id="1095087"/>
-                            <constraint firstItem="968456" firstAttribute="top" secondItem="982254" secondAttribute="bottom" constant="3" id="1095088"/>
+                            <constraint id="1270730" firstItem="967454" firstAttribute="top" secondItem="966463" secondAttribute="bottom" constant="8"/>
+                            <constraint id="1270732" firstItem="968456" firstAttribute="top" secondItem="966463" secondAttribute="bottom" constant="8"/>
+                            <constraint id="1270733" firstItem="967459" firstAttribute="top" secondItem="966463" secondAttribute="bottom" constant="8"/>
+                            <constraint id="1270734" firstItem="965271" firstAttribute="top" secondItem="966464" secondAttribute="bottom" constant="86"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="B_Back" destination="966459" id="name-outlet-966459"/>
-                        <outlet property="B_ManageVolunteerHours" destination="982254" id="name-outlet-982254"/>
                         <outlet property="B_MonthNext" destination="967459" id="name-outlet-967459"/>
                         <outlet property="B_MonthPrevious" destination="967454" id="name-outlet-967454"/>
                         <outlet property="CV_Grid" destination="966464" id="name-outlet-966464"/>
@@ -1887,7 +1844,7 @@
                             </label>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="984938">
                                 <rect key="frame" x="357" y="20" width="20" height="20"/>
-                                <color key="color" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="color" colorSpace="calibratedWhite" white="1" alpha="1"/>
                             </activityIndicatorView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="[site name]" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="1006319">
                                 <rect key="frame" x="56" y="79" width="276" height="29"/>
@@ -1896,7 +1853,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="1006320">
-                                <rect key="frame" x="0.0" y="154" width="414" height="457"/>
+                                <rect key="frame" x="0.0" y="223" width="414" height="458"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="1006321">
@@ -1910,7 +1867,7 @@
                                 </prototypes>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1006324">
-                                <rect key="frame" x="0.0" y="686" width="414" height="36"/>
+                                <rect key="frame" x="0.0" y="120" width="414" height="36"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="Add Volunteer &amp; Hours">
@@ -1919,7 +1876,7 @@
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1006327">
-                                <rect key="frame" x="0.0" y="631" width="414" height="36"/>
+                                <rect key="frame" x="0.0" y="170" width="414" height="36"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="Mark All As Approved">
@@ -1927,15 +1884,15 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Date" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1006331">
-                                <rect key="frame" x="104" y="116" width="181" height="30"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <constraints>
-                                    <constraint id="1226032" firstAttribute="width" constant="181"/>
-                                </constraints>
-                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1271564">
+                                <rect key="frame" x="0.0" y="695" width="414" height="36"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="Edit Site Calendar">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666696" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -1949,18 +1906,19 @@
                             <constraint firstItem="1006319" firstAttribute="top" secondItem="984936" secondAttribute="bottom" constant="8" id="1007540"/>
                             <constraint firstItem="1006319" firstAttribute="leading" secondItem="983860" secondAttribute="leadingMargin" constant="36" id="1007541"/>
                             <constraint firstAttribute="trailingMargin" secondItem="1006319" secondAttribute="trailing" constant="62" id="1007542"/>
-                            <constraint firstItem="1006331" firstAttribute="top" secondItem="1006319" secondAttribute="bottom" constant="8" id="1007543"/>
-                            <constraint firstItem="1006320" firstAttribute="top" secondItem="1006331" secondAttribute="bottom" constant="8" id="1105465"/>
-                            <constraint firstAttribute="leadingMargin" secondItem="1006320" secondAttribute="leading" constant="20" id="1105466"/>
-                            <constraint firstItem="1006320" firstAttribute="trailing" secondItem="983860" secondAttribute="trailingMargin" constant="20" id="1105467"/>
-                            <constraint firstAttribute="bottom" secondItem="1006320" secondAttribute="bottom" constant="125" id="1105468"/>
-                            <constraint firstItem="1006327" firstAttribute="top" secondItem="1006320" secondAttribute="bottom" constant="20" id="1105469"/>
-                            <constraint firstAttribute="leadingMargin" secondItem="1006327" secondAttribute="leading" constant="20" id="1105470"/>
-                            <constraint firstItem="1006327" firstAttribute="trailing" secondItem="983860" secondAttribute="trailingMargin" constant="20" id="1105471"/>
-                            <constraint firstItem="1006324" firstAttribute="top" secondItem="1006327" secondAttribute="bottom" constant="19" id="1105472"/>
-                            <constraint firstAttribute="leadingMargin" secondItem="1006324" secondAttribute="leading" constant="20" id="1105473"/>
-                            <constraint firstItem="1006324" firstAttribute="trailing" secondItem="983860" secondAttribute="trailingMargin" constant="20" id="1105474"/>
-                            <constraint id="1226033" firstAttribute="centerX" secondItem="1006331" secondAttribute="centerX" constant="12"/>
+                            <constraint id="1271565" firstItem="1006324" firstAttribute="top" secondItem="1006319" secondAttribute="bottom" constant="12"/>
+                            <constraint id="1271566" firstAttribute="leadingMargin" secondItem="1006324" secondAttribute="leading" constant="20"/>
+                            <constraint id="1271567" firstItem="1006324" firstAttribute="trailing" secondItem="983860" secondAttribute="trailingMargin" constant="20"/>
+                            <constraint id="1271568" firstItem="1006327" firstAttribute="top" secondItem="1006324" secondAttribute="bottom" constant="14"/>
+                            <constraint id="1271569" firstAttribute="leadingMargin" secondItem="1006327" secondAttribute="leading" constant="20"/>
+                            <constraint id="1271570" firstItem="1006327" firstAttribute="trailing" secondItem="983860" secondAttribute="trailingMargin" constant="20"/>
+                            <constraint id="1272409" firstAttribute="leadingMargin" secondItem="1271564" secondAttribute="leading" constant="20"/>
+                            <constraint id="1272410" firstItem="1271564" firstAttribute="trailing" secondItem="983860" secondAttribute="trailingMargin" constant="20"/>
+                            <constraint id="1273245" firstItem="1006320" firstAttribute="top" secondItem="1006327" secondAttribute="bottom" constant="17"/>
+                            <constraint id="1273246" firstAttribute="leadingMargin" secondItem="1006320" secondAttribute="leading" constant="20"/>
+                            <constraint id="1273247" firstItem="1006320" firstAttribute="trailing" secondItem="983860" secondAttribute="trailingMargin" constant="20"/>
+                            <constraint id="1273248" firstAttribute="bottom" secondItem="1006320" secondAttribute="bottom" constant="55"/>
+                            <constraint id="1273249" firstItem="1271564" firstAttribute="top" secondItem="1006320" secondAttribute="bottom" constant="14"/>
                         </constraints>
                     </view>
                     <connections>
@@ -1969,10 +1927,11 @@
                         <outlet property="B_Back" destination="984934" id="name-outlet-984934"/>
                         <outlet property="B_MarkAsApproved" destination="1006327" id="name-outlet-1006327"/>
                         <outlet property="L_SiteName" destination="1006319" id="name-outlet-1006319"/>
-                        <outlet property="TB_Date" destination="1006331" id="name-outlet-1006331"/>
                         <outlet property="TV_WorkLogItems" destination="1006320" id="name-outlet-1006320"/>
                         <segue destination="965273" kind="show" identifier="Segue_SCVolHoursToSCSite" animates="NO" id="986714"/>
                         <segue destination="1008804" kind="show" identifier="Segue_SCVolHoursToSCAddVolHours" animates="NO" id="1012886"/>
+                        <segue id="1270723" destination="956331" kind="show" animates="NO" identifier="Segue_SCVolHoursToSCSites"/>
+                        <outlet property="B_GoToSiteCalendar" destination="1271564" id="name-outlet-1271564"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="983861" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2033,7 +1992,7 @@
                             </label>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="988583">
                                 <rect key="frame" x="357" y="20" width="20" height="20"/>
-                                <color key="color" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="color" colorSpace="calibratedWhite" white="1" alpha="1"/>
                             </activityIndicatorView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Site is Open" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="988584">
                                 <rect key="frame" x="107" y="153" width="264" height="21"/>
@@ -2151,6 +2110,7 @@
                         <outlet property="TB_CloseTime" destination="988589" id="name-outlet-988589"/>
                         <outlet property="TB_OpenTime" destination="988587" id="name-outlet-988587"/>
                         <segue destination="965273" kind="show" identifier="Segue_SCSiteDetailsToSCSite" animates="NO" id="989180"/>
+                        <outlet property="L_Title" destination="988580" id="name-outlet-988580"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="987268" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2193,16 +2153,10 @@
                             </label>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="1010277">
                                 <rect key="frame" x="357" y="20" width="20" height="20"/>
-                                <color key="color" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="color" colorSpace="calibratedWhite" white="1" alpha="1"/>
                             </activityIndicatorView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="[date]" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="1010278">
-                                <rect key="frame" x="56" y="116" width="276" height="29"/>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="24"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Volunteer" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1010907">
-                                <rect key="frame" x="30" y="182" width="245" height="30"/>
+                                <rect key="frame" x="20" y="211" width="245" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="1022564"/>
                                     <constraint firstAttribute="width" constant="245" id="1024561"/>
@@ -2212,17 +2166,13 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select the volunteer:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1010913">
-                                <rect key="frame" x="30" y="153" width="186" height="21"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="21" id="1010915"/>
-                                    <constraint firstAttribute="width" constant="186" id="1022561"/>
-                                </constraints>
+                                <rect key="frame" x="20" y="182" width="158" height="20"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Hours" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1011551">
-                                <rect key="frame" x="30" y="269" width="87" height="30"/>
+                                <rect key="frame" x="24" y="282" width="87" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="87" id="1011552"/>
                                 </constraints>
@@ -2231,10 +2181,7 @@
                                 <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Set the Hours Worked:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1011553">
-                                <rect key="frame" x="30" y="240" width="238" height="21"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="238" id="1023891"/>
-                                </constraints>
+                                <rect key="frame" x="24" y="253" width="173" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -2257,6 +2204,21 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Date" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1259393">
+                                <rect key="frame" x="22" y="144" width="181" height="30"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <constraints>
+                                    <constraint id="1259394" firstAttribute="width" constant="181"/>
+                                </constraints>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select the date:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1259397">
+                                <rect key="frame" x="20" y="116" width="121" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666696" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -2270,23 +2232,24 @@
                             <constraint firstItem="1010276" firstAttribute="top" secondItem="1010275" secondAttribute="bottom" constant="8" id="1019925"/>
                             <constraint firstItem="1010276" firstAttribute="leading" secondItem="1008805" secondAttribute="leadingMargin" constant="36" id="1019926"/>
                             <constraint firstAttribute="trailingMargin" secondItem="1010276" secondAttribute="trailing" constant="62" id="1019927"/>
-                            <constraint firstItem="1010278" firstAttribute="top" secondItem="1010276" secondAttribute="bottom" constant="8" id="1020582"/>
-                            <constraint firstItem="1010278" firstAttribute="leading" secondItem="1008805" secondAttribute="leadingMargin" constant="36" id="1020583"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="1010278" secondAttribute="trailing" constant="62" id="1020584"/>
-                            <constraint firstItem="1010913" firstAttribute="top" secondItem="1010278" secondAttribute="bottom" constant="8" id="1021242"/>
-                            <constraint firstItem="1010913" firstAttribute="leading" secondItem="1008805" secondAttribute="leadingMargin" constant="10" id="1021901"/>
-                            <constraint firstItem="1010907" firstAttribute="top" secondItem="1010913" secondAttribute="bottom" constant="8" id="1022562"/>
-                            <constraint firstItem="1010907" firstAttribute="leading" secondItem="1008805" secondAttribute="leadingMargin" constant="10" id="1022563"/>
-                            <constraint firstItem="1011553" firstAttribute="top" secondItem="1010907" secondAttribute="bottom" constant="28" id="1023889"/>
-                            <constraint firstItem="1011553" firstAttribute="leading" secondItem="1008805" secondAttribute="leadingMargin" constant="10" id="1023890"/>
-                            <constraint firstItem="1011551" firstAttribute="top" secondItem="1011553" secondAttribute="bottom" constant="8" id="1023892"/>
-                            <constraint firstItem="1011551" firstAttribute="leading" secondItem="1008805" secondAttribute="leadingMargin" constant="10" id="1023893"/>
-                            <constraint firstItem="1011561" firstAttribute="top" secondItem="1011551" secondAttribute="bottom" constant="33" id="1107417"/>
-                            <constraint firstAttribute="leadingMargin" secondItem="1011561" secondAttribute="leading" constant="20" id="1107418"/>
-                            <constraint firstItem="1011561" firstAttribute="trailing" secondItem="1008805" secondAttribute="trailingMargin" constant="20" id="1107419"/>
-                            <constraint firstItem="1011563" firstAttribute="top" secondItem="1011561" secondAttribute="bottom" constant="22" id="1107420"/>
-                            <constraint firstAttribute="leadingMargin" secondItem="1011563" secondAttribute="leading" constant="20" id="1107421"/>
-                            <constraint firstItem="1011563" firstAttribute="trailing" secondItem="1008805" secondAttribute="trailingMargin" constant="20" id="1107422"/>
+                            <constraint id="1261022" firstItem="1259397" firstAttribute="top" secondItem="1010276" secondAttribute="bottom" constant="8"/>
+                            <constraint id="1261023" firstItem="1259397" firstAttribute="leading" secondItem="1008805" secondAttribute="leadingMargin"/>
+                            <constraint id="1261837" firstItem="1259393" firstAttribute="top" secondItem="1259397" secondAttribute="bottom" constant="7"/>
+                            <constraint id="1261838" firstItem="1259393" firstAttribute="leading" secondItem="1008805" secondAttribute="leadingMargin" constant="2"/>
+                            <constraint id="1262654" firstItem="1010913" firstAttribute="top" secondItem="1259393" secondAttribute="bottom" constant="8"/>
+                            <constraint id="1262655" firstItem="1010913" firstAttribute="leading" secondItem="1008805" secondAttribute="leadingMargin"/>
+                            <constraint id="1263472" firstItem="1010907" firstAttribute="top" secondItem="1010913" secondAttribute="bottom" constant="9"/>
+                            <constraint id="1263473" firstItem="1010907" firstAttribute="leading" secondItem="1008805" secondAttribute="leadingMargin"/>
+                            <constraint id="1263474" firstItem="1011553" firstAttribute="top" secondItem="1010907" secondAttribute="bottom" constant="12"/>
+                            <constraint id="1263475" firstItem="1011553" firstAttribute="leading" secondItem="1008805" secondAttribute="leadingMargin" constant="4"/>
+                            <constraint id="1264295" firstItem="1011551" firstAttribute="top" secondItem="1011553" secondAttribute="bottom" constant="8"/>
+                            <constraint id="1264296" firstItem="1011551" firstAttribute="leading" secondItem="1008805" secondAttribute="leadingMargin" constant="4"/>
+                            <constraint id="1265118" firstItem="1011561" firstAttribute="top" secondItem="1011551" secondAttribute="bottom" constant="20"/>
+                            <constraint id="1265119" firstAttribute="leadingMargin" secondItem="1011561" secondAttribute="leading" constant="20"/>
+                            <constraint id="1265120" firstItem="1011561" firstAttribute="trailing" secondItem="1008805" secondAttribute="trailingMargin" constant="20"/>
+                            <constraint id="1265121" firstItem="1011563" firstAttribute="top" secondItem="1011561" secondAttribute="bottom" constant="22"/>
+                            <constraint id="1265122" firstAttribute="leadingMargin" secondItem="1011563" secondAttribute="leading" constant="20"/>
+                            <constraint id="1265123" firstItem="1011563" firstAttribute="trailing" secondItem="1008805" secondAttribute="trailingMargin" constant="20"/>
                         </constraints>
                     </view>
                     <connections>
@@ -2294,11 +2257,12 @@
                         <outlet property="B_Back" destination="1010273" id="name-outlet-1010273"/>
                         <outlet property="B_Cancel" destination="1011563" id="name-outlet-1011563"/>
                         <outlet property="B_Save" destination="1011561" id="name-outlet-1011561"/>
-                        <outlet property="L_Date" destination="1010278" id="name-outlet-1010278"/>
                         <outlet property="L_SiteName" destination="1010276" id="name-outlet-1010276"/>
                         <outlet property="TB_Hours" destination="1011551" id="name-outlet-1011551"/>
                         <outlet property="TB_Volunteer" destination="1010907" id="name-outlet-1010907"/>
                         <segue destination="983859" kind="show" identifier="Segue_SCAddVolHoursToSCVolHours" animates="NO" id="1012938"/>
+                        <outlet property="TB_Date" destination="1259393" id="name-outlet-1259393"/>
+                        <outlet property="L_Title" destination="1010275" id="name-outlet-1010275"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1008806" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2336,70 +2300,58 @@
                             </label>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="1115310">
                                 <rect key="frame" x="357" y="20" width="20" height="20"/>
-                                <color key="color" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="color" colorSpace="calibratedWhite" white="1" alpha="1"/>
                             </activityIndicatorView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1115312">
-                                <rect key="frame" x="20" y="83" width="92" height="21"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="92" id="1115313"/>
-                                </constraints>
+                                <rect key="frame" x="20" y="70" width="50" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1115314">
-                                <rect key="frame" x="20" y="112" width="374" height="30"/>
+                                <rect key="frame" x="20" y="90" width="374" height="30"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1115316">
-                                <rect key="frame" x="20" y="162" width="92" height="20"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="92" id="1115317"/>
-                                </constraints>
+                                <rect key="frame" x="20" y="125" width="46" height="20"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1115318">
-                                <rect key="frame" x="20" y="191" width="374" height="30"/>
+                                <rect key="frame" x="20" y="145" width="374" height="30"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1115319">
-                                <rect key="frame" x="20" y="241" width="92" height="21"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="92" id="1115320"/>
-                                </constraints>
+                                <rect key="frame" x="20" y="180" width="79" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1115321">
-                                <rect key="frame" x="20" y="270" width="374" height="30"/>
+                                <rect key="frame" x="20" y="200" width="374" height="30"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Phone:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1115322">
-                                <rect key="frame" x="20" y="354" width="92" height="20"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="92" id="1115323"/>
-                                </constraints>
+                                <rect key="frame" x="20" y="270" width="54" height="20"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Subject" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1115324">
-                                <rect key="frame" x="20" y="383" width="374" height="30"/>
+                                <rect key="frame" x="20" y="290" width="374" height="30"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1115325">
-                                <rect key="frame" x="0.0" y="433" width="414" height="36"/>
+                                <rect key="frame" x="0.0" y="330" width="414" height="36"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="Save These Settings">
@@ -2407,17 +2359,8 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1115326">
-                                <rect key="frame" x="0.0" y="489" width="414" height="36"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <state key="normal" title="Never Mind">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password Verify" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1115328">
-                                <rect key="frame" x="20" y="308" width="374" height="30"/>
+                                <rect key="frame" x="20" y="235" width="374" height="30"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
@@ -2432,41 +2375,37 @@
                             <constraint firstAttribute="trailingMargin" secondItem="1115309" secondAttribute="trailing" constant="23" id="1116003"/>
                             <constraint firstItem="1115310" firstAttribute="top" secondItem="1113198" secondAttribute="top" constant="20" id="1116004"/>
                             <constraint firstAttribute="trailingMargin" secondItem="1115310" secondAttribute="trailing" constant="17" id="1116005"/>
-                            <constraint firstItem="1115312" firstAttribute="top" secondItem="1115309" secondAttribute="bottom" constant="12" id="1116683"/>
                             <constraint firstItem="1115312" firstAttribute="leading" secondItem="1113198" secondAttribute="leadingMargin" id="1116684"/>
-                            <constraint firstItem="1115314" firstAttribute="top" secondItem="1115312" secondAttribute="bottom" constant="8" id="1116685"/>
                             <constraint firstItem="1115314" firstAttribute="leading" secondItem="1113198" secondAttribute="leadingMargin" id="1116686"/>
                             <constraint firstItem="1115314" firstAttribute="trailing" secondItem="1113198" secondAttribute="trailingMargin" id="1116687"/>
-                            <constraint firstItem="1115316" firstAttribute="top" secondItem="1115314" secondAttribute="bottom" constant="20" id="1116688"/>
                             <constraint firstItem="1115316" firstAttribute="leading" secondItem="1113198" secondAttribute="leadingMargin" id="1116689"/>
-                            <constraint firstItem="1115318" firstAttribute="top" secondItem="1115316" secondAttribute="bottom" constant="9" id="1117374"/>
                             <constraint firstItem="1115318" firstAttribute="leading" secondItem="1113198" secondAttribute="leadingMargin" id="1117375"/>
                             <constraint firstItem="1115318" firstAttribute="trailing" secondItem="1113198" secondAttribute="trailingMargin" id="1117376"/>
-                            <constraint firstItem="1115319" firstAttribute="top" secondItem="1115318" secondAttribute="bottom" constant="20" id="1117377"/>
                             <constraint firstItem="1115319" firstAttribute="leading" secondItem="1113198" secondAttribute="leadingMargin" id="1117378"/>
-                            <constraint firstItem="1115321" firstAttribute="top" secondItem="1115319" secondAttribute="bottom" constant="8" id="1118068"/>
                             <constraint firstItem="1115321" firstAttribute="leading" secondItem="1113198" secondAttribute="leadingMargin" id="1118069"/>
                             <constraint firstItem="1115321" firstAttribute="trailing" secondItem="1113198" secondAttribute="trailingMargin" id="1118070"/>
-                            <constraint firstItem="1115328" firstAttribute="top" secondItem="1115321" secondAttribute="bottom" constant="8" id="1118071"/>
                             <constraint firstItem="1115328" firstAttribute="leading" secondItem="1113198" secondAttribute="leadingMargin" id="1118072"/>
                             <constraint firstItem="1115328" firstAttribute="trailing" secondItem="1113198" secondAttribute="trailingMargin" id="1118073"/>
-                            <constraint firstItem="1115322" firstAttribute="top" secondItem="1115328" secondAttribute="bottom" constant="16" id="1118769"/>
                             <constraint firstItem="1115322" firstAttribute="leading" secondItem="1113198" secondAttribute="leadingMargin" id="1118770"/>
-                            <constraint firstItem="1115324" firstAttribute="top" secondItem="1115322" secondAttribute="bottom" constant="9" id="1119468"/>
                             <constraint firstItem="1115324" firstAttribute="leading" secondItem="1113198" secondAttribute="leadingMargin" id="1119469"/>
                             <constraint firstItem="1115324" firstAttribute="trailing" secondItem="1113198" secondAttribute="trailingMargin" id="1119470"/>
-                            <constraint firstItem="1115325" firstAttribute="top" secondItem="1115324" secondAttribute="bottom" constant="20" id="1119471"/>
                             <constraint firstAttribute="leadingMargin" secondItem="1115325" secondAttribute="leading" constant="20" id="1120173"/>
                             <constraint firstItem="1115325" firstAttribute="trailing" secondItem="1113198" secondAttribute="trailingMargin" constant="20" id="1120174"/>
-                            <constraint firstItem="1115326" firstAttribute="top" secondItem="1115325" secondAttribute="bottom" constant="20" id="1120175"/>
-                            <constraint firstAttribute="leadingMargin" secondItem="1115326" secondAttribute="leading" constant="20" id="1120176"/>
-                            <constraint firstItem="1115326" firstAttribute="trailing" secondItem="1113198" secondAttribute="trailingMargin" constant="20" id="1120177"/>
+                            <constraint id="1283051" firstItem="1115309" firstAttribute="bottom" secondItem="1115312" secondAttribute="top" constant="1"/>
+                            <constraint id="1283871" firstItem="1115314" firstAttribute="top" secondItem="1115309" secondAttribute="bottom" constant="19"/>
+                            <constraint id="1284692" firstItem="1115316" firstAttribute="top" secondItem="1115314" secondAttribute="bottom" constant="5"/>
+                            <constraint id="1285512" firstItem="1115318" firstAttribute="top" secondItem="1115316" secondAttribute="bottom"/>
+                            <constraint id="1286333" firstItem="1115319" firstAttribute="top" secondItem="1115318" secondAttribute="bottom" constant="5"/>
+                            <constraint id="1287155" firstItem="1115319" firstAttribute="bottom" secondItem="1115321" secondAttribute="top" constant="1"/>
+                            <constraint id="1287978" firstItem="1115328" firstAttribute="top" secondItem="1115321" secondAttribute="bottom" constant="5"/>
+                            <constraint id="1288802" firstItem="1115322" firstAttribute="top" secondItem="1115328" secondAttribute="bottom" constant="5"/>
+                            <constraint id="1289626" firstItem="1115324" firstAttribute="top" secondItem="1115322" secondAttribute="bottom"/>
+                            <constraint id="1290451" firstItem="1115325" firstAttribute="top" secondItem="1115324" secondAttribute="bottom" constant="10"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="AI_Busy" destination="1115310" id="name-outlet-1115310"/>
                         <outlet property="B_Back" destination="1115306" id="name-outlet-1115306"/>
-                        <outlet property="B_Cancel" destination="1115326" id="name-outlet-1115326"/>
                         <outlet property="B_Save" destination="1115325" id="name-outlet-1115325"/>
                         <outlet property="L_Title" destination="1115309" id="name-outlet-1115309"/>
                         <outlet property="TB_Email" destination="1115318" id="name-outlet-1115318"/>
@@ -2504,7 +2443,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sites On Date" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="1193895">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Site On Date" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="1193895">
                                 <rect key="frame" x="58" y="42" width="276" height="29"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="24"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -2518,7 +2457,7 @@
                             </label>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="1193897">
                                 <rect key="frame" x="357" y="20" width="20" height="20"/>
-                                <color key="color" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="color" colorSpace="calibratedWhite" white="1" alpha="1"/>
                             </activityIndicatorView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="[date]" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="1193898">
                                 <rect key="frame" x="58" y="126" width="276" height="29"/>
@@ -2618,6 +2557,7 @@
                         <outlet property="TB_OpenTime" destination="1195444" id="name-outlet-1195444"/>
                         <outlet property="TB_CloseTime" destination="1195447" id="name-outlet-1195447"/>
                         <outlet property="B_Done" destination="1195448" id="name-outlet-1195448"/>
+                        <outlet property="L_Title" destination="1193895" id="name-outlet-1193895"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1193890" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2654,7 +2594,7 @@
                             </label>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="1206836">
                                 <rect key="frame" x="357" y="20" width="20" height="20"/>
-                                <color key="color" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="color" colorSpace="calibratedWhite" white="1" alpha="1"/>
                             </activityIndicatorView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1206848">
                                 <rect key="frame" x="20" y="86" width="94" height="30"/>
@@ -2789,10 +2729,9 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="1206841" fixedFrame="YES">
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="1206841">
                                 <rect key="frame" x="357" y="20" width="20" height="20"/>
-                                <color key="color" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="color" colorSpace="calibratedWhite" white="1" alpha="1"/>
                             </activityIndicatorView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="[date]" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="1206842">
                                 <rect key="frame" x="58" y="79" width="276" height="29"/>
@@ -2841,6 +2780,8 @@
                             <constraint id="1212780" firstItem="1206842" firstAttribute="top" secondItem="1206840" secondAttribute="bottom" constant="8"/>
                             <constraint id="1212781" firstAttribute="trailingMargin" secondItem="1206842" secondAttribute="trailing" constant="60"/>
                             <constraint id="1212782" firstItem="1207646" firstAttribute="trailing" secondItem="1205287" secondAttribute="trailingMargin" constant="20"/>
+                            <constraint id="1240031" firstItem="1206841" firstAttribute="top" secondItem="1205287" secondAttribute="top" constant="20"/>
+                            <constraint id="1240799" firstAttribute="trailingMargin" secondItem="1206841" secondAttribute="trailing" constant="17"/>
                         </constraints>
                     </view>
                     <connections>
@@ -2855,6 +2796,78 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1205288" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1489" y="1636"/>
+        </scene>
+        <scene sceneID="1293166">
+            <objects>
+                <viewController id="1293167" sceneMemberID="viewController" customClass="VC_SCVolList">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="1293164"/>
+                        <viewControllerLayoutGuide type="bottom" id="1293165"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="1293168">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" colorSpace="calibratedWhite" white="0.666666666666667" alpha="1"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1293997">
+                                <rect key="frame" x="9" y="15" width="72" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="72" id="1293998"/>
+                                </constraints>
+                                <state key="normal" title="&lt; Back">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Volunteers" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="1293999">
+                                <rect key="frame" x="20" y="42" width="374" height="29"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="24"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="1294000">
+                                <rect key="frame" x="357" y="20" width="20" height="20"/>
+                                <color key="color" colorSpace="calibratedWhite" white="1" alpha="1"/>
+                            </activityIndicatorView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="1294001">
+                                <rect key="frame" x="0.0" y="86" width="414" height="624"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="1294002">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1294002" id="1294003">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <constraints>
+                            <constraint id="1295789" firstItem="1293997" firstAttribute="top" secondItem="1293168" secondAttribute="top" constant="15"/>
+                            <constraint id="1295790" firstAttribute="leadingMargin" secondItem="1293997" secondAttribute="leading" constant="11"/>
+                            <constraint id="1295791" firstItem="1294000" firstAttribute="top" secondItem="1293168" secondAttribute="top" constant="20"/>
+                            <constraint id="1295792" firstAttribute="trailingMargin" secondItem="1294000" secondAttribute="trailing" constant="17"/>
+                            <constraint id="1295793" firstItem="1293999" firstAttribute="top" secondItem="1293168" secondAttribute="top" constant="42"/>
+                            <constraint id="1295794" firstItem="1293999" firstAttribute="trailing" secondItem="1293168" secondAttribute="trailingMargin"/>
+                            <constraint id="1295795" firstItem="1293999" firstAttribute="leading" secondItem="1293168" secondAttribute="leadingMargin"/>
+                            <constraint id="1296635" firstItem="1294001" firstAttribute="top" secondItem="1293999" secondAttribute="bottom" constant="15"/>
+                            <constraint id="1296636" firstAttribute="leadingMargin" secondItem="1294001" secondAttribute="leading" constant="20"/>
+                            <constraint id="1296637" firstItem="1294001" firstAttribute="trailing" secondItem="1293168" secondAttribute="trailingMargin" constant="20"/>
+                            <constraint id="1296638" firstAttribute="bottom" secondItem="1294001" secondAttribute="bottom" constant="26"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <segue id="1294955" destination="956331" kind="show" animates="NO" identifier="Segue_SCVolListToSCSites"/>
+                        <outlet property="B_Back" destination="1293997" id="name-outlet-1293997"/>
+                        <outlet property="AI_Busy" destination="1294000" id="name-outlet-1294000"/>
+                        <outlet property="TV_Volunteers" destination="1294001" id="name-outlet-1294001"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1293169" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-744" y="2485"/>
         </scene>
     </scenes>
     <resources>

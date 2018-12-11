@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -21,7 +22,7 @@ namespace a_vitavol
         Button B_NewUser;
         Spinner SP_TypeOfUser;
         ListView LV_Users;
-        ProgressBar PB_Busy;
+        C_BusyBox BusyBox;
 
         List<E_VitaUserRoles> UserRoles;
         List<C_VitaUser> OurUsers;
@@ -42,7 +43,7 @@ namespace a_vitavol
             B_NewUser = FindViewById<Button>(Resource.Id.B_NewUser);
             SP_TypeOfUser = FindViewById<Spinner>(Resource.Id.SP_WhichUsers);
             LV_Users = FindViewById<ListView>(Resource.Id.LV_Users);
-            PB_Busy = FindViewById<ProgressBar>(Resource.Id.PB_Busy);
+            BusyBox = new C_BusyBox(this, "Loading Users");
 
             C_Common.SetViewColors(this, Resource.Id.V_AdminUsers);
 
@@ -82,7 +83,8 @@ namespace a_vitavol
                 E_VitaUserRoles.Admin
             };
 
-            PB_Busy.Visibility = ViewStates.Visible;
+            if (!Global.AllUsersFetched)
+                BusyBox.Show();
             EnableUI(false);
 
             Task.Run(async () =>
@@ -92,7 +94,7 @@ namespace a_vitavol
 
                 void p()
                 {
-                    PB_Busy.Visibility = ViewStates.Gone;
+                    BusyBox.Hide();
                     EnableUI(true);
 
                     StartLV(OurUsers);
@@ -120,11 +122,16 @@ namespace a_vitavol
             };
         }
 
-        public override void OnBackPressed() =>
-            StartActivity(new Intent(this, typeof(A_AdminMenu)));
+        public override void OnBackPressed()
+        {
+            if (UIIsEnabled)
+                StartActivity(new Intent(this, typeof(A_AdminMenu)));
+        }
 
+        bool UIIsEnabled;
         private void EnableUI(bool en)
         {
+            UIIsEnabled = en;
             B_NewUser.Enabled = en;
             SP_TypeOfUser.Enabled = en;
             LV_Users.Enabled = en;

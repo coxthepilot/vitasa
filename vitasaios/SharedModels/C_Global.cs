@@ -10,7 +10,6 @@ using System.Net.Http.Headers;
 
 namespace zsquared
 {
-    public enum E_DistroType { NewUser, Feedback }
     public enum E_Reports { Unknown = 0, WorkLog, Volunteers };
     public enum E_ViewCameFrom { Unknown = 0, List, Map, MySignUps, SCSites, SCSite, Login, VolOptions, Suggestions, CalEntry, CalDefaults, 
         Users, User, Main, SCOptions, Admin, AdminSiteCalendar, AdminSiteCalReset, SiteCalendar, AdminMobileDate }
@@ -18,19 +17,28 @@ namespace zsquared
 
     public class C_Global
     {
-        public static readonly string[] States = {
+        public static readonly string[] StateNames = {
             "AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "FL", "GA",
             "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD",
             "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ",
             "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC",
             "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY" };
 
-        public static readonly string Name_Global = "global";
+        public static string[] AbrevDayOfWeek = { "Su", "M", "Tu", "W", "Th", "F", "Sa" };
 
-        ///// <summary>
-        ///// Used in client; the message to show
-        ///// </summary>
-        //public E_Message MessageToShow;
+        /// <summary>
+        /// Number of minutes that the site all fetch data is valid; After expiration, the
+        /// sites data is refetched.
+        /// </summary>
+        public static int SitesExpirationTime = 10;
+
+        /// <summary>
+        /// Number of minutes that the user all fetch data is valid; After expiration, the
+        /// users data is refetched.
+        /// </summary>
+        public static int UsersExpirationTime = 10;
+
+        public static readonly string Name_Global = "global";
 
         /// <summary>
         /// This is the id user that we logged into the system with. This is the user with the valid token.
@@ -42,12 +50,14 @@ namespace zsquared
         /// </summary>
         public List<C_VitaSite> SiteCache;
         public bool AllSitesFetched;
+        public C_YMDhms AllSitesFetchTime;
 
         /// <summary>
         /// List of known users; this is not a list of ALL users, just ones we have seen
         /// </summary>
         public List<C_VitaUser> UserCache;
         public bool AllUsersFetched;
+        public C_YMDhms AllUsersFetchTime;
 
         /// <summary>
         /// The slug of the current selected site
@@ -59,12 +69,6 @@ namespace zsquared
         /// The details view controller needs to know where to go "Back" to
         /// </summary>
         public E_ViewCameFrom ViewCameFrom = E_ViewCameFrom.Unknown;
-
-        ///// <summary>
-        ///// The open sites that need help. Used in SitesOnDateMap after launch from SitesOnDateList, and
-        ///// then in SitesOnDateList if return from Map; this is the slug for the site that needs help
-        ///// </summary>
-        //public List<string> OpenSitesThatNeedHelp;
 
         /// <summary>
         /// The Month and Year last used in the Calendar view.
@@ -81,7 +85,6 @@ namespace zsquared
         public E_Reports SelectedReport;
         public List<C_CalendarEntry> DOWCalendar;
         public DayOfWeek SelectedDOW;
-        public E_DistroType EmailDistroType;
 
         public C_CalendarDateDetails CalendarDateDetails;
 
@@ -98,6 +101,9 @@ namespace zsquared
 
             UserCache = new List<C_VitaUser>();
             SiteCache = new List<C_VitaSite>();
+
+            _SuggestionCache = new List<C_Suggestion>();
+            _NotificationCache = new List<C_Notification>();
 
             BytesReceived = 0;
 
@@ -149,8 +155,8 @@ namespace zsquared
                         scids.Add(u.id);
                         scnames.Add(u.Name);
                     }
-                    site.SiteCoordinatorsIds = scids;
-                    site.SiteCoordinatorNames = scnames;
+                    //site.SiteCoordinatorsIds = scids;
+                    //site.SiteCoordinatorNames = scnames;
                 }
 
                 // fix the SiteId in any calendar entries in case there were not set correctly
@@ -201,7 +207,7 @@ namespace zsquared
                 {
                     JsonValue responseJson = JsonValue.Parse(ior.ResponseString);
 
-                    C_CalendarEntry cex = new C_CalendarEntry(responseJson);
+                    C_CalendarEntry cex = new C_CalendarEntry(responseJson, site.id);
                     calEntry.id = cex.id;
                     calEntry.SiteID = cex.SiteID;
 
@@ -321,6 +327,15 @@ namespace zsquared
                 jb.Add(site.Latitude, C_VitaSite.N_Latitude);
                 jb.Add(site.Longitude, C_VitaSite.N_Longitude);
                 jb.Add(site.PlaceID, C_VitaSite.N_PlaceID);
+                jb.Add(site.ContactName, C_VitaSite.N_ContactName);
+                jb.Add(site.ContactPhone, C_VitaSite.N_ContactPhone);
+                jb.Add(site.Notes, C_VitaSite.N_Notes);
+
+                jb.StartArray(C_VitaSite.N_SiteCoordinators);
+                foreach(C_SiteCoordinator sc in site.SiteCoordinators)
+                    jb.AddArrayObject(sc.ToJson());
+                jb.EndArray();
+
                 string bodyjson = jb.ToString();
 
                 ior = await UpdateSiteFields(site, bodyjson, token);
@@ -427,7 +442,12 @@ namespace zsquared
             C_IOResult ior = await Upload("POST", updateurl, jsonString, token);
 
             if (ior.Success)
-                SiteCache.Add(ior.Site);
+            {
+                JsonValue responseJson = JsonValue.Parse(ior.ResponseString);
+                C_VitaSite newsite = new C_VitaSite(responseJson);
+                ior.Site = newsite;
+                SiteCache.Add(newsite);
+            }
 
             return ior;
         }
@@ -488,7 +508,20 @@ namespace zsquared
 
             if (AllSitesFetched)
             {
-                return SiteCache;
+                try
+                {
+                    C_YMDhms expireTime = AllSitesFetchTime.AddMinutes(SitesExpirationTime);
+
+                    // use the current data until the expire time
+                    if (C_YMDhms.Now < expireTime)
+                        return SiteCache;
+                }
+                catch (Exception ex)
+                {
+#if DEBUG
+                    Console.WriteLine(ex.Message);
+#endif
+                }
             }
 
             List<C_VitaSite> siteslist = null;
@@ -504,6 +537,7 @@ namespace zsquared
                     siteslist = ImportSites(responseJson);
 
                     AllSitesFetched = true;
+                    AllSitesFetchTime = C_YMDhms.Now;
                 }
             }
             catch (Exception e)
@@ -569,7 +603,6 @@ namespace zsquared
                 {
                     if (!SiteCacheContains(res.Slug))
                         SiteCache.Add(res);
-                    //CleanWorkItemsFromSite(res);
                 }
             }
 
@@ -636,27 +669,38 @@ namespace zsquared
         private List<C_VitaSite> ImportSites(JsonValue json)
         {
             List<C_VitaSite> res = new List<C_VitaSite>();
-            foreach (JsonValue j in json)
+            try
             {
-                try
+                foreach (JsonValue j in json)
                 {
-                    C_VitaSite vs = new C_VitaSite(j)
-                    {
-                        SampleTime = DateTime.Now
-                    };
+                    C_VitaSite aa = new C_VitaSite();
+
+                    C_VitaSite vs = new C_VitaSite(j);
                     res.Add(vs);
+
+                    //// -------- testing only ---------------
+                    //C_YMD now = C_YMD.Now;
+                    //foreach (C_CalendarEntry ce in vs.SiteCalendar)
+                    //{
+                    //    if (ce.Date < now)
+                    //    {
+                    //        Console.WriteLine(">>>>> " + vs.Name + " has old dates.");
+                    //        break;
+                    //    }
+                    //}
+                    //// -------- testing only ---------------
 
                     if (!SiteCacheContains(vs.Slug))
                         SiteCache.Add(vs);
 
                     AllSitesFetched = true;
                 }
-                catch (Exception e)
-                {
+            }
+            catch (Exception e)
+            {
 #if DEBUG
-                    Console.WriteLine(e.Message);
+                Console.WriteLine(e.Message);
 #endif
-                }
             }
 
             return res;
@@ -778,11 +822,19 @@ namespace zsquared
 
                 BytesReceived += responseString.Length;
 
-                if (response.StatusCode != HttpStatusCode.OK)
+                if (response.StatusCode == HttpStatusCode.Unauthorized)
                 {
                     res.Success = false;
                     res.ResultCode = E_IOResultCode.WebException;
-                    res.ErrorMessage = "error in login (bad http status code)";
+                    res.ErrorMessage = "Bad email or password.";
+
+                    return res;
+                }
+                else if (response.StatusCode != HttpStatusCode.OK)
+                {
+                    res.Success = false;
+                    res.ResultCode = E_IOResultCode.WebException;
+                    res.ErrorMessage = "error in login (" + response.StatusCode + ")";
 
                     return res;
                 }
@@ -821,8 +873,12 @@ namespace zsquared
 
                 res.User.Token = token;
                 LoggedInUserId = res.User.id;
-                if (!UserCacheContains(res.User.id))
+
+                C_VitaUser ux = GetUserFromCacheNoFetch(LoggedInUserId);
+                if (ux == null)
                     UserCache.Add(res.User);
+                else
+                    ux.Token = res.User.Token;
 
                 res.Success = true;
             }
@@ -906,7 +962,11 @@ namespace zsquared
                 return UserCache;
 
             if (AllUsersFetched)
-                return UserCache;
+            {
+                C_YMDhms expireTime = AllUsersFetchTime.AddMinutes(UsersExpirationTime);
+                if (C_YMDhms.Now < expireTime)
+                    return UserCache;
+            }
 
             List<C_VitaUser> res = null;
             AllUsersFetched = false;
@@ -919,17 +979,28 @@ namespace zsquared
 
                 JsonValue jv = JsonValue.Parse(ior.ResponseString);
 
-                res = new List<C_VitaUser>();
-                foreach (JsonValue jv1 in jv)
+                try
                 {
-                    C_VitaUser vu = new C_VitaUser(jv1);
-                    res.Add(vu);
+                    res = new List<C_VitaUser>();
+                    foreach (JsonValue jv1 in jv)
+                    {
+                        C_VitaUser vu = new C_VitaUser(jv1);
+                        res.Add(vu);
 
-                    UserCache.Add(vu);
-                    //CleanWorkItemsFromUser(vu);
+                        var ou = UserCache.Where(u => u.id == vu.id);
+                        if (!ou.Any())
+                            UserCache.Add(vu);
+                    }
+                }
+                catch (Exception ex)
+                {
+#if DEBUG
+                    Console.WriteLine(ex.Message);
+#endif
                 }
 
                 AllUsersFetched = true;
+                AllUsersFetchTime = C_YMDhms.Now;
             }
             catch (Exception e)
             {
@@ -1015,7 +1086,12 @@ namespace zsquared
             C_IOResult ior = await Upload("POST", usersUrl, userjson, token);
 
             if (ior.Success)
+            {
+                JsonValue jv = JsonValue.Parse(ior.ResponseString);
+                C_VitaUser u = new C_VitaUser(jv);
+                ior.User = u;
                 UserCache.Add(ior.User);
+            }
 
             return ior;
         }
@@ -1023,6 +1099,12 @@ namespace zsquared
         public C_VitaUser GetUserFromCacheNoFetch(int id)
         {
             var ou = UserCache.Where(u => u.id == id);
+            return ou.FirstOrDefault();
+        }
+
+        public C_VitaUser GetUserFromCacheNoFetch(string email)
+        {
+            var ou = UserCache.Where(u => u.Email == email);
             return ou.FirstOrDefault();
         }
 
@@ -1066,6 +1148,10 @@ namespace zsquared
         {
             C_VitaUser res = null;
 
+            res = GetUserFromCacheNoFetch(id);
+            if (res != null)
+                return res;
+
             string usersUrl = "/users/" + id.ToString();
 
             C_IOResult ior = await Download(usersUrl, token);
@@ -1090,27 +1176,6 @@ namespace zsquared
             return res;
         }
 
-        public async Task<C_IOResult> SubscribeUserToPreferredSites(C_VitaUser user, string token, bool subscribe)
-        {
-            user.SubscribePreferred = subscribe;
-
-            if (UsingTestData)
-            {
-                return new C_IOResult() { Success = true };
-            }
-
-            C_JsonBuilder jb = new C_JsonBuilder();
-            jb.Add(user.SubscribePreferred, C_VitaUser.N_SubscribePreferred);
-            jb.StartArray(C_VitaUser.N_PreferredSites);
-            foreach(string pss in user.PreferredSiteSlugs)
-                jb.AddArrayElement(pss);
-            jb.EndArray();
-
-            C_IOResult ior = await UpdateUserFields(jb, user, token);
-
-            return ior;
-        }
-
         public async Task<C_IOResult> SubscribeUserToMobileSites(C_VitaUser user, string token, bool subscribe)
         {
             user.SubscribeMobile = subscribe;
@@ -1120,16 +1185,14 @@ namespace zsquared
                 return new C_IOResult() { Success = true };
             }
 
-            C_JsonBuilder jb = new C_JsonBuilder();
-            jb.Add(user.SubscribeMobile ? "true" : "false", C_VitaUser.N_SubscribeMobile);
-            jb.EndArray();
+            C_IOResult ior = await UpdateUserFields(user.ToJsonAsJsonBuilder(), user, token);
 
-            C_IOResult ior = await UpdateUserFields(jb, user, token);
 
             return ior;
         }
 
         // --------------------- work log items -------------------
+        const double EPSILON = 0.01d;
 
         public async Task<C_IOResult> AddWorkLogItem(C_VitaUser user, string token, C_WorkLogItem workLogItem)
         {
@@ -1141,24 +1204,84 @@ namespace zsquared
                 return new C_IOResult() { Success = true };
             }
 
-            user.WorkItems.Add(workLogItem);
+            string usersUrl = "/users/" + user.id.ToString() + "/work_logs/";
 
-            throw new Exception("not implemented yet");
+            //workLogItem.UserId = user.id;
+            string worklogjson = workLogItem.ToJson();
+
+            C_IOResult ior = await Upload("POST", usersUrl, worklogjson, token);
+
+            if (ior.Success)
+            {
+                // the response string is that of a user with the worklog embedded
+                JsonValue rjv = JsonValue.Parse(ior.ResponseString);
+                C_VitaUser ux = new C_VitaUser(rjv);
+                // find the worklog we just created to get its id
+                foreach(C_WorkLogItem wix in ux.WorkItems)
+                {
+                    if ((wix.Date == workLogItem.Date) && (Math.Abs(wix.Hours - workLogItem.Hours) < EPSILON) && (wix.SiteSlug == workLogItem.SiteSlug))
+                    {
+                        workLogItem.id = wix.id;
+                        break;
+                    }
+                }
+                user.WorkItems.Add(workLogItem);
+
+                // and add it to the site's list as well
+                C_VitaSite site = GetSiteFromSlugNoFetch(workLogItem.SiteSlug);
+
+                if (site != null)
+                    site.WorkLogItems.Add(workLogItem);
+            }
+
+            return ior;
         }
 
         public async Task<C_IOResult> UpdateWorkLogItem(C_VitaUser user, string token, C_WorkLogItem workLogItem)
         {
+            if (workLogItem.id == -1)
+                throw new ApplicationException("id must not be -1 for an update");
+
             if (UsingTestData)
             {
-
                 return new C_IOResult() { Success = true };
             }
 
-            throw new Exception("not implemented yet");
+            string usersUrl = "/users/" + user.id.ToString() + "/work_logs/" + workLogItem.id.ToString();
+
+            string worklogjson = workLogItem.ToJson();
+
+            C_IOResult ior = await Upload("PUT", usersUrl, worklogjson, token);
+
+            // note that the ior.responsestring is that of a user/json, not a worklog
+            if (ior.Success)
+            {
+                // we need to make sure the copy of this item on the server
+                C_VitaSite site = GetSiteFromSlugNoFetch(workLogItem.SiteSlug);
+                if (site != null)
+                {
+                    foreach (C_WorkLogItem wix in site.WorkLogItems)
+                    {
+                        if (wix.id == workLogItem.id)
+                        {
+                            wix.Approved = workLogItem.Approved;
+                            wix.Date = workLogItem.Date;
+                            wix.Hours = workLogItem.Hours;
+
+                            break;
+                        }
+                    }
+                }
+            }
+
+            return ior;
         }
 
         public async Task<C_IOResult> RemoveWorkLogItem(C_VitaUser user, string token, C_WorkLogItem workLogItem)
         {
+            if (workLogItem.id == -1)
+                throw new ApplicationException("id must not be -1 for a delete");
+
             if (UsingTestData)
             {
                 user.WorkItems.Remove(workLogItem);
@@ -1166,9 +1289,35 @@ namespace zsquared
                 return new C_IOResult() { Success = true };
             }
 
-            user.WorkItems.Remove(workLogItem);
+            string usersUrl = "/users/" + user.id.ToString() + "/work_logs/" + workLogItem.id.ToString();
 
-            throw new Exception("not implemented yet");
+            string worklogjson = workLogItem.ToJson();
+
+            C_IOResult ior = await Upload("DELETE", usersUrl, worklogjson, token);
+
+            if (ior.Success)
+            {
+                user.WorkItems.Remove(workLogItem);
+                // and find this workitem in the site side
+                C_VitaSite site = GetSiteFromSlugNoFetch(workLogItem.SiteSlug);
+                if (site != null)
+                {
+                    int wiix = -1;
+                    for(int ix = 0; ix != site.WorkLogItems.Count; ix++)
+                    {
+                        C_WorkLogItem wix = site.WorkLogItems[ix];
+                        if (wix.id == workLogItem.id)
+                        {
+                            wiix = ix;
+                            break;
+                        }
+                    }
+                    if (wiix != -1)
+                        site.WorkLogItems.RemoveAt(wiix);
+                }
+            }
+                
+            return ior;
         }
 
         private int GetLargestWorkLogItemID()
@@ -1487,11 +1636,8 @@ namespace zsquared
 
         // =================== core upload/download =================
 
-        //public static string VitaCoreUrl = "https://vitasa.abandonedfactory.net";
-
         public C_Config Config;
-
-        public const string N_ConfigURL = "http://s3-us-west-2.amazonaws.com/vita-static-content-prod/";
+        public const string N_ConfigURL = "https://s3-us-west-2.amazonaws.com/vitasa/";
         public const string N_ConfigName = "config.json";
 
         public async Task<bool> CheckConfig()

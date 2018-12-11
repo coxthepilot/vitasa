@@ -32,11 +32,15 @@ namespace vitavol
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UILabel L_Date { get; set; }
+        UIKit.UILabel L_SiteName { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UILabel L_SiteName { get; set; }
+        UIKit.UILabel L_Title { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UITextField TB_Date { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
@@ -68,14 +72,19 @@ namespace vitavol
                 B_Save = null;
             }
 
-            if (L_Date != null) {
-                L_Date.Dispose ();
-                L_Date = null;
-            }
-
             if (L_SiteName != null) {
                 L_SiteName.Dispose ();
                 L_SiteName = null;
+            }
+
+            if (L_Title != null) {
+                L_Title.Dispose ();
+                L_Title = null;
+            }
+
+            if (TB_Date != null) {
+                TB_Date.Dispose ();
+                TB_Date = null;
             }
 
             if (TB_Hours != null) {

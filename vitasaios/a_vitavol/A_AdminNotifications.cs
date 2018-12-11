@@ -90,14 +90,19 @@ namespace a_vitavol
             });
         }
 
+        bool UIIsEnabled;
         private void EnableUI(bool en)
         {
+            UIIsEnabled = en;
             B_New.Enabled = en;
             LV_Notifications.Enabled = en;
         }
 
         public override void OnBackPressed()
         {
+            if (!UIIsEnabled)
+                return;
+
             Global.SelectedNotification = null;
             StartActivity(new Intent(this, typeof(A_AdminMenu)));
         }

@@ -15,6 +15,7 @@ namespace a_vitavol
     public class A_AdminSiteLocation : Activity
     {
         C_Global Global;
+        C_VitaUser LoggedInUser;
 
         TextView L_SiteName;
 
@@ -41,6 +42,7 @@ namespace a_vitavol
             if (g.Global == null)
                 g.Global = new C_Global();
             Global = g.Global;
+            LoggedInUser = Global.GetUserFromCacheNoFetch(Global.LoggedInUserId);
 
             SetContentView(Resource.Layout.AdminSiteLocation);
 
@@ -58,12 +60,14 @@ namespace a_vitavol
 
             C_Common.SetViewColors(this, Resource.Id.V_AdminSiteLocation);
 
-            B_Done.Click += (sender, e) => 
+            async void doneHandler(object sender, System.EventArgs e)
             {
-                SaveLocation();
+                await DoTheSave();
+                //SaveLocation();
 
-                StartActivity(new Intent(this, typeof(A_AdminSite)));
-            };
+                //StartActivity(new Intent(this, typeof(A_AdminSite)));
+            }
+            B_Done.Click += doneHandler;
 
             B_GetLatLong.Click += (sender, e) => 
             {
@@ -87,7 +91,7 @@ namespace a_vitavol
                 });
             };
 
-            StateSpinner = new C_SPinnerHelper<string>(this, SP_State, C_Global.States.ToList());
+            StateSpinner = new C_SPinnerHelper<string>(this, SP_State, C_Global.StateNames.ToList());
             StateSpinner.SetValue(Global.SelectedSiteTemp.State);
 
             TB_Name.Text = Global.SelectedSiteTemp.Name;
@@ -99,6 +103,103 @@ namespace a_vitavol
             TB_Longitude.Text = Global.SelectedSiteTemp.Longitude;
 
             L_SiteName.Text = Global.SelectedSiteTemp.Name;
+            EnableUI(true);
+        }
+
+        public override void OnBackPressed()
+        {
+            if (!UIIsEnabled)
+                return;
+
+            if (TB_Name.Text.Length == 0)
+            {
+                StartActivity(new Intent(this, typeof(A_AdminSite)));
+                return;
+            }
+
+            if (!ChangesMade())
+            {
+                StartActivity(new Intent(this, typeof(A_AdminSite)));
+                return;
+            }
+
+            C_MessageBox mbox1 = 
+                new C_MessageBox(this,
+                                 "Change",
+                                 "Changes were made. Save?",
+                                 E_MessageBoxButtons.YesNoCancel);
+            mbox1.Show();
+            async void mboxHandler(object sender, C_MessageBoxEventArgs args)
+            {
+                if (args.Result == E_MessageBoxResults.Cancel)
+                    return;
+
+                if (args.Result != E_MessageBoxResults.Yes)
+                {
+                    StartActivity(new Intent(this, typeof(A_AdminSite)));
+                    return;
+                }
+
+                await DoTheSave();
+            }
+            mbox1.Dismissed += mboxHandler;
+        }
+
+        private async Task<bool> DoTheSave()
+        {
+            if (TB_Name.Text.Length < 4)
+            {
+                C_MessageBox mbox1 =
+                    new C_MessageBox(this,
+                                     "Error",
+                                     "A site name is required (3 or more characters).",
+                                     E_MessageBoxButtons.Ok);
+                mbox1.Show();
+                return true;
+            }
+
+            if (Global.SelectedSiteTemp.id == -1)
+            {
+                var ou = Global.SiteCache.Where(s => s.Name.ToLower() == TB_Name.Text.ToLower());
+                if (ou.Any())
+                {
+                    C_MessageBox mbox1 =
+                        new C_MessageBox(this,
+                                         "Error",
+                                         "A site name with that name already exists. Choose another name.",
+                                         E_MessageBoxButtons.Ok);
+                    mbox1.Show();
+                    return true;
+                }
+            }
+
+            SaveLocation();
+
+            // if this a new site, go ahead and do the create so that the other functions can work (like calendar)
+            if (Global.SelectedSiteTemp.id == -1)
+            {
+                C_IOResult ior = await Global.CreateSite(Global.SelectedSiteTemp, Global.SelectedSiteTemp.ToJson(false), LoggedInUser.Token);
+
+                if (!ior.Success)
+                {
+                    C_MessageBox mbox1 =
+                        new C_MessageBox(this,
+                                         "Error",
+                                         "Unable to create the site.",
+                                         E_MessageBoxButtons.Ok);
+                    mbox1.Show();
+                    return true;
+                }
+                else
+                {
+                    Global.SelectedSiteTemp = ior.Site;
+                    Global.SelectedSiteSlug = ior.Site.Slug;
+                    Global.SelectedSiteName = ior.Site.Name;
+                }
+            }
+
+            StartActivity(new Intent(this, typeof(A_AdminSite)));
+            return true;
         }
 
         private void SaveLocation()
@@ -116,14 +217,23 @@ namespace a_vitavol
             Global.SelectedSiteTemp.Dirty = true;
         }
 
-        public override void OnBackPressed()
+        private bool ChangesMade()
         {
-            SaveLocation();
-            StartActivity(new Intent(this, typeof(A_AdminSite)));
+            bool c_name = Global.SelectedSiteTemp.Name != TB_Name.Text;
+            bool c_street = Global.SelectedSiteTemp.Street != TB_Street.Text;
+            bool c_city = Global.SelectedSiteTemp.City != TB_City.Text;
+            bool c_state = Global.SelectedSiteTemp.State != StateSpinner.GetValue();
+            bool c_zip = Global.SelectedSiteTemp.Zip != TB_Zip.Text;
+            bool c_lat = Global.SelectedSiteTemp.Latitude != TB_Latitude.Text;
+            bool c_long = Global.SelectedSiteTemp.Longitude != TB_Longitude.Text;
+
+            return c_name || c_street || c_city || c_state || c_zip || c_lat || c_long;
         }
 
+        bool UIIsEnabled;
         private void EnableUI(bool en)
         {
+            UIIsEnabled = en;
             SP_State.Enabled = en;
             TB_Zip.Enabled = en;
             TB_City.Enabled = en;

@@ -59,6 +59,20 @@ namespace zsquared
 
         public C_HMS(string s)
         {
+            if (s.Length > 8)
+            {
+                // must be in the format "2000-01-01 10:00:00 UTC"
+                if (s.Contains("UTC"))
+                {
+                    string[] s1 = s.Split(' ');
+                    if (s1.Length != 3)
+                        throw new ApplicationException("Unexpected format");
+                    s = s1[1];
+                }
+                else
+                    throw new ApplicationException("Unexpected format");
+            }
+
             bool isPM = s.Contains("pm");
             if (s.Contains("am"))
             {
@@ -75,9 +89,6 @@ namespace zsquared
 
 			// HH:MM:SS or HH:MM
 			string[] ss = s.Split(new char[] { ':' });
-            if ((ss.Length < 2) || (ss.Length > 3))
-                throw new ApplicationException("Unexpected format (HH:MM[:SS])");
-
             try
             {
                 if (ss.Length == 3)
@@ -90,6 +101,12 @@ namespace zsquared
                 {
                     _hour = Convert.ToInt32(ss[0]);
                     _minutes = Convert.ToInt32(ss[1]);
+                    _seconds = 0;
+                }
+                else
+                {
+                    _hour = 0;
+                    _minutes = 0;
                     _seconds = 0;
                 }
             }

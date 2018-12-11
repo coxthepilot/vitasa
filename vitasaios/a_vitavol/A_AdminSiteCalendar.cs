@@ -4,6 +4,7 @@ using Android.App;
 using Android.Widget;
 using Android.OS;
 using Android.Content;
+using Android.Graphics;
 
 using zsquared;
 
@@ -24,7 +25,7 @@ namespace a_vitavol
         Button B_Done;
         Button B_Reset;
 
-        C_GVHelper GVHelper;
+        C_GVHelper2 GVHelper;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -65,9 +66,8 @@ namespace a_vitavol
 
                 L_MonthYear.Text = Global.CalendarDate.ToString("mmm-yyyy");
 
-                C_DateDetails[] detailsx = BuildDateStateArray(Global.CalendarDate, Global.SelectedSiteTemp);
-                C_DateDetails[] dayDetailsx = BuildDayStateArray();
-                GVHelper.SetNewDateDetails(detailsx, dayDetailsx);
+                C_DateDetails2[] detailsx = BuildDateStateArray2(Global.CalendarDate, Global.SelectedSiteTemp);
+                GVHelper.SetNewDateDetails(detailsx);
             };
 
             B_MonthPrev.Click += (sender, e) => 
@@ -79,26 +79,14 @@ namespace a_vitavol
 
                 L_MonthYear.Text = Global.CalendarDate.ToString("mmm-yyyy");
 
-                C_DateDetails[] detailsx = BuildDateStateArray(Global.CalendarDate, Global.SelectedSiteTemp);
-                C_DateDetails[] dayDetailsx = BuildDayStateArray();
-                GVHelper.SetNewDateDetails(detailsx, dayDetailsx);
+                C_DateDetails2[] detailsx = BuildDateStateArray2(Global.CalendarDate, Global.SelectedSiteTemp);
+                GVHelper.SetNewDateDetails(detailsx);
             };
 
-            C_DateDetails[] details = BuildDateStateArray(Global.CalendarDate, Global.SelectedSiteTemp);
-            C_DateDetails[] dayDetails = BuildDayStateArray();
-            GVHelper = new C_GVHelper(this, GV_Calendar);
+            C_DateDetails2[] details = BuildDateStateArray2(Global.CalendarDate, Global.SelectedSiteTemp);
 
-            GVHelper.SetResourceID(C_GVHelper.ID_Background, Resource.Drawable.background);
-            GVHelper.SetResourceID(C_GVHelper.ID_OpenWithNeeds, Resource.Drawable.openwithneeds);
-            GVHelper.SetResourceID(C_GVHelper.ID_OpenWithNeedsBoxed, Resource.Drawable.openwithneedsboxed);
-            GVHelper.SetResourceID(C_GVHelper.ID_OpenNoNeeds, Resource.Drawable.opennoneeds);
-            GVHelper.SetResourceID(C_GVHelper.ID_OpenNoNeedsBoxed, Resource.Drawable.opennoneedsboxed);
-            GVHelper.SetResourceID(C_GVHelper.ID_Closed, Resource.Drawable.closed);
-            GVHelper.SetResourceID(C_GVHelper.ID_ClosedBoxed, Resource.Drawable.closedboxed);
-            GVHelper.SetResourceID(C_GVHelper.ID_GridCell, Resource.Layout.GridCell);
-            GVHelper.SetResourceID(C_GVHelper.ID_GridCellText, Resource.Id.L_Cell);
-
-            GVHelper.SetNewDateDetails(details, dayDetails);
+            GVHelper = new C_GVHelper2(this, GV_Calendar);
+            GVHelper.SetNewDateDetails(details);
             GVHelper.DateTouched += GVHelper_DateTouched;
 
             L_MonthYear.Text = Global.CalendarDate.ToString("mmm-yyyy");
@@ -112,69 +100,110 @@ namespace a_vitavol
 
         void GVHelper_DateTouched(object sender, C_DateTouchedEventArgs e)
         {
+            C_CalendarEntry ce = Global.SelectedSiteTemp.GetCalendarEntryForDate(e.Date);
+            if (ce == null)
+                return;
+
             Global.CalendarDate = e.Date;
-            Global.ViewCameFrom = E_ViewCameFrom.AdminSiteCalendar;
+            //Global.ViewCameFrom = E_ViewCameFrom.AdminSiteCalendar;
             Global.CalendarDateDetails = new C_CalendarDateDetails()
             {
-                SaveAction = E_CalendarDateDetailsSaveAction.None,
+                SaveAction = E_CalendarDateDetailsSaveAction.Save,
                 MainTitle = "Site Coordinator",
                 SiteName = Global.SelectedSiteTemp.Name,
                 Date = e.Date.ToString("mmm dd, yyyy"),
                 Note = null,
-                CalendarEntry = Global.SelectedSiteTemp.GetCalendarEntryForDate(e.Date)
+                CalendarEntry = ce,
+                CameFrom = E_ViewCameFrom.AdminSiteCalendar
             };
             StartActivity(new Intent(this, typeof(A_CalendarDateDetails)));
         }
 
-        public C_DateDetails[] BuildDayStateArray()
-        {
-            C_DateDetails[] DayOfWeekState = new C_DateDetails[7];
+        //public C_DateDetails[] BuildDayStateArray()
+        //{
+        //    C_DateDetails[] DayOfWeekState = new C_DateDetails[7];
 
-            for (int ix = 0; ix != 7; ix++)
-            {
-                C_DateDetails dayState = new C_DateDetails()
-                {
-                    Date = null,
-                    DayOfWeek = ix,
+        //    for (int ix = 0; ix != 7; ix++)
+        //    {
+        //        C_DateDetails dayState = new C_DateDetails()
+        //        {
+        //            Date = null,
+        //            DayOfWeek = ix,
 
-                    DateType = E_DateType.Header,
-                    SiteState = E_SiteState.Background
-                };
+        //            DateType = E_DateType.Header,
+        //            SiteState = E_SiteState.Background
+        //        };
 
-                DayOfWeekState[ix] = dayState;
-            }
+        //        DayOfWeekState[ix] = dayState;
+        //    }
 
-            return DayOfWeekState;
-        }
+        //    return DayOfWeekState;
+        //}
 
-        public C_DateDetails[] BuildDateStateArray(C_YMD Date, C_VitaSite site)
+        //public C_DateDetails[] BuildDateStateArray(C_YMD Date, C_VitaSite site)
+        //{
+        //    int daysInMonth = DateTime.DaysInMonth(Date.Year, Date.Month);
+
+        //    C_YMD now = C_YMD.Now;
+
+        //    C_DateDetails[] DateState = new C_DateDetails[daysInMonth];
+
+        //    // scan through the days to determine the state of that date
+        //    for (int day = 1; day <= daysInMonth; day++)
+        //    {
+        //        C_YMD ourDate = new C_YMD(Date.Year, Date.Month, day);
+
+        //        C_DateDetails dayState = new C_DateDetails()
+        //        {
+        //            Date = ourDate,
+        //            DayOfWeek = (int)ourDate.DayOfWeek,
+
+        //            DateType = E_DateType.DayOfMonth,
+        //            Boxed = false
+        //        };
+
+        //        C_CalendarEntry sce = site.GetCalendarEntryForDate(ourDate);
+
+        //        if (sce == null)
+        //            dayState.DateType = E_DateType.PastDate;
+        //        else 
+        //            dayState.SiteState = !sce.SiteIsOpen ? E_SiteState.Closed : E_SiteState.OpenWithNeeds;
+
+        //        DateState[day - 1] = dayState;
+        //    }
+
+        //    return DateState;
+        //}
+
+        public C_DateDetails2[] BuildDateStateArray2(C_YMD Date, C_VitaSite site)
         {
             int daysInMonth = DateTime.DaysInMonth(Date.Year, Date.Month);
 
-            C_YMD now = C_YMD.Now;
-
-            C_DateDetails[] DateState = new C_DateDetails[daysInMonth];
+            C_DateDetails2[] DateState = new C_DateDetails2[daysInMonth];
 
             // scan through the days to determine the state of that date
             for (int day = 1; day <= daysInMonth; day++)
             {
                 C_YMD ourDate = new C_YMD(Date.Year, Date.Month, day);
 
-                C_DateDetails dayState = new C_DateDetails()
-                {
-                    Date = ourDate,
-                    DayOfWeek = (int)ourDate.DayOfWeek,
-
-                    DateType = E_DateType.DayOfMonth,
-                    Boxed = false
-                };
+                C_DateDetails2 dayState = new C_DateDetails2(ourDate);
+                dayState.TextColor = Color.White;
 
                 C_CalendarEntry sce = site.GetCalendarEntryForDate(ourDate);
 
                 if (sce == null)
-                    dayState.DateType = E_DateType.PastDate;
-                else 
-                    dayState.SiteState = !sce.SiteIsOpen ? E_SiteState.Closed : E_SiteState.OpenWithNeeds;
+                {
+                    dayState.NormalColor = C_Common.Color_StandardBackground;
+                    dayState.CanClick = false;
+                }
+                else if (sce.SiteIsOpen)
+                {
+                    dayState.NormalColor = C_Common.Color_TwoAppt;
+                }
+                else
+                {
+                    dayState.NormalColor = C_Common.Color_NoSiteOpen;
+                }
 
                 DateState[day - 1] = dayState;
             }

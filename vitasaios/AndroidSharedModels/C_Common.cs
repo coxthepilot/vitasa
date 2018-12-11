@@ -12,15 +12,16 @@ namespace zsquared
 {
     public static class C_Common
     {
-        public static Color StandardBackground => Color.Rgb(19, 67, 107); // #FF13436B
+        public static Color Color_NoSiteOpen = Color.Rgb(0x57, 0x57, 0x57);
+        public static Color Color_OneAppt = Color.Rgb(0xBB, 0xBA, 0x49);
+        public static Color Color_TwoAppt = Color.Rgb(0x2F, 0xA1, 0x80);
+        public static Color Color_BadAppt = Color.Rgb(0xA8, 0x00, 0x00);
 
-        public static Color StandardButton => Color.Rgb(33, 96, 147); //#ff216093
-
-        public static Color LogoutButton => Color.Rgb(33, 122, 147); // #ff217a93 
-
-        public static Color StandardButtonLight => Color.Rgb(70, 123, 165);
-
-        public static Color SwitchOn => Color.Rgb(188, 196, 49);
+        public static Color Color_StandardBackground = Color.Rgb(19, 67, 107); // #FF13436B
+        public static Color Color_StandardButton = Color.Rgb(33, 96, 147); //#ff216093
+        public static Color Color_LogoutButton = Color.Rgb(33, 122, 147); // #ff217a93 
+        public static Color Color_StandardButtonLight = Color.Rgb(70, 123, 165);
+        public static Color Color_SwitchOn = Color.Rgb(188, 196, 49);
 
         public static ColorStateList GetStandardColorStateList()
         {
@@ -48,7 +49,7 @@ namespace zsquared
         {
             View view = a.FindViewById(viewResourceId);
             if (setBackground)
-                view.SetBackgroundColor(C_Common.StandardBackground);
+                view.SetBackgroundColor(C_Common.Color_StandardBackground);
 
             Queue<View> ViewsQ = new Queue<View>();
             ViewsQ.Enqueue(view);
@@ -61,12 +62,15 @@ namespace zsquared
                     for (int ix = 0; ix != vg.ChildCount; ix++)
                     {
                         View child = vg.GetChildAt(ix);
-                        string nameLower = child.AccessibilityClassName.ToLower();
+
+                        string nameLower = child.GetType().ToString().ToLower();
+
+                        //string nameLower = child.AccessibilityClassName.ToLower();
                         if (nameLower.Contains("button"))
                         {
                             Button b = child as Button;
                             b.SetTextColor(GetStandardColorStateList());
-                            b.SetBackgroundColor(StandardButton);
+                            b.SetBackgroundColor(Color_StandardButton);
                         }
                         else if (nameLower.Contains("textview"))
                         {
@@ -84,7 +88,7 @@ namespace zsquared
                     }
                 }
                 else
-                    Console.WriteLine("huh?");
+                    throw new ApplicationException("expecting a view group");
             }
         }
     }

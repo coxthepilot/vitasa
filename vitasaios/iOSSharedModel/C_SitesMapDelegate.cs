@@ -16,6 +16,7 @@ namespace zsquared
 
         readonly UIViewController ourVC;
         readonly List<C_VitaSite> Sites;
+        C_PersistentSettings Settings;
 
         public event SitesMapEventHandler SiteTouchUpInside;
 
@@ -23,6 +24,7 @@ namespace zsquared
         {
             ourVC = cv;
             Sites = sites;
+            Settings = new C_PersistentSettings();
         }
 
         readonly string pId = "PinAnnotation";
@@ -50,7 +52,7 @@ namespace zsquared
 
             C_VitaSite ourSite = sou.First();
 
-            ((MKPinAnnotationView)pinView).PinTintColor = ourSite.PreferredSite ? UIColor.Black : UIColor.Green;
+            ((MKPinAnnotationView)pinView).PinTintColor = Settings.IsPreferedSite(ourSite.Slug) ? UIColor.Black : UIColor.Green;
 
             pinView.CanShowCallout = true;
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using System.IO;
+using System.Collections.Generic;
 
 using Android.App;
 using Android.Widget;
@@ -37,7 +38,10 @@ namespace a_vitavol
             MyAppDelegate g = (MyAppDelegate)Application;
             // retain the number of bytes receive across re-initialization of the Global
             long bytes = g.Global == null ? 0 : g.Global.BytesReceived;
-            Global = g.Global = new C_Global();
+            if (g.Global == null)
+                g.Global = new C_Global();
+            //Global = g.Global = new C_Global();
+            Global = g.Global;
             Global.BytesReceived = bytes;
 
             // Set our view from the "main" layout resource
@@ -61,54 +65,54 @@ namespace a_vitavol
             };
             Settings.Save();
 
-            // the following installs the test data and tells Global to use it rather than the api's
-            if (!Global.UsingTestData)
-            {
-                try
-                {
-                    Android.Content.Res.AssetManager assets = Assets;
+            //// the following installs the test data and tells Global to use it rather than the api's
+            //if (!Global.UsingTestData)
+            //{
+            //    try
+            //    {
+            //        Android.Content.Res.AssetManager assets = Assets;
 
-                    //string[] rnames = assembly.GetManifestResourceNames();
-                    using (Stream stream_s = assets.Open("testdata_sites.json"))
-                    {
-                        using (StreamReader sr_s = new StreamReader(stream_s))
-                        {
-                            using (Stream stream_u = assets.Open("testdata_users.json"))
-                            {
-                                using (StreamReader sr_u = new StreamReader(stream_u))
-                                {
-                                    string sitesjson = sr_s.ReadToEnd();
+            //        //string[] rnames = assembly.GetManifestResourceNames();
+            //        using (Stream stream_s = assets.Open("testdata_sites.json"))
+            //        {
+            //            using (StreamReader sr_s = new StreamReader(stream_s))
+            //            {
+            //                using (Stream stream_u = assets.Open("testdata_users.json"))
+            //                {
+            //                    using (StreamReader sr_u = new StreamReader(stream_u))
+            //                    {
+            //                        string sitesjson = sr_s.ReadToEnd();
 
-                                    string usersjson = sr_u.ReadToEnd();
+            //                        string usersjson = sr_u.ReadToEnd();
 
-                                    Global.UseTestData(sitesjson, usersjson);
+            //                        Global.UseTestData(sitesjson, usersjson);
 
-                                    C_Suggestion sug = new C_Suggestion(-1, C_YMD.Now, true)
-                                    {
-                                        Subject = "123 subject",
-                                        Text = "new message\nand more\nnew message\nand more\nnew message\nand more\nnew message\nand more\nnew message\nand more\n"
-                                    };
-                                    Global._SuggestionCache.Add(sug);
+            //                        C_Suggestion sug = new C_Suggestion(-1, C_YMD.Now, true)
+            //                        {
+            //                            Subject = "123 subject",
+            //                            Text = "new message\nand more\nnew message\nand more\nnew message\nand more\nnew message\nand more\nnew message\nand more\n"
+            //                        };
+            //                        Global._SuggestionCache.Add(sug);
 
-                                    C_Notification not = new C_Notification
-                                    {
-                                        Audience = E_NotificationAudience.Volunteers,
-                                        CreatedDT = DateTime.Now,
-                                        Message = "the notification text",
-                                        SentDT = DateTime.MinValue,
-                                        id = 1
-                                    };
-                                    Global._NotificationCache.Add(not);
-                                }
-                            }
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Log.Debug("vita", ex.Message);
-                }
-            }
+            //                        C_Notification not = new C_Notification
+            //                        {
+            //                            Audience = E_NotificationAudience.Volunteers,
+            //                            CreatedDT = DateTime.Now,
+            //                            Message = "the notification text",
+            //                            SentDT = DateTime.MinValue,
+            //                            id = 1
+            //                        };
+            //                        Global._NotificationCache.Add(not);
+            //                    }
+            //                }
+            //            }
+            //        }
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        Log.Debug("vita", ex.Message);
+            //    }
+            //}
 
             if (Intent.Extras != null)
             {
@@ -166,6 +170,11 @@ namespace a_vitavol
                         {
                             Global.LoggedInUserId = ior.User.id;
                             Global.ViewCameFrom = E_ViewCameFrom.Main;
+
+                            Settings.PreferedSites = new List<string>();
+                            foreach (string ps in ior.User.PreferredSiteSlugs)
+                                Settings.AddPreferedSite(ps);
+                            Settings.Save();
 
                             if (ior.User.HasAdmin)
                                 nextIntent = new Intent(this, typeof(A_AdminMenu));

@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 
 using zsquared;
+using static zsquared.C_MessageBox;
 
 namespace vitavol
 {
@@ -75,6 +76,27 @@ namespace vitavol
                         C_Notification noti = args.Item;
                         Global.SelectedNotification = noti;
                         PerformSegue("Segue_AdminNotificationsToAdminNotification", this);
+                    };
+                    NotificationsTableSource.DeleteAllowed += (object sender, C_TableSource<C_Notification>.TableSourceEventArgs<C_Notification> args) => 
+                    {
+                        return true;
+                    };
+                    NotificationsTableSource.Delete += (object sender, C_TableSource<C_Notification>.TableSourceEventArgs<C_Notification> args) => 
+                    {
+                        C_Notification noti = args.Item;
+
+                        Task.Run(async () => 
+                        {
+                            C_IOResult ior = await Global.RemoveNotification(noti, LoggedInUser.Token);
+
+                            if (!ior.Success)
+                            {
+                                E_MessageBoxResults mbresx = await MessageBox(this,
+                                    "Error",
+                                    "Unable to delete the notification.",
+                                    E_MessageBoxButtons.Ok);
+                            }
+                        });
                     };
                     TV_Notifications.Source = NotificationsTableSource;
                     TV_Notifications.ReloadData();

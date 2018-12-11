@@ -22,6 +22,14 @@ namespace vitavol
             AppDelegate myAppDelegate = (AppDelegate)UIApplication.SharedApplication.Delegate;
             Global = myAppDelegate.Global;
 
+            UITapGestureRecognizer labelTap = new UITapGestureRecognizer(() =>
+            {
+                C_Common.DropFirstResponder(View);
+            });
+
+            L_Title.UserInteractionEnabled = true;
+            L_Title.AddGestureRecognizer(labelTap);
+
             B_Back.TouchUpInside += (sender, e) => 
             {
                 PerformSegue("Segue_SuggestionToVolHome", this);
@@ -49,9 +57,7 @@ namespace vitavol
                 C_Suggestion sug = new C_Suggestion(Global.LoggedInUserId, C_YMD.Now, false)
                 {
                     Text = TxV_Message.Text,
-                    Subject = TB_Subject.Text,
-                    id = Global.LoggedInUserId,
-                    Status = E_SuggestionStatus.Open
+                    Subject = TB_Subject.Text
                 };
 
                 AI_Busy.StartAnimating();

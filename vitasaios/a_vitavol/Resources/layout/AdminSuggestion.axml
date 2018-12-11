@@ -1,99 +1,129 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:id="@+id/V_AdminSuggestion"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <LinearLayout 
-        xmlns:android="http://schemas.android.com/apk/res/android" 
-        android:orientation="vertical" 
-        android:layout_width="match_parent" 
-        android:layout_height="match_parent">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:minWidth="25px"
-            android:minHeight="25px"
-            android:id="@+id/textView1"
-            android:gravity="center"
-            android:textColor="@android:color/white"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            android:text="Suggestion" />
-        <ProgressBar
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/PB_Busy"
-            android:indeterminate="true"
-            android:visibility="gone" />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@android:color/white"
-            android:id="@+id/textView2"
-            android:text="From"
-            android:textSize="18dp"
-            android:textStyle="bold" />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@android:color/white"
-            android:textSize="18dp"
-            android:id="@+id/L_From" />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/textView3"
-            android:textSize="18dp"
-            android:textColor="@android:color/white"
-            android:text="Date"
-            android:textStyle="bold" />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@android:color/white"
-            android:id="@+id/L_Date" />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@android:color/white"
-            android:textSize="18dp"
-            android:id="@+id/textView4"
-            android:text="Subject"
-            android:textStyle="bold" />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="18dp" 
-            android:textColor="@android:color/white"
-            android:id="@+id/L_Subject" />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@android:color/white"
-            android:textSize="18dp"
-            android:id="@+id/textView5"
-            android:text="Message"
-            android:textStyle="bold" />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:textSize="18dp" 
-            android:textColor="@android:color/white"
-            android:id="@+id/L_Message" />
-    </LinearLayout>
-    <FrameLayout
+    <TextView
+        android:id="@+id/textView1"
+        
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentBottom="true">
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom" 
-            android:id="@+id/B_Send"
-            android:text="Send via email to..."
-            android:textColor="@android:color/white"
-            android:background="#ff216093" />
-    </FrameLayout>
-</FrameLayout>
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        
+        android:gravity="center"
+        android:textColor="@android:color/white"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:text="Suggestion" />
+    <ProgressBar
+        android:id="@+id/PB_Busy"
+        
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        
+        android:indeterminate="true"
+        android:visibility="gone" />
+    <TextView
+        android:id="@+id/textView2"
+        
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        
+        android:textColor="@android:color/white"
+        android:text="From"
+        android:textSize="18dp"
+        android:textStyle="bold" />
+    <TextView
+        android:id="@+id/L_From" 
+        
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        
+        android:textColor="@android:color/white"
+        android:textSize="18dp" />
+    <TextView
+        android:id="@+id/textView3"
+        
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        
+        android:textSize="18dp"
+        android:textColor="@android:color/white"
+        android:text="Date"
+        android:textStyle="bold" />
+    <TextView
+        android:id="@+id/L_Date" 
+        
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        
+        android:textColor="@android:color/white" />
+    <TextView
+        android:id="@+id/textView4"
+        
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        
+        android:textColor="@android:color/white"
+        android:textSize="18dp"
+        android:text="Subject"
+        android:textStyle="bold" />
+    <TextView
+        android:id="@+id/L_Subject" 
+        
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        
+        android:textSize="18dp" 
+        android:textColor="@android:color/white" />
+    <TextView
+        android:id="@+id/textView5"
+        
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        
+        android:textColor="@android:color/white"
+        android:textSize="18dp"
+        android:text="Message"
+        android:textStyle="bold" />
+    <TextView
+        android:id="@+id/L_Message" 
+        
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        
+        android:textSize="18dp" 
+        android:textColor="@android:color/white" />
+    <Button
+        android:id="@+id/B_Send"
+        
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        
+        android:text="Send via email to..."
+        android:textColor="@android:color/white"
+        android:background="#ff216093" />
+    <Button
+        android:id="@+id/B_Delete"
+        
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:layout_marginTop="4dp"
+        
+        android:text="Delete"
+        android:textColor="@android:color/white"
+        android:background="#ff217a93" />
+</LinearLayout>

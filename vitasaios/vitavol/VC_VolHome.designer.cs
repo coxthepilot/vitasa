@@ -52,10 +52,6 @@ namespace vitavol
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UISwitch SW_Site { get; set; }
-
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UITextField TB_Hours { get; set; }
 
         void ReleaseDesignerOutlets ()
@@ -103,11 +99,6 @@ namespace vitavol
             if (SW_Mobile != null) {
                 SW_Mobile.Dispose ();
                 SW_Mobile = null;
-            }
-
-            if (SW_Site != null) {
-                SW_Site.Dispose ();
-                SW_Site = null;
             }
 
             if (TB_Hours != null) {

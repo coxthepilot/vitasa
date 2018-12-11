@@ -12,294 +12,176 @@ using System.Collections.Generic;
 
 namespace zsquared
 {
-	/* To use the helper with a GridView, do the following
-	 * 
-     * Install a GridView in the page with
-     <GridView
-		android:minWidth="25px"
-        android:minHeight="25px"
-        android:layout_width="match_parent"
-        android:layout_height="650px"
-        android:numColumns="7"
-        android:stretchMode="columnWidth"
-        android:gravity="center"
-        android:paddingRight="20dp"
-        android:paddingLeft="20dp"
-        android:clipToPadding="true"
-        android:fitsSystemWindows="true"
-        android:id="@+id/GV_Calendar" />
-    
-    Use the following in the OnCreate function
-    
-
-        // build the array of values for each date in the month
-        C_DateDetails[] details = BuildDateStateArray(Global.SelectedDate);
-        // build the array of values for each day of the week
-        C_DateDetails[] dayDetails = BuildDayStateArray(OurSite);
-        
-        // create the helper; nothing is displayed at this point
-        GVHelper = new C_GVHelper(this, GV_Calendar);
-
-        // let the grid know the images to use for the various states
-        GVHelper.SetResourceID(C_GVHelper.ID_Background, Resource.Drawable.background);
-        GVHelper.SetResourceID(C_GVHelper.ID_OpenWithNeeds, Resource.Drawable.openwithneeds);
-        GVHelper.SetResourceID(C_GVHelper.ID_OpenWithNeedsBoxed, Resource.Drawable.openwithneedsboxed);
-        GVHelper.SetResourceID(C_GVHelper.ID_OpenNoNeeds, Resource.Drawable.opennoneeds);
-        GVHelper.SetResourceID(C_GVHelper.ID_OpenNoNeedsBoxed, Resource.Drawable.opennoneedsboxed);
-        GVHelper.SetResourceID(C_GVHelper.ID_Closed, Resource.Drawable.closed);
-        GVHelper.SetResourceID(C_GVHelper.ID_ClosedBoxed, Resource.Drawable.closedboxed);
-        GVHelper.SetResourceID(C_GVHelper.ID_GridCell, Resource.Layout.GridCell);
-        GVHelper.SetResourceID(C_GVHelper.ID_GridCellText, Resource.Id.L_Cell);
-
-        // finally, provided the day and date details and the handlers for cell clicks
-        GVHelper.SetNewDateDetails(details, dayDetails);
-        GVHelper.DateTouched += GVHelper_DateTouched;
-        GVHelper.DayOfWeekTouched += GVHelper_DayOfWeekTouched;
-    */
-
-	// ---------- GV helper class ---------
-
-	public enum E_DateType
-	{
-		// Date         DayOfWeek   SiteState       Text        -  Text             Background               Box
-		Header,         // n/a      f/name of day   n/a         -  Name of day      open/closed/background   as needed
-		PastDate,       // f/day    n/a             n/a         -  Number of day    background color         none
-		DayOfMonth,     // f/day    n/a             f/color     -  Number of day    open/closed              as needed
-		NotADate        // n/a      n/a             n/a         -  Nothing          background color         none
-	}
-
-	public enum E_SiteState
-	{
-		Closed,                 // site is closed
-		OpenWithNeeds,          // site is open and has needs
-		OpenNoNeeds,            // site is open but has no needs
-        Background,             // just put the plain background in place
-        Normal                  // just a regular day of the month
-	}
-
-	public class C_DateDetails
-	{
-        public E_DateType DateType;
+    public class C_DateTouchedEventArgs : EventArgs
+    {
         public C_YMD Date;
-		public int DayOfWeek;
 
-        public int BackgroundResourceId = -1;
-        public Color BackgroundColor;           // us this if BackgroundResourceId == -1
-        public ColorStateList TextColors;
-
-		public E_SiteState SiteState;
-
-		public bool Boxed;
-	}
-
-	public class C_GVHelper
-	{
-		public const string ID_Background = "background";
-		public const string ID_GridCell = "gridcell";
-		public const string ID_GridCellText = "gridcelltext";
-		public const string ID_OpenNoNeeds = "opennoneeds";
-		public const string ID_OpenNoNeedsBoxed = "opennoneedsboxed";
-		public const string ID_OpenWithNeeds = "openwithneeds";
-		public const string ID_OpenWithNeedsBoxed = "openwithneedsboxed";
-		public const string ID_Closed = "closed";
-		public const string ID_ClosedBoxed = "closedboxed";
-
-		public event EventHandler<C_DateTouchedEventArgs> DateTouched;
-
-		public event EventHandler<C_DayOfWeekTouchedEventArgs> DayOfWeekTouched;
-
-		readonly GridView GV;
-		List<C_DateDetails> DateDetails;
-        readonly Activity _activity;
-        Dictionary<string, int> ResourceIds;
-
-        public C_GVHelper(Activity a, GridView gv)
-		{
-			GV = gv;
-			_activity = a;
-            ResourceIds = new Dictionary<string, int>();
-		}
-
-        public void SetResourceID(string s_ID, int i_id)
+        public C_DateTouchedEventArgs(C_YMD ymd)
         {
-            if (!ResourceIds.ContainsKey(s_ID))
-                ResourceIds.Add(s_ID, i_id);
-            else
-                ResourceIds[s_ID] = i_id;
+            Date = ymd;
+        }
+    }
+
+    public class C_GVHelper2
+    {
+        public event EventHandler<C_DateTouchedEventArgs> DateTouched;
+
+        readonly GridView GV;
+        C_DateDetails2[] DateDetails;
+        readonly Activity _activity;
+
+        public C_GVHelper2(Activity a, GridView gv)
+        {
+            GV = gv;
+            _activity = a;
         }
 
-		public void SetNewDateDetails(C_DateDetails[] dateDetails, C_DateDetails[] dayOfWeekDetails)
-		{
-            if ((ResourceIds.Count != 9)
-                || (!ResourceIds.ContainsKey(ID_Background))
-                || (!ResourceIds.ContainsKey(ID_GridCell))
-                || (!ResourceIds.ContainsKey(ID_GridCellText))
-                || (!ResourceIds.ContainsKey(ID_OpenNoNeeds))
-                || (!ResourceIds.ContainsKey(ID_OpenNoNeedsBoxed))
-                || (!ResourceIds.ContainsKey(ID_OpenWithNeeds))
-                || (!ResourceIds.ContainsKey(ID_OpenWithNeedsBoxed))
-                || (!ResourceIds.ContainsKey(ID_Closed))
-                || (!ResourceIds.ContainsKey(ID_ClosedBoxed)))
-                throw new ApplicationException("must have all resource IDs to get started");
+        public void SetNewDateDetails(C_DateDetails2[] dateDetails)
+        {
+            DateDetails = dateDetails;
 
-			DateDetails = BuildDetails(dateDetails, dayOfWeekDetails);
+            GV.ItemClick += GV_ItemClick;
 
-			GV.ItemClick += GV_ItemClick;
+            GV.Adapter = new C_GridViewCalendar2(_activity, DateDetails);
+        }
 
-            GV.Adapter = new C_GridViewCalendar(_activity, DateDetails, ResourceIds);
-		}
+        void GV_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
+        {
+            int FirstDayInMonthOffset = (int)DateDetails[0].Date.DayOfWeek;
 
-		void GV_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
-		{
-			C_DateDetails dd = DateDetails[e.Position];
+            C_DateDetails2 res = new C_DateDetails2(null);
+            res.NormalColor = C_Common.Color_StandardBackground;
+            res.CanClick = false;
 
-			if (dd.DateType == E_DateType.DayOfMonth)
-				DateTouched?.Invoke(this, new C_DateTouchedEventArgs(dd.Date));
-			else if (dd.DateType == E_DateType.Header)
-				DayOfWeekTouched?.Invoke(this, new C_DayOfWeekTouchedEventArgs(dd.DayOfWeek));
-		}
+            if (e.Position >= 7)
+            {
+                int dayOfMonth = e.Position - 7 - FirstDayInMonthOffset;
+                bool validDay = (dayOfMonth >= 0) && (dayOfMonth < DateDetails.Length);
+                if (validDay)
+                    res = DateDetails[dayOfMonth];
+            }
 
-		private List<C_DateDetails> BuildDetails(C_DateDetails[] dateDetails, C_DateDetails[] dayOfWeekDetails)
-		{
-			List<C_DateDetails> res = new List<C_DateDetails>();
+            if (res.CanClick)
+                DateTouched?.Invoke(this, new C_DateTouchedEventArgs(res.Date));
+        }
+    }
 
-			// create the header row if we are provided with day of week details
-			if (dayOfWeekDetails != null)
-			{
-				for (int iz = 0; iz != 7; iz++)
-					res.Add(dayOfWeekDetails[iz]);
-			}
+    public class C_DateDetails2
+    {
+        public Color NormalColor;
+        public Color TextColor;
+        public Color BoxColor;
 
-			// create the filler up to the first day of the month
-			int firstDayOfWeek = dateDetails[0].DayOfWeek;
-			int ix = 0;
-			while (ix != firstDayOfWeek)
-			{
-				C_DateDetails dd = new C_DateDetails()
-				{
-					DateType = E_DateType.NotADate
-				};
-				res.Add(dd);
+        public bool ShowBox;
+        public bool CanClick;
 
-				ix++;
-			}
+        public C_YMD Date;
 
-			// populate the entries for the days of the month
-			for (int iy = 0; iy != dateDetails.Length; iy++)
-				res.Add(dateDetails[iy]);
+        public C_DateDetails2(C_YMD date)
+        {
+            Date = date;
+            CanClick = true;
+        }
+    }
 
-			return res;
-		}
-	}
-
-	public class C_DateTouchedEventArgs : EventArgs
-	{
-		public C_YMD Date;
-
-		public C_DateTouchedEventArgs(C_YMD ymd)
-		{
-			Date = ymd;
-		}
-	}
-
-	public class C_DayOfWeekTouchedEventArgs : EventArgs
-	{
-		public int DayOfWeek;
-
-		public C_DayOfWeekTouchedEventArgs(int dow)
-		{
-			DayOfWeek = dow;
-		}
-	}
-
-	public class C_GridViewCalendar : BaseAdapter<C_DateDetails>
-	{
-        readonly List<C_DateDetails> DateDetails;
+    public class C_GridViewCalendar2 : BaseAdapter<C_DateDetails2>
+    {
+        readonly C_DateDetails2[] DateState;
         readonly Activity _activity;
-        readonly Dictionary<string, int> ResourceIds;
+        readonly int FirstDayInMonthOffset;
 
-        public C_GridViewCalendar(Activity a, List<C_DateDetails> dateDetails, Dictionary<string, int> resouceIds)
-		{
-			DateDetails = dateDetails;
-			_activity = a;
-            ResourceIds = resouceIds;
-		}
+        public C_GridViewCalendar2(Activity a, C_DateDetails2[] dateDetails)
+        {
+            DateState = dateDetails;
+            _activity = a;
+            FirstDayInMonthOffset = (int)DateState[0].Date.DayOfWeek;
 
-		public override long GetItemId(int position)
-		{
-			return position;
-		}
+        }
 
-		public override int Count
-		{
-			get
-			{
-                return DateDetails.Count;
-			}
-		}
+        public override long GetItemId(int position)
+        {
+            return position;
+        }
 
-		public override C_DateDetails this[int position]
-		{
-			get
-			{
-				return DateDetails[position];
-			}
-		}
+        public override int Count
+        {
+            get
+            {
+                return 7 * 7;
+            }
+        }
 
-		public override View GetView(int position, View convertView, ViewGroup parent)
-		{
-			C_DateDetails item = DateDetails[position];
+        public override C_DateDetails2 this[int position]
+        {
+            get
+            {
+                C_DateDetails2 res = new C_DateDetails2(null);
+                res.NormalColor = C_Common.Color_StandardBackground;
+                res.CanClick = false;
 
-			if (convertView == null)
-                convertView = _activity.LayoutInflater.Inflate(ResourceIds[C_GVHelper.ID_GridCell], null);
+                if (position >= 7)
+                {
+                    int dayOfMonth = position - 7 - FirstDayInMonthOffset;
+                    bool validDay = (dayOfMonth >= 0) && (dayOfMonth < DateState.Length);
+                    if (validDay)
+                        res = DateState[dayOfMonth];
+                }
 
-            TextView L_Cell = convertView.FindViewById<TextView>(ResourceIds[C_GVHelper.ID_GridCellText]);
-			L_Cell.SetHeight(50);
+                return res;
+            }
+        }
 
-			switch (item.DateType)
-			{
-                case E_DateType.Header:
-					L_Cell.Text = C_YMD.DayOfWeekNamesAbrev[item.DayOfWeek];
-                    int id = -1;
-                    if ((item.SiteState == E_SiteState.OpenNoNeeds) || (item.SiteState == E_SiteState.OpenWithNeeds))
-                        id = ResourceIds[C_GVHelper.ID_OpenWithNeeds];
-                    else if (item.SiteState == E_SiteState.Closed)
-                        id = ResourceIds[C_GVHelper.ID_Closed];
-                    else
-                        id = ResourceIds[C_GVHelper.ID_Background];
-                    L_Cell.SetBackgroundResource(id);
-					break;
-				case E_DateType.NotADate:
-					L_Cell.Text = "";
-                    L_Cell.SetBackgroundResource(ResourceIds[C_GVHelper.ID_Background]);
-                    break;
-                case E_DateType.PastDate:
-                    L_Cell.Text = item.Date.Day.ToString();
-                    L_Cell.SetBackgroundResource(ResourceIds[C_GVHelper.ID_Background]);
-                    break;
-                case E_DateType.DayOfMonth:
-                    L_Cell.Text = item.Date.Day.ToString();
-                    int idx = -1;
-					switch (item.SiteState)
-					{
-						case E_SiteState.Closed:
-                            idx = item.Boxed ? ResourceIds[C_GVHelper.ID_ClosedBoxed] : ResourceIds[C_GVHelper.ID_Closed];
-							break;
-						case E_SiteState.OpenNoNeeds:
-                            idx = item.Boxed ? ResourceIds[C_GVHelper.ID_OpenNoNeedsBoxed] : ResourceIds[C_GVHelper.ID_OpenNoNeeds];
-							break;
-						case E_SiteState.OpenWithNeeds:
-                            idx = item.Boxed ? ResourceIds[C_GVHelper.ID_OpenWithNeedsBoxed] : ResourceIds[C_GVHelper.ID_OpenWithNeeds];
-							break;
-                        case E_SiteState.Background:
-                            idx = ResourceIds[C_GVHelper.ID_Background];
-                            break;
-					}
-					L_Cell.SetBackgroundResource(idx);
-					break;
-			}
+        public override View GetView(int position, View convertView, ViewGroup parent)
+        {
+            if (convertView == null)
+                convertView = _activity.LayoutInflater.Inflate(a_vitavol.Resource.Layout.GridCell, null);
 
-			return convertView;
-		}
-	}
+            TextView L_Cell = convertView.FindViewById<TextView>(a_vitavol.Resource.Id.L_Cell);
+            L_Cell.SetHeight(50);
+
+            C_YMD now = C_YMD.Now;
+
+            if (position < 7)
+            {
+                // 0..6 get the name of the day of the week
+                L_Cell.Text = C_Global.AbrevDayOfWeek[position];
+
+                L_Cell.SetBackgroundColor(C_Common.Color_StandardBackground);
+                L_Cell.SetTextColor(Color.White);
+            }
+            else
+            {
+                // 7..<end> get the day of the month number
+                int dayOfMonth = position - 7 - FirstDayInMonthOffset;
+                bool validDay = (dayOfMonth >= 0) && (dayOfMonth < DateState.Length);
+                if (validDay)
+                {
+                    C_DateDetails2 dateState = DateState[dayOfMonth];
+                    L_Cell.Text = dateState.Date.Day.ToString();
+
+                    Color normColor = dateState.NormalColor;
+                    Color textColor = dateState.TextColor;
+                    if (dateState.Date < now)
+                    {
+                        normColor = C_Common.Color_StandardBackground;
+                        textColor = Color.White;
+                    }
+
+                    L_Cell.SetBackgroundColor(normColor);
+                    L_Cell.SetTextColor(textColor);
+
+                    //if ((dateState.ShowBox) && ((dateState.Date >= now) || AllowPastDates))
+                        //L_Cell.ContentView.Layer.BorderColor = dateState.BoxColor.CGColor;
+                }
+                else
+                {
+                    // non-date; make this blank and disappear
+                    L_Cell.Text = "";
+                    L_Cell.SetBackgroundColor(C_Common.Color_StandardBackground);
+                }
+            }
+
+            return convertView;
+        }
+    }
 }

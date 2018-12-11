@@ -36,6 +36,10 @@ namespace vitavol
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UILabel L_Title { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UISwitch SW_Mobile { get; set; }
 
         [Outlet]
@@ -91,6 +95,11 @@ namespace vitavol
             if (B_SitesCoordinated != null) {
                 B_SitesCoordinated.Dispose ();
                 B_SitesCoordinated = null;
+            }
+
+            if (L_Title != null) {
+                L_Title.Dispose ();
+                L_Title = null;
             }
 
             if (SW_Mobile != null) {

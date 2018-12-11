@@ -28,7 +28,7 @@ namespace vitavol
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UILabel L_User { get; set; }
+        UIKit.UIButton B_Services { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
@@ -51,9 +51,9 @@ namespace vitavol
                 B_Filter = null;
             }
 
-            if (L_User != null) {
-                L_User.Dispose ();
-                L_User = null;
+            if (B_Services != null) {
+                B_Services.Dispose ();
+                B_Services = null;
             }
 
             if (Map_SitesMap != null) {

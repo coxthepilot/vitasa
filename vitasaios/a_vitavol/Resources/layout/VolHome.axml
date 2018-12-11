@@ -19,19 +19,6 @@
             android:textStyle="bold"
             android:text="Volunteer Home"
             android:textColor="@android:color/white" />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/textView2"
-            android:text="Select notifications to receive:"
-            android:paddingTop="10dp"
-            android:textColor="@android:color/white" />
-        <CheckBox
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/CB_PreferedSiteChanges"
-            android:text="Send me notifications when a Prefered Site's schedule changes."
-            android:textColor="@android:color/white" />
         <CheckBox
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

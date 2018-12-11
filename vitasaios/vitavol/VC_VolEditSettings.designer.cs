@@ -24,10 +24,6 @@ namespace vitavol
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UIButton B_Cancel { get; set; }
-
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UIButton B_Save { get; set; }
 
         [Outlet]
@@ -64,11 +60,6 @@ namespace vitavol
             if (B_Back != null) {
                 B_Back.Dispose ();
                 B_Back = null;
-            }
-
-            if (B_Cancel != null) {
-                B_Cancel.Dispose ();
-                B_Cancel = null;
             }
 
             if (B_Save != null) {

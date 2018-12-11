@@ -16,6 +16,7 @@ namespace vitavol
     {
         C_SitesMapDelegate mapDelegate;
         C_Global Global;
+        C_VitaUser LoggedInUser;
         List<C_VitaSite> SelectedSites;
 
         C_PersistentSettings Settings;
@@ -30,12 +31,17 @@ namespace vitavol
 
             AppDelegate myAppDelegate = (AppDelegate)UIApplication.SharedApplication.Delegate;
             Global = myAppDelegate.Global;
+            if (Global.LoggedInUserId != -1)
+                LoggedInUser = Global.GetUserFromCacheNoFetch(Global.LoggedInUserId);
             Settings = new C_PersistentSettings();
 
             B_Back.TouchUpInside += (sender, e) =>
                 PerformSegue("Segue_SitesMapToMain", this);
 
             B_Filter.TouchUpInside += (sender, e) =>
+                PerformSegue("Segue_SitesMapToSitesFilter", this);
+
+            B_Services.TouchUpInside += (sender, e) =>
                 PerformSegue("Segue_SitesMapToSitesFilter", this);
         }
 
@@ -54,11 +60,7 @@ namespace vitavol
             locationManager.RequestWhenInUseAuthorization();
             CLLocation loc = locationManager.Location;
 
-            // assume a starting point of center of san antonio
-            //const double lat = 29.4208763;
-            //const double lon = -98.4730651;
             var mapCenter = new CLLocationCoordinate2D(Settings.Latitude, Settings.Longitude);
-            // use a scaling to see about 20km
             var mapRegion = MKCoordinateRegion.FromDistance(mapCenter, 30000, 30000);
             Map_SitesMap.CenterCoordinate = mapCenter;
             Map_SitesMap.Region = mapRegion;
@@ -83,18 +85,24 @@ namespace vitavol
                         if (ior.Success && (ior.User != null) && ior.User.HasVolunteer)
                         {
                             Global.LoggedInUserId = ior.User.id;
+                            LoggedInUser = ior.User;
                             Global.SelectedUser = ior.User;
+
+                            Settings.ClearPreferedSites();
+                            foreach (string ps in ior.User.PreferredSiteSlugs)
+                                Settings.AddPreferedSite(ps);
                         }
                     }
                 }
                 bool hasMobile =
                    (Global.LoggedInUserId != -1)
-                && (Global.SelectedUser != null)
-                && Global.SelectedUser.HasVolunteer
-                && Global.SelectedUser.HasMobile;
+                && (LoggedInUser != null)
+                && LoggedInUser.HasVolunteer
+                && LoggedInUser.HasMobile;
 
-                if (((Global.LoggedInUserId == -1) || (Global.SelectedUser == null))
-                    && Settings.SitesFilter.SiteCapabilityContains(E_CapabilitiesFilter.Mobile))
+                // this is for the case where a mobile user was signed in and another signin happens without
+                //  mobile, then we need to ensure that the mobile filter is off
+                if (!hasMobile)
                 {
                     Settings.SitesFilter.RemoveSiteCapability(E_CapabilitiesFilter.Mobile);
                     if (Settings.SitesFilter.SiteCapabilitiesCount == 0)
@@ -104,26 +112,28 @@ namespace vitavol
                 // find the sites that match our filter
                 SelectedSites = Global.GetSitesUsingFilterNoFetch(Settings.SitesFilter, hasMobile);
 
-                // set the flag so that the pin maker will set the appropriate color for a preferred site
-                //List<string> preferredSiteSlugs = C_PreferredSites.GetPreferredSites(this);
-                List<string> preferredSiteSlugs = Settings.GetPreferedSites();
-                foreach (C_VitaSite site in SelectedSites)
-                    site.PreferredSite = preferredSiteSlugs.Contains(site.Slug);
+                //// set the flag so that the pin maker will set the appropriate color for a preferred site
+                ////List<string> preferredSiteSlugs = C_PreferredSites.GetPreferredSites(this);
+                //List<string> preferredSiteSlugs = Settings.GetPreferedSites();
+                //foreach (C_VitaSite site in SelectedSites)
+                    //site.PreferredSite = preferredSiteSlugs.Contains(site.Slug);
 
                 void p()
                 {
                     AI_Busy.StopAnimating();
 
-                    string filterButtonTitle = Settings.SitesFilter.FilterIsActive() ? "Filter Active" : "Set Filter";
+                    string filterButtonTitle = Settings.SitesFilter.DateFilter.ToString();
+                    if (Settings.SitesFilter.DateFilter == E_DateFilter.AllDays)
+                        filterButtonTitle = "All Days";
+                    else if ((Settings.SitesFilter.DateFilter != E_DateFilter.Today)
+                        && (Settings.SitesFilter.DateFilter != E_DateFilter.Tomorrow))
+                        filterButtonTitle = Settings.SitesFilter.GetDateForFilter().ToString("mmm dd, yyyy");
                     B_Filter.SetTitle(filterButtonTitle, UIControlState.Normal);
 
-                    if ((Global.LoggedInUserId != -1) && (Global.SelectedUser != null))
-                    {
-                        L_User.Text = Global.SelectedUser.Name;
-                        L_User.Hidden = false;
-                    }
-                    else
-                        L_User.Hidden = true;
+                    string servicesString = Settings.SitesFilter.ServicesAsString();
+                    if (Settings.SitesFilter.SiteCapabilityContains(E_CapabilitiesFilter.Any))
+                        servicesString = "All Services";
+                    B_Services.SetTitle(servicesString, UIControlState.Normal);
 
                     PutPinsOnMap(SelectedSites);
                 }

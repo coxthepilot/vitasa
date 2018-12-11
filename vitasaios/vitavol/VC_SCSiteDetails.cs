@@ -34,6 +34,18 @@ namespace vitavol
             AppDelegate myAppDelegate = (AppDelegate)UIApplication.SharedApplication.Delegate;
             Global = myAppDelegate.Global;
 
+            UITapGestureRecognizer labelTap = new UITapGestureRecognizer(() =>
+            {
+                C_Common.DropFirstResponder(View);
+            });
+
+            L_Title.UserInteractionEnabled = true;
+            L_Title.AddGestureRecognizer(labelTap);
+            L_Date.UserInteractionEnabled = true;
+            L_Date.AddGestureRecognizer(labelTap);
+            L_SiteName.UserInteractionEnabled = true;
+            L_SiteName.AddGestureRecognizer(labelTap);
+
             SelectedDate = Global.CalendarDate;
             LoggedInUser = Global.GetUserFromCacheNoFetch(Global.LoggedInUserId);
             SelectedSite = Global.GetSiteFromSlugNoFetch(Global.SelectedSiteSlug);
@@ -76,14 +88,20 @@ namespace vitavol
                 SelectedCalendarEntry.SiteIsOpen = SW_SiteIsOpen.On;
                 SelectedCalendarEntry.OpenTime = new C_HMS(TB_OpenTime.Text);
                 SelectedCalendarEntry.CloseTime = new C_HMS(TB_CloseTime.Text);
-                C_CalendarEntry ce = SelectedSite.GetCalendarEntryForDate(SelectedDate);
-                ce.CopyFrom(SelectedCalendarEntry);
 
                 AI_Busy.StartAnimating();
                 EnableUI(true);
 
                 Task.Run(async () => 
                 {
+                    C_CalendarEntry ce = SelectedSite.GetCalendarEntryForDate(SelectedDate);
+
+                    bool old_SiteIsOpen = ce.SiteIsOpen;
+                    C_HMS old_Open = ce.OpenTime;
+                    C_HMS old_Close = ce.CloseTime;
+
+                    ce.CopyFrom(SelectedCalendarEntry);
+
                     C_IOResult ior = await Global.UpdateCalendarEntry(SelectedSite, LoggedInUser.Token, ce);
 
                     UIApplication.SharedApplication.InvokeOnMainThread(
@@ -96,6 +114,10 @@ namespace vitavol
                             PerformSegue("Segue_SCSiteDetailsToSCSite", this);
                         else
                         {
+                            ce.SiteIsOpen = old_SiteIsOpen;
+                            ce.OpenTime = old_Open;
+                            ce.CloseTime = old_Close;
+
                             E_MessageBoxResults mbres = await MessageBox(this,
                                  "Error - enable to update the calendar",
                                  ior.ErrorMessage,
