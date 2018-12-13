@@ -58,25 +58,26 @@ namespace a_vitavol
 
                     if ((ior.User != null) && (C_GooglePlayHelper.IsGooglePlayServicesInstalled(this)))
                     {
+                        var sharedPreferences = GetSharedPreferences("vitasa", FileCreationMode.MultiProcess);
+                        string firebasetoken = sharedPreferences.GetString("firebasetoken", null);
+                        string firebasetoken_updated = sharedPreferences.GetString("firebasetoken_updated", "false");
 
                         // see if we need to update the messaging token on the backend
-                        if (Settings.FirebaseTokenUpdated)
+                        if (!string.IsNullOrEmpty(firebasetoken))
+                        //if ((firebasetoken_updated == "true") && (!string.IsNullOrEmpty(firebasetoken)))
                         {
-                            string messagingToken = Settings.FirebaseToken;
-                            if (!string.IsNullOrEmpty(messagingToken))
-                            {
-                                // the current token can be found at: FirebaseInstanceId.Instance.Token
-                                C_IOResult ior1 = await Global.RegisterNotificationToken(E_Platform.Android, messagingToken, ior.User.Token);
+                            // the current token can be found at: FirebaseInstanceId.Instance.Token
+                            C_IOResult ior1 = await Global.RegisterNotificationToken(E_Platform.Android, firebasetoken, ior.User.Token);
 #if DEBUG
-                                if (!ior1.Success)
-                                    Log.Debug("vita", "unable to register token");
+                            if (!ior1.Success)
+                                Log.Debug("vita", "unable to register token");
 #endif
-                                if (ior1.Success)
-                                {
-                                    // show that we have updated the token on the backend
-                                    Settings.FirebaseTokenUpdated = false;
-                                    Settings.Save();
-                                }
+                            if (ior1.Success)
+                            {
+                                // show that we have updated the token on the backend
+                                var editor = sharedPreferences.Edit();
+                                editor.PutString("firebasetoken_updated", "false");
+                                editor.Commit();
                             }
                         }
                     }

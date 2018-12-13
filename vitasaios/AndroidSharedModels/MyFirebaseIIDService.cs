@@ -33,27 +33,30 @@ namespace FCMClient
 			editor.PutString("firebasetoken_updated", "true");
 			editor.Commit();
 
-			//just in case this happens when we are actually logged in
+			//just in case this happens when we are actually logged in; is not a problem if not, will handle at login
             a_vitavol.MyAppDelegate g = (a_vitavol.MyAppDelegate)Application;
             C_Global Global = g.Global;
-            if ((Global != null) && (Global.LoggedInUserId != -1))
+            if (Global != null)
             {
-                C_VitaUser user = Global.GetUserFromCacheNoFetch(Global.LoggedInUserId);
-                if (user != null)
+                if (Global.LoggedInUserId != -1)
                 {
-                    Task.Run(async () => 
+                    C_VitaUser user = Global.GetUserFromCacheNoFetch(Global.LoggedInUserId);
+                    if (user != null)
                     {
-                        C_IOResult ior = await Global.RegisterNotificationToken(E_Platform.Android, token, user.Token);
-                        if (ior.Success)
+                        Task.Run(async () =>
                         {
-							Log.Debug(TAG, "Saved the token");
-							editor.PutString("firebasetoken_updated", "false");
-							editor.Commit();
-						}
-                        else
-							Log.Debug(TAG, "Unable to save the token");
-					});
-				}
+                            C_IOResult ior = await Global.RegisterNotificationToken(E_Platform.Android, token, user.Token);
+                            if (ior.Success)
+                            {
+                                Log.Debug(TAG, "Saved the token");
+                                editor.PutString("firebasetoken_updated", "false");
+                                editor.Commit();
+                            }
+                            else
+                                Log.Debug(TAG, "Unable to save the token");
+                        });
+                    }
+                }
             }
 		}
 	}

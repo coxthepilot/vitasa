@@ -32,10 +32,10 @@ namespace zsquared
         public float Latitude;
         public float Longitude;
 
-        public bool FirebaseTokenUpdated;
-        public string FirebaseMessage;
-        public string FirebaseToken;
-        public string FirebaseID;
+        //public bool FirebaseTokenUpdated;
+        //public string FirebaseMessage;
+        //public string FirebaseToken;
+        //public string FirebaseID;
 
         public C_SitesFilter SitesFilter;
 
@@ -70,7 +70,7 @@ namespace zsquared
             Latitude = 29.41541f;
             Longitude = -98.491823f;
 
-            FirebaseTokenUpdated = false;
+            //FirebaseTokenUpdated = false;
 
             SitesFilter = new C_SitesFilter();
 
@@ -81,7 +81,7 @@ namespace zsquared
 
             try
             {
-                string settings_json_s = GetSharedPreferences(activity, N_PersistentSettings, "");
+                string settings_json_s = GetSharedPreferencesX(activity, N_PersistentSettings, "");
 
                 JsonValue settings_json = JsonValue.Parse(settings_json_s);
 
@@ -100,17 +100,17 @@ namespace zsquared
                 if (settings_json.ContainsKey(N_Longitude))
                     Longitude = Tools.JsonProcessFloat(settings_json[N_Longitude], 10.0f);
 
-                if (settings_json.ContainsKey(N_FirebaseUpdated))
-                    FirebaseTokenUpdated = Tools.JsonProcessBool(settings_json[N_FirebaseUpdated], false);
+                //if (settings_json.ContainsKey(N_FirebaseUpdated))
+                //    FirebaseTokenUpdated = Tools.JsonProcessBool(settings_json[N_FirebaseUpdated], false);
 
-                if (settings_json.ContainsKey(N_FirebaseMessage))
-                    FirebaseMessage = Tools.JsonProcessString(settings_json[N_FirebaseMessage], null);
+                //if (settings_json.ContainsKey(N_FirebaseMessage))
+                //    FirebaseMessage = Tools.JsonProcessString(settings_json[N_FirebaseMessage], null);
 
-                if (settings_json.ContainsKey(N_FirebaseToken))
-                    FirebaseToken = Tools.JsonProcessString(settings_json[N_FirebaseToken], null);
+                //if (settings_json.ContainsKey(N_FirebaseToken))
+                //    FirebaseToken = Tools.JsonProcessString(settings_json[N_FirebaseToken], null);
 
-                if (settings_json.ContainsKey(N_FirebaseID))
-                    FirebaseID = Tools.JsonProcessString(settings_json[N_FirebaseID], null);
+                //if (settings_json.ContainsKey(N_FirebaseID))
+                    //FirebaseID = Tools.JsonProcessString(settings_json[N_FirebaseID], null);
 
                 if (settings_json.ContainsKey(N_SitesFilter))
                 {
@@ -160,10 +160,10 @@ namespace zsquared
             jb.Add(Latitude, N_Latitude);
             jb.Add(Longitude, N_Longitude);
 
-            jb.Add(FirebaseTokenUpdated, N_FirebaseUpdated);
-            jb.Add(FirebaseMessage, N_FirebaseMessage);
-            jb.Add(FirebaseID, N_FirebaseID);
-            jb.Add(FirebaseToken, N_FirebaseToken);
+            //jb.Add(FirebaseTokenUpdated, N_FirebaseUpdated);
+            //jb.Add(FirebaseMessage, N_FirebaseMessage);
+            //jb.Add(FirebaseID, N_FirebaseID);
+            //jb.Add(FirebaseToken, N_FirebaseToken);
 
             //jb.Add(SitesFilter.ToJson(), N_SitesFilter);
             jb.StartArray(N_SitesFilter);
@@ -179,11 +179,11 @@ namespace zsquared
             jb.EndArray();
 
             string jbstring = jb.ToString();
-            PutSharedPreferences(activity, N_PersistentSettings, jbstring);
+            PutSharedPreferencesX(activity, N_PersistentSettings, jbstring);
 #if DEBUG
             try
             {
-                string check = GetSharedPreferences(activity, N_PersistentSettings);
+                string check = GetSharedPreferencesX(activity, N_PersistentSettings);
                 if (check != jbstring)
                     Log.Debug("vita", "save and read from shared preferences failed");
                 JsonValue jvt = JsonValue.Parse(check);
@@ -212,7 +212,7 @@ namespace zsquared
             return PreferedSites.Contains(slug);
         }
 
-        private string GetSharedPreferences(Android.App.Activity a, string key, string defaultValue = null)
+        private string GetSharedPreferencesX(Android.App.Activity a, string key, string defaultValue = null)
         {
             ISharedPreferences SharedPreferences = a.GetSharedPreferences("vitasa", FileCreationMode.MultiProcess);
             string res = SharedPreferences.GetString(key, defaultValue);
@@ -220,7 +220,7 @@ namespace zsquared
             return res;
         }
 
-        private void PutSharedPreferences(Android.App.Activity a, string key, string value)
+        private void PutSharedPreferencesX(Android.App.Activity a, string key, string value)
         {
             ISharedPreferences SharedPreferences = a.GetSharedPreferences("vitasa", FileCreationMode.MultiProcess);
             ISharedPreferencesEditor Editor = SharedPreferences.Edit();

@@ -11,6 +11,16 @@ namespace zsquared
         public delegate void DatePickerEventHandler(object sender, DatePickerEventArgs args);
         public event DatePickerEventHandler DateSelected;
 
+        public class DatePickerEventArgs : EventArgs
+        {
+            public C_YMD Date;
+
+            public DatePickerEventArgs(C_YMD ymd)
+            {
+                Date = ymd;
+            }
+        }
+
         public C_YMD SelectedDate;
 
         public C_DatePicker(C_YMD startDate)
@@ -32,16 +42,5 @@ namespace zsquared
             SelectedDate = new C_YMD(year, monthOfYear + 1, dayOfMonth);
             DateSelected?.Invoke(this, new DatePickerEventArgs(new C_YMD(year, monthOfYear + 1, dayOfMonth)));
         }
-
-        public class DatePickerEventArgs : EventArgs
-        {
-            public C_YMD Date;
-
-            public DatePickerEventArgs(C_YMD ymd)
-            {
-                Date = ymd;
-            }
-        }
-
     }
 }

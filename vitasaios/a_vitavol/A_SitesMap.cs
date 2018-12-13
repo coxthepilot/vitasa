@@ -16,6 +16,9 @@ using Android.Gms.Location;
 using Android.Gms.Common;
 using Android.Locations;
 
+//using Android.Support.Fragment;
+//using Android.Support.V4.App;
+
 using zsquared;
 
 namespace a_vitavol
@@ -172,20 +175,29 @@ namespace a_vitavol
 
         private void InitMapFragment()
         {
-            _mapFragment = FragmentManager.FindFragmentByTag("map") as MapFragment;
-            if (_mapFragment == null)
+            try
             {
-                GoogleMapOptions mapOptions = new GoogleMapOptions()
-                    .InvokeMapType(GoogleMap.MapTypeNormal)
-                    .InvokeZoomControlsEnabled(true)
-                    .InvokeCompassEnabled(true);
+                _mapFragment = FragmentManager.FindFragmentByTag("map") as MapFragment;
+                if (_mapFragment == null)
+                {
+                    GoogleMapOptions mapOptions = new GoogleMapOptions()
+                        .InvokeMapType(GoogleMap.MapTypeNormal)
+                        .InvokeZoomControlsEnabled(true)
+                        .InvokeCompassEnabled(true);
 
-                FragmentTransaction fragTx = FragmentManager.BeginTransaction();
-                _mapFragment = MapFragment.NewInstance(mapOptions);
-                fragTx.Add(Resource.Id.Map_Sites, _mapFragment, "map");
-                fragTx.Commit();
+                    FragmentTransaction fragTx = FragmentManager.BeginTransaction();
+
+                    _mapFragment = MapFragment.NewInstance(mapOptions);
+                    fragTx.Add(Resource.Id.Map_Sites, _mapFragment, "map");
+                    fragTx.Commit();
+                }
+                _mapFragment.GetMapAsync(this);
             }
-            _mapFragment.GetMapAsync(this);
+            catch (Exception ex)
+            {
+                C_MessageBox mbox = new C_MessageBox(this, "Error", "Failed in InitMapFragment [" + ex.Message + "]", E_MessageBoxButtons.Ok);
+                mbox.Show();
+            }
         }
 
         bool UIIsEnabled;
@@ -228,53 +240,58 @@ namespace a_vitavol
 
         public void OnMapReady(GoogleMap map)
         {
-            _map = map;
-
-            float zoom = Settings.Zoom;
-            float lat = Settings.Latitude;
-            float longi = Settings.Longitude;
-
-            //Log.Debug("vita", "Map zoom: " + zoom.ToString() + " at: " + lat.ToString() + " / " + longi.ToString());
-
-            // default starting location, center of San Antonio
-            //LatLng location = new LatLng(29.415411, -98.4918232);
-            LatLng location = new LatLng(lat, longi);
-            CameraPosition.Builder builder = CameraPosition.InvokeBuilder();
-            builder.Target(location);
-            builder.Zoom(zoom);
-            CameraPosition cameraPosition = builder.Build();
-            CameraUpdate cameraUpdate = CameraUpdateFactory.NewCameraPosition(cameraPosition);
-            _map.MoveCamera(cameraUpdate);
-
-            _map.InfoWindowClick += MapOnInfoWindowClick;
-            _map.CameraChange += (object sender, GoogleMap.CameraChangeEventArgs e) => 
+            try
             {
-                CameraPosition cpos = e.Position;
-                Settings.Zoom = cpos.Zoom;
-                Settings.Latitude = (float)e.Position.Target.Latitude;
-                Settings.Longitude = (float)e.Position.Target.Longitude;
-                Settings.Save();
-            };
+                _map = map;
 
-            foreach (C_VitaSite site in SelectedSites)
-            {
-                double latitude = double.NaN;
-                double longitude = double.NaN;
-                bool dok = double.TryParse(site.Latitude, out latitude);
-                dok &= double.TryParse(site.Longitude, out longitude);
+                float zoom = Settings.Zoom;
+                float lat = Settings.Latitude;
+                float longi = Settings.Longitude;
 
-                if (dok)
+                // default starting location, center of San Antonio
+                LatLng location = new LatLng(lat, longi);
+                CameraPosition.Builder builder = CameraPosition.InvokeBuilder();
+                builder.Target(location);
+                builder.Zoom(zoom);
+                CameraPosition cameraPosition = builder.Build();
+                CameraUpdate cameraUpdate = CameraUpdateFactory.NewCameraPosition(cameraPosition);
+                _map.MoveCamera(cameraUpdate);
+
+                _map.InfoWindowClick += MapOnInfoWindowClick;
+                _map.CameraChange += (object sender, GoogleMap.CameraChangeEventArgs e) =>
                 {
-                    MarkerOptions markerOpt1 = new MarkerOptions();
-                    markerOpt1.SetPosition(new LatLng(latitude, longitude));
-                    markerOpt1.SetTitle(site.Name);
-                    bool siteIsPrefered = Settings.IsPreferedSite(site.Slug);
-                    BitmapDescriptor bmd = siteIsPrefered ?
-                                               BitmapDescriptorFactory.FromAsset("MarkerPinFlagBlack50.png") :
-                                               BitmapDescriptorFactory.FromAsset("MarkerPinFlagGreen50.png");
-                    markerOpt1.SetIcon(bmd);
-                    _map.AddMarker(markerOpt1);
+                    CameraPosition cpos = e.Position;
+                    Settings.Zoom = cpos.Zoom;
+                    Settings.Latitude = (float)e.Position.Target.Latitude;
+                    Settings.Longitude = (float)e.Position.Target.Longitude;
+                    Settings.Save();
+                };
+
+                foreach (C_VitaSite site in SelectedSites)
+                {
+                    double latitude = double.NaN;
+                    double longitude = double.NaN;
+                    bool dok = double.TryParse(site.Latitude, out latitude);
+                    dok &= double.TryParse(site.Longitude, out longitude);
+
+                    if (dok)
+                    {
+                        MarkerOptions markerOpt1 = new MarkerOptions();
+                        markerOpt1.SetPosition(new LatLng(latitude, longitude));
+                        markerOpt1.SetTitle(site.Name);
+                        bool siteIsPrefered = Settings.IsPreferedSite(site.Slug);
+                        BitmapDescriptor bmd = siteIsPrefered ?
+                                                   BitmapDescriptorFactory.FromAsset("MarkerPinFlagBlack50.png") :
+                                                   BitmapDescriptorFactory.FromAsset("MarkerPinFlagGreen50.png");
+                        markerOpt1.SetIcon(bmd);
+                        _map.AddMarker(markerOpt1);
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                C_MessageBox mbox = new C_MessageBox(this, "Error", "Failed in OnMapReady [" + ex.Message + "]", E_MessageBoxButtons.Ok);
+                mbox.Show();
             }
         }
 

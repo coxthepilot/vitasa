@@ -119,16 +119,28 @@ namespace a_vitavol
                 string m_id = Intent.Extras.GetString("google.message_id");
                 if (m_id != null)
                 {
+                    var sharedPreferences = GetSharedPreferences("vitasa", FileCreationMode.MultiProcess);
+                    string fb_message = sharedPreferences.GetString("firebase_message", null);
+                    string fb_id = sharedPreferences.GetString("firebase_messageid", null);
+
                     //string fb_message = C_SharedPreferences.GetSharedPreferences(this, "firebase_message", "");
                     //string fb_id = C_SharedPreferences.GetSharedPreferences(this, "firebase_messageid", "");
-                    string fb_message = Settings.FirebaseMessage;
-                    string fb_id = Settings.FirebaseID;
+                    //string fb_message = Settings.FirebaseMessage;
+                    //string fb_id = Settings.FirebaseID;
+
+                    //var sharedPreferences = GetSharedPreferences("vitasa", FileCreationMode.MultiProcess);
+                    //string firebasetoken = sharedPreferences.GetString("firebasetoken", null);
+
 
                     if (m_id == fb_id)
                     {
                         C_MessageBox mbox = new C_MessageBox(this, "Notification", fb_message, E_MessageBoxButtons.Ok);
 						mbox.Show();
 					}
+                    else
+                    {
+                        Log.Debug("vitasa", "Message received but not for us.");
+                    }
                 }
             }
 
@@ -153,15 +165,41 @@ namespace a_vitavol
                 }
 
                 // we have user credentials, so try to login with those credentials
-                PB_Busy.Visibility = Android.Views.ViewStates.Visible;
+                PB_Busy.Visibility = ViewStates.Visible;
                 EnableUI(false);
                 Task.Run(async () =>
                 {
                     C_IOResult ior = await Global.PerformLogin(email, password);
 
+                    if ((ior.User != null) && (C_GooglePlayHelper.IsGooglePlayServicesInstalled(this)))
+                    {
+                        var sharedPreferences = GetSharedPreferences("vitasa", FileCreationMode.MultiProcess);
+                        string firebasetoken = sharedPreferences.GetString("firebasetoken", null);
+                        string firebasetoken_updated = sharedPreferences.GetString("firebasetoken_updated", "false");
+
+                        // see if we need to update the messaging token on the backend
+                        //if ((firebasetoken_updated == "true") && (!string.IsNullOrEmpty(firebasetoken)))
+                        if (!string.IsNullOrEmpty(firebasetoken))
+                        {
+                            // the current token can be found at: FirebaseInstanceId.Instance.Token
+                            C_IOResult ior1 = await Global.RegisterNotificationToken(E_Platform.Android, firebasetoken, ior.User.Token);
+#if DEBUG
+                            if (!ior1.Success)
+                                Log.Debug("vita", "unable to register token");
+#endif
+                            if (ior1.Success)
+                            {
+                                // show that we have updated the token on the backend
+                                var editor = sharedPreferences.Edit();
+                                editor.PutString("firebasetoken_updated", "false");
+                                editor.Commit();
+                            }
+                        }
+                    }
+
                     void p()
                     {
-                        PB_Busy.Visibility = Android.Views.ViewStates.Gone;
+                        PB_Busy.Visibility = ViewStates.Gone;
                         EnableUI(true);
 
                         // the default destination is the login screen

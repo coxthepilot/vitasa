@@ -22,5 +22,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)C_SpinnerHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)C_GeoCode.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)C_PersistentSettings.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)C_MapsHelper.cs" />
   </ItemGroup>
 </Project>

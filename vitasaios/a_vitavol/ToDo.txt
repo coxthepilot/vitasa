@@ -21,7 +21,9 @@ Backend
 
 
 Android
+* S8, LG V30: fail
 * error 500 on user create is back; looks like subscription arn missing
+
 
 * deprecated Fragment manager?
 * admin suggestion: email send [verify]
