@@ -89,15 +89,18 @@ namespace a_vitavol
                     return;
                 }
 
-                C_VitaUser u = Global.GetUserFromCacheNoFetch(TB_Email.Text);
-                if (u != null)
+                if (Global.SelectedUser == null)
                 {
-                    C_MessageBox mbox1 = new C_MessageBox(this,
-                     "Error",
-                     "That email is already in use.",
-                     E_MessageBoxButtons.Ok);
-                    mbox1.Show();
-                    return;
+                    C_VitaUser u = Global.GetUserFromCacheNoFetch(TB_Email.Text);
+                    if (u != null)
+                    {
+                        C_MessageBox mbox1 = new C_MessageBox(this,
+                         "Error",
+                         "That email is already in use.",
+                         E_MessageBoxButtons.Ok);
+                        mbox1.Show();
+                        return;
+                    }
                 }
 
                 PullValuesFromForm();
@@ -271,15 +274,18 @@ namespace a_vitavol
                     return;
                 }
 
-                C_VitaUser u = Global.GetUserFromCacheNoFetch(TB_Email.Text);
-                if (u != null)
+                if (Global.SelectedUser == null)
                 {
-                    C_MessageBox mbox1 = new C_MessageBox(this,
-                     "Error",
-                     "That email is already in use.",
-                     E_MessageBoxButtons.Ok);
-                    mbox1.Show();
-                    return;
+                    C_VitaUser u = Global.GetUserFromCacheNoFetch(TB_Email.Text);
+                    if (u != null)
+                    {
+                        C_MessageBox mbox1 = new C_MessageBox(this,
+                         "Error",
+                         "That email is already in use.",
+                         E_MessageBoxButtons.Ok);
+                        mbox1.Show();
+                        return;
+                    }
                 }
 
                 PullValuesFromForm();

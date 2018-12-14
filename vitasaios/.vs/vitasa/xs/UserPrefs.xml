@@ -1,12 +1,9 @@
 ﻿<Properties StartupConfiguration="{AD1C86D4-8E32-4FEC-85A2-B1D982F3DE61}|Default">
   <MonoDevelop.Ide.ItemProperties.vitavol automaticSigning="False" PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.A303A8EC-EE1A-4F0B-A551-48C2CB1F172A" />
   <MonoDevelop.Ide.ItemProperties.SharedModels HideGettingStarted="True" />
-  <MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workbench ActiveDocument="a_vitavol/ToDo.txt">
     <Files>
-      <File FileName="a_vitavol/ToDo.txt" Line="26" Column="1" />
-      <File FileName="SharedModels/C_Global.cs" Line="1199" Column="31" />
-      <File FileName="a_vitavol/MainActivity.cs" Line="198" Column="22" />
-      <File FileName="a_vitavol/A_SitesMap.cs" Line="288" Column="22" />
+      <File FileName="a_vitavol/ToDo.txt" Line="21" Column="32" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.ItemProperties.a__vitavol AndroidDesignerPreferredDevice="Nexus 4" PreferredExecutionTarget="Android.Android_Accelerated_Oreo" />
@@ -46,15 +43,17 @@
       <Breakpoint file="/Users/Billy/Documents/source/vitasa/vitasaios/SharedModels/C_Vita.cs" relfile="SharedModels/C_Vita.cs" line="24" column="1" />
       <Breakpoint file="/Users/Billy/Documents/source/vitasa/vitasaios/SharedModels/C_Global.cs" relfile="SharedModels/C_Global.cs" line="702" column="1" />
       <Breakpoint file="/Users/Billy/Documents/source/vitasa/vitasaios/vitavol/VC_SiteDetails.cs" relfile="vitavol/VC_SiteDetails.cs" line="150" column="21" />
-      <Breakpoint file="/Users/Billy/Documents/source/vitasa/vitasaios/vitavol/VC_AdminUser.cs" relfile="vitavol/VC_AdminUser.cs" line="225" column="1" />
-      <Breakpoint file="/Users/Billy/Documents/source/vitasa/vitasaios/vitavol/VC_AdminUser.cs" relfile="vitavol/VC_AdminUser.cs" line="232" column="27" />
-      <Breakpoint file="/Users/Billy/Documents/source/vitasa/vitasaios/AndroidSharedModels/MyFirebaseMessagingService.cs" relfile="AndroidSharedModels/MyFirebaseMessagingService.cs" line="19" column="1" />
+      <Breakpoint file="/Users/Billy/Documents/source/vitasa/vitasaios/vitavol/VC_AdminUser.cs" relfile="vitavol/VC_AdminUser.cs" line="231" column="1" />
+      <Breakpoint file="/Users/Billy/Documents/source/vitasa/vitasaios/vitavol/VC_AdminUser.cs" relfile="vitavol/VC_AdminUser.cs" line="238" column="27" />
       <Breakpoint file="/Users/Billy/Documents/source/vitasa/vitasaios/AndroidSharedModels/MyFirebaseIIDService.cs" relfile="AndroidSharedModels/MyFirebaseIIDService.cs" line="30" column="1" />
-      <Breakpoint file="/Users/Billy/Documents/source/vitasa/vitasaios/a_vitavol/A_SitesMap.cs" relfile="a_vitavol/A_SitesMap.cs" line="162" column="1" />
-      <Breakpoint file="/Users/Billy/Documents/source/vitasa/vitasaios/vitavol/C_LocalNotification.cs" relfile="vitavol/C_LocalNotification.cs" line="19" column="20" />
-      <Breakpoint file="/Users/Billy/Documents/source/vitasa/vitasaios/vitavol/C_UserNotificationCenterDelegate.cs" relfile="vitavol/C_UserNotificationCenterDelegate.cs" line="12" column="11" />
       <Breakpoint file="/Users/Billy/Documents/source/vitasa/vitasaios/a_vitavol/A_Login.cs" relfile="a_vitavol/A_Login.cs" line="70" column="40" />
-      <Breakpoint file="/Users/Billy/Documents/source/vitasa/vitasaios/AndroidSharedModels/MyFirebaseMessagingService.cs" relfile="AndroidSharedModels/MyFirebaseMessagingService.cs" line="36" column="1" />
+      <Breakpoint file="/Users/Billy/Documents/source/vitasa/vitasaios/vitavol/C_LocalNotification.cs" relfile="vitavol/C_LocalNotification.cs" line="19" column="1" />
+      <Breakpoint file="/Users/Billy/Documents/source/vitasa/vitasaios/vitavol/C_UserNotificationCenterDelegate.cs" relfile="vitavol/C_UserNotificationCenterDelegate.cs" line="12" column="1" />
+      <Breakpoint file="/Users/Billy/Documents/source/vitasa/vitasaios/vitavol/AppDelegate.cs" relfile="vitavol/AppDelegate.cs" line="130" column="1" />
+      <Breakpoint file="/Users/Billy/Documents/source/vitasa/vitasaios/AndroidSharedModels/C_MapsHelper.cs" relfile="AndroidSharedModels/C_MapsHelper.cs" line="113" column="1" />
+      <Breakpoint file="/Users/Billy/Documents/source/vitasa/vitasaios/a_vitavol/A_SitesMap.cs" relfile="a_vitavol/A_SitesMap.cs" line="130" column="1" />
+      <Breakpoint file="/Users/Billy/Documents/source/vitasa/vitasaios/a_vitavol/MainActivity.cs" relfile="a_vitavol/MainActivity.cs" line="119" column="21" />
+      <Breakpoint file="/Users/Billy/Documents/source/vitasa/vitasaios/a_vitavol/A_SitesMap.cs" relfile="a_vitavol/A_SitesMap.cs" line="108" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MultiItemStartupConfigurations />

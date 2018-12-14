@@ -133,6 +133,17 @@ namespace zsquared
             }
         }
 
+        private bool _DidReceiveRemoteNotification;
+        public bool DidReceiveRemoteNotification
+        {
+            get { return _DidReceiveRemoteNotification; }
+            set
+            {
+                _DidReceiveRemoteNotification = value;
+                Save();
+            }
+        }
+
         private List<string> _PreferedSites;
 
         public readonly static string N_PersistentSettings = "settings";
@@ -150,6 +161,7 @@ namespace zsquared
         public readonly static string N_FirstDate = "firstdate";
         public readonly static string N_LastDate = "lastdate";
         public readonly static string N_PreferedSites = "preferedsites";
+        public readonly static string N_DidReceiveRemoveNotification = "didreceiveremotenotification";
 
         public C_PersistentSettings()
         {
@@ -200,6 +212,9 @@ namespace zsquared
 
                 if (settings_json.ContainsKey(N_FirebaseID))
                     _FirebaseID = Tools.JsonProcessString(settings_json[N_FirebaseID], null);
+
+                if (settings_json.ContainsKey(N_DidReceiveRemoveNotification))
+                    _DidReceiveRemoteNotification = Tools.JsonProcessBool(settings_json[N_DidReceiveRemoveNotification], false);
 
                 if (settings_json.ContainsKey(N_SitesFilter))
                 {
@@ -267,6 +282,8 @@ namespace zsquared
             jb.Add(FirebaseMessage, N_FirebaseMessage);
             jb.Add(FirebaseID, N_FirebaseID);
             jb.Add(NotificationToken, N_FirebaseToken);
+
+            jb.Add(DidReceiveRemoteNotification, N_DidReceiveRemoveNotification);
 
             //jb.Add(SitesFilter.ToJson(), N_SitesFilter);
             jb.StartArray(N_SitesFilter);

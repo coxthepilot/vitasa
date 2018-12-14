@@ -5061,6 +5061,12 @@ namespace a_vitavol
 			// aapt resource value: 0x7f09004d
 			public const int bottom_sheet_behavior = 2131296333;
 			
+			// aapt resource value: 0x7f090057
+			public const int channel_description = 2131296343;
+			
+			// aapt resource value: 0x7f090056
+			public const int channel_name = 2131296342;
+			
 			// aapt resource value: 0x7f09004e
 			public const int character_counter_pattern = 2131296334;
 			
@@ -5253,6 +5259,9 @@ namespace a_vitavol
 			
 			// aapt resource value: 0x7f0e016e
 			public const int Animation_Design_BottomSheetDialog = 2131624302;
+			
+			// aapt resource value: 0x7f0e0192
+			public const int AppTheme = 2131624338;
 			
 			// aapt resource value: 0x7f0e00a9
 			public const int Base_AlertDialog_AppCompat = 2131624105;

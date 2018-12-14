@@ -75,7 +75,8 @@ namespace vitavol
                             return;
                         }
 
-                        if (Settings.NotificationTokenUpdated)
+                        // changed in 2.1 to always register the token on login
+                        if (!string.IsNullOrWhiteSpace(Settings.NotificationToken))
                         {
                             string deviceToken = Settings.NotificationToken;
 

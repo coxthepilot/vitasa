@@ -104,22 +104,24 @@ namespace a_vitavol
 
             CB_PreferedSite.CheckedChange += (sender, e) => 
             {
-                //if (CB_PreferedSite.Checked)
-                //{
-                //    Settings.AddPreferedSite(SelectedSite.Slug);
-                //    Settings.Save();
-                //}
-                //else
-                //{
-                //    Settings.RemovePreferedSite(SelectedSite.Slug);
-                //    Settings.Save();
-                //}
                 // for all users, save this in our list so that the map reflects the change
                 if ((LoggedInUser != null) && LoggedInUser.HasVolunteer)
                 {
                     PB_Busy.Visibility = ViewStates.Visible;
                     EnableUI(false);
-                    bool preferedSiteOn = CB_PreferedSite.Checked;
+
+                    if (CB_PreferedSite.Checked)
+                    {
+                        if (!LoggedInUser.PreferredSiteSlugs.Contains(SelectedSite.Slug))
+                            LoggedInUser.PreferredSiteSlugs.Add(SelectedSite.Slug);
+                    }
+                    else
+                    {
+                        if (LoggedInUser.PreferredSiteSlugs.Contains(SelectedSite.Slug))
+                            LoggedInUser.PreferredSiteSlugs.Remove(SelectedSite.Slug);
+                    }
+
+
                     Task.Run(async () =>
                     {
                         C_IOResult ior = await Global.UpdateUserFields(LoggedInUser.ToJsonAsJsonBuilder(), LoggedInUser, LoggedInUser.Token);

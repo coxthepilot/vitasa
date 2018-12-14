@@ -100,9 +100,7 @@ namespace vitavol
 			// Get current device token
 			var DeviceToken = deviceToken.Description;
 			if (!string.IsNullOrWhiteSpace(DeviceToken))
-			{
-				DeviceToken = DeviceToken.Trim('<').Trim('>');
-			}
+				DeviceToken = DeviceToken.Trim('<').Trim('>').Trim();
 
             C_PersistentSettings Settings = new C_PersistentSettings();
 
@@ -112,12 +110,9 @@ namespace vitavol
 			// Has the token changed?
 			if (string.IsNullOrEmpty(oldDeviceToken) || !oldDeviceToken.Equals(DeviceToken))
 			{
-                // todo: call the back end api to register this APNS token
-                Console.WriteLine(DeviceToken);
+                Settings.NotificationToken = DeviceToken;
+                Settings.NotificationTokenUpdated = true;
 			}
-
-            Settings.NotificationToken = DeviceToken;
-            Settings.NotificationTokenUpdated = true;
 		}
 
 		public override void FailedToRegisterForRemoteNotifications(UIApplication application, NSError error)
@@ -127,176 +122,187 @@ namespace vitavol
 				Console.WriteLine("[AppDelegate] Notification error: " + error.ToString());
 		}
 
-   //     public override void PerformFetch(UIApplication application, Action<UIBackgroundFetchResult> completionHandler)
-   //     {
-			//Console.WriteLine("OS initiated Fetch...");
-			//FetchHandler(completionHandler);
-   //     }
+        [Export("application:didReceiveRemoteNotification:fetchCompletionHandler:")]
+        new void DidReceiveRemoteNotification(UIApplication application, NSDictionary userInfo, Action<UIBackgroundFetchResult> completionHandler)
+        {
+            //Console.WriteLine("did receive remote notification");
 
-   //     public void FetchHandler(Action<UIBackgroundFetchResult> completionHandler)
-   //     {
-   //         // get our settings; if this is a new app, then create the empty json set
-			//// KnownEventsJson is a list of events for which we will eventually issue notifications
-			//string KnownEventsJsonString = NSUserDefaults.StandardUserDefaults.StringForKey(N_KnownEventsJson);
-			//if (string.IsNullOrEmpty(KnownEventsJsonString))
-			//{
-			//	KnownEventsJsonString = "{}";
-			//	NSUserDefaults.StandardUserDefaults.SetString(KnownEventsJsonString, N_KnownEventsJson);
-			//}
+            C_PersistentSettings Settings = new C_PersistentSettings();
+            Settings.DidReceiveRemoteNotification = true;
 
-			//// see if we have a user; if we do not have a user, then we have nothing to do
-   //         string email = NSUserDefaults.StandardUserDefaults.StringForKey(N_Email);
-   //         string password = NSUserDefaults.StandardUserDefaults.StringForKey(N_Password);
-			//if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
-			//{
-   //             completionHandler?.Invoke(UIBackgroundFetchResult.NoData);
-   //             return;
-			//}
+            completionHandler(UIBackgroundFetchResult.NoData);
+        }
 
-			//Task.Run(async () =>
-			//{
-			//	C_VitaUser ourUser = await C_Vita.PerformLogin(email, password);
-   //             if ((ourUser == null) || (ourUser.HasSiteCoordinator))
-			//	{
-			//		completionHandler?.Invoke(UIBackgroundFetchResult.NoData);
-			//		return;
-			//	}
+        //     public override void PerformFetch(UIApplication application, Action<UIBackgroundFetchResult> completionHandler)
+        //     {
+        //Console.WriteLine("OS initiated Fetch...");
+        //FetchHandler(completionHandler);
+        //     }
 
-			//	// now that we have a user, go ahead and parse the KnownEvents
-			//	List<C_NotificationEvent> KnownEvents = new List<C_NotificationEvent>();
-   //             try
-   //             {
-   //                 JsonValue KnownEventsJson = JsonValue.Parse(KnownEventsJsonString);
-   //                 if (KnownEventsJson.ContainsKey("knownevents"))
-   //                 {
-   //                     JsonValue kej = KnownEventsJson["knownevents"];
-   //                     foreach (JsonValue jv in kej)
-   //                     {
-   //                         C_NotificationEvent ne = new C_NotificationEvent(jv);
-   //                         KnownEvents.Add(ne);
-   //                     }
-   //                 }
-   //             }
-   //             catch {}
+        //     public void FetchHandler(Action<UIBackgroundFetchResult> completionHandler)
+        //     {
+        //         // get our settings; if this is a new app, then create the empty json set
+        //// KnownEventsJson is a list of events for which we will eventually issue notifications
+        //string KnownEventsJsonString = NSUserDefaults.StandardUserDefaults.StringForKey(N_KnownEventsJson);
+        //if (string.IsNullOrEmpty(KnownEventsJsonString))
+        //{
+        //	KnownEventsJsonString = "{}";
+        //	NSUserDefaults.StandardUserDefaults.SetString(KnownEventsJsonString, N_KnownEventsJson);
+        //}
 
-			//	C_YMD firstDay = C_YMD.Now;
-			//	// remove items that happened from yesterday back
-			//	// this leave the list with items from this day forward
-			//	List<C_NotificationEvent> itemsToRemove = new List<C_NotificationEvent>();
-			//	foreach (C_NotificationEvent wi in KnownEvents)
-			//	{
-			//		if (wi.EventDate < firstDay)
-			//			itemsToRemove.Add(wi);
-			//	}
-			//	foreach (C_NotificationEvent ne in itemsToRemove)
-			//		KnownEvents.Remove(ne);
+        //// see if we have a user; if we do not have a user, then we have nothing to do
+        //         string email = NSUserDefaults.StandardUserDefaults.StringForKey(N_Email);
+        //         string password = NSUserDefaults.StandardUserDefaults.StringForKey(N_Password);
+        //if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
+        //{
+        //             completionHandler?.Invoke(UIBackgroundFetchResult.NoData);
+        //             return;
+        //}
 
-			//	// update the KnownEvents based on the fetch of the user WorkItems
-			//	// get the work items for the next 7 days, including today
-			//	C_YMD lastDay = firstDay.AddDays(7);
-			//	List<C_WorkItem> ourUserWorkItems = new List<C_WorkItem>();
-			//	foreach (C_WorkItem wi in ourUser.WorkIntentsX)
-			//	{
-			//		if ((wi.Date >= firstDay) && (wi.Date <= lastDay))
-			//			ourUserWorkItems.Add(wi);
-			//	}
+        //Task.Run(async () =>
+        //{
+        //	C_VitaUser ourUser = await C_Vita.PerformLogin(email, password);
+        //             if ((ourUser == null) || (ourUser.HasSiteCoordinator))
+        //	{
+        //		completionHandler?.Invoke(UIBackgroundFetchResult.NoData);
+        //		return;
+        //	}
 
-			//	// a dictionary to convert slugs to site names; our cache of conversions
-			//	// populte with the ones we already know
-			//	Dictionary<string, string> SlugToSiteName = new Dictionary<string, string>();
-			//	foreach (C_NotificationEvent ne in KnownEvents)
-			//	{
-			//		if (!SlugToSiteName.ContainsKey(ne.SiteSlug))
-			//			SlugToSiteName.Add(ne.SiteSlug, ne.SiteName);
-			//	}
+        //	// now that we have a user, go ahead and parse the KnownEvents
+        //	List<C_NotificationEvent> KnownEvents = new List<C_NotificationEvent>();
+        //             try
+        //             {
+        //                 JsonValue KnownEventsJson = JsonValue.Parse(KnownEventsJsonString);
+        //                 if (KnownEventsJson.ContainsKey("knownevents"))
+        //                 {
+        //                     JsonValue kej = KnownEventsJson["knownevents"];
+        //                     foreach (JsonValue jv in kej)
+        //                     {
+        //                         C_NotificationEvent ne = new C_NotificationEvent(jv);
+        //                         KnownEvents.Add(ne);
+        //                     }
+        //                 }
+        //             }
+        //             catch {}
 
-			//	// go through the events received with the user, filter for the next 7 days
-			//	//  if the event is in KnownEvents, copy it over and update it
-			//	//  if not in KnownEvents, create a new Event
-			//	List<C_NotificationEvent> NewKnownEvents = new List<C_NotificationEvent>();
-			//	foreach (C_WorkItem wi in ourUserWorkItems)
-			//	{
-			//		// look for this event in the KnownEvents
-			//		var ou = KnownEvents.Where(nex => nex.WorkItemId == wi.id);
-			//		if (ou.Any())
-			//		{
-			//			// item found; just add to the result
-			//			NewKnownEvents.Add(ou.First());
-			//		}
-			//		else
-			//		{
-			//			// the workitem was not found in our known events
-			//			C_NotificationEvent nne = new C_NotificationEvent(wi);
-			//			if (SlugToSiteName.ContainsKey(wi.SiteSlug))
-			//			{
-			//				nne.SiteName = SlugToSiteName[wi.SiteSlug];
-			//				NewKnownEvents.Add(nne);
-			//			}
-			//			else
-			//			{
-			//				C_VitaSite site = await C_VitaSite.FetchSitesDetails(wi.SiteSlug);
-			//				if (site != null)
-			//				{
-			//					SlugToSiteName.Add(wi.SiteSlug, site.Name);
-			//					nne.SiteName = site.Name;
-			//					NewKnownEvents.Add(nne);
-			//				}
-			//			}
-			//		}
-			//	}
+        //	C_YMD firstDay = C_YMD.Now;
+        //	// remove items that happened from yesterday back
+        //	// this leave the list with items from this day forward
+        //	List<C_NotificationEvent> itemsToRemove = new List<C_NotificationEvent>();
+        //	foreach (C_NotificationEvent wi in KnownEvents)
+        //	{
+        //		if (wi.EventDate < firstDay)
+        //			itemsToRemove.Add(wi);
+        //	}
+        //	foreach (C_NotificationEvent ne in itemsToRemove)
+        //		KnownEvents.Remove(ne);
 
-			//	// if the next event has not already been scehduled to notify, then do so
-			//	if (NewKnownEvents.Count != 0)
-			//	{
-			//		// sort the events so that the next event is on top
-			//		NewKnownEvents.Sort(C_NotificationEvent.ComparebyDateAscending);
-			//		// get that next event
-			//		C_NotificationEvent ne = NewKnownEvents[0];
-			//		// if we haven't already issue the notification, the create and post it
-			//		if (!ne.NotificationIssued)
-			//		{
-   //                     try
-   //                     {
-   //                         // figure out when we want the alert to go out
-   //                         C_YMD notificationDate = ne.EventDate.SubtractDays(1);
-   //                         if (notificationDate < C_YMD.Now)
-   //                             notificationDate = C_YMD.Now;
-   //                         DateTime notificationDateTime = new DateTime(
-   //                             notificationDate.Year,
-   //                             notificationDate.Month,
-   //                             notificationDate.Day,
-   //                             15, 00, 0); // at 3pm in the afternoon (totally arbitrary)
+        //	// update the KnownEvents based on the fetch of the user WorkItems
+        //	// get the work items for the next 7 days, including today
+        //	C_YMD lastDay = firstDay.AddDays(7);
+        //	List<C_WorkItem> ourUserWorkItems = new List<C_WorkItem>();
+        //	foreach (C_WorkItem wi in ourUser.WorkIntentsX)
+        //	{
+        //		if ((wi.Date >= firstDay) && (wi.Date <= lastDay))
+        //			ourUserWorkItems.Add(wi);
+        //	}
 
-   //                         ILocalNotification adiln = DependencyService.Get<ILocalNotification>();
-   //                         if (adiln != null)
-   //                         {
-   //                             adiln.ShowNotification(
-   //                                 "VITA Event Sign Up",                   // title
-   //                                 "You have signed up to volunteer",      // subtitle
-   //                                 ne.SiteName + " on " + ne.EventDate.ToString("mmm dd, yyyy"),  // description
-   //                                 ne.WorkItemId.ToString(),               // id
-   //                                 notificationDateTime.ToString("O"),     // date or interval
-   //                                 1,                                      // type = set to date
-   //                                 "");                                    // extra parameters - we have none
-   //                         }
+        //	// a dictionary to convert slugs to site names; our cache of conversions
+        //	// populte with the ones we already know
+        //	Dictionary<string, string> SlugToSiteName = new Dictionary<string, string>();
+        //	foreach (C_NotificationEvent ne in KnownEvents)
+        //	{
+        //		if (!SlugToSiteName.ContainsKey(ne.SiteSlug))
+        //			SlugToSiteName.Add(ne.SiteSlug, ne.SiteName);
+        //	}
 
-   //                         ne.NotificationIssued = true;
-   //                     }
-   //                     catch
-   //                     {
-   //                         ne.NotificationIssued = false;
-   //                     }
-			//		}
-			//	}
+        //	// go through the events received with the user, filter for the next 7 days
+        //	//  if the event is in KnownEvents, copy it over and update it
+        //	//  if not in KnownEvents, create a new Event
+        //	List<C_NotificationEvent> NewKnownEvents = new List<C_NotificationEvent>();
+        //	foreach (C_WorkItem wi in ourUserWorkItems)
+        //	{
+        //		// look for this event in the KnownEvents
+        //		var ou = KnownEvents.Where(nex => nex.WorkItemId == wi.id);
+        //		if (ou.Any())
+        //		{
+        //			// item found; just add to the result
+        //			NewKnownEvents.Add(ou.First());
+        //		}
+        //		else
+        //		{
+        //			// the workitem was not found in our known events
+        //			C_NotificationEvent nne = new C_NotificationEvent(wi);
+        //			if (SlugToSiteName.ContainsKey(wi.SiteSlug))
+        //			{
+        //				nne.SiteName = SlugToSiteName[wi.SiteSlug];
+        //				NewKnownEvents.Add(nne);
+        //			}
+        //			else
+        //			{
+        //				C_VitaSite site = await C_VitaSite.FetchSitesDetails(wi.SiteSlug);
+        //				if (site != null)
+        //				{
+        //					SlugToSiteName.Add(wi.SiteSlug, site.Name);
+        //					nne.SiteName = site.Name;
+        //					NewKnownEvents.Add(nne);
+        //				}
+        //			}
+        //		}
+        //	}
 
-			//	// save the updated known events back into the settings storage
-			//	string newKnownEventJsonString = C_NotificationEvent.GetJsonFromList(NewKnownEvents);
-			//	NSUserDefaults.StandardUserDefaults.SetString(newKnownEventJsonString, N_KnownEventsJson);
+        //	// if the next event has not already been scehduled to notify, then do so
+        //	if (NewKnownEvents.Count != 0)
+        //	{
+        //		// sort the events so that the next event is on top
+        //		NewKnownEvents.Sort(C_NotificationEvent.ComparebyDateAscending);
+        //		// get that next event
+        //		C_NotificationEvent ne = NewKnownEvents[0];
+        //		// if we haven't already issue the notification, the create and post it
+        //		if (!ne.NotificationIssued)
+        //		{
+        //                     try
+        //                     {
+        //                         // figure out when we want the alert to go out
+        //                         C_YMD notificationDate = ne.EventDate.SubtractDays(1);
+        //                         if (notificationDate < C_YMD.Now)
+        //                             notificationDate = C_YMD.Now;
+        //                         DateTime notificationDateTime = new DateTime(
+        //                             notificationDate.Year,
+        //                             notificationDate.Month,
+        //                             notificationDate.Day,
+        //                             15, 00, 0); // at 3pm in the afternoon (totally arbitrary)
 
-			//	Global.LastFetchRunTime = DateTime.Now;
+        //                         ILocalNotification adiln = DependencyService.Get<ILocalNotification>();
+        //                         if (adiln != null)
+        //                         {
+        //                             adiln.ShowNotification(
+        //                                 "VITA Event Sign Up",                   // title
+        //                                 "You have signed up to volunteer",      // subtitle
+        //                                 ne.SiteName + " on " + ne.EventDate.ToString("mmm dd, yyyy"),  // description
+        //                                 ne.WorkItemId.ToString(),               // id
+        //                                 notificationDateTime.ToString("O"),     // date or interval
+        //                                 1,                                      // type = set to date
+        //                                 "");                                    // extra parameters - we have none
+        //                         }
 
-   //             completionHandler?.Invoke(UIBackgroundFetchResult.NewData);
-			//});        
+        //                         ne.NotificationIssued = true;
+        //                     }
+        //                     catch
+        //                     {
+        //                         ne.NotificationIssued = false;
+        //                     }
+        //		}
+        //	}
+
+        //	// save the updated known events back into the settings storage
+        //	string newKnownEventJsonString = C_NotificationEvent.GetJsonFromList(NewKnownEvents);
+        //	NSUserDefaults.StandardUserDefaults.SetString(newKnownEventJsonString, N_KnownEventsJson);
+
+        //	Global.LastFetchRunTime = DateTime.Now;
+
+        //             completionHandler?.Invoke(UIBackgroundFetchResult.NewData);
+        //});        
         //}
 
         public override void OnResignActivation(UIApplication application)

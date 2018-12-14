@@ -1,40 +1,22 @@
-﻿using Android.App;
-using Android.Widget;
-using Android.OS;
-using Android.Content;
-using Android.Util;
-
-using System;
+﻿using System;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 
-using Android.Gms.Common.Apis;
+using Android.App;
+using Android.OS;
+using Android.Widget;
 
-using Android.Gms.Maps;
-using Android.Gms.Maps.Model;
-using Android.Gms.Location;
-using Android.Gms.Common;
-using Android.Locations;
-
-//using Android.Support.Fragment;
-//using Android.Support.V4.App;
+using Android.Content;
+using Android.Util;
 
 using zsquared;
 
 namespace a_vitavol
 {
-    [Activity(Theme = "@android:style/Theme.DeviceDefault.NoActionBar", Label = "VITA: Sites Map")]
-    public class A_SitesMap : Activity,
-        IOnMapReadyCallback,
-        GoogleApiClient.IConnectionCallbacks,
-        GoogleApiClient.IOnConnectionFailedListener,
-        Android.Gms.Location.ILocationListener
+    [Activity(Theme = "@android:style/Theme.DeviceDefault.NoActionBar", Label = "A_SitesFilter")]
+    public class A_SitesMap : Activity
     {
         C_Global Global;
-
-        GoogleMap _map;
-        MapFragment _mapFragment;
-        GoogleApiClient apiClient;
 
         Button B_Filter;
         Button B_Services;
@@ -44,6 +26,8 @@ namespace a_vitavol
         C_PersistentSettings Settings;
 
         C_AlertBox AlertBox;
+
+        C_MapsHelper MapsHelper;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -74,6 +58,23 @@ namespace a_vitavol
             EnableUI(false);
             AlertBox = new C_AlertBox(this, "", "Loading site information...");
             AlertBox.Show();
+
+            MapsHelper = new C_MapsHelper(this, Settings);
+            MapsHelper.MapMarkerClicked += (object sender, C_MapsHelper.MapMarkerClickEventArgs args) =>
+            {
+                if (args.SiteName != null)
+                {
+                    C_VitaSite s = Global.GetSiteByNameNoFetch(args.SiteName);
+                    if (s != null)
+                    {
+                        Global.SelectedSiteSlug = s.Slug;
+                        Global.SelectedSiteName = s.Name;
+                        Global.ViewCameFrom = E_ViewCameFrom.Map;
+
+                        StartActivity(new Intent(this, typeof(A_SiteDetails)));
+                    }
+                }
+            };
 
             Task.Run(async () => 
             {
@@ -119,30 +120,10 @@ namespace a_vitavol
                             Settings.SitesFilter.AddSiteCapability(E_CapabilitiesFilter.Any);
                     }
 
-
-                    //if (((Global.LoggedInUserId == -1) || (Global.SelectedUser == null))
-                    //    && Settings.SitesFilter.SiteCapabilityContains(E_CapabilitiesFilter.Mobile))
-                    //{
-                    //    Settings.SitesFilter.RemoveSiteCapability(E_CapabilitiesFilter.Mobile);
-                    //    if (Settings.SitesFilter.SiteCapabilitiesCount == 0)
-                    //        Settings.SitesFilter.AddSiteCapability(E_CapabilitiesFilter.Any);
-                    //}
-
                     // find the sites that match our filter
                     SelectedSites = Global.GetSitesUsingFilterNoFetch(Settings.SitesFilter, hasMobile);
 
-                    //// set the flag so that the pin maker will set the appropriate color for a preferred site
-                    ////List<string> preferredSiteSlugs = C_PreferredSites.GetPreferredSites(this);
-                    //List<string> preferredSiteSlugs = Settings.PreferedSites;
-                    //foreach (C_VitaSite site in SelectedSites)
-                        //sitePreferredSite = preferredSiteSlugs.Contains(site.Slug);
-
-                    if (C_GooglePlayHelper.IsGooglePlayServicesInstalled(this))
-                    {
-                        // pass in the Context, ConnectionListener and ConnectionFailedListener
-                        apiClient = new GoogleApiClient.Builder(this, this, this)
-                            .AddApi(LocationServices.API).Build();
-                    }
+                    await MapsHelper.MapsAreReady.Task;
                 }
                 catch (Exception ex)
                 {
@@ -167,37 +148,12 @@ namespace a_vitavol
                         servicesString = "Services";
                     B_Services.SetText(servicesString, TextView.BufferType.Normal);
 
-                    InitMapFragment();
+
+                    MapsHelper.AddSites(SelectedSites);
+                    //InitMapFragment();
                 }
                 RunOnUiThread(p);
             });
-        }
-
-        private void InitMapFragment()
-        {
-            try
-            {
-                _mapFragment = FragmentManager.FindFragmentByTag("map") as MapFragment;
-                if (_mapFragment == null)
-                {
-                    GoogleMapOptions mapOptions = new GoogleMapOptions()
-                        .InvokeMapType(GoogleMap.MapTypeNormal)
-                        .InvokeZoomControlsEnabled(true)
-                        .InvokeCompassEnabled(true);
-
-                    FragmentTransaction fragTx = FragmentManager.BeginTransaction();
-
-                    _mapFragment = MapFragment.NewInstance(mapOptions);
-                    fragTx.Add(Resource.Id.Map_Sites, _mapFragment, "map");
-                    fragTx.Commit();
-                }
-                _mapFragment.GetMapAsync(this);
-            }
-            catch (Exception ex)
-            {
-                C_MessageBox mbox = new C_MessageBox(this, "Error", "Failed in InitMapFragment [" + ex.Message + "]", E_MessageBoxButtons.Ok);
-                mbox.Show();
-            }
         }
 
         bool UIIsEnabled;
@@ -210,155 +166,6 @@ namespace a_vitavol
         {
             if (UIIsEnabled)
                 StartActivity(new Intent(this, typeof(MainActivity)));
-        }
-
-        protected override void OnResume()
-        {
-            base.OnResume();
-
-            if (apiClient != null)
-                apiClient.Connect();
-        }
-
-        protected override void OnPause()
-        {
-            base.OnPause();
-
-            Task.Run(async () => 
-            {
-                if (apiClient.IsConnected)
-                {
-                    // stop location updates, passing in the LocationListener
-                    await LocationServices.FusedLocationApi.RemoveLocationUpdates(apiClient, this);
-
-                    apiClient.Disconnect();
-                }
-            });
-        }
-
-        // ---------- maps api helper ----------------
-
-        public void OnMapReady(GoogleMap map)
-        {
-            try
-            {
-                _map = map;
-
-                float zoom = Settings.Zoom;
-                float lat = Settings.Latitude;
-                float longi = Settings.Longitude;
-
-                // default starting location, center of San Antonio
-                LatLng location = new LatLng(lat, longi);
-                CameraPosition.Builder builder = CameraPosition.InvokeBuilder();
-                builder.Target(location);
-                builder.Zoom(zoom);
-                CameraPosition cameraPosition = builder.Build();
-                CameraUpdate cameraUpdate = CameraUpdateFactory.NewCameraPosition(cameraPosition);
-                _map.MoveCamera(cameraUpdate);
-
-                _map.InfoWindowClick += MapOnInfoWindowClick;
-                _map.CameraChange += (object sender, GoogleMap.CameraChangeEventArgs e) =>
-                {
-                    CameraPosition cpos = e.Position;
-                    Settings.Zoom = cpos.Zoom;
-                    Settings.Latitude = (float)e.Position.Target.Latitude;
-                    Settings.Longitude = (float)e.Position.Target.Longitude;
-                    Settings.Save();
-                };
-
-                foreach (C_VitaSite site in SelectedSites)
-                {
-                    double latitude = double.NaN;
-                    double longitude = double.NaN;
-                    bool dok = double.TryParse(site.Latitude, out latitude);
-                    dok &= double.TryParse(site.Longitude, out longitude);
-
-                    if (dok)
-                    {
-                        MarkerOptions markerOpt1 = new MarkerOptions();
-                        markerOpt1.SetPosition(new LatLng(latitude, longitude));
-                        markerOpt1.SetTitle(site.Name);
-                        bool siteIsPrefered = Settings.IsPreferedSite(site.Slug);
-                        BitmapDescriptor bmd = siteIsPrefered ?
-                                                   BitmapDescriptorFactory.FromAsset("MarkerPinFlagBlack50.png") :
-                                                   BitmapDescriptorFactory.FromAsset("MarkerPinFlagGreen50.png");
-                        markerOpt1.SetIcon(bmd);
-                        _map.AddMarker(markerOpt1);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                C_MessageBox mbox = new C_MessageBox(this, "Error", "Failed in OnMapReady [" + ex.Message + "]", E_MessageBoxButtons.Ok);
-                mbox.Show();
-            }
-        }
-
-        void MapOnInfoWindowClick(object sender, GoogleMap.InfoWindowClickEventArgs e)
-        {
-            Marker myMarker = e.Marker;
-            if (myMarker != null)
-            {
-                C_VitaSite s = Global.GetSiteByNameNoFetch(e.Marker.Title);
-                if (s != null)
-                {
-                    Global.SelectedSiteSlug = s.Slug;
-                    Global.SelectedSiteName = s.Name;
-                    Global.ViewCameFrom = E_ViewCameFrom.Map;
-
-                    StartActivity(new Intent(this, typeof(A_SiteDetails)));
-                }
-            }
-        }
-
-        public void OnConnected(Bundle bundle)
-        {
-            // This method is called when we connect to the LocationClient. We can start location updated directly from
-            // here if desired, or we can do it in a lifecycle method, as shown above 
-
-            // You must implement this to implement the IGooglePlayServicesClientConnectionCallbacks Interface
-            if (apiClient.IsConnected && (_map != null))
-            {
-                Location locationx = LocationServices.FusedLocationApi.GetLastLocation(apiClient);
-                if (locationx != null)
-                {
-                    LatLng location = new LatLng(locationx.Latitude, locationx.Longitude);
-                    CameraPosition.Builder builder = CameraPosition.InvokeBuilder();
-                    builder.Target(location);
-                    builder.Zoom(10);
-                    CameraPosition cameraPosition = builder.Build();
-                    CameraUpdate cameraUpdate = CameraUpdateFactory.NewCameraPosition(cameraPosition);
-
-                    _map.MoveCamera(cameraUpdate);
-                }
-                else
-                    Log.Debug("vita", "OnConnected with _map and apiConnected but no location");
-            }
-            else
-                Log.Debug("vita", "OnConnected but _map is null or apiClient is not connected!");
-        }
-
-        public void OnConnectionSuspended(int i)
-        {
-
-        }
-
-        public void OnConnectionFailed(ConnectionResult bundle)
-        {
-            // This method is used to handle connection issues with the Google Play Services Client (LocationClient). 
-            // You can check if the connection has a resolution (bundle.HasResolution) and attempt to resolve it
-
-            // You must implement this to implement the IGooglePlayServicesClientOnConnectionFailedListener Interface
-            //Log.Info("LocationClient", "Connection failed, attempting to reach google play services");
-        }
-
-        public void OnLocationChanged(Location location)
-        {
-            // This method returns changes in the user's location if they've been requested
-
-            // You must implement this to implement the Android.Gms.Locations.ILocationListener Interface
-            //Log.Debug("LocationClient", "Location updated");
         }
     }
 }

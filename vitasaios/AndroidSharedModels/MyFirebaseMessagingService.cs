@@ -5,6 +5,8 @@ using Android.Media;
 using Android.Util;
 using Android.OS;
 
+using Android.Support.V4.App;
+
 using Firebase.Messaging;
 
 namespace a_vitavol
@@ -36,25 +38,39 @@ namespace a_vitavol
             RemoteMessage.Notification notif = rmessage.GetNotification();
             string messageBody = notif.Body;
 
-			Bundle b = new Bundle();
-			b.PutString("body", messageBody);
-            b.PutLong("time", rmessage.SentTime);
+            if (Build.VERSION.SdkInt < BuildVersionCodes.O)
+            {
+                // Notification channels are new in API 26 (and not a part of the
+                // support library). There is no need to create a notification 
+                // channel on older versions of Android.
+                return;
+            }
 
-			var intent = new Intent(this, typeof(A_ViewNotification));
-			intent.AddFlags(ActivityFlags.ClearTop);
-            intent.PutExtra("message", b);
-			var pendingIntent = PendingIntent.GetActivity(this, 0, intent, PendingIntentFlags.OneShot);
+            const string CHANNEL_ID = "local_notification";
+            const int NOTIFICATION_ID = 1000;
 
-			var notificationBuilder = new Notification.Builder(this)
-				.SetSmallIcon(Resource.Drawable.vitasaicon)
-				.SetContentTitle("VITA Message")
-				.SetContentText(messageBody)
-				.SetAutoCancel(true)
-				.SetContentIntent(pendingIntent);
+            var name = Resources.GetString(Resource.String.channel_name);
+            var description = GetString(Resource.String.channel_description);
+            var channel = new NotificationChannel(CHANNEL_ID, name, NotificationImportance.Default)
+            {
+                Description = description
+            };
 
-			var notificationManager = NotificationManager.FromContext(this);
-			notificationManager.Notify(0, notificationBuilder.Build());
-		}
+            var notificationManager = (NotificationManager)GetSystemService(NotificationService);
+            notificationManager.CreateNotificationChannel(channel);
+
+            NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
+                .SetAutoCancel(true)
+                .SetContentTitle("VITA SA")
+                .SetContentText(messageBody)
+                .SetSmallIcon(Resource.Drawable.vitasaicon);
+
+            // Build the notification:
+            Notification notification = builder.Build();
+
+            // Publish the notification:
+            notificationManager.Notify(NOTIFICATION_ID, notification);
+        }
 
         public override void HandleIntent(Intent p0)
         {
@@ -62,15 +78,10 @@ namespace a_vitavol
 
 			if (p0.Extras != null)
 			{
-			    //foreach (var key in p0.Extras.KeySet())
-			    //{
-			    //    Log.Debug("VITA Extras Intent", "Key: {0}", key);
-			    //}
-
                 string body = p0.GetStringExtra("gcm.notification.body");
-                Log.Debug("VITA Extras Intent", "body: " + body);
+                //Log.Debug("VITA Extras Intent", "body: " + body);
 				string id = p0.GetStringExtra("google.message_id");
-				Log.Debug("VITA Extras Intent", "id: " + body);
+				//Log.Debug("VITA Extras Intent", "id: " + body);
 				if ((body != null) && (id != null))
                 {
 
@@ -80,7 +91,7 @@ namespace a_vitavol
                     editor.PutString("firebase_messageid", id);
                     editor.Commit();
                 }
-			}
+            }
         }
     }
 }

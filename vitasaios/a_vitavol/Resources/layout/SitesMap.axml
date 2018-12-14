@@ -17,12 +17,12 @@
         android:background="#ff216093" 
     />
     
-    <com.google.android.gms.maps.MapView
-        android:id="@+id/Map_Sites" 
-        
+    <fragment
+        android:id="@+id/Map_Sites"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        class="com.google.android.gms.maps.MapFragment" 
     />
     
     <Button

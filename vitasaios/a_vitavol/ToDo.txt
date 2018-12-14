@@ -10,30 +10,21 @@ Training
 
 
 Backend
-* PUT on user for subscribe_mobile was not rejected but returned null
+* subscribe mobile error 500
 
-* to be implemented: user contains array of siteslugs for prefered sites [git]
-* to be implemented: vol subscribe to mobile changes [git]
-* Generate email for new volunteer/SC registrations (destination email list management?)
-* Generate email on new feedback (from public or volunteer)
-
-- for sites, remove a bunch of unused fields (sunday_...)
 
 
 Android
-* S8, LG V30: fail
-* error 500 on user create is back; looks like subscription arn missing
+* on later api, maps locks on return from details or settings;  [get Mark to verify at release on Friday]
 
-
-* deprecated Fragment manager?
 * admin suggestion: email send [verify]
-
++ pull down on lists to refresh
 + need admin tool to view/edit/delete worklogs (online only for now?)
-+ figure out how to do overlays and put the filter buttons on top of the map
 + from admin mobile, click on date: can edit calendar entry there; can create calendar entry?
 
 
 Apple
+
 
 + pull down on listviews to refresh?
 + need admin tool to view/edit/delete worklogs (online only for now?)

@@ -73,14 +73,17 @@ namespace vitavol
                 }
 
                 // (introduced after the push of 2.0)
-                C_VitaUser u = Global.GetUserFromCacheNoFetch(TB_Email.Text);
-                if (u != null)
+                if (Global.SelectedUser == null)
                 {
-                    E_MessageBoxResults mbres3 = await MessageBox(this,
-                        "Error",
-                        "That email is already in use.",
-                        E_MessageBoxButtons.Ok);
-                    return;
+                    C_VitaUser u = Global.GetUserFromCacheNoFetch(TB_Email.Text);
+                    if (u != null)
+                    {
+                        E_MessageBoxResults mbres3 = await MessageBox(this,
+                            "Error",
+                            "That email is already in use.",
+                            E_MessageBoxButtons.Ok);
+                        return;
+                    }
                 }
 
                 PullValuesFromForm();
@@ -135,14 +138,17 @@ namespace vitavol
                 }
 
                 // (introduced after the push of 2.0)
-                C_VitaUser u = Global.GetUserFromCacheNoFetch(TB_Email.Text);
-                if (u != null)
+                if (Global.SelectedUser == null)
                 {
-                    E_MessageBoxResults mbres = await MessageBox(this,
-                        "Error",
-                        "That email is already in use.",
-                        E_MessageBoxButtons.Ok);
-                    return;
+                    C_VitaUser u = Global.GetUserFromCacheNoFetch(TB_Email.Text);
+                    if (u != null)
+                    {
+                        E_MessageBoxResults mbres = await MessageBox(this,
+                            "Error",
+                            "That email is already in use.",
+                            E_MessageBoxButtons.Ok);
+                        return;
+                    }
                 }
 
                 PullValuesFromForm();

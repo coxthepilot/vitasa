@@ -38,9 +38,9 @@
 		<true/>
 	</dict>
 	<key>CFBundleShortVersionString</key>
-	<string>2.0</string>
+	<string>2.1</string>
 	<key>CFBundleVersion</key>
-	<string>2.0</string>
+	<string>2.1</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>To show user location on site map.</string>
 	<key>UIBackgroundModes</key>

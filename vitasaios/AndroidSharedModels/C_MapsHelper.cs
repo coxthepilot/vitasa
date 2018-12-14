@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 using Android.OS;
 using Android.App;
-using Android.Support.V4.App;
+using Android.Support.V7.App;
 
 using Android.Gms.Common.Apis;
 using Android.Gms.Maps;
@@ -18,17 +19,19 @@ namespace zsquared
 
     public class C_MapsHelper : 
         Java.Lang.Object, 
-        IOnMapReadyCallback,
-        GoogleApiClient.IConnectionCallbacks,
-        GoogleApiClient.IOnConnectionFailedListener
+        IOnMapReadyCallback
+        //GoogleApiClient.IConnectionCallbacks,
+        //GoogleApiClient.IOnConnectionFailedListener
 
     {
         GoogleMap _map;
         MapFragment _mapFragment;
-        GoogleApiClient apiClient;
+        //GoogleApiClient apiClient;
+        //readonly AppCompatActivity activity;
         readonly Activity activity;
         C_PersistentSettings Settings;
-        readonly List<C_VitaSite> SelectedSites;
+        List<C_VitaSite> SelectedSites;
+        public TaskCompletionSource<bool> MapsAreReady;
 
         public delegate void MapMarkerClickEventHandler(object sender, MapMarkerClickEventArgs args);
         public event MapMarkerClickEventHandler MapMarkerClicked;
@@ -43,29 +46,28 @@ namespace zsquared
             }
         }
 
-        public C_MapsHelper(Activity a, C_PersistentSettings settings, List<C_VitaSite> sites)
+        public C_MapsHelper(Android.App.Activity a, C_PersistentSettings settings)
         {
             activity = a;
             Settings = settings;
-            SelectedSites = sites;
+            //SelectedSites = sites;
+            MapsAreReady = new TaskCompletionSource<bool>();
 
             try
             {
-                //_mapFragment = FragmentManager.FindFragmentByTag("map") as MapFragment;
-                //if (_mapFragment == null)
-                //{
-                    GoogleMapOptions mapOptions = new GoogleMapOptions()
-                        .InvokeMapType(GoogleMap.MapTypeNormal)
-                        .InvokeZoomControlsEnabled(true)
-                        .InvokeCompassEnabled(true);
+                _mapFragment = (MapFragment)activity.FragmentManager.FindFragmentById(a_vitavol.Resource.Id.Map_Sites);
 
-                    //FragmentTransaction fragTx = FragmentManager.BeginTransaction();
+                GoogleMapOptions mapOptions = new GoogleMapOptions()
+                    .InvokeMapType(GoogleMap.MapTypeNormal)
+                    .InvokeZoomControlsEnabled(true)
+                    .InvokeCompassEnabled(true);
 
-                    _mapFragment = MapFragment.NewInstance(mapOptions);
-                    activity.FragmentManager.BeginTransaction()
-                        .Add(a_vitavol.Resource.Id.Map_Sites, _mapFragment, "map")
-                        .Commit();
-                //}
+                var fragTx = activity.FragmentManager.BeginTransaction();
+
+                _mapFragment = MapFragment.NewInstance(mapOptions);
+                fragTx.Add(a_vitavol.Resource.Id.Map_Sites, _mapFragment, "map");
+                fragTx.Commit();
+
                 _mapFragment.GetMapAsync(this);
             }
             catch (Exception ex)
@@ -104,31 +106,38 @@ namespace zsquared
                     Settings.Save();
                 };
 
-                foreach (C_VitaSite site in SelectedSites)
-                {
-                    double latitude = double.NaN;
-                    double longitude = double.NaN;
-                    bool dok = double.TryParse(site.Latitude, out latitude);
-                    dok &= double.TryParse(site.Longitude, out longitude);
-
-                    if (dok)
-                    {
-                        MarkerOptions markerOpt1 = new MarkerOptions();
-                        markerOpt1.SetPosition(new LatLng(latitude, longitude));
-                        markerOpt1.SetTitle(site.Name);
-                        bool siteIsPrefered = Settings.IsPreferedSite(site.Slug);
-                        BitmapDescriptor bmd = siteIsPrefered ?
-                                                   BitmapDescriptorFactory.FromAsset("MarkerPinFlagBlack50.png") :
-                                                   BitmapDescriptorFactory.FromAsset("MarkerPinFlagGreen50.png");
-                        markerOpt1.SetIcon(bmd);
-                        _map.AddMarker(markerOpt1);
-                    }
-                }
+                MapsAreReady.TrySetResult(true);
             }
             catch (Exception ex)
             {
                 C_MessageBox mbox = new C_MessageBox(activity, "Error", "Failed in OnMapReady [" + ex.Message + "]", E_MessageBoxButtons.Ok);
                 mbox.Show();
+            }
+        }
+
+        public void AddSites(List<C_VitaSite> sites)
+        {
+            SelectedSites = sites;
+
+            foreach (C_VitaSite site in SelectedSites)
+            {
+                double latitude = double.NaN;
+                double longitude = double.NaN;
+                bool dok = double.TryParse(site.Latitude, out latitude);
+                dok &= double.TryParse(site.Longitude, out longitude);
+
+                if (dok)
+                {
+                    MarkerOptions markerOpt1 = new MarkerOptions();
+                    markerOpt1.SetPosition(new LatLng(latitude, longitude));
+                    markerOpt1.SetTitle(site.Name);
+                    bool siteIsPrefered = Settings.IsPreferedSite(site.Slug);
+                    BitmapDescriptor bmd = siteIsPrefered ?
+                                               BitmapDescriptorFactory.FromAsset("MarkerPinFlagBlack50.png") :
+                                               BitmapDescriptorFactory.FromAsset("MarkerPinFlagGreen50.png");
+                    markerOpt1.SetIcon(bmd);
+                    _map.AddMarker(markerOpt1);
+                }
             }
         }
 
@@ -139,67 +148,7 @@ namespace zsquared
             {
 
                 MapMarkerClicked?.Invoke(this, new MapMarkerClickEventArgs(e.Marker.Title));
-
-                //C_VitaSite s = Global.GetSiteByNameNoFetch(e.Marker.Title);
-                //if (s != null)
-                //{
-                //    Global.SelectedSiteSlug = s.Slug;
-                //    Global.SelectedSiteName = s.Name;
-                //    Global.ViewCameFrom = E_ViewCameFrom.Map;
-
-                //    StartActivity(new Intent(this, typeof(A_SiteDetails)));
-                //}
             }
         }
-
-        public void OnConnected(Bundle bundle)
-        {
-            // This method is called when we connect to the LocationClient. We can start location updated directly from
-            // here if desired, or we can do it in a lifecycle method, as shown above 
-
-            // You must implement this to implement the IGooglePlayServicesClientConnectionCallbacks Interface
-            if (apiClient.IsConnected && (_map != null))
-            {
-                Location locationx = LocationServices.FusedLocationApi.GetLastLocation(apiClient);
-                if (locationx != null)
-                {
-                    LatLng location = new LatLng(locationx.Latitude, locationx.Longitude);
-                    CameraPosition.Builder builder = CameraPosition.InvokeBuilder();
-                    builder.Target(location);
-                    builder.Zoom(10);
-                    CameraPosition cameraPosition = builder.Build();
-                    CameraUpdate cameraUpdate = CameraUpdateFactory.NewCameraPosition(cameraPosition);
-
-                    _map.MoveCamera(cameraUpdate);
-                }
-                //else
-                    //Log.Debug("vita", "OnConnected with _map and apiConnected but no location");
-            }
-            //else
-                //Log.Debug("vita", "OnConnected but _map is null or apiClient is not connected!");
-        }
-
-        public void OnConnectionSuspended(int i)
-        {
-
-        }
-
-        public void OnConnectionFailed(ConnectionResult bundle)
-        {
-            // This method is used to handle connection issues with the Google Play Services Client (LocationClient). 
-            // You can check if the connection has a resolution (bundle.HasResolution) and attempt to resolve it
-
-            // You must implement this to implement the IGooglePlayServicesClientOnConnectionFailedListener Interface
-            //Log.Info("LocationClient", "Connection failed, attempting to reach google play services");
-        }
-
-        public void OnLocationChanged(Location location)
-        {
-            // This method returns changes in the user's location if they've been requested
-
-            // You must implement this to implement the Android.Gms.Locations.ILocationListener Interface
-            //Log.Debug("LocationClient", "Location updated");
-        }
-
     }
 }
