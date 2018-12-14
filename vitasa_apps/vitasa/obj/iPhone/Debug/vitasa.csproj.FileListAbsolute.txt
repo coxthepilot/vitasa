@@ -1,0 +1,12 @@
+/Users/Billy/Documents/source/vitasa/vitasaios/vitasa/obj/iPhone/Debug/device-builds/ipad5.4-11.2.1/ibtool/_BundleResourceWithLogicalName.items
+/Users/Billy/Documents/source/vitasa/vitasaios/vitasa/obj/iPhone/Debug/device-builds/ipad5.4-11.2.1/actool/_PartialAppManifest.items
+/Users/Billy/Documents/source/vitasa/vitasaios/vitasa/obj/iPhone/Debug/device-builds/ipad5.4-11.2.1/actool/_BundleResourceWithLogicalName.items
+/Users/Billy/Documents/source/vitasa/vitasaios/vitasa/obj/iPhone/Debug/device-builds/ipad5.4-11.2.1/coremlc/_PartialAppManifest.items
+/Users/Billy/Documents/source/vitasa/vitasaios/vitasa/obj/iPhone/Debug/device-builds/ipad5.4-11.2.1/coremlc/_BundleResourceWithLogicalName.items
+/Users/Billy/Documents/source/vitasa/vitasaios/vitasa/obj/iPhone/Debug/device-builds/ipad5.4-11.2.1/optimized/Settings.bundle/Root.plist
+/Users/Billy/Documents/source/vitasa/vitasaios/vitasa/obj/iPhone/Debug/device-builds/ipad5.4-11.2.1/optimized/
+/Users/Billy/Documents/source/vitasa/vitasaios/vitasa/obj/iPhone/Debug/vitasa.csprojResolveAssemblyReference.cache
+/Users/Billy/Documents/source/vitasa/vitasaios/vitasa/obj/iPhone/Debug/vitasa.AppResources.resources
+/Users/Billy/Documents/source/vitasa/vitasaios/vitasa/obj/iPhone/Debug/vitasa.AppResources.es.resources
+/Users/Billy/Documents/source/vitasa/vitasaios/vitasa/obj/iPhone/Debug/vitasa.csproj.GenerateResource.Cache
+/Users/Billy/Documents/source/vitasa/vitasaios/vitasa/obj/iPhone/Debug/vitasa.csproj.CoreCompileInputs.cache

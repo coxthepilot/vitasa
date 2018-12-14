@@ -1,0 +1,2 @@
+android.support.multidex.MultiDexApplication
+net.zsquared.a_vitavol
