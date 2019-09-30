@@ -9,6 +9,9 @@
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="vitasa" expanded="True">
+            <Node name="a_vitavol" expanded="True">
+              <Node name="ToDo.txt" selected="True" />
+            </Node>
             <Node name="vitavol" expanded="True" />
           </Node>
         </State>
