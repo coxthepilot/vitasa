@@ -1,0 +1,9 @@
+com.google.maps.android.ui.RotationLayout;/Volumes/Samsung_T5/source/vitasa/vitasa_apps/a_vitavol/obj/Debug/lp/1/jl/res/layout/amu_text_bubble.xml
+item;/Volumes/Samsung_T5/source/vitasa/vitasa_apps/a_vitavol/obj/Debug/lp/1/jl/res/values/values.xml
+LinearLayout;/Volumes/Samsung_T5/source/vitasa/vitasa_apps/a_vitavol/obj/Debug/lp/1/jl/res/layout/amu_info_window.xml
+LinearLayout;/Volumes/Samsung_T5/source/vitasa/vitasa_apps/a_vitavol/obj/Debug/lp/1/jl/res/layout/amu_text_bubble.xml
+resources;/Volumes/Samsung_T5/source/vitasa/vitasa_apps/a_vitavol/obj/Debug/lp/1/jl/res/values/values.xml
+style;/Volumes/Samsung_T5/source/vitasa/vitasa_apps/a_vitavol/obj/Debug/lp/1/jl/res/values/values.xml
+TextView;/Volumes/Samsung_T5/source/vitasa/vitasa_apps/a_vitavol/obj/Debug/lp/1/jl/res/layout/amu_info_window.xml
+TextView;/Volumes/Samsung_T5/source/vitasa/vitasa_apps/a_vitavol/obj/Debug/lp/1/jl/res/layout/amu_text_bubble.xml
+WebView;/Volumes/Samsung_T5/source/vitasa/vitasa_apps/a_vitavol/obj/Debug/lp/1/jl/res/layout/amu_webview.xml

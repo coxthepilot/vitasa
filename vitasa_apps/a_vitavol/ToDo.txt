@@ -1,5 +1,9 @@
 ﻿----- Issues/Actions -----
 
+For TY2019 season
+* add google analytics; C# version? verify view in firebase analytics pages
+
+
 For go live
 * test and verify the mobile apps
 * release apps through web store

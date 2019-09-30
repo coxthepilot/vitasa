@@ -1,11 +1,19 @@
 ﻿<Properties StartupConfiguration="{6A54BBFE-FE39-4316-BA0B-E74DA172F56E}|Default">
-  <MonoDevelop.Ide.ItemProperties.vitavol automaticSigning="False" PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.E8CF63A9-5B46-49AD-A900-5A971FBC9D59" />
+  <MonoDevelop.Ide.ItemProperties.vitavol automaticSigning="False" PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.C7185C66-0170-4F8F-90F6-55C8BBC8962F" />
   <MonoDevelop.Ide.ItemProperties.SharedModels HideGettingStarted="True" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="vitavol/VC_About.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="a_vitavol/ToDo.txt">
     <Files>
-      <File FileName="a_vitavol/ToDo.txt" Line="21" Column="32" />
-      <File FileName="vitavol/VC_About.cs" Line="1" Column="1" />
+      <File FileName="a_vitavol/ToDo.txt" Line="4" Column="36" />
     </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="vitasa" expanded="True">
+            <Node name="vitavol" expanded="True" />
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.ItemProperties.a__vitavol AndroidDesignerPreferredDevice="Nexus 4" PreferredExecutionTarget="Android.Android_Accelerated_Oreo" />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />

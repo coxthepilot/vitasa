@@ -23,3 +23,9 @@ vitasaios/vitasaadmin/obj
 vitasaios/vitavol/bin
 vitasaios/vitavol/obj
 vitasaios/vitavolandroid/packages.config
+*.ipa
+*.apk
+*.pdb
+*.dll
+*.pdb
+*.dll
