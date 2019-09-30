@@ -1,0 +1,120 @@
+﻿Data set
+* 3 sites, fixed, scfixed
+    - a) MWF, b) TuTh, c) WedSatSun
+    - with local addresses
+* 5 sites, mobile, scmobile
+    - a) M, b) Tu, c) We, d) Fr, e) Sat
+    - with local addresses
+    
+Accounts
+* voltester@a.c, 123123123
+* voltestermobile@g.c, 123123123
+* sctester@a.c, 123123123
+* admin@g.c, 123456abc
+
+Top level
+* take site offline via config and verify
+
+No login
+* Find a Site Near You
+   - maps shows all sites, non-mobile
+   - click on marker shows site name
+   - click on flag shows site details
+   - site details: can designate site as preferred; confirm shows on map as red
+   - get directions goes to Apple/Google maps
+   - View site calendar shows the calendar, click on date show open times
+* Before You Go
+   - message visible and scrolls
+* About
+   - Message visible and scrolls
+* Staff Acccess
+   - see below
+
+Volunteer logged in, non-mobile
+* Find a Site Near you
+   - same as not logged in
+* Staff Access
+   - allows login, the first time
+   - directly to vol home afterwards
+* Vol Home as non-mobile
+   - can subscribe to prefered site notifications
+      - shut down and confirm
+   - Can post a suggestion
+      - verify suggestion received through admin
+   - Can change settings
+      - shut down and confirm
+   - shows total hours worked
+      - add hours and confirm
+      - cannot edit already approved hours
+   - Can logout
+   
+Volunteer logged in, mobile
+* Find a Site Near You
+   - option to see mobile sites is visible
+   - mobile calendar displays correctly
+* Vol Home as mobile
+   - mobile: can subscribe to mobile notifications
+      - shut down and confirm
+   - button for mobile calendar is visible
+   - Mobile Calendar
+      - shows calendar, click on date to see sites open on that date
+
+
+SiteCoordinator logged in
+* Sites
+   - verify all sites listed
+* Site
+    - Calendar
+        - click on date
+            - make changes; confirm
+    - Manage Vol Hours
+        - add hours
+        - confirm
+        - can edit fields in a work item (hours, date, volunteer)
+    - Settings
+        - confirm settings stick
+
+Admin Logged in
+* Users
+    - verify list of users
+    - confirm filter shows the correct users
+    - click on user
+        - confirm each field can be changed
+        - for SiteCoordinators
+            - confirm changes stick
+    - create new user
+        - enter values in all fields; confirm they stick
+    - delete user
+        - confirm
+* Sites
+    - verify all sites
+    - verify filter show correct sites
+    - click on site
+        - change location values and confirm
+            - confirm that geocoding is working
+        - change site details and confirm
+        - calendar
+            - do calendar reset and confirm
+            - change values on one date and confirm
+        - site coordinators
+            - make changes and confirm
+    - create new site
+        - do the calendar reset before save and confirm
+    - delete site
+        - confirm
+* Notifications
+    - create and confirm
+* Suggestions
+    - confirm list
+    - view suggestion
+    - send in email and confirm
+* Mobile
+    - confirm calendar
+    - click on date
+        - confirm results
+* Settings
+    - confirm changes stick
+
+
+
+

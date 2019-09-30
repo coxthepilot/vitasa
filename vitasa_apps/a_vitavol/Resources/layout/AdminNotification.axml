@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:id="@+id/V_AdminNotification"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout 
+        xmlns:android="http://schemas.android.com/apk/res/android" 
+        android:orientation="vertical" 
+        android:layout_width="match_parent" 
+        android:layout_height="match_parent">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:id="@+id/textView1"
+            android:gravity="center"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:text="Notification"
+            android:textColor="@android:color/white" />
+        <ProgressBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/PB_Busy"
+            android:indeterminate="true"
+            android:visibility="gone" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView2"
+            android:text="To:"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            android:textColor="@android:color/white" />
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/SP_To" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/L_LastSent"
+            android:text="Last Sent:"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            android:textColor="@android:color/white" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView4"
+            android:text="Message"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            android:textColor="@android:color/white" />
+        <EditText
+            android:inputType="textMultiLine"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/TB_Message"
+            android:gravity="top" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true">
+        <LinearLayout
+            android:layout_gravity="bottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="0px"
+                android:layout_height="0px" />
+            <Button
+                android:id="@+id/B_SaveAndSend"
+                android:text="Save and Send"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/white"
+                android:background="#ff216093"
+                android:layout_marginRight="4dp" 
+            />
+            <Button
+                android:id="@+id/B_Delete"
+                android:text="Delete"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/white"
+                android:background="#ff217a93"
+                android:layout_marginLeft="4dp" 
+            />
+        </LinearLayout>
+    </LinearLayout>
+</FrameLayout>

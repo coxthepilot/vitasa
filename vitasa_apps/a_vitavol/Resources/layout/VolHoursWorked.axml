@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android" 
+    android:orientation="vertical" 
+    android:id="@+id/V_VolHoursWorked"
+    android:layout_width="match_parent" 
+    android:layout_height="match_parent">
+    
+    <TextView
+        android:id="@+id/textView1"
+        
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        
+        android:gravity="center"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:text="Volunteer - Hours Summary"
+        android:textColor="@android:color/white"
+        android:background="#FF13436B" />
+
+    <TextView
+        android:id="@+id/L_HoursWorked"
+        
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        
+        android:text="Hours worked"
+        android:textColor="@android:color/white"
+        android:background="#FF13436B" />
+    
+    <ListView
+        android:id="@+id/L_Hours" 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+    />
+
+    <Button
+        android:id="@+id/B_AddHours"
+        
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        
+        android:text="I Need To Add Hours"
+        android:textColor="@android:color/white"
+        android:background="#ff216093" />
+</LinearLayout>

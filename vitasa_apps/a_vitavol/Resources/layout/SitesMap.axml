@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:id="@+id/V_SitesMap"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <Button
+        android:id="@+id/B_Filter"
+        
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        
+        android:text="Filter"
+        android:textColor="@android:color/white"
+        android:background="#ff216093" 
+    />
+    
+    <fragment
+        android:id="@+id/Map_Sites"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        class="com.google.android.gms.maps.MapFragment" 
+    />
+    
+    <Button
+        android:id="@+id/B_Services"
+        
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        
+        android:layout_gravity="bottom" 
+        android:text="Services"
+        android:textColor="@android:color/white"
+        android:background="#ff216093" 
+    />
+</LinearLayout>

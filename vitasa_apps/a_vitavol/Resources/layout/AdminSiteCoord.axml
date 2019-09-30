@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+    android:orientation="vertical" 
+    android:id="@+id/V_AdminSiteCoord"
+    android:layout_width="match_parent" 
+    android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/textView1"
+        
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        
+        android:gravity="center"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:text="Site Coordinators"
+        android:textColor="@android:color/white" />
+    <TextView
+        android:id="@+id/L_SiteName"
+        
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        
+        android:gravity="center"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:text="[site name]"
+        android:textColor="@android:color/white" />
+    <ProgressBar
+        android:id="@+id/PB_Busy"
+        
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        
+        android:indeterminate="true"
+        android:visibility="gone" />
+    <ListView
+        android:id="@+id/LV_Coordinators" 
+        
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+    />
+    <Button
+        android:id="@+id/B_Save"
+        
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        
+        android:layout_gravity="bottom" 
+        android:text="Done"
+        android:textColor="@android:color/white"
+        android:background="#ff216093" />
+</LinearLayout>

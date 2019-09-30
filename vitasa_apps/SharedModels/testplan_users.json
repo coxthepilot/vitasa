@@ -1,0 +1,190 @@
+﻿{
+  "users": [
+    {
+      "id": "1",
+      "name": "Chris",
+      "email": "kenkaku@gmail.com",
+      "phone": "",
+      "certification": "None",
+      "roles": [ "Admin" ],
+      "work_history": []
+    },
+    {
+      "id": "2",
+      "name": "admin user",
+      "email": "admin@g.c",
+      "phone": "123-123-1241",
+      "certification": "Advanced",
+      "roles": [ "Admin" ],
+      "work_history": []
+    },
+    {
+      "id": "3",
+      "name": "uddd eee",
+      "email": "a@g.c",
+      "phone": "123-123-1234",
+      "certification": "Advanced",
+      "roles": [ "Mobile", "SiteCoordinator" ],
+      "work_history": []
+    },
+    {
+      "id": "4",
+      "name": "Fred Flintstone",
+      "email": "fred@g.c",
+      "phone": "",
+      "certification": "Basic",
+      "roles": [ "SiteCoordinator" ],
+      "work_history": []
+    },
+    {
+      "id": "9",
+      "name": "voltester",
+      "email": "voltester@g.c",
+      "phone": "123-123-1234",
+      "certification": "Basic",
+      "roles": [ "Volunteer", "Mobile" ],
+      "work_history": [
+        {
+          "id": "5",
+          "date": "2018-11-27",
+          "site": "adult-education-center",
+          "user_id": "0",
+          "hours": "5",
+          "approved": "true"
+        },
+        {
+          "id": "6",
+          "date": "2018-11-27",
+          "site": "adult-education-center",
+          "user_id": "0",
+          "hours": "4",
+          "approved": "true"
+        },
+        {
+          "id": "7",
+          "date": "2018-12-04",
+          "site": "bazan-library",
+          "user_id": "0",
+          "hours": "12",
+          "approved": "true"
+        },
+        {
+          "id": "8",
+          "date": "2018-11-28",
+          "site": "adult-education-center",
+          "user_id": "0",
+          "hours": "5",
+          "approved": "true"
+        },
+        {
+          "id": "9",
+          "date": "2018-11-28",
+          "site": "adult-education-center",
+          "user_id": "0",
+          "hours": "1",
+          "approved": "true"
+        },
+        {
+          "id": "12",
+          "date": "2018-11-28",
+          "site": "adult-education-center",
+          "user_id": "0",
+          "hours": "1",
+          "approved": "true"
+        }
+      ]
+    },
+    {
+      "id": "10",
+      "name": "vol not mobile",
+      "email": "vol@g.c",
+      "phone": "",
+      "certification": "Advanced",
+      "roles": [ "Volunteer" ],
+      "work_history": [
+        {
+          "id": "10",
+          "date": "2018-11-28",
+          "site": "bazan-library",
+          "user_id": "0",
+          "hours": "4",
+          "approved": "true"
+        },
+        {
+          "id": "11",
+          "date": "2018-11-28",
+          "site": "brook-hollow-library",
+          "user_id": "0",
+          "hours": "1",
+          "approved": "true"
+        },
+        {
+          "id": "13",
+          "date": "2018-11-28",
+          "site": "adult-education-center",
+          "user_id": "0",
+          "hours": "2",
+          "approved": "true"
+        },
+        {
+          "id": "14",
+          "date": "2018-11-28",
+          "site": "adult-education-center",
+          "user_id": "0",
+          "hours": "3",
+          "approved": "true"
+        },
+        {
+          "id": "15",
+          "date": "2018-12-03",
+          "site": "adult-education-center",
+          "user_id": "0",
+          "hours": "4",
+          "approved": "true"
+        }
+      ]
+    },
+    {
+      "id": "11",
+      "name": "vol mobile",
+      "email": "volmobile@g.c",
+      "phone": "",
+      "certification": "Advanced",
+      "roles": [ "Volunteer", "Mobile" ],
+      "work_history": [
+        {
+          "id": "16",
+          "date": "2018-12-03",
+          "site": "adult-education-center",
+          "user_id": "0",
+          "hours": "10",
+          "approved": "true"
+        },
+        {
+          "id": "17",
+          "date": "2018-12-03",
+          "site": "adult-education-center",
+          "user_id": "0",
+          "hours": "11",
+          "approved": "true"
+        },
+        {
+          "id": "18",
+          "date": "2018-12-10",
+          "site": "adult-education-center",
+          "user_id": "0",
+          "hours": "6",
+          "approved": "true"
+        },
+        {
+          "id": "19",
+          "date": "2018-12-17",
+          "site": "adult-education-center",
+          "user_id": "0",
+          "hours": "7",
+          "approved": "true"
+        }
+      ]
+    }
+  ]
+}

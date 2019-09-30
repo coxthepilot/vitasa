@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>com.apple.ibtool.document.errors</key>
+	<dict/>
+	<key>com.apple.ibtool.document.notices</key>
+	<dict>
+		<key>7326</key>
+		<array>
+			<dict>
+				<key>affected-objects</key>
+				<array>
+					<string>7326</string>
+				</array>
+				<key>message</key>
+				<string>UIWebView should be replaced with WKWebView</string>
+				<key>type</key>
+				<string>IBIssueTypeDiscouragedConfiguration</string>
+				<key>type-value</key>
+				<integer>11</integer>
+			</dict>
+		</array>
+		<key>870113</key>
+		<array>
+			<dict>
+				<key>affected-objects</key>
+				<array>
+					<string>870113</string>
+				</array>
+				<key>message</key>
+				<string>UIWebView should be replaced with WKWebView</string>
+				<key>type</key>
+				<string>IBIssueTypeDiscouragedConfiguration</string>
+				<key>type-value</key>
+				<integer>11</integer>
+			</dict>
+		</array>
+	</dict>
+	<key>com.apple.ibtool.document.warnings</key>
+	<dict>
+		<key>1006321</key>
+		<array>
+			<dict>
+				<key>affected-objects</key>
+				<array>
+					<string>1006321</string>
+				</array>
+				<key>message</key>
+				<string>Prototype table cells must have reuse identifiers</string>
+				<key>type</key>
+				<string>IBIssueTypeUnsupportedConfiguration</string>
+				<key>type-value</key>
+				<integer>9</integer>
+			</dict>
+		</array>
+		<key>1193161</key>
+		<array>
+			<dict>
+				<key>affected-objects</key>
+				<array>
+					<string>1193161</string>
+				</array>
+				<key>message</key>
+				<string>Prototype collection view cells must have reuse identifiers</string>
+				<key>type</key>
+				<string>IBIssueTypeUnsupportedConfiguration</string>
+				<key>type-value</key>
+				<integer>9</integer>
+			</dict>
+		</array>
+		<key>1206857</key>
+		<array>
+			<dict>
+				<key>affected-objects</key>
+				<array>
+					<string>1206857</string>
+				</array>
+				<key>message</key>
+				<string>Prototype collection view cells must have reuse identifiers</string>
+				<key>type</key>
+				<string>IBIssueTypeUnsupportedConfiguration</string>
+				<key>type-value</key>
+				<integer>9</integer>
+			</dict>
+		</array>
+		<key>1207644</key>
+		<array>
+			<dict>
+				<key>affected-objects</key>
+				<array>
+					<string>1207644</string>
+				</array>
+				<key>message</key>
+				<string>Prototype table cells must have reuse identifiers</string>
+				<key>type</key>
+				<string>IBIssueTypeUnsupportedConfiguration</string>
+				<key>type-value</key>
+				<integer>9</integer>
+			</dict>
+		</array>
+		<key>1294002</key>
+		<array>
+			<dict>
+				<key>affected-objects</key>
+				<array>
+					<string>1294002</string>
+				</array>
+				<key>message</key>
+				<string>Prototype table cells must have reuse identifiers</string>
+				<key>type</key>
+				<string>IBIssueTypeUnsupportedConfiguration</string>
+				<key>type-value</key>
+				<integer>9</integer>
+			</dict>
+		</array>
+		<key>916469</key>
+		<array>
+			<dict>
+				<key>affected-objects</key>
+				<array>
+					<string>916469</string>
+				</array>
+				<key>message</key>
+				<string>Prototype table cells must have reuse identifiers</string>
+				<key>type</key>
+				<string>IBIssueTypeUnsupportedConfiguration</string>
+				<key>type-value</key>
+				<integer>9</integer>
+			</dict>
+		</array>
+		<key>956794</key>
+		<array>
+			<dict>
+				<key>affected-objects</key>
+				<array>
+					<string>956794</string>
+				</array>
+				<key>message</key>
+				<string>Prototype table cells must have reuse identifiers</string>
+				<key>type</key>
+				<string>IBIssueTypeUnsupportedConfiguration</string>
+				<key>type-value</key>
+				<integer>9</integer>
+			</dict>
+		</array>
+		<key>966465</key>
+		<array>
+			<dict>
+				<key>affected-objects</key>
+				<array>
+					<string>966465</string>
+				</array>
+				<key>message</key>
+				<string>Prototype collection view cells must have reuse identifiers</string>
+				<key>type</key>
+				<string>IBIssueTypeUnsupportedConfiguration</string>
+				<key>type-value</key>
+				<integer>9</integer>
+			</dict>
+		</array>
+	</dict>
+</dict>
+</plist>

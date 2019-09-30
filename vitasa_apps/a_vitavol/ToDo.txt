@@ -1,0 +1,123 @@
+﻿----- Issues/Actions -----
+
+For go live
+* test and verify the mobile apps
+* release apps through web store
+* remove test data, users and sites
+    - leave users for apple eval
+
+Training
+
+
+Backend
+* subscribe mobile error 500
+
+
+
+Android
+* on later api, maps locks on return from details or settings;  [get Mark to verify at release on Friday]
+
+* admin suggestion: email send [verify]
++ pull down on lists to refresh
++ need admin tool to view/edit/delete worklogs (online only for now?)
++ from admin mobile, click on date: can edit calendar entry there; can create calendar entry?
+
+
+Apple
+
+
++ pull down on listviews to refresh?
++ need admin tool to view/edit/delete worklogs (online only for now?)
++ sc vol hours: slide for approve (in addition to delete)
++ from admin mobile, click on date: can edit calendar entry there; can create calendar entry?
+
+
+Staff website
+>> website to do list is in WebStorm
+
+
+.org Website
+* update sites page to use an accordion
+* need to put the privacy policy at vitasa.org/en/privacy-policy.html
+* website map to use get all sites from backend (or cached version)
+- way to ask for sites today, or tomorrow
+
+
+
+Improvements:
+* SC vol hours: delete failed: still removed from list and no error shown [cannot fix; will require further research and effort]
+    - remove from listview happens in listview helper before the delete callback is called
+* for SC in adding hours, put users that frequent that site at the top in a section
+* for vol, put their frequent sites at the top in a section
+* move geocode to the save activity; handle multiple responses and hide lat/long in view?
+* sitedetails: for client, show closed now, next opens at xxx on yyy
+* use notifications as way to know site has changed rather than timeouts
+
+[38 screens]
+* MainActivity/ViewController
+* BeforeYouGo
+* About
+* SitesMap
+* SiteCalendar
+* (iOS) SiteCalOnDate
+* SitesFilter
+* SiteDetails
+* Login
+* VolHome
+* VolHoursWorked
+* EditHours
+* Suggestion
+* (iOS) VolMobileCalendar
+* (iOS) VolMobileCalOnDate
+* VolEditSettings
+* SCSites
+* SCSite
+* SCVolHours
+* SCAddVolHours
+* AdminMenu
+* AdminUsers
+* AdminUser
+* AdminUserSites
+* AdminSites
+* AdminSite
+* AdminSiteLocation
+* AdminSiteDetails
+* AdminSiteCalendar
+* (iOS) AdminSiteCalDetails
+* AdminSiteCalReset
+* (iOS) AdminSiteCalResetDOW
+* AdminSiteCalResetAction
+* AdminSiteCoord
+* AdminNotifications
+* AdminNotification
+* AdminSuggestions
+* AdminSuggestion
+* AdminMobile
+* AdminMobileDate
+* (Android) CalendarDateDetails
+* AdminEmailDistroMgmt
+* (android) ViewNotification
+
+
+
+* ios/android: 
+   - [ios] use Siri to get site info?
+
+Default URL for backend
+    //Debug: BackendUrl = "https://vitasa.abandonedfactory.net";
+    Staging: BackendUrl = "https://staging.volunteer-savvy.com/";
+    Prod: BackendUrl = "https://volunteer-savvy.com/";
+
+
+
+
+
+
+vitaadmin:
+--- requires major upgrades ---
+
+
+
+
+
+
